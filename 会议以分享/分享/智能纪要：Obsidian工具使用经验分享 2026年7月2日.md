@@ -2,7 +2,7 @@
 lark_doc_url: https://beike.feishu.cn/docx/JMredI66wonTHcxOvWhckbx4n4u
 ---
 
-# 总结yebuzhida
+# 总结
 音频围绕笔记工具的使用展开，重点介绍了 Obsidian 工具的功能、应用场景、结合 AI 的方式以及相关插件和 skill，同时分享了艾玛、Workbarry 等工具在业务领域的应用案例，还探讨了笔记管理和使用的相关问题，内容如下：
 
 - **Obsidian 工具介绍**
