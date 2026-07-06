@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "试用期目标.md",
+                "file": "数据库表/starlord10张核心数据库表.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "试用期目标"
+              "title": "starlord10张核心数据库表"
             }
           }
         ],
@@ -201,12 +201,11 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 320.5,
-    "collapsed": true
+    "width": 320.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -223,13 +222,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a1209a8af237b022",
+  "active": "23e3e3c2cc942472",
   "lastOpenFiles": [
-    "项目分析/edar-starlord项目学习/SCHEMA.md",
+    "项目分析/edar-starlord项目学习/材料配置问题.md",
+    "数据库表/starlord10张核心数据库表.md",
+    "数据库表",
     "试用期目标.md",
+    "项目分析/edar-starlord项目学习/SCHEMA.md",
     "项目分析/edar-starlord项目学习/未命名.md",
     "知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
-    "项目分析/edar-starlord项目学习/材料配置问题.md",
     "项目分析/edar-starlord项目学习/fig/Pasted image 20260706104036.png",
     "项目分析/edar-starlord项目学习/fig/Pasted image 20260706103850.png",
     "项目分析/edar-starlord项目学习/fig/Pasted image 20260706103035.png",
@@ -266,11 +267,9 @@
     "智能纪要：家装业务系统相关内容讨论 2026年7月3日.zip",
     "日报与周报",
     "项目分析/edar-starlord项目学习/concepts/system-responsibilities.md",
-    "项目分析/edar-starlord项目学习/业务知识沉淀",
     "项目分析/edar-starlord项目学习/concepts/system-boundary-controller.md",
     "项目分析/edar-starlord项目学习/entities/project-overview.md",
     "项目分析/edar-starlord项目学习/concepts/state-machines.md",
-    "项目分析/edar-starlord项目学习/concepts/external-systems.md",
     "未命名.canvas"
   ]
 }
