@@ -4,5 +4,6 @@
   "alwaysUpdateLinks": true,
   "newFileLocation": "current",
   "attachmentFolderPath": "./fig",
-  "newLinkFormat": "absolute"
+  "newLinkFormat": "absolute",
+  "promptDelete": false
 }
