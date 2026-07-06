@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "周报"
             }
+          },
+          {
+            "id": "b7f5c9ab9c23520a",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "项目分析/edar-starlord项目学习/Pasted image 20260706101842.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pasted image 20260706101842"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -207,10 +220,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "45c4f183fd5b17b0",
+  "active": "b7f5c9ab9c23520a",
   "lastOpenFiles": [
-    "日报与周报/日报.md",
+    "项目分析/edar-starlord项目学习/材料配置问题.md",
+    "项目分析/edar-starlord项目学习/Pasted image 20260706101842.png",
     "日报与周报/周报.md",
+    "日报与周报/日报.md",
     "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/总结.md",
     "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/Pasted image 20260703194736.png",
     "项目分析/edar-starlord项目学习/业务知识沉淀/施工包概念理解.md",
@@ -251,8 +266,6 @@
     "项目分析/edar-starlord项目学习/concepts/external-systems.md",
     "项目分析/edar-starlord项目学习/SCHEMA.md",
     "项目分析/edar-starlord项目学习/concepts/system-boundary-api.md",
-    "项目分析/edar-starlord项目学习/entities/material-flow-rule.md",
-    "项目分析/edar-starlord项目学习/entities/coordinator-task.md",
     "未命名.canvas"
   ]
 }
