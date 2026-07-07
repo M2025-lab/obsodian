@@ -85,47 +85,47 @@
 
 表格
 
-|字段|类型|说明|
-|---|---|---|
-|id|BIGINT|主键，自增|
-|template_id|BIGINT|主材任务模板 ID，FK → n_material_template.id|
-|project_order_id|BIGINT|项目订单 ID，FK → project_info.project_order_id|
-|home_order_no|VARCHAR|主订单号|
-|order_no|VARCHAR|主材订单号|
-|source_type|INTEGER|创建来源 (0 = 供应链订单，1 = 测量申请单)|
-|service_mode|INTEGER|服务模式|
-|gb_code|VARCHAR|城市编码|
-|material_code|VARCHAR|主材编码|
-|material_name|VARCHAR|主材名称|
-|supplier_code|VARCHAR|供应商编码|
-|supplier_name|VARCHAR|供应商名称|
-|task_type|INTEGER|任务类型 → TaskTypeEnum|
-|process_batch|INTEGER|批量批次号|
-|plan_activate_time|TIMESTAMP|预计激活时间|
-|node_task|VARCHAR|子节点序列（按序排列）|
-|current_node_type|INTEGER|当前子节点类型|
-|current_node_time|TIMESTAMP|当前子节点激活时间|
-|process_status|TINYINT|进程状态 → ProcessStatusEnum|
-|state|TINYINT|状态 (0 = 无效，1 = 有效)|
-|process_code|VARCHAR|流程定义唯一 code|
-|version|INTEGER|版本号|
-|node_path|VARCHAR|节点路径|
-|condition_code|VARCHAR|条件枚举值|
-|mode|INTEGER|模式 (1 = 北京，2 = 圣都)|
-|sale_type|INTEGER|销售类型|
-|mdm_code|VARCHAR|分公司 code|
-|mdm_company_name|VARCHAR|分公司名称|
-|business_id|VARCHAR|零售业务 ID|
-|attachment|VARCHAR|任务附件|
-|biz_relation_id|VARCHAR|业务关联 ID（JSON）|
-|sync_to_sdm|INTEGER|推送 SDM 标识 (0 = 未知，1 = 老 VSS, 2 = 新 SDM, 3 = 刷数)|
-|purchase_order_no|VARCHAR|采购单号|
-|flow_type|INTEGER|业务类型 (0 = 正单，1 = 返补)|
-|create_by|VARCHAR|创建人|
-|modify_by|VARCHAR|修改人|
-|modify_name|VARCHAR|修改人姓名|
-|gmt_create|TIMESTAMP|创建时间|
-|gmt_modified|TIMESTAMP|修改时间|
+| 字段                 | 类型        | 说明                                              |
+| ------------------ | --------- | ----------------------------------------------- |
+| id                 | BIGINT    | 主键，自增                                           |
+| template_id        | BIGINT    | 主材任务模板 ID，FK → n_material_template.id           |
+| project_order_id   | BIGINT    | 项目订单 ID，FK → project_info.project_order_id      |
+| home_order_no      | VARCHAR   | 主订单号                                            |
+| order_no           | VARCHAR   | 主材订单号                                           |
+| source_type        | INTEGER   | 创建来源 (0 = 供应链订单，1 = 测量申请单)                      |
+| service_mode       | INTEGER   | 服务模式                                            |
+| gb_code            | VARCHAR   | 城市编码                                            |
+| material_code      | VARCHAR   | 主材编码                                            |
+| material_name      | VARCHAR   | 主材名称                                            |
+| supplier_code      | VARCHAR   | 供应商编码                                           |
+| supplier_name      | VARCHAR   | 供应商名称                                           |
+| task_type          | INTEGER   | 任务类型 → TaskTypeEnum                             |
+| process_batch      | INTEGER   | 批量批次号                                           |
+| plan_activate_time | TIMESTAMP | 预计激活时间                                          |
+| node_task          | VARCHAR   | 子节点序列（按序排列）                                     |
+| current_node_type  | INTEGER   | 当前子节点类型                                         |
+| current_node_time  | TIMESTAMP | 当前子节点激活时间                                       |
+| process_status     | TINYINT   | 进程状态 → ProcessStatusEnum                        |
+| state              | TINYINT   | 状态 (0 = 无效，1 = 有效)                              |
+| process_code       | VARCHAR   | 流程定义唯一 code                                     |
+| version            | INTEGER   | 版本号                                             |
+| node_path          | VARCHAR   | 节点路径                                            |
+| condition_code     | VARCHAR   | 条件枚举值                                           |
+| mode               | INTEGER   | 模式 (1 = 北京，2 = 圣都)                              |
+| sale_type          | INTEGER   | 销售类型                                            |
+| mdm_code           | VARCHAR   | 分公司 code                                        |
+| mdm_company_name   | VARCHAR   | 分公司名称                                           |
+| business_id        | VARCHAR   | 零售业务 ID                                         |
+| attachment         | VARCHAR   | 任务附件                                            |
+| biz_relation_id    | VARCHAR   | 业务关联 ID（JSON）                                   |
+| sync_to_sdm        | INTEGER   | 推送 SDM 标识 (0 = 未知，1 = 老 VSS, 2 = 新 SDM, 3 = 刷数) |
+| purchase_order_no  | VARCHAR   | 采购单号                                            |
+| flow_type          | INTEGER   | 业务类型 (0 = 正单，1 = 返补)                            |
+| create_by          | VARCHAR   | 创建人                                             |
+| modify_by          | VARCHAR   | 修改人                                             |
+| modify_name        | VARCHAR   | 修改人姓名                                           |
+| gmt_create         | TIMESTAMP | 创建时间                                            |
+| gmt_modified       | TIMESTAMP | 修改时间                                            |
 
 ### 状态枚举
 
@@ -167,53 +167,53 @@
 
 表格
 
-|字段|类型|说明|
-|---|---|---|
-|id|BIGINT|主键，自增|
-|task_dispatch_id|BIGINT|任务调度 ID，FK → task_dispatch.id|
-|template_node_id|BIGINT|模板节点 ID|
-|order_no|VARCHAR|主材订单号|
-|project_order_id|BIGINT|项目订单 ID|
-|home_order_no|VARCHAR|主单号|
-|package_code|VARCHAR|施工包 code|
-|node_type|INTEGER|节点类型 → NodeTypeEnum|
-|remarks|VARCHAR|备注|
-|images|VARCHAR|图片（逗号分隔）|
-|notice_retain_time|TIMESTAMP|通知保留时间|
-|platform_check_time|TIMESTAMP|平台考核时间|
-|estimated_time|TIMESTAMP|预估开始时间|
-|promise_time|TIMESTAMP|对客承诺考核时间|
-|start_time|TIMESTAMP|实际开始时间|
-|end_time|TIMESTAMP|实际结束时间（表单时间）|
-|submit_time|TIMESTAMP|提交时间（系统时间）|
-|submit_name|VARCHAR|提交人姓名|
-|submit_by|VARCHAR|提交人 ID|
-|executor_types|VARCHAR|多角色类型（逗号分隔）|
-|executor_type|INTEGER|执行人角色 → RoleTypeEnum|
-|executor_id|VARCHAR|执行人 ID|
-|executor_name|VARCHAR|执行人姓名|
-|process_status|TINYINT|进程状态 → ProcessStatusEnum|
-|qualified|INTEGER|审核结果 → QualifiedEnum|
-|state|TINYINT|状态 (0 = 无效，1 = 有效)|
-|process_code|VARCHAR|流程 code|
-|node_code|INTEGER|节点编码|
-|task_code|VARCHAR|任务编码|
-|u_task_code|VARCHAR|唯一任务编码|
-|restart|TINYINT|重启次数|
-|restart_remind|INTEGER|重启是否提示|
-|workbench_sync|INTEGER|工作台同步 (0 = 否，1 = 是)|
-|remind|INTEGER|是否提示|
-|dispatch_types|VARCHAR|派出角色类型|
-|delay_day|INTEGER|延期天数|
-|readiness_status|INTEGER|就绪状态 → ReadinessStatusEnum|
-|attachment|VARCHAR|附件|
-|process_batch|INTEGER|批次号|
-|remarks_filter|VARCHAR|无法复尺原因筛选项|
-|create_by|VARCHAR|创建人|
-|modify_by|VARCHAR|修改人|
-|modify_name|VARCHAR|修改人姓名|
-|gmt_create|TIMESTAMP|创建时间|
-|gmt_modified|TIMESTAMP|修改时间|
+| 字段                  | 类型        | 说明                            |
+| ------------------- | --------- | ----------------------------- |
+| id                  | BIGINT    | 主键，自增                         |
+| task_dispatch_id    | BIGINT    | 任务调度 ID，FK → task_dispatch.id |
+| template_node_id    | BIGINT    | 模板节点 ID                       |
+| order_no            | VARCHAR   | 主材订单号                         |
+| project_order_id    | BIGINT    | 项目订单 ID                       |
+| home_order_no       | VARCHAR   | 主单号                           |
+| package_code        | VARCHAR   | 施工包 code                      |
+| node_type           | INTEGER   | 节点类型 → NodeTypeEnum           |
+| remarks             | VARCHAR   | 备注                            |
+| images              | VARCHAR   | 图片（逗号分隔）                      |
+| notice_retain_time  | TIMESTAMP | 通知保留时间                        |
+| platform_check_time | TIMESTAMP | 平台考核时间                        |
+| estimated_time      | TIMESTAMP | 预估开始时间                        |
+| promise_time        | TIMESTAMP | 对客承诺考核时间                      |
+| start_time          | TIMESTAMP | 实际开始时间                        |
+| end_time            | TIMESTAMP | 实际结束时间（表单时间）                  |
+| submit_time         | TIMESTAMP | 提交时间（系统时间）                    |
+| submit_name         | VARCHAR   | 提交人姓名                         |
+| submit_by           | VARCHAR   | 提交人 ID                        |
+| executor_types      | VARCHAR   | 多角色类型（逗号分隔）                   |
+| executor_type       | INTEGER   | 执行人角色 → RoleTypeEnum          |
+| executor_id         | VARCHAR   | 执行人 ID                        |
+| executor_name       | VARCHAR   | 执行人姓名                         |
+| process_status      | TINYINT   | 进程状态 → ProcessStatusEnum      |
+| qualified           | INTEGER   | 审核结果 → QualifiedEnum          |
+| state               | TINYINT   | 状态 (0 = 无效，1 = 有效)            |
+| process_code        | VARCHAR   | 流程 code                       |
+| node_code           | INTEGER   | 节点编码                          |
+| task_code           | VARCHAR   | 任务编码                          |
+| u_task_code         | VARCHAR   | 唯一任务编码                        |
+| restart             | TINYINT   | 重启次数                          |
+| restart_remind      | INTEGER   | 重启是否提示                        |
+| workbench_sync      | INTEGER   | 工作台同步 (0 = 否，1 = 是)           |
+| remind              | INTEGER   | 是否提示                          |
+| dispatch_types      | VARCHAR   | 派出角色类型                        |
+| delay_day           | INTEGER   | 延期天数                          |
+| readiness_status    | INTEGER   | 就绪状态 → ReadinessStatusEnum    |
+| attachment          | VARCHAR   | 附件                            |
+| process_batch       | INTEGER   | 批次号                           |
+| remarks_filter      | VARCHAR   | 无法复尺原因筛选项                     |
+| create_by           | VARCHAR   | 创建人                           |
+| modify_by           | VARCHAR   | 修改人                           |
+| modify_name         | VARCHAR   | 修改人姓名                         |
+| gmt_create          | TIMESTAMP | 创建时间                          |
+| gmt_modified        | TIMESTAMP | 修改时间                          |
 
 ### 状态枚举
 
