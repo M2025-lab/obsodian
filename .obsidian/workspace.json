@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "日报与周报/日报记录-个人.md",
+                "file": "数据库表/starlord10张核心数据库表.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "日报记录-个人"
+              "title": "starlord10张核心数据库表"
             }
           }
         ],
@@ -266,8 +266,10 @@
   },
   "active": "e3223540f732951f",
   "lastOpenFiles": [
-    "日报与周报/日报记录-汇报.md",
+    "项目分析/edar-starlord项目学习/材料配置问题.md",
+    "配置.md",
     "日报与周报/日报记录-个人.md",
+    "日报与周报/日报记录-汇报.md",
     "日报与周报/日报-邮件发送.md",
     "日报与周报/fig/Pasted image 20260707193330.png",
     "日报与周报/fig/Pasted image 20260707193214.png",
@@ -277,9 +279,7 @@
     "日报与周报/fig/Pasted image 20260707120947.png",
     "日报与周报/fig",
     "日报与周报/周报.md",
-    "项目分析/edar-starlord项目学习/材料配置问题.md",
     "数据库表/starlord10张核心数据库表.md",
-    "配置.md",
     "试用期目标.md",
     "数据库表",
     "项目分析/edar-starlord项目学习/SCHEMA.md",
