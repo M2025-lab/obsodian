@@ -163,7 +163,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 277.5
+    "width": 224.5
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -275,7 +275,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 320.5
+    "width": 320.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -292,7 +293,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0238af7ca141f638",
+  "active": "0d05a3c14b0378b1",
   "lastOpenFiles": [
     "数据库表/数据库打标签.md",
     "日报与周报/日报记录-个人.md",
