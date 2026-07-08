@@ -360,3 +360,185 @@
 - 项目维度：所有业务表通过 `project_order_id` 串联
 - 任务维度：节点、扩展、进度、日志通过 `task_dispatch_id` 串联
 - 配置维度：所有流程规则通过 `process_code + version` 串联
+
+
+## 一、核心问题：主材流程配置路由表（`n_material_route`）的作用
+这张表是**主材履约可视化流程编排的核心“连线”配置表**，对应流程图画布上节点之间的“箭头”，用来定义流程节点的流转路径与触发条件。
+
+### 具体职能
+1. **定义节点流转方向**
+    通过 `source_code`（来源节点编码）和 `target_code`（目标节点编码），明确“当前节点完成后，下一步流转到哪个节点”，是流程串起来的基础。`type` 字段进一步区分：
+    - `1`：小节点路由，即同一个任务内部的节点流转
+    - `2`：大节点路由，即不同任务之间的流转
+2. **控制分支流转条件**
+    `rule_expression` 字段存储规则表达式，系统在节点完成后会执行该表达式，判断是否满足走这条路径的条件，以此实现分支流程（例如：验收合格走下一节点，不合格走重启/返工节点）。
+3. **支持差异化配置**
+    可按 `category_id`（品类规则）、`delivery_type`（配送方式）配置不同的流转路径，实现不同主材、不同配送模式下的流程差异。
+4. **标准化节点映射**
+    `source_unified_code` / `target_unified_code` 存储统一节点编码，用于跨流程、跨系统的节点标准化对齐。
+
+### 关联关系
+- 通过 `process_code` + `version` 关联 `n_material_process_define`（流程定义主表），归属于某一套具体的流程版本
+- `source_code` / `target_code` 关联 `n_material_node_cfg`（节点定义表）的节点编码
+- `category_id` 关联品类规则表，实现按品类差异化路由
+
+---
+
+## 二、全库表结构整体解析与关联关系
+这套库是**家装主材履约调度系统（Starlord）**，覆盖家装订单中主材从测量、设计、复尺、下单、生产、送货到安装的全流程调度、节点管控、周期考核、异常跟单等业务。下面按模块逐一说明：
+
+### 模块1：项目/订单基础层
+#### project_info（项目信息表）
+- **存储内容**：家装项目的基础档案，包含主订单号、项目订单号、省市区县编码、地址、客户姓名与UCID、楼层、电梯、商户ID等项目维度基础属性。
+- **核心地位**：全库的顶层锚点，几乎所有业务表都通过 `project_order_id` 关联项目。
+
+### 模块2：通话沟通类
+#### call_record（通话记录表）
+- **存储内容**：项目关联的全量通话记录，含呼入/呼出/转接类型、通话时间、接通状态、时长、主被叫号码、虚拟号、坐席与客户UCID、城市、挂断方、通话渠道、录音URL。
+- **关联**：通过 `project_order_id` 挂载到项目上，属于项目沟通附属数据。
+
+### 模块3：测量业务类
+管理测量申请、模板、详情、交界面配置。
+
+| 表名 | 存储内容 | 核心关联 |
+|------|----------|----------|
+| `measure_apply` | 每个项目的测量申请单，区分签前/签后测量，记录测量范围、测量时间、操作人 | `project_order_id` 关联项目，一个项目对应一条申请单 |
+| `measure_apply_operate_log` | 测量申请范围内主材/供应商的增删改操作日志，记录操作类型、来源、操作人、城市 | `project_order_id` 关联测量申请单 |
+| `measure_apply_range_type_config` | 后台配置的测量范围规则，按签前/签后类型配置对应主材、供应商 | 配置级规则表，业务逻辑中用于默认范围判断 |
+| `cfg_measure_template` | 按前台类目、组合空间配置的测量属性模板，JSON存储字段配置 | 被测量详情、测量单元表业务引用 |
+| `cfg_measure_attr_used` | 历史使用过的供应链属性ID与名称沉淀 | 属性字典表 |
+| `measure_material_detail` | 具体测量节点的详情数据：测量图片、备注、过滤后备注 | `task_dispatch_id` / `task_dispatch_node_id` 关联任务节点实例 |
+| `measure_material_unit` | 测量任务下按类目、空间维度的SKU测量结果与属性值 | `task_dispatch_id` 关联任务实例 |
+| `material_measure_interface_config` | 测量/复尺交界面要求、示例图片配置主表 | 主键被两张关系表引用 |
+| `material_measure_interface_config_category_rel` | 交界面规则适用的履约类目+任务节点 | `rule_id` 关联交界面主表 |
+| `material_measure_interface_config_mdm_rel` | 交界面规则适用的分公司范围 | `rule_id` 关联交界面主表 |
+| `design_review_alteration` | 设计复核环节是否需要变更的结论 | `task_dispatch_id` / `task_dispatch_node_id` 关联任务节点 |
+
+### 模块4：返补跟单类
+管理主材返补（原厂返补/当场返补）的跟单任务与进展。
+
+| 表名 | 存储内容 | 核心关联 |
+|------|----------|----------|
+| `coordinator_task_order` | 返补跟单主任务，包含CT单号、问题单、主材/供应商、返补类型、状态、问题描述、解决方案、下单出入参 | `project_order_id` 关联项目；`ct_order_no` 关联CT单 |
+| `coordinator_task_order_unit` | 返补跟单明细单元，冗余主材、供应商信息 | `coordinator_task_order_id` 关联跟单主表 |
+| `coordinator_task_progress` | 跟单状态流转日志：前后状态、处理类型、下次跟进时间、备注、处理人、完单时间 | `coordinator_task_id` 关联跟单主表 |
+| `coordinator_retail_record` | 纯零售场景跟单记录：地址、客户、大区、品类 | 通过 `ct_order_no` 与其他跟单表关联 |
+
+### 模块5：延期管理类
+管理延期申请、原因、标准化回收。
+
+| 表名 | 存储内容 | 核心关联 |
+|------|----------|----------|
+| `material_delay_process` | 主材延期申请单主表：定制品信息、延期角色、原/预计进场日期、延期天数、提交/审批/确认人、确认状态 | `project_order_id` 关联项目 |
+| `material_delay_process_log` | 延期单操作日志：提交、通过、驳回、确认，含驳回原因 | `material_delay_process_id` 关联延期单 |
+| `material_delay_process_reason` | 延期单对应的分级原因明细、延期天数、备注、图片 | `material_delay_process_id` 关联延期单 |
+| `delay_reason_recovery_record` | LLM标准化延期原因回收表：原始信息、标准化原因、LLM追踪、提醒状态 | `recovery_type`+`recovery_key` 关联各业务延期记录 |
+| `task_dispatch_node_delay_reason` | 任务节点维度的延期原因登记、原因枚举组合 | `task_dispatch_node_id` 关联节点实例 |
+
+### 模块6：流程配置层（规则大脑）
+分为老版 `material_*` 和新版 `n_material_*` 两套体系，新版为当前可视化流程编排主力。
+
+#### 6.1 新版流程配置（n_material_* 系列）
+对应流程图画布的完整元素：流程→节点→路由→时间→推送。
+
+| 表名 | 存储内容 | 核心关联 |
+|------|----------|----------|
+| `n_material_process_define` | 流程定义主表，一套完整流程的根：流程编码、版本、任务类型、配送方式、状态、底线流程、工种描述 | `process_code`+`version` 是整套流程唯一标识 |
+| `n_material_node_cfg` | 流程中的“节点方块”配置：节点编码、类型、激活条件、扩展字段、备注 | `process_code`+`version` 关联流程定义 |
+| `n_material_route` | 流程中的“连线箭头”：节点流转方向、规则表达式、品类/配送方式维度 | 上文已详述，关联流程与节点 |
+| `n_material_route_time` | 连线上的时间依赖规则：前置条件、时间关系、间隔天数 | `route_id` 关联路由表 |
+| `n_material_edge` | 流程画布的坐标、拐点信息，用于前端渲染 | `process_code`+`version` 关联流程 |
+| `n_material_task_cfg` | 节点的任务属性：角色、操作项、重启规则、合并规则、送装一体 | `node_id` 关联节点定义 |
+| `n_material_node_transfer_condition` | 节点激活详细条件：履约类型、触发方式、时间间隔 | `node_id` 关联节点定义 |
+| `n_material_time_cfg` | 节点考核时间配置：平台/首次/重启考核、时间基准、间隔天数 | `process_code`+`version` 关联流程 |
+| `n_material_time_relation` | 考核时间的依赖关系：依赖哪个节点的哪种时间 | `time_id` 关联时间配置 |
+| `n_material_push_cfg` | 节点消息推送配置：通知时机、通知上级、实时/批量、提前量 | `process_code`+`version` 关联流程 |
+| `n_material_time_calculate_rule_cfg` | 节点作业耗时计算规则：固定、按面积、按户型、按工艺递增 | `node_id` 关联节点定义 |
+| `n_material_period_calculate_hit_craft_cfg` | 命中特殊工艺的耗时增量 | 关联耗时配置主表 |
+| `n_material_period_calculate_hit_house_cfg` | 不同房屋/户型的耗时配置 | 关联耗时配置主表 |
+| `n_material_branch` | 任务分支配置：分支编码、适用主材/任务 | 被分支条件表引用 |
+| `n_material_branch_condition` | 分支下的条件枚举、规则表达式、默认值 | `branch_code` 关联分支主表 |
+| `n_material_template` | 用工任务模板：名称、工种、范围、销售类型 | 被模板单元表引用 |
+| `n_material_template_unit` | 用工模板适用维度：城市、分公司、套餐、主材、供应商 | `template_id` 关联用工模板 |
+| `n_material_cfg_log` | 所有主材配置的变更日志 | 全量配置操作留痕 |
+
+#### 6.2 老版流程配置（material_flow_* / material_task_*）
+早期流程规则体系，功能与新版对应。
+
+| 表名 | 存储内容 |
+|------|----------|
+| `material_flow_rule` | 流程规则主表 |
+| `material_flow_rule_category` | 按品类/供应商配置节点流程 |
+| `material_flow_rule_unit` | 规则适用范围：订单版本、业务类型、分公司、套餐 |
+| `material_flow_rule_template_mapping` | 规则与模板映射 |
+| `material_task` | 任务模板配置：激活规则、批次、来源 |
+| `material_task_node` | 任务模板节点配置：关联、时间、角色、重启 |
+| `material_task_node_time` | 节点考核时间配置 |
+| `material_task_node_time_relation` | 考核时间依赖条件 |
+
+#### 6.3 交付/排程流程规则（delivery_flow_*）
+面向材料排程、送货的流程规则。
+- `delivery_flow_rule`：排程流程规则主表
+- `delivery_flow_rule_category`：按品类配置节点流程与交付模板
+- `delivery_flow_rule_unit`：规则适用范围维度
+
+#### 6.4 其他业务配置
+| 表名 | 存储内容 |
+|------|----------|
+| `cfg_material_task_route` | 材料任务来源→目标路由配置 |
+| `material_payment_intercept_config` | 尾款拦截配置：哪些品类/套餐限制送货安装预约 |
+| `n_holiday_cfg` | 假期/请假配置主表：城市、组织、时间段 |
+| `n_holiday_cfg_detail` | 请假影响范围：分公司、供应商、品类、任务、节点 |
+| `stock_up` | 主材各环节周期配置：测量/复尺/备货/送货/安装 |
+| `stock_up_condition_rule` | 备货周期的条件规则：条件节点、时间关系、天数 |
+
+### 模块7：任务实例层（运行时核心数据）
+流程配置落地到具体订单的业务实例，是系统核心业务表。
+
+| 表名 | 存储内容 | 核心地位与关联 |
+|------|----------|----------------|
+| `task_dispatch` | 任务主实例：每个项目下，每个主材+供应商+任务类型生成一条。含模板、流程、订单、主材、状态、批次、预计激活时间、当前节点等 | **任务维度主表**，`id` 被所有任务子表引用；`project_order_id` 关联项目 |
+| `task_dispatch_node` | 节点实例：任务下每个节点的执行数据，含各时间字段（通知/考核/预估/承诺/实际开始结束）、执行人、状态、合格结果、重启次数、延期天数、就绪状态 | **节点维度主表**，流程调度、考核、通知的直接载体；`task_dispatch_id` 关联任务主表 |
+| `task_dispatch_extend` | 任务扩展属性：用量确认、变更单号、是否下单、SKU信息 | 一对一关联任务主表 |
+| `task_dispatch_node_report_relation` | 节点与验收报告关联：施工包、工艺、报告标准 | 关联节点实例 |
+| `task_node_progress` | 节点人工跟进进展：状态流转、下次跟进时间、延期原因、责任方 | 关联节点实例 |
+| `task_process_batch` | 批量任务批次：多个节点合并为一批处理，记录批次类型、执行人、激活时间 | 关联项目 |
+| `task_batch_node_relation` | 批次与节点的关联关系 | 关联批次表与节点 |
+| `task_estimated_time_change_log` | 节点考核时间变更历史 | 关联节点 |
+| `task_handle_extension` | 节点处理定位数据：经纬度、速度、精度，用于上门打卡校验 | 关联节点 |
+| `task_select_category` | 项目选材记录：主材、供应商、选材时间 | 关联项目 |
+| `task_create_fail_reason` | 任务创建失败异常记录：供应链参数、错误原因、分公司 | 关联项目 |
+
+### 模块8：通知、消息与事件
+| 表名 | 存储内容 | 关联 |
+|------|----------|------|
+| `message_send_job` | 消息发送任务：通知时机、角色、提前量、运行状态 | 关联任务与节点 |
+| `notice_task_info` | 业务通知：如送货异常提醒，含接收人、发送状态 | 关联项目 |
+| `notice_time_history` | 通知时间变更历史：原时间、现时间、备注 | 关联节点 |
+| `self_buy_remind_record` | 业主自购材料提醒发送记录 | 关联项目 |
+| `event_pub` | 事件发布表：事件ID、类型、内容、状态，可靠事件投递 | 事件驱动架构的生产端 |
+| `event_sub` | 事件订阅表：消费端事件落地与重试 | 与发布表结构对应 |
+| `retry_delay_queue` | 延迟重试消息：消息类型、执行时间、重试次数、参数 | 关联流程编码 |
+
+### 模块9：上下游同步
+| 表名 | 存储内容 | 关联 |
+|------|----------|------|
+| `oms_message_sync` | OMS同步的节点消息：启动/完成、合格状态、到货/配送时间 | 关联项目、主材单、任务节点类型 |
+| `supplier_sync_info` | 供应商同步数据：接单时间、配送确认时间、备注 | 关联节点、主材单 |
+| `thirdparty_data` | 通用第三方数据存储，按类型+业务key存储 | 通用存储表 |
+
+### 模块10：系统支撑
+| 表名 | 存储内容 |
+|------|----------|
+| `operation_audit` | 审批流程表：业务数据、流程实例、状态、意见 |
+| `operation_log` | 系统操作日志：用户、请求响应、IP、trace_id |
+| `refresh_data_log` | 数据刷数/修复日志：事件类型、上下文、request_id |
+| `quotation_booking_scope` | 历史遗留表，线上无数据 |
+
+---
+
+## 三、全库核心关联脉络
+1. **顶层锚点**：`project_info.project_order_id` 贯穿所有业务表，代表一个家装项目。
+2. **配置到执行**：流程定义 → 节点+路由配置 → 生成任务实例 → 生成节点实例，是系统核心执行链路。
+3. **业务挂载**：通话、测量、延期、返补、通知、同步数据，全部通过项目ID或任务/节点ID挂载到主业务链路上。
+4. **双配置体系**：老版配置与新版可视化流程配置并存，新版为当前主力。
