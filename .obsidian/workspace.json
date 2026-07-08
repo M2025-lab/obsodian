@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "数据库表/数据库打标签.md",
+                "file": "日报与周报/日报记录-个人.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "数据库打标签"
+              "title": "日报记录-个人"
             }
           },
           {
@@ -294,8 +294,8 @@
   },
   "active": "0d05a3c14b0378b1",
   "lastOpenFiles": [
-    "数据库表/所有的starlord数据库表.md",
     "数据库表/数据库打标签.md",
+    "数据库表/所有的starlord数据库表.md",
     "日报与周报/日报记录-个人.md",
     "数据库表/starlord数据库全量字段_副本.xml",
     "数据库表/starlord数据库全量字段 1.xml",
