@@ -69,7 +69,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "starlord项目整理/starlord接口字典文档.md",
+                "file": "starlord项目整理/REST汇总/starlord接口字典文档.md",
                 "mode": "source",
                 "source": false
               },
@@ -79,6 +79,20 @@
           },
           {
             "id": "0c54ec8c76ca0d14",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "starlord项目整理/REST汇总/starlord-安装任务.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "starlord-安装任务"
+            }
+          },
+          {
+            "id": "1567de952a841cdc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -134,7 +148,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -321,35 +335,35 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "0c54ec8c76ca0d14",
+  "active": "1567de952a841cdc",
   "lastOpenFiles": [
-    "starlord项目整理/starlord接口字典文档.md",
-    "starlord项目整理/未命名.md",
     "日报与周报/日报记录-个人.md",
+    "starlord项目整理/未命名.md",
+    "starlord项目整理/REST汇总/starlord接口字典文档.md",
+    "starlord项目整理/REST汇总/starlord-安装任务.md",
+    "starlord项目整理/REST汇总/starlord-材料流程.md",
+    "starlord项目整理/REST汇总",
+    "starlord项目整理/REST汇总/starlord-其他.md",
+    "starlord项目整理/REST汇总/starlord-Feign接口.md",
+    "starlord项目整理/REST汇总/starlord-主材任务.md",
+    "starlord项目整理/REST汇总/starlord-测量复尺.md",
+    "starlord项目整理/REST汇总/starlord-调度派工.md",
+    "starlord项目整理/REST汇总/starlord-人力配置.md",
+    "starlord项目整理/REST汇总/starlord-后门-工具-测试.md",
+    "starlord项目整理/starlord-09-其他.md",
+    "starlord项目整理/starlord-08-Feign接口.md",
+    "starlord项目整理/starlord-07-后门-工具-测试.md",
+    "starlord项目整理/starlord-06-人力配置.md",
+    "starlord项目整理/starlord-05-材料流程.md",
+    "starlord项目整理/starlord-04-测量复尺.md",
+    "starlord项目整理/starlord-03-安装任务.md",
+    "starlord项目整理/starlord-02-调度派工.md",
+    "starlord项目整理/starlord-01-主材任务.md",
     "starlord项目整理/材料配置问题.md",
     "starlord项目整理/业务知识沉淀/Home-交付学习新人文档.md",
     "starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档.md",
     "starlord项目整理/业务知识沉淀/用工平台新人学习文档.md",
-    "starlord项目整理/业务知识沉淀/施工包概念理解.md",
-    "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/总结.md",
-    "项目分析/edar-starlord项目学习/task-dispatch-v2.md",
-    "项目分析/edar-starlord项目学习/SCHEMA.md",
-    "项目分析/edar-starlord项目学习/material-schedule.md",
-    "项目分析/edar-starlord项目学习/starlord_业务架构与流程.md",
     "starlord项目整理",
-    "starlord数据库表/starlord全量REST接口与数据表映射.md",
-    "starlord数据库表/数据库个人总结.md",
-    "试用期目标.md",
-    "日报与周报/日报-邮件发送.md",
-    "会议与分享/我的产出--新人工具/Obsidian + Git + 飞书 笔记协作工具链配置手册.md",
-    "starlord数据库表/数据库打标签.md",
-    "项目分析/edar-starlord项目学习/concepts/system-boundary-controller.md",
-    "项目分析/edar-starlord项目学习/index.md",
-    "项目分析/edar-starlord项目学习/concepts/system-responsibilities.md",
-    "starlord数据库表/所有的starlord数据库表.md",
-    "starlord数据库表/starlord10张核心数据库表.md",
-    "配置.md",
-    "知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 222.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 221.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 220.java",
@@ -358,7 +372,6 @@
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 217.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 216.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 215.java",
-    "日报与周报/fig/TaskDispatchDetailSimpleDTO 214.java",
     "日报与周报/fig/Pasted image 20260707193330.png",
     "日报与周报/fig/Pasted image 20260707193214.png",
     "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/fig/Pasted image 20260707181604.png",
