@@ -20,7 +20,7 @@
 
 ## 交付系统能力Map
 
-交付的核心是对**人、场、料的调控**，关键概念为施工包，材料方面主要是主材「主材是指装修过程中用量大、金额高、对整体效果和品质起决定性作用的材料」，辅材不履约。edar-starlord系统是**家装交付中台**，核心定位是：**主材任务全生命周期管理的调度引擎和配置中心**。 [edar-starlord系统新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/Ci7uwvxu2ilenbky9HCcQbSgnfe)[[edar-starlord系统新人学习文档]]
+交付的核心是对**人、场、料的调控**，关键概念为施工包，材料方面主要是主材「主材是指装修过程中用量大、金额高、对整体效果和品质起决定性作用的材料」，辅材不履约。edar-starlord系统是**家装交付中台**，核心定位是：**主材任务全生命周期管理的调度引擎和配置中心**。 [edar-starlord系统新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/Ci7uwvxu2ilenbky9HCcQbSgnfe)[[starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档]]
 
 **交付流程的核心要素：**人、场、货（料）
 

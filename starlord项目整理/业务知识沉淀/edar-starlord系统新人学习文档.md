@@ -1,6 +1,6 @@
 家装系统从整体流程来看大致可分为签单 → 设计 → 报价/选材 → 合同签订 → 开工准备 → 施工阶段 → 竣工验收 → 结算 → 售后     「可参考[履约流程分级](https://a4mkvsc1gv.feishu.cn/docx/NKo0ddvANonQnVxRRFMcDBJZnKg)」
 
-家装系统从领域来划分大致为[Home-交付学习新人文档](https://tcnazlbn8p8b.feishu.cn/wiki/RAPZwbNuoisu3akToPocue9kn6d)：[[Home-交付学习新人文档]]
+家装系统从领域来划分大致为[Home-交付学习新人文档](https://tcnazlbn8p8b.feishu.cn/wiki/RAPZwbNuoisu3akToPocue9kn6d)：[[starlord项目整理/业务知识沉淀/Home-交付学习新人文档]]
 [[总结]]
 ![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=MjVkNDA2NDdkYzViZDM3MmQ0Yzc1ZTY5ODljYzdkYmVfMW54R21ScnVldjJGQndRWU5YVFlrVWtxWEpEeTJVa0ZfVG9rZW46RVVzQmJRSWo5b3BYeUJ4WmlmUWNURW1iblRmXzE3ODI5Nzk1MjU6MTc4Mjk4MzEyNV9WNA&add_watermark=true&scene_type=CCM)
 
@@ -8,7 +8,7 @@
 
 本文档定位是系统职责清单「[edar-starlord系统新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/Ci7uwvxu2ilenbky9HCcQbSgnfe)」，主要理清楚系统要干的事情。
 
-本系统中还涉及用工平台「[用工平台新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/ZaNOwV18ui2p8Lkmhdzc1SvdnJh)」[[用工平台新人学习文档]]
+本系统中还涉及用工平台「[用工平台新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/ZaNOwV18ui2p8Lkmhdzc1SvdnJh)」[[starlord项目整理/业务知识沉淀/用工平台新人学习文档]]
 
 该系统自身做的事（按业务域）
 
