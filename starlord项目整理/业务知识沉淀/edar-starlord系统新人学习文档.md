@@ -1,18 +1,17 @@
 家装系统从整体流程来看大致可分为签单 → 设计 → 报价/选材 → 合同签订 → 开工准备 → 施工阶段 → 竣工验收 → 结算 → 售后     「可参考[履约流程分级](https://a4mkvsc1gv.feishu.cn/docx/NKo0ddvANonQnVxRRFMcDBJZnKg)」
 
-家装系统从领域来划分大致为[Home-交付学习新人文档](https://tcnazlbn8p8b.feishu.cn/wiki/RAPZwbNuoisu3akToPocue9kn6d)：[[starlord项目整理/业务知识沉淀/Home-交付学习新人文档]]
+家装系统从领域来划分大致为[[starlord项目整理/业务知识沉淀/Home-交付学习新人文档]]
 [[总结]]
-![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=MjVkNDA2NDdkYzViZDM3MmQ0Yzc1ZTY5ODljYzdkYmVfMW54R21ScnVldjJGQndRWU5YVFlrVWtxWEpEeTJVa0ZfVG9rZW46RVVzQmJRSWo5b3BYeUJ4WmlmUWNURW1iblRmXzE3ODI5Nzk1MjU6MTc4Mjk4MzEyNV9WNA&add_watermark=true&scene_type=CCM)
 
 其中我们部门的重点可视为从开工准备开始到售后的所有步骤，位于交付阶段。edar-starlord系统是**家装交付中台**，核心定位是：**主材任务****全生命周期管理****的调度引擎和配置中心**。 「主材是指装修过程中用量大、金额高、对整体效果和品质起决定性作用的材料」
 
-本文档定位是系统职责清单「[edar-starlord系统新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/Ci7uwvxu2ilenbky9HCcQbSgnfe)」，主要理清楚系统要干的事情。
+本文档定位是系统职责清单，主要理清楚系统要干的事情。
 
-本系统中还涉及用工平台「[用工平台新人学习文档](https://tcnazlbn8p8b.feishu.cn/wiki/ZaNOwV18ui2p8Lkmhdzc1SvdnJh)」[[starlord项目整理/业务知识沉淀/用工平台新人学习文档]]
+本系统中还涉及用工平台[[starlord项目整理/业务知识沉淀/用工平台新人学习文档]]
 
 该系统自身做的事（按业务域）
 
-1. ### 主材任务调度引擎（核心能力），是系统最核心的职责——管理**主材任务从创建到完成**的完整生命周期。 其中包括：
+1.  主材任务调度引擎（核心能力），是系统最核心的职责——管理**主材任务从创建到完成**的完整生命周期。 其中包括：
 
 - **任务进度追踪**：查询主材任务在各个节点（测量、复尺、下单、排产、送货、安装、验收）的进度状态和明细
 - **任务状态变更**：驱动任务从一个节点流转到下一个节点（"处理"操作），支持单条和批量
@@ -29,7 +28,7 @@
 
 **关键 Service：** `TaskDispatchService`, `TaskDispatchV2Service`, `TaskDispatchNodeService`, `MaterialProcessV2Service`, `MaterialActivateV2Service`, `MaterialHandleV2Service`
 
-1. ### 主材任务模板与配置管理，定义不同类型主材（橱柜、木门、地板等）的标准化处理流程。
+1. 主材任务模板与配置管理，定义不同类型主材（橱柜、木门、地板等）的标准化处理流程。
 
 **能力清单：**
 
@@ -46,7 +45,7 @@
 
 **关键 Service：** `TaskTemplateService`, `MaterialTemplateV2Service`, `MaterialTaskConfigV2Service`
 
-1. ### 主材送货批次管理，管理供应商送货的批次流程——分批送货的时间安排和状态跟踪。
+1.  主材送货批次管理，管理供应商送货的批次流程——分批送货的时间安排和状态跟踪。
 
 **能力清单：**
 
@@ -58,7 +57,7 @@
 
 **关键 Service：** `MaterialDeliveryService`, `MaterialBatchV2Service`, `TaskProcessBatchService`
 
-1. ### 主材进度可视化，为运营和管理人员提供全局的主材进度视图。
+1.  主材进度可视化，为运营和管理人员提供全局的主材进度视图。
 
 **能力清单：**
 
@@ -67,7 +66,7 @@
 
 **关键 Service：** `MaterialScheduleService`
 
-1. ### 安装工任务管理，面向安装工和工长的任务执行界面。
+1.  安装工任务管理，面向安装工和工长的任务执行界面。
 
 **能力清单：**
 
@@ -81,7 +80,7 @@
 
 **关键 Service：** `MaterialTaskInstallerTaskService`, `InstallerTaskService`
 
-1. ### 管家端任务管理，面向管家的综合任务操作界面。
+1.  管家端任务管理，面向管家的综合任务操作界面。
 
 **能力清单：**
 
@@ -93,7 +92,7 @@
 
 **关键 Service：** `MaterialButlerService`, `StarlordService`
 
-1. ### 业主端主材进展，面向 C 端业主的主材进展查看。
+1.  业主端主材进展，面向 C 端业主的主材进展查看。
 
 **能力清单：**
 
@@ -103,7 +102,7 @@
 
 **关键 Service：** `MaterialCustomerService`
 
-1. ### 验收与自检管理，管理安装完成后的验收和自检流程。
+1.  验收与自检管理，管理安装完成后的验收和自检流程。
 
 **能力清单：**
 
@@ -118,7 +117,7 @@
 
 **关键 Service：** `AcceptanceReportService`, `AuditService`
 
-1. ### 延期管理，管理主材任务因各种原因导致的延期。
+1.  延期管理，管理主材任务因各种原因导致的延期。
 
 **能力清单：**
 
@@ -133,7 +132,7 @@
 
 **关键 Service：** `DelayService`, `MaterialDelayProcessService`, `MaterialDelayApproveService`
 
-1. ### 用工管理（Home 2.5 人力调度），管理安装环节的用工调度和配置。
+1.  用工管理（Home 2.5 人力调度），管理安装环节的用工调度和配置。
 
 **能力清单：**
 
@@ -148,7 +147,7 @@
 
 **关键 Service：** `ManpowerTaskService`, `ManpowerCfgService`, `ManpowerNodeCfgService`
 
-1. ### 测量申请单管理，面向设计师的测量申请流程。
+1.  测量申请单管理，面向设计师的测量申请流程。
 
 **能力清单：**
 
@@ -161,7 +160,7 @@
 
 **关键 Service：** `MeasureApplyService`, `MeasureFormTemplateService`
 
-1. ### 测量交界面配置
+1.  测量交界面配置
 
 管理测量和复尺环节的交界面规则（供运营后台配置）。
 
@@ -176,7 +175,7 @@
 
 **关键 Service：** `MeasureConfigRuleService`, `MeasureApplyRangeConfigService`
 
-1. ### 品类流程与履约配置（供应链履约 — Material Flow）
+1.  品类流程与履约配置（供应链履约 — Material Flow）
 
 管理供应链侧的材料履约流程配置。
 
@@ -193,7 +192,7 @@
 
 **关键 Service：** `MaterialFlowCategoryService`, `MaterialFlowRuleService`, `MaterialFlowProcessService`
 
-1. ### 排程交付流程配置（Delivery Flow）
+1.  排程交付流程配置（Delivery Flow）
 
 管理排程侧的材料交付流程配置。
 
@@ -214,7 +213,7 @@
 
 **关键 Service：** `DeliveryFlowCategoryService`, `DeliveryFlowRuleService`, `CategoryProcessService`, `MaterialTaskProcessTemplateService`
 
-1. ### 跟单员工作台
+1.  跟单员工作台
 
 面向跟单员的任务跟踪和管理界面。
 
@@ -230,7 +229,7 @@
 
 **关键 Service：** `CoordinatorPlatformService`, `ReplenishCoordinatorTaskService`
 
-1. ### 排产管理
+1.  排产管理
 
 管理工厂侧的排产任务。
 
@@ -241,7 +240,7 @@
 
 **关键 Service：** `ProductScheduleService`
 
-1. ### 业主自购材料管理
+1.  业主自购材料管理
 
 管理业主自行购买的材料清单。
 
@@ -253,7 +252,7 @@
 
 **关键 Service：** `MaterialSelfBuyService`
 
-1. ### 施工任务创建与激活
+1.  施工任务创建与激活
 
 面向 SDM 和外部系统的主材任务创建接口。
 
@@ -267,7 +266,7 @@
 
 **关键 Service：** `MaterialConstructionTaskService`
 
-1. ### 外部消息同步
+1.  外部消息同步
 
 接收并处理外部系统推送的消息。
 
@@ -282,7 +281,7 @@
 
 **关键 Service：** `SdmMessageSyncService`, `OmsMessageSyncService`, `SupplierMessageSyncService`
 
-1. ### 系统巡检与数据补偿
+1.  系统巡检与数据补偿
 
 保证系统数据一致性和正确性的运维能力。
 
@@ -301,7 +300,7 @@
 
 **关键 Service：** `RefreshDataService`, `StarlordInspectionService`, `RefreshOrderService`, `EventSubExtFixService`
 
-1. ### 运营配置与元数据
+1.  运营配置与元数据
 
 系统级别的配置和元数据管理。
 
@@ -316,7 +315,7 @@
 
 **关键 Service：** `StarlordConfigService`, `HolidayCfgService`, `StockUpCycleService`
 
-1. ### 通话记录
+1.  通话记录
 
 **能力清单：**
 
@@ -325,9 +324,7 @@
 
 **关键 Service：** `CallRecordService`
 
-### 系统总结
-
-![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGNjM2VlYjdlZDQ2MzUxZWNlMTQ3ZDFkNmNmNGFhNTlfYm9ZMTBQOVQ3TGJOc0d0N3Q0U2xvbFF0TEZERm12VDNfVG9rZW46VlBMSGJhbjM1b3JIMW54b3FmbWNyUVlFbmpjXzE3ODI5Nzk1MjU6MTc4Mjk4MzEyNV9WNA&add_watermark=true&scene_type=CCM)
+ 系统总结
 
 **核心定位：** edar-starlord 是家装行业的主材交付中台，它的核心价值在于：
 
