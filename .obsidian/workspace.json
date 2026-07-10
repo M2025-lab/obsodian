@@ -4,179 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "fd0942eed74eab4f",
+        "id": "7db06d554baf00e2",
         "type": "tabs",
         "children": [
           {
-            "id": "094f1499334049e3",
+            "id": "d88b35672a9cccea",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "数据库表/所有的starlord数据库表.md",
+                "file": "知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "所有的starlord数据库表"
-            }
-          },
-          {
-            "id": "0d05a3c14b0378b1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "数据库表/数据库打标签.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "数据库打标签"
-            }
-          },
-          {
-            "id": "6bbce5ff2cb9e97a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "试用期目标.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "试用期目标"
-            }
-          },
-          {
-            "id": "816351dabac6b387",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/材料配置问题.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "材料配置问题"
-            }
-          },
-          {
-            "id": "932fce755f75abc6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/REST汇总/starlord接口字典文档.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "starlord接口字典文档"
-            }
-          },
-          {
-            "id": "0c54ec8c76ca0d14",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/REST汇总/starlord-安装任务.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "starlord-安装任务"
-            }
-          },
-          {
-            "id": "1567de952a841cdc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/主材全链路 接口-动作映射表.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "主材全链路 接口-动作映射表"
-            }
-          },
-          {
-            "id": "763ee4a934093f7d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/材料配置问题.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "材料配置问题"
-            }
-          },
-          {
-            "id": "9ef31012549d199b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "starlord项目整理/主材全链路业务与系统配置总结.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "主材全链路业务与系统配置总结"
-            }
-          },
-          {
-            "id": "a6df73751f91583c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "日报与周报/日报记录-个人.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "日报记录-个人"
-            }
-          },
-          {
-            "id": "e3223540f732951f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "数据库表/starlord10张核心数据库表.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "starlord10张核心数据库表"
-            }
-          },
-          {
-            "id": "32338617f387ed30",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "日报与周报/日报记录-个人.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "日报记录-个人"
+              "title": "📚 异常排查 & 调用链分析 完整手册"
             }
           }
-        ],
-        "currentTab": 9
+        ]
       }
     ],
     "direction": "vertical"
@@ -363,9 +208,23 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a6df73751f91583c",
+  "active": "d88b35672a9cccea",
   "lastOpenFiles": [
+    "日报与周报/日报记录-汇报.md",
+    "日报与周报/日报记录-个人.md",
     "starlord项目整理/总流程梳理.md",
+    "starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档.md",
+    "starlord项目整理/业务知识沉淀/[[施工包概念理解.md",
+    "starlord项目整理/业务知识沉淀/Home-交付学习新人文档.md",
+    "starlord项目整理/业务知识沉淀/用工平台新人学习文档.md",
+    "starlord项目整理/业务知识沉淀/fig/Pasted image 20260710103621.png",
+    "starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102725.png",
+    "starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102401.png",
+    "starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102349.png",
+    "starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102321.png",
+    "starlord项目整理/业务知识沉淀/fig",
+    "starlord项目整理/业务知识沉淀/施工包概念理解.md",
+    "需求/供应商汰换20260709/技术方案的问题.md",
     "starlord数据库表/starlord全量REST接口与数据表映射.md",
     "starlord项目整理/REST汇总/starlord-主材任务.md",
     "starlord项目整理/REST汇总/starlord-人力配置.md",
@@ -377,21 +236,14 @@
     "starlord项目整理/REST汇总/starlord-安装任务.md",
     "starlord项目整理/主材全链路 接口-动作映射表.md",
     "starlord项目整理/主材全链路业务与系统配置总结.md",
-    "需求/供应商汰换20260709/技术方案的问题.md",
     "需求/供应商汰换20260709/fig/Pasted image 20260709204407.png",
     "需求/供应商汰换20260709/fig",
     "需求/供应商汰换20260709",
     "需求",
-    "日报与周报/日报记录-个人.md",
     "starlord项目整理/fig/Pasted image 20260709183730.png",
     "starlord项目整理/fig/Pasted image 20260709183010.png",
     "starlord项目整理/fig/Pasted image 20260709182439.png",
     "starlord项目整理/fig/Pasted image 20260709181538.png",
-    "starlord项目整理/fig/Pasted image 20260709181057.png",
-    "starlord项目整理/fig/Pasted image 20260709180959.png",
-    "starlord项目整理/fig/Pasted image 20260709180538.png",
-    "starlord项目整理/fig/Pasted image 20260709174211.png",
-    "starlord项目整理/fig/Pasted image 20260709174118.png",
     "试用期目标.md",
     "日报与周报/日报-邮件发送.md",
     "2026-07-09.md",
@@ -400,16 +252,10 @@
     "日报与周报/周报.md",
     "starlord项目整理/REST汇总/starlord接口字典文档.md",
     "starlord项目整理/REST汇总",
-    "starlord项目整理/REST汇总/starlord-Feign接口.md",
-    "starlord项目整理/starlord-09-其他.md",
-    "starlord项目整理/starlord-08-Feign接口.md",
-    "starlord项目整理/starlord-07-后门-工具-测试.md",
-    "starlord项目整理/starlord-06-人力配置.md",
     "starlord项目整理",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 222.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 221.java",
     "日报与周报/fig/TaskDispatchDetailSimpleDTO 220.java",
-    "日报与周报/fig/TaskDispatchDetailSimpleDTO 219.java",
     "未命名.canvas"
   ]
 }

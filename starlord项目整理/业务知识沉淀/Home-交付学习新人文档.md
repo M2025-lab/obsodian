@@ -14,9 +14,7 @@
   - 物-采购平台、仓储中心、运输中心、材料订单中心，实现材料的采购、存储、运输、以及订单管理。
 - 基础能力，通过例如人员系统、供应链系统、商品系统等支持，包括右边的业财系统
 
-![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=NmI0ODNjY2U1N2E3NjNjNTNjYjY5YzdmMjJkZTQ4NTZfMEZOYlNPMUhDemw4cno4d2J6U0RDcU9taTlnbzhvWWZfVG9rZW46RnlLV2JaNmJyb0RNZXp4TEFPbWN6TWR6bnpmXzE3ODI5Nzk2MzQ6MTc4Mjk4MzIzNF9WNA&add_watermark=true&scene_type=CCM)
-
-​             
+![[starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102321.png]]
 
 ## 交付系统能力Map
 
@@ -25,10 +23,7 @@
 **交付流程的核心要素：**人、场、货（料）
 
 **交付过程、结果要素：**工期、质量、服务、成本
-
-![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=MDQxYzU2OWNhYzgzZThkMzQ5YTAzMzZhNjU0NWJiNjdfdjVscEJGMUFSOURtRDYwNHF5Y3plSlNmM2o3QlZoNG5fVG9rZW46QUxudmJYdHU4b3B6QjZ4UEpzWmM5ejZKbkNmXzE3ODI5Nzk2MzQ6MTc4Mjk4MzIzNF9WNA&add_watermark=true&scene_type=CCM)
-
-关键概念施工包[施工包概念理解](https://tcnazlbn8p8b.feishu.cn/wiki/JHlRwTH8di3rpDkXjLQcsJBkn1b)[[[[施工包概念理解]]
+![[starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102349.png]]
+关键概念施工包[[starlord项目整理/业务知识沉淀/施工包概念理解]]
 施工包理解可通过下图的施工包任务配置辅助理解
-
-![img](https://tcnazlbn8p8b.feishu.cn/space/api/box/stream/download/asynccode/?code=OGM3NzA4NWEyYmJkMGM4MmIzM2Y5ODk2YzQwYzc4NzVfN3NqZFZ1aGs4VnhiUUkxZHVjc3NLSnZGWDJPQTYzcjFfVG9rZW46T1FLbGIzSHhOb01tUk54U0pQaGNRTXVGbm9oXzE3ODI5Nzk2MzQ6MTc4Mjk4MzIzNF9WNA&add_watermark=true&scene_type=CCM)
+![[starlord项目整理/业务知识沉淀/fig/Pasted image 20260710102401.png]]
