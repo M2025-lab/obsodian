@@ -3,7 +3,7 @@
   "permissionMode": "yolo",
   "model": "claude-code/deepseek-v4-flash",
   "thinkingBudget": "off",
-  "effortLevel": "high",
+  "effortLevel": "max",
   "serviceTier": "default",
   "enableAutoTitleGeneration": true,
   "titleGenerationModel": "",
@@ -95,14 +95,14 @@
     "claude": "claude-code/deepseek-v4-flash"
   },
   "savedProviderEffort": {
-    "claude": "high"
+    "claude": "max"
   },
   "savedProviderServiceTier": {},
   "savedProviderThinkingBudget": {},
   "savedProviderPermissionMode": {
     "claude": "yolo"
   },
-  "lastCustomModel": "",
+  "lastCustomModel": "claude-code/deepseek-v4-flash",
   "maxTabs": 5,
   "enableAutoScroll": true,
   "deferMathRenderingDuringStreaming": true,

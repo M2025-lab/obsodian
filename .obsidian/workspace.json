@@ -243,12 +243,11 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 320.5,
-    "collapsed": true
+    "width": 320.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -267,8 +266,9 @@
   },
   "active": "bb90ce18afad6492",
   "lastOpenFiles": [
-    "技能沉淀.md",
+    "starlord项目整理/业务知识沉淀/一些核心概念.md",
     "日报与周报/日报记录-个人.md",
+    "技能沉淀.md",
     "starlord项目整理/总流程梳理.md",
     "starlord项目整理/业务知识沉淀/施工包概念理解.md",
     "starlord项目整理/业务知识沉淀/用工平台新人学习文档.md",
@@ -283,7 +283,6 @@
     "starlord数据库表/starlord全量REST接口与数据表映射.md",
     "starlord数据库表/starlord10张核心数据库表.md",
     "知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
-    "starlord项目整理/业务知识沉淀/一些核心概念.md",
     "starlord项目整理/业务知识沉淀/Home-交付学习新人文档.md",
     "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/总结.md",
     "需求/供应商汰换20260709/技术方案的问题.md",
