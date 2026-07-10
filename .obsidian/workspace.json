@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "starlord项目整理/总流程梳理.md",
+                "file": "需求/供应商汰换20260709/技术方案的问题.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "总流程梳理"
+              "title": "技术方案的问题"
             }
           }
         ]
@@ -210,8 +210,8 @@
   },
   "active": "d88b35672a9cccea",
   "lastOpenFiles": [
-    "starlord项目整理/材料配置问题.md",
     "starlord项目整理/总流程梳理.md",
+    "starlord项目整理/材料配置问题.md",
     "知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
     "日报与周报/日报记录-汇报.md",
     "日报与周报/日报记录-个人.md",
