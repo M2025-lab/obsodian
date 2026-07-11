@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "反思.md",
+                "file": "starlord项目整理/总流程梳理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "反思"
+              "title": "总流程梳理"
             }
           },
           {
@@ -280,8 +280,8 @@
   },
   "active": "f38f0e51fe2bdc82",
   "lastOpenFiles": [
-    "技能沉淀.md",
     "反思.md",
+    "技能沉淀.md",
     "日报与周报/日报记录-个人.md",
     "starlord项目整理/业务知识沉淀/一些核心概念.md",
     "starlord项目整理/总流程梳理.md",
