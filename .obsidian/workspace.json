@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "starlord项目整理/复尺流程.md",
+                "file": "starlord项目整理/枚举类和上下游梳理-starlord系统.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "复尺流程"
+              "title": "枚举类和上下游梳理-starlord系统"
             }
           },
           {
@@ -295,9 +295,9 @@
   },
   "active": "f5a24a712cfc27cd",
   "lastOpenFiles": [
+    "starlord项目整理/复尺流程.md",
     "starlord项目整理/接口-动作映射表.md",
     "starlord项目整理/枚举类和上下游梳理-starlord系统.md",
-    "starlord项目整理/复尺流程.md",
     "starlord项目整理/总流程梳理.md",
     "反思.md",
     "技能沉淀.md",
