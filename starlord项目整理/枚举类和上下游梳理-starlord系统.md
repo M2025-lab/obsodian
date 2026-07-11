@@ -113,30 +113,40 @@ delivery_flow_rule (主表)
 
 ### 任务类型枚举
 
-| 类型 | 编码 | 说明 |
-|------|------|------|
-| MEASURE | 1 | 测量（上门测量）|
-| RESERVE | 2 | 预定（材料预定）|
-| RECHECK_SCALE | 3 | 复尺（复尺确认）|
-| ORDER | 4 | 下单（采购下单）|
-| ENTER | 5 | 送货（物流配送）|
-| INSTALL | 6 | 安装（安装施工）|
-| ONCE_INSTALL | 9 | 预埋件安装 |
-| DESIGN | 10 | 设计（设计任务）|
-| DESIGN_REVIEW | 11 | 设计复核（报价变更审核）|
+| 类型                   | 编码 | 说明              |
+| -------------------- | -- | --------------- |
+| MEASURE              | 1  | 测量（上门测量）        |
+| RESERVE              | 2  | 预定（材料预定）        |
+| RECHECK_SCALE        | 3  | 复尺（复尺确认）        |
+| ORDER                | 4  | 下单（采购下单）        |
+| ENTER                | 5  | 送货（物流配送）        |
+| INSTALL              | 6  | 安装（安装施工）        |
+| ORDER_TAKING         | 7  | 接单（供应商接单）       |
+| STOCK_UP             | 8  | 备货（备货生产）        |
+| ONCE_INSTALL         | 9  | 预埋件安装           |
+| DESIGN               | 10 | 设计（设计任务）        |
+| DESIGN_REVIEW        | 11 | 报价变更（设计复核/报价变更） |
+| PRODUCT_SCHEDULE     | 12 | 排产（生产排期）        |
+| PRODUCT_ORDER        | 13 | 下生产单（工厂生产单）     |
+| WAREHOUSE_ENTER      | 14 | 进仓（货物入仓）        |
+| QUOTE                | 15 | 报价（报价任务）        |
+| CONFIRM_MANUFACTURER | 16 | 确认方案（自购方案确认）    |
+| MEASURE_ORDER        | 17 | 下测量单（创建测量申请单）   |
 
 ### 节点类型枚举
 
-| 节点 | 编码 | 说明 |
-|------|------|------|
-| NODE_START | 1 | 开始节点 |
-| NOTIFY_CAN_START | 20 | 通知启动（约工）|
-| NOTIFY_START | 40 | 启动派单 |
-| SELF_CHECK | 50 | 进场 |
-| START | 60 | 启动（提交自检）|
-| SELF_CHECK_ACCEPTANCE | 65 | 自检验收 |
-| FINISH_START | 80 | 启动验收（实地验收）|
-| OWNER_CONFIRM | 85 | 业主确认 |
+
+| 节点类型                  | 编码 | 说明         |
+| --------------------- | -: | ---------- |
+| NODE_START            |  1 | 开始节点（流程开始） |
+| NOTIFY_CAN_START      | 20 | 通知启动（约工）   |
+| NOTIFY_START          | 40 | 启动派单（派单）   |
+| SELF_CHECK            | 50 | 进场（进场确认）   |
+| START                 | 60 | 启动（提交自检）   |
+| SELF_CHECK_ACCEPTANCE | 65 | 自检验收       |
+| FINISH_START          | 80 | 启动验收（实地验收） |
+| OWNER_CONFIRM         | 85 | 业主确认       |
+
 
 ---
 
