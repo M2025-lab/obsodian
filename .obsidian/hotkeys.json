@@ -1,22 +1,4 @@
 {
-  "editor:insert-codeblock": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "K"
-    }
-  ],
-  "editor:insert-mathblock": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "M"
-    }
-  ],
   "editor:set-heading-1": [
     {
       "modifiers": [
@@ -81,6 +63,24 @@
         "Shift"
       ],
       "key": "]"
+    }
+  ],
+  "editor:insert-codeblock": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "K"
+    }
+  ],
+  "editor:insert-mathblock": [
+    {
+      "modifiers": [
+        "Ctrl",
+        "Shift"
+      ],
+      "key": "M"
     }
   ]
 }
