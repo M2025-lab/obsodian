@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>starlord 服务 — 业务架构与流程</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d2991d;
+    --red: #f85149;
+    --purple: #a371f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 24px;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  
+  header {
+    text-align: center;
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+  header h1 { font-size: 2em; color: var(--accent); margin-bottom: 8px; }
+  header p { color: var(--text-dim); font-size: 0.95em; }
+
+  h2 {
+    color: var(--accent);
+    font-size: 1.4em;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { color: var(--green); font-size: 1.15em; margin: 32px 0 12px; }
+
+  .intro-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 1.05em;
+  }
+  .intro-card .pipe { color: var(--purple); font-weight: bold; }
+
+  .mermaid-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  .mermaid-wrap .mermaid { display: flex; justify-content: center; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 32px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9em;
+  }
+  th { background: #21262d; color: var(--accent); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1c2128; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+  .tag-f { background: #1f3a5f; color: #58a6ff; }
+  .tag-k { background: #2d1f3a; color: #a371f7; }
+
+  .badge {
+    display: inline-block;
+    width: 32px; height: 32px; line-height: 32px;
+    text-align: center; border-radius: 50%;
+    font-weight: bold; font-size: 0.85em; margin-right: 4px;
+  }
+  .badge-5 { background: #1f3a5f; color: #58a6ff; }
+  .badge-6 { background: #1f3a3a; color: #3fb950; }
+  .badge-7 { background: #3a1f5f; color: #a371f7; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .summary-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .summary-card .num { font-size: 2em; font-weight: 700; color: var(--accent); }
+  .summary-card .label { color: var(--text-dim); font-size: 0.9em; margin-top: 4px; }
+
+  footer {
+    text-align: center;
+    padding: 32px 0;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>edar-starlord 材料履约系统</h1>
+  <p>业务架构 · 调用链路 · 核心流程 ｜ 数据来源：Obsidian 知识库 ｜ 2026-07-02</p>
+</header>
+
+<!-- 概览 -->
+<div class="intro-card">
+  <span class="pipe">ofc</span>（履约调度）→ <span class="pipe">starlord</span>（材料履约/任务状态机）→ <span class="pipe">cube</span>（施工包）→ <span class="pipe">sdm/vss</span>（供应商系统）
+</div>
+
+<div class="summary-grid">
+  <div class="summary-card"><div class="num">4</div><div class="label">上游调用方</div></div>
+  <div class="summary-card"><div class="num">16</div><div class="label">Feign/Kafka 调用关系</div></div>
+  <div class="summary-card"><div class="num">12</div><div class="label">核心数据表</div></div>
+  <div class="summary-card"><div class="num">3</div><div class="label">配置模式</div></div>
+</div>
+
+<!-- 一、业务架构图 -->
+<h2>一、业务架构图</h2>
+
+<h3>1.1 系统全景</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    subgraph UP["上游调用方"]
+        direction LR
+        OFC["scm-ofc<br/>履约调度中心"]
+        WB["scm-workbench<br/>工作台"]
+        PFC["project-fulfillment<br/>项目履约中心"]
+        SDM_UP["scm-sdm<br/>供应商触发"]
+    end
+
+    subgraph SL["edar-starlord 材料履约系统"]
+        direction LR
+        WEB["Web Controller"]
+        CORE["任务核心<br/>Create / Activate / Handle / Cancel"]
+        CONFIG["配置查询<br/>MaterialConfigV2"]
+        SYNC["供应商同步<br/>OmsMessageSync / SdmMessageSync"]
+        PRODUCER["事件发布<br/>Kafka Producer"]
+    end
+
+    subgraph DOWN["下游依赖"]
+        direction LR
+        CUBE["utopia-cube<br/>施工包"]
+        SCM_SDM["scm-sdm<br/>新SDM"]
+        SCM_VSS["scm-supplier-op<br/>老VSS"]
+        SHUTTLE["shuttle-order<br/>订单服务"]
+        ARTISAN["artisan-construction<br/>排期服务"]
+        KAFKA["Kafka<br/>消息队列"]
+    end
+
+    OFC --> WEB
+    WB --> WEB
+    PFC --> WEB
+    SDM_UP --> WEB
+    WEB --> CORE
+    CORE --> CONFIG
+    CORE --> SYNC
+    CORE --> PRODUCER
+    SYNC --> SCM_SDM
+    SYNC --> SCM_VSS
+    PRODUCER --> KAFKA
+    KAFKA --> CUBE
+    CORE --> CUBE
+    CORE --> SHUTTLE
+    CORE --> ARTISAN
+    CUBE --> WEB
+    SCM_SDM --> WEB
+</div>
+</div>
+
+<h3>1.2 配置体系（三套并行）</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    subgraph MODE5["mode=5 八合一配置"]
+        direction TB
+        MR["material_flow_rule<br/>规则定义"]
+        MRC["material_flow_rule_category<br/>品类规则"]
+        MRM["material_flow_rule_template_mapping<br/>category→template 映射"]
+        MR --> MRC --> MRM
+    end
+
+    subgraph MODE6["mode=6 全国配置"]
+        direction TB
+        NT["n_material_template<br/>模板定义"]
+        NTU["n_material_template_unit<br/>供应商单元(按分公司维度)"]
+        NPD["n_material_process_define<br/>流程定义(任务类型)"]
+        NT --> NTU --> NPD
+    end
+
+    subgraph MODE7["mode=7 排程配置"]
+        direction TB
+        DFR["delivery_flow_rule<br/>排程规则"]
+        DFRU["delivery_flow_rule_unit<br/>规则单元(分公司维度)"]
+        DFRC["delivery_flow_rule_category<br/>品类规则(供应商维度)"]
+        DFR --> DFRU --> DFRC
+    end
+
+    subgraph SHARED["共用表"]
+        NNC["n_material_node_cfg<br/>节点配置"]
+        NNTC["n_material_node_transfer_condition<br/>节点转移条件(激活前置)"]
+    end
+
+    MODE5 -.-> SHARED
+    MODE6 -.-> SHARED
+    MODE7 -.-> SHARED
+</div>
+</div>
+
+<h3>1.3 内部服务调用链路</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    API["Web API 入口<br/>TaskDispatchController / V2"] --> CREATE
+    CREATE["MaterialCreateV2<br/>任务创建"] --> CONFIG_S["MaterialConfigV2<br/>配置查询"]
+    CONFIG_S --> DB["MySQL<br/>task_dispatch / template / rule 表"]
+    CREATE --> ACTIVATE
+    HANDLE["MaterialHandleV2<br/>节点处理"] --> ACTIVATE
+    ACTIVATE["MaterialActivateV2<br/>任务激活"] --> KAFKA_P["Kafka 发布"]
+    ACTIVATE --> CUBE_F["Feign: cube<br/>创建施工包"]
+    HANDLE --> SYNC_S["OmsMessageSync<br/>SDM/VSS 同步"]
+    SYNC_S --> SDM_S["SdmMessageSync<br/>采购单操作"]
+    SDM_S --> SDM_API["Feign: scm-sdm<br/>createOrUpdate"]
+    CANCEL["MaterialCancelV2<br/>任务取消"] --> KAFKA_P
+    KAFKA_P --> KAFKA_C["Kafka 消费<br/>cube 施工包创建"]
+
+    style API fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style CREATE fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style CONFIG_S fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style ACTIVATE fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style HANDLE fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style CANCEL fill:#1f3a5f,stroke:#58a6ff,color:#c9d1d9
+    style SYNC_S fill:#2d1f3a,stroke:#a371f7,color:#c9d1d9
+    style SDM_S fill:#2d1f3a,stroke:#a371f7,color:#c9d1d9
+    style KAFKA_P fill:#1f3a3a,stroke:#3fb950,color:#c9d1d9
+    style KAFKA_C fill:#1f3a3a,stroke:#3fb950,color:#c9d1d9
+    style DB fill:#3a2f1f,stroke:#d2991d,color:#c9d1d9
+</div>
+</div>
+
+<!-- 二、核心业务流程 -->
+<h2>二、核心业务流程</h2>
+
+<h3>2.1 任务创建全流程（时序图）</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+sequenceDiagram
+    participant OFC as ofc 履约中心
+    participant SL as starlord
+    participant Order as shuttle-order
+    participant Sched as artisan-construction
+    participant DB as MySQL
+    participant SDM as scm-sdm
+    participant K as Kafka
+    participant Cube as utopia-cube
+
+    OFC->>SL: Feign: createTask(materialCode, supplierCode, taskType, ...)
+    SL->>Order: getByProjectOrderId → 查订单详情(分公司/装修类型)
+    SL->>Sched: queryConstructionSchedulesV2 → 查施工排期
+    SL->>SL: 计算 mode (5=八合一 / 6=全国 / 7=排程)
+    
+    alt mode=7 (排程)
+        SL->>DB: 查 delivery_flow_rule + delivery_flow_rule_category
+    else mode=5/6 (全国/八合一)
+        SL->>DB: 查 n_material_template_unit + n_material_process_define
+    end
+    
+    SL->>DB: 去重检查 (projectOrderId+materialCode+supplierCode+taskType)
+    SL->>DB: INSERT task_dispatch + task_dispatch_node × N
+    SL->>SL: 计算 planActivateTime(计划激活时间)
+    SL->>SL: 生成 purchaseOrderNo(采购单号)
+    
+    SL->>K: publishTaskDispatchChange → 通知 cube
+    
+    SL-->>OFC: 返回 taskDispatchId
+    
+    Note over SL: afterCreate() 异步
+    SL->>SL: activateTaskDispatchByPlanTime()
+    SL->>DB: UPDATE task_dispatch.process_status = UNCOMPLETED(2)
+    SL->>K: publishTaskDispatchChange → cube 创建施工包
+    SL->>SDM: sendVssNew → sendSdmNewTask → createOrUpdate
+    SDM-->>SL: 返回 purchaseOrderNo
+    SL->>SDM: sendSdmAcceptOrder → 自动接单
+</div>
+</div>
+
+<h3>2.2 配置查询决策树</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    A["queryAllMaterialForm<br/>(condition)"] --> B{"mode?<br/>isDelivery_Flow_MODE?"}
+    
+    B -->|mode=7 排程| C["queryDeliveryFlowFormByUnit"]
+    B -->|mode=5/6| D["queryAllMaterialFormByUnit"]
+    
+    C --> C1["查 delivery_flow_rule_unit<br/>(按 mdmCode/saleType/documentType)"]
+    C1 --> C2{"命中?"}
+    C2 -->|是| C3["取最大 ruleId → 查 category<br/>(按 materialCode/supplierCode)"]
+    C2 -->|否| C4["返回空列表 → 任务不生成"]
+    C3 --> C5{"category 命中?"}
+    C5 -->|是| C6["查 n_material_process_define<br/>(按 templateId+taskType)"]
+    C5 -->|否| C4
+    C6 --> C7{"processDefine 命中?"}
+    C7 -->|是| C8["查 n_material_node_cfg<br/>组装 NMaterialForm 返回"]
+    C7 -->|否| C4
+    
+    D --> D1["查 n_material_template_unit<br/>(按 materialCode/supplierCode/mode/mdmCode/saleType)"]
+    D1 --> D2{"命中?"}
+    D2 -->|是| D3["查 n_material_process_define<br/>(按 templateIds+taskType)"]
+    D2 -->|否| D4["返回空列表"]
+    D3 --> D5{"命中?"}
+    D5 -->|是| D6["查 n_material_node_cfg<br/>过滤 isBaseCfg + 兼容性"]
+    D5 -->|否| D4
+</div>
+</div>
+
+<h3>2.3 SDM 供应商同步流程</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    A["sendVssNew (taskDispatch, nextNode)"] --> B{"过滤条件"}
+    B -->|"nextNode = null"| X["return"]
+    B -->|"安装 / 预埋件任务"| X
+    B -->|"executorType != SUPPLIER(6)"| X
+    B -->|"报价变更 + 复尺未完成"| X
+    B -->|通过| C{"syncToSdm ?"}
+    
+    C -->|"2=NEW_SDM / 3=REFRESH_DATA"| D{"restart == 0 ?"}
+    C -->|"1=OLD_VSS"| E["走老VSS - addOrUpdateByOrderNo"]
+    C -->|"0=DEFAULT"| F{"mode == 2.5 ?"}
+    F -->|是| E
+    F -->|否| X
+    
+    D -->|是| G["sendSdmNewTask - 创建采购单"]
+    D -->|否| H["跳过 (已有PO)"]
+    
+    G --> G1["batchQuery 查 PO 是否存在"]
+    G1 -->|已存在| G2["return (跳过)"]
+    G1 -->|不存在| G3["createOrUpdate 调用 SDM"]
+    G3 -->|成功| G4["更新 task_dispatch.purchaseOrderNo"]
+    G3 -->|"7001 错误"| G5["重试 / 跳过"]
+    G4 --> G6["sendSdmAcceptOrder - 自动接单 21 to 32"]
+    G6 --> G7["publishTaskOrderChange 发 Kafka"]
+</div>
+</div>
+
+<h3>2.4 任务生命周期状态机</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> NOT_ACTIVE: 创建任务
+    NOT_ACTIVE --> UNCOMPLETED: 激活(planActivateTime到期<br/>或 afterCreate直接激活)
+    NOT_ACTIVE --> SUSPEND_ACTIVE: 前置条件不满足<br/>(尾款未付/订单状态不对)
+    SUSPEND_ACTIVE --> UNCOMPLETED: 条件满足后重新激活
+    
+    state UNCOMPLETED {
+        [*] --> node20: nodeType=20<br/>通知可启动(总工)
+        node20 --> node60: nodeType=60<br/>START节点(供应商)
+        node60 --> node65: nodeType=65<br/>自检验收
+        node65 --> node80: nodeType=80<br/>FINISH_START
+        node80 --> node85: nodeType=85<br/>业主确认
+    }
+    
+    UNCOMPLETED --> COMPLETED: 所有节点完成
+    COMPLETED --> [*]
+</div>
+</div>
+
+<!-- 三、服务调用矩阵 -->
+<h2>三、服务调用关系矩阵</h2>
+<table>
+<thead><tr><th>调用方向</th><th>接口</th><th>协议</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>ofc → starlord</td><td><code>MaterialTaskFeign.create()</code></td><td><span class="tag tag-f">Feign</span></td><td>创建主材任务（主要入口）</td></tr>
+<tr><td>ofc → starlord</td><td><code>MaterialTaskConfigFeign.queryMaterialConfig()</code></td><td><span class="tag tag-f">Feign</span></td><td>查询材料配置</td></tr>
+<tr><td>sdm → starlord</td><td><code>MaterialConstructionTaskFeign.create()</code></td><td><span class="tag tag-f">Feign</span></td><td>SDM 触发创建</td></tr>
+<tr><td>workbench → starlord</td><td><code>EdarStarlordRpc.create()</code></td><td><span class="tag tag-f">Feign</span></td><td>工作台触发创建</td></tr>
+<tr><td>pfc → starlord</td><td><code>MaterialConstructionTaskFeign.activity()</code></td><td><span class="tag tag-f">Feign</span></td><td>激活任务</td></tr>
+<tr><td>starlord → sdm</td><td><code>PurchaseManageApi.createOrUpdate()</code></td><td><span class="tag tag-f">Feign</span></td><td>创建/更新采购单</td></tr>
+<tr><td>starlord → sdm</td><td><code>PurchaseManageApi.batchQuery()</code></td><td><span class="tag tag-f">Feign</span></td><td>批量查询采购单</td></tr>
+<tr><td>starlord → sdm</td><td><code>PurchaseManageApi.changeStatus()</code></td><td><span class="tag tag-f">Feign</span></td><td>变更采购单状态</td></tr>
+<tr><td>starlord → vss</td><td><code>ServiceOrderManageApi.addOrUpdateByOrderNo()</code></td><td><span class="tag tag-f">Feign</span></td><td>老VSS同步</td></tr>
+<tr><td>starlord → cube</td><td><code>PackageConstructionOperateService.newCreatePackage()</code></td><td><span class="tag tag-f">Feign</span></td><td>创建施工包</td></tr>
+<tr><td>starlord → cube</td><td><code>PackageSdmFeign.syncOrderStatus()</code></td><td><span class="tag tag-f">Feign</span></td><td>SDM 状态同步到 cube</td></tr>
+<tr><td>cube → starlord</td><td><code>TaskDispatchFeign.calEstimatedTimeForCubeBatch()</code></td><td><span class="tag tag-f">Feign</span></td><td>查询考核时间</td></tr>
+<tr><td>starlord → shuttle-order</td><td><code>ProjectOrderService.getByProjectOrderId()</code></td><td><span class="tag tag-f">Feign</span></td><td>查订单详情</td></tr>
+<tr><td>starlord → artisan</td><td><code>ConstructionScheduleFeignService.queryConstructionSchedulesV2()</code></td><td><span class="tag tag-f">Feign</span></td><td>查施工排期</td></tr>
+<tr><td>starlord → Kafka</td><td><code>publishTaskDispatchChange</code></td><td><span class="tag tag-k">Kafka</span></td><td>任务状态变更通知</td></tr>
+<tr><td>starlord → Kafka</td><td><code>publishTaskOrderChange</code></td><td><span class="tag tag-k">Kafka</span></td><td>任务订单变更通知</td></tr>
+<tr><td>sdm → starlord</td><td><code>SdmMessageSyncFeign.syncOrderStatus()</code></td><td><span class="tag tag-f">Feign</span></td><td>SDM 状态回调</td></tr>
+</tbody>
+</table>
+
+<!-- 四、核心数据表 -->
+<h2>四、核心数据表</h2>
+<table>
+<thead><tr><th>表名</th><th>说明</th><th>关键字段</th></tr></thead>
+<tbody>
+<tr><td><code>task_dispatch</code></td><td>主材任务主表</td><td>id, project_order_id, material_code, supplier_code, task_type, process_status, mode, sync_to_sdm</td></tr>
+<tr><td><code>task_dispatch_node</code></td><td>任务节点表</td><td>id, task_dispatch_id, node_type, process_status, executor_type, estimated_time</td></tr>
+<tr><td><code>n_material_template</code></td><td>全国配置模板</td><td>id, template_code, state</td></tr>
+<tr><td><code>n_material_template_unit</code></td><td>模板供应商单元</td><td>template_id, material_code, supplier_code, mdm_code, sale_type</td></tr>
+<tr><td><code>n_material_process_define</code></td><td>流程定义</td><td>template_id, task_type, process_code</td></tr>
+<tr><td><code>n_material_node_cfg</code></td><td>节点配置</td><td>process_code, node_code, node_type</td></tr>
+<tr><td><code>n_material_node_transfer_condition</code></td><td>节点转移条件(排程激活前置)</td><td>process_code, delivery_process_template_id, condition_mode</td></tr>
+<tr><td><code>delivery_flow_rule</code></td><td>排程规则</td><td>id, delivery_process_cfg_id</td></tr>
+<tr><td><code>delivery_flow_rule_unit</code></td><td>排程规则单元(分公司维度)</td><td>rule_id, mdm_company_code, sale_type, document_type</td></tr>
+<tr><td><code>delivery_flow_rule_category</code></td><td>排程品类规则</td><td>rule_id, material_code, supplier_code, category_id</td></tr>
+<tr><td><code>material_flow_rule</code></td><td>八合一规则</td><td>id, gb_code</td></tr>
+<tr><td><code>material_flow_rule_category</code></td><td>八合一分品类规则</td><td>rule_id, material_code, supplier_code</td></tr>
+<tr><td><code>material_flow_rule_template_mapping</code></td><td>八合一 category↔template 映射</td><td>category_id, template_code</td></tr>
+</tbody>
+</table>
+
+<!-- 五、配置模式对比 -->
+<h2>五、三种配置模式对比</h2>
+<table>
+<thead><tr><th>维度</th><th><span class="badge badge-5">5</span>八合一</th><th><span class="badge badge-6">6</span>全国</th><th><span class="badge badge-7">7</span>排程</th></tr></thead>
+<tbody>
+<tr><td><b>适用范围</b></td><td>北京被窝</td><td>圣都等非北京分公司</td><td>灰度开启后</td></tr>
+<tr><td><b>配置表</b></td><td><code>material_flow_rule*</code></td><td><code>n_material_template*</code></td><td><code>delivery_flow_rule*</code></td></tr>
+<tr><td><b>模板映射</b></td><td>category → template mapping</td><td>template → unit → processDefine</td><td>rule → unit → category → processDefine</td></tr>
+<tr><td><b>节点定义</b></td><td><code>n_material_node_cfg</code></td><td><code>n_material_node_cfg</code></td><td><code>n_material_node_cfg</code> (共用)</td></tr>
+<tr><td><b>激活条件</b></td><td><code>n_material_node_cfg</code> (nodeCode=1000)</td><td><code>n_material_node_cfg</code> (nodeCode=1000)</td><td><code>n_material_node_transfer_condition</code></td></tr>
+<tr><td><b>供应商同步</b></td><td>syncToSdm=2 (NEW_SDM)</td><td>syncToSdm=1 (OLD_VSS)</td><td>syncToSdm=2 (NEW_SDM)</td></tr>
+<tr><td><b>创建入口</b></td><td><code>execCreateMaterialProcess</code></td><td><code>execCreateMaterialProcess</code></td><td><code>execCreateMaterialProcess</code> (同)</td></tr>
+</tbody>
+</table>
+
+<footer>
+  starlord 材料履约系统 · 业务架构文档 · 基于源码 + Obsidian 知识库 · 2026-07-02
+</footer>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1f6feb',
+      primaryTextColor: '#c9d1d9',
+      primaryBorderColor: '#30363d',
+      lineColor: '#58a6ff',
+      secondaryColor: '#161b22',
+      tertiaryColor: '#0d1117',
+      fontSize: '14px'
+    },
+    flowchart: { useMaxWidth: true, htmlLabels: true },
+    sequence: { useMaxWidth: true, diagramMarginX: 30, boxMargin: 8 },
+    state: { useMaxWidth: true }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>整装业务流程全景 — starlord 业务视角</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --card-bg: #161b22; --border: #30363d;
+    --text: #c9d1d9; --text-dim: #8b949e;
+    --blue: #58a6ff; --green: #3fb950; --orange: #d2991d;
+    --purple: #a371f7; --red: #f85149; --pink: #f778ba;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6; padding: 24px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  header {
+    text-align: center; padding: 48px 0 20px;
+    border-bottom: 1px solid var(--border); margin-bottom: 40px;
+  }
+  header h1 { font-size: 2em; color: var(--blue); margin-bottom: 8px; }
+  header p { color: var(--text-dim); font-size: 0.95em; }
+
+  h2 { color: var(--blue); font-size: 1.4em; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { color: var(--green); font-size: 1.15em; margin: 32px 0 12px; }
+
+  .mermaid-wrap {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px; margin-bottom: 24px; overflow-x: auto;
+  }
+  .mermaid-wrap .mermaid { display: flex; justify-content: center; }
+
+  .timeline {
+    display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 32px;
+  }
+  .phase {
+    flex: 1; min-width: 140px; background: var(--card-bg);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; text-align: center;
+  }
+  .phase .icon { font-size: 1.8em; margin-bottom: 8px; }
+  .phase .title { font-weight: 700; font-size: 1em; margin-bottom: 4px; }
+  .phase .sub { font-size: 0.8em; color: var(--text-dim); }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 16px 0 32px;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9em; }
+  th { background: #21262d; color: var(--blue); font-weight: 600; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1c2128; }
+
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; font-weight: 600;
+  }
+  .tag-s { background: #1f3a5f; color: #58a6ff; }
+  .tag-m { background: #2d1f3a; color: #a371f7; }
+  .tag-c { background: #1f3a3a; color: #3fb950; }
+  .tag-i { background: #3a2f1f; color: #d2991d; }
+  .tag-e { background: #3a1f1f; color: #f85149; }
+
+  footer {
+    text-align: center; padding: 32px 0; color: var(--text-dim);
+    font-size: 0.85em; border-top: 1px solid var(--border); margin-top: 48px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>整装业务全景流程</h1>
+  <p>从签约到竣工，主材+施工双线并行 ｜ 贝壳整装 · starlord 业务视角</p>
+</header>
+
+<!-- ===== 一、端到端全景 ===== -->
+<h2>一、端到端业务全景</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart LR
+    subgraph PHASE1["① 签约 & 设计"]
+        direction TB
+        A1["客源获取"] --> A2["到店签约"]
+        A2 --> A3["量房设计"]
+        A3 --> A4["方案报价"]
+    end
+
+    subgraph PHASE2["② 施工阶段"]
+        direction TB
+        B1["开工交底"] --> B2["技术交底"]
+        B2 --> B3["水电施工"]
+        B3 --> B4["瓦工施工"]
+        B4 --> B5["木工施工"]
+        B5 --> B6["油工施工"]
+        B6 --> B7["基装验收"]
+    end
+
+    subgraph PHASE3["③ 主材履约"]
+        direction TB
+        C1["测量"] --> C2["设计"]
+        C2 --> C3["复尺"]
+        C3 --> C4["报价变更"]
+        C4 --> C5["下单"]
+        C5 --> C6["备货"]
+        C6 --> C7["送货"]
+        C7 --> C8["安装"]
+    end
+
+    subgraph PHASE4["④ 交付验收"]
+        direction TB
+        D1["安装验收"] --> D2["自检"]
+        D2 --> D3["管家验收"]
+        D3 --> D4["业主确认"]
+        D4 --> D5["竣工验收"]
+    end
+
+    PHASE1 --> PHASE2
+    PHASE2 --> PHASE3
+    PHASE3 --> PHASE4
+
+    style PHASE1 fill:#1f2430,stroke:#58a6ff
+    style PHASE2 fill:#1f2a1f,stroke:#3fb950
+    style PHASE3 fill:#2a1f30,stroke:#a371f7
+    style PHASE4 fill:#302a1f,stroke:#d2991d
+</div>
+</div>
+
+<!-- ===== 二、施工包全生命周期 ===== -->
+<h2>二、施工包 — 施工阶段的作业载体</h2>
+<p style="color: var(--text-dim); margin-bottom: 16px;">
+施工包是连接「工地施工」与「主材安装」的核心桥梁。每一次安装/施工任务，都由施工包承接，管理从约工到验收的完整过程。
+</p>
+
+<h3>2.1 施工包状态流转</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> 待激活: 系统生成施工包
+    
+    待激活 --> 待约工: 到激活时间
+    待激活 --> 已取消: 取消施工包
+    
+    待约工 --> 待派单: 约工完成
+    待约工 --> 已取消: 取消
+    
+    待派单 --> 待进场: 派单完成
+    
+    待进场 --> 施工中: 工人进场打卡
+    
+    state 施工中 {
+        [*] --> 施工作业
+        施工作业 --> 自检: 工人自检
+        自检 --> 管家验收: 自检完成
+        管家验收 --> 整改: 验收不通过
+        整改 --> 施工作业: 整改后继续
+    }
+    
+    施工中 --> 现场验收: 管家验收通过
+    现场验收 --> 已完成: 业主确认
+    
+    已完成 --> [*]
+    已取消 --> [*]
+</div>
+</div>
+
+<h3>2.2 施工包作业流程</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    A["施工包激活<br/>状态=待约工(100)"] --> B["约工<br/>工长预约工人"]
+    B --> C["派单<br/>指派具体工人"]
+    C --> D["进场打卡<br/>工人到达现场签到"]
+    D --> E["施工<br/>工人开始作业"]
+    E --> F{"施工类型?"}
+    F -->|"主材安装"| G["供应商安装施工<br/>橱柜/门/地板/卫浴..."]
+    F -->|"基装施工"| H["工长/工人施工<br/>水电/瓦工/木工/油工"]
+    G --> I["自检<br/>工人自查施工质量"]
+    H --> I
+    I --> J["管家验收<br/>交付专家现场检查"]
+    J --> K{"验收通过?"}
+    K -->|是| L["业主确认"]
+    K -->|否| M["整改<br/>返回施工"]
+    M --> E
+    L --> N["施工包完成<br/>状态=已完成(600)"]
+
+    style A fill:#1f2430,stroke:#58a6ff,color:#c9d1d9
+    style N fill:#1f2a1f,stroke:#3fb950,color:#c9d1d9
+    style M fill:#3a1f1f,stroke:#f85149,color:#c9d1d9
+</div>
+</div>
+
+<!-- ===== 三、主材任务双线并行 ===== -->
+<h2>三、主材任务 — 双线并行</h2>
+<p style="color: var(--text-dim); margin-bottom: 16px;">
+主材任务按执行主体分为两条线：<b>供应商执行线</b>（由供应商在门店端/小程序操作）和 <b>内部协同线</b>（由设计师、内控员在平台操作）。
+两条线并行推进，通过「复尺完成 → 触发报价变更」形成核心依赖。
+</p>
+
+<h3>3.1 双线全景</h3>
+<div class="mermaid-wrap">
+<div class="mermaid">
+flowchart TD
+    subgraph SUPPLIER["🔵 供应商执行线（供应商/工人操作）"]
+        direction LR
+        S1["① 测量<br/>taskType=1<br/>供应商上门量尺"] --> S2
+        
+        subgraph S2 ["② 复尺 taskType=3"]
+            direction TB
+            S2A["通知复尺<br/>（系统推送）"] --> S2B["上门复尺<br/>（供应商执行）"]
+        end
+        
+        S2 --> S3["③ 安装<br/>taskType=6<br/>送货后上门安装"]
+    end
+
+    subgraph INTERNAL["🟢 内部协同线（设计师/内控员操作）"]
+        direction LR
+        I1["④ 设计<br/>taskType=10<br/>设计方案确认"] --> I2["⑤ 报价变更<br/>taskType=11<br/>复尺后调整报价"]
+        I2 --> I3["⑥ 下单<br/>taskType=4<br/>创建采购单→SDM"]
+        I3 --> I4["⑦ 备货/送货<br/>taskType=9<br/>供应商生产发货"]
+    end
+
+    S2 -.->|"复尺完成<br/>触发报价变更"| I2
+    I4 -->|"送货到工地后<br/>触发安装"| S3
+
+    style SUPPLIER fill:#1f2430,stroke:#a371f7
+    style INTERNAL fill:#1f2a1f,stroke:#3fb950
+</div>
+</div>
+
+<h3>3.2 各节点详解</h3>
+<table>
+<thead><tr><th>节点</th><th>taskType</th><th>执行线</th><th>操作人</th><th>触发方式</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><b>测量</b></td><td>1</td><td><span class="tag tag-s">供应商线</span></td><td>供应商测量员</td><td>系统自动 / 手动触发</td><td>供应商上门量尺，记录毛坯尺寸</td></tr>
+<tr><td><b>复尺</b></td><td>3</td><td><span class="tag tag-s">供应商线</span></td><td>供应商测量员</td><td>前置节点完成后触发</td><td>贴砖/找平后再次测量，得到精确尺寸</td></tr>
+<tr><td><b>设计</b></td><td>10</td><td><span class="tag tag-i">内部线</span></td><td>设计师</td><td>测量完成后触发</td><td>根据测量数据出设计方案，确认材料清单</td></tr>
+<tr><td><b>报价变更</b></td><td>11</td><td><span class="tag tag-i">内部线</span></td><td>内控员 / 设计师</td><td>复尺完成后自动触发</td><td>复尺后尺寸/方案变动，调整报价单 → 业主确认</td></tr>
+<tr><td><b>下单</b></td><td>4</td><td><span class="tag tag-i">内部线</span></td><td>内控员</td><td>报价确认后触发</td><td>向 SDM 创建采购单（PO），供应商开始备货</td></tr>
+<tr><td><b>备货/送货</b></td><td>9</td><td><span class="tag tag-i">内部线</span></td><td>供应商</td><td>下单完成后</td><td>供应商生产、发货到工地</td></tr>
+<tr><td><b>安装</b></td><td>6</td><td><span class="tag tag-s">供应商线</span></td><td>供应商安装工</td><td>送货完成后触发</td><td>材料到工地后上门安装</td></tr>
+</tbody>
+</table>
+
+<h3>3.3 核心依赖：复尺 → 报价变更</h3>
+<p style="color: var(--text-dim);">
+这是两条线唯一的<b>硬依赖</b>：供应商完成复尺后，系统自动触发报价变更。因为复尺尺寸是报价变更的依据——
+只有知道精确尺寸，才能确定最终材料数量和价格。
+</p>
+
+<div class="mermaid-wrap">
+<div class="mermaid">
+sequenceDiagram
+    participant 供应商 as 供应商（门店端）
+    participant starlord as starlord 任务引擎
+    participant 内控 as 内控员（平台）
+    participant SDM as SDM 采购系统
+
+    供应商->>starlord: 提交复尺结果(taskType=3)
+    starlord->>starlord: 复尺任务完成 ✅
+    starlord->>starlord: 自动触发报价变更(taskType=11)
+    Note over starlord: 检查 flow_rule 配置<br/>创建下一个任务节点
+    starlord-->>内控: 待办：报价变更待处理
+    内控->>starlord: 调整报价单
+    内控->>starlord: 提交报价变更
+    starlord->>starlord: 报价变更任务完成 ✅
+    starlord->>starlord: 触发下单(taskType=4)
+    starlord->>SDM: 创建采购单(PO)
+    SDM-->>starlord: PO 创建成功
+</div>
+</div>
+
+<h3>3.4 不同 mode 的推进策略</h3>
+<table>
+<thead><tr><th>mode</th><th>名称</th><th>配置方式</th><th>适用场景</th><th>推进特点</th></tr></thead>
+<tbody>
+<tr><td><b>5</b></td><td>八合一</td><td>flow_rule 流规则</td><td>标准品类（橱柜、室内门等）</td><td>严格按流程节点顺序推进，每个节点完成后自动触发下一个</td></tr>
+<tr><td><b>6</b></td><td>全国模版</td><td>template 模版</td><td>非标品类 / 需要灵活配置</td><td>按模版定义节点，支持跳过/并行，可按分公司定制</td></tr>
+<tr><td><b>7</b></td><td>排程</td><td>flow_rule 流规则</td><td>排程场景（激活/计划时间驱动）</td><td>根据施工进度自动计算计划时间，在时间节点自动生成任务</td></tr>
+</tbody>
+</table>
+
+<h3>3.5 涉及的关键接口</h3>
+<table>
+<thead><tr><th>接口</th><th>用途</th><th>调用方</th></tr></thead>
+<tbody>
+<tr><td><code>createMaterialTask</code></td><td>创建主材任务（OFC→starlord 入口）</td><td>OFC</td></tr>
+<tr><td><code>queryTaskDetail</code></td><td>查询任务详情和节点信息</td><td>门店端 / 平台</td></tr>
+<tr><td><code>handleTaskNode</code></td><td>处理任务节点（qualified=1 通过 / =2 驳回）</td><td>门店端 / 平台</td></tr>
+<tr><td><code>sendVssNew / sendSdmNewPackage</code></td><td>同步采购单到 SDM</td><td>starlord</td></tr>
+<tr><td><code>queryDeliveryFlowFormByUnit</code></td><td>查询配送流程配置（flow_rule / template）</td><td>starlord 内部</td></tr>
+<tr><td><code>calculatePlanActiveTime</code></td><td>计算排程计划的激活时间</td><td>starlord 内部</td></tr>
+</tbody>
+</table>
+
+<!-- ===== 四、时间线视图 ===== -->
+<h2>四、整装项目时间线</h2>
+<div class="mermaid-wrap">
+<div class="mermaid">
+gantt
+    title 整装项目施工时间线（典型 3-4 个月）
+    dateFormat YYYY-MM-DD
+    axisFormat %m/%d
+
+    section 签约设计
+    客源签约       :a1, 2026-03-01, 7d
+    量房设计报价    :a2, after a1, 14d
+
+    section 基装施工
+    开工交底       :b1, after a2, 1d
+    技术交底       :b2, after b1, 1d
+    水电施工       :b3, after b2, 10d
+    瓦工施工       :b4, after b3, 14d
+    木工施工       :b5, after b4, 7d
+    油工施工       :b6, after b5, 14d
+    基装验收       :b7, after b6, 1d
+
+    section 主材履约
+    测量           :c1, after b1, 5d
+    设计           :c2, after c1, 7d
+    复尺           :c3, after c2, 5d
+    报价变更       :c4, after c3, 3d
+    下单备货       :c5, after c4, 20d
+    送货           :c6, after c5, 3d
+    安装           :c7, after c6, 10d
+
+    section 验收交付
+    安装验收       :d1, after c7, 3d
+    自检整改       :d2, after d1, 5d
+    竣工验收       :d3, after d2, 1d
+</div>
+</div>
+
+<!-- ===== 五、关键角色 ===== -->
+<h2>五、关键角色与职责</h2>
+<table>
+<thead><tr><th>角色</th><th>标签</th><th>核心职责</th></tr></thead>
+<tbody>
+<tr><td>客户经理</td><td><span class="tag tag-s">签约</span></td><td>获客、签约、合同管理</td></tr>
+<tr><td>家装设计师</td><td><span class="tag tag-s">设计</span></td><td>方案设计、量房、报价</td></tr>
+<tr><td>橱柜/定制设计师</td><td><span class="tag tag-s">设计</span></td><td>橱柜/定制柜设计、复尺</td></tr>
+<tr><td>工长（项目经理）</td><td><span class="tag tag-m">施工</span></td><td>开工交底、施工管理、约工派单</td></tr>
+<tr><td>工人</td><td><span class="tag tag-m">施工</span></td><td>水电瓦木油施工、进场打卡</td></tr>
+<tr><td>交付专家（管家）</td><td><span class="tag tag-c">验收</span></td><td>现场验收、进度跟踪、业主沟通</td></tr>
+<tr><td>工程经理</td><td><span class="tag tag-c">验收</span></td><td>工程质量管理、验收审核</td></tr>
+<tr><td>内控员</td><td><span class="tag tag-i">审核</span></td><td>报价审核、变更审核、尾款确认</td></tr>
+<tr><td>供应商</td><td><span class="tag tag-e">履约</span></td><td>测量、复尺、备货、送货、安装</td></tr>
+<tr><td>顾问</td><td><span class="tag tag-s">签约</span></td><td>售前咨询、客源转化</td></tr>
+</tbody>
+</table>
+
+<!-- ===== 六、关键名词 ===== -->
+<h2>六、业务名词解释</h2>
+<table>
+<thead><tr><th>名词</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td><b>施工包</b></td><td>工地施工的作业载体，关联工人、材料、时间，状态从待约工→施工→验收→完成</td></tr>
+<tr><td><b>主材任务</b></td><td>每个品类（如橱柜、室内门）在每个履约环节（测量/复尺/安装）的任务单</td></tr>
+<tr><td><b>履约环节</b></td><td>测量→设计→复尺→报价变更→下单→备货→送货→安装，每个环节可由系统自动推进</td></tr>
+<tr><td><b>约工</b></td><td>工长预约工人，确定上门时间</td></tr>
+<tr><td><b>派单</b></td><td>将施工包指派给具体工人执行</td></tr>
+<tr><td><b>进场打卡</b></td><td>工人到达施工现场后签到，标志施工作业正式开始</td></tr>
+<tr><td><b>自检</b></td><td>施工完成后工人自查质量</td></tr>
+<tr><td><b>管家验收</b></td><td>交付专家现场检查施工质量，通过则进入业主确认</td></tr>
+<tr><td><b>整改</b></td><td>验收不通过时，工人返回现场修正问题</td></tr>
+<tr><td><b>复尺</b></td><td>在施工进行到一定阶段后，再次精确测量尺寸（如贴砖后测量橱柜）</td></tr>
+<tr><td><b>报价变更</b></td><td>复尺后发现尺寸/方案变化，调整报价单</td></tr>
+<tr><td><b>采购单 (PO)</b></td><td>starlord 向供应商系统 (SDM) 创建的材料采购订单</td></tr>
+</tbody>
+</table>
+
+<footer>
+  整装业务全景 · starlord 业务视角 · 2026-07-02
+</footer>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1f6feb',
+      primaryTextColor: '#c9d1d9',
+      primaryBorderColor: '#30363d',
+      lineColor: '#58a6ff',
+      secondaryColor: '#161b22',
+      tertiaryColor: '#0d1117',
+      fontSize: '14px'
+    },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+    sequence: { useMaxWidth: true, diagramMarginX: 30, boxMargin: 8 },
+    state: { useMaxWidth: true },
+    gantt: { useMaxWidth: true, barHeight: 20, fontSize: 12 }
+  });
+</script>
+</body>
+</html>

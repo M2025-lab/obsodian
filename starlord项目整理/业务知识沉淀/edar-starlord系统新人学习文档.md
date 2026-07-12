@@ -1,5 +1,6 @@
 家装系统从整体流程来看大致可分为签单 → 设计 → 报价/选材 → 合同签订 → 开工准备 → 施工阶段 → 竣工验收 → 结算 → 售后     「可参考[履约流程分级](https://a4mkvsc1gv.feishu.cn/docx/NKo0ddvANonQnVxRRFMcDBJZnKg)」
-
+![[starlord项目整理/业务知识沉淀/fig/starlord_业务架构与流程.html]]
+![[starlord项目整理/业务知识沉淀/fig/starlord_整装业务流程全景.html]]
 家装系统从领域来划分大致为[[starlord项目整理/业务知识沉淀/Home-交付学习新人文档]]
 [[总结]]
 
