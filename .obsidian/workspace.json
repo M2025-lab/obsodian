@@ -109,7 +109,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#路径3：零售订单直接创建",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,8 +130,7 @@
               "title": "书签"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -247,8 +246,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 320.5,
-    "collapsed": true
+    "width": 561.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -265,11 +263,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "53880614391a5f16",
+  "active": "e8aac3b4b4018a37",
   "lastOpenFiles": [
+    "starlord项目整理/业务知识沉淀/一些核心概念.md",
+    "需求/供应商汰换20260709/技术方案的问题.md",
+    "日报与周报/日报记录-个人.md",
+    "日报与周报/日报-邮件发送.md",
+    "日报与周报/日报记录-汇报.md",
+    "日报与周报/周报.md",
+    "新人串讲/新人第一次串讲.md",
     "starlord项目整理/复尺流程.md",
     "starlord项目整理/安装流程.md",
-    "新人串讲/新人第一次串讲.md",
     "starlord项目整理/全部枚举类型梳理.md",
     "starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档.md",
     "starlord项目整理/用工平台.md",
@@ -283,17 +287,14 @@
     "新人串讲/fig/Pasted image 20260712165022.png",
     "新人串讲/fig/Pasted image 20260712164459.png",
     "starlord项目整理/主材任务操作-带图片.md",
-    "日报与周报/日报记录-个人.md",
     "技能沉淀.md",
     "starlord数据库表/starlord全量REST接口与数据表映射.md",
     "starlord项目整理/业务知识沉淀/Home-交付学习新人文档.md",
     "starlord项目整理/枚举类和上下游梳理-starlord系统.md",
     "starlord项目整理/施工订单系统分享.md",
     "starlord项目整理/主材任务流程梳理.md",
-    "starlord项目整理/业务知识沉淀/一些核心概念.md",
     "新人串讲/fig/Home系统.png",
     "新人串讲/fig",
-    "需求/供应商汰换20260709/技术方案的问题.md",
     "starlord项目整理/业务知识沉淀/用工平台新人学习文档.md",
     "starlord项目整理/业务知识沉淀/fig/Home系统.png",
     "starlord项目整理/业务知识沉淀/fig/starlord_整装业务流程全景.html",
@@ -301,10 +302,8 @@
     "starlord项目整理/starlord_业务架构与流程.html",
     "starlord项目整理/接口-动作映射表.md",
     "随记.md",
-    "日报与周报/日报记录-汇报.md",
     "新人串讲",
     "starlord项目整理/全部枚举类型梳理.md.tmp.2979.e2c3567adb0a",
-    "starlord项目整理/业务知识沉淀/施工包概念理解.md",
     "需求/供应商汰换20260709/fig/Pasted image 20260710115634.png",
     "需求/供应商汰换20260709/fig/Pasted image 20260710114549.png",
     "需求/供应商汰换20260709/fig/Pasted image 20260710114008.png",
