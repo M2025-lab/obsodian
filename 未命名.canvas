@@ -1,1 +1,9 @@
-{}
+{
+	"nodes":[
+		{"id":"d9b0faab2d27dcd4","x":-125,"y":-30,"width":250,"height":60,"type":"text","text":""},
+		{"id":"1ce95867e5ecb274","x":-760,"y":-340,"width":400,"height":400,"type":"file","file":"新人串讲/新人第一次串讲.md"}
+	],
+	"edges":[
+		{"id":"12cfa8f54ebf06af","fromNode":"1ce95867e5ecb274","fromSide":"right","toNode":"d9b0faab2d27dcd4","toSide":"top"}
+	]
+}
