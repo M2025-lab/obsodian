@@ -27,7 +27,7 @@ invoke(MaterialBatchCreateBO)
   │    ├─ 过滤已生成的实例       避免重复生成
   │    └─ 获取订单详情          (ProjectOrder)
   │
-  ├─ ② buildWithConfig()       构建 TaskDispatch + TaskDispatchNode 框架
+  ├─ ② buildWithConfig()       构建 TaskDispatch + TaskDispatchNode 框架。 根据模板来创建任务实例
   │    ├─ 遍历 MaterialTask 模板
   │    ├─ 构建 TaskDispatch（主表）
   │    └─ 构建 TaskDispatchNode（子表节点，按模板节点顺序排序）
@@ -145,3 +145,106 @@ invoke(MaterialBatchCreateBO)
 - 每个 `TaskDispatch` 代表一个主材品类的施工调度任务
 - 根据项目排期或依赖条件，计算合适的激活时间
 - 激活后，安装师傅/协调员就能看到并开始处理
+
+---
+
+## 激活时间计算逻辑详解（`buildTaskDispatchWithTime`）
+
+该方法在 `③ buildTaskDispatch` 中被调用，核心逻辑是根据 `MaterialTask` 模板上配置的 `activateMode`（激活模式）分四种情况计算 `TaskDispatch` 的 `planActivateTime`（计划激活时间）：
+
+```java
+for (TaskDispatch taskDispatch : context.getInserts()) {
+    MaterialTask materialTask = materialTasksMap.get(taskDispatch.getTemplateId());
+
+    if (ActivateModeEnum.isPlanTime(materialTask.getActivateMode().intValue())) {
+        // 情况一：排期时间依赖
+    } else if (LangUtils.isImmediatelyActivate(materialTask.getActivateMode())) {
+        // 情况二：立即激活
+    } else if (ActivateModeEnum.isDependentNode(materialTask.getActivateMode().intValue())) {
+        // 情况三：节点依赖
+    } else {
+        // 情况四：其他（兜底）
+    }
+}
+```
+
+### 情况一：`PLAN_TIME` — 按排期工序时间激活
+
+**适用场景**：任务激活依赖于项目排期中某个工序的完成时间（如"瓦工完工后3天"）。
+
+```
+查项目排期 → 找到模板配置的关联工序 → 取该工序的开始时间 + 偏移量(方向+天数) → 设为激活时间
+```
+
+```java
+ProjectScheduleItemBO projectScheduleItemBO = projectScheduleItemMap.get(materialTask.getActivateRelationCode());
+if (Objects.isNull(projectScheduleItemBO)) {
+    // 排期里找不到对应的工序 → initDate（暂不激活）
+    taskDispatch.setPlanActivateTime(CommonConstant.getInitDate());
+} else {
+    // 取排期工序的开始时间 + 偏移量（方向由 ScheduleRelationEnum 控制）
+    Date planActivateTime = DateUtil.getEstimatedTime(
+        projectScheduleItemBO.getStartDate(),
+        relationEnum,                         // 偏移方向（提前/延后）
+        materialTask.getActivateDuration()    // 偏移天数
+    );
+    taskDispatch.setPlanActivateTime(planActivateTime);
+}
+```
+
+> **例子**：排期里"瓦工完工"是 7月20日，模板配了延后2天 → 激活时间 = 7月22日
+
+### 情况二：`IMMEDIATE` — 立即激活
+
+**适用场景**：任务创建后马上就需要处理（如"量尺"通常创建即激活）。
+
+```java
+taskDispatch.setPlanActivateTime(new Date());
+```
+
+### 情况三：`DEPENDENT_NODE` — 按前置节点依赖激活
+
+**适用场景**：当前任务依赖另一个任务实例的完成（如"送货"依赖"量尺"完成）。
+
+```
+查前置任务 →
+  ├─ 没有前置任务 → initDate（暂不激活）
+  ├─ 有前置任务且存在未完成的 → initDate（暂不激活）
+  └─ 有前置任务且全部完成 → 取前置任务的最后修改时间作为激活时间
+```
+
+```java
+List<TaskDispatch> taskDispatchList = dispatchCreateService.queryDependentNodeTask(taskDispatch);
+
+if (CollectionUtils.isEmpty(taskDispatchList)) {
+    taskDispatch.setPlanActivateTime(CommonConstant.getInitDate());
+} else {
+    List<TaskDispatch> unFinishedList = taskDispatchList.stream()
+        .filter(e -> ProcessStatusEnum.FINISHED.getValue().byteValue() != e.getProcessStatus())
+        .collect(Collectors.toList());
+
+    if (!CollectionUtils.isEmpty(unFinishedList)) {
+        // 有未完成的 → 不激活
+        taskDispatch.setPlanActivateTime(CommonConstant.getInitDate());
+        return;
+    }
+    // 全部完成 → 取前置任务的最后修改时间
+    taskDispatch.setPlanActivateTime(taskDispatchList.get(0).getGmtModified());
+}
+```
+
+### 情况四：其他（默认兜底）
+
+```java
+taskDispatch.setPlanActivateTime(CommonConstant.getInitDate());
+```
+
+`CommonConstant.getInitDate()` 是一个早期固定日期（通常为 `1970-01-01` 或 `2000-01-01`），表示**暂不激活**，后续由 `activateTaskDispatchAsync` 或其他激活机制触发。
+
+### 关键设计要点
+
+| 要点 | 说明 |
+|------|------|
+| **计算的是"计划激活时间"，不是"实际激活"** | 实际激活动作是在 `activateTaskDispatchAsync` 中异步执行的，这里只算出什么时候可以激活 |
+| `initDate` 含义 | 不等于"永远不激活"，而是"暂时不触发激活条件"，可能在后续通过其他入口手动激活 |
+| `switch.immediately.active.after.create` | 类顶部的开关配置，控制创建后是否立即激活，和这里的激活模式是两个独立维度 |
