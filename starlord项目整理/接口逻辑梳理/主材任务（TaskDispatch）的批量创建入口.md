@@ -261,3 +261,195 @@ taskDispatch.setPlanActivateTime(CommonConstant.getInitDate());
 | **计算的是"计划激活时间"，不是"实际激活"** | 实际激活动作是在 `activateTaskDispatchAsync` 中异步执行的，这里只算出什么时候可以激活 |
 | `initDate` 含义 | 不等于"永远不激活"，而是"暂时不触发激活条件"，可能在后续通过其他入口手动激活 |
 | `switch.immediately.active.after.create` | 类顶部的开关配置，控制创建后是否立即激活，和这里的激活模式是两个独立维度 |
+
+---
+
+## pushMsg 推送消息逻辑详解
+
+### 代码
+
+```java
+private void pushMsg(TaskDispatchCreateContext context){
+    // ① 收集所有新创建的 TaskDispatch ID
+    List<Long> taskDispatchIds = context.getInserts().stream()
+        .map(TaskDispatch::getId).collect(Collectors.toList());
+
+    // ② 查询这些任务中状态为 UNCOMPLETED（未完成）的节点
+    ArrayList<Byte> unCompletedList = Lists.newArrayList(TaskDispatchNodeStatusEnum.UNCOMPLETED.getValue().byteValue());
+    List<TaskDispatchNode> activeDispatchNodeList = taskDispatchNodeDao.listByParam(taskDispatchIds, null, unCompletedList);
+
+    // ③ 逐个推送消息
+    for (TaskDispatchNode node : activeDispatchNodeList) {
+        messagePushClient.pushMessageWhenTaskDispatchNodeProcessChange(node.getId(), TaskDispatchNodeStatusEnum.UNCOMPLETED);
+    }
+}
+```
+
+### 逻辑拆解
+
+| 步骤 | 做了什么 |
+|------|---------|
+| ① **取 ID 列表** | 从刚创建的 `TaskDispatch` 列表中提取所有主键 ID |
+| ② **查已激活的节点** | 筛选这批任务中状态为 `UNCOMPLETED`（未完成）的节点。注意：只有 `IMMEDIATE` 模式的第一个节点会在此阶段被设为 `UNCOMPLETED` |
+| ③ **推送通知** | 对每个已激活的节点，调用 `messagePushClient.pushMessageWhenTaskDispatchNodeProcessChange()` 发推送 |
+
+### 业务含义
+
+只在任务创建时，对**已经自动激活了的节点**发推送通知。比如 `IMMEDIATE` 模式的"量尺"任务，创建后第一个节点就是 `UNCOMPLETED` 状态，此时给执行人发通知。
+
+而那些 `PLAN_TIME` 或 `DEPENDENT_NODE` 模式的任务，所有节点都是 `UN_ACTIVE`，不会被查到，所以**不会在这里推送**。
+
+---
+
+### 推送底层完整调用链
+
+```
+pushMsg(context)
+  → messagePushClient.pushMessageWhenTaskDispatchNodeProcessChange(nodeId, UNCOMPLETED)
+      │
+      ├─ ① newMessagePushService.push(nodeId)        ← 新版推送（2023+）
+      │
+      └─ ② 遍历 TaskNodeMsgEnum.values()             ← 旧版推送
+              └─ pushMsg(taskDispatch, node, enum)
+                    │
+                    ├─ PushClient.sendPushMsg()       ← IM/App 推送
+                    └─ PushClient.sendPushNotice()    ← 短信推送
+```
+
+#### 入口方法 `pushMessageWhenTaskDispatchNodeProcessChange`
+
+```java
+public void pushMessageWhenTaskDispatchNodeProcessChange(Long taskDispatchNodeId,
+        TaskDispatchNodeStatusEnum progressStatus) {
+    // 1. 查节点
+    TaskDispatchNode node = taskDispatchNodeDao.getById(taskDispatchNodeId);
+    // 2. 查主任务
+    TaskDispatch taskDispatch = taskDispatchService.getById(node.getTaskDispatchId());
+    // 3. 新版推送
+    taskExecutorHelper.awaitExecutor(Lists.newArrayList(node.getId()),
+        (t) -> newMessagePushService.push(t));
+    // 4. 旧版推送：遍历枚举，匹配则发
+    for (TaskNodeMsgEnum taskNodeMsgEnum : TaskNodeMsgEnum.values()) {
+        if (taskNodeMsgEnum.shouldPushMsg(taskDispatch, node)) {
+            pushMsg(taskDispatch, node, taskNodeMsgEnum);
+        }
+    }
+}
+```
+
+---
+
+### 分支 1：新版推送（NewMessagePushService.push）
+
+```java
+push(nodeId) {
+    TaskDispatchNode node = taskDispatchNodeDao.getById(nodeId);
+    NMaterialTaskForm taskForm = getTaskForm(node);   // 查模板配置
+    pushMessage(taskForm, node);                       // 遍历 materialPushCfgList
+        → message()                                    // 按配置发推送
+            → PushClient.sendPushMsg(collect, param)   // → IM 推送
+}
+```
+
+配置从模板表 `NMaterialTaskCfg` 的 `materialPushCfgList` 中读取：
+
+| pushCfg 字段 | 含义 |
+|-------------|------|
+| `noticeTimeType` | 何时推送：完成时/开始时/将延期/已延期 |
+| `relationCode` | 发给谁：关联任务节点 / 特定角色 |
+| `noticeParent` | 是否同时发给上级 |
+
+---
+
+### 分支 2：旧版推送（TaskNodeMsgEnum）
+
+`TaskNodeMsgEnum` 是一个枚举，**硬编码**了每种场景的消息模板。每个枚举值包含：
+
+```java
+MEASURE_START_UNCOMPLETED(
+    TaskTypeEnum.MEASURE,                          // 任务类型：测量
+    NodeTypeEnum.START,                            // 节点类型：启动
+    TaskDispatchNodeStatusEnum.UNCOMPLETED,        // 节点状态：未完成
+    PushChannelEnum.GONGZUOZHUSHOU,                // 推送渠道：工作助手
+    null,                                          // receiverUcIds: 不指定（用节点执行人）
+    "你收到一个新的测量任务",                        // 标题
+    "push.measure.start.active.jump.url",          // 跳转链接 Key（从 Apollo 取）
+    "项目地址：#{#projectOrderInfo.address}...",    // SpEL 模板内容
+)
+```
+
+**判断是否推送（`shouldPushMsg`）**：通过 任务类型 + 节点类型 + 节点状态 三者匹配。子类可覆写添加额外条件。
+
+**消息内容拼装**：使用 **SpEL（Spring Expression Language）** 模板引擎，从 Apollo 的 `message` namespace 读取跳转 URL，运行时注入 context 变量（`#taskDispatch`、`#taskDispatchNode`、`#projectOrderInfo`、`#messagePushClient`、`#esTime` 等）。
+
+**接收人**：默认取 `node.getExecutorId()`（节点执行人 UCID）。
+
+---
+
+### 分支 1 和 2 合并后的最终发送：PushClient
+
+新旧两个分支最终都走到 `PushClient.sendPushMsg()`：
+
+```java
+public void sendPushMsg(Set<String> ucIdList, TaskMessageParam param) {
+    // 1. 按渠道获取配置
+    PushConfigProperties config = getConfig(param.getChannel());
+    //    渠道 RENWUTIXING  → PushMaterialTaskCenterProperties
+    //    渠道 GONGZUOZHUSHOU → PushMaterialOrderNoticeProperties
+
+    // 2. 组装请求参数（appId, passcode, 接收人, 消息体）
+    PushGroupSendParam groupSendDto = ...;
+    groupSendDto.setTo_ucids(ucIdList);
+    groupSendDto.setMsg_payload(JSON.toJSONString(param));
+
+    // 3. 异步发送
+    CompletableFuture.runAsync(() -> {
+        pushHttpUtil.postJson(config.getUrl(), paramMap, config);
+    });
+}
+```
+
+**`PushHttpUtil.postJson()`** — 实际的 HTTP 调用：
+
+```
+POST {config.url}
+Headers:
+  Content-Type: application/x-www-form-urlencoded; charset=utf-8
+  Lianjia-Im-Protocal-Version: {version}
+  Lianjia-App-Id: {appId}
+  Lianjia-Im-Passcode: {passcode}
+Body: FormBody（to_ucids, msg_payload, from_ucid, msg_type 等）
+```
+
+发送到**Lianjia 内部 IM 推送平台**（消息中心服务）。
+
+---
+
+### 三个推送渠道
+
+| 渠道 | 枚举值 | 目标 | 配置方式 | 底层调用 |
+|------|--------|------|---------|---------|
+| 任务提醒 | `RENWUTIXING` | IM/App 推送 | `push.material-task-center.property.*` | `PushHttpUtil.postJson(url)` |
+| 工作助手 | `GONGZUOZHUSHOU` | IM/App 推送 | `push.material-order-notice.property.*` | `PushHttpUtil.postJson(url)` |
+| 短信 | `NOTICE` | 手机短信 | 模板 ID + 变量 | `smsService.publishSms()` |
+
+---
+
+### 涉及的外部服务
+
+| 外部系统 | 用途 | 调用方式 |
+|---------|------|---------|
+| **IM 推送服务** | 发送 App 推送 | `PushHttpUtil` → OkHttp POST |
+| **短信服务** | 发送短信通知 | `SmsService.publishSms()` |
+| **shuttle-order（订单服务）** | 查询订单详情 | Feign → `ProjectOrderService` |
+| **ceres（人员中心）** | UCID 映射、人员详情 | Feign → `PersonHighServiceApi` |
+| **customer-home（客源）** | 家居顾问查询 | Feign → `CustomerHomeFeign` |
+
+---
+
+### 回到 pushMsg 方法本身
+
+在第 ⑦ 步 `pushMsg()` 中，只对 `UNCOMPLETED` 状态的节点推送，也就是说：
+
+- 只有 **立即激活（IMMEDIATE）** 模式的任务会在这里发推送
+- 配置了排期时间或节点依赖的任务，它们的推送会在后续 `activateTaskDispatchAsync` 异步激活节点时才触发

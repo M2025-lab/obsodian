@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "技能沉淀.md",
+                "file": "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的批量创建入口.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "技能沉淀"
+              "title": "主材任务（TaskDispatch）的批量创建入口"
             }
           },
           {
@@ -323,9 +323,9 @@
   },
   "active": "f1e6853c1ba48974",
   "lastOpenFiles": [
+    "技能沉淀.md",
     "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的批量创建入口.md",
     "日报与周报/日报记录-个人.md",
-    "技能沉淀.md",
     "随记.md",
     "日报与周报/日报记录-汇报.md",
     "starlord项目整理/接口逻辑梳理/创建延期单逻辑.md",
