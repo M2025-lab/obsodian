@@ -131,6 +131,9 @@ activateTaskDispatch(taskDispatch)
                  └─ 发推送通知（给执行人）
 ```
 
+任务激活必须是未激活且激活日期在当天。激活方式有两版，旧版无processCode，若有该字段则使用新版激活。
+
+
 ---
 
 ## 2. 节点完成任务流转
