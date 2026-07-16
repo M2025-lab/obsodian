@@ -69,12 +69,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "日报与周报/日报记录-个人.md",
+                "file": "会议与分享/分享/智能纪要：Obsidian工具使用经验分享 2026年7月2日.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "日报记录-个人"
+              "title": "智能纪要：Obsidian工具使用经验分享 2026年7月2日"
+            }
+          },
+          {
+            "id": "17f251abadd115a9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "会议与分享/分享/ai围炉.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ai围炉"
             }
           },
           {
@@ -120,7 +134,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -307,10 +321,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f1e6853c1ba48974",
+  "active": "17f251abadd115a9",
   "lastOpenFiles": [
-    "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑.md",
+    "会议与分享/分享/智能纪要：Obsidian工具使用经验分享 2026年7月2日.md",
+    "会议与分享/分享/ai围炉.md",
     "日报与周报/日报记录-个人.md",
+    "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑.md",
     "技能沉淀.md",
     "starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑.md",
     "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的批量创建入口.md",
@@ -337,8 +353,6 @@
     "starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档.md",
     "新人串讲/fig/Pasted image 20260712175818.png",
     "会议与分享/会议/智能纪要：家装业务系统相关内容讨论 2026年7月3日/总结.md",
-    "starlord项目整理/材料配置问题.md",
-    "starlord项目整理/主材全链路业务与系统配置总结.md",
     "新人串讲/fig/Pasted image 20260712165901.png",
     "新人串讲/fig/Pasted image 20260712165705.png",
     "新人串讲/fig/Pasted image 20260712165022.png",
