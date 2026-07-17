@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）.md",
+                "file": "starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）"
+              "title": "旧版激活方式方法逻辑"
             }
           }
         ],
@@ -93,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 224.5,
-    "collapsed": true
+    "width": 224.5
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -224,15 +223,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4e5ae566c13f397c",
+  "active": "b54f696b5c388094",
   "lastOpenFiles": [
-    "日报与周报/日报记录-个人.md",
     "starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）.md",
+    "日报与周报/日报记录-个人.md",
+    "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑.md",
     "新人串讲/新人第一次串讲.md",
     "starlord项目整理/业务知识沉淀/施工包概念理解.md",
     "starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档.md",
     "starlord项目整理/用工平台.md",
-    "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑.md",
     "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的批量创建入口.md",
     "starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑.md",
     "会议与分享/分享/知识库—— 四种技术方案对比实验报告.md",

@@ -4,7 +4,13 @@ date: 2026-07-16
 class: com.ke.utopia.servicev2.impl.MaterialActivateV2ServiceImpl
 method: activateTaskDispatch(TaskDispatch)
 ---
-
+新版主材任务激活主要分为材料进排程反补的情况、以及这种情况之外的「材料进排程」和「其他的」三种。
+材料进排程反补--直接激活。
+非材料进排程反补-「查询配置」判断能否激活。 查询配置查询所有有效的和无效的，若查不到则查询已删除的，若还查不到就跳过。查到之后按照版本号降序
+材料进排程不反补--根据最新模板的激活条件的判断，若差不到就返回。
+	并且验证订单状态大于主材任务配置的节点状态 且 订单不是取消状态 ，可以激活
+以及else--进行shouldActive拦截和尾款拦截，
+进行激活操作、查第一个未激活的节点，并激活
 # 主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）
 
 ## 功能概述
