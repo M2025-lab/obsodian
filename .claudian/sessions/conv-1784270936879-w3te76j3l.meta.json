@@ -1,0 +1,24 @@
+{
+  "id": "conv-1784270936879-w3te76j3l",
+  "providerId": "claude",
+  "title": "解释多维度逐级降级匹配的维度",
+  "titleGenerationStatus": "success",
+  "createdAt": 1784270936897,
+  "updatedAt": 1784270954536,
+  "lastResponseAt": 1784270954535,
+  "sessionId": "ececa098-805d-45b0-a03d-b99235ef8b1a",
+  "providerState": {
+    "providerSessionId": "ececa098-805d-45b0-a03d-b99235ef8b1a"
+  },
+  "currentNote": "starlord项目整理/接口逻辑梳理/查询主材任务配置的自营安装角色（TaskTemplateController.queryMaterialInstallRole）业务流梳理.md",
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 3719,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 26496,
+    "contextWindow": 200000,
+    "contextTokens": 30215,
+    "percentage": 15,
+    "contextWindowIsAuthoritative": true
+  }
+}
