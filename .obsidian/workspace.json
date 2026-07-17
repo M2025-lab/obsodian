@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -237,8 +237,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "db964d9d1fe9d0db",
+  "active": "4e5ae566c13f397c",
   "lastOpenFiles": [
+    "需求/供应商汰换20260709/技术方案.md",
     "需求/供应商汰换20260709/方案解释.md",
     "需求/供应商汰换20260709/从Hive拉取数据的API模式（searchHiveApi）.md",
     "starlord项目整理/接口逻辑梳理/查询主材任务配置的自营安装角色（TaskTemplateController.queryMaterialInstallRole）业务流梳理.md",
@@ -247,7 +248,6 @@
     "starlord项目整理/接口逻辑梳理/测量申请单事件处理（ScmMeasureApplyEventHandler.handleBiz）业务流梳理.md",
     "技能沉淀.md",
     "starlord项目整理/接口逻辑梳理/主材任务节点完成处理（MaterialHandleV2ServiceImpl.handleNode）业务流梳理.md",
-    "需求/供应商汰换20260709/技术方案.md",
     "需求/供应商汰换20260709/一些核心概念.md",
     "starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑.md",
     "starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）.md",
