@@ -38,7 +38,7 @@ method: queryMaterialInstallRole
 
 ### 分组 + 并行查安装角色（核心逻辑）
 
-**queryInstallRoleFromTaskTemplate(merchantIdMap, skuList, params)**
+**   (merchantIdMap, skuList, params)**
 
 - **assembleParamList()** — 给每个入参追加履约分公司 mdmCode
 - **构建 merchantAndSkuMap**（merchantId_skuId → SkuInfo）
