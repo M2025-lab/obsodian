@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio-mcp" modified="2026-07-19T03:46:50.000Z" agent="drawio-mcp/1.0" version="24.7.17" type="device" compressed="false">
+  <diagram name="starlord-architecture" id="bfbfa6a9380f">
+    <mxGraphModel dx="1354" dy="981" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#1a1a2e" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UP_CONT" value="上游调用方" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=14;rounded=1;arcSize=8;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="40" y="40" width="960" height="140" />
+        </mxCell>
+        <mxCell id="OFC" value="scm-ofc&#10;履约调度中心" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="60" y="210" width="215" height="65" />
+        </mxCell>
+        <mxCell id="WB" value="scm-workbench&#10;工作台" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="300" y="210" width="215" height="65" />
+        </mxCell>
+        <mxCell id="PFC" value="project-fulfillment&#10;项目履约中心" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="530" y="210" width="215" height="65" />
+        </mxCell>
+        <mxCell id="SDM_UP" value="scm-sdm&#10;供应商触发" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="760" y="210" width="215" height="65" />
+        </mxCell>
+        <mxCell id="SL_CONT" value="edar-starlord 材料履约系统" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=14;rounded=1;arcSize=8;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="40" y="370" width="960" height="310" />
+        </mxCell>
+        <mxCell id="WEB" value="Web Controller&#10;HTTP 接入层" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="70" y="290" width="195" height="60" />
+        </mxCell>
+        <mxCell id="CORE" value="任务核心层&#10;Create / Activate / Handle / Cancel" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="300" y="290" width="275" height="60" />
+        </mxCell>
+        <mxCell id="DB" value="MySQL&#10;实例数据存储" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="770" y="290" width="200" height="60" />
+        </mxCell>
+        <mxCell id="CONFIG" value="配置查询层&#10;MaterialConfigV2" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=11;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="70" y="880" width="195" height="50" />
+        </mxCell>
+        <mxCell id="SYNC" value="供应商同步层&#10;OmsMessageSync / SdmMessageSync" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=11;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="300" y="880" width="275" height="50" />
+        </mxCell>
+        <mxCell id="PRODUCER" value="事件发布层&#10;Kafka Producer" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=11;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="300" y="960" width="275" height="60" />
+        </mxCell>
+        <mxCell id="DOWN_CONT" value="下游依赖" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=14;rounded=1;arcSize=8;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="40" y="700" width="960" height="150" />
+        </mxCell>
+        <mxCell id="KAFKA" value="Kafka&#10;消息队列" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="70" y="950" width="125" height="60" />
+        </mxCell>
+        <mxCell id="CUBE" value="utopia-cube&#10;施工包" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="210" y="1030" width="125" height="60" />
+        </mxCell>
+        <mxCell id="SCM_SDM" value="scm-sdm&#10;新SDM" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="340" y="1030" width="125" height="60" />
+        </mxCell>
+        <mxCell id="SCM_VSS" value="scm-supplier-op&#10;老VSS" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="490" y="1030" width="125" height="60" />
+        </mxCell>
+        <mxCell id="SHUTTLE" value="shuttle-order&#10;订单服务" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="630" y="920" width="125" height="60" />
+        </mxCell>
+        <mxCell id="ARTISAN" value="artisan-construction&#10;排期服务" style="fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;fontSize=12;rounded=1;arcSize=6;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="770" y="920" width="125" height="60" />
+        </mxCell>
+        <mxCell id="2" value="Feign HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="OFC" target="WEB">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="3" value="Feign HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="WB" target="WEB">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="4" value="Feign HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="PFC" target="WEB">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="5" value="Feign HTTP" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="SDM_UP" target="WEB">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="6" value="路由分发" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="WEB" target="CORE">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="7" value="查询模板配置" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="CONFIG">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8" value="同步任务状态" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="SYNC">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="240" />
+              <mxPoint x="20" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9" value="发布事件" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="PRODUCER">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="240" />
+              <mxPoint x="20" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="10" value="读写数据" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="DB">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="11" value="Kafka Producer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="PRODUCER" target="KAFKA">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="120" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12" value="订阅消费" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="KAFKA" target="CUBE">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="13" value="sendSdmNewTask&#10;sendSdmAcceptOrder" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="SYNC" target="SCM_SDM">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="400" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="14" value="sendVssNew" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="SYNC" target="SCM_VSS">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="540" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="15" value="Feign 直调" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="CUBE">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="240" />
+              <mxPoint x="20" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="16" value="getByProjectOrderId" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=1.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="SHUTTLE">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1000" y="240" />
+              <mxPoint x="1000" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="17" value="querySchedules" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=1.0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CORE" target="ARTISAN">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1000" y="240" />
+              <mxPoint x="1000" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="18" value="回调（创建结果）" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=0.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="CUBE" target="WEB">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="600" />
+              <mxPoint x="20" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="19" value="回调（订单号）" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;fillColor=#333333;strokeColor=#000000;fontColor=#ffffff;exitX=0.5;exitY=0.0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1.0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" source="SCM_SDM" target="WEB">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="20" y="600" />
+              <mxPoint x="20" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" value="Starlord 系统架构图" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="50" y="10" width="400" height="30" />
+        </mxCell>
+        <mxCell id="21" value="上下游信息交互方式全景 — Feign / Kafka / 直连同步" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="50" y="42" width="400" height="20" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

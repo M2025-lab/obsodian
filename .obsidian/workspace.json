@@ -237,8 +237,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4e5ae566c13f397c",
+  "active": "b54f696b5c388094",
   "lastOpenFiles": [
+    "starlord项目整理/starlord-architecture.html",
+    "starlord项目整理/starlord-architecture.drawio",
     "需求/供应商汰换20260709/技术方案.md",
     "需求/供应商汰换20260709/方案解释.md",
     "需求/供应商汰换20260709/从Hive拉取数据的API模式（searchHiveApi）.md",
@@ -264,7 +266,6 @@
     "会议与分享/分享/技术方案-小师傅.md",
     "会议与分享/分享/ai围炉.md",
     "会议与分享/分享/智能纪要：Obsidian工具使用经验分享 2026年7月2日.md",
-    "starlord项目整理/复尺流程.md",
     "未命名.canvas",
     "starlord项目整理/接口逻辑梳理",
     "新人串讲/fig/Pasted image 20260713163614.png",
@@ -284,7 +285,6 @@
     "需求/供应商汰换20260709/fig/Pasted image 20260710115634.png",
     "需求/供应商汰换20260709/fig/Pasted image 20260710114549.png",
     "starlord项目整理/业务知识沉淀/fig",
-    "需求/供应商汰换20260709/fig",
-    "需求/供应商汰换20260709"
+    "需求/供应商汰换20260709/fig"
   ]
 }
