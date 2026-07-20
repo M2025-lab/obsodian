@@ -1,0 +1,41 @@
+flowchart LR
+  subgraph UP["▲ 上游调用方"]
+    OFC["scm-ofc 履约调度中心"]
+    WB["scm-workbench 工作台"]
+    PFC["PFC / scm-sdm"]
+  end
+
+  subgraph SL["■ edar-starlord 材料履约系统"]
+    WC["Web Controller HTTP 接入层"]
+    CORE["任务核心层 Create/Activate/Handle/Cancel"]
+    DB[("MySQL task_dispatch")]
+    CONFIG["配置查询层 MaterialConfigV2"]
+    SYNC["供应商同步层 OmsMessageSync"]
+    PRODUCER["事件发布层 Kafka Producer"]
+
+    WC -->|路由分发| CORE
+    CORE -->|读写| DB
+    CORE -->|查模板| CONFIG
+    CORE -->|同步任务| SYNC
+    CORE -->|发布事件| PRODUCER
+  end
+
+  subgraph DOWN["▼ 下游依赖"]
+    KAFKA["Kafka 消息队列"]
+    CUBE["utopia-cube 施工包"]
+    SDM["scm-sdm 新 SDM"]
+    VSS["scm-supplier-op 老 VSS"]
+    SHUTTLE["shuttle-order 订单服务"]
+    ARTISAN["artisan-construction 排期服务"]
+  end
+
+  OFC -->|Feign| WC
+  WB -->|Feign| WC
+  PFC -->|Feign| WC
+  SYNC -->|sendSdmNewTask| SDM
+  SYNC -->|sendVssNew| VSS
+  PRODUDER -.->|Kafka Publish| KAFKA
+  KAFKA -.->|订阅| CUBE
+  CORE -->|Feign 直调| CUBE
+  CORE -->|getByOrderId| SHUTTLE
+  CORE -->|querySchedules| ARTISAN
