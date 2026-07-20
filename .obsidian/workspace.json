@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "日报与周报/日报记录-个人.md",
+                "file": "需求/供应商汰换20260709/技术方案.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "日报记录-个人"
+              "title": "技术方案"
             }
           },
           {
@@ -237,8 +237,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b54f696b5c388094",
+  "active": "4e5ae566c13f397c",
   "lastOpenFiles": [
+    "需求/供应商汰换20260709/方案解释.md",
+    "日报与周报/日报记录-个人.md",
     "starlord项目整理/starlord-architecture-mermaid.html",
     "starlord项目整理/starlord-architecture.mermaid",
     "starlord项目整理/starlord-architecture-v3.drawio",
@@ -246,10 +248,8 @@
     "starlord项目整理/starlord-architecture.html",
     "starlord项目整理/starlord-architecture.drawio",
     "需求/供应商汰换20260709/技术方案.md",
-    "需求/供应商汰换20260709/方案解释.md",
     "需求/供应商汰换20260709/从Hive拉取数据的API模式（searchHiveApi）.md",
     "starlord项目整理/接口逻辑梳理/查询主材任务配置的自营安装角色（TaskTemplateController.queryMaterialInstallRole）业务流梳理.md",
-    "日报与周报/日报记录-个人.md",
     "starlord项目整理/接口逻辑梳理/Hive大数据API调用（HiveApiNewUtil.searchHiveApi）逻辑梳理.md",
     "starlord项目整理/接口逻辑梳理/测量申请单事件处理（ScmMeasureApplyEventHandler.handleBiz）业务流梳理.md",
     "技能沉淀.md",
@@ -283,7 +283,6 @@
     "starlord项目整理/业务知识沉淀/fig/Home系统.png",
     "starlord项目整理/业务知识沉淀/fig/starlord_整装业务流程全景.html",
     "starlord项目整理/业务知识沉淀/fig/starlord_业务架构与流程.html",
-    "starlord项目整理/starlord_业务架构与流程.html",
     "需求/供应商汰换20260709/fig/Pasted image 20260710115634.png",
     "需求/供应商汰换20260709/fig/Pasted image 20260710114549.png"
   ]
