@@ -129,6 +129,8 @@ SpringBoot
 ```
 
 可能一个Token。
+Tokenizer拆的，但是他怎么拆的。使用BPE算法，以及后续的byte-level BPE 等进行拆分，核心思想就是不断统计整个语料，Token 是"统计"出来的。如果“你好”很常见那就把他划分为一个token。
+
 
 ---
 
@@ -180,6 +182,14 @@ SpringBoot
 
 Prompt要优化。
 
+### 拆成多个 Prompt
+
+不要：
+
+一个 Prompt：
+
+什么都干。
+
 ---
 
 ### 编码
@@ -216,6 +226,6 @@ Token
 
 > 为什么LLM不是数据库？
 
-> 为什么LLM会胡说？
+> 为什么LLM会胡说？LLM 的目标从来不是"说真话"，而是"预测最可能的下一个 Token"。他只是预测下一次最有可能出现的token
 
-> Token为什么收费？
+> Token为什么收费？Transformer 每处理一个 Token，都要参与一次完整计算。每一个 Token 都意味着 GPU 要完成一次计算。Token 越多，占用 GPU 的时间越长，消耗的算力越多，因此成本也越高。
