@@ -142,12 +142,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "concepts/system-boundary-controller.md",
-                "linksCollapsed": false,
+                "file": "日报与周报/日报记录-个人.md",
+                "linksCollapsed": true,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "system-boundary-controller 的出链列表"
+              "title": "日报记录-个人 的出链列表"
             }
           },
           {
