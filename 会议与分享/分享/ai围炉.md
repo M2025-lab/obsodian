@@ -1011,3 +1011,11 @@ _核心原则： 不追"最热"，选能和已有基础设施（Spring生态、E
 openApi：[Agent 接口文档](https://beike.feishu.cn/wiki/UItxwpOrxibwfRk3DBPcf2oOnIe)
 
 后管接入手册：http://preview.workcenter.home.ke.com/quickstart-guide.ejs
+
+---
+## 相关文档
+
+- [[会议与分享/分享/技术方案-小师傅]] — 「小师傅」AI助手1.0技术方案
+- [[会议与分享/分享/知识库—— 四种技术方案对比实验报告]] — BSU知识库方案实验
+- [[会议与分享/我的产出--新人工具/Obsidian + Git + 飞书 笔记协作工具链配置手册]] — Obsidian工具链配置
+- [[会议与分享/分享/智能纪要：Obsidian工具使用经验分享 2026年7月2日]] — Obsidian使用经验分享

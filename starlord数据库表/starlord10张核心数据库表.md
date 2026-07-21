@@ -805,3 +805,12 @@ stock_up_condition_rule (备货条件规则)
 ### 补充说明
 
 整个流程以 `project_info.project_order_id` 为全局串联键，由配置层的静态规则驱动运行层的动态数据生成；主流程走「任务→节点」链路，异常和售后走独立跟进链路，数据分层清晰，关联关系明确。
+
+---
+## 相关文档
+
+- [[starlord数据库表/所有的starlord数据库表]] — 全库82张表的分层完整目录
+- [[starlord数据库表/数据库打标签]] — 表的A/B/C/D分类标签
+- [[starlord数据库表/数据库个人总结]] — 个人接口→数据表映射速查
+- [[starlord数据库表/starlord全量REST接口与数据表映射]] — REST接口与数据表关联
+- [[starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档]] — 核心表对应的业务功能

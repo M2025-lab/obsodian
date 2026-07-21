@@ -264,3 +264,9 @@ lark_doc_url: https://beike.feishu.cn/docx/JMredI66wonTHcxOvWhckbx4n4u
 —— 以真实使用踩坑经验提醒用户选择多端同步工具时需优先考量稳定性，具备实用参考意义。
 
 > （注：部分内容可能由 AI 生成）
+
+---
+## 相关文档
+
+- [[会议与分享/我的产出--新人工具/Obsidian + Git + 飞书 笔记协作工具链配置手册]] — Obsidian工具链完整配置指南
+- [[会议与分享/分享/ai围炉]] — AI与工具链结合

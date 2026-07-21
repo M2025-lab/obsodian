@@ -1,0 +1,22 @@
+{
+  "id": "conv-1784620878082-ki2133dks",
+  "providerId": "claude",
+  "title": "帮我给这些文档自动生成引用关系。",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1784620878082,
+  "updatedAt": 1784621688589,
+  "lastResponseAt": 1784620884150,
+  "sessionId": "43acf632-e82e-42e7-a829-d863682285cb",
+  "providerState": {
+    "providerSessionId": "43acf632-e82e-42e7-a829-d863682285cb"
+  },
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 1000000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}

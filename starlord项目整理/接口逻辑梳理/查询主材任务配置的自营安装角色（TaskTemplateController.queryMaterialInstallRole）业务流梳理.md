@@ -232,3 +232,10 @@ L4: mdmNoLimitInstallRoleMapFuture.get(materialNoLimitSupplier)
 3. **四级降级匹配** — 从最精确的履约分公司+供应商，逐步退到最宽松的不限分公司+不限供应商
 4. **历史兼容** — specialHandlerResult 专门处理北京的室内门和金属门旧数据，缓存项目级查询结果减少重复调用
 5. **分页保障** — querySimpleTaskTemplate 用 while 循环确保超过一页也能全部查完
+
+---
+## 相关文档
+
+- [[starlord项目整理/安装流程]] — 安装任务节点与自营安装角色关联
+- [[starlord项目整理/全部枚举类型梳理]] — 安装角色相关枚举
+- [[starlord项目整理/Mode配置入口完整汇总]] — Mode对角色配置的影响

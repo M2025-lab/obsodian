@@ -456,3 +456,10 @@ Body: FormBody（to_ucids, msg_payload, from_ucid, msg_type 等）
 
 - 只有 **立即激活（IMMEDIATE）** 模式的任务会在这里发推送
 - 配置了排期时间或节点依赖的任务，它们的推送会在后续 `activateTaskDispatchAsync` 异步激活节点时才触发
+
+---
+## 相关文档
+
+- [[starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑]] — 批量创建的完整业务逻辑（本入口对应的核心处理）
+- [[starlord项目整理/主材任务流程梳理]] — 主材任务全流程流转图
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 全链路配置总览

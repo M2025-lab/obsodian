@@ -48,3 +48,13 @@ confidence: high
 - **Feign**: 46个 FeignClient 接口
 - **Kafka**: 23个 KafkaListener
 - **Schedule**: 多个定时任务
+
+---
+## 相关文档
+
+- [[starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档]] — 系统新人学习入口（业务视角）
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 全链路业务配置总览
+- [[starlord项目整理/枚举类和上下游梳理-starlord系统]] — 系统职责与领域划分
+- [[starlord项目整理/REST汇总/starlord接口字典文档]] — 748个REST接口总字典
+- [[starlord数据库表/starlord10张核心数据库表]] — 10张核心表结构
+- [[starlord数据库表/所有的starlord数据库表]] — 全库分层目录

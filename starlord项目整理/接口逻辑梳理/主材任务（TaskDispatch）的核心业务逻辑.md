@@ -1029,3 +1029,13 @@ invoke(MaterialBatchCreateBO)
 | 施工排期 BO | `edar-starlord-service/.../service/bo/ProjectScheduleItemBO.java` |
 | 查询条件 | `edar-starlord-dao/.../bean/QueryMaterialTaskCondition.java` |
 | 查询条件(TD) | `edar-starlord-dao/.../bean/QueryTaskDispatchCondition.java` |
+
+---
+## 相关文档
+
+- [[starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）]] — V2激活逻辑详解
+- [[starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑]] — V1旧版激活逻辑对比
+- [[starlord项目整理/接口逻辑梳理/主材任务节点完成处理（MaterialHandleV2ServiceImpl.handleNode）业务流梳理]] — 节点完成处理逻辑
+- [[starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的批量创建入口]] — 批量创建入口
+- [[starlord项目整理/主材任务流程梳理]] — 主材任务全流程流转图
+- [[项目分析/edar-starlord项目学习/entities/task-dispatch-v2-service]] — TaskDispatchV2服务实体分析

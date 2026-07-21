@@ -11294,3 +11294,10 @@
 | 81 | `task_select_category` | `TaskSelectCategoryDao` | `TaskSelectCategoryMapper` | 8 |
 | 82 | `thirdparty_data` | `ThirdpartyDataDao` | `ThirdpartyDataMapper` | 7 |
 **总计**: 82 张表
+
+---
+## 相关文档
+
+- [[starlord数据库表/starlord10张核心数据库表]] — 10张核心表分析
+- [[starlord数据库表/所有的starlord数据库表]] — 全库分层目录
+- [[starlord项目整理/REST汇总/starlord接口字典文档]] — 748个REST接口总字典

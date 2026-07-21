@@ -52,6 +52,16 @@
 - [[system-boundary-controller]] — 系统边界 Controller 层：80个Controller、430+ REST端点。
 - [[system-responsibilities]] — 系统职责清单：从Controller+Service推导的10大核心业务能力。
 
-## Comparisons
+## 相关外部文档
 
-## Queries
+> 以下文档位于 `starlord项目整理/` 和 `starlord数据库表/` 下，与此Wiki内容互补。
+
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 全链路业务与系统配置总览
+- [[starlord项目整理/主材任务流程梳理]] — 主材任务全流程流转图（Mermaid）
+- [[starlord项目整理/安装流程]] — 安装任务节点流转详析
+- [[starlord项目整理/复尺流程]] — 复尺任务节点流转详析
+- [[starlord项目整理/全部枚举类型梳理]] — 全量枚举类型分组一览
+- [[starlord项目整理/接口-动作映射表]] — 接口与业务动作映射
+- [[starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档]] — 系统新人学习入口（业务视角）
+- [[starlord数据库表/所有的starlord数据库表]] — 全库82张表的分层目录
+- [[starlord项目整理/REST汇总/starlord接口字典文档]] — 748个REST接口总字典

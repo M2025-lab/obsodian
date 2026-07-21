@@ -208,3 +208,11 @@ method: handleBiz
 4. **模式判断链** — 根据项目区域、项目版本、排程开关等多维度判断走哪种模式（HOME2.5 / HOME2.5_MANPOWER / DELIVERY_FLOW）
 5. **幂等保护** — createTask 和 createTaskOld 都检查已有任务防重复
 6. **异常安全** — handleBiz 整体 try-catch，不抛异常到事件总线
+
+---
+## 相关文档
+
+- [[starlord项目整理/复尺流程]] — 测量申请触发复尺任务的流转
+- [[starlord项目整理/主材任务流程梳理]] — 主材任务全流程中测量申请的位置
+- [[starlord项目整理/Mode配置入口完整汇总]] — Mode对任务创建的影响
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 业务维度与单据体系

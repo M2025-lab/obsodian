@@ -107,3 +107,8 @@ WorkCenter TaskChanged 事件 → MaterialDelayProcessService.createDelayUndoTas
 ## 相关页面
 - [[project-overview]] — 项目总览
 - [[event-driven-flow]] — 事件驱动流程
+
+## 相关外部文档
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 配置驱动架构的业务含义
+- [[starlord项目整理/安装流程]] — 安装任务节点流转（V2架构的具体体现）
+- [[starlord项目整理/复尺流程]] — 复尺任务节点流转

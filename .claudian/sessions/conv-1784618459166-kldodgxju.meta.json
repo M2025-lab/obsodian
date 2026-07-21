@@ -4,20 +4,20 @@
   "title": "Research agent development skill requirements",
   "titleGenerationStatus": "success",
   "createdAt": 1784618459180,
-  "updatedAt": 1784618473069,
-  "lastResponseAt": 1784618473069,
+  "updatedAt": 1784621681947,
+  "lastResponseAt": 1784620861101,
   "sessionId": "787b18ef-4d2e-49d5-9fb7-ea9481034c1b",
   "providerState": {
     "providerSessionId": "787b18ef-4d2e-49d5-9fb7-ea9481034c1b"
   },
   "usage": {
     "model": "deepseek-v4-flash",
-    "inputTokens": 451,
+    "inputTokens": 0,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 27264,
+    "cacheReadInputTokens": 0,
     "contextWindow": 200000,
-    "contextTokens": 27715,
-    "percentage": 14,
+    "contextTokens": 0,
+    "percentage": 0,
     "contextWindowIsAuthoritative": true
   }
 }

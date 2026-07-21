@@ -41,6 +41,20 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "starlord项目整理/Model=5、6、7 业务模式影响哪些.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Model=5、6、7 业务模式影响哪些"
+            }
+          },
+          {
+            "id": "dd30c270cab64cdc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "日报与周报/日报记录-个人.md",
                 "mode": "source",
                 "source": false
@@ -64,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -250,11 +264,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b54f696b5c388094",
+  "active": "dd30c270cab64cdc",
   "lastOpenFiles": [
-    "starlord项目整理/业务知识沉淀/Model=5、6、7 业务模式影响哪些.md",
-    "starlord项目整理/业务知识沉淀/施工包概念理解.md",
+    "starlord项目整理/Model=5、6、7 业务模式影响哪些.md",
     "日报与周报/日报记录-个人.md",
+    "starlord项目整理/Mode配置入口完整汇总.md",
+    "starlord项目整理/业务知识沉淀/施工包概念理解.md",
     "AI agent 学习",
     "需求/供应商汰换20260709/方案解释.md",
     "需求/供应商汰换20260709/技术方案.md",
@@ -284,7 +299,6 @@
     "starlord项目整理/接口-动作映射表.md",
     "会议与分享/分享/技术方案-小师傅.md",
     "会议与分享/分享/ai围炉.md",
-    "会议与分享/分享/智能纪要：Obsidian工具使用经验分享 2026年7月2日.md",
     "未命名.canvas",
     "starlord项目整理/接口逻辑梳理",
     "新人串讲/fig/Pasted image 20260713163614.png",

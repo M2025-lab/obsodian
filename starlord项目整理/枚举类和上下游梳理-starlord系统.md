@@ -174,3 +174,11 @@ delivery_flow_rule (主表)
 | ES 搜索 | `ElasticSearchManager` | 任务检索、数据同步 |
 | 消息推送 | `DiTingManager` | 企业微信消息推送 |
 
+---
+## 相关文档
+
+- [[starlord项目整理/全部枚举类型梳理]] — 全量枚举类型完整列表
+- [[starlord项目整理/业务知识沉淀/edar-starlord系统新人学习文档]] — 系统新人学习入口
+- [[starlord项目整理/接口-动作映射表]] — 接口与业务动作映射
+- [[starlord项目整理/主材全链路业务与系统配置总结]] — 全链路业务流程总览
+

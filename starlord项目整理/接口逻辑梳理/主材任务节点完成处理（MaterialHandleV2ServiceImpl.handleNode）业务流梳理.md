@@ -264,3 +264,11 @@ method: handleNode
   3. **并发风险**: batchHandleNode 使用固定 5 线程池并行处理不同节点，但未加锁；两个节点可能属于同一 TaskDispatch 的相同状态，存在竞争条件
   4. **递归深度**: completePreTask 沿路由链递归，无上限保护
   5. **回退路径**: 不合格时 restartProcess 重启到第一个节点，复尺驳回会额外推送通知
+
+---
+## 相关文档
+
+- [[starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑]] — 整体业务逻辑与节点流转
+- [[starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）]] — V2激活前置逻辑
+- [[starlord项目整理/安装流程]] — 安装任务节点（handleNode的目标节点）
+- [[starlord项目整理/复尺流程]] — 复尺任务节点（handleNode的目标节点）

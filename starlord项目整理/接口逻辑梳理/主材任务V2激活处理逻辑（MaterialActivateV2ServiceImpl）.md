@@ -380,3 +380,11 @@ doActivateTaskDispatch(taskDispatch)
 | **排程/全国两套逻辑** | `mode` 决定走哪套激活判断：DELIVERY_FLOW(7) 查 `n_material_node_transfer_condition`，非排程查 `n_material_node_cfg` |
 | **北京2.5 验收报告双路径** | 订单状态满足即可激活（路径A）；订单状态不满足时再查验收报告（路径B），验收报告通过也可激活 |
 | **尾款拦截多层配置** | 从硬编码模式（圣都/自购跳过）→ 数据库配置（北京2.5的 `material_payment_intercept_config`）→ Apollo 配置（通用拦截规则）依次判断 |
+
+---
+## 相关文档
+
+- [[starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑]] — 批量创建与整体业务逻辑
+- [[starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑]] — V1旧版激活逻辑对比
+- [[starlord项目整理/主材任务流程梳理]] — 主材任务全流程流转图
+- [[starlord项目整理/Mode配置入口完整汇总]] — Mode配置影响激活路径选择

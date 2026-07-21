@@ -194,3 +194,10 @@ sign = md5(md5_first + secret)  → 放入 header["sign"]
 3. **自动重试** — 基于 guava-retrying 库，最大 3 次，固定间隔 1s，针对 `UtopiaBussinessException` 重试
 4. **异常转译** — 所有异常最终转为 `UtopiaBussinessException(ERROR_BUSINESS)`，不暴露底层 HTTP 异常细节
 5. **调用方** — 当前用于供应商替换业务查订单范围和后门调试接口
+
+---
+## 相关文档
+
+- [[需求/供应商汰换20260709/从Hive拉取数据的API模式（searchHiveApi）]] — Hive API调用的需求场景说明
+- [[技能沉淀]] — Java技术要点（OkHttp、重试机制等）
+- [[需求/供应商汰换20260709/技术方案]] — 供应商汰换技术方案

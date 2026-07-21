@@ -102,3 +102,10 @@ public class HiveApiClient {
 
 推荐：**在 `HiveApiUtil` 内部声明一个 `static final OkHttpClient` 单例**，不需要单独抽 `OkHttpUtil`。
 
+---
+## 相关文档
+
+- [[starlord项目整理/接口逻辑梳理/Hive大数据API调用（HiveApiNewUtil.searchHiveApi）逻辑梳理]] — Hive API代码级完整分析
+- [[需求/供应商汰换20260709/技术方案]] — 供应商汰换方案（Hive API的使用场景）
+- [[技能沉淀]] — Java技术要点（OkHttp、重试机制等）
+
