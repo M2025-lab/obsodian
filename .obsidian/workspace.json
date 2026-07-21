@@ -219,7 +219,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.5
+    "width": 221.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -236,8 +236,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4e5ae566c13f397c",
+  "active": "23e3e3c2cc942472",
   "lastOpenFiles": [
+    "AI agent 学习",
     "需求/供应商汰换20260709/方案解释.md",
     "日报与周报/日报记录-个人.md",
     "需求/供应商汰换20260709/技术方案.md",
