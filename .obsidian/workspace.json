@@ -97,12 +97,40 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AI agent 学习/第一阶段/第一阶段.md",
+                "file": "日报与周报/日报记录-个人.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "第一阶段"
+              "title": "日报记录-个人"
+            }
+          },
+          {
+            "id": "51774a56edf144a0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "starlord项目整理/Model=5、6、7 业务模式影响哪些.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Model=5、6、7 业务模式影响哪些"
+            }
+          },
+          {
+            "id": "3eb255c7102297e3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "starlord项目整理/Mode配置入口完整汇总.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Mode配置入口完整汇总"
             }
           }
         ],
@@ -198,12 +226,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "AI agent 学习/第一阶段/第一阶段.md",
+                "file": "日报与周报/日报记录-个人.md",
                 "linksCollapsed": true,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "第一阶段 的出链列表"
+              "title": "日报记录-个人 的出链列表"
             }
           },
           {
@@ -295,11 +323,11 @@
   },
   "active": "e234088b5efb7730",
   "lastOpenFiles": [
-    "AI agent 学习/第一阶段/day1.md",
-    "AI agent 学习/第一阶段/第一阶段.md",
-    "日报与周报/日报记录-个人.md",
     "starlord项目整理/Mode配置入口完整汇总.md",
     "starlord项目整理/Model=5、6、7 业务模式影响哪些.md",
+    "日报与周报/日报记录-个人.md",
+    "AI agent 学习/第一阶段/第一阶段.md",
+    "AI agent 学习/第一阶段/day1.md",
     "需求/供应商汰换20260709/技术方案.md",
     "日报与周报/周报.md",
     "AI agent 学习/第一阶段",
