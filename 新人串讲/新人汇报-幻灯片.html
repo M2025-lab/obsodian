@@ -366,9 +366,46 @@
         <div class="fbox">业主确认<small>85</small></div>
       </div>
     </div>
+    <div class="fgroup pre" style="margin-top:14px">
+      <span class="glabel">模板如何决定任务流程</span>
+      <p style="margin:6px 0 0;font-size:14.5px;color:var(--ink-2)">每个主材按 <b>品类 × 城市 × 套餐/服务模式 × 配置模式</b> 匹配模板；模板内含 <b>processChain</b> 决定该主材经历的节点序列——<b>不同模板 = 不同流程</b>：</p>
+      <div class="flow" style="margin-top:8px">
+        <div class="fbox" style="min-width:auto">测量→下单→送货→安装<small>标准</small></div>
+        <div class="farrow">·</div>
+        <div class="fbox" style="min-width:auto">测量→变更单→下单→送货<small>含变更</small></div>
+        <div class="farrow">·</div>
+        <div class="fbox" style="min-width:auto">测量→设计→复尺→…→安装→验收<small>整装</small></div>
+      </div>
+    </div>
     <div class="cards c2" style="margin-top:18px">
       <div class="card"><h3><span class="tag">生命周期</span></h3><p>创建后 <code>NOT_ACTIVE</code> → 到期/条件满足激活进入 <code>UNCOMPLETED</code> → 逐节点流转 → 全部完成进入 <code>COMPLETED</code>；前置不满足则挂起 <code>SUSPEND_ACTIVE</code>。</p></div>
       <div class="card"><h3><span class="tag o">激活的坑</span></h3><p>受<b>前置条件</b>约束（尾款拦截 / 订单状态 / 依赖节点）；存在<b>新版 / 旧版双激活路径</b>，新版还需处理多分支、条件路由。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9.5 核心领域模型：主材任务 vs 节点 ============ -->
+<section class="slide" data-title="系统认知 · 核心领域模型">
+  <div class="wrap">
+    <div class="kicker green">02 系统与技术认知</div>
+    <h2>状态机落到两张表：主材任务 vs 主材任务节点</h2>
+    <div class="lead">抽象的状态机由两张表承载，对应一条层级链：<b>项目 → 多个主材 → 每主材按模板生成多个主材任务（task_dispatch，如「测量」一条）→ 每任务内部多个工序节点（task_dispatch_node）</b>。<code>node_task</code> 保存有序节点序列，<code>current_node_type</code> 随完成向前推进，即"流转到哪个流程"。</div>
+    <div class="cards c2" style="margin-top:12px">
+      <div class="card"><h3><span class="tag">主材任务 · task_dispatch</span></h3><p>颗粒度 = 一次履约，<code>task_type</code>（1测量/3复尺/4下单/5送货/6安装/7接单/8备货/10设计/12排产/14进仓/200变更单…）。状态 4 态（含 <b>4 暂停激活</b>）。含 <code>plan_activate_time</code>、<code>supplier_code</code>、<code>order_no</code> 等。</p></div>
+      <div class="card"><h3><span class="tag o">任务节点 · task_dispatch_node</span></h3><p>颗粒度 = 一道工序，<code>node_type</code> 阶梯：<code>0默认→20通知可启动→40通知启动→60启动→65自检验收→80启动完成→85业主确认</code>。状态 3 态（无暂停）。表中还记录<b>激活时间</b>(<code>plan_activate_time/estimated_time/start_time/current_node_time</code>) 与<b>处理人</b>(<code>executor_type/executor_id/submit_by</code>) 等。</p></div>
+    </div>
+    <div class="fgroup" style="margin-top:14px">
+      <span class="glabel">「激活」的两个层级 —— 复杂度与并发坑的根源</span>
+      <table>
+        <thead><tr><th>维度</th><th>任务激活（task 级）</th><th>节点激活（node 级）</th></tr></thead>
+        <tbody>
+          <tr><td>颗粒度</td><td>一次 SKU 履约</td><td>一道工序</td></tr>
+          <tr><td>触发</td><td>创建后到期/条件满足，由 <code>activateIfNeeded</code> / 异步 <code>afterCreate</code> 驱动</td><td>由任务推进驱动，<code>current_node_type</code> 随前序节点完成前移</td></tr>
+          <tr><td>状态数</td><td>4 态（含 暂停激活）</td><td>3 态（无暂停）</td></tr>
+          <tr><td>完成判定</td><td>最后一个节点完成 → 任务整体置 3</td><td>本节点工序做/验完即 3</td></tr>
+          <tr><td>典型风险</td><td>两次激活竞争（异步+同步各调一次 <code>doActivateTaskDispatch</code>）</td><td>前置条件拦截、<code>restart</code> 重启重走节点</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -378,7 +415,7 @@
   <div class="wrap">
     <div class="kicker purple">02 系统与技术认知 · 重点</div>
     <h2>三类复杂点 · 详细拆解<span style="font-size:18px;color:var(--ink-3);font-weight:500">（下一阶段的主攻方向）</span></h2>
-    <div class="lead">把前几页串起来：<b>配置维度爆炸(第8页) + 状态机与激活复杂(第9页) + 跨系统一致性(上下游/下一页)</b> 三者叠加，构成系统真正的复杂度。归纳如下，也是我下一阶段要逐个拆解的目标。</div>
+    <div class="lead">把前几页串起来：<b>配置维度爆炸(第8页) + 状态机与领域模型(第9/9.5页) + 跨系统一致性(上下游/下一页)</b> 三者叠加，构成系统真正的复杂度。归纳如下，也是我下一阶段要逐个拆解的目标。</div>
     <div class="cplx">
       <div class="col">
         <div class="head h-b"><div class="idx">复杂点 ①</div><div class="name">配置维度爆炸</div></div>
