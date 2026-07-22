@@ -125,12 +125,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "日报与周报/日报记录-个人.md",
+                "file": "starlord数据库表/数据库打标签.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "日报记录-个人"
+              "title": "数据库打标签"
             }
           },
           {
@@ -351,6 +351,10 @@
   },
   "active": "f5027b7831a8919e",
   "lastOpenFiles": [
+    "starlord数据库表/数据库个人总结.md",
+    "starlord数据库表/所有的starlord数据库表.md",
+    "starlord数据库表/starlord全量REST接口与数据表映射.md",
+    "日报与周报/日报记录-个人.md",
     "需求/供应商汰换20260709/技术方案.md",
     "新人串讲/供应商汰换-串讲素材.md",
     "需求/供应商汰换20260709/方案解释.md",
@@ -364,7 +368,6 @@
     "新人串讲/新人汇报-幻灯片.html",
     "新人汇报-幻灯片.html",
     "新人汇报.md",
-    "日报与周报/日报记录-个人.md",
     "starlord项目整理/Mode配置入口完整汇总.md",
     "starlord项目整理/Model=5、6、7 业务模式影响哪些.md",
     "AI agent 学习/第一阶段/第一阶段.md",
@@ -387,9 +390,6 @@
     "技能沉淀.md",
     "starlord项目整理/接口逻辑梳理/主材任务节点完成处理（MaterialHandleV2ServiceImpl.handleNode）业务流梳理.md",
     "需求/供应商汰换20260709/一些核心概念.md",
-    "starlord项目整理/接口逻辑梳理/旧版激活方式方法逻辑.md",
-    "starlord项目整理/接口逻辑梳理/主材任务（TaskDispatch）的核心业务逻辑.md",
-    "新人串讲/新人第一次串讲.md",
     "未命名.canvas",
     "新人串讲/fig/Pasted image 20260713163614.png",
     "新人串讲/fig/Pasted image 20260712175818.png",
