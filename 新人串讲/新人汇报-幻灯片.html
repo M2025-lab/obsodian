@@ -448,28 +448,83 @@
   </div>
 </section>
 
-<!-- ============ 13 实践产出② 汰换 背景+方案 ============ -->
-<section class="slide" data-title="实践产出 · 供应商汰换 方案">
+<!-- ============ 13 实践产出② 汰换 背景+架构 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 架构">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>供应商汰换（参与开发）：两层判断方案</h2>
-    <div class="card" style="margin-bottom:16px"><h3><span class="tag o">背景</span></h3>
-      <p>常规汰换之外，存在需<b>快速终止老商履约、切换新商</b>的紧急场景（服务异常 / 质量合规风险 / 重大履约事故），无法等在途货单自然消化，需差异化处理。</p></div>
-    <div class="cards c2">
-      <div class="card"><h3><span class="tag">第一层 · 谁来履约</span></h3>
+    <h2>供应商汰换（参与开发）：五阶段数据流</h2>
+    <div class="card" style="margin-bottom:14px"><h3><span class="tag o">背景</span></h3>
+      <p>常规汰换之外，存在需快速终止老商履约、切换新商的紧急场景（服务异常 / 质量合规 / 重大履约事故）。同一 SKU×店铺下老商所处阶段不同（已测量 / 已下货 / 已发货），处理方式完全不同。</p></div>
+    <div class="cards c3" style="margin-bottom:14px">
+      <div class="card"><h3><span class="tag">常规汰换 · 1</span></h3><p>看老商任务是否<b>已完成且同步 SDM</b></p></div>
+      <div class="card"><h3><span class="tag o">紧急+立即 · 2</span></h3><p>已发货留老商；未发货切新商并<b>取消 OMS 货单</b></p></div>
+      <div class="card"><h3><span class="tag g">紧急+不立即 · 3</span></h3><p>有货单一律<b>留老商</b>完成当前货单</p></div>
+    </div>
+    <div class="fgroup">
+      <span class="glabel">端到端流程</span>
+      <div class="flow">
+        <div class="fbox">① 消息落表<small>PENDING</small></div><div class="farrow">→</div>
+        <div class="fbox">② T+1 聚合<small>A→D</small></div><div class="farrow">→</div>
+        <div class="fbox">③ Hive 查单<small>货单状态</small></div><div class="farrow">→</div>
+        <div class="fbox">④ 判履约方<small>3 类型</small></div><div class="farrow">→</div>
+        <div class="fbox">⑤ 需求层<small>改需求</small></div><div class="farrow">→</div>
+        <div class="fbox" style="border-color:var(--warn);color:var(--warn)">⑥ 任务+外围<small>排程/考核/OMS</small></div>
+      </div>
+    </div>
+    <p class="sub">关键设计：先<b>落表 + T+1 聚合</b>，把一天多次变更（A→B→C→D）收敛为最终态（A→D），避免反复改任务、产生大量无效任务。</p>
+  </div>
+</section>
+
+<!-- ============ 13.5 实践产出② 汰换 判定规则 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 判定规则">
+  <div class="wrap">
+    <div class="kicker orange">03 我的实践产出</div>
+    <h2>核心业务规则：谁来履约 + 任务怎么处理</h2>
+    <table>
+      <tr><th>货单状态 ╲ 汰换类型</th><th>紧急-立即</th><th>紧急-不立即</th></tr>
+      <tr><td><b>无货单</b></td><td>新商跟进</td><td>新商跟进</td></tr>
+      <tr><td><b>有货单·待接单/备货中</b></td><td>新商跟进</td><td>老商继续</td></tr>
+      <tr><td><b>有货单·待发货/待签收</b></td><td>老商继续</td><td>老商继续</td></tr>
+    </table>
+    <p class="sub">紧急汰换判定矩阵：<b>无货单一律新商跟进</b>；有货单仅「紧急-立即 + 待接单/备货中」切新商，其余留老商。</p>
+    <div class="cards c2" style="margin-top:14px">
+      <div class="card"><h3><span class="tag">常规汰换 · 两步判断</span></h3>
         <ul>
-          <li>履约结果 = <b>老商履约</b> → 全部不处理（短路，依据货单状态）</li>
-          <li>履约结果 = <b>新商履约</b> → 进入第二层</li>
-          <li>三种汰换方式：常规 / 紧急+立即 / 紧急+不立即</li>
+          <li><b>判断一</b>：有货单 → 老商继续；无 → 进入判断二</li>
+          <li><b>判断二</b>：货前有「供应商角色且 ≥1 已完成」任务 → 老商继续；否则新商跟进</li>
         </ul></div>
-      <div class="card"><h3><span class="tag g">第二层 · 任务怎么处理</span></h3>
+      <div class="card"><h3><span class="tag g">角色场景 a / b</span></h3>
         <ul>
-          <li>按<b>角色场景（a / b）+ 老商任务状态</b>决定</li>
-          <li>场景 a：新老商角色一致且均非供应商 → 认可老商结果</li>
-          <li>场景 b：涉及供应商角色 → 老商任务在途则<b>取消老商</b>，按实际生成新商</li>
+          <li><b>a 场景</b>：新老商均非供应商 → 老商状态全量覆写新商（保连续性）</li>
+          <li><b>b 场景</b>：含供应商角色 → 老商在途则<b>取消老商</b>，按实际生成新商</li>
+          <li>角色任一不可判断 → 默认 b</li>
         </ul></div>
     </div>
-    <p class="sub">链路：MQ 落库 → T+1 聚合（A→B→C→D 取最终态）→ Hive 查受影响订单 → 履约判断 → 需求层回调 → 任务操作 → 下游同步 →（紧急+立即）OMS 换单。</p>
+  </div>
+</section>
+
+<!-- ============ 13.6 实践产出② 汰换 设计思想 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 设计思想">
+  <div class="wrap">
+    <div class="kicker orange">03 我的实践产出</div>
+    <h2>设计思想 &amp; 数据设计要点</h2>
+    <div class="cards c2" style="margin-bottom:14px">
+      <div class="card"><h3><span class="tag">为什么这样设计</span></h3>
+        <ul>
+          <li><b>先落表</b>：避免 A→B→C→D 连续改四次任务</li>
+          <li><b>T+1 聚合</b>：收敛为最终态 A→D，减少任务创建、消除无效任务</li>
+          <li><b>经需求层</b>：需求才是真实业务，任务由需求产生 → 需求↓任务</li>
+          <li><b>需求层再回调</b>：各外围系统监听同一事件，从源头保证一致性</li>
+        </ul></div>
+      <div class="card"><h3><span class="tag g">数据设计</span></h3>
+        <ul>
+          <li><b>消息落库</b>：<code>MerchantSkuSupplierReplacePayload</code> → <code>supplier_replace_message</code></li>
+          <li><b>中间表</b>：status 0/1/2/3，<code>idx_status_create</code> 聚合捞取</li>
+          <li><b>需求层接口</b>：<code>POST /api/supplier-replacement/evaluate</code> 只判「谁来履约」，结论落 <code>receipt_order_service_item</code></li>
+          <li><b>Hive 取数</b>：<code>HiveApiUtil.searchHiveApi</code> 拉受影响订单，分批 1000</li>
+        </ul></div>
+    </div>
+    <p class="sub">跨团队协作：需求横跨 商品中心 / 需求层 / OMS / 排程 / 考核 / Hive 多团队；我聚焦在 <b>回调层状态闭环、激活并发、Hive 取数链路</b> 几个接合点。</p>
   </div>
 </section>
 
