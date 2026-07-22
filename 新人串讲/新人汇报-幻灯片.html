@@ -86,6 +86,11 @@
   .tag.p{background:var(--purple-soft);color:var(--purple)}
   .dot{width:10px;height:10px;border-radius:50%;flex:none}
   .dot.b{background:var(--accent)}.dot.g{background:var(--accent-2)}.dot.o{background:var(--warn)}.dot.p{background:var(--purple)}
+  /* ---------- lead / bridge line ---------- */
+  .lead{font-size:18px;color:var(--ink-2);line-height:1.65;margin-bottom:20px;border-left:4px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent);padding:12px 16px;border-radius:0 10px 10px 0}
+  .lead.green{border-left-color:var(--accent-2);background:linear-gradient(90deg,var(--accent-2-soft),transparent)}
+  .lead.orange{border-left-color:var(--warn);background:linear-gradient(90deg,var(--warn-soft),transparent)}
+  .lead.purple{border-left-color:var(--purple);background:linear-gradient(90deg,var(--purple-soft),transparent)}
   /* ---------- flow diagrams ---------- */
   .flow{display:flex;align-items:stretch;flex-wrap:wrap;gap:0;margin:10px 0}
   .fbox{background:var(--slide-bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:15px;font-weight:600;color:var(--ink);text-align:center;display:flex;align-items:center;justify-content:center;min-width:86px;box-shadow:0 4px 12px -8px rgba(27,34,51,.14)}
@@ -191,22 +196,24 @@
 <section class="slide" data-title="汇报框架">
   <div class="wrap">
     <div class="kicker">Agenda</div>
-    <h2>汇报框架 · 五个模块</h2>
+    <h2>汇报框架 · 一条主线贯穿</h2>
     <div class="agenda">
-      <div class="ag-card"><div class="n">01</div><div class="t">业务认知</div><div class="d">Home 五层定位 · 主材任务全链路 · 货前/货后</div></div>
-      <div class="ag-card"><div class="n">02</div><div class="t">系统与技术认知</div><div class="d">starlord 定位 · 上下游 · 三套配置 · 状态机 · 三类复杂点</div></div>
-      <div class="ag-card"><div class="n">03</div><div class="t">我的实践产出</div><div class="d">前端小工具（提效10x）· 供应商汰换（参与开发）</div></div>
+      <div class="ag-card"><div class="n">01</div><div class="t">业务认知</div><div class="d">开发视角 · 主材任务是核心载体 · 全链路货前/货后分界</div></div>
+      <div class="ag-card"><div class="n">02</div><div class="t">系统与技术认知</div><div class="d">定位 → 上下游 → 三套配置 → 状态机(配置驱动) → 三类复杂点</div></div>
+      <div class="ag-card"><div class="n">03</div><div class="t">我的实践产出</div><div class="d">前端小工具(提效10x) · 供应商汰换(问题→方案→落地)</div></div>
       <div class="ag-card"><div class="n">04</div><div class="t">技能与知识沉淀</div><div class="d">Java 基础 · Hive 大数据调用 · 异常排查手册</div></div>
       <div class="ag-card"><div class="n">05</div><div class="t">复盘与规划</div><div class="d">两个困境反思 · 现状转变 · 下一步计划</div></div>
     </div>
+    <p class="sub">整体叙事：<b>业务提出"要管什么" → 系统提供"怎么支撑" → 我在一个真实需求里"把能力落地"</b>，认知层层递进。</p>
   </div>
 </section>
 
-<!-- ============ 3 业务认知① 定位 ============ -->
-<section class="slide" data-title="业务认知 · 系统定位">
+<!-- ============ 3 业务认知① 全景与核心载体 ============ -->
+<section class="slide" data-title="业务认知 · 全景与核心载体">
   <div class="wrap">
     <div class="kicker">01 业务认知</div>
-    <h2>我们在家装链路里的位置：交付层</h2>
+    <h2>开发视角：材料履约要"管什么"</h2>
+    <div class="lead">从开发视角看，材料履约本质是<b>协调"货前测量 → 货后安装验收"的全过程</b>；系统要把这个过程管起来、可追踪。starlord 处在家装链路最末端的<b>交付层</b>。</div>
     <div class="cards c3">
       <div class="card"><h3><span class="dot b"></span>履约调度（管理）</h3>
         <ul><li><b>施工调度</b>：派单 / 预约 / 人员调度 / 考核</li><li><b>材料调度</b>：下单 / 履约 / 主材进展跟进 / 产能分配 / 时效监控</li></ul></div>
@@ -215,15 +222,16 @@
       <div class="card"><h3><span class="dot o"></span>基础能力（支撑）</h3>
         <ul><li>人员 / 商品 / 材料 / 供应商等系统支撑</li><li>为调度与作业提供数据与服务</li></ul></div>
     </div>
-    <p class="sub">其中<b>主材任务</b>是材料履约的核心载体：把「客户需要哪些主材」拆成可追踪的任务流。</p>
+    <p class="sub">交付层里，<b>主材任务</b>是材料履约的核心载体 —— 它把"客户需要哪些主材"拆成一条条可追踪的任务流。接下来看它的一生。</p>
   </div>
 </section>
 
-<!-- ============ 4 业务认知② 全链路 ============ -->
+<!-- ============ 4 业务认知② 主材任务全链路 ============ -->
 <section class="slide" data-title="业务认知 · 主材任务全链路">
   <div class="wrap">
     <div class="kicker">01 业务认知</div>
-    <h2>主材任务全链路：下单 = 货前/货后唯一分界</h2>
+    <h2>主材任务的一生：下单 = 货前/货后唯一分界</h2>
+    <div class="lead">既然主材任务是载体，它的一生是怎样的？答案在一条<b>全链路</b>上：以<b>"下单"</b>为唯一分界，下单前是需求确认（货前），下单后才是真正的供应链履约（货后）。</div>
     <div class="fgroup pre">
       <span class="glabel">货前 · 需求确认（未产生货物）</span>
       <div class="flow">
@@ -250,15 +258,16 @@
         <div class="fbox">业主确认</div>
       </div>
     </div>
-    <p class="sub">货前触发点在前置系统（设计师提交<b>主材申请单</b>）→ 拆分为 <b>SKU</b>（品牌+规格+材质+颜色）→ 每个 SKU 走自己的履约流程。</p>
+    <p class="sub">货前由前置系统触发（设计师提交<b>主材申请单</b>）→ 拆分为 <b>SKU</b>（品牌+规格+材质+颜色）→ 每个 SKU 走自己的履约流程；货后则用<b>货单号</b>串联供应商全过程。</p>
   </div>
 </section>
 
-<!-- ============ 5 业务认知③ 核心概念 ============ -->
-<section class="slide" data-title="业务认知 · 核心概念">
+<!-- ============ 5 业务认知③ 谁在执行 + 一句话主线 ============ -->
+<section class="slide" data-title="业务认知 · 协作实体与主线">
   <div class="wrap">
     <div class="kicker">01 业务认知</div>
-    <h2>核心协作实体 &amp; 一句话业务主线</h2>
+    <h2>全链路靠谁落地：两类协作实体</h2>
+    <div class="lead">全链路要真正跑起来，靠两类实体协作：<b>施工包</b>是"安装"的执行单位，<b>用工平台</b>是"人、货、工序"的协调中枢。两者把抽象的 SKU 履约流程变成具体的现场作业。</div>
     <div class="cards c2" style="margin-bottom:20px">
       <div class="card"><h3><span class="tag">施工包</span></h3>
         <p>工人施工动作的管理载体，以「人 + 料」构成，<b>安装以施工包为单位</b>；支持基装/安装、整装/零售、总工/产业/供应商工人等多种模式，涉及生成、变更、延期、验收、拆包/合包。</p></div>
@@ -274,6 +283,7 @@
   <div class="wrap">
     <div class="kicker green">02 系统与技术认知</div>
     <h2>edar-starlord：主材任务的调度引擎 + 配置中心</h2>
+    <div class="lead">理解了业务"要管什么"，接下来看系统"怎么支撑"。edar-starlord 是一个<b>管理主材任务配置与调度的微服务</b>（严格多模块分层：web→service→manager→dao→base←api）。</div>
     <div class="cards c4">
       <div class="card"><h3><span class="dot b"></span>任务编排</h3><p>把「测量→下单→排产→送货→安装→验收」长链条标准化为可追踪任务流</p></div>
       <div class="card"><h3><span class="dot g"></span>配置驱动</h3><p>模板 / 规则配置，适配不同品类、城市、供应商的业务差异</p></div>
@@ -288,7 +298,8 @@
 <section class="slide" data-title="系统认知 · 上下游依赖">
   <div class="wrap">
     <div class="kicker green">02 系统与技术认知</div>
-    <h2>上下游依赖：上游 Web 接入，下游消息/接口联动</h2>
+    <h2>作为枢纽：上游触发、下游联动</h2>
+    <div class="lead">starlord 处在多个系统之间：<b>上游</b>多业务系统触发任务，<b>下游</b>多履约/供应链系统被联动。正因为它要对接千差万别的业务，才需要"配置驱动"来适配 —— 这正是下一页要讲的复杂度来源。</div>
     <div class="sys">
       <div class="col">
         <h4>上游调用方</h4>
@@ -324,22 +335,24 @@
 <section class="slide" data-title="系统认知 · 三套配置模式">
   <div class="wrap">
     <div class="kicker green">02 系统与技术认知</div>
-    <h2>三套配置模式并存（ModeEnum，主用 HOME2.5）</h2>
+    <h2>配置驱动的第一道坎：三套配置模式并存</h2>
+    <div class="lead">"适配差异"落到实现上就是<b>配置驱动</b>。但历史演进留下了 <b>三套配置链路</b>（由 <code>mode_type</code> 区分），要在不同<b>分公司 / 品类 / 套餐</b>下走完全不同的配置 —— 这是系统复杂度的第一个来源。</div>
     <table>
       <tr><th>维度</th><th>mode=5 八合一</th><th>mode=6 全国</th><th>mode=7 排程</th></tr>
       <tr><td><b>适用范围</b></td><td>北京被窝</td><td>圣都等非北京分公司</td><td>排程材料配置</td></tr>
       <tr><td><b>配置表</b></td><td><code>material_flow_rule*</code></td><td><code>n_material_template*</code></td><td><code>delivery_flow_rule*</code></td></tr>
       <tr><td><b>模板映射</b></td><td>category → template</td><td>template → unit → processDefine</td><td>rule → unit → category → processDefine</td></tr>
     </table>
-    <p class="sub">同一套「材料履约」逻辑，要在不同<b>分公司 / 品类 / 套餐</b>下走完全不同的配置链路 —— 这是系统复杂度的核心来源。</p>
+    <p class="sub">代码依据：节点代码经 <code>CodeJointConvert.jointTaskCode(nodeCode, modeType)</code> 拼接 —— <b>配置模式直接决定任务/节点的生成</b>。那么这些配置是怎么变成任务流转的？看下一页。</p>
   </div>
 </section>
 
-<!-- ============ 9 系统认知④ 状态机 ============ -->
+<!-- ============ 9 系统认知④ 状态机与激活 ============ -->
 <section class="slide" data-title="系统认知 · 状态机与激活">
   <div class="wrap">
     <div class="kicker green">02 系统与技术认知</div>
-    <h2>任务状态机与激活</h2>
+    <h2>配置如何变成流转：processChain 驱动状态机</h2>
+    <div class="lead">配置不是静态的：启动时把 <b>processChain（JSON 有向图，节点=状态/步骤、边=流转）</b> 加载进内存，由它<b>驱动任务的创建与状态流转</b>。配置模式(mode_type) → 模板 → 流程定义 → 状态机，是一条可验证的因果链。</div>
     <div class="fgroup">
       <span class="glabel">主材任务节点类型（常说 20 / 40 / 60 / 80）</span>
       <div class="flow">
@@ -365,6 +378,7 @@
   <div class="wrap">
     <div class="kicker purple">02 系统与技术认知 · 重点</div>
     <h2>三类复杂点 · 详细拆解<span style="font-size:18px;color:var(--ink-3);font-weight:500">（下一阶段的主攻方向）</span></h2>
+    <div class="lead">把前几页串起来：<b>配置维度爆炸(第8页) + 状态机与激活复杂(第9页) + 跨系统一致性(上下游/下一页)</b> 三者叠加，构成系统真正的复杂度。归纳如下，也是我下一阶段要逐个拆解的目标。</div>
     <div class="cplx">
       <div class="col">
         <div class="head h-b"><div class="idx">复杂点 ①</div><div class="name">配置维度爆炸</div></div>
@@ -410,6 +424,7 @@
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
     <h2>材料履约进展查询工具（前端小工具 · 自主开发）</h2>
+    <div class="lead">前面是"认知"，下面进入"落地"。先做的一个小工具，正是为了更快看清前面那张<b>全链路进展图</b>。</div>
     <div class="row">
       <div>
         <div class="card" style="margin-bottom:14px"><h3><span class="tag o">背景痛点</span></h3>
@@ -448,20 +463,19 @@
   </div>
 </section>
 
-<!-- ============ 13 实践产出② 汰换 背景+架构 ============ -->
-<section class="slide" data-title="实践产出 · 供应商汰换 架构">
+<!-- ============ 13 实践产出② 汰换 背景+问题+架构 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换(问题+架构)">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>供应商汰换（参与开发）：五阶段数据流</h2>
-    <div class="card" style="margin-bottom:14px"><h3><span class="tag o">背景</span></h3>
-      <p>常规汰换之外，存在需快速终止老商履约、切换新商的紧急场景（服务异常 / 质量合规 / 重大履约事故）。同一 SKU×店铺下老商所处阶段不同（已测量 / 已下货 / 已发货），处理方式完全不同。</p></div>
+    <h2>供应商汰换：先看清"问题"，再看"方案"</h2>
+    <div class="lead orange">我把这个需求按 <b>问题 → 方案 → 落地</b> 来讲。先看问题：老商出现服务异常 / 质量合规 / 重大履约事故时，若不快速汰换，<b>已发货 / 在途材料会持续由问题商履约</b>，扩大客诉与损失。解决方案是一条端到端数据流。</div>
     <div class="cards c3" style="margin-bottom:14px">
       <div class="card"><h3><span class="tag">常规汰换 · 1</span></h3><p>看老商任务是否<b>已完成且同步 SDM</b></p></div>
       <div class="card"><h3><span class="tag o">紧急+立即 · 2</span></h3><p>已发货留老商；未发货切新商并<b>取消 OMS 货单</b></p></div>
       <div class="card"><h3><span class="tag g">紧急+不立即 · 3</span></h3><p>有货单一律<b>留老商</b>完成当前货单</p></div>
     </div>
     <div class="fgroup">
-      <span class="glabel">端到端流程</span>
+      <span class="glabel">端到端方案：五阶段数据流</span>
       <div class="flow">
         <div class="fbox">① 消息落表<small>PENDING</small></div><div class="farrow">→</div>
         <div class="fbox">② T+1 聚合<small>A→D</small></div><div class="farrow">→</div>
@@ -471,15 +485,16 @@
         <div class="fbox" style="border-color:var(--warn);color:var(--warn)">⑥ 任务+外围<small>排程/考核/OMS</small></div>
       </div>
     </div>
-    <p class="sub">关键设计：先<b>落表 + T+1 聚合</b>，把一天多次变更（A→B→C→D）收敛为最终态（A→D），避免反复改任务、产生大量无效任务。</p>
+    <p class="sub">下一页起逐层展开：<b>判定规则(谁来履约) → 业务编排(生成新商) → 领域模型(落在哪) → 设计思想(为什么这样)</b>。</p>
   </div>
 </section>
 
-<!-- ============ 13.5 实践产出② 汰换 判定规则 ============ -->
+<!-- ============ 14 实践产出② 汰换 判定规则 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 判定规则">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>核心业务规则：谁来履约 + 任务怎么处理</h2>
+    <h2>方案①：核心业务规则 · 谁来履约</h2>
+    <div class="lead orange">方案的第一步是判断"谁来履约"。规则围绕<b>货单状态</b>与<b>汰换类型</b>展开 —— 核心原则：已发货的货单不轻易动，避免错发漏发。</div>
     <table>
       <tr><th>货单状态 ╲ 汰换类型</th><th>紧急-立即</th><th>紧急-不立即</th></tr>
       <tr><td><b>无货单</b></td><td>新商跟进</td><td>新商跟进</td></tr>
@@ -503,12 +518,13 @@
   </div>
 </section>
 
-<!-- ============ 13.7 实践产出② 汰换 编排 ============ -->
+<!-- ============ 15 实践产出② 汰换 编排 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 编排">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>业务编排内部流程（3.1 ~ 3.6）</h2>
-    <p class="sub" style="margin-bottom:12px"><code>SupplierReplaceProcessServiceImpl.process()</code> 按步骤处理每个 SKU 变更明细（<code>SkuChangeDetail</code>：skuId / merchantId / newSupplierCode）。</p>
+    <h2>方案②：业务编排内部流程（3.1 ~ 3.6）</h2>
+    <div class="lead orange">确定了"谁来履约"后，方案进入执行：对每个 SKU 变更明细，<code>SupplierReplaceProcessServiceImpl.process()</code> 按 3.1~3.6 编排，生成并激活新商任务。</div>
+    <p class="sub" style="margin-bottom:12px"><code>SkuChangeDetail</code>：skuId / merchantId / newSupplierCode。</p>
     <table>
       <tr><th>步骤</th><th>说明</th></tr>
       <tr><td><b>3.1 老商履约</b></td><td>老商已履约 → 直接走主材申请单逻辑结束该 SKU 处理</td></tr>
@@ -522,12 +538,12 @@
   </div>
 </section>
 
-
-<!-- ============ 13.8 实践产出② 汰换 系统基础 ============ -->
+<!-- ============ 16 实践产出② 汰换 系统基础 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 系统基础">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>涉及的系统模块与领域模型</h2>
+    <h2>方案③：落地的载体 · 系统模块与领域模型</h2>
+    <div class="lead orange">编排要落到具体代码与数据上。汰换横跨 starlord 的分层模块，写入几张核心领域模型表。</div>
     <div class="cards c2">
       <div class="card"><h3><span class="tag">分层模块</span></h3>
         <ul>
@@ -549,12 +565,12 @@
   </div>
 </section>
 
-
-<!-- ============ 13.6 实践产出② 汰换 设计思想 ============ -->
+<!-- ============ 17 实践产出② 汰换 设计思想 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 设计思想">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>设计思想 &amp; 数据设计要点</h2>
+    <h2>方案④：设计思想 &amp; 数据设计要点</h2>
+    <div class="lead orange">为什么是上面这套方案（落表→T+1→需求层→回调），而不是即时改任务？每一处取舍都为了"一致性"与"减少无效任务"。</div>
     <div class="cards c2" style="margin-bottom:14px">
       <div class="card"><h3><span class="tag">为什么这样设计</span></h3>
         <ul>
@@ -575,12 +591,12 @@
   </div>
 </section>
 
-<!-- ============ 14 实践产出② 汰换 贡献 ============ -->
+<!-- ============ 18 实践产出② 汰换 贡献 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 贡献">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>供应商汰换：我的代码贡献</h2>
-    <p class="sub" style="margin-bottom:12px">子系统由 <code>sunbin050</code> 主导搭建；本人聚焦<b>大数据能力接入 + 两处增量修复 + 并发分析</b>。</p>
+    <h2>落地①：供应商汰换 · 我的代码贡献</h2>
+    <div class="lead orange">方案讲完，落到"我做了什么"。子系统由 <code>sunbin050</code> 主导搭建；本人聚焦<b>大数据能力接入 + 两处增量修复 + 并发分析</b>。</div>
     <div class="contrib">
       <div class="c-item"><div class="no">1</div><div><h4>HiveAPI 大数据接入（核心）</h4><p>提交 <code>76c73b73b</code>：新增 Spring 组件 <code>HiveApiNewUtil</code>、<code>SupplierReplaceHiveManager</code>+DTO、BackDoor 后门；打通实时货单反查，使 3.6 步精准识别已发货货单触发 OMS 取消重下。</p></div></div>
       <div class="c-item"><div class="no">2</div><div><h4>回调成功标记（状态闭环）</h4><p>提交 <code>d33479452</code>：新增 <code>markReplaceMessagesDone</code>，覆盖四列表、<code>LinkedHashSet</code> 去重、真正批量更新，状态补全 PENDING→PROCESSING→DONE，避免消息长期卡 PROCESSING。</p></div></div>
@@ -590,12 +606,12 @@
   </div>
 </section>
 
-
-<!-- ============ 14.5 实践产出② 汰换 交付清单 ============ -->
+<!-- ============ 19 实践产出② 汰换 交付清单 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 交付清单">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>交付清单 &amp; 汇报话术</h2>
+    <h2>落地②：交付清单 &amp; 汇报话术</h2>
+    <div class="lead orange">最后，交付物清单与一句话定位，便于评审快速抓住价值。</div>
     <table>
       <tr><th>#</th><th>提交</th><th>主题</th><th>日期</th></tr>
       <tr><td>1</td><td><code>76c73b73b</code></td><td>HiveAPI 拉取数据功能（能力接入）</td><td>07-14</td></tr>
@@ -610,8 +626,7 @@
   </div>
 </section>
 
-
-<!-- ============ 15 技能沉淀 ============ -->
+<!-- ============ 20 技能沉淀 ============ -->
 <section class="slide" data-title="技能与知识沉淀">
   <div class="wrap">
     <div class="kicker purple">04 技能与知识沉淀</div>
@@ -639,7 +654,7 @@
   </div>
 </section>
 
-<!-- ============ 16 复盘反思 ============ -->
+<!-- ============ 21 复盘反思 ============ -->
 <section class="slide" data-title="复盘反思">
   <div class="wrap">
     <div class="kicker">05 复盘与规划</div>
@@ -652,7 +667,7 @@
   </div>
 </section>
 
-<!-- ============ 17 下一阶段规划 ============ -->
+<!-- ============ 22 下一阶段规划 ============ -->
 <section class="slide" data-title="下一阶段规划">
   <div class="wrap">
     <div class="kicker">05 复盘与规划</div>
@@ -665,7 +680,7 @@
   </div>
 </section>
 
-<!-- ============ 18 结束 ============ -->
+<!-- ============ 23 结束 ============ -->
 <section class="slide cover" data-title="结束">
   <div class="wrap" style="text-align:center">
     <span class="badge">Thanks</span>
