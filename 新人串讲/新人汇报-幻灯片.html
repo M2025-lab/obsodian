@@ -503,6 +503,53 @@
   </div>
 </section>
 
+<!-- ============ 13.7 实践产出② 汰换 编排 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 编排">
+  <div class="wrap">
+    <div class="kicker orange">03 我的实践产出</div>
+    <h2>业务编排内部流程（3.1 ~ 3.6）</h2>
+    <p class="sub" style="margin-bottom:12px"><code>SupplierReplaceProcessServiceImpl.process()</code> 按步骤处理每个 SKU 变更明细（<code>SkuChangeDetail</code>：skuId / merchantId / newSupplierCode）。</p>
+    <table>
+      <tr><th>步骤</th><th>说明</th></tr>
+      <tr><td><b>3.1 老商履约</b></td><td>老商已履约 → 直接走主材申请单逻辑结束该 SKU 处理</td></tr>
+      <tr><td><b>3.2 生成新商任务</b></td><td>调 <code>createTask</code> 生成新商主材+下单任务，查回并对 <code>extend.replacement</code> 打标</td></tr>
+      <tr><td><b>3.3 激活</b></td><td>激活时间 &lt; 当前时间则立即激活任务</td></tr>
+      <tr><td><b>3.4 状态复制</b></td><td>a 场景（均非供应商）将老商任务状态/节点复制到新商（copyTaskState / copyNodeState）</td></tr>
+      <tr><td><b>3.5 并行后置</b></td><td>并行：货主材+考核、排程（demandChange）、下单</td></tr>
+      <tr><td><b>3.6 紧急→OMS</b></td><td><code>replace_type=2</code> 先经 <b>Hive 反查已发货货单</b>，再调 OMS 取消重下新商货单</td></tr>
+    </table>
+    <p class="sub"><b>关键闭环（3.6）</b>：经 <code>SupplierReplaceHiveManager.queryOrderRange(skuId, merchantId)</code> 反查项目单/订单号/状态/供应商，命中已发货货单才驱动 OMS 取消重下——即大数据能力接入的意义所在。</p>
+  </div>
+</section>
+
+
+<!-- ============ 13.8 实践产出② 汰换 系统基础 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 系统基础">
+  <div class="wrap">
+    <div class="kicker orange">03 我的实践产出</div>
+    <h2>涉及的系统模块与领域模型</h2>
+    <div class="cards c2">
+      <div class="card"><h3><span class="tag">分层模块</span></h3>
+        <ul>
+          <li><code>api</code> DTO / 枚举（SupplierReplaceHiveDTO 等）</li>
+          <li><code>dao</code> MyBatis（337 xml；核心表 task_dispatch / task_dispatch_node / measure_apply / supplier_replace_message）</li>
+          <li><code>manager</code> 业务编排 / 外部调用（Hive、企微）</li>
+          <li><code>service</code> 核心逻辑、事件监听、汰换编排</li>
+          <li><code>web</code> Controller / BackDoor / 静态页</li>
+        </ul></div>
+      <div class="card"><h3><span class="tag g">核心领域模型</span></h3>
+        <ul>
+          <li><code>task_dispatch</code> 任务主表：process_status / supplier / task_type / material / order_no</li>
+          <li><code>task_dispatch_node</code> 工序节点：node_type / operator_id</li>
+          <li><code>measure_apply</code> 复尺申请（汰换数据源之一）</li>
+          <li><code>supplier_replace_message</code> 汰换消息：status / fulfill_result</li>
+        </ul></div>
+    </div>
+    <p class="sub">主材任务生命周期：复尺申请 → createTask → 打标 <code>extend.replacement</code> → 激活 → 并行（货主材+考核 / 排程 / 下单）→ 履约（老/新商）→ OMS 货单 → 完结。</p>
+  </div>
+</section>
+
+
 <!-- ============ 13.6 实践产出② 汰换 设计思想 ============ -->
 <section class="slide" data-title="实践产出 · 供应商汰换 设计思想">
   <div class="wrap">
@@ -532,16 +579,37 @@
 <section class="slide" data-title="实践产出 · 供应商汰换 贡献">
   <div class="wrap">
     <div class="kicker orange">03 我的实践产出</div>
-    <h2>供应商汰换：我的具体代码贡献</h2>
+    <h2>供应商汰换：我的代码贡献</h2>
+    <p class="sub" style="margin-bottom:12px">子系统由 <code>sunbin050</code> 主导搭建；本人聚焦<b>大数据能力接入 + 两处增量修复 + 并发分析</b>。</p>
     <div class="contrib">
-      <div class="c-item"><div class="no">1</div><div><h4>状态闭环修复</h4><p>回调层缺 <code>markDone</code> 导致消息长期卡在 PROCESSING。新增 <code>markReplaceMessagesDone</code>，覆盖新增/取消/修改/不变四个列表，LinkedHashSet 去重，改为真正批量更新，状态补全为 PENDING→PROCESSING→DONE。</p></div></div>
-      <div class="c-item"><div class="no">2</div><div><h4>NPE Bug 修复</h4><p><code>handleSceneAIfNeed</code> 新老商任务复制中，「新商有某 taskType 而老商没有」导致 NPE；通过增加校验、以任务类型维度遍历复制解决。</p></div></div>
-      <div class="c-item"><div class="no">3</div><div><h4>两次激活竞争分析</h4><p>定位创建后异步激活（afterCreate）与回调同步激活（activateIfNeeded）两次调用 <code>doActivateTaskDispatch</code>，分析乐观锁 CAS + 事务保护机制，确认各竞态场景正确。</p></div></div>
-      <div class="c-item"><div class="no">4</div><div><h4>Hive API 落地 + 流程梳理</h4><p>完成 HiveApiUtil 大禹环境部署与功能测试，解决分页超时、缺索引 GROUP BY 慢等问题；验证 a/b 场景取消逻辑，梳理考核/排程并行路径（CompletableFuture + 仅紧急立即通知 OMS）。</p></div></div>
+      <div class="c-item"><div class="no">1</div><div><h4>HiveAPI 大数据接入（核心）</h4><p>提交 <code>76c73b73b</code>：新增 Spring 组件 <code>HiveApiNewUtil</code>、<code>SupplierReplaceHiveManager</code>+DTO、BackDoor 后门；打通实时货单反查，使 3.6 步精准识别已发货货单触发 OMS 取消重下。</p></div></div>
+      <div class="c-item"><div class="no">2</div><div><h4>回调成功标记（状态闭环）</h4><p>提交 <code>d33479452</code>：新增 <code>markReplaceMessagesDone</code>，覆盖四列表、<code>LinkedHashSet</code> 去重、真正批量更新，状态补全 PENDING→PROCESSING→DONE，避免消息长期卡 PROCESSING。</p></div></div>
+      <div class="c-item"><div class="no">3</div><div><h4>新老商 NPE 修复</h4><p>提交 <code>dcd1e8409</code>：3.4 步 <code>newTask==null</code> 触发 NPE 致整批中断；增加判空后安全跳过，流程健壮。</p></div></div>
+      <div class="c-item"><div class="no">4</div><div><h4>并发正确性 + 流程验证</h4><p>两次激活竞争分析（CAS+事务保护正确）；验证 a/b 取消逻辑、梳理考核/排程并行路径（CompletableFuture + 仅紧急立即通知 OMS）。</p></div></div>
     </div>
-    <p class="sub">当前进度：需求处于<b>测试与联调阶段</b>，正推进联调与上线。</p>
   </div>
 </section>
+
+
+<!-- ============ 14.5 实践产出② 汰换 交付清单 ============ -->
+<section class="slide" data-title="实践产出 · 供应商汰换 交付清单">
+  <div class="wrap">
+    <div class="kicker orange">03 我的实践产出</div>
+    <h2>交付清单 &amp; 汇报话术</h2>
+    <table>
+      <tr><th>#</th><th>提交</th><th>主题</th><th>日期</th></tr>
+      <tr><td>1</td><td><code>76c73b73b</code></td><td>HiveAPI 拉取数据功能（能力接入）</td><td>07-14</td></tr>
+      <tr><td>2</td><td><code>dcd1e8409</code></td><td>新老商任务处理（NPE 修复）</td><td>07-20</td></tr>
+      <tr><td>3</td><td><code>d33479452</code></td><td>需求层回调新增汰换处理成功标记</td><td>07-21</td></tr>
+      <tr><td>4</td><td><code>e570cb10e</code> 等</td><td>HiveAPI 功能测试（多笔联调）</td><td>07-14~</td></tr>
+    </table>
+    <div class="cards c2" style="margin-top:14px">
+      <div class="card"><h3><span class="tag">一句话定位</span></h3><p>负责材料主材任务生命周期系统中的"供应商汰换"需求，重点打通大数据查询通道、补全需求层回调闭环。</p></div>
+      <div class="card"><h3><span class="tag g">业务价值</span></h3><p>紧急汰换精准识别已发货货单并自动触发 OMS 取消重下，避免错发漏发；需求层实时感知履约结果。</p></div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ 15 技能沉淀 ============ -->
 <section class="slide" data-title="技能与知识沉淀">
@@ -615,7 +683,7 @@
 <!-- ============ nav bar ============ -->
 <div class="navbar">
   <button class="nbtn" id="prevBtn" aria-label="上一页">‹</button>
-  <div class="counter" id="counter">1 / 18</div>
+  <div class="counter" id="counter">1 / 23</div>
   <button class="nbtn" id="nextBtn" aria-label="下一页">›</button>
 </div>
 
