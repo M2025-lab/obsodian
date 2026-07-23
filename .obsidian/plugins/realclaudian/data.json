@@ -4,8 +4,13 @@
       {
         "tabId": "tab-1784620962817-8h8g3e3",
         "conversationId": "conv-1784618459166-kldodgxju"
+      },
+      {
+        "draftModel": "claude-code/deepseek-v4-flash",
+        "tabId": "tab-1784810228645-o21nyya",
+        "conversationId": null
       }
     ],
-    "activeTabId": "tab-1784620962817-8h8g3e3"
+    "activeTabId": "tab-1784810228645-o21nyya"
   }
 }
