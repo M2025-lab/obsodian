@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "需求/安装 拆除经营主体用工改造/prd记录.md",
+                "file": "日报与周报/日报记录-个人.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "prd记录"
+              "title": "日报记录-个人"
             }
           }
         ],
@@ -238,10 +238,10 @@
   },
   "active": "a79c66bc248d20ae",
   "lastOpenFiles": [
+    "需求/安装 拆除经营主体用工改造/prd记录.md",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260723203033.png",
     "需求/安装 拆除经营主体用工改造/fig",
     "需求/安装 拆除经营主体用工改造/【待评审0707】安装拆除经营主体用工改造.md",
-    "需求/安装 拆除经营主体用工改造/prd记录.md",
     "日报与周报/日报记录-个人.md",
     "需求/安装 拆除经营主体用工改造",
     "starlord项目整理/全部枚举类型梳理.md",
@@ -283,7 +283,6 @@
     "新人串讲/fig/Pasted image 20260712165901.png",
     "新人串讲/fig/Pasted image 20260712165705.png",
     "新人串讲/fig/Pasted image 20260712165022.png",
-    "新人串讲/fig/Pasted image 20260712164459.png",
-    "新人串讲/fig/Home系统.png"
+    "新人串讲/fig/Pasted image 20260712164459.png"
   ]
 }
