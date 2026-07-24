@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "需求/安装 拆除经营主体用工改造/产业工人--问题反馈（费用提报）.md",
+                "file": "需求/安装 拆除经营主体用工改造/prd记录.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "产业工人--问题反馈（费用提报）"
+              "title": "prd记录"
             }
           }
         ],
@@ -281,10 +281,11 @@
   },
   "active": "ef621cd423cfbaf5",
   "lastOpenFiles": [
+    "需求/安装 拆除经营主体用工改造/fig/企业微信截图_ce2f7af1-bf5d-4cb6-a50b-7f1f284ac0e4.png",
+    "需求/安装 拆除经营主体用工改造/产业工人--问题反馈（费用提报）.md",
     "需求/安装 拆除经营主体用工改造/约工驳回.md",
     "需求/安装 拆除经营主体用工改造/派单页面的查询.md",
     "需求/安装 拆除经营主体用工改造/prd记录.md",
-    "需求/安装 拆除经营主体用工改造/产业工人--问题反馈（费用提报）.md",
     "日报与周报/日报记录-个人.md",
     "需求/安装 拆除经营主体用工改造/fig/企业微信截图_2da72158-a1fc-46cd-92ea-0d387703f9c4.png",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260723203033.png",
@@ -315,7 +316,6 @@
     "starlord项目整理/接口逻辑梳理/主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）.md",
     "新人串讲/新人汇报-幻灯片.html",
     "新人汇报-幻灯片.html",
-    "新人汇报.md",
     "AI agent 学习/第一阶段",
     "AI agent 学习",
     "starlord项目整理/starlord-architecture-mermaid.html",
