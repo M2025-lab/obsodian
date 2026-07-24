@@ -29,3 +29,13 @@
 | --- | ------ | --- | ------------- |
 | 问题单 | 安装项目经理 | COE | ❌             |
 | 费用单 | 安装项目经理 | COE | 超额审批「需要上一级审批」 |
+
+
+派单页面的查询
+/utopia-cube/web/list-package-by-operator-manager
+![[需求/安装 拆除经营主体用工改造/fig/企业微信截图_2da72158-a1fc-46cd-92ea-0d387703f9c4.png]]
+产业工人--约工驳回
+/utopia-cube/web/package/reappointProblemSubmit
+
+产业工人--问题反馈（费用提报）
+utopia-cube/api/pc/problem/order/quota/submit
