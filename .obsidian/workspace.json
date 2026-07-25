@@ -190,7 +190,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 776.5
+    "width": 632.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -207,7 +207,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "cfba3658877c10d6",
+  "active": "23e3e3c2cc942472",
   "lastOpenFiles": [
     "需求/安装 拆除经营主体用工改造/约工驳回.md",
     "需求/安装 拆除经营主体用工改造/派单页面的查询.md",
