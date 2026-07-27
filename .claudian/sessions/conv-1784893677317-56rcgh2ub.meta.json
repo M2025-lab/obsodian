@@ -4,20 +4,20 @@
   "title": "Generate daily report from git content",
   "titleGenerationStatus": "success",
   "createdAt": 1784893677317,
-  "updatedAt": 1784894480390,
-  "lastResponseAt": 1784894480390,
+  "updatedAt": 1785157960990,
+  "lastResponseAt": 1785157960990,
   "sessionId": "b4716975-bc2d-4bd5-9b4f-b2b6a151aaac",
   "providerState": {
     "providerSessionId": "b4716975-bc2d-4bd5-9b4f-b2b6a151aaac"
   },
   "usage": {
     "model": "deepseek-v4-flash",
-    "inputTokens": 555,
+    "inputTokens": 1503,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 77056,
+    "cacheReadInputTokens": 82560,
     "contextWindow": 200000,
-    "contextTokens": 77611,
-    "percentage": 39,
+    "contextTokens": 84063,
+    "percentage": 42,
     "contextWindowIsAuthoritative": true
   }
 }
