@@ -1,0 +1,24 @@
+{
+  "id": "conv-1785251050840-pcykowqxg",
+  "providerId": "claude",
+  "title": "Create daily report generator",
+  "titleGenerationStatus": "success",
+  "createdAt": 1785251050841,
+  "updatedAt": 1785251090880,
+  "lastResponseAt": 1785251090880,
+  "sessionId": "5efddf3d-b319-4ee0-8909-7d434bf3d345",
+  "providerState": {
+    "providerSessionId": "5efddf3d-b319-4ee0-8909-7d434bf3d345"
+  },
+  "currentNote": "日报与周报/日报记录-个人.md",
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 825,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 46720,
+    "contextWindow": 200000,
+    "contextTokens": 47545,
+    "percentage": 24,
+    "contextWindowIsAuthoritative": true
+  }
+}
