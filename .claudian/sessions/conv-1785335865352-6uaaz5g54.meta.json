@@ -1,0 +1,23 @@
+{
+  "id": "conv-1785335865352-6uaaz5g54",
+  "providerId": "claude",
+  "title": "Build daily report generator",
+  "titleGenerationStatus": "success",
+  "createdAt": 1785335865353,
+  "updatedAt": 1785335895926,
+  "lastResponseAt": 1785335895926,
+  "sessionId": "3bab6b4d-48ab-4a82-9b30-6f5123d27778",
+  "providerState": {
+    "providerSessionId": "3bab6b4d-48ab-4a82-9b30-6f5123d27778"
+  },
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 19270,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 27008,
+    "contextWindow": 200000,
+    "contextTokens": 46278,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}
