@@ -1,0 +1,24 @@
+{
+  "id": "conv-1785508908147-mjbswj46l",
+  "providerId": "claude",
+  "title": "Update daily report generator, add approval ana...",
+  "titleGenerationStatus": "success",
+  "createdAt": 1785508908148,
+  "updatedAt": 1785508996132,
+  "lastResponseAt": 1785508996132,
+  "sessionId": "f96351c6-5cf1-4549-a1a5-ee46f189d51f",
+  "providerState": {
+    "providerSessionId": "f96351c6-5cf1-4549-a1a5-ee46f189d51f"
+  },
+  "currentNote": "日报与周报/日报记录-个人.md",
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 87,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 49024,
+    "contextWindow": 200000,
+    "contextTokens": 49111,
+    "percentage": 25,
+    "contextWindowIsAuthoritative": true
+  }
+}

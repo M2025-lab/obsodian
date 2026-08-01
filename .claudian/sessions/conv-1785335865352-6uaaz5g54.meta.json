@@ -4,20 +4,19 @@
   "title": "Build daily report generator",
   "titleGenerationStatus": "success",
   "createdAt": 1785335865353,
-  "updatedAt": 1785507535834,
-  "lastResponseAt": 1785507535834,
+  "updatedAt": 1785508881146,
+  "lastResponseAt": 1785508881146,
   "sessionId": "3bab6b4d-48ab-4a82-9b30-6f5123d27778",
   "providerState": {
     "providerSessionId": "3bab6b4d-48ab-4a82-9b30-6f5123d27778"
   },
   "usage": {
     "model": "deepseek-v4-flash",
-    "inputTokens": 3227,
+    "inputTokens": 1258,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 56704,
-    "contextWindow": 200000,
-    "contextTokens": 59931,
-    "percentage": 30,
-    "contextWindowIsAuthoritative": true
+    "cacheReadInputTokens": 84736,
+    "contextWindow": 1000000,
+    "contextTokens": 85994,
+    "percentage": 9
   }
 }
