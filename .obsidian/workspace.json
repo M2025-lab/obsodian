@@ -229,9 +229,19 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "a8034d19edddd1a4",
+            "type": "leaf",
+            "state": {
+              "type": "copilot-chat-view",
+              "state": {},
+              "icon": "message-square",
+              "title": "Copilot"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 7
       }
     ],
     "direction": "horizontal",
@@ -249,11 +259,31 @@
       "markdown-importer:打开 Markdown 格式转换器": false,
       "realclaudian:Open Claudian": false,
       "feishu-lark-cli-sync:同步到飞书": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "copilot:Open Copilot Chat": false
     }
   },
-  "active": "ab0505980ab96b47",
+  "active": "a8034d19edddd1a4",
   "lastOpenFiles": [
+    "copilot/copilot-conversations/写了什么@20260804_155650.md",
+    "copilot/copilot-conversations",
+    "copilot/copilot-custom-prompts/Clip Web Page.md",
+    "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
+    "copilot/copilot-custom-prompts/Remove URLs.md",
+    "copilot/copilot-custom-prompts/Generate glossary.md",
+    "copilot/copilot-custom-prompts/Generate table of contents.md",
+    "copilot/copilot-custom-prompts/Make longer.md",
+    "copilot/copilot-custom-prompts/Make shorter.md",
+    "copilot/copilot-custom-prompts/Emojify.md",
+    "copilot/copilot-custom-prompts/Explain like I am 5.md",
+    "copilot/copilot-custom-prompts/Simplify.md",
+    "copilot/copilot-custom-prompts/Summarize.md",
+    "copilot/copilot-custom-prompts/Translate to Chinese.md",
+    "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
+    "copilot/copilot-custom-prompts",
+    "copilot",
     "新人串讲/新人第一次串讲.md",
     "cube-dev-summary.md",
     "日报与周报/日报记录-个人.md",
@@ -267,23 +297,7 @@
     "需求/fig/Pasted image 20260729113756.png",
     "需求/fig/Pasted image 20260729112746.png",
     "需求/fig",
-    "需求/技术设计文档模板.md",
-    "随记.md",
     "未命名.canvas",
-    "需求/安装 拆除经营主体用工改造/派单二级确认状态影响范围报告.md",
-    "需求/安装 拆除经营主体用工改造/安装拆除经营主体用工改造-技术设计文档-新版.md",
-    "需求/安装 拆除经营主体用工改造/# 安装拆除经营主体用工改造-技术设计文档.md",
-    "需求/安装 拆除经营主体用工改造/安装拆除经营主体用工改造-技术设计文档.md",
-    "需求/安装 拆除经营主体用工改造/安装拆除经营主体用工改造-业务逻辑梳理.md",
-    "需求/安装 拆除经营主体用工改造/产业工人--问题反馈（费用提报）.md",
-    "需求/安装 拆除经营主体用工改造/fig/安装拆除经营主体用工改造-技术设计文档.md",
-    "需求/安装 拆除经营主体用工改造/约工驳回.md",
-    "需求/安装 拆除经营主体用工改造/派单页面的查询.md",
-    "starlord项目整理/全部枚举类型梳理.md",
-    "starlord项目整理/枚举类和上下游梳理-starlord系统.md",
-    "starlord项目整理/接口-动作映射表.md",
-    "starlord项目整理/主材任务流程梳理.md",
-    "starlord项目整理/主材任务操作-带图片.md",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724161013.png",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724160926.png",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724160847.png",
@@ -297,9 +311,6 @@
     "新人串讲/新人汇报-幻灯片.html",
     "新人汇报-幻灯片.html",
     "AI agent 学习/第一阶段",
-    "AI agent 学习",
-    "starlord项目整理/starlord-architecture-mermaid.html",
-    "starlord项目整理/starlord-architecture.mermaid",
-    "starlord项目整理/starlord-architecture-v3.drawio"
+    "AI agent 学习"
   ]
 }
