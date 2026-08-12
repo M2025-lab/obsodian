@@ -90,9 +90,23 @@
               "icon": "lucide-file",
               "title": "日报记录-个人"
             }
+          },
+          {
+            "id": "a14cf912ba5f83c4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "需求/通知复尺自动化/需求背景.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "需求背景"
+            }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -273,8 +287,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 357.203125,
-    "collapsed": true
+    "width": 357.203125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -292,10 +305,17 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "b54f696b5c388094",
+  "active": "a14cf912ba5f83c4",
   "lastOpenFiles": [
-    "日报与周报/笔记集/主材流程配置查询-套餐维度问题排查-20260810.md",
+    "copilot/copilot-custom-prompts/Summarize.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
+    "copilot/copilot-custom-prompts/Make shorter.md",
+    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
+    "copilot/copilot-conversations/写了什么@20260804_155650.md",
+    "需求/通知复尺自动化/需求背景.md",
     "日报与周报/日报记录-个人.md",
+    "需求/通知复尺自动化",
+    "日报与周报/笔记集/主材流程配置查询-套餐维度问题排查-20260810.md",
     "日报与周报/笔记集",
     "日报与周报/fig/笔记集",
     "starlord数据库表/数据库.md",
@@ -303,28 +323,22 @@
     "需求/供应商汰换20260709/技术方案.md",
     "未命名.md",
     "starlord数据库表/数据库打标签.md",
-    "新人串讲/新人汇报.md",
-    "copilot/copilot-conversations/写了什么@20260804_155650.md",
+    "日报与周报/新人串讲/新人汇报.md",
     "copilot/copilot-conversations",
     "copilot/copilot-custom-prompts/Clip Web Page.md",
     "copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
-    "copilot/copilot-custom-prompts/Rewrite as tweet.md",
     "copilot/copilot-custom-prompts/Remove URLs.md",
     "copilot/copilot-custom-prompts/Generate glossary.md",
     "copilot/copilot-custom-prompts/Generate table of contents.md",
     "copilot/copilot-custom-prompts/Make longer.md",
-    "copilot/copilot-custom-prompts/Make shorter.md",
     "copilot/copilot-custom-prompts/Emojify.md",
     "copilot/copilot-custom-prompts/Explain like I am 5.md",
     "copilot/copilot-custom-prompts/Simplify.md",
-    "copilot/copilot-custom-prompts/Summarize.md",
     "copilot/copilot-custom-prompts/Translate to Chinese.md",
     "copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "copilot/copilot-custom-prompts",
     "copilot",
-    "新人串讲/新人第一次串讲.md",
-    "cube-dev-summary.md",
+    "日报与周报/新人串讲/新人第一次串讲.md",
     "需求/fig/Pasted image 20260729113756.png",
     "需求/fig/Pasted image 20260729112746.png",
     "需求/fig",
@@ -339,7 +353,6 @@
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260723203033.png",
     "需求/安装 拆除经营主体用工改造/fig",
     "需求/安装 拆除经营主体用工改造",
-    "新人串讲/新人汇报-幻灯片.html",
-    "新人汇报-幻灯片.html"
+    "日报与周报/新人串讲/新人汇报-幻灯片.html"
   ]
 }
