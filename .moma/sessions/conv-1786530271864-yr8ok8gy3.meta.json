@@ -1,0 +1,25 @@
+{
+  "id": "conv-1786530271864-yr8ok8gy3",
+  "providerId": "claude",
+  "title": "打招呼",
+  "titleGenerationStatus": "success",
+  "createdAt": 1786530271864,
+  "updatedAt": 1786530290145,
+  "lastResponseAt": 1786530290145,
+  "sessionId": "b8787d1d-20dc-46fa-aeed-96557f6d7f06",
+  "providerState": {
+    "providerSessionId": "b8787d1d-20dc-46fa-aeed-96557f6d7f06"
+  },
+  "currentNote": "需求/通知复尺自动化/需求背景.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 2650,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36800,
+    "outputTokens": 288,
+    "contextWindow": 200000,
+    "contextTokens": 39450,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}

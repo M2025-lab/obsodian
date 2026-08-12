@@ -1,6 +1,6 @@
 {
   "userName": "",
-  "onesToken": "",
+  "onesToken": "sk-b5ded371a0f864330707582d73b49d14",
   "permissionMode": "yolo",
   "model": "haiku",
   "thinkingBudget": "off",
@@ -79,12 +79,28 @@
   "lastCustomModel": "",
   "backendEnv": "prod",
   "audioFileRecognition": {
-    "enable": false,
-    "supportAudioSuffixes": []
+    "enable": true,
+    "supportAudioSuffixes": [
+      "mp3",
+      "wav",
+      "wma",
+      "ape",
+      "flac",
+      "ogg-opus",
+      "aac",
+      "m4a",
+      "flv",
+      "mp4",
+      "3gp",
+      "amr"
+    ]
   },
   "fileShare": {
-    "enabled": false,
-    "supportFileSuffixes": []
+    "enabled": true,
+    "supportFileSuffixes": [
+      "md",
+      "html"
+    ]
   },
   "autoUpdate": true,
   "pluginEnv": "prod",
@@ -102,7 +118,8 @@
       "cliPath": "",
       "defaultConversationId": "",
       "defaultParentFolderId": "",
-      "identity": "user"
+      "identity": "user",
+      "autoInstallAttemptedAt": "2026-08-12T10:23:15.776Z"
     },
     "lark": {
       "enabled": false,
@@ -116,14 +133,17 @@
       "cliPath": "",
       "defaultConversationId": "",
       "defaultParentFolderId": "",
-      "identity": "user"
+      "identity": "user",
+      "spaceCleanupAttemptedAt": "2026-08-12T10:23:09.994Z"
     },
     "moma": {
       "enabled": false,
       "cliPath": "",
       "defaultConversationId": "",
       "defaultParentFolderId": "",
-      "identity": "user"
+      "identity": "user",
+      "autoInstallAttemptedAt": "2026-08-12T10:24:22.294Z",
+      "momaCliUpdateAttemptedAt": "2026-08-12T10:24:22.294Z"
     },
     "strictMarkdown": false
   },
@@ -131,5 +151,26 @@
     "effort-default-medium",
     "chat-view-placement-v1"
   ],
-  "lastGrayReleaseCheck": 1786530187601
+  "lastGrayReleaseCheck": 1786531016936,
+  "voiceRecordingDefaults": {
+    "storageMode": "text",
+    "storagePath": "/moma_ob/voice_recording/"
+  },
+  "voiceRecording": {
+    "storageMode": "text",
+    "storagePath": "/moma_ob/voice_recording/"
+  },
+  "grayReleaseUpdateEnabled": true,
+  "hermesGrayEnabled": true,
+  "momaCliGrayEnabled": true,
+  "realtimeAsrEnabled": false,
+  "remoteAgentConfig": {
+    "fetchedAt": 1786530261671,
+    "fetchedPluginVersion": "0.3.4",
+    "envVars": {
+      "claude": {
+        "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "200000"
+      }
+    }
+  }
 }

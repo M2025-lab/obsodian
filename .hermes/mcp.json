@@ -2,7 +2,14 @@
   "mcpServers": {
     "web-search": {
       "type": "http",
-      "url": "https://next.ke.com/ob/api/v1/mcp/zhipu-web-search"
+      "url": "https://next.ke.com/ob/api/v1/mcp/zhipu-web-search",
+      "headers": {
+        "Authorization": "Bearer sk-b5ded371a0f864330707582d73b49d14",
+        "X-Platform": "macOS 25.2.0",
+        "X-Plugin-Version": "0.3.4",
+        "X-OB-Version": "1.13.6",
+        "X-Plugin-Env": "prod"
+      }
     }
   },
   "_moma": {

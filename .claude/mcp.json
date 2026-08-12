@@ -7,7 +7,8 @@
         "X-Platform": "macOS 25.2.0",
         "X-Plugin-Version": "0.3.4",
         "X-OB-Version": "1.13.6",
-        "X-Plugin-Env": "prod"
+        "X-Plugin-Env": "prod",
+        "Authorization": "Bearer sk-b5ded371a0f864330707582d73b49d14"
       }
     }
   },

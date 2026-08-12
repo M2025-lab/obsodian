@@ -1,0 +1,32 @@
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [INFO] [Claudian Sync auto-install] skip (already attempted) {"attemptedAt":"2026-08-12T10:23:15.776Z"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:58 [WARN] [Claudian shell-path] probe failed, falling back to heuristic {"reason":"shell PATH probe timed out after 2500ms"}
+18:37:00 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
