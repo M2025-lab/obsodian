@@ -30,3 +30,9 @@
 18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
 18:36:58 [WARN] [Claudian shell-path] probe failed, falling back to heuristic {"reason":"shell PATH probe timed out after 2500ms"}
 18:37:00 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+19:36:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+19:36:57 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/create","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-dlNhJCe9icVwEvYx_bFK8Q\",\"refreshToken\":\"obrt-XNsvZxbdSCrzxQ6lmQisXQ\",\"accessTokenIssuedAt\":1786534617347,\"accessExpiresAt\":1786541817347,\"refreshTokenIssuedAt\":1786534617347,\"refreshExpiresAt\":1789126617347}}"}
+19:36:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+19:36:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+19:36:58 [INFO] [moma debug] plugin-settings success
