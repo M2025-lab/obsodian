@@ -258,8 +258,8 @@
             "state": {
               "type": "claudian-view",
               "state": {},
-              "icon": "bot",
-              "title": "Claudian"
+              "icon": "lucide-ghost",
+              "title": "claudian-view"
             }
           },
           {
@@ -268,8 +268,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "icon": "lucide-ghost",
+              "title": "git-view"
             }
           },
           {
@@ -278,17 +278,26 @@
             "state": {
               "type": "copilot-chat-view",
               "state": {},
-              "icon": "message-square",
-              "title": "Copilot"
+              "icon": "lucide-ghost",
+              "title": "copilot-chat-view"
+            }
+          },
+          {
+            "id": "336baceb86401b1e",
+            "type": "leaf",
+            "state": {
+              "type": "moma-view",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "Moma"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 8
       }
     ],
     "direction": "horizontal",
-    "width": 357.203125,
-    "collapsed": true
+    "width": 357.203125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -303,10 +312,11 @@
       "realclaudian:Open Claudian": false,
       "feishu-lark-cli-sync:同步到飞书": false,
       "obsidian-git:Open Git source control": false,
-      "copilot:Open Copilot Chat": false
+      "copilot:Open Copilot Chat": false,
+      "moma:Open Moma": false
     }
   },
-  "active": "a14cf912ba5f83c4",
+  "active": "336baceb86401b1e",
   "lastOpenFiles": [
     "需求/通知复尺自动化/fig/Pasted image 20260812164546.png",
     "需求/通知复尺自动化/fig/Pasted image 20260812151209.png",

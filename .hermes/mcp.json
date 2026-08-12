@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "web-search": {
+      "type": "http",
+      "url": "https://next.ke.com/ob/api/v1/mcp/zhipu-web-search"
+    }
+  },
+  "_moma": {
+    "servers": {
+      "web-search": {
+        "contextSaving": false,
+        "description": "网页搜索透传"
+      }
+    }
+  }
+}

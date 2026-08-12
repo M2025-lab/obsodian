@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "web-search": {
+      "type": "http",
+      "url": "https://next.ke.com/ob/api/v1/mcp/zhipu-web-search",
+      "headers": {
+        "X-Platform": "macOS 25.2.0",
+        "X-Plugin-Version": "0.3.4",
+        "X-OB-Version": "1.13.6",
+        "X-Plugin-Env": "prod"
+      }
+    }
+  },
+  "_moma": {
+    "servers": {
+      "web-search": {
+        "contextSaving": false,
+        "description": "网页搜索透传"
+      }
+    }
+  }
+}
