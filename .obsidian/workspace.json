@@ -287,7 +287,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 357.203125
+    "width": 357.203125,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -305,7 +306,7 @@
       "copilot:Open Copilot Chat": false
     }
   },
-  "active": "a8034d19edddd1a4",
+  "active": "a14cf912ba5f83c4",
   "lastOpenFiles": [
     "copilot/copilot-conversations/If_a_lead_ball_and_a_feather_are_dropped_simultaneously@20260812_111902.md",
     "copilot/copilot-custom-prompts/Summarize.md",
