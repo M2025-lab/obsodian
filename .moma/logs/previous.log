@@ -1,83 +1,44 @@
-18:23:06 [INFO] [moma debug] remote-config-sync no token, skip
-18:23:06 [INFO] [CliProcessRunner] spawn {"executable":"wecom-cli","command":"wecom-cli","args":["--version"]}
-18:23:06 [INFO] [moma npm spawn] ENOENT {"cli":"wecom-cli","errorCode":"ENOENT"}
-18:23:06 [INFO] [Claudian Sync auto-install] starting {"cliPath":"wecom-cli","npmPackage":"@wecom/cli"}
-18:23:07 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":16,"result":"/opt/homebrew/bin/npm"}
-18:23:07 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
-18:23:07 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
-18:23:07 [INFO] [Claudian shell-path] probed {"length":599}
-18:23:07 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-18:23:07 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
-18:23:07 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["install","-g","@wecom/cli"]}
-18:23:09 [INFO] [Claudian Sync space-cleanup] starting {"cliPath":null,"hasAutoInstallRecord":false}
-18:23:09 [INFO] [Claudian Sync space-cleanup] residue probed {"skill":"absent","shims":{"kespace":"absent","ks":"absent"},"configuredCli":"not-set","fileEvidence":false}
-18:23:09 [INFO] [Claudian Sync space-cleanup] no residue
-18:23:09 [INFO] [Claudian Sync space-cleanup] done, will not run again {"attemptedAt":"2026-08-12T10:23:09.994Z"}
-18:23:15 [INFO] [Claudian Sync auto-install] npm + skills installed
-18:23:15 [INFO] [Claudian Sync auto-install] install path done {"hasToken":false}
-18:24:19 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-18:24:20 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/create","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-YZ3iHNjh4_T64_FzZahIaA\",\"refreshToken\":\"obrt-hSwBYLy3PuGnElH5kOwg0A\",\"accessTokenIssuedAt\":1786530260240,\"accessExpiresAt\":1786537460240,\"refreshTokenIssuedAt\":1786530260240,\"refreshExpiresAt\":1789122260240}}"}
-18:24:21 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["--version"]}
-18:24:21 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-18:24:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-18:24:21 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-18:24:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-18:24:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/connector/wecom/bot"}
-18:24:21 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-18:24:21 [INFO] [moma debug] plugin-settings success
-18:24:21 [INFO] [moma debug] remote-config-sync audioFileRecognition applied {"enable":true,"supportAudioSuffixes":["mp3","wav","wma","ape","flac","ogg-opus","aac","m4a","flv","mp4","3gp","amr"]}
-18:24:21 [INFO] [moma debug] remote-config-sync fileShare applied {"enabled":true,"supportFileSuffixes":["md","html"]}
-18:24:21 [INFO] [moma debug] remote-config-sync voiceRecording storage filled from server {"storageMode":"text","storagePath":"/moma_ob/voice_recording/"}
-18:24:21 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":["claude"]}
-18:24:21 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
-18:24:21 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
-18:24:21 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
-18:24:21 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
-18:24:21 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/connector/wecom/bot"}
-18:24:21 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
-18:24:21 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
-18:24:21 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
-18:24:22 [INFO] [Claudian Sync auto-install] authorize success {"botId":"aibpiZ9u2MelAPNzjkuPciaaQOTHmO3RfM1"}
-18:24:22 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-18:24:22 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
-18:24:22 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.4"}
-18:24:22 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-18:24:22 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-18:24:31 [moma debug] buildTurnSubmission {
-  "contentLength": 5,
-  "turnRequest": {
-    "textLength": 5,
-    "hasSkillInvocation": false,
-    "currentNotePath": "需求/通知复尺自动化/需求背景.md",
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-18:24:31 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-hello
-"""
-
-Generate a title for this conversation:
-18:24:31 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-18:24:31 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-18:24:31 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-18:24:31 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-18:24:31 [moma debug] ColdStartQuery onesToken 存在: true
-18:24:31 [moma debug] ColdStartQuery momaFlagSettings 已注入
-18:24:31 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-18:24:31 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.4\\nX-OB-Version: 1.13.6\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-YZ3iHNjh4_T64_FzZahIaA\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.4\\nX-OB-Version: 1.13.6\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-YZ3iHNjh4_T64_FzZahIaA\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PA…(truncated)
-18:24:31 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":42758}
-18:24:31 【最终给大模型传递的参数：{
-  "prompt": "hello\n\n<linked_note>\n需求/通知复尺自动化/需求背景.md\n</linked_note>"
-}】
-18:24:31 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.4\\nX-OB-Version: 1.13.6\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-YZ3iHNjh4_T64_FzZahIaA\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.4\\nX-OB-Version: 1.13.6\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Re…(truncated)
-18:24:31 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":42759}
-18:24:32 [moma debug] ColdStartQuery session_id: 413f6fa6-661d-4c96-8ebd-664179754083
-18:24:36 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-18:24:36 [moma debug] ColdStartQuery 完成，共收到消息数: 43 | 响应文本长度: 3
-18:24:41 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":42759,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-18:35:33 [ERROR] [plan-local daemon] failed to stop daemon Error: moma CLI not found
-Error: moma CLI not found
-    at eval (plugin:moma:126945:28)
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [INFO] [Claudian Sync auto-install] skip (already attempted) {"attemptedAt":"2026-08-12T10:23:15.776Z"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:56 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
+18:36:56 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:36:58 [WARN] [Claudian shell-path] probe failed, falling back to heuristic {"reason":"shell PATH probe timed out after 2500ms"}
+18:37:00 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+19:36:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:36:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+19:36:57 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/create","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-dlNhJCe9icVwEvYx_bFK8Q\",\"refreshToken\":\"obrt-XNsvZxbdSCrzxQ6lmQisXQ\",\"accessTokenIssuedAt\":1786534617347,\"accessExpiresAt\":1786541817347,\"refreshTokenIssuedAt\":1786534617347,\"refreshExpiresAt\":1789126617347}}"}
+19:36:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+19:36:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+19:36:58 [INFO] [moma debug] plugin-settings success
+20:36:57 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:36:57 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+20:36:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+20:36:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+20:36:58 [INFO] [moma debug] plugin-settings success
+21:36:57 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
