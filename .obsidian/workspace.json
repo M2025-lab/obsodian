@@ -162,6 +162,22 @@
             }
           }
         ]
+      },
+      {
+        "id": "4eefad9d5344c69f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d8c9f55e390d07ce",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -279,12 +295,12 @@
             "state": {
               "type": "copilot-chat-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "copilot-chat-view"
+              "icon": "message-square",
+              "title": "Copilot"
             }
           },
           {
-            "id": "336baceb86401b1e",
+            "id": "c303cbaff88dc995",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -317,7 +333,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "a14cf912ba5f83c4",
+  "active": "c303cbaff88dc995",
   "lastOpenFiles": [
     "starlord数据库表/数据库.md",
     "starlord数据库表/数据库打标签.md",

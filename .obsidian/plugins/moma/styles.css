@@ -3139,9 +3139,18 @@ body.theme-dark .moma-tool-content-todo {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
   flex-shrink: 0;
+  row-gap: 12px;
   padding: 4px 6px 6px 6px;
   overflow: visible; /* permission-mode hint tooltip (::after) extends outside row */
+}
+
+/* 侧边栏过窄导致工具栏换行时，隐藏次要标签文字 */
+.moma-input-toolbar--compact .moma-thinking-effort > .moma-thinking-label-text,
+.moma-input-toolbar--compact .moma-thinking-budget > .moma-thinking-label-text,
+.moma-input-toolbar--compact .moma-context-meter-percent {
+  display: none;
 }
 
 /* Model picker + effort/thinking controls visible in toolbar.
@@ -6618,7 +6627,267 @@ body.theme-dark .moma-tool-content-todo {
    ============================================ */
 /* ── FileShareUpdateContentModal — isolated styles ── */
 
+/* Full-screen modal shell must not block the vault file tree while open.
+   Child .modal re-enables hit-testing so the dialog itself stays interactive.
+   Hide .modal-bg: pointer-events:none alone is not enough for some drag hit-tests. */
+.modal-container.moma-share-update-pass-through {
+  pointer-events: none;
+}
+
+.modal-container.moma-share-update-pass-through .modal {
+  pointer-events: auto;
+}
+
+.modal-container.moma-share-update-pass-through > .modal-bg {
+  display: none;
+}
+
+/* Same-name vault matches */
+.moma-share-update-matches {
+  gap: 10px;
+}
+
+.moma-share-update-matches-hint {
+  color: var(--text-faint);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.moma-share-update-match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.moma-share-update-match-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-primary);
+  color: var(--text-normal);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+}
+
+.moma-share-update-match-item:hover,
+.moma-share-update-match-item:focus-visible {
+  border-color: var(--interactive-accent-hover);
+  background: var(--background-modifier-hover);
+}
+
+.moma-share-update-match-item--selected {
+  border-color: var(--interactive-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 10%, var(--background-primary));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--interactive-accent) 35%, transparent);
+}
+
+.moma-share-update-match-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.moma-share-update-match-item--selected .moma-share-update-match-icon {
+  color: var(--interactive-accent);
+}
+
+.moma-share-update-match-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.moma-share-update-match-path {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.moma-share-update-match-radio {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--interactive-accent);
+  cursor: pointer;
+}
+
+/* Custom same-name path dropdown */
+.moma-share-update-match-dropdown {
+  position: relative;
+}
+
+.moma-share-update-match-trigger {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px 12px 10px 14px;
+  border: 1px solid var(--interactive-accent);
+  border-radius: 8px;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  box-shadow: none;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.moma-share-update-match-trigger:hover,
+.moma-share-update-match-dropdown.is-open .moma-share-update-match-trigger {
+  border-color: var(--interactive-accent);
+  background-color: var(--background-modifier-hover);
+  box-shadow: none;
+}
+
+.moma-share-update-match-trigger:focus-visible {
+  outline: none;
+  border-color: var(--interactive-accent);
+  box-shadow: none;
+}
+
+.moma-share-update-match-trigger-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.moma-share-update-match-trigger-label.is-placeholder {
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+.moma-share-update-match-trigger-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  transition: transform 150ms ease, color 150ms ease;
+}
+
+.moma-share-update-match-trigger-chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+.moma-share-update-match-dropdown.is-open .moma-share-update-match-trigger-chevron {
+  transform: rotate(180deg);
+  color: var(--interactive-accent);
+}
+
+.moma-share-update-match-dropdown.has-value .moma-share-update-match-trigger {
+  border-color: var(--interactive-accent);
+}
+
+.moma-share-update-match-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-primary);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--background-modifier-box-shadow, #000) 12%, transparent);
+}
+
+.moma-share-update-match-dropdown.is-open .moma-share-update-match-menu {
+  display: flex;
+}
+
+.moma-share-update-match-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: var(--text-normal);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.moma-share-update-match-option:hover {
+  background: var(--background-modifier-hover);
+}
+
+.moma-share-update-match-option.is-selected {
+  background: color-mix(in srgb, var(--interactive-accent) 12%, var(--background-primary));
+  color: var(--text-normal);
+}
+
+.moma-share-update-match-option-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.moma-share-update-match-option.is-selected .moma-share-update-match-option-icon {
+  color: var(--interactive-accent);
+}
+
+.moma-share-update-match-option-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.moma-share-update-match-option-path {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 /* Drop zone container */
+.moma-share-update-drop-example-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2px;
+}
+
+.moma-share-update-drop-example {
+  color: var(--text-accent);
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.moma-share-update-drop-example:hover {
+  color: var(--text-accent-hover, var(--interactive-accent-hover));
+  text-decoration: underline;
+}
+
 .moma-share-update-dropzone {
   position: relative;
   display: flex;
@@ -6720,6 +6989,575 @@ body.theme-dark .moma-tool-content-todo {
 /* Confirm button row */
 .moma-share-update-confirm-wrap {
   padding-top: 8px;
+}
+
+
+/* ============================================
+   features/file-share-risk.css
+   ============================================ */
+/* Moma 风险告知 / 安检等待 / 问题结果 — 对齐 chat-app RiskConsentDialog */
+
+/* 独立风险告知弹窗（工作台卡片门禁）才改壳；分享弹窗沿用原来的 file-share chrome */
+.moma-risk-consent-modal:not(.moma-file-share-modal),
+.moma-risk-audit-modal:not(.moma-file-share-edit-modal) {
+  --moma-brand: #D97757;
+  --moma-brand-rgb: 217, 119, 87;
+  width: min(600px, 92vw);
+  max-width: 92vw;
+  border-radius: 18px;
+  border: 1px solid color-mix(in srgb, var(--moma-brand) 10%, var(--background-modifier-border));
+  box-shadow:
+    0 28px 56px -14px color-mix(in srgb, var(--text-normal) 18%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--background-modifier-border) 55%, transparent);
+  overflow: hidden;
+}
+
+.moma-risk-consent-modal:not(.moma-file-share-modal) .modal-content {
+  padding: 4px 24px 18px;
+}
+
+.moma-risk-consent-modal-title {
+  display: none;
+}
+
+.moma-risk-consent {
+  --moma-brand: #D97757;
+  --moma-brand-rgb: 217, 119, 87;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.moma-risk-consent-statement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--moma-brand) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--moma-brand) 10%, transparent);
+}
+
+.moma-risk-consent-statement-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--moma-brand);
+  opacity: 0.75;
+}
+
+.moma-risk-consent-statement-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.moma-risk-consent-statement-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-normal);
+}
+
+.moma-risk-consent-link {
+  color: var(--moma-brand);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 2px;
+}
+
+.moma-risk-consent-link:hover {
+  text-decoration: underline;
+}
+
+.moma-risk-consent-link-arrow {
+  display: inline-flex;
+  margin-left: 2px;
+  vertical-align: 1px;
+  opacity: 0.6;
+}
+
+.moma-risk-consent-link-arrow svg {
+  width: 11px;
+  height: 11px;
+}
+
+.moma-risk-consent-core {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--moma-brand) 10%, var(--background-modifier-border));
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, var(--moma-brand) 3%, var(--background-primary)) 0%,
+    var(--background-secondary) 100%
+  );
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--text-normal) 3%, transparent);
+}
+
+.moma-risk-consent-core-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  color: var(--text-normal);
+}
+
+.moma-risk-consent-core-icon {
+  color: var(--moma-brand);
+  opacity: 0.7;
+}
+
+.moma-risk-consent-core-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.moma-risk-consent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.moma-risk-consent-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-normal);
+}
+
+.moma-risk-consent-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--moma-brand);
+  background: color-mix(in srgb, var(--moma-brand) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--moma-brand) 14%, transparent);
+}
+
+.moma-risk-consent-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.moma-risk-consent-linkbar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--moma-brand) 4%, var(--background-primary));
+  border: 1px dashed color-mix(in srgb, var(--moma-brand) 28%, transparent);
+}
+
+.moma-risk-consent-linkbar-icon {
+  flex-shrink: 0;
+  color: var(--moma-brand);
+}
+
+.moma-risk-consent-linkbar-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.moma-risk-consent-linkbar-text {
+  margin: 0;
+  font-size: 13px;
+  color: var(--moma-brand);
+}
+
+.moma-risk-consent-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.moma-risk-consent-check {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  flex: 1;
+  height: 32px;
+  cursor: pointer;
+}
+
+.moma-risk-consent-check-label {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--text-normal);
+  user-select: none;
+}
+
+/* 原生 checkbox 会被 Obsidian 主题刷成紫色，隐藏后用自定义方块着色 */
+.moma-file-share-modal .moma-risk-consent input.moma-risk-consent-checkbox,
+.moma-risk-consent-modal input.moma-risk-consent-checkbox,
+.moma-risk-consent input.moma-risk-consent-checkbox {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  accent-color: #D97757 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.moma-risk-consent-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  border: 1.5px solid #e0a08a;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.moma-risk-consent-checkbox:checked + .moma-risk-consent-box {
+  border-color: #D97757;
+  background: #D97757;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2 6.4 11.2 12.5 4.8' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 11px 11px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.moma-risk-consent-checkbox:focus-visible + .moma-risk-consent-box {
+  outline: 2px solid rgba(217, 119, 87, 0.45);
+  outline-offset: 2px;
+}
+
+.moma-risk-consent-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  height: 32px;
+}
+
+.moma-risk-consent-btn {
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  height: 32px !important;
+  line-height: 1 !important;
+  min-width: auto !important;
+}
+
+.moma-file-share-modal .moma-risk-consent button.moma-risk-consent-btn--cancel,
+.moma-risk-consent-modal button.moma-risk-consent-btn--cancel,
+.moma-risk-consent button.moma-risk-consent-btn--cancel {
+  padding: 0 18px !important;
+  color: var(--moma-brand) !important;
+  background: color-mix(in srgb, var(--moma-brand) 8%, var(--background-primary)) !important;
+  background-color: color-mix(in srgb, var(--moma-brand) 8%, var(--background-primary)) !important;
+  border: 1px solid color-mix(in srgb, var(--moma-brand) 35%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.moma-file-share-modal .moma-risk-consent button.moma-risk-consent-btn--cancel:hover,
+.moma-risk-consent-modal button.moma-risk-consent-btn--cancel:hover,
+.moma-risk-consent button.moma-risk-consent-btn--cancel:hover {
+  color: var(--moma-brand) !important;
+  background: color-mix(in srgb, var(--moma-brand) 14%, var(--background-primary)) !important;
+  border-color: var(--moma-brand) !important;
+}
+
+.moma-risk-consent-modal button.moma-risk-consent-btn--confirm,
+.moma-risk-consent button.moma-risk-consent-btn--confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 22px !important;
+  font-weight: 600 !important;
+  color: #fff !important;
+  background: var(--moma-brand) !important;
+  background-color: var(--moma-brand) !important;
+  box-shadow: 0 2px 8px rgba(var(--moma-brand-rgb), 0.28);
+  transition: box-shadow 0.2s, transform 0.15s, filter 0.15s;
+}
+
+.moma-risk-consent-modal button.moma-risk-consent-btn--confirm:hover:not(:disabled),
+.moma-risk-consent button.moma-risk-consent-btn--confirm:hover:not(:disabled) {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 14px rgba(var(--moma-brand-rgb), 0.36);
+  transform: translateY(-0.5px);
+}
+
+.moma-risk-consent-modal button.moma-risk-consent-btn--confirm:active:not(:disabled),
+.moma-risk-consent button.moma-risk-consent-btn--confirm:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.moma-risk-consent-modal button.moma-risk-consent-btn--confirm:disabled,
+.moma-risk-consent button.moma-risk-consent-btn--confirm:disabled {
+  opacity: 0.45;
+  filter: none;
+  box-shadow: none;
+}
+
+.moma-risk-consent-btn-icon {
+  display: inline-flex;
+}
+
+.moma-risk-consent-btn-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* 安检等待 */
+.moma-security-scan {
+  --moma-brand: #D97757;
+  --moma-brand-rgb: 217, 119, 87;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 8px 12px;
+  text-align: center;
+}
+
+.moma-security-scan-visual {
+  margin-bottom: 12px;
+}
+
+.moma-security-scan-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  color: var(--moma-brand);
+  background: color-mix(in srgb, var(--moma-brand) 14%, transparent);
+  animation: moma-security-scan-pulse 1.4s ease-in-out infinite;
+}
+
+.moma-security-scan-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.moma-security-scan-title {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 650;
+  color: var(--text-normal);
+}
+
+.moma-security-scan-kicker,
+.moma-security-scan-hint,
+.moma-security-scan-caption {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.moma-security-scan-hint {
+  margin: 8px 0 16px;
+}
+
+.moma-security-scan-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--background-modifier-border);
+  margin-bottom: 8px;
+}
+
+.moma-security-scan-fill--indeterminate {
+  width: 36%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--moma-brand);
+  animation: moma-security-scan-bar 1.2s ease-in-out infinite;
+}
+
+.moma-security-scan-caption {
+  font-size: 12px;
+}
+
+@keyframes moma-security-scan-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.85; }
+}
+
+@keyframes moma-security-scan-bar {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(320%); }
+}
+
+/* 问题结果 — 对齐 chat-app StaticRiskAuditDialog */
+.moma-risk-audit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.moma-risk-audit-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.moma-risk-audit-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, #ef4444 12%, var(--background-primary));
+  color: #dc2626;
+}
+
+.moma-risk-audit-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.moma-risk-audit-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--text-normal);
+}
+
+.moma-risk-audit-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.moma-risk-audit-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.moma-risk-audit-summary--block {
+  border-color: color-mix(in srgb, #ef4444 40%, var(--background-modifier-border));
+  background: color-mix(in srgb, #ef4444 8%, transparent);
+}
+
+.moma-risk-audit-summary--review {
+  border-color: color-mix(in srgb, #f59e0b 40%, var(--background-modifier-border));
+  background: color-mix(in srgb, #f59e0b 8%, transparent);
+}
+
+.moma-risk-audit-summary-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.moma-risk-audit-summary-value {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text-normal);
+}
+
+.moma-risk-audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.moma-risk-audit-group {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.moma-risk-audit-group-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.moma-risk-audit-group-type {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b45309;
+  background: color-mix(in srgb, #f59e0b 16%, transparent);
+}
+
+.moma-risk-audit-group-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.moma-risk-audit-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.moma-risk-audit-chip {
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-normal);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  word-break: break-word;
+}
+
+.moma-risk-audit-empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.moma-risk-audit-foot {
+  display: flex;
+  justify-content: flex-end;
 }
 
 
@@ -9089,6 +9927,11 @@ body.theme-light .moma-space-panel {
   padding: 20px 24px;
 }
 
+.moma-space-file-body--iframe {
+  padding: 0;
+  overflow: hidden;
+}
+
 /* Binary file fallback */
 .moma-space-file-sync-btn {
   color: var(--interactive-accent);
@@ -11385,6 +12228,49 @@ body.theme-dark .moma-space-submenu {
   word-break: break-word;
 }
 
+/* Inline recording embed: native <audio controls>, full-width, no float beside 逐字稿. */
+.voice-recording .internal-embed.media-embed,
+.markdown-preview-view.voice-recording .internal-embed.media-embed,
+.voice-recording .media-embed,
+.markdown-preview-view.voice-recording .media-embed,
+.voice-recording .cm-embed-block,
+.markdown-source-view.voice-recording .cm-embed-block {
+  display: block;
+  float: none;
+  clear: both;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0 16px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.voice-recording .internal-embed.media-embed audio,
+.markdown-preview-view.voice-recording .internal-embed.media-embed audio,
+.voice-recording .media-embed audio,
+.markdown-preview-view.voice-recording .media-embed audio,
+.voice-recording audio,
+.markdown-preview-view.voice-recording audio {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  margin: 0;
+}
+
+/* ── VOICE_RECORDING_CUSTOM_AUDIO_PLAYER (TEMP off)
+ * Custom player kept in registerVoiceRecordingAudioPlayer.ts; native controls preferred for now.
+ */
+
+/* ── VOICE_RECORDING_STICKY_AUDIO (TEMP off): dock / delegated-hide styles removed from active path.
+ * Implementation kept in registerVoiceRecordingStickyAudio.ts for a later stable revive.
+ */
+
 /* ── Vault note style (cssclasses: voice-recording)
  * Selectors are intentionally unscoped to .markdown-preview-view.voice-recording:
  * Obsidian may put cssclasses on a parent, so nested selectors often miss.
@@ -11410,6 +12296,7 @@ body.theme-dark .moma-space-submenu {
 
 .voice-recording h2,
 .markdown-preview-view.voice-recording h2 {
+  clear: both;
   margin: 32px 0 14px;
   padding: 0 0 10px;
   font-size: 18px;
@@ -12550,15 +13437,19 @@ body.theme-dark .moma-space-submenu {
 
 .moma-utt-speaker {
   font-weight: 600;
-  cursor: pointer;
+  /* SPEAKER_RENAME (TEMP off): 暂不可点击改名 */
+  cursor: default;
+  /* cursor: pointer; */
   border-radius: 3px;
   padding: 0 2px;
 }
 
+/* SPEAKER_RENAME (TEMP off)
 .moma-utt-speaker:hover {
   opacity: 0.8;
   text-decoration: underline;
 }
+*/
 
 /* Speaker color palette by appearance order (A=0 … Z=25); keep in sync with SPEAKER_COLORS */
 .moma-utt-speaker[data-spk="0"] { color: #3b82f6; }
