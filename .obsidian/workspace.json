@@ -195,7 +195,7 @@
       {
         "id": "3b44f0a6673f4400",
         "type": "tabs",
-        "dimension": 31.896551724137932,
+        "dimension": 31.89655172413793,
         "children": [
           {
             "id": "58060d60dfe7b94e",
@@ -211,7 +211,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 229.5
+    "width": 320
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -364,9 +364,19 @@
   },
   "active": "b54f696b5c388094",
   "lastOpenFiles": [
+    "需求/通知复尺自动化/接口代码/edar-starlord/api/示例入参.json",
+    "需求/通知复尺自动化/接口代码/edar-starlord/service/src/main/java/com/ke/utopia/service/impl/NotifyTaskAutomationServiceImpl.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/web/src/main/java/com/ke/utopia/web/NotifyTaskAutomationController.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/service/src/main/java/com/ke/utopia/service/NotifyTaskAutomationService.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/java/com/ke/utopia/dao/impl/MaterialNotifyTaskAutomationDaoImpl.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/java/com/ke/utopia/dao/MaterialNotifyTaskAutomationDao.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/resources/mapper/MaterialNotifyTaskAutomationMapper.xml",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/java/com/ke/utopia/mapper/MaterialNotifyTaskAutomationMapper.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/java/com/ke/utopia/model/MaterialNotifyTaskAutomationExample.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/dao/src/main/java/com/ke/utopia/model/MaterialNotifyTaskAutomation.java",
+    "需求/通知复尺自动化/接口代码/edar-starlord/base/src/main/java/com/ke/utopia/enumeration/NotifyJudgeResultEnum.java",
     "需求/通知复尺自动化/通知复尺自动化-作业层技术方案.md",
     "需求/通知复尺自动化/执行方案.md",
-    "未命名",
     "需求/通知复尺自动化/需求背景.md",
     "需求/需求问题梳理.md",
     "需求/技术设计文档模板.md",
@@ -381,35 +391,25 @@
     "starlord数据库表/数据库个人总结.md",
     "需求/通知复尺自动化/fig/Pasted image 20260812164546.png",
     "需求/通知复尺自动化/fig/Pasted image 20260812151209.png",
-    "需求/通知复尺自动化/fig",
     "copilot/copilot-conversations/If_a_lead_ball_and_a_feather_are_dropped_simultaneously@20260812_111902.md",
     "copilot/copilot-custom-prompts/Summarize.md",
     "copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
     "copilot/copilot-custom-prompts/Make shorter.md",
     "copilot/copilot-custom-prompts/Rewrite as tweet.md",
     "copilot/copilot-conversations/写了什么@20260804_155650.md",
-    "需求/通知复尺自动化",
     "日报与周报/笔记集/主材流程配置查询-套餐维度问题排查-20260810.md",
-    "日报与周报/笔记集",
-    "日报与周报/fig/笔记集",
     "starlord数据库表/所有的starlord数据库表.md",
     "需求/供应商汰换20260709/技术方案.md",
     "未命名.md",
     "日报与周报/新人串讲/新人汇报.md",
-    "copilot/copilot-conversations",
-    "copilot/copilot-custom-prompts/Clip Web Page.md",
-    "copilot/copilot-custom-prompts",
-    "copilot",
     "需求/fig/Pasted image 20260729113756.png",
     "需求/fig/Pasted image 20260729112746.png",
-    "需求/fig",
     "未命名.canvas",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724161013.png",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724160926.png",
     "需求/安装 拆除经营主体用工改造/fig/Pasted image 20260724160847.png",
     "日报与周报/fig/Pasted image 20260724142126.png",
     "日报与周报/fig/Pasted image 20260724142116.png",
-    "需求/安装 拆除经营主体用工改造/fig/企业微信截图_ce2f7af1-bf5d-4cb6-a50b-7f1f284ac0e4.png",
-    "需求/安装 拆除经营主体用工改造/fig"
+    "需求/安装 拆除经营主体用工改造/fig/企业微信截图_ce2f7af1-bf5d-4cb6-a50b-7f1f284ac0e4.png"
   ]
 }

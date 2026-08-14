@@ -1,0 +1,15 @@
+{
+  "project_order_id": 123456789012345678,
+  "receive_time": "2026-08-10",
+  "material_code": "029001001",
+  "material_name": "集成吊顶",
+  "task_type": 9060,
+  "task_name": "通知复尺",
+  "judge_result": 1,
+  "judge_remark": "所有识别项均通过，满足通知条件",
+  "key_frame_urls": [
+    "https://s3.example.com/frame/010.jpg",
+    "https://s3.example.com/frame/011.jpg",
+    "https://s3.example.com/frame/012.jpg"
+  ]
+}
