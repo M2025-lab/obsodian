@@ -118,6 +118,7 @@
       {
         "id": "3bbe29f11514bcc6",
         "type": "tabs",
+        "dimension": 68.10344827586206,
         "children": [
           {
             "id": "b54f696b5c388094",
@@ -164,11 +165,12 @@
         ]
       },
       {
-        "id": "4eefad9d5344c69f",
+        "id": "3b44f0a6673f4400",
         "type": "tabs",
+        "dimension": 31.896551724137932,
         "children": [
           {
-            "id": "d8c9f55e390d07ce",
+            "id": "58060d60dfe7b94e",
             "type": "leaf",
             "state": {
               "type": "moma-workbench",
@@ -181,8 +183,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 229.5,
-    "collapsed": true
+    "width": 229.5
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -300,7 +301,7 @@
             }
           },
           {
-            "id": "c303cbaff88dc995",
+            "id": "3cb2ba8b9c93e000",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -333,7 +334,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "c303cbaff88dc995",
+  "active": "58060d60dfe7b94e",
   "lastOpenFiles": [
     "starlord数据库表/数据库.md",
     "starlord数据库表/数据库打标签.md",

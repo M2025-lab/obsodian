@@ -12367,11 +12367,19 @@ body.theme-dark .moma-space-submenu {
   letter-spacing: 0.02em;
 }
 
-.voice-recording p > strong,
-.markdown-preview-view.voice-recording p > strong {
+/* Transcript speaker names: **说话人B** → Obsidian 强调色 (Appearance → accent).
+ * Use descendant `p strong` so wrapped <strong> still matches; LP uses .cm-strong.
+ */
+.voice-recording p strong,
+.markdown-preview-view.voice-recording p strong {
   margin-right: 4px;
   font-weight: 600;
-  color: var(--text-accent);
+  color: var(--interactive-accent, var(--text-accent, var(--color-accent)));
+}
+
+.voice-recording .markdown-source-view.mod-cm6 .cm-strong,
+.markdown-source-view.mod-cm6.voice-recording .cm-strong {
+  color: var(--interactive-accent, var(--text-accent, var(--color-accent)));
 }
 
 /* ── Summary markdown hierarchy (## 实时总结 / ### 章节 / - li) ──

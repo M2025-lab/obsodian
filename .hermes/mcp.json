@@ -6,10 +6,10 @@
       "headers": {
         "Authorization": "Bearer sk-b5ded371a0f864330707582d73b49d14",
         "X-Platform": "macOS 25.2.0",
-        "X-Plugin-Version": "0.3.6",
+        "X-Plugin-Version": "0.3.7",
         "X-OB-Version": "1.13.7",
         "X-Plugin-Env": "prod",
-        "X-Plugin-Auth": "Bearer obat-0vG9wGIZaZPzdsVYYhI5hg"
+        "X-Plugin-Auth": "Bearer obat-5bUAYV1mcLqslavaR7CNZg"
       }
     }
   },
