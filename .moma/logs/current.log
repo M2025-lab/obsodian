@@ -94,3 +94,8 @@
 18:33:31 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
 18:33:31 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/refresh","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-P9ZwbKu90yqZHCh3iS1GBg\",\"refreshToken\":\"obrt-miUI8yurD7CGEYzoA9ngtA\",\"accessTokenIssuedAt\":1786703611383,\"accessExpiresAt\":1786710811383,\"refreshTokenIssuedAt\":1786703611383,\"refreshExpiresAt\":1789295611383}}"}
 18:33:31 [INFO] [auth-credential] refresh success, generation=undefined
+18:46:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:46:01 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:46:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+18:46:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+18:46:01 [INFO] [moma debug] plugin-settings success
