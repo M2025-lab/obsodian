@@ -1,0 +1,23 @@
+{
+  "id": "conv-1786883589024-2a0ngw3dt",
+  "providerId": "claude",
+  "title": "按归类方案重命名文件夹",
+  "titleGenerationStatus": "success",
+  "createdAt": 1786883589026,
+  "updatedAt": 1786883746177,
+  "lastResponseAt": 1786883746177,
+  "sessionId": "4270c81a-11b7-4cd2-b201-e4db7e6bde26",
+  "providerState": {
+    "providerSessionId": "4270c81a-11b7-4cd2-b201-e4db7e6bde26"
+  },
+  "usage": {
+    "model": "deepseek-v4-flash",
+    "inputTokens": 46,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 56832,
+    "contextWindow": 200000,
+    "contextTokens": 56878,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

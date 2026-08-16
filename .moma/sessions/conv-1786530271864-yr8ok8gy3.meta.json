@@ -4,8 +4,8 @@
   "title": "打招呼",
   "titleGenerationStatus": "success",
   "createdAt": 1786530271864,
-  "updatedAt": 1786703640843,
-  "lastResponseAt": 1786703640843,
+  "updatedAt": 1786883123253,
+  "lastResponseAt": 1786883123253,
   "sessionId": "b8787d1d-20dc-46fa-aeed-96557f6d7f06",
   "providerState": {
     "providerSessionId": "b8787d1d-20dc-46fa-aeed-96557f6d7f06"
@@ -15,13 +15,13 @@
   ],
   "usage": {
     "model": "haiku",
-    "inputTokens": 844,
+    "inputTokens": 2284,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 59136,
-    "outputTokens": 165,
+    "cacheReadInputTokens": 80000,
+    "outputTokens": 98,
     "contextWindow": 200000,
-    "contextTokens": 59980,
-    "percentage": 30,
+    "contextTokens": 82284,
+    "percentage": 41,
     "contextWindowIsAuthoritative": true
   }
 }
