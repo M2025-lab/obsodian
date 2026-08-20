@@ -122,3 +122,88 @@ validator.validate(getTarget());           // getTarget() == 那个 List 实例
 
 ---
 
+## 4. 解决方案（三选一，按侵入性排序）
+
+| 方案 | 做法 | 优点 | 缺点 |
+|---|---|---|---|
+| ① Wrapper 包一层 | 参数改成 `Wrapper { @Valid @NotEmpty List<X> list }` | 零代码、HV 原生支持 | **改变 HTTP 契约**，前端/Feign 调用方全要改 |
+| ② service 手动校验 | service 注入 `javax.validation.Validator`，循环 `validator.validate(x)` | 侵入小、可控 | 每个接口都要写一遍样板代码，易漏 |
+| ③ **AOP 框架 @ValidList**（最终采用） | 自定义注解 + 切面，参数标 `@ValidList` 即自动逐条校验 | 声明式、一处实现全局生效、未标注接口零影响 | 有切点/代理的坑（见 §5） |
+
+> 2026-08-20 起项目内已落地方案③：`@ValidList` + `ValidListAspect`（`edar-starlord-web/.../com/ke/utopia/config/`），编译通过、已 `git add`。**接口侧用法**：Feign 接口上的 `@Valid` 保留不动（只校验根对象），在 **Controller 实现类方法参数**上补 `@ValidList` 即生效。`allowEmpty()` 默认 false（空集合报 4004「第N个参数不能为空」），true 时空集合/null 放行。
+
+---
+
+## 5. AOP 框架落地踩坑（2026-08-20 实测，全部踩过）
+
+### 5.1 坑一：切点表达式——项目没有 `controller` 包层级
+
+`execution(* com.ke.utopia..controller..*(..))` **命中不到任何类**：全项目 Controller 都在 `com.ke.utopia.web` 及其 12 个子包（butler/manpower/materialflow/deliveryflow/panorama/selfbuy/coordinator/fix/foreman/mcp/trace/transfer），**根本不存在 `controller` 这个包层级**（仅 test 目录有）。
+
+### 5.2 坑二：`within(@RestController *)` 依赖注解继承，CGLIB 代理后不可靠
+
+`@RestController` **没有 `@Inherited`**，Controller 被 CGLIB 代理后，代理子类（`$$EnhancerBySpringCGLIB$$`）并不携带该注解，`within` 注解匹配存在命中不到的风险（这也是项目里原切面 `MethodLoggerAj` 坚持用 `execution` 的原因）。
+
+**最终切点（双保险，推荐抄这个）**：
+
+```java
+@Around("execution(* com.ke.utopia.web..*.*(..)) || within(@org.springframework.web.bind.annotation.RestController *)")
+```
+
+- `execution(* com.ke.utopia.web..*.*(..))`：包路径匹配，100% 可靠、不依赖注解继承
+- `within(@RestController *)`：兜底未来放包外的 controller
+- 未标 `@ValidList` 参数的方法直接 `proceed()`，对现有接口零影响
+
+### 5.3 坑三（最隐蔽）：CGLIB 代理类方法上的参数注解为空
+
+`joinPoint.getSignature().getMethod()` 拿到的是 **CGLIB 代理类覆写的方法**——代理类方法**不会复制/继承方法参数注解**（注解不可继承）。就算切点命中了，用代理方法取 `Parameter[]` 也拿不到 `@ValidList`，切面会**静默放行**。
+
+```java
+// ❌ 拿不到注解：method 是代理类方法，参数注解为空
+Method method = signature.getMethod();
+
+// ✅ 必须剥掉代理后缀取原始 Controller 类
+Method method = AopUtils.getMostSpecificMethod(signature.getMethod(),
+        ClassUtils.getUserClass(joinPoint.getTarget()));
+```
+
+> 注意 `ClassUtils.getUserClass(target)` 而不是 `target.getClass()`——后者返回的仍是代理类。
+
+### 5.4 坑四：进程没重启 = 切面静默失效（最容易被忽略）
+
+切面是 Spring 启动扫描注册的 Bean，**启动之后新增的 class 不会自动进容器**。项目**没有 devtools 热部署**，改完代码不重启，`target/classes` 里文件再新也没用。
+
+**铁证排查法（jcmd 看类加载）**：
+
+```bash
+jcmd <pid> GC.class_histogram | grep -iE "ValidList|MethodLogAspect"
+```
+
+- 有 `MethodLogAspect`（旧类）但**没有 `ValidListAspect`** → 进程跑的是旧代码，直接重启
+- 若新类已加载但仍不生效，才需要往切点/代理链路挖
+
+配套手段：
+- 切面加 `@PostConstruct` 启动日志（如 `[ValidList] ValidListAspect 已加载`），bean 是否创建一眼可观测
+- 标注接口加命中日志：`[ValidList] 命中校验: XxxController.method 参数数=N 错误数=M`
+- **curl 要看 body 里的 `ResultDTO.code`，HTTP 状态码恒为 200**（`UtopiaExceptionHandler` 统一处理）；4004=ERROR_PARAM_ILLEGAL，5000 是兜底
+
+### 5.5 使用约束
+
+- `@ValidList` **只能标在 Controller 实现类方法参数上**：注解在 web 模块，api 模块 Feign 接口依赖方向 web→api **无法引用**（循环依赖）；Controller 实现方法需显式写注解，不能依赖 Feign 接口上的注解继承
+- 若未来要让 Feign 接口参数也支持，需把注解下沉到 `edar-starlord-api` 模块（可选扩展，当前未做）
+- AOP 只对 Spring 代理 bean 生效，Controller 内部 `this` 自调用拦不到（Controller 基本无此场景，可不处理）
+
+### 5.6 切面校验逻辑要点
+
+```java
+// 校验顺序（固定，避免语义歧义）：
+// null 视同空集合 → 走 allowEmpty 分支（true 放行 / false 报"第N个参数不能为空"）
+// 非 null 且非 List → 报"参数类型必须为List"
+// List 非空 → 逐条 validator.validate(item)，收集"第N个参数第J条数据[字段]消息"
+// 有错误 → 抛 UtopiaBussinessException(ERROR_PARAM_ILLEGAL, String.join(";", errors))
+```
+
+错误出口复用现有 `UtopiaExceptionHandler` 统一转 4004，无需新增异常处理。
+
+---
+
