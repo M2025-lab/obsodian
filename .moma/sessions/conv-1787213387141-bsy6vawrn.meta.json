@@ -1,0 +1,14 @@
+{
+  "id": "conv-1787213387141-bsy6vawrn",
+  "providerId": "claude",
+  "title": "优化 Java List 入参校验逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787213387141,
+  "updatedAt": 1787213435035,
+  "lastResponseAt": 1787213435035,
+  "sessionId": "45754771-b786-43f1-b7f1-17c06a21990b",
+  "providerState": {
+    "providerSessionId": "45754771-b786-43f1-b7f1-17c06a21990b"
+  },
+  "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md"
+}

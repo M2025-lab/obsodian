@@ -151,7 +151,7 @@
     "effort-default-medium",
     "chat-view-placement-v1"
   ],
-  "lastGrayReleaseCheck": 1787210128896,
+  "lastGrayReleaseCheck": 1787213728900,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -165,7 +165,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787210041475,
+    "fetchedAt": 1787213340277,
     "fetchedPluginVersion": "0.3.10",
     "envVars": {
       "claude": {
