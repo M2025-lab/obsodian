@@ -130,7 +130,7 @@ validator.validate(getTarget());           // getTarget() == 那个 List 实例
 | ② service 手动校验 | service 注入 `javax.validation.Validator`，循环 `validator.validate(x)` | 侵入小、可控 | 每个接口都要写一遍样板代码，易漏 |
 | ③ **AOP 框架 @ValidList**（最终采用） | 自定义注解 + 切面，参数标 `@ValidList` 即自动逐条校验 | 声明式、一处实现全局生效、未标注接口零影响 | 有切点/代理的坑（见 §5） |
 
-> 2026-08-20 起项目内已落地方案③：`@ValidList` + `ValidListAspect`（均在 `edar-starlord-web/src/main/java/com/ke/utopia/config/`），编译通过、已 `git add`。**接口侧用法**：Feign 接口上的 `@Valid` 保留不动（只校验根对象），在 **Controller 实现类方法参数**上补 `@ValidList` 即生效。`allowEmpty()` 默认 false（空集合报 4004「第N个参数不能为空」），true 时空集合/null 放行。
+> 2026-08-20 起项目内已落地方案③：`@ValidList` + `ValidListAspect`（均在 `xxx-web/src/main/java/com/xxx/config/`），编译通过、已 `git add`。**接口侧用法**：Feign 接口上的 `@Valid` 保留不动（只校验根对象），在 **Controller 实现类方法参数**上补 `@ValidList` 即生效。`allowEmpty()` 默认 false（空集合报 4004「第N个参数不能为空」），true 时空集合/null 放行。
 
 ---
 
@@ -138,7 +138,7 @@ validator.validate(getTarget());           // getTarget() == 那个 List 实例
 
 ### 5.1 坑一：切点表达式——项目没有 `controller` 包层级
 
-`execution(* com.ke.utopia..controller..*(..))` **命中不到任何类**：全项目 Controller 都在 `com.ke.utopia.web` 及其 12 个子包（butler/manpower/materialflow/deliveryflow/panorama/selfbuy/coordinator/fix/foreman/mcp/trace/transfer），**根本不存在 `controller` 这个包层级**（仅 test 目录有）。
+`execution(* com.xxx..controller..*(..))` **命中不到任何类**：全项目 Controller 都在 `com.xxx.web` 及其 12 个子包（butler/manpower/materialflow/deliveryflow/panorama/selfbuy/coordinator/fix/foreman/mcp/trace/transfer），**根本不存在 `controller` 这个包层级**（仅 test 目录有）。
 
 ### 5.2 坑二：`within(@RestController *)` 依赖注解继承，CGLIB 代理后不可靠
 
@@ -147,10 +147,10 @@ validator.validate(getTarget());           // getTarget() == 那个 List 实例
 **最终切点（双保险，推荐抄这个）**：
 
 ```java
-@Around("execution(* com.ke.utopia.web..*.*(..)) || within(@org.springframework.web.bind.annotation.RestController *)")
+@Around("execution(* com.xxx.web..*.*(..)) || within(@org.springframework.web.bind.annotation.RestController *)")
 ```
 
-- `execution(* com.ke.utopia.web..*.*(..))`：包路径匹配，100% 可靠、不依赖注解继承
+- `execution(* com.xxx.web..*.*(..))`：包路径匹配，100% 可靠、不依赖注解继承
 - `within(@RestController *)`：兜底未来放包外的 controller
 - 未标 `@ValidList` 参数的方法直接 `proceed()`，对现有接口零影响
 
@@ -183,15 +183,15 @@ jcmd <pid> GC.class_histogram | grep -iE "ValidList|MethodLogAspect"
 - 若新类已加载但仍不生效，才需要往切点/代理链路挖
 
 配套手段（均已在 `ValidListAspect` 中实现）：
-- 切面加 `@PostConstruct` 启动日志：`[ValidList] ValidListAspect 已加载，切点: execution(* com.ke.utopia.web..*.*(..)) || within(@RestController *)`——bean 是否创建一眼可观测，重启后没有这行 = 切面没注册为 Bean
+- 切面加 `@PostConstruct` 启动日志：`[ValidList] ValidListAspect 已加载，切点: execution(* com.xxx.web..*.*(..)) || within(@RestController *)`——bean 是否创建一眼可观测，重启后没有这行 = 切面没注册为 Bean
 - 命中日志（info，仅标注 `@ValidList` 的方法打印）：`[ValidList] 命中校验: {实现类}.{方法} 参数数=N 错误数=M`（类名取自 `getMostSpecificMethod` 解析出的实现类，非代理类）
 - 校验失败日志（warn）：`[ValidList] 批量参数校验失败: {分号拼接的错误消息}`——抛异常前先打日志，方便定位
-- **curl 要看 body 里的 `ResultDTO.code`，HTTP 状态码恒为 200**（`UtopiaExceptionHandler` 统一处理）；4004=ERROR_PARAM_ILLEGAL，5000 是兜底
+- **curl 要看 body 里的 `ResultDTO.code`，HTTP 状态码恒为 200**（`GlobalExceptionHandler` 统一处理）；4004=ERROR_PARAM_ILLEGAL，5000 是兜底
 
 ### 5.5 使用约束
 
 - `@ValidList` **只能标在 Controller 实现类方法参数上**：注解在 web 模块，api 模块 Feign 接口依赖方向 web→api **无法引用**（循环依赖）；Controller 实现方法需显式写注解，不能依赖 Feign 接口上的注解继承
-- 若未来要让 Feign 接口参数也支持，需把注解下沉到 `edar-starlord-api` 模块（可选扩展，当前未做）
+- 若未来要让 Feign 接口参数也支持，需把注解下沉到 `xxx-api` 模块（可选扩展，当前未做）
 - AOP 只对 Spring 代理 bean 生效，Controller 内部 `this` 自调用拦不到（Controller 基本无此场景，可不处理）
 
 ### 5.6 切面校验逻辑要点（对应 `ValidListAspect.collectErrors` 最终实现）
@@ -205,10 +205,223 @@ jcmd <pid> GC.class_histogram | grep -iE "ValidList|MethodLogAspect"
 //    （validator.validate(null) 会抛 IllegalArgumentException，必须前置拦截）
 // ⑤ 元素非 null → validator.validate(item)，收集"第N个参数第J条数据[字段]消息"
 // 有错误 → logger.warn("[ValidList] 批量参数校验失败: ...")
-//          抛 UtopiaBussinessException(ERROR_PARAM_ILLEGAL, String.join(";", errors))
+//          抛 BusinessException(ERROR_PARAM_ILLEGAL, String.join(";", errors))
 ```
 
-错误出口复用现有 `UtopiaExceptionHandler` 统一转 4004，无需新增异常处理。实现参考：`edar-starlord-web/src/main/java/com/ke/utopia/config/ValidListAspect.java`（`validateListParameter` + `collectErrors`）。
+错误出口复用现有 `GlobalExceptionHandler` 统一转 4004，无需新增异常处理。
+
+---
+
+## 6. 核心实现代码（最终版，包名已脱敏为 com.xxx）
+
+### 6.1 ValidList.java（注解）
+
+```java
+package com.xxx.config;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * ValidList
+ * <p>
+ * 批量 List 参数 JSR-303 元素级校验注解，配合 {@link ValidListAspect} 使用。
+ * <p>
+ * 背景：@Valid 作用于 List 根对象时，Hibernate Validator 只对根对象本身执行校验，
+ * 而 List 自身无 Bean 约束，validate() 返回 0 violations，集合元素得不到校验。
+ * 该注解 + 切面实现对 List 内每个元素逐条执行 validator.validate(item)。
+ * <p>
+ * 使用约束：注解必须标注在 Controller 实现类方法的参数上
+ * （因注解定义在 web 模块，api 模块的 Feign 接口无法引用）。
+ *
+ * @author liutengda003
+ * @date 2026-08-20
+ */
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface ValidList {
+
+    /**
+     * 是否允许空集合。
+     * <p>
+     * true：参数为 null 或空集合时直接放行，不做校验；
+     * false（默认）：参数为 null 或空集合时抛出"参数不能为空"。
+     */
+    boolean allowEmpty() default false;
+}
+```
+
+### 6.2 ValidListAspect.java（切面）
+
+```java
+package com.xxx.config;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ClassUtils;
+
+import com.xxx.common.enumeration.ResultCodeEnum;
+import com.xxx.common.exception.BusinessException;
+
+/**
+ * ValidListAspect
+ * <p>
+ * 批量 List 参数 JSR-303 元素级校验切面。
+ * 切点覆盖 com.xxx.web 包及所有 @RestController，仅对参数上标注了 {@link ValidList} 的方法做校验，
+ * 未标注的方法直接 proceed()，对现有接口零影响。
+ * <p>
+ * 校验失败时抛出 BusinessException(ERROR_PARAM_ILLEGAL)，
+ * 由 GlobalExceptionHandler 统一转换为 Result 返回（code=4004）。
+ *
+ * @author liutengda003
+ * @date 2026-08-20
+ */
+@Aspect
+@Component
+public class ValidListAspect {
+
+    private static final Logger logger = LoggerFactory.getLogger(ValidListAspect.class);
+
+    private final Validator validator;
+
+    public ValidListAspect(Validator validator) {
+        this.validator = validator;
+    }
+
+    /**
+     * 启动日志：用于确认切面 bean 是否被 Spring 容器成功加载。
+     * 若重启后启动日志中看不到本行，说明切面根本没有注册为 Bean，
+     * 应先排查 @ComponentScan 扫描范围 / 类加载。
+     */
+    @PostConstruct
+    public void init() {
+        logger.info("[ValidList] ValidListAspect 已加载，切点: execution(* com.xxx.web..*.*(..)) || within(@RestController *)");
+    }
+
+    /**
+     * 切点：com.xxx.web 包及子包下所有方法（项目 Controller 全部位于该包，已代码核对），
+     * 并兜底匹配所有标注 @RestController 的类型。
+     * <p>
+     * 说明：原切点仅用 within(@RestController *)，但 @RestController 无 @Inherited，
+     * Controller 经 CGLIB 代理后存在匹配不到的风险，故叠加包路径 execution 兜底。
+     * 未标注 {@link ValidList} 参数的方法直接 proceed()，对现有接口零影响。
+     */
+    @Around("execution(* com.xxx.web..*.*(..)) || within(@org.springframework.web.bind.annotation.RestController *)")
+    public Object validateListParameter(ProceedingJoinPoint joinPoint) throws Throwable {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        // 关键：必须用 getUserClass 去掉 CGLIB 代理后缀（$$EnhancerBySpringCGLIB$$...），
+        // 取到原始 Controller 类。否则 getMostSpecificMethod 在代理类上解析，
+        // 而 CGLIB 生成的覆写方法不携带方法参数注解（注解不可继承），会导致 @ValidList 检测不到、切面静默放行。
+        Method method = AopUtils.getMostSpecificMethod(
+                signature.getMethod(),
+                ClassUtils.getUserClass(joinPoint.getTarget()));
+        Parameter[] parameters = method.getParameters();
+        Object[] args = joinPoint.getArgs();
+
+        List<String> errors = new ArrayList<>();
+        boolean hit = false;
+        for (int i = 0; i < parameters.length; i++) {
+            if (!parameters[i].isAnnotationPresent(ValidList.class)) {
+                continue;
+            }
+            hit = true;
+            ValidList validList = parameters[i].getAnnotation(ValidList.class);
+            Object arg = i < args.length ? args[i] : null;
+            collectErrors(validList, arg, i + 1, errors);
+        }
+
+        if (hit) {
+            // 命中日志：用于确认切面对该接口是否生效
+            logger.info("[ValidList] 命中校验: {}.{} 参数数={} 错误数={}",
+                    method.getDeclaringClass().getSimpleName(), method.getName(), parameters.length, errors.size());
+        }
+        if (!errors.isEmpty()) {
+            logger.warn("[ValidList] 批量参数校验失败: {}", String.join(";", errors));
+            throw new BusinessException(ResultCodeEnum.ERROR_PARAM_ILLEGAL, String.join(";", errors));
+        }
+        return joinPoint.proceed();
+    }
+
+    /**
+     * 收集单个 @ValidList 参数的错误信息。
+     *
+     * @param validList  参数上的 @ValidList 注解
+     * @param arg        参数实际值
+     * @param paramIndex 参数序号（1 起）
+     * @param errors     错误信息收集容器
+     */
+    private void collectErrors(ValidList validList, Object arg, int paramIndex, List<String> errors) {
+        // null 视同空集合，由 allowEmpty 决定是否放行（不与"类型必须为List"混淆）
+        if (arg == null) {
+            if (!validList.allowEmpty()) {
+                errors.add("第" + paramIndex + "个参数不能为空");
+            }
+            return;
+        }
+        // 非 List 且非 null：注解误标在非 List 参数上，防御性提示
+        if (!(arg instanceof List)) {
+            errors.add("第" + paramIndex + "个参数类型必须为List");
+            return;
+        }
+        List<?> list = (List<?>) arg;
+        if (CollectionUtils.isEmpty(list)) {
+            if (!validList.allowEmpty()) {
+                errors.add("第" + paramIndex + "个参数不能为空");
+            }
+            return;
+        }
+        for (int j = 0; j < list.size(); j++) {
+            Object item = list.get(j);
+            if (item == null) {
+                // validator.validate(null) 会抛 IllegalArgumentException，必须前置拦截
+                errors.add("第" + paramIndex + "个参数第" + (j + 1) + "条数据不能为空");
+                continue;
+            }
+            Set<ConstraintViolation<Object>> violations = validator.validate(item);
+            for (ConstraintViolation<Object> violation : violations) {
+                errors.add("第" + paramIndex + "个参数第" + (j + 1) + "条数据["
+                        + violation.getPropertyPath() + "]" + violation.getMessage());
+            }
+        }
+    }
+}
+```
+
+### 6.3 使用示例
+
+```java
+// Feign 接口（api 模块）：@Valid 保留不动，只负责"根对象"级校验
+@PostMapping("/api/recognize/task/result")
+ResultDTO<Void> receiveTaskResult(@Valid @RequestBody List<NotifyTaskResultParam> paramList);
+
+// Controller 实现类（web 模块）：参数上补 @ValidList，元素级校验由切面接管
+@Override
+@PostMapping("/api/recognize/task/result")
+public ResultDTO<Void> receiveTaskResult(@ValidList @RequestBody List<NotifyTaskResultParam> paramList) {
+    return notifyTaskAutomationService.receiveTaskResult(paramList);
+}
+```
 
 ---
 

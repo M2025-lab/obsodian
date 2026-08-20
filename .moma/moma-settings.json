@@ -104,7 +104,7 @@
   },
   "autoUpdate": true,
   "pluginEnv": "prod",
-  "maxTabs": 3,
+  "maxTabs": 10,
   "chatTabDisplay": true,
   "enableAutoScroll": true,
   "skillHubAutoUpdateEnabled": false,
@@ -151,7 +151,7 @@
     "effort-default-medium",
     "chat-view-placement-v1"
   ],
-  "lastGrayReleaseCheck": 1787217328910,
+  "lastGrayReleaseCheck": 1787220929084,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -165,7 +165,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787213340277,
+    "fetchedAt": 1787221049525,
     "fetchedPluginVersion": "0.3.10",
     "envVars": {
       "claude": {
