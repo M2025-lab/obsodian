@@ -1,0 +1,25 @@
+{
+  "id": "conv-1787231705516-t654ogph2",
+  "providerId": "claude",
+  "title": "查询 moma 使用的 LLM",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787231705516,
+  "updatedAt": 1787231721289,
+  "lastResponseAt": 1787231721289,
+  "sessionId": "70c715fe-9e42-48d3-81ab-7e6e55a7041d",
+  "providerState": {
+    "providerSessionId": "70c715fe-9e42-48d3-81ab-7e6e55a7041d"
+  },
+  "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 1856,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36736,
+    "outputTokens": 388,
+    "contextWindow": 200000,
+    "contextTokens": 38592,
+    "percentage": 19,
+    "contextWindowIsAuthoritative": true
+  }
+}
