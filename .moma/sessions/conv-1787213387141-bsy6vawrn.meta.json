@@ -4,11 +4,22 @@
   "title": "优化 Java List 入参校验逻辑",
   "titleGenerationStatus": "success",
   "createdAt": 1787213387141,
-  "updatedAt": 1787213435035,
-  "lastResponseAt": 1787213435035,
+  "updatedAt": 1787214589071,
+  "lastResponseAt": 1787214589070,
   "sessionId": "45754771-b786-43f1-b7f1-17c06a21990b",
   "providerState": {
     "providerSessionId": "45754771-b786-43f1-b7f1-17c06a21990b"
   },
-  "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md"
+  "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 201,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 41792,
+    "outputTokens": 1286,
+    "contextWindow": 200000,
+    "contextTokens": 41993,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
 }

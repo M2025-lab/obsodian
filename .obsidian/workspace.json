@@ -355,7 +355,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.9453125
+    "width": 487.74609375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -374,7 +374,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "2b942e8b664182d5",
+  "active": "f0ddd3c57ae8c81e",
   "lastOpenFiles": [
     "20.知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
     "00.需求/通知复尺自动化/自测造数方案.md",
