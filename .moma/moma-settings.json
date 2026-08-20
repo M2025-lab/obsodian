@@ -151,7 +151,7 @@
     "effort-default-medium",
     "chat-view-placement-v1"
   ],
-  "lastGrayReleaseCheck": 1787220929084,
+  "lastGrayReleaseCheck": 1787224529098,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
