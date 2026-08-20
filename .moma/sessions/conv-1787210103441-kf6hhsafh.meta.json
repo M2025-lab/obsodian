@@ -1,0 +1,25 @@
+{
+  "id": "conv-1787210103441-kf6hhsafh",
+  "providerId": "claude",
+  "title": "编写SQL模板查询项目主材task_type=3节点ID",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787210103441,
+  "updatedAt": 1787210123551,
+  "lastResponseAt": 1787210123551,
+  "sessionId": "cd3083e7-6c6c-4916-8581-b2e87d1a1a17",
+  "providerState": {
+    "providerSessionId": "cd3083e7-6c6c-4916-8581-b2e87d1a1a17"
+  },
+  "currentNote": "00.需求/通知复尺自动化/自测造数方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 3635,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36928,
+    "outputTokens": 701,
+    "contextWindow": 200000,
+    "contextTokens": 40563,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}
