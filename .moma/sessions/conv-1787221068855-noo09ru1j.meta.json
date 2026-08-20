@@ -4,8 +4,8 @@
   "title": "替换文档ke/utopia相关字段",
   "titleGenerationStatus": "success",
   "createdAt": 1787221068855,
-  "updatedAt": 1787221831897,
-  "lastResponseAt": 1787221831897,
+  "updatedAt": 1787222427991,
+  "lastResponseAt": 1787222427991,
   "sessionId": "64491466-4134-4038-bd5e-741d8600370f",
   "providerState": {
     "providerSessionId": "64491466-4134-4038-bd5e-741d8600370f"
@@ -13,12 +13,12 @@
   "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
   "usage": {
     "model": "haiku",
-    "inputTokens": 1203,
+    "inputTokens": 803,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 50240,
-    "outputTokens": 705,
+    "cacheReadInputTokens": 51392,
+    "outputTokens": 684,
     "contextWindow": 200000,
-    "contextTokens": 51443,
+    "contextTokens": 52195,
     "percentage": 26,
     "contextWindowIsAuthoritative": true
   }

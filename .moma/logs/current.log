@@ -521,3 +521,23 @@ validateListParameter
 </editor_selection>
 18:30:30 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 18:30:30 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:36:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:36:24 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:40:12 [moma debug] buildTurnSubmission {
+  "contentLength": 5,
+  "turnRequest": {
+    "textLength": 5,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:40:12 【发送给 Provider SDK 的 Prompt】
+HV是什么
+
+<editor_selection path="20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md" lines="331-331">
+validateListParameter
+</editor_selection>
+18:40:29 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:40:29 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
