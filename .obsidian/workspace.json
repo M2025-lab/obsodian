@@ -109,10 +109,14 @@
             "id": "1b45e71c1a6504a6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "📚 批量List接口@Valid校验失效排查与解决方案"
             }
           }
         ],
@@ -309,7 +313,7 @@
             }
           },
           {
-            "id": "3cb2ba8b9c93e000",
+            "id": "f0ddd3c57ae8c81e",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -319,11 +323,11 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 8
       }
     ],
     "direction": "horizontal",
-    "width": 357.203125
+    "width": 389.9453125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -342,8 +346,9 @@
       "moma:Open Moma": false
     }
   },
-  "active": "23e3e3c2cc942472",
+  "active": "1b45e71c1a6504a6",
   "lastOpenFiles": [
+    "00.需求/通知复尺自动化/通知复尺自动化-开发总结.md",
     "11.数据库表/XXnryY0j",
     "91.copilot/copilot-custom-prompts/Translate to Chinese.md",
     "91.copilot/copilot-custom-prompts/Summarize.md",
@@ -386,7 +391,6 @@
     "80.日报周报/新人串讲/fig",
     "80.日报周报/fig/笔记集",
     "80.日报周报/fig/TaskDispatchDetailSimpleDTO.java",
-    "80.日报周报/fig/TaskDispatchDetailSimpleDTO 99.java",
     "80.日报周报/fig/Pasted image 20260724142126.png",
     "80.日报周报/fig/Pasted image 20260724142116.png",
     "80.日报周报/fig/Pasted image 20260707193330.png",
