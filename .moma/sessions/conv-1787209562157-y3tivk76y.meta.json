@@ -4,6 +4,22 @@
   "title": "造数 task_type=3 自动化通知及节点数据",
   "titleGenerationStatus": "success",
   "createdAt": 1787209562157,
-  "updatedAt": 1787209568588,
-  "sessionId": null
+  "updatedAt": 1787210844591,
+  "lastResponseAt": 1787210844591,
+  "sessionId": "61575f88-ec58-4e3b-bd43-d8cea3c06028",
+  "providerState": {
+    "providerSessionId": "61575f88-ec58-4e3b-bd43-d8cea3c06028"
+  },
+  "currentNote": "00.需求/通知复尺自动化/自测造数方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 84,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 79744,
+    "outputTokens": 736,
+    "contextWindow": 200000,
+    "contextTokens": 79828,
+    "percentage": 40,
+    "contextWindowIsAuthoritative": true
+  }
 }
