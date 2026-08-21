@@ -204,6 +204,22 @@
             }
           }
         ]
+      },
+      {
+        "id": "b1822beabd245537",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "46e6e6d223f44dec",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
