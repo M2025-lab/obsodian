@@ -186,3 +186,14 @@ String.join(",", param.getImages());中param.getImages()不能为null，沉淀�
 14:03:18 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:07:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:07:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:13:18 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:13:18 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:17:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:17:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:22:59 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:22:59 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/refresh","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-Cv3aRjKdaLYtRNYfzf95DQ\",\"refreshToken\":\"obrt-RO2YMvoyS5AiCuHjsOv-9w\",\"accessTokenIssuedAt\":1787293379387,\"accessExpiresAt\":1787300579387,\"refreshTokenIssuedAt\":1787293379387,\"refreshExpiresAt\":1789885379387}}"}
+14:22:59 [INFO] [auth-credential] refresh success, generation=undefined
+14:22:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:23:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:27:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:27:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
