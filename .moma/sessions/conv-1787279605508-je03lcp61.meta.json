@@ -1,0 +1,25 @@
+{
+  "id": "conv-1787279605508-je03lcp61",
+  "providerId": "claude",
+  "title": "记录 Java String.join 参数非空限制",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787279605508,
+  "updatedAt": 1787279955299,
+  "lastResponseAt": 1787279955299,
+  "sessionId": "976dff20-6165-4876-93bc-a3db56043f4b",
+  "providerState": {
+    "providerSessionId": "976dff20-6165-4876-93bc-a3db56043f4b"
+  },
+  "currentNote": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 219,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 55424,
+    "outputTokens": 293,
+    "contextWindow": 200000,
+    "contextTokens": 55643,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}
