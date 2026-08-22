@@ -46,7 +46,8 @@
       "environmentVariables": "",
       "environmentHash": "",
       "installationMethodsByHost": {
-        "MirrordeMacBook-Pro.local": "native-windows"
+        "MirrordeMacBook-Pro.local": "native-windows",
+        "bogon": "native-windows"
       },
       "wslDistroOverridesByHost": {}
     }
@@ -142,8 +143,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-08-21T02:33:00.434Z",
-      "momaCliUpdateAttemptedAt": "2026-08-21T02:33:00.434Z"
+      "autoInstallAttemptedAt": "2026-08-22T03:05:19.516Z",
+      "momaCliUpdateAttemptedAt": "2026-08-22T03:05:19.516Z"
     },
     "strictMarkdown": false
   },
@@ -151,7 +152,7 @@
     "effort-default-medium",
     "chat-view-placement-v1"
   ],
-  "lastGrayReleaseCheck": 1787312082800,
+  "lastGrayReleaseCheck": 1787367917324,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -165,7 +166,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787279582442,
+    "fetchedAt": 1787367916548,
     "fetchedPluginVersion": "0.3.10",
     "envVars": {
       "claude": {
