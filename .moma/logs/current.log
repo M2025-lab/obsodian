@@ -93,3 +93,8 @@
 12:50:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 12:55:36 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 12:55:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:00:36 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+13:00:37 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/refresh","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat-TTCftTimIS8yDOJX73dSgQ\",\"refreshToken\":\"obrt-bDidlDePrsXk-klWpwkzow\",\"accessTokenIssuedAt\":1787374837545,\"accessExpiresAt\":1787382037545,\"refreshTokenIssuedAt\":1787374837545,\"refreshExpiresAt\":1789966837545}}"}
+13:00:37 [INFO] [auth-credential] refresh success, generation=undefined
+13:00:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:00:38 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
