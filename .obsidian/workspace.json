@@ -204,22 +204,6 @@
             }
           }
         ]
-      },
-      {
-        "id": "b1822beabd245537",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "46e6e6d223f44dec",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
@@ -374,8 +358,9 @@
       "moma:Open Moma": false
     }
   },
-  "active": "f0ddd3c57ae8c81e",
+  "active": "2b942e8b664182d5",
   "lastOpenFiles": [
+    "20.知识沉淀/📚 Spring事务失效排查手册.md",
     "20.知识沉淀/📚 String.join 传 null 抛 NPE 的坑与判空方案.md",
     "20.知识沉淀/Obsidian知识库归类方案.md",
     "00.需求/通知复尺自动化/自测造数方案.md",
@@ -402,7 +387,6 @@
     "91.copilot/copilot-custom-prompts/Emojify.md",
     "91.copilot/copilot-custom-prompts/Clip Web Page.md",
     "91.copilot/copilot-custom-prompts/Clip YouTube Transcript.md",
-    "91.copilot/copilot-conversations/写了什么@20260804_155650.md",
     "91.copilot/copilot-custom-prompts",
     "91.copilot/copilot-conversations",
     "91.copilot",

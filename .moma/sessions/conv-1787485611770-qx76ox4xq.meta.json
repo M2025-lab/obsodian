@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787485611770-qx76ox4xq",
+  "providerId": "claude",
+  "title": "排查事务失效步骤",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787485611770,
+  "updatedAt": 1787485912820,
+  "lastResponseAt": 1787485912820,
+  "sessionId": "5b8b8ca7-1b6d-4e87-a1b4-2bf05119cbb0",
+  "providerState": {
+    "providerSessionId": "5b8b8ca7-1b6d-4e87-a1b4-2bf05119cbb0"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 443,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 44032,
+    "outputTokens": 257,
+    "contextWindow": 200000,
+    "contextTokens": 44475,
+    "percentage": 22,
+    "contextWindowIsAuthoritative": true
+  }
+}
