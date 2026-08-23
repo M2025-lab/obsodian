@@ -107,3 +107,8 @@ Generate a title for this conversation:
 }
 19:48:56 【发送给 Provider SDK 的 Prompt】
 放在wiki中
+20:46:17 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:46:19 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+20:46:19 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+20:46:20 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+20:46:20 [INFO] [moma debug] plugin-settings success
