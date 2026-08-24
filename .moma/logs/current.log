@@ -33,3 +33,9 @@
 09:39:26 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"net::ERR_INTERNET_DISCONNECTED"}
 09:39:26 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
 09:39:29 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+10:39:25 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:39:26 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:39:27 [INFO] [ObsidianTransport] {"method":"POST","url":"https://next.ke.com/ob/api/auth/credential/create","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"tokenType\":\"Bearer\",\"accessToken\":\"obat--RybswIoFI37d7XNLMIdJQ\",\"refreshToken\":\"obrt-zYfdyHkru4QfQgHlU47Qkg\",\"accessTokenIssuedAt\":1787539167222,\"accessExpiresAt\":1787546367222,\"refreshTokenIssuedAt\":1787539167222,\"refreshExpiresAt\":1790131167222}}"}
+10:39:27 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:39:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:39:27 [INFO] [moma debug] plugin-settings success
