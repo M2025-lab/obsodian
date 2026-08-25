@@ -275,3 +275,26 @@ redis中epllo 属于一个机制，用来管理连接，用的是linux的内部�
 18:01:59 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":52601,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
 18:02:00 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
 18:02:00 [moma debug] ColdStartQuery 完成，共收到消息数: 96 | 响应文本长度: 21
+18:37:33 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+18:37:33 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:33 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:33 [INFO] [auth-credential] refresh success, generation=undefined
+18:37:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=1&sortOrder=asc"}
+18:37:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=2&sortOrder=asc"}
+18:37:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=3&sortOrder=desc"}
+18:37:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/calendar/list?startTime=2026-08-23+00%3A00%3A00&endTime=2026-08-29+23%3A59%3A59"}
+18:37:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=1&sortOrder=asc"}
+18:37:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=2&sortOrder=asc"}
+18:37:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/calendar/list?startTime=2026-08-23+00%3A00%3A00&endTime=2026-08-29+23%3A59%3A59"}
+18:37:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/meeting-assistant/meeting/search?pageNum=1&pageSize=20&meetingType=3&sortOrder=desc"}
+18:37:39 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/meeting-assistant/materials/infos?meetingInstanceIds=5936465631150204603&includeSmartSummary=true"}
+18:37:40 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/meeting-assistant/materials/infos?meetingInstanceIds=5936465631150204603&includeSmartSummary=true"}
+18:37:40 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:41 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:37:58 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:38:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:38:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+18:38:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+18:38:01 [INFO] [moma debug] plugin-settings success
