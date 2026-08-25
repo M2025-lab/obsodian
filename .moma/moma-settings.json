@@ -1,6 +1,7 @@
 {
   "userName": "",
   "onesToken": "sk-b5ded371a0f864330707582d73b49d14",
+  "hostAuthSelfHealEnabled": false,
   "permissionMode": "yolo",
   "model": "haiku",
   "thinkingBudget": "off",
@@ -47,7 +48,8 @@
       "environmentHash": "",
       "installationMethodsByHost": {
         "MirrordeMacBook-Pro.local": "native-windows",
-        "bogon": "native-windows"
+        "bogon": "native-windows",
+        "PC-20200915PKWW.ljstaff.com": "native-windows"
       },
       "wslDistroOverridesByHost": {}
     }
@@ -150,9 +152,10 @@
   },
   "appliedMigrations": [
     "effort-default-medium",
-    "chat-view-placement-v1"
+    "chat-view-placement-v1",
+    "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1787574214452,
+  "lastGrayReleaseCheck": 1787622030355,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -166,13 +169,18 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787485592681,
-    "fetchedPluginVersion": "0.3.10",
+    "fetchedAt": 1787622029871,
+    "fetchedPluginVersion": "0.3.11",
     "envVars": {
       "claude": {
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "200000"
       }
     }
   },
-  "workbenchAutoOpenDismissed": true
+  "workbenchAutoOpenDismissed": false,
+  "quota": {
+    "limitTitle": "本周额度已达上限"
+  },
+  "hostAuthSelfHealGrayEnabled": false,
+  "homepageEnabled": false
 }

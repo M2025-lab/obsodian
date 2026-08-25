@@ -13743,19 +13743,15 @@ body.theme-dark .moma-space-submenu {
 
 .moma-utt-speaker {
   font-weight: 600;
-  /* SPEAKER_RENAME (TEMP off): 暂不可点击改名 */
-  cursor: default;
-  /* cursor: pointer; */
+  cursor: pointer;
   border-radius: 3px;
   padding: 0 2px;
 }
 
-/* SPEAKER_RENAME (TEMP off)
 .moma-utt-speaker:hover {
   opacity: 0.8;
   text-decoration: underline;
 }
-*/
 
 /* Speaker color palette by appearance order (A=0 … Z=25); keep in sync with SPEAKER_COLORS */
 .moma-utt-speaker[data-spk="0"] { color: #3b82f6; }
@@ -19132,6 +19128,233 @@ body.theme-light .moma-workbench-view {
 
 
 /* ============================================
+   features/homepage.css
+   ============================================ */
+@keyframes nv-interstitial-destroy {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.setting-item[nv-greyed] {
+	opacity: .5; 
+	pointer-events: none;
+}
+
+#nv-main-setting {
+	flex-wrap: wrap;
+}
+
+#nv-main-setting .setting-item-control {
+	padding-top: var(--size-4-1);
+	flex-basis: 100%;
+	align-items: stretch;
+}
+
+#nv-main-setting .setting-item-control input, #nv-main-setting .setting-item-control select {
+	font-size: var(--font-ui-medium);
+	font-weight: 600;
+}
+
+#nv-main-setting .setting-item-control select {
+	padding: var(--size-4-3) var(--size-4-4);
+	padding-right: var(--size-4-8);
+	height: auto;
+}
+
+#nv-main-setting .setting-item-control input {
+	flex-grow: 1;
+	padding: var(--size-4-5) var(--size-4-4);
+}
+
+#nv-main-setting .setting-item-control input[disabled] {
+	opacity: 0.3;
+}
+
+#nv-main-setting #nv-desc, #nv-main-setting #nv-info {
+	flex-basis: 100%;
+}
+
+#nv-main-setting #nv-desc {
+	font-weight: 500;
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	padding: 10px 0 0;
+}
+
+#nv-main-setting #nv-desc.mod-warning {
+	color: var(--text-error);
+}
+
+#nv-main-setting #nv-desc code {
+	font-family: var(--font-monospace);
+	font-size: var(--font-smaller);
+	border-radius: var(--radius-s);
+}
+
+#nv-main-setting #nv-desc small {
+	display: block;
+	font-weight: 400;
+	color: var(--text-muted);
+	font-size: calc(var(--font-ui-smaller) * 0.9);
+	padding: 5px 0 0;
+}
+
+.nv-homepage-file-tag {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: var(--size-2-2);
+}
+
+.nv-mobile-setting, .nv-command-setting {
+	flex-wrap: wrap;
+	row-gap: var(--size-2-2);
+}
+
+.nv-mobile-setting .nv-mobile-info {
+	font-size: var(--font-ui-smaller);
+	width: 100%;
+	margin-right: var(--size-4-18);
+}
+
+.nv-command-desc {
+	padding: 0;
+}
+
+.nv-command-box {
+	margin: 1em 0 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	width: 100%;
+}
+
+.nv-command-pill {
+	background-color: var(--background-modifier-hover);
+	border-radius: var(--radius-s);
+	font-size: var(--font-ui-small);
+	padding: var(--size-2-1) var(--size-2-2) var(--size-2-1) var(--size-2-3) ;
+}
+
+.nv-command-pill.nv-command-invalid {
+	color: var(--text-faint);
+}
+
+.nv-command-pill button {
+	display: inline-block;
+	padding: 0;
+	margin: 0 0 0 3px;
+	vertical-align: bottom;
+}
+
+.nv-command-pill button:first-of-type {
+	margin-left: var(--size-4-2);
+}
+
+.nv-command-pill button.nv-command-selected {
+	margin-left: var(--size-2-2);
+	padding: 0 var(--size-2-1);
+}
+
+.nv-command-pill button.nv-command-selected span {
+	color: var(--text-accent);
+	display: inline-block;
+	font-size: 0.9em;
+	vertical-align: top;
+	position: relative;
+	top: -1px;
+}
+
+.nv-command-pill > .svg-icon, .nv-command-pill button .svg-icon {
+	height: 1em;
+	width: 1em;
+	opacity: 1;
+}
+
+.nv-command-pill > .svg-icon {
+	vertical-align: text-bottom;
+	position: relative;
+	margin: 0 var(--size-2-1) 0 0;
+}
+
+.nv-command-pill.nv-dragging {
+	background-color: transparent;
+}
+
+.nv-command-add-button {
+	font-size: var(--font-ui-small);
+	padding: var(--size-2-2) var(--size-4-2);
+	height: auto;
+}
+
+button.nv-debug-button {
+	margin: 3em 0 -0.2em;
+	font-size: var(--font-ui-smaller);
+	padding: 0;
+	height: auto;
+	float: right;
+	box-shadow: none;
+	background: none;
+	color: var(--text-color);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.nv-debug-button:hover, .nv-debug-button:active {
+	text-decoration: underline;
+}
+
+.is-phone #nv-main-setting .setting-item-control {
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.is-phone #nv-main-setting .setting-item-control select {
+	width: auto;
+	max-width: auto;
+}
+
+.is-phone .nv-mobile-setting {
+	row-gap: var(--size-4-2);
+}
+
+.is-phone .nv-mobile-setting .setting-item-info {
+	max-width: calc(100% - 100px);
+}
+
+.is-phone .nv-command-pill {
+	width: 100%;
+	border: none;
+	background: none;
+	padding: 0 0 var(--size-4-2);
+	display: flex;
+	gap: var(--size-4-4);
+	align-items: baseline;
+}
+
+.is-phone .nv-command-pill .nv-command-text {
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.is-phone .nv-command-pill, .is-phone .nv-command-add-button {
+	font-size: var(--font-ui-medium);
+	justify-content: space-between;
+}
+
+.is-phone .nv-command-add-button {
+	padding: var(--size-2-3) var(--size-4-3);
+}
+
+.is-phone .nv-command-pill button {
+	line-height: var(--font-ui-medium);
+	height: 100%;
+	margin: 0;
+}
+
+
+/* ============================================
    modals/instruction.css
    ============================================ */
 /* Instruction Mode */
@@ -19905,6 +20128,267 @@ body.theme-light .moma-workbench-view {
   border-radius: 9px;
   font-size: 13px;
   font-weight: 550;
+}
+
+
+/* ============================================
+   modals/wecom-auth.css
+   ============================================ */
+.moma-wecom-auth-qr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 196px;
+  margin: var(--size-4-2) 0;
+}
+
+/* CLI 出的 PNG 实测 392×392，按原始尺寸铺开会把下面的指引顶到折叠线以外。196 是
+   精确的一半，模块边缘照样落在整像素上，不会被量化成不均匀宽度；手机扫这个尺寸
+   绰绰有余。pixelated 是给高 DPI 下的实际放大用的 */
+.moma-wecom-auth-qr-img {
+  width: 100%;
+  max-width: 196px;
+  height: auto;
+  image-rendering: pixelated;
+  background: var(--color-base-00);
+  border-radius: var(--radius-s);
+}
+
+.moma-wecom-auth-qr-placeholder {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+
+.moma-wecom-auth-output {
+  max-height: 160px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.moma-wecom-auth-guide {
+  margin: 0 0 var(--size-4-2);
+  padding-left: 1.4em;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.moma-wecom-auth-guide li + li {
+  margin-top: 2px;
+}
+
+.moma-wecom-auth-guide-link {
+  display: inline-block;
+  margin-bottom: var(--size-4-2);
+  font-size: var(--font-ui-smaller);
+}
+
+/* 二维码原始 392px，不用飞书向导那个 920px */
+.moma-wecom-auth-modal {
+  width: min(520px, 92vw);
+}
+
+.moma-wecom-auth-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4-3);
+}
+
+.moma-wecom-auth-header {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--size-4-3);
+  justify-content: space-between;
+}
+
+.moma-wecom-auth-header-text {
+  min-width: 0;
+}
+
+
+.moma-wecom-auth-message {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  line-height: 1.45;
+}
+
+.moma-wecom-auth-note {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.moma-wecom-auth-state {
+  background: var(--background-modifier-hover);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  flex: 0 0 auto;
+  font-size: var(--font-ui-smaller);
+  font-weight: 600;
+  padding: 4px 10px;
+}
+
+.moma-wecom-auth-state--running {
+  border-color: var(--interactive-accent);
+  color: var(--text-accent);
+}
+
+.moma-wecom-auth-state--completed {
+  background: rgba(var(--color-green-rgb), 0.12);
+  border-color: rgba(var(--color-green-rgb), 0.32);
+  color: var(--color-green);
+}
+
+.moma-wecom-auth-state--failed,
+.moma-wecom-auth-state--timed_out,
+.moma-wecom-auth-state--cancelled {
+  background: rgba(var(--color-red-rgb), 0.1);
+  border-color: rgba(var(--color-red-rgb), 0.28);
+  color: var(--text-error);
+}
+
+/* 三步用 flex：连接线靠 flex:1 自己撑开，不必像飞书那样硬编码 grid 列数 */
+.moma-wecom-auth-steps {
+  align-items: flex-start;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  display: flex;
+  gap: var(--size-4-2);
+  padding: var(--size-4-3);
+}
+
+.moma-wecom-auth-step {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 64px;
+  text-align: center;
+}
+
+.moma-wecom-auth-step-dot {
+  background: var(--background-modifier-border);
+  border: 2px solid var(--background-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--background-modifier-border);
+  height: 12px;
+  width: 12px;
+}
+
+.moma-wecom-auth-step-label {
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.moma-wecom-auth-step-state {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.2;
+}
+
+.moma-wecom-auth-step--completed .moma-wecom-auth-step-dot {
+  background: var(--color-green);
+  box-shadow: 0 0 0 3px rgba(var(--color-green-rgb), 0.16);
+}
+
+.moma-wecom-auth-step--running .moma-wecom-auth-step-dot {
+  background: var(--interactive-accent);
+  box-shadow: 0 0 0 4px var(--background-modifier-hover);
+}
+
+.moma-wecom-auth-step--failed .moma-wecom-auth-step-dot,
+.moma-wecom-auth-step--cancelled .moma-wecom-auth-step-dot {
+  background: var(--text-error);
+  box-shadow: 0 0 0 4px rgba(var(--color-red-rgb), 0.14);
+}
+
+.moma-wecom-auth-step-line {
+  background: var(--background-modifier-border);
+  flex: 1 1 auto;
+  height: 1px;
+  margin-top: 6px;
+  min-width: 24px;
+}
+
+.moma-wecom-auth-step-line--completed {
+  background: var(--color-green);
+}
+
+.moma-wecom-auth-current {
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  display: grid;
+  gap: var(--size-4-2);
+  padding: var(--size-4-2) var(--size-4-3);
+}
+
+
+
+
+.moma-wecom-auth-action-url {
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  padding: 8px 10px;
+}
+
+.moma-wecom-auth-action-button {
+  justify-self: start;
+}
+
+@media (max-width: 480px) {
+  .moma-wecom-auth-header {
+    flex-direction: column;
+  }
+
+  .moma-wecom-auth-steps {
+    flex-direction: column;
+  }
+
+  .moma-wecom-auth-step {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: var(--size-4-2);
+    text-align: left;
+  }
+
+  .moma-wecom-auth-step-line {
+    display: none;
+  }
+}
+
+/* 用户反馈：灰色小字的折叠行没人注意。橙色边框 + 正常字号，让它读起来像一条提示
+   而不是一个可忽略的高级选项 */
+.moma-wecom-auth-guide-box {
+  background: rgba(var(--color-orange-rgb), 0.1);
+  border: 1px solid rgba(var(--color-orange-rgb), 0.38);
+  border-radius: 8px;
+  padding: 0 var(--size-4-3);
+}
+
+.moma-wecom-auth-guide-summary {
+  color: var(--text-warning);
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+  font-weight: 600;
+  padding: var(--size-4-2) 0;
+}
+
+.moma-wecom-auth-guide-box[open] .moma-wecom-auth-guide-summary {
+  margin-bottom: 4px;
 }
 
 

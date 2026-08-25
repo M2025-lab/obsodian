@@ -204,6 +204,22 @@
             }
           }
         ]
+      },
+      {
+        "id": "54612ab31132aa00",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cf23f4893d2ea602",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -325,7 +341,7 @@
             }
           },
           {
-            "id": "f0ddd3c57ae8c81e",
+            "id": "97dc783650b34ae3",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -358,7 +374,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "2b942e8b664182d5",
+  "active": "97dc783650b34ae3",
   "lastOpenFiles": [
     "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
     "20.知识沉淀/📚 Spring事务失效排查手册.md",
