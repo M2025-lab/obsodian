@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787652109244-3vdfnxk81",
+  "providerId": "claude",
+  "title": "整理 Redis epoll 连接管理机制",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787652109244,
+  "updatedAt": 1787652299586,
+  "lastResponseAt": 1787652299586,
+  "sessionId": "f385eb14-b46e-4a57-9223-6bbe06c696eb",
+  "providerState": {
+    "providerSessionId": "f385eb14-b46e-4a57-9223-6bbe06c696eb"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 191,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 42752,
+    "outputTokens": 449,
+    "contextWindow": 200000,
+    "contextTokens": 42943,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}
