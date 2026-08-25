@@ -303,3 +303,10 @@ redis中epllo 属于一个机制，用来管理连接，用的是linux的内部�
 19:38:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 19:38:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 19:38:01 [INFO] [moma debug] plugin-settings success
+20:37:58 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:38:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+20:38:00 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+20:38:01 [INFO] [auth-credential] refresh success, generation=undefined
+20:38:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+20:38:02 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+20:38:02 [INFO] [moma debug] plugin-settings success
