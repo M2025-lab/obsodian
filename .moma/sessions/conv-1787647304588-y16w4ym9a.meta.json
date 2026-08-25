@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787647304588-y16w4ym9a",
+  "providerId": "claude",
+  "title": "记录Map键类型不匹配导致取值为空的问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787647304588,
+  "updatedAt": 1787647429677,
+  "lastResponseAt": 1787647429677,
+  "sessionId": "c71e694b-1bf1-43e0-bba8-0980c6f061da",
+  "providerState": {
+    "providerSessionId": "c71e694b-1bf1-43e0-bba8-0980c6f061da"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 368,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 45056,
+    "outputTokens": 265,
+    "contextWindow": 200000,
+    "contextTokens": 45424,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}

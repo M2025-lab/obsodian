@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787648498842-v1t34l3rm",
+  "providerId": "claude",
+  "title": "复习个人知识点",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787648498842,
+  "updatedAt": 1787648667329,
+  "lastResponseAt": 1787648667329,
+  "sessionId": "47fb2a1b-1efa-4d20-81ee-8d2e2afa10ac",
+  "providerState": {
+    "providerSessionId": "47fb2a1b-1efa-4d20-81ee-8d2e2afa10ac"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 2708,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68224,
+    "outputTokens": 2940,
+    "contextWindow": 200000,
+    "contextTokens": 70932,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

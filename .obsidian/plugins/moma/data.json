@@ -4,8 +4,20 @@
       {
         "tabId": "tab-1787485587371-8oyr3yv",
         "conversationId": "conv-1787485611770-qx76ox4xq"
+      },
+      {
+        "tabId": "tab-1787647117278-0sbazh1",
+        "conversationId": "conv-1787647304588-y16w4ym9a"
+      },
+      {
+        "tabId": "tab-1787647944585-8zpeswa",
+        "conversationId": "conv-1787648498842-v1t34l3rm"
+      },
+      {
+        "tabId": "tab-1787649222154-0ywgc4h",
+        "conversationId": "conv-1787649243831-mnqat9ow8"
       }
     ],
-    "activeTabId": "tab-1787485587371-8oyr3yv"
+    "activeTabId": "tab-1787649222154-0ywgc4h"
   }
 }

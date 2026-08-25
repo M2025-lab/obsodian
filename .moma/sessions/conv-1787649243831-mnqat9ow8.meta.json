@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787649243831-mnqat9ow8",
+  "providerId": "claude",
+  "title": "新会话",
+  "createdAt": 1787649243831,
+  "updatedAt": 1787649278888,
+  "lastResponseAt": 1787649278888,
+  "sessionId": "b62ce188-3eaa-4393-8099-d0de5d87bea5",
+  "providerState": {
+    "providerSessionId": "b62ce188-3eaa-4393-8099-d0de5d87bea5"
+  },
+  "currentNote": "20.知识沉淀/📚 String.join 传 null 抛 NPE 的坑与判空方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 2924,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36992,
+    "outputTokens": 1649,
+    "contextWindow": 200000,
+    "contextTokens": 39916,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}
