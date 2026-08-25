@@ -1,0 +1,23 @@
+16:37:41 [INFO] [Claudian shell-path] probed {"length":599}
+16:37:42 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:37:42 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:37:42 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:37:43 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:37:43 [INFO] [moma debug] plugin-settings success
+16:37:43 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:37:43 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:37:43 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:37:43 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+16:37:43 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+16:37:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=c2%3Abf%3Af1%3A86%3Ad9%3Ab3"}
+16:37:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:37:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:37:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:37:44 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:37:45 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+16:37:45 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+16:37:45 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+16:37:45 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+16:37:45 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+16:37:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:37:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
