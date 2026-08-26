@@ -155,7 +155,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1787661480859,
+  "lastGrayReleaseCheck": 1787708512134,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -177,7 +177,7 @@
       }
     }
   },
-  "workbenchAutoOpenDismissed": true,
+  "workbenchAutoOpenDismissed": false,
   "quota": {
     "limitTitle": "本周额度已达上限"
   },

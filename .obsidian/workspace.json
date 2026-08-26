@@ -242,6 +242,22 @@
             }
           }
         ]
+      },
+      {
+        "id": "eb150b2a00c6d61d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "809ea4a48df0d558",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
