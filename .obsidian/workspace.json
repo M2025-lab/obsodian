@@ -174,9 +174,37 @@
               "icon": "lucide-file",
               "title": "需求回顾总结成长"
             }
+          },
+          {
+            "id": "58f4166fd7766d79",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "📚 批量List接口@Valid校验失效排查与解决方案"
+            }
+          },
+          {
+            "id": "b88dbbb937b1f953",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "20.知识沉淀/📚 功能开关位置写在循环外导致工程部配置不生效.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "📚 功能开关位置写在循环外导致工程部配置不生效"
+            }
           }
         ],
-        "currentTab": 11
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -216,14 +244,7 @@
               "icon": "lucide-folder-closed",
               "title": "文件列表"
             }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "3bbe29f11514bcc6",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "53880614391a5f16",
             "type": "leaf",
@@ -241,23 +262,8 @@
               "title": "搜索"
             }
           }
-        ]
-      },
-      {
-        "id": "eb150b2a00c6d61d",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "809ea4a48df0d558",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -412,8 +418,11 @@
       "moma:Open Moma": false
     }
   },
-  "active": "97dc783650b34ae3",
+  "active": "b88dbbb937b1f953",
   "lastOpenFiles": [
+    "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
+    "00.需求/通知复尺自动化/需求回顾总结成长.md",
+    "20.知识沉淀/📚 功能开关位置写在循环外导致工程部配置不生效.md",
     "20.知识沉淀/📚 Apollo配置JSON注入Map启动失败.md",
     "20.知识沉淀/📚 String.join 传 null 抛 NPE 的坑与判空方案.md",
     "未命名.canvas",
@@ -421,12 +430,10 @@
     "20.知识沉淀/📚 Spring事务失效排查手册.md",
     "20.知识沉淀/📚 Map.get 返回 null 的类型不匹配坑.md",
     "20.知识沉淀/未命名.md",
-    "20.知识沉淀/📚 批量List接口@Valid校验失效排查与解决方案.md",
     "20.知识沉淀/Obsidian知识库归类方案.md",
     "00.需求/通知复尺自动化/自测造数方案.md",
     "80.日报周报/SKILL.md",
     "20.知识沉淀/📚 异常排查 & 调用链分析 完整手册.md",
-    "00.需求/通知复尺自动化/需求回顾总结成长.md",
     "00.需求/通知复尺自动化/需求背景.md",
     "00.需求/通知复尺自动化/执行方案.md",
     "00.需求/通知复尺自动化/通知复尺自动化-开发总结.md",
@@ -441,7 +448,6 @@
     "91.copilot/copilot-custom-prompts/Make longer.md",
     "91.copilot/copilot-custom-prompts/Generate table of contents.md",
     "91.copilot/copilot-custom-prompts/Generate glossary.md",
-    "91.copilot/copilot-custom-prompts/Fix grammar and spelling.md",
     "91.copilot/copilot-custom-prompts",
     "91.copilot/copilot-conversations",
     "91.copilot",

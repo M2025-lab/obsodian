@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787748077744-zthffqdu3",
+  "providerId": "claude",
+  "title": "创建功能开关位置导致配置不生效的知识沉淀笔记",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787748077744,
+  "updatedAt": 1787748212729,
+  "lastResponseAt": 1787748212729,
+  "sessionId": "235133fa-455d-4f41-a224-d3f0674aaf3a",
+  "providerState": {
+    "providerSessionId": "235133fa-455d-4f41-a224-d3f0674aaf3a"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 344,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 49600,
+    "outputTokens": 462,
+    "contextWindow": 200000,
+    "contextTokens": 49944,
+    "percentage": 25,
+    "contextWindowIsAuthoritative": true
+  }
+}
