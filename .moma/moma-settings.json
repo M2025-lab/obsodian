@@ -169,7 +169,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787747899579,
+    "fetchedAt": 1787751215485,
     "fetchedPluginVersion": "0.3.11",
     "envVars": {
       "claude": {

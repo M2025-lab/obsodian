@@ -1,0 +1,23 @@
+{
+  "id": "conv-1787751229312-rwrry2dpi",
+  "providerId": "claude",
+  "title": "整理贝壳家装八合一配置体系",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787751229312,
+  "updatedAt": 1787751515671,
+  "lastResponseAt": 1787751515671,
+  "sessionId": "599f8bc3-2829-4db8-93b0-b7e049dd6ad7",
+  "providerState": {
+    "providerSessionId": "599f8bc3-2829-4db8-93b0-b7e049dd6ad7"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0,
+    "contextWindowIsAuthoritative": true
+  }
+}
