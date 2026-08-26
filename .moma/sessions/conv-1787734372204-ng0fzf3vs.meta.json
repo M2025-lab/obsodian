@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787734372204-ng0fzf3vs",
+  "providerId": "claude",
+  "title": "分析 Apollo JSON 配置注入 Map 失败问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787734372204,
+  "updatedAt": 1787734576015,
+  "lastResponseAt": 1787734576015,
+  "sessionId": "e747e796-3450-456a-805f-70c4aa379b9d",
+  "providerState": {
+    "providerSessionId": "e747e796-3450-456a-805f-70c4aa379b9d"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 165,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 51840,
+    "outputTokens": 382,
+    "contextWindow": 200000,
+    "contextTokens": 52005,
+    "percentage": 26,
+    "contextWindowIsAuthoritative": true
+  }
+}

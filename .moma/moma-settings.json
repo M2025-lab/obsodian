@@ -145,8 +145,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-08-25T08:37:45.801Z",
-      "momaCliUpdateAttemptedAt": "2026-08-25T08:37:45.801Z"
+      "autoInstallAttemptedAt": "2026-08-26T08:32:00.150Z",
+      "momaCliUpdateAttemptedAt": "2026-08-26T08:32:00.150Z"
     },
     "strictMarkdown": false
   },
@@ -155,7 +155,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1787730112936,
+  "lastGrayReleaseCheck": 1787733759360,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -169,7 +169,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": false,
   "remoteAgentConfig": {
-    "fetchedAt": 1787651975812,
+    "fetchedAt": 1787734365280,
     "fetchedPluginVersion": "0.3.11",
     "envVars": {
       "claude": {

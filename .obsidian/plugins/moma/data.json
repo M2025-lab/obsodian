@@ -20,8 +20,16 @@
       {
         "tabId": "tab-1787651975048-xetpkf3",
         "conversationId": "conv-1787652109244-3vdfnxk81"
+      },
+      {
+        "tabId": "tab-1787733116858-3myw72x",
+        "conversationId": null
+      },
+      {
+        "tabId": "tab-1787734364448-1xw9528",
+        "conversationId": "conv-1787734372204-ng0fzf3vs"
       }
     ],
-    "activeTabId": "tab-1787651975048-xetpkf3"
+    "activeTabId": "tab-1787734364448-1xw9528"
   }
 }

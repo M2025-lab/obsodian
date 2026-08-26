@@ -209,3 +209,213 @@
 15:41:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 15:41:53 [INFO] [moma debug] plugin-settings success
 15:41:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:46:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:46:54 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:52:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:52:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:57:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:57:42 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:02:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:02:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:07:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:07:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:12:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:12:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:17:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:17:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:22:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:22:42 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:27:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:27:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:31:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:31:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:31:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:31:57 [INFO] [moma debug] plugin-settings success
+16:31:57 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:31:57 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:31:57 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:31:57 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+16:31:57 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+16:31:57 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:31:59 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":16,"result":"/opt/homebrew/bin/npm"}
+16:31:59 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+16:31:59 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+16:31:59 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+16:31:59 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+16:31:59 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+16:31:59 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+16:31:59 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+16:31:59 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+16:32:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+16:32:00 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+16:32:00 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.11"}
+16:32:01 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+16:32:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:32:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:37:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:37:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:42:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:42:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:42:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:42:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:42:39 [INFO] [moma debug] plugin-settings success
+16:42:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:42:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:47:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:47:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:52:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:52:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:52:44 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:52:44 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:52:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:52:45 [INFO] [moma debug] plugin-settings success
+16:52:45 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:52:45 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:52:45 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:52:45 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+16:52:45 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+16:52:45 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:52:45 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+16:52:45 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.11"}
+16:52:52 [moma debug] buildTurnSubmission {
+  "contentLength": 3959,
+  "turnRequest": {
+    "textLength": 3959,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+16:52:52 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+对，这个报错基本已经把原因说清楚了：**Apollo 里的 `JSON` 配置最终通过 `@Value` 进来时，本质上
+16:52:52 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+16:52:52 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+16:52:52 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+16:52:52 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+16:52:52 [moma debug] ColdStartQuery onesToken 存在: true
+16:52:52 [moma debug] ColdStartQuery momaFlagSettings 已注入
+16:52:52 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+16:52:52 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-HcSZTG4HlMuiIS4qw2Vlpw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-HcSZTG4HlMuiIS4qw2Vlpw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+16:52:52 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":40632}
+16:52:52 【发送给 Provider SDK 的 Prompt】
+对，这个报错基本已经把原因说清楚了：**Apollo 里的 `JSON` 配置最终通过 `@Value` 进来时，本质上仍然是一个 `String`，Spring 不会自动把 JSON 字符串转换成 `Map<String, String>`。**
+
+你现在这样：
+
+```java
+@Value("${receive.recognize.result.project.id.mapping:{}}")
+private Map<String, String> receiveRecognizeResultProjectIdMapping;
+```
+
+看起来合理，但实际：
+
+```text
+Apollo
+  ↓
+配置中心返回 String
+  ↓
+"{\"111\":\"222\",\"333\":\"4445\"}"
+  ↓
+@Value
+  ↓
+Map<String, String>   ← Spring 转不了
+  ↓
+启动失败
+```
+
+所以报：
+
+```text
+Failed to convert value of type 'java.lang.String'
+to required type 'java.util.Map'
+```
+
+## 最简单的改法
+
+既然 Apollo 里配置类型是 **JSON**，建议代码也直接接收 `String`，然后自己解析。
+
+### 1. ApolloConfig
+
+```java
+// 项目id映射
+@Value("${receive.recognize.result.project.id.mapping:{}}")
+private String receiveRecognizeResultProjectIdMapping;
+```
+
+Apollo 配置：
+
+```json
+{
+  "111": "222",
+  "333": "4445"
+}
+```
+
+### 2. 使用时解析
+
+如果你们项目已经用了 FastJSON：
+
+```java
+Map<String, String> projectIdMapping =
+        JSON.parseObject(
+                apolloConfig.getReceiveRecognizeResultProjectIdMapping(),
+                new TypeReference<Map<String, String>>() {}
+        );
+
+String projectOrderId = String.valueOf(param.getProjectOrderId());
+
+if (projectIdMapping.containsKey(projectOrderId)) {
+    String newProjectOrderId = projectIdMapping.get(projectOrderId);
+    param.setProjectOrderId(Long.valueOf(newProjectOrderId));
+
+    log.info(
+            "receiveTaskResult projectOrderId mapping, projectOrderId:{}, newProjectOrderId:{}",
+            projectOrderId,
+            newProjectOrderId
+    );
+}
+```
+
+---
+
+## 更推荐：启动时只解析一次
+
+你现在如果每次请求都：
+
+```java
+JSON.parseObject(...)
+```
+
+其实没必要。
+
+可以在 `ApolloConfig` 里面直接提供一个 Map：
+
+```java
+@Value("${receive.recognize.result.project.id.mapping:{}}")
+private String receiveRecognizeResultProjectIdMapping;
+
+public Map<String, String> getReceiveRecognizeResultProjectIdMapping() {
+    return JSON.parseObject(
+            receiveRecognizeResultProjectIdMapping,
+            new TypeReference<Map<String, String>>() {}
+    );
+}
+```
+
+但是这里有一个问题：**每次调用 getter 都会解析 JSON**。
+
+如果这个配置基本不动…(truncated)
+16:52:52 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-HcSZTG4HlMuiIS4qw2Vlpw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+16:52:52 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":40633}
+16:52:53 [moma debug] ColdStartQuery session_id: 1db0430d-9dc9-4a13-a22d-a099c45790c0
+16:52:57 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+16:52:57 [moma debug] ColdStartQuery 完成，共收到消息数: 17 | 响应文本长度: 28
+16:53:03 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":40633,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+16:57:40 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:57:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:02:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:02:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:07:40 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:07:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
