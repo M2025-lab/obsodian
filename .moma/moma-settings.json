@@ -155,7 +155,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1787813197530,
+  "lastGrayReleaseCheck": 1787820397029,
   "voiceRecordingDefaults": {
     "storageMode": "text",
     "storagePath": "/moma_ob/voice_recording/"
@@ -167,9 +167,9 @@
   "grayReleaseUpdateEnabled": true,
   "hermesGrayEnabled": true,
   "momaCliGrayEnabled": true,
-  "realtimeAsrEnabled": false,
+  "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1787819423785,
+    "fetchedAt": 1787820101743,
     "fetchedPluginVersion": "0.3.11",
     "envVars": {
       "claude": {

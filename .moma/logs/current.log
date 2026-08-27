@@ -756,3 +756,20 @@ cube
 16:31:11 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":36348}
 16:31:12 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
 16:31:21 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":36348,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+16:41:41 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:41:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:41:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:41:41 [INFO] [moma debug] plugin-settings success
+16:41:41 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:41:41 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:41:41 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:41:41 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+16:41:41 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+16:41:41 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:41:41 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+16:41:41 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.11"}
+16:46:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:46:37 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:46:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:46:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:46:39 [INFO] [moma debug] plugin-settings success
