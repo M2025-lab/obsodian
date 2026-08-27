@@ -145,8 +145,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-08-27T03:49:15.771Z",
-      "momaCliUpdateAttemptedAt": "2026-08-27T03:49:15.771Z"
+      "autoInstallAttemptedAt": "2026-08-27T13:04:29.387Z",
+      "momaCliUpdateAttemptedAt": "2026-08-27T13:04:29.387Z"
     },
     "strictMarkdown": false
   },
@@ -169,7 +169,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1787820101743,
+    "fetchedAt": 1787835868195,
     "fetchedPluginVersion": "0.3.11",
     "envVars": {
       "claude": {

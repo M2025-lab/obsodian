@@ -32,3 +32,211 @@
 21:01:36 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
 21:01:38 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
 21:01:40 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+21:04:25 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+21:04:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+21:04:28 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+21:04:28 [INFO] [moma debug] plugin-settings success
+21:04:28 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+21:04:28 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+21:04:28 [INFO] [moma debug] remote-config-sync quota identical to cache
+21:04:28 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+21:04:28 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+21:04:28 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+21:04:28 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+21:04:28 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+21:04:28 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+21:04:28 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+21:04:28 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+21:04:28 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+21:04:28 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+21:04:28 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+21:04:28 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+21:04:29 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+21:04:29 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+21:04:29 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.11"}
+21:04:30 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+21:04:45 [moma debug] buildTurnSubmission {
+  "contentLength": 8755,
+  "turnRequest": {
+    "textLength": 8755,
+    "hasSkillInvocation": false,
+    "currentNotePath": "90.AI学习/Agent学习计划.md",
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:04:45 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+帮我根据如下的计划重新生成学习计划：可以。结合你现在已经有的 **Java / Spring Boot / Kafka 
+21:04:45 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+21:04:45 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+21:04:45 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+21:04:45 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+21:04:45 [moma debug] ColdStartQuery onesToken 存在: true
+21:04:45 [moma debug] ColdStartQuery momaFlagSettings 已注入
+21:04:45 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+21:04:45 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-1Z1AgoeqeDgBqmlhs1LAbg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-1Z1AgoeqeDgBqmlhs1LAbg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+21:04:45 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":2246}
+21:04:45 【发送给 Provider SDK 的 Prompt】
+帮我根据如下的计划重新生成学习计划：可以。结合你现在已经有的 **Java / Spring Boot / Kafka / Redis / MySQL / ES** 基础，我建议不要走“从 Python 学起 → 学机器学习 → 学深度学习 → 最后才碰 Agent”这条路线。
+
+你的路线应该是：
+
+> **Python 基础 → LLM API → Tool Calling → RAG → MCP → LangGraph → Agent 工程化 → Java 业务集成 → 企业级 Agent**
+
+---
+
+# 一、整体路线
+
+```text
+                    Agent 开发能力
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+      AI 基础          Agent 核心        工程能力
+        │                │                │
+   LLM API           Tool Calling      FastAPI
+   Prompt            LangGraph         Docker
+   Embedding         MCP               Redis
+   Structured        Memory            Kafka
+   Output            RAG               MySQL/ES
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                  企业 Agent 项目
+                         │
+                 Python + Java
+```
+
+最终形成：
+
+```text
+                用户
+                 │
+                 ▼
+          Python Agent
+                 │
+        ┌────────┼────────┐
+        ▼        ▼        ▼
+       LLM      RAG      Tools
+        │        │        │
+        │        │        ▼
+        │        │   Java Spring Boot
+        │        │        │
+        │        │   ┌────┼────┐
+        │        │   ▼    ▼    ▼
+        │        │ Kafka Redis  DB/ES
+        │        │
+        └────────┴───────────┐
+                             ▼
+                           答案
+```
+
+---
+
+# 二、第一阶段：Python —— 只学 Agent 需要的
+
+**目标：1 周左右**
+
+你不是转 Python 开发，所以不要把时间花在特别深的 Python 语法上。
+
+重点学习：
+
+### 必学
+
+```text
+变量 / List / Dict / Set
+函数
+class
+异常处理
+模块
+pip
+venv
+JSON
+HTTP
+async / await
+类型注解
+Pydantic
+```
+
+尤其注意：
+
+```python
+async def
+await
+```
+
+因为后面 Agent 大量涉及：
+
+```text
+LLM 请求
+Tool 调用
+HTTP
+Streaming
+并发
+```
+
+### 学习结果
+
+你能写：
+
+```text
+Python
+   ↓
+FastAPI
+   ↓
+HTTP API
+   ↓
+调用 Java 服务
+```
+
+**不需要现在学习：**
+
+* Django
+* 数据科学
+* NumPy
+* Pandas
+* 机器学习算法
+* 深度学习
+
+---
+
+# 三、第二阶段：LLM API —— 真正进入 AI
+
+**目标：1 周**
+
+这一阶段非常重要。
+
+不要一上来就学 La…(truncated)
+21:04:45 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-1Z1AgoeqeDgBqmlhs1LAbg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+21:04:45 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":2247}
+21:04:46 [moma debug] ColdStartQuery session_id: 4becb9fb-5a91-491d-af9d-89d0490018b9
+21:04:55 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":2246,"killed":false,"exitCode":null,"stdinWritableEnded":true,"stdinDestroyed":true,"stdoutDestroyed":false,"stderrDestroyed":false}
+21:04:55 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":2247,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+21:04:56 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+21:04:56 [moma debug] ColdStartQuery 完成，共收到消息数: 77 | 响应文本长度: 20
+21:09:56 [moma debug] buildTurnSubmission {
+  "contentLength": 3,
+  "turnRequest": {
+    "textLength": 3,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:09:56 【发送给 Provider SDK 的 Prompt】
+补进去
+21:13:38 [moma debug] buildTurnSubmission {
+  "contentLength": 25,
+  "turnRequest": {
+    "textLength": 25,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:13:38 【发送给 Provider SDK 的 Prompt】
+根据第一阶段生成第一阶段计划放在  第一阶段目录下

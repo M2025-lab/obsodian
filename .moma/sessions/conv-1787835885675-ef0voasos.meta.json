@@ -1,0 +1,25 @@
+{
+  "id": "conv-1787835885675-ef0voasos",
+  "providerId": "claude",
+  "title": "重新生成 AI Agent 开发学习计划",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787835885675,
+  "updatedAt": 1787836665695,
+  "lastResponseAt": 1787836665695,
+  "sessionId": "a8934a18-2be6-4956-b58e-18d948229cac",
+  "providerState": {
+    "providerSessionId": "a8934a18-2be6-4956-b58e-18d948229cac"
+  },
+  "currentNote": "90.AI学习/Agent学习计划.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 297,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 67520,
+    "outputTokens": 526,
+    "contextWindow": 200000,
+    "contextTokens": 67817,
+    "percentage": 34,
+    "contextWindowIsAuthoritative": true
+  }
+}

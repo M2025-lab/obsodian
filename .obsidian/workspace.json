@@ -265,12 +265,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00.需求/通知复尺自动化/sendPushMsg.md",
+                "file": "90.AI学习/Agent学习计划.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "sendPushMsg"
+              "title": "Agent学习计划"
             }
           }
         ],
@@ -488,15 +488,15 @@
       "moma:Open Moma": false
     }
   },
-  "active": "97dc783650b34ae3",
+  "active": "eae4cda920c493c0",
   "lastOpenFiles": [
+    "00.需求/通知复尺自动化/sendPushMsg.md",
     "00.需求/通知复尺自动化/handleNode.md",
     "📚 ....md",
     "未命名.canvas",
     "未命名 1.canvas",
     "10.项目整理/edar-starlord新人快速上手指南.md",
     "20.知识沉淀/📚 Kafka开发级知识手册.md",
-    "00.需求/通知复尺自动化/sendPushMsg.md",
     "00.需求/通知复尺自动化/执行方案.md",
     "00.需求/通知复尺自动化/需求回顾总结成长.md",
     "00.需求/通知复尺自动化/需求背景.md",
