@@ -447,8 +447,9 @@
       "moma:Open Moma": false
     }
   },
-  "active": "cfac0be75ae1e544",
+  "active": "97dc783650b34ae3",
   "lastOpenFiles": [
+    "20.知识沉淀/📚 Kafka开发级知识手册.md",
     "00.需求/通知复尺自动化/handleNode.md",
     "00.需求/通知复尺自动化/sendPushMsg.md",
     "00.需求/通知复尺自动化/执行方案.md",
@@ -476,7 +477,6 @@
     "91.copilot/copilot-custom-prompts/Rewrite as tweet thread.md",
     "91.copilot/copilot-custom-prompts/Remove URLs.md",
     "91.copilot/copilot-custom-prompts/Make shorter.md",
-    "91.copilot/copilot-custom-prompts/Make longer.md",
     "91.copilot/copilot-custom-prompts",
     "91.copilot/copilot-conversations",
     "91.copilot",
