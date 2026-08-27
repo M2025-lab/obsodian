@@ -680,3 +680,18 @@ cube
 14:46:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 14:46:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 14:46:37 [INFO] [moma debug] plugin-settings success
+15:42:57 [moma debug] buildTurnSubmission {
+  "contentLength": 204,
+  "turnRequest": {
+    "textLength": 204,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+15:42:57 【发送给 Provider SDK 的 Prompt】
+现在我们聊一下，如何让新人能够梳理出配置、任务、流程这几个关系。我认为流程是一个比较抽象的概念，它会随着配置的变化而变化。但是基本的流程就是报价、测量、复尺、报价变更、下单、送货、安装、验收。这只是一个比较不太准确的用于概念理解的流程，这些流程会随着配置而变化，比如有些品类，它没有测量和复尺，以及报价变更。所以说，每个品类的具体流程会随着配置的变动而变动，而每一个品类它自己的流程，就是主材任务生成的依据。
+15:42:57 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+15:42:57 [INFO] [auth-credential] refresh success, generation=undefined
+15:46:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
