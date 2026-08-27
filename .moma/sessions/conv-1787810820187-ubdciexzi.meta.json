@@ -4,8 +4,8 @@
   "title": "整理新人快速上手项目知识文档",
   "titleGenerationStatus": "success",
   "createdAt": 1787810820187,
-  "updatedAt": 1787818420368,
-  "lastResponseAt": 1787818420367,
+  "updatedAt": 1787819632490,
+  "lastResponseAt": 1787819632490,
   "sessionId": "a3b4e80a-32c5-4f34-8300-996d90fe7752",
   "providerState": {
     "providerSessionId": "a3b4e80a-32c5-4f34-8300-996d90fe7752",
@@ -622,14 +622,18 @@
       }
     }
   },
+  "externalContextPaths": [
+    "/Users/mirror/IdeaProjects/edar-starlord"
+  ],
   "usage": {
     "model": "haiku",
-    "inputTokens": 405,
+    "inputTokens": 366,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 88128,
-    "outputTokens": 411,
+    "cacheReadInputTokens": 115520,
+    "outputTokens": 587,
     "contextWindow": 200000,
-    "contextTokens": 88533,
-    "percentage": 44
+    "contextTokens": 115886,
+    "percentage": 58,
+    "contextWindowIsAuthoritative": true
   }
 }
