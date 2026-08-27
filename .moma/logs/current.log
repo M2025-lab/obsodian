@@ -312,3 +312,366 @@ Partition 3 → Broker 4
 13:46:38 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 13:46:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 13:46:39 [INFO] [moma debug] plugin-settings success
+14:03:44 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:03:44 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:03:44 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:03:44 [INFO] [moma debug] plugin-settings success
+14:03:44 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+14:03:44 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+14:03:44 [INFO] [moma debug] remote-config-sync quota identical to cache
+14:03:44 [INFO] [moma debug] remote-config-sync voiceRecording defaults identical to cache
+14:03:44 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+14:03:44 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+14:03:44 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+14:03:44 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.11"}
+14:03:46 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+14:03:46 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-xUF-SvpkR3h8weo6V-S8Mg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+14:03:46 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":23526}
+14:03:56 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":23526,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+14:07:00 [moma debug] buildTurnSubmission {
+  "contentLength": 10002,
+  "turnRequest": {
+    "textLength": 10002,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:07:00 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+# 角色
+
+你是一名资深的后端架构师、业务分析师和技术文档专家。
+
+你需要基于我提供的**全部知识库内容**，包括但不限
+14:07:00 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+14:07:00 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+14:07:00 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+14:07:00 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+14:07:00 [moma debug] ColdStartQuery onesToken 存在: true
+14:07:00 [moma debug] ColdStartQuery momaFlagSettings 已注入
+14:07:00 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+14:07:00 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-xUF-SvpkR3h8weo6V-S8Mg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-xUF-SvpkR3h8weo6V-S8Mg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+14:07:00 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":23774}
+14:07:00 【发送给 Provider SDK 的 Prompt】
+# 角色
+
+你是一名资深的后端架构师、业务分析师和技术文档专家。
+
+你需要基于我提供的**全部知识库内容**，包括但不限于：
+
+* 系统介绍
+* 业务需求
+* 产品需求文档
+* 技术方案
+* 代码分析
+* 接口文档
+* 数据库设计
+* SQL
+* 配置
+* Apollo 配置
+* Redis
+* Kafka / MQ
+* 定时任务
+* 系统调用记录
+* 日志
+* 时序图
+* 流程图
+* 历史讨论
+* Bug 排查记录
+* 开发记录
+* 需求变更记录
+* 其他零散文字记录
+
+帮我重新整理成一份：
+
+> **“新人快速上手该项目 / 业务的完整知识文档”**
+
+---
+
+# 一、最终目标
+
+这不是简单的知识库总结。
+
+你的目标是：
+
+> **把知识库中零散、重复、分散、不同时间产生的各种信息，重新组织成一份新人可以从零开始阅读，并最终能够参与开发、理解业务、排查问题的完整文档。**
+
+假设一个新人：
+
+* 第一天加入项目
+* 完全不了解业务
+* 不知道有哪些系统
+* 不知道系统之间怎么调用
+* 不知道核心概念
+* 不知道数据在哪里
+* 不知道配置在哪里
+* 不知道一个请求完整怎么跑
+* 不知道出现问题应该从哪里排查
+
+那么这份文档应该能够帮助他逐步回答：
+
+```text
+这个项目是干什么的？
+        ↓
+解决什么业务问题？
+        ↓
+有哪些核心业务概念？
+        ↓
+有哪些角色？
+        ↓
+有哪些系统？
+        ↓
+系统之间是什么关系？
+        ↓
+一个完整业务流程怎么跑？
+        ↓
+系统之间怎么调用？
+        ↓
+数据存在哪里？
+        ↓
+核心表是什么？
+        ↓
+Redis / Kafka / MQ 做什么？
+        ↓
+有哪些配置？
+        ↓
+代码主要在哪里？
+        ↓
+一个请求进入系统之后怎么执行？
+        ↓
+出现问题应该怎么排查？
+```
+
+---
+
+# 二、最重要的原则：站在“新人”的视角整理
+
+不要按照知识库原本的文档顺序输出。
+
+知识库通常是：
+
+```text
+需求A
+Bug记录
+SQL
+需求B
+系统介绍
+代码片段
+会议记录
+配置
+需求变更
+```
+
+你需要把它重新组织成：
+
+```text
+第一阶段：先理解项目
+第二阶段：理解业务
+第三阶段：理解系统
+第四阶段：理解核心流程
+第五阶段：理解系统调用
+第六阶段：理解数据
+第七阶段：理解配置
+第八阶段：理解代码
+第九阶段：理解异常与排查
+第十阶段：开始开发
+```
+
+也就是说：
+
+> **输出顺序应该服从“新人认知顺序”，而不是知识库顺序。**
+
+---
+
+# 三、首先建立完整知识地图
+
+在正式输出文档之前，先分析全部知识库内容，建立项目知识地图。
+
+至少识别：
+
+```text
+项目
+├── 业务
+│   ├── 核心业务
+│   ├── 业务角色
+│   ├── 业务对象
+│   ├── 状态
+│   └── 业务规则
+│
+├── 系统
+│   ├── 当前系统
+│   ├── 上游系统
+│   ├── 下游系统
+│   └── 第三方系统
+│
+├── 技术
+│   ├── Java
+│   ├── Spring
+│   ├── MySQL
+│   ├── Redis
+│   ├── Kafka/MQ
+│   └── 其他基础设施
+│
+├── 数据
+│   ├── 核心表
+│   ├── 核心字段
+│   ├── 数据关系
+│   └── 数据流
+│
+├── 配置
+│   ├── Apollo
+│   ├── Feature Switch
+│   ├── 定时任务
+│   └── 环境配置
+│
+└── 运维
+    ├── 日志
+    ├── 监控
+    ├── 常见问题
+    └── 排查方式
+```
+
+先建立这个整体认知，再开始写正文。
+
+---
+
+# 四、文档必须包含的核心内容
+
+最终文档至少包含以下章节。
+
+# 1. 项目概览
+
+用新人能够理解的语言说明：
+
+* 这个项目是什么
+* 主要解决什么问题
+* 为什么需要这个系统
+* 系统服务什么业务
+* 项目在整个大系统中的位置
+* 上游是谁
+* 下游是谁
+* 谁使用这个系统
+* 系统核心能力是什么
+
+最后给新人一张：
+
+```text
+整个项目全景图
+```
+
+例如：
+
+```text
+上游系统
+    ↓
+当前系统
+    ↓
+核心业务处理
+    ↓
+数据库 / Redis / MQ
+    ↓
+下游系统
+    ↓
+用户 / 业务人员
+```
+
+---
+
+# 2. 核心业务概念
+
+把项目中所有重要概念提取出来。
+
+例如：
+
+```text
+项目
+项目单
+任务
+节点
+主材
+识别任务
+通知复尺…(truncated)
+14:07:00 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-xUF-SvpkR3h8weo6V-S8Mg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.11\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+14:07:00 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":23775}
+14:07:00 [moma debug] ColdStartQuery session_id: 4c384fab-aba2-4af7-b1b3-b4b209d12df8
+14:07:08 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+14:07:08 [moma debug] ColdStartQuery 完成，共收到消息数: 82 | 响应文本长度: 14
+14:07:10 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":23775,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+14:28:11 [moma debug] buildTurnSubmission {
+  "contentLength": 7,
+  "turnRequest": {
+    "textLength": 7,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:28:11 【发送给 Provider SDK 的 Prompt】
+北沃换为 被窝
+
+<editor_selection path="10.项目整理/edar-starlord新人快速上手指南.md" lines="84-84">
+北沃
+</editor_selection>
+14:28:56 [moma debug] buildTurnSubmission {
+  "contentLength": 9,
+  "turnRequest": {
+    "textLength": 9,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:28:56 【发送给 Provider SDK 的 Prompt】
+cube 是施工包
+
+<editor_selection path="10.项目整理/edar-starlord新人快速上手指南.md" lines="75-75">
+cube
+</editor_selection>
+14:33:41 [moma debug] buildTurnSubmission {
+  "contentLength": 58,
+  "turnRequest": {
+    "textLength": 58,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:33:41 【发送给 Provider SDK 的 Prompt】
+以复尺任务为例，其下包含通知复尺、复尺节点做一张图解释主材任务以及状态和节点任务以及状态的关系 放在容易混淆的概念里
+14:35:54 [moma debug] buildTurnSubmission {
+  "contentLength": 47,
+  "turnRequest": {
+    "textLength": 47,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:35:54 【发送给 Provider SDK 的 Prompt】
+根据系统的核心能力 主材任务调度主材任务模板与配置 ，给出示例讲解 包含不同mode 不同配置
+
+<editor_selection path="10.项目整理/edar-starlord新人快速上手指南.md" lines="623-623">
+主材任务模板与配置
+</editor_selection>
+14:36:08 [moma debug] buildTurnSubmission {
+  "contentLength": 56,
+  "turnRequest": {
+    "textLength": 56,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:36:08 【发送给 Provider SDK 的 Prompt】
+根据系统的核心能力 主材任务调度主材任务模板与配置 ，给出示例讲解 包含不同mode 不同配置  放在合适的位置
+
+<editor_selection path="10.项目整理/edar-starlord新人快速上手指南.md" lines="623-623">
+主材任务模板与配置
+</editor_selection>
