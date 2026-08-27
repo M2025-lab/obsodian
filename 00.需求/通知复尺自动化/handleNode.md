@@ -59,19 +59,19 @@
 
 ### 3.4 分支逻辑（第1层）
 
-|   |   |   |
-|---|---|---|
-|条件|业务含义|处理|
-|`taskDispatchNodeId==null && salesSubOrderNo` 空|两个定位参数都没给|`Preconditions` 抛 `IllegalArgumentException`|
-|`taskDispatchNodeId==null` 但零售单号有|零售复尺无任务实例|转 `handleWithoutTask` 先建任务再递归|
-|节点/任务查不到|数据不存在|抛 `TASK_NONE_EXIST`(ERROR_PARAM_ILLEGAL)|
-|`RETAIL` 且 `processCode==""`|非模板配置的新零售单|完成节点 + `createMaterialTaskWithDefaultParam` 补建默认任务 → return|
-|节点 `processStatus==COMPLETED(3)`|已提交过|直接 return（幂等）|
-|节点 `processStatus==UN_ACTIVE(1)`|任务尚未激活|收口前置任务/节点 + 激活当前任务|
-|`nodeType >= CHANGE(200)`|变更单节点|任务直接置 COMPLETED → return（不推下一节点）|
-|`qualified==UNQUALIFIED(2)`|复尺/验收不合格|走重启流程 `restartProcess`|
-|`qualified` 为合格(1)/null|正常流转|计算下一节点并激活|
-|`nextNode==null`（无下一节点）|任务走到末尾|TaskDispatch 置 COMPLETED；发 C 端客户消息；激活后置任务|
+|                                                 |            |                                                             |
+| ----------------------------------------------- | ---------- | ----------------------------------------------------------- |
+| 条件                                              | 业务含义       | 处理                                                          |
+| `taskDispatchNodeId==null && salesSubOrderNo` 空 | 两个定位参数都没给  | `Preconditions` 抛 `IllegalArgumentException`                |
+| `taskDispatchNodeId==null` 但零售单号有               | 零售复尺无任务实例  | 转 `handleWithoutTask` 先建任务再递归                               |
+| 节点/任务查不到                                        | 数据不存在      | 抛 `TASK_NONE_EXIST`(ERROR_PARAM_ILLEGAL)                    |
+| `RETAIL` 且 `processCode==""`                    | 非模板配置的新零售单 | 完成节点 + `createMaterialTaskWithDefaultParam` 补建默认任务 → return |
+| 节点 `processStatus==COMPLETED(3)`                | 已提交过       | 直接 return（幂等）                                               |
+| 节点 `processStatus==UN_ACTIVE(1)`                | 任务尚未激活     | 收口前置任务/节点 + 激活当前任务                                          |
+| `nodeType >= CHANGE(200)`                       | 变更单节点      | 任务直接置 COMPLETED → return（不推下一节点）                            |
+| `qualified==UNQUALIFIED(2)`                     | 复尺/验收不合格   | 走重启流程 `restartProcess`                                      |
+| `qualified` 为合格(1)/null                         | 正常流转       | 计算下一节点并激活                                                   |
+| `nextNode==null`（无下一节点）                         | 任务走到末尾     | TaskDispatch 置 COMPLETED；发 C 端客户消息；激活后置任务                   |
 
 ---
 
