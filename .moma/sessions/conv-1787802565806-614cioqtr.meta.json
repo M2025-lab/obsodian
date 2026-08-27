@@ -1,0 +1,24 @@
+{
+  "id": "conv-1787802565806-614cioqtr",
+  "providerId": "claude",
+  "title": "解释新零售概念",
+  "titleGenerationStatus": "success",
+  "createdAt": 1787802565806,
+  "updatedAt": 1787802581004,
+  "lastResponseAt": 1787802581004,
+  "sessionId": "abf34628-dc90-4a8a-8be4-469d14beda83",
+  "providerState": {
+    "providerSessionId": "abf34628-dc90-4a8a-8be4-469d14beda83"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 20735,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 16128,
+    "outputTokens": 472,
+    "contextWindow": 200000,
+    "contextTokens": 36863,
+    "percentage": 18,
+    "contextWindowIsAuthoritative": true
+  }
+}
