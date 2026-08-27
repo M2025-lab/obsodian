@@ -305,3 +305,10 @@ Partition 3 → Broker 4
 12:46:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 12:46:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 12:46:37 [INFO] [moma debug] plugin-settings success
+13:46:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+13:46:37 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+13:46:37 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+13:46:38 [INFO] [auth-credential] refresh success, generation=undefined
+13:46:38 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+13:46:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+13:46:39 [INFO] [moma debug] plugin-settings success
