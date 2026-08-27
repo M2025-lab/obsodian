@@ -265,12 +265,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90.AI学习/Agent学习计划.md",
+                "file": "90.AI学习/第一阶段/第一阶段.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Agent学习计划"
+              "title": "第一阶段"
             }
           }
         ],
@@ -490,6 +490,7 @@
   },
   "active": "eae4cda920c493c0",
   "lastOpenFiles": [
+    "90.AI学习/Agent学习计划.md",
     "00.需求/通知复尺自动化/sendPushMsg.md",
     "00.需求/通知复尺自动化/handleNode.md",
     "📚 ....md",
