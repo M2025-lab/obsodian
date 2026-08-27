@@ -228,7 +228,88 @@ starlord 自身做的事，按业务域可归纳为以下核心能力（详见 [
 - **是什么**：送货或安装环节出问题后，需要补单（原厂返补/当场返补）跟进的跟单单据。
 - **状态**：0待处理/10处理中/20待跟进/30待下单/40已下单/50已提交提货/90已关单。【已确认】
 
-### 2.3 容易混淆的概念
+### 2.3 配置 → 流程 → 任务 → 节点：四层关系一图打通
+
+> 这是新人最容易卡住、也最该先建立的心智模型。理解了它，后面所有的 Mode、模板表、状态流转都能挂上来。
+
+#### 核心一句话
+
+**流程是配置的产物，任务是按蓝图实例化出来的数据行。
+
+#### 四层关系
+
+```mermaid
+flowchart LR
+    C["①配置<br/>delivery_flow_rule命中模板<br/>+ n_material_template定义节点链<br/>+ Mode/Apollo微调"]
+    C -->|"定义出"| P["②流程<br/>(蓝图,不在DB存)<br/>该品类该走哪些任务类型<br/>每个任务里该走哪些节点"]
+    P -->|"调度引擎按蓝图实例化"| T["③任务<br/>task_dispatch<br/>每个task_type一条"]
+    T -->|"1:N挂载"| N["④节点<br/>task_dispatch_node<br/>每个node_type一条"]
+    classDef cfg fill:#fce8e6,stroke:#ea4335,stroke-width:2px,color:#1a1a1a
+    classDef proc fill:#fef7e0,stroke:#f9ab00,stroke-width:2px,color:#1a1a1a
+    classDef task fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#1a1a1a
+    classDef node fill:#e6f4ea,stroke:#34a853,stroke-width:2px,color:#1a1a1a
+    class C cfg
+    class P proc
+    class T task
+    class N node
+```
+
+- **配置**（①）：运营在配置后台维护的模板和规则（`delivery_flow_rule` 命中哪套 `n_material_template`，Mode/Apollo 再做微调）——**定义蓝图**。
+- **流程**（②）：配置算出来的结果——"该品类的任务该包含哪些任务类型、每个任务内部该走哪些节点"。**它是个抽象概念，DB 里不存**。【代码推断】
+- **任务**（③）：调度引擎按流程蓝图，为一个品类实际生成的 `task_dispatch` 数据行——**每个 task_type 一条**。
+- **节点**（④）：每条任务下挂的 `task_dispatch_node` 工序行——**每个 node_type 一条**。
+
+> **流程是依据，任务是结果**——图纸和按图纸盖出来的房子的关系。新人找"流程"不要去 DB 里 grep，去配置表和模板表里找。
+
+#### 通用流程的两层拆分（关键，能解释"有些品类没有测量/复尺"）
+
+家装主材交付有条人尽皆知的通用流程：**报价 → 测量 → 复尺 → 报价变更 → 下单 → 送货 → 安装 → 验收**。但它其实混了两个层级，新人必须拆开看：【合理推测，基于 task_type / node_type 口径】
+
+| 通用流程步骤                        | 层级              | 在 starlord 的落地                        |
+| ----------------------------- | --------------- | ------------------------------------- |
+| 测量 / 复尺 / 报价变更 / 下单 / 送货 / 安装 | **任务级**         | 各自一条 `task_dispatch`（各对应一个 task_type） |
+| 通知 执行                         | **节点级**         | 安装任务里的 node_type（20 40 60 80）         |
+| 报价                            | **不在 starlord** | 上游报价中控（中控系统），starlord 只接"报价变更"回流      |
+
+也就是说，**流程本身是两层结构**：
+- **流程 = 一组任务类型（task_type）的有序集合**（任务级链路）
+- **每个任务类型内部 = 一组节点类型（node_type）的有序链**（节点级链路）
+
+配置决定这两层各装哪些、怎么排。**"有些品类没有测量和复尺"** = 配置把对应的 task_type 从该品类的流程里摘掉了；**"有些品类没有报价变更"** = 同理，该 task_type 没进流程。【代码推断】
+
+#### 对比示例：同一套房的橱柜 vs 木门，流程不一样
+
+```mermaid
+flowchart TD
+    subgraph CG["橱柜（需量尺定制，流程长）"]
+        CG1["测量任务 task_type=1"] --> CG2["复尺任务 task_type=3<br/>含 node20通知复尺→node60复尺执行"]
+        CG2 --> CG3["下单任务 task_type=4"]
+        CG3 --> CG4["送货任务 task_type=5"]
+        CG4 --> CG5["安装任务 task_type=6<br/>含 node40派单→node50进场→node60自检→node65验收→node80实地→node85业主"]
+    end
+    subgraph MD["木门（标准品，无测量复尺）"]
+        MD1["下单任务 task_type=4"] --> MD2["送货任务 task_type=5"]
+        MD2 --> MD3["安装任务 task_type=6<br/>含 node40派单→node50进场→node60自检→node65验收→node80实地→node85业主"]
+    end
+    classDef cg fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#1a1a1a
+    classDef md fill:#e6f4ea,stroke:#34a853,stroke-width:2px,color:#1a1a1a
+    class CG1,CG2,CG3,CG4,CG5 cg
+    class MD1,MD2,MD3 md
+```
+
+同样是这一套房的橱柜和木门：
+- **橱柜**走完整的"测量→复尺→下单→送货→安装"——因为它要量尺定制，配置里保留了测量和复尺两个 task_type。
+- **木门**是标准品，直接"下单→送货→安装"——配置里没有测量和复尺的 task_type，**流程比橱柜短**。
+
+> **每个品类的具体流程，就是该品类主材任务生成的依据**——配置定了流程，调度引擎按流程生成对应的任务和节点。同样一套房，不同品类生成的 `task_dispatch` 条数和类型都不一样。
+
+#### 新人该怎么用这个模型
+
+1. 看到任何一条 `task_dispatch`，先问：**这是哪个品类、哪个 task_type 的任务？**（品类看 material_code，类型看 task_type）
+2. 再问：**这个品类为什么有这个任务？** 去配置表（`delivery_flow_rule` + `n_material_template`）看该品类的流程模板里有没有这个 task_type。
+3. 想理解某个品类完整流程，**不要查 DB，去查配置后台的模板**——看它定义了哪些任务类型、每个任务挂了哪些节点。
+
+### 2.4 容易混淆的概念
 
 | 对比 | 区别 | 何时用 A / 何时用 B |
 |------|------|---------------------|

@@ -4,8 +4,8 @@
   "title": "整理新人快速上手项目知识文档",
   "titleGenerationStatus": "success",
   "createdAt": 1787810820187,
-  "updatedAt": 1787816652766,
-  "lastResponseAt": 1787816652766,
+  "updatedAt": 1787818420368,
+  "lastResponseAt": 1787818420367,
   "sessionId": "a3b4e80a-32c5-4f34-8300-996d90fe7752",
   "providerState": {
     "providerSessionId": "a3b4e80a-32c5-4f34-8300-996d90fe7752",
@@ -624,12 +624,12 @@
   },
   "usage": {
     "model": "haiku",
-    "inputTokens": 65630,
+    "inputTokens": 405,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 16128,
-    "outputTokens": 3139,
+    "cacheReadInputTokens": 88128,
+    "outputTokens": 411,
     "contextWindow": 200000,
-    "contextTokens": 81758,
-    "percentage": 41
+    "contextTokens": 88533,
+    "percentage": 44
   }
 }

@@ -695,3 +695,15 @@ cube
 15:42:57 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
 15:42:57 [INFO] [auth-credential] refresh success, generation=undefined
 15:46:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:12:25 [moma debug] buildTurnSubmission {
+  "contentLength": 4,
+  "turnRequest": {
+    "textLength": 4,
+    "hasSkillInvocation": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+16:12:25 【发送给 Provider SDK 的 Prompt】
+第二章吧
