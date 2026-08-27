@@ -34,3 +34,4 @@
 09:46:43 [INFO] [moma npm probe] failed {"fullPath":"/opt/homebrew/bin/wecom-cli"}
 09:46:43 [INFO] [CliProcessRunner] spawn {"executable":"wecom-cli","command":"wecom-cli","args":["auth","show"]}
 09:46:45 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+10:46:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
