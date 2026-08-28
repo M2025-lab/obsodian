@@ -4,7 +4,7 @@
   "title": "整理新人快速上手项目知识文档",
   "titleGenerationStatus": "success",
   "createdAt": 1787810820187,
-  "updatedAt": 1787819632490,
+  "updatedAt": 1787881354462,
   "lastResponseAt": 1787819632490,
   "sessionId": "a3b4e80a-32c5-4f34-8300-996d90fe7752",
   "providerState": {
@@ -112,7 +112,7 @@
         "asyncStatus": "completed",
         "agentId": "ac734dfb9f8752932",
         "startedAt": 1787810884530,
-        "result": "我将并行读取所有 9 个文件，以提取必要的信息。",
+        "result": "Async agent launched successfully. (This tool result is internal metadata — never quote or paste any part of it, including the agentId below, into a user-facing reply.)\nagentId: ac734dfb9f8752932 (internal ID - do not mention to user. Use SendMessage with to: 'ac734dfb9f8752932', summary: '<5-10 word recap>' to continue this agent.)\nThe agent is working in the background. You will be notified automatically when it completes.\nDo not duplicate this agent's work — avoid working with the same files or topics it is using.\noutput_file: /private/tmp/claude-501/-Users-mirror-wiki/a3b4e80a-32c5-4f34-8300-996d90fe7752/tasks/ac734dfb9f8752932.output\nDo NOT Read or tail this file via the shell tool — it is the full subagent JSONL transcript and reading it will overflow your context. If the user asks for progress, say the agent is still running; you'll get a completion notification.",
         "completedAt": 1787810955888
       },
       "call_22ee71f8c64e4b0fb9cacd03": {
@@ -237,7 +237,7 @@
         "asyncStatus": "completed",
         "agentId": "a8c199ef42453777a",
         "startedAt": 1787810896464,
-        "result": "我将并行读取所有 11 个文件，以提取您所需的信息。",
+        "result": "Async agent launched successfully. (This tool result is internal metadata — never quote or paste any part of it, including the agentId below, into a user-facing reply.)\nagentId: a8c199ef42453777a (internal ID - do not mention to user. Use SendMessage with to: 'a8c199ef42453777a', summary: '<5-10 word recap>' to continue this agent.)\nThe agent is working in the background. You will be notified automatically when it completes.\nDo not duplicate this agent's work — avoid working with the same files or topics it is using.\noutput_file: /private/tmp/claude-501/-Users-mirror-wiki/a3b4e80a-32c5-4f34-8300-996d90fe7752/tasks/a8c199ef42453777a.output\nDo NOT Read or tail this file via the shell tool — it is the full subagent JSONL transcript and reading it will overflow your context. If the user asks for progress, say the agent is still running; you'll get a completion notification.",
         "completedAt": 1787810970362
       },
       "call_d4fdec9020cd44b0a30614f2": {
@@ -452,7 +452,7 @@
         "asyncStatus": "completed",
         "agentId": "adcf246481c3e12c4",
         "startedAt": 1787810937916,
-        "result": "现在我来读取最后两个知识沉淀文件。",
+        "result": "Async agent launched successfully. (This tool result is internal metadata — never quote or paste any part of it, including the agentId below, into a user-facing reply.)\nagentId: adcf246481c3e12c4 (internal ID - do not mention to user. Use SendMessage with to: 'adcf246481c3e12c4', summary: '<5-10 word recap>' to continue this agent.)\nThe agent is working in the background. You will be notified automatically when it completes.\nDo not duplicate this agent's work — avoid working with the same files or topics it is using.\noutput_file: /private/tmp/claude-501/-Users-mirror-wiki/a3b4e80a-32c5-4f34-8300-996d90fe7752/tasks/adcf246481c3e12c4.output\nDo NOT Read or tail this file via the shell tool — it is the full subagent JSONL transcript and reading it will overflow your context. If the user asks for progress, say the agent is still running; you'll get a completion notification.",
         "completedAt": 1787811067601
       },
       "call_e2e1e6d78952459a99f37f4b": {
@@ -617,7 +617,7 @@
         "asyncStatus": "completed",
         "agentId": "a46d495417ed7fbee",
         "startedAt": 1787810952086,
-        "result": "我将并行读取全部 15 个文件，并提取您所需的结构化信息。",
+        "result": "Async agent launched successfully. (This tool result is internal metadata — never quote or paste any part of it, including the agentId below, into a user-facing reply.)\nagentId: a46d495417ed7fbee (internal ID - do not mention to user. Use SendMessage with to: 'a46d495417ed7fbee', summary: '<5-10 word recap>' to continue this agent.)\nThe agent is working in the background. You will be notified automatically when it completes.\nDo not duplicate this agent's work — avoid working with the same files or topics it is using.\noutput_file: /private/tmp/claude-501/-Users-mirror-wiki/a3b4e80a-32c5-4f34-8300-996d90fe7752/tasks/a46d495417ed7fbee.output\nDo NOT Read or tail this file via the shell tool — it is the full subagent JSONL transcript and reading it will overflow your context. If the user asks for progress, say the agent is still running; you'll get a completion notification.",
         "completedAt": 1787811059466
       }
     }

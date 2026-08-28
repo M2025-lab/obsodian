@@ -17,6 +17,7 @@ body {
   --moma-error: #dc3545;
   --moma-error-rgb: 220, 53, 69;
   --moma-compact: #5bc0de;
+  --moma-compact-rgb: 91, 192, 222;
 }
 
 /* Provider-specific brand overrides */
@@ -2919,6 +2920,7 @@ body.theme-dark .moma-tool-content-todo {
 /* Height calculation: context row (36px) + textarea min (60px) + toolbar (38px) + border (2px) = 136px */
 .moma-input-wrapper {
   position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   min-height: 140px;
@@ -3234,6 +3236,389 @@ body.theme-dark .moma-tool-content-todo {
 
 .moma-file-chip:hover {
   background: var(--background-modifier-hover);
+}
+
+/* Composer references stay out of the editor body as semantic root chips. */
+.moma-workbench-reference-summaries {
+  display: none;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  gap: 6px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.moma-workbench-reference-item-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.moma-workbench-reference-item-remove:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+  opacity: 1;
+}
+
+.moma-workbench-reference-popover {
+  position: absolute;
+  z-index: var(--layer-popover, 1000);
+  bottom: calc(100% - 1px);
+  left: 0;
+  display: none;
+  width: 240px;
+  max-width: calc(100vw - 32px);
+  max-height: min(320px, calc(100vh - 32px));
+  padding: 0;
+  border: 1px solid var(--moma-overflow-popover-border-color);
+  border-radius: 10px;
+  background: var(--background-primary);
+  box-shadow: var(--shadow-l);
+  overflow-y: auto;
+}
+
+.moma-workbench-reference-popover-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 10px 8px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-radius: 10px 10px 0 0;
+  background: var(--background-primary);
+}
+
+.moma-workbench-reference-popover-title {
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-workbench-reference-popover-count,
+.moma-workbench-reference-section-count,
+.moma-workbench-reference-item-count {
+  flex: 0 0 auto;
+  color: var(--text-faint);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.moma-workbench-reference-keyboard-hint {
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(var(--moma-reference-accent-rgb), 0.12);
+  background: rgba(var(--moma-reference-accent-rgb), 0.06);
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.moma-workbench-reference-section + .moma-workbench-reference-section {
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.moma-workbench-reference-section-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 5px 8px 3px 10px;
+  background: rgba(var(--moma-reference-accent-rgb), 0.055);
+}
+
+.moma-workbench-reference-section-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-workbench-reference-list {
+  padding: 5px;
+}
+
+.moma-workbench-reference-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 32px;
+  gap: 8px;
+  padding: 4px 5px 4px 7px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: background 0.12s ease;
+}
+
+.moma-workbench-reference-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+.moma-workbench-reference-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--moma-reference-accent);
+}
+
+.moma-workbench-reference-item-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.8;
+}
+
+.moma-workbench-reference-item-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: 12px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-workbench-reference-entry {
+  position: relative;
+  flex: 0 1 auto;
+  max-width: 180px;
+  min-width: 0;
+}
+
+.moma-workbench-reference-entry--data {
+  --moma-reference-accent: var(--moma-brand);
+  --moma-reference-accent-rgb: var(--moma-brand-rgb);
+}
+
+.moma-workbench-reference-entry--space {
+  --moma-reference-accent: var(--moma-brand);
+  --moma-reference-accent-rgb: var(--moma-brand-rgb);
+}
+
+.moma-workbench-reference-entry--local {
+  --moma-reference-accent: #a78bfa;
+  --moma-reference-accent-rgb: 167, 139, 250;
+}
+
+.moma-workbench-reference-section--data,
+.moma-workbench-reference-item--data {
+  --moma-reference-accent: var(--moma-brand);
+  --moma-reference-accent-rgb: var(--moma-brand-rgb);
+}
+
+.moma-workbench-reference-section--space,
+.moma-workbench-reference-item--space {
+  --moma-reference-accent: var(--moma-brand);
+  --moma-reference-accent-rgb: var(--moma-brand-rgb);
+}
+
+.moma-workbench-reference-section--local,
+.moma-workbench-reference-item--local {
+  --moma-reference-accent: #a78bfa;
+  --moma-reference-accent-rgb: 167, 139, 250;
+}
+
+.moma-workbench-reference-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  height: 26px;
+  padding: 0 4px 0 7px;
+  border: 1px solid rgba(var(--moma-reference-accent-rgb), 0.24);
+  border-radius: 8px;
+  background: rgba(var(--moma-reference-accent-rgb), 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  color: var(--text-normal);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.moma-workbench-reference-entry:hover .moma-workbench-reference-chip {
+  border-color: rgba(var(--moma-reference-accent-rgb), 0.44);
+  background: rgba(var(--moma-reference-accent-rgb), 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.moma-workbench-reference-entry.is-keyboard-selected .moma-workbench-reference-chip {
+  border-color: var(--moma-reference-accent);
+  background: rgba(var(--moma-reference-accent-rgb), 0.16);
+  box-shadow: 0 0 0 2px rgba(var(--moma-reference-accent-rgb), 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.moma-workbench-reference-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  color: var(--moma-reference-accent);
+}
+
+.moma-workbench-reference-chip-icon svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.8;
+}
+
+.moma-workbench-reference-chip-title {
+  flex: 1 1 auto;
+  min-width: 24px;
+  overflow: hidden;
+  color: var(--text-normal);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-workbench-reference-chip-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 6px;
+  background: rgba(var(--moma-reference-accent-rgb), 0.14);
+  color: var(--moma-reference-accent);
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.moma-workbench-reference-chip-remove,
+.moma-workbench-reference-popover-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.moma-workbench-reference-chip-remove:hover,
+.moma-workbench-reference-popover-clear:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+  opacity: 1;
+}
+
+.moma-workbench-reference-overflow {
+  position: relative;
+  flex: 0 0 auto;
+  outline: none;
+  --moma-overflow-accent: var(--text-normal);
+  --moma-overflow-border-color: var(--background-modifier-border-hover);
+  --moma-overflow-background: var(--background-modifier-hover);
+  --moma-overflow-popover-border-color: var(--background-modifier-border);
+}
+
+.moma-workbench-reference-overflow--moma {
+  --moma-overflow-accent: var(--moma-brand);
+  --moma-overflow-border-color: rgba(var(--moma-brand-rgb), 0.38);
+  --moma-overflow-background: rgba(var(--moma-brand-rgb), 0.1);
+  --moma-overflow-popover-border-color: rgba(var(--moma-brand-rgb), 0.18);
+}
+
+.moma-workbench-reference-overflow--local {
+  --moma-overflow-accent: #a78bfa;
+  --moma-overflow-border-color: rgba(167, 139, 250, 0.38);
+  --moma-overflow-background: rgba(167, 139, 250, 0.1);
+  --moma-overflow-popover-border-color: rgba(167, 139, 250, 0.18);
+}
+
+.moma-workbench-reference-overflow-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.moma-workbench-reference-overflow:hover .moma-workbench-reference-overflow-chip,
+.moma-workbench-reference-overflow:focus-within .moma-workbench-reference-overflow-chip {
+  border-color: var(--moma-overflow-border-color);
+  background: var(--moma-overflow-background);
+  color: var(--moma-overflow-accent);
+}
+
+.moma-workbench-reference-overflow:hover .moma-workbench-reference-popover,
+.moma-workbench-reference-overflow:focus-within .moma-workbench-reference-popover {
+  display: block;
+}
+
+.moma-workbench-reference-entry .moma-workbench-reference-keyboard-hint {
+  position: absolute;
+  z-index: var(--layer-popover, 1000);
+  right: 0;
+  bottom: calc(100% + 6px);
+  width: max-content;
+  max-width: min(220px, calc(100vw - 32px));
+  padding: 6px 9px;
+  border: 1px solid rgba(var(--moma-reference-accent-rgb), 0.24);
+  border-radius: 6px;
+  background: var(--background-primary);
+  box-shadow: var(--shadow-s);
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 /* Skill warning row (shown when a workbench skill is not installed for current provider) */
@@ -5399,10 +5784,7 @@ body.theme-dark .moma-tool-content-todo {
    ============================================ */
 /* External Context Selector */
 .moma-external-context-selector {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
+  display: none !important;
 }
 
 .moma-external-context-selector--chips {
@@ -8781,6 +9163,17 @@ body.theme-dark .moma-diff-insert {
   z-index: 10001;
 }
 
+.moma-slash-group-label {
+  padding: 7px 12px 5px;
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--background-secondary-alt);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
 .moma-slash-item {
   padding: 8px 12px;
   cursor: pointer;
@@ -11074,17 +11467,6 @@ body.theme-dark .moma-space-submenu {
   overflow-y: auto;
 }
 
-/* When showing an iframe the view must not scroll itself — the iframe handles it */
-.moma-data-asset-detail-view.has-iframe {
-  overflow-y: hidden;
-}
-
-.moma-data-asset-detail-iframe {
-  flex: 1;
-  width: 100%;
-  min-height: 0;
-  border: 0;
-}
 
 .moma-data-asset-detail-header {
   position: sticky;
@@ -11135,7 +11517,7 @@ body.theme-dark .moma-space-submenu {
   padding: 24px 30px 80px;
 }
 
-.has-iframe .moma-data-asset-detail-body {
+.moma-data-asset-detail-body.is-html {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -11143,6 +11525,18 @@ body.theme-dark .moma-space-submenu {
   min-height: 0;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.moma-data-asset-detail-iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  border: 0;
+  background: #f4f5f7;
 }
 
 .moma-data-asset-detail-state {
@@ -20343,10 +20737,14 @@ button.nv-debug-button {
   line-height: 1.4;
   overflow-wrap: anywhere;
   padding: 8px 10px;
+  /* Obsidian 全局把非输入元素设为 user-select: none,手选这条兜底路径会断。 */
+  user-select: text;
+  cursor: text;
 }
 
-.moma-wecom-auth-action-button {
-  justify-self: start;
+.moma-wecom-auth-action-buttons {
+  display: flex;
+  gap: var(--size-4-2);
 }
 
 @media (max-width: 480px) {
@@ -23252,6 +23650,8 @@ body.theme-dark .moma-skill-card:hover {
 .moma-image-chip:focus-visible,
 .moma-file-chip-remove:focus-visible,
 .moma-image-remove:focus-visible,
+.moma-workbench-reference-summary-clear:focus-visible,
+.moma-workbench-reference-item-remove:focus-visible,
 .moma-image-modal-close:focus-visible,
 .moma-approved-remove-btn:focus-visible,
 .moma-save-env-btn:focus-visible,
