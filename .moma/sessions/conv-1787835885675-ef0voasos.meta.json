@@ -4,8 +4,8 @@
   "title": "重新生成 AI Agent 开发学习计划",
   "titleGenerationStatus": "success",
   "createdAt": 1787835885675,
-  "updatedAt": 1787881354464,
-  "lastResponseAt": 1787839636627,
+  "updatedAt": 1787886396042,
+  "lastResponseAt": 1787886396042,
   "sessionId": "a8934a18-2be6-4956-b58e-18d948229cac",
   "providerState": {
     "providerSessionId": "a8934a18-2be6-4956-b58e-18d948229cac"
@@ -13,13 +13,13 @@
   "currentNote": "90.AI学习/Agent学习计划.md",
   "usage": {
     "model": "haiku",
-    "inputTokens": 622,
+    "inputTokens": 91886,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 110336,
-    "outputTokens": 285,
+    "cacheReadInputTokens": 10432,
+    "outputTokens": 1684,
     "contextWindow": 200000,
-    "contextTokens": 110958,
-    "percentage": 55,
+    "contextTokens": 102318,
+    "percentage": 51,
     "contextWindowIsAuthoritative": true
   }
 }
