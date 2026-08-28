@@ -76,3 +76,8 @@ Python 不需要。这就是「鸭子类型」——走起来像鸭子，就是�
 13:42:36 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 13:42:36 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 13:42:36 [INFO] [moma debug] plugin-settings success
+14:42:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:42:36 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:42:36 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:42:36 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:42:36 [INFO] [moma debug] plugin-settings success
