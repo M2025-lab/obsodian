@@ -17,7 +17,7 @@
 
 ## 一图总览
 
-![image.png](https://file.ljcdn.com/codelink-web/ob/1787917916723-bbd35860-719d-43d8-8f9b-0217ae6b4af2.png)
+![image.png](https://file.ljcdn.com/codelink-web/ob/1787918522203-6b55288d-3bb5-425c-a3ee-74b296fc6c9a.png)
 
 ## 核心结论速览（详见各分篇）
 
