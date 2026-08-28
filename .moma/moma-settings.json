@@ -182,5 +182,7 @@
     "limitTitle": "本周额度已达上限"
   },
   "hostAuthSelfHealGrayEnabled": false,
-  "homepageEnabled": false
+  "homepageEnabled": false,
+  "lastGrayReleaseDismiss": 1787917812884,
+  "lastGrayReleaseDismissVersion": "0.3.13"
 }

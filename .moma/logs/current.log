@@ -101,3 +101,8 @@ Python 不需要。这就是「鸭子类型」——走起来像鸭子，就是�
 18:46:16 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 18:46:17 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 18:46:17 [INFO] [moma debug] plugin-settings success
+19:46:15 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:51:55 [INFO] [moma debug] file-upload request {"fileName":"image.png"}
+19:51:55 [INFO] [MomaHttpClient] → (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload"}
+19:51:56 [INFO] [MomaHttpClient] ← (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"s3Key\":\"/codelink-web/ob/1787917916723-bbd35860-719d-43d8-8f9b-0217ae6b4af2.png\",\"s3Url\":\"https://file.ljcdn.com/codelink-web/ob/1787917916723-bbd35860-719d-43d8-8f9b-0217ae6b4af2.png\",\"originalFileName\":\"image.png\"}}"}
+19:51:56 [INFO] [moma debug] file-upload success {"fileName":"image.png","originalFileName":"image.png"}
