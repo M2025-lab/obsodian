@@ -12390,6 +12390,12 @@ body.theme-dark .moma-space-submenu {
   color: var(--text-normal);
 }
 
+.moma-rec-settings-btn--disabled,
+:is(.moma-container, .moma-workbench-view) button.moma-rec-settings-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .moma-rec-settings-btn svg {
   width: 15px;
   height: 15px;
@@ -13909,9 +13915,9 @@ body.theme-dark .moma-space-submenu {
 .moma-rec-modal {
   position: fixed;
   z-index: 200;
-  width: min(920px, calc(100vw - 48px));
-  height: min(720px, calc(100vh - 80px));
-  max-height: min(720px, calc(100vh - 80px));
+  width: min(1080px, calc(100vw - 32px));
+  height: min(840px, calc(100vh - 48px));
+  max-height: min(840px, calc(100vh - 48px));
   background: var(--background-primary);
   border: 1px solid var(--background-modifier-border);
   border-radius: 12px;
@@ -13930,7 +13936,7 @@ body.theme-dark .moma-space-submenu {
 
 /* LIVE_SUMMARY off: narrower modal without right summary column */
 .moma-rec-modal--no-live-summary {
-  width: min(620px, calc(100vw - 48px));
+  width: min(720px, calc(100vw - 32px));
 }
 
 .moma-rec-modal-split {
@@ -13939,11 +13945,400 @@ body.theme-dark .moma-space-submenu {
   display: flex;
 }
 
+/* Left column: ~58% — transcript + divider + inline summary + footer */
 .moma-rec-main {
+  flex: 0 0 58%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+/* ── Pane area: fills left column above footer ── */
+
+.moma-rec-pane-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Panes: transcript / summary — flex children of pane-area ── */
+
+.moma-rec-pane {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+
+/* Transcript pane */
+.moma-rec-pane--transcript {
+  flex-basis: 50%;
+}
+
+.moma-rec-pane--transcript .moma-rec-transcript {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Summary pane */
+.moma-rec-pane--summary {
+  flex-basis: 50%;
+}
+
+.moma-rec-pane--summary .moma-rec-summary-inline-host {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.moma-rec-pane--summary .moma-rec-summary-inline {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Collapsed pane: zero height */
+.moma-rec-pane--collapsed {
+  flex-basis: 0% !important;
+  flex-shrink: 0 !important;
+  overflow: hidden;
+}
+
+/* ── Drag divider ── */
+
+.moma-rec-modal button.moma-rec-divider {
+  flex-shrink: 0;
+  width: 100%;
+  height: 8px;
+  min-height: 8px;
+  line-height: 0;
+  cursor: ns-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  font: inherit;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.moma-rec-divider::before {
+  content: '';
+  display: block;
+  width: calc(100% - 24px);
+  height: 2px;
+  border-radius: 99px;
+  background: var(--background-modifier-border);
+  transition: background 0.15s ease;
+}
+
+.moma-rec-divider:hover::before,
+.moma-rec-divider:active::before {
+  background: var(--moma-brand);
+}
+
+.moma-rec-divider-chip {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 10px;
+  border-radius: 99px;
+  border: 1px dashed var(--background-modifier-border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.moma-rec-divider-chevron {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.moma-rec-divider-chevron--up {
+  display: none;
+}
+
+/* Must beat `.moma-rec-modal button.moma-rec-divider` (height: 8px; line-height: 0) */
+.moma-rec-modal button.moma-rec-divider.moma-rec-divider--transcript-collapsed,
+.moma-rec-modal button.moma-rec-divider.moma-rec-divider--summary-collapsed {
+  height: 32px;
+  min-height: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.moma-rec-modal button.moma-rec-divider.moma-rec-divider--transcript-collapsed {
+  border-bottom: 1px dashed var(--background-modifier-border) !important;
+}
+
+.moma-rec-modal button.moma-rec-divider.moma-rec-divider--summary-collapsed {
+  border-top: 1px dashed var(--background-modifier-border) !important;
+}
+
+.moma-rec-divider--transcript-collapsed::before,
+.moma-rec-divider--summary-collapsed::before {
+  display: none;
+}
+
+.moma-rec-divider--transcript-collapsed .moma-rec-divider-chip,
+.moma-rec-divider--summary-collapsed .moma-rec-divider-chip {
+  display: inline-flex;
+}
+
+.moma-rec-divider--summary-collapsed .moma-rec-divider-chevron--up {
+  display: block;
+}
+
+.moma-rec-divider--summary-collapsed .moma-rec-divider-chevron--down {
+  display: none;
+}
+
+.moma-rec-divider--transcript-collapsed:hover .moma-rec-divider-chip,
+.moma-rec-divider--summary-collapsed:hover .moma-rec-divider-chip,
+.moma-rec-divider--transcript-collapsed:focus-visible .moma-rec-divider-chip,
+.moma-rec-divider--summary-collapsed:focus-visible .moma-rec-divider-chip {
+  color: var(--moma-brand);
+  border-color: var(--moma-brand);
+  background: rgba(var(--moma-brand-rgb), 0.1);
+}
+
+/* ── Inline summary (left-column, below transcript) ── */
+
+.moma-rec-summary-inline-host {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.moma-rec-summary-inline {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.moma-rec-summary-inline__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.moma-rec-summary-inline__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.moma-rec-summary-inline__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 4px;
+  color: var(--text-faint);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.moma-rec-summary-inline__toggle:hover {
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-muted) !important;
+}
+
+.moma-rec-summary-inline__toggle svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.moma-rec-summary-inline__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 14px 12px;
+}
+
+
+/* ── Right column: session Q&A (~42%) ── */
+
+.moma-rec-session-host {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+}
+
+.moma-rec-session {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--background-secondary);
+  overflow: hidden;
+}
+
+/* Body: fills remaining space between top and composer */
+.moma-rec-session__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Idle placeholder: icon + hint + example chips */
+.moma-rec-session__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px 20px;
+  pointer-events: none;
+}
+
+.moma-rec-session__placeholder-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(var(--moma-brand-rgb), 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--moma-brand);
+  flex-shrink: 0;
+}
+
+.moma-rec-session__placeholder-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.moma-rec-session__placeholder-hint {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-normal);
+  text-align: center;
+  line-height: 1.55;
+}
+
+.moma-rec-session__placeholder-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 280px;
+  pointer-events: auto;
+}
+
+.moma-rec-session__placeholder-chip {
+  font: inherit;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: #70341f !important;
+  background: #fff8f5 !important;
+  border: 1px solid #efc5b7 !important;
+  border-radius: 10px;
+  padding: 9px 12px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+  white-space: normal;
+  word-break: break-all;
+}
+
+.moma-rec-session__placeholder-chip:hover {
+  border-color: var(--moma-brand) !important;
+  color: #70341f !important;
+  transform: translateY(-1px);
+}
+
+body.theme-dark .moma-rec-session__placeholder-chip {
+  color: var(--moma-brand) !important;
+  background: rgba(var(--moma-brand-rgb), 0.12) !important;
+  border-color: rgba(var(--moma-brand-rgb), 0.35) !important;
+}
+
+body.theme-dark .moma-rec-session__placeholder-chip:hover {
+  border-color: var(--moma-brand) !important;
+  color: var(--moma-brand) !important;
+}
+
+/* Hide placeholder when a thread has started */
+.moma-rec-session.has-thread .moma-rec-session__placeholder {
+  display: none;
+}
+
+/* Inline Q&A thread in the right column */
+.moma-rec-session__msgs {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 12px 16px;
+  background: var(--background-primary);
+}
+
+.moma-rec-session.has-thread .moma-rec-session__msgs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Sheet already has a 12px gutter; main-chat .moma-message 14px 18px would double it. */
+.moma-rec-session__msgs .moma-message {
+  padding: 4px;
+}
+
+.moma-rec-session__msgs .moma-message-user {
+  width: fit-content;
+  max-width: 95%;
+  align-self: flex-end;
+  padding: 10px 12px;
+  margin-right: 0;
 }
 
 .moma-rec-modal-hd {
@@ -14462,17 +14857,13 @@ body.theme-dark .moma-space-submenu {
   color: #fff !important;
 }
 
-/* ── Live summary (right panel) ── */
-
-.moma-rec-live-summary {
-  width: 380px;
-  flex-shrink: 0;
-  border-left: 1px solid var(--background-modifier-border);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  background: var(--background-secondary);
-}
+/* ── Live summary — legacy root kept for summary body content classes ── */
+/* The old right-column layout (.moma-rec-live-summary as width:380px fixed column)
+   is replaced by .moma-rec-session-host / .moma-rec-session (right column)
+   and .moma-rec-summary-inline-host / .moma-rec-summary-inline (left inline area).
+   The inner content classes (.moma-rec-live-summary__body, __stack, __title, etc.)
+   are no longer emitted by InlineSummaryPanel — skeleton/content/chapters classes
+   remain unchanged and are scoped inside .moma-rec-summary-inline__body. */
 
 .moma-rec-live-summary__head {
   padding: 12px 12px 10px;
@@ -14527,32 +14918,60 @@ body.theme-dark .moma-space-submenu {
 
 .moma-rec-ask {
   flex-shrink: 0;
-  position: relative;
-  z-index: 3;
   overflow: visible;
   background: var(--background-secondary);
   padding: 14px 12px 12px;
+  border-top: 1px solid var(--background-modifier-border);
 }
 
-.moma-rec-ask::before {
-  content: "";
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -18px;
-  height: 18px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, transparent, var(--background-primary));
+.moma-rec-paper-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 7px;
+}
+
+.moma-rec-modal button.moma-rec-paper {
+  border: 1px solid var(--background-modifier-border) !important;
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-muted) !important;
+  border-radius: 999px !important;
+  padding: 6px 11px 5px !important;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.2;
+  box-shadow: none !important;
+  cursor: default;
+  opacity: 0.7;
+}
+
+.moma-rec-modal button.moma-rec-paper.is-ready {
+  border-color: #efb39f !important;
+  background: #fff5f1 !important;
+  color: #a5482a !important;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.moma-rec-modal button.moma-rec-paper.is-ready:hover {
+  background: #ffeae2 !important;
+}
+
+.moma-rec-modal button.moma-rec-paper:disabled {
+  cursor: default;
 }
 
 .moma-rec-ask__context {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
   min-width: 0;
+}
+
+.moma-rec-ask__context.has-paper {
+  margin-bottom: 7px;
 }
 
 .moma-rec-ask__skill-warning {
@@ -14565,27 +14984,7 @@ body.theme-dark .moma-space-submenu {
 }
 
 .moma-rec-ask__file {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  font-size: 11.5px;
-  font-weight: 600;
-  line-height: 1.3;
-  color: var(--moma-brand);
-  background: rgba(var(--moma-brand-rgb), 0.12);
-  border: 1px solid rgba(var(--moma-brand-rgb), 0.24);
-  border-radius: 6px;
-  padding: 3px 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.moma-rec-ask__file.is-empty {
-  color: var(--text-muted);
-  font-weight: 500;
-  background: var(--background-modifier-hover);
-  border-color: var(--background-modifier-border);
+  display: none;
 }
 
 .moma-rec-ask__box {
@@ -14673,6 +15072,28 @@ body.theme-dark .moma-space-submenu {
   min-width: 0;
 }
 
+.moma-rec-ask__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.moma-rec-ask__actions .moma-plus-menu {
+  flex-shrink: 0;
+}
+
+.moma-rec-ask__actions .moma-plus-menu-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.moma-rec-ask__actions .moma-plus-menu-popup {
+  z-index: 40;
+}
+
 .moma-rec-modal button.moma-rec-ask__send {
   width: 28px;
   height: 28px;
@@ -14684,6 +15105,7 @@ body.theme-dark .moma-space-submenu {
   color: var(--background-primary);
   cursor: pointer;
   flex-shrink: 0;
+  margin-left: auto;
   box-shadow: none !important;
   outline: none;
 }
@@ -14696,113 +15118,6 @@ body.theme-dark .moma-space-submenu {
 .moma-rec-modal button.moma-rec-ask__send:disabled {
   opacity: 0.7;
   cursor: default;
-}
-
-.moma-rec-ask__kbd {
-  font-size: 11px;
-  color: var(--text-muted);
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.moma-rec-ask-sheet {
-  display: none;
-  position: absolute;
-  top: 88px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  background: var(--background-primary);
-  border: none;
-  border-radius: 12px 12px 0 0;
-  box-shadow: 0 -16px 40px rgba(0, 0, 0, 0.14);
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.moma-rec-ask-sheet.is-open {
-  display: flex;
-}
-
-.moma-rec-live-summary.is-ask-open .moma-rec-ask {
-  background: var(--background-primary);
-  box-shadow: 0 -16px 24px rgba(0, 0, 0, 0.045);
-}
-
-.moma-rec-live-summary.is-ask-open .moma-rec-ask::before {
-  display: block;
-}
-
-/* Dark: black-only shadows vanish on --background-secondary. Stroke + stronger lift. */
-body.theme-dark .moma-rec-ask-sheet {
-  border: 1px solid var(--background-modifier-border);
-  border-bottom: none;
-  box-shadow:
-    0 -1px 0 rgba(255, 255, 255, 0.08),
-    0 -18px 40px rgba(0, 0, 0, 0.55);
-}
-
-body.theme-dark .moma-rec-live-summary.is-ask-open .moma-rec-ask {
-  border-left: 1px solid var(--background-modifier-border);
-  border-right: 1px solid var(--background-modifier-border);
-  box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.4);
-}
-
-.moma-rec-ask-sheet__hd {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 10px 10px 14px;
-  border-bottom: 1px solid var(--background-modifier-border);
-  background: var(--background-secondary);
-  flex-shrink: 0;
-}
-
-.moma-rec-ask-sheet__title {
-  font-size: 13px;
-  font-weight: 650;
-  color: var(--text-normal);
-}
-
-.moma-rec-modal button.moma-rec-ask-sheet__close {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  border-radius: 5px;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.moma-rec-modal button.moma-rec-ask-sheet__close:hover {
-  background: var(--background-modifier-hover);
-  color: var(--text-normal);
-}
-
-.moma-rec-ask-sheet__msgs {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding: 12px 12px 16px;
-  background: var(--background-primary);
-}
-
-/* Sheet already has a 12px gutter; main-chat .moma-message 14px 18px would double it. */
-.moma-rec-ask-sheet__msgs .moma-message {
-  padding: 4px;
-}
-
-.moma-rec-ask-sheet__msgs .moma-message-user {
-  padding: 10px 12px;
-  margin-right: 0;
 }
 
 /* skeleton */
@@ -15929,8 +16244,895 @@ body.theme-dark .moma-rec-live-summary.is-ask-open .moma-rec-ask {
 
 /* ── Recording settings modal (⚙ entry) ── */
 
+.moma-modal-overlay.moma-rec-settings-overlay {
+  z-index: 280;
+}
+
+.moma-modal-overlay.moma-rec-settings-nested {
+  z-index: 290;
+}
+
+/* Pass-through like FileShareUpdateContentModal: vault / Space / 数据 stay draggable. */
+.moma-modal-overlay.moma-rec-settings-overlay--pass {
+  background: transparent;
+  pointer-events: none;
+}
+
+.moma-modal-overlay.moma-rec-settings-overlay--pass .moma-modal {
+  pointer-events: auto;
+}
+
 .moma-modal--rec-settings {
-  width: min(520px, calc(100vw - 32px));
+  width: min(1100px, 96vw);
+  height: min(780px, 92vh);
+  max-height: min(780px, 92vh);
+  border-radius: 14px;
+}
+
+.moma-modal--meeting-type {
+  width: min(560px, 92vw);
+  max-height: min(86vh, 680px);
+}
+
+.moma-modal--meeting-type .moma-modal-hd {
+  padding: 12px 18px;
+}
+
+.moma-modal--meeting-type .moma-modal-hd h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.moma-modal--meeting-type .moma-modal-bd {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 18px 12px;
+}
+
+.moma-modal--meeting-type .moma-modal-ft {
+  padding: 12px 18px;
+  gap: 10px;
+}
+
+.moma-modal--meeting-type .moma-rec-settings-field {
+  gap: 6px;
+}
+
+.moma-modal--meeting-type .moma-rec-settings-label {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-normal);
+  line-height: 1.4;
+}
+
+.moma-modal--meeting-type .moma-meeting-field-tip {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.moma-modal--meeting-type input.moma-rec-settings-input,
+.moma-modal--meeting-type textarea.moma-rec-settings-textarea {
+  padding: 9px 11px !important;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.moma-modal--meeting-type textarea.moma-meeting-rule {
+  min-height: 108px;
+  font-family: inherit;
+  line-height: 1.65;
+}
+
+/* ── Start-recording type picker ── */
+
+.moma-modal-overlay.moma-rec-start-overlay {
+  z-index: 280;
+  background: rgba(26, 28, 32, 0.35);
+}
+
+.moma-modal--rec-start {
+  width: min(520px, 92vw);
+  max-height: min(86vh, 680px);
+  border-radius: 14px;
+}
+
+.moma-modal--rec-start .moma-modal-hd {
+  padding: 14px 18px;
+}
+
+.moma-modal--rec-start .moma-modal-hd h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.moma-modal--rec-start .moma-modal-bd {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+.moma-modal--rec-start .moma-modal-ft {
+  padding: 11px 18px;
+}
+
+.moma-rec-start-lead {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.moma-rec-start-list {
+  display: grid;
+  gap: 7px;
+}
+
+.moma-rec-start-choice.is-placeholder {
+  pointer-events: none;
+  cursor: default;
+}
+
+.moma-rec-start-choice.is-placeholder:hover {
+  border-color: var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.moma-rec-start-skeleton {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.moma-rec-start-skeleton-title,
+.moma-rec-start-skeleton-meta {
+  border-radius: 99px;
+  background: var(--background-modifier-border);
+  animation: moma-summary-shimmer 1.4s ease infinite;
+}
+
+.moma-rec-start-skeleton-title {
+  width: 42%;
+  height: 12px;
+}
+
+.moma-rec-start-skeleton-meta {
+  width: 72%;
+  height: 9px;
+  margin-top: 8px;
+}
+
+.moma-rec-start-choice.is-placeholder:nth-child(2) .moma-rec-start-skeleton-title {
+  width: 36%;
+}
+
+.moma-rec-start-choice.is-placeholder:nth-child(2) .moma-rec-start-skeleton-meta {
+  width: 58%;
+}
+
+.moma-rec-start-choice.is-placeholder:nth-child(3) .moma-rec-start-skeleton-title {
+  width: 48%;
+}
+
+.moma-rec-start-choice.is-placeholder:nth-child(3) .moma-rec-start-skeleton-meta {
+  width: 64%;
+}
+
+.moma-rec-start-status {
+  padding: 12px 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.moma-rec-start-choice {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  cursor: pointer;
+  background: var(--background-primary);
+  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+}
+
+.moma-rec-start-choice:hover {
+  border-color: #ebb09b;
+  background: #fffaf8;
+}
+
+.moma-rec-start-choice.is-on {
+  border-color: #e98c6e;
+  background: #fff2ec;
+  box-shadow: 0 0 0 3px rgba(216, 102, 66, 0.08);
+}
+
+.moma-rec-start-radio {
+  width: 17px;
+  height: 17px;
+  box-sizing: border-box;
+  border: 2px solid #b9bcc2;
+  border-radius: 50%;
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.moma-rec-start-choice.is-on .moma-rec-start-radio {
+  border: 5px solid var(--moma-brand, #d86642);
+}
+
+.moma-rec-start-choice strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--text-normal);
+}
+
+.moma-rec-start-choice-meta {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.moma-rec-start-empty {
+  padding: 28px 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 550;
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-secondary);
+}
+
+.moma-modal-overlay button.moma-rec-start-confirm {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 108px;
+}
+
+.moma-modal-overlay button.moma-rec-start-confirm.is-loading {
+  cursor: wait;
+  opacity: 0.92;
+}
+
+.moma-rec-start-confirm-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: moma-rec-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.moma-rec-settings-overlay .moma-modal-hd {
+  flex: 0 0 auto;
+  padding: 14px 20px;
+  font-size: 13px;
+}
+
+.moma-rec-settings-overlay .moma-modal-bd {
+  padding: 20px 24px 24px;
+  overflow-y: auto;
+}
+
+.moma-rec-settings-overlay .moma-modal-bd.moma-modal-bd--menu-open {
+  overflow: visible;
+}
+
+.moma-rec-settings-headline {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.moma-rec-settings-headline--export {
+  margin-top: 22px;
+}
+
+.moma-rec-settings-headline h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-normal);
+  letter-spacing: -0.2px;
+}
+
+.moma-rec-settings-headline--export h2 {
+  font-size: 16px;
+}
+
+.moma-rec-settings-headline p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.moma-modal-overlay button.moma-rec-settings-new {
+  flex-shrink: 0;
+  padding: 8px 12px !important;
+  height: auto;
+  font-size: 12px;
+  font-weight: 650;
+  border-radius: 8px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.moma-modal-overlay button.moma-rec-settings-new:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.moma-meeting-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.moma-meeting-card {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-primary);
+  box-shadow: 0 3px 12px rgba(64, 47, 40, 0.045);
+  cursor: pointer;
+  outline: none;
+}
+
+.moma-meeting-card:hover,
+.moma-meeting-card:focus-visible {
+  box-shadow: 0 5px 16px rgba(64, 47, 40, 0.065);
+  border-color: color-mix(in srgb, var(--moma-brand, #D97757) 45%, var(--background-modifier-border));
+}
+
+.moma-meeting-card.is-selected {
+  border-color: #e9a28a;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--moma-brand, #D97757) 16%, transparent);
+}
+
+.moma-meeting-card--empty {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border-style: dashed;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 650;
+  background: var(--background-secondary);
+}
+
+.moma-meeting-grid-status {
+  grid-column: 1 / -1;
+  padding: 18px 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.moma-meeting-card-unmatched,
+.moma-knowledge-unmatched-tag {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.moma-meeting-card-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 25px;
+}
+
+.moma-meeting-card-head h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-normal);
+  min-width: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-meeting-card-head .moma-meeting-pill {
+  flex-shrink: 0;
+}
+
+.moma-meeting-card-tools {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.moma-meeting-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  height: 20px;
+  border-radius: 999px;
+  background: #edf7f2;
+  color: #23a36d;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.moma-meeting-pill.is-off {
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+}
+
+.moma-modal-overlay button.moma-meeting-icon-btn {
+  width: 25px !important;
+  height: 25px !important;
+  min-width: 25px;
+  padding: 0 !important;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  box-shadow: none !important;
+}
+
+.moma-modal-overlay button.moma-meeting-icon-btn:hover {
+  background: var(--background-modifier-hover) !important;
+  border-color: var(--background-modifier-border) !important;
+  color: var(--moma-brand, #D97757) !important;
+}
+
+.moma-modal-overlay button.moma-meeting-icon-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+.moma-meeting-card-meta {
+  margin-top: 5px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.moma-meeting-card-kb {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.moma-meeting-view-list {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 10px 14px;
+  padding: 0;
+}
+
+.moma-meeting-view-label {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.5;
+  padding-top: 2px;
+}
+
+.moma-meeting-view-value {
+  color: var(--text-normal);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.moma-meeting-view-knowledge {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--text-normal);
+}
+
+.moma-meeting-view-rule {
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding: 10px;
+  line-height: 1.6;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.moma-meeting-view-tip {
+  margin-top: 0;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--moma-brand, #D97757) 8%, var(--background-primary));
+  color: #8b442d;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.moma-meeting-knowledge-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  min-height: 0;
+  padding: 10px;
+  border: 1.5px dashed color-mix(in srgb, var(--moma-brand, #D97757) 40%, var(--background-modifier-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--moma-brand, #D97757) 6%, var(--background-primary));
+}
+
+.moma-meeting-knowledge-drop.is-dragover {
+  border-color: var(--moma-brand, #D97757);
+  background: color-mix(in srgb, var(--moma-brand, #D97757) 12%, var(--background-primary));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--moma-brand, #D97757) 12%, transparent);
+}
+
+.moma-meeting-knowledge-drop-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: #8f452c;
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+.moma-meeting-knowledge-drop-help {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.moma-knowledge-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-height: 66px;
+  padding: 8px 10px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-primary);
+  cursor: text;
+}
+
+.moma-knowledge-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.moma-knowledge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px 6px 4px 8px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  font-size: 12.5px;
+  line-height: 1.3;
+}
+
+.moma-knowledge-chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-modal-overlay button.moma-knowledge-chip-remove {
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--text-muted) !important;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.moma-modal-overlay button.moma-knowledge-chip-remove:hover {
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-normal) !important;
+}
+
+.moma-knowledge-chip.is-vault,
+.moma-knowledge-chip.is-space,
+.moma-knowledge-chip.is-data,
+.moma-meeting-tag.is-vault,
+.moma-meeting-tag.is-space,
+.moma-meeting-tag.is-data {
+  background: #e8f1ff;
+  border-color: #b7d0f5;
+  color: #1d4f91;
+}
+
+.moma-knowledge-chip-badge,
+.moma-meeting-tag-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #2f6fed;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.moma-meeting-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 2px 6px 2px 4px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 11.5px;
+  line-height: 1.3;
+}
+
+.moma-meeting-tag-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-meeting-tag-more {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px dashed color-mix(in srgb, var(--text-muted) 38%, var(--background-modifier-border));
+  border-radius: 5px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  cursor: default;
+}
+
+.moma-meeting-card:hover .moma-meeting-tag-more,
+.moma-meeting-card:focus-visible .moma-meeting-tag-more {
+  border-color: color-mix(in srgb, var(--moma-brand, #D97757) 38%, var(--background-modifier-border));
+  background: color-mix(in srgb, var(--moma-brand, #D97757) 7%, var(--background-secondary));
+  color: var(--text-normal);
+}
+
+.moma-knowledge-chip.is-stale {
+  background: #fff1f1;
+  border-color: #f0b4b4;
+  color: #b42318;
+}
+
+.moma-knowledge-chip.is-stale .moma-knowledge-chip-badge,
+.moma-meeting-tag.is-stale .moma-meeting-tag-badge {
+  background: #dc2626;
+}
+
+.moma-meeting-tag.is-stale {
+  background: #fff1f1;
+  border-color: #f0b4b4;
+  color: #b42318;
+}
+
+/* Above meeting-type modal overlays (z-index 280–290); same Obsidian dark caret tooltip as recording list. */
+.tooltip.moma-knowledge-tooltip {
+  z-index: 10003;
+}
+
+.moma-knowledge-fcm-chips {
+  display: none !important;
+}
+
+.moma-knowledge-mention-host {
+  position: relative;
+  width: 100%;
+  z-index: 5;
+}
+
+/* Body portal for meeting-type @ list — escapes modal overflow clipping. */
+.moma-knowledge-mention-host--portal {
+  position: static;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.moma-knowledge-mention-host--portal .moma-mention-dropdown {
+  pointer-events: auto;
+}
+
+.moma-modal-overlay textarea.moma-knowledge-chip-input {
+  flex: 1;
+  min-width: 160px;
+  min-height: 24px;
+  max-height: 24px;
+  margin: 0;
+  padding: 4px 2px;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  resize: none;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.45;
+  font-family: inherit;
+}
+
+.moma-modal-overlay textarea.moma-knowledge-chip-input:focus {
+  box-shadow: none !important;
+}
+
+.moma-meeting-rule-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.moma-meeting-rule-count {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.moma-meeting-rule-count.is-warn {
+  color: #b45309;
+}
+
+.moma-meeting-rule-count.is-error {
+  color: #dc2626;
+}
+
+.moma-meeting-switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 2px 0;
+}
+
+.moma-meeting-switch-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.moma-modal-overlay .moma-meeting-switch {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 42px;
+  height: 24px;
+  min-width: 42px;
+  min-height: 24px;
+  flex: 0 0 42px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #c8cbd0;
+  box-shadow: none;
+  overflow: hidden;
+  cursor: pointer;
+  line-height: 0;
+  user-select: none;
+}
+
+.moma-modal-overlay .moma-meeting-switch::before,
+.moma-modal-overlay .moma-meeting-switch::after {
+  display: none !important;
+  content: none !important;
+}
+
+.moma-modal-overlay .moma-meeting-switch .moma-meeting-switch-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.moma-modal-overlay .moma-meeting-switch.is-on {
+  background: var(--moma-brand, #d86642);
+}
+
+.moma-modal-overlay .moma-meeting-switch.is-on .moma-meeting-switch-knob {
+  transform: translateX(18px);
+}
+
+.moma-modal-overlay .moma-rec-settings-form {
+  max-width: 610px;
+}
+
+.moma-modal-overlay .moma-rec-settings-fields {
+  grid-template-columns: 1fr;
+}
+
+.moma-modal-overlay .moma-rec-settings-ft button {
+  padding: 7px 18px !important;
+  height: auto;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px !important;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: none !important;
+}
+
+@media (max-width: 700px) {
+  .moma-meeting-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .moma-modal--rec-settings {
+    width: 96vw;
+    height: min(90vh, 720px);
+  }
 }
 
 .moma-rec-settings-bd {
@@ -16306,6 +17508,19 @@ button.moma-storage-mode-item.is-selected .moma-storage-mode-check {
   min-height: 100px;
   resize: vertical;
   font-family: ui-monospace, Menlo, monospace;
+}
+
+.moma-modal-overlay .moma-modal--meeting-type input.moma-rec-settings-input,
+.moma-modal-overlay .moma-modal--meeting-type textarea.moma-rec-settings-textarea {
+  padding: 9px 11px !important;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.moma-modal-overlay .moma-modal--meeting-type textarea.moma-meeting-rule {
+  min-height: 108px;
+  font-family: inherit;
+  line-height: 1.65;
 }
 
 .moma-modal-overlay select.moma-rec-settings-select,

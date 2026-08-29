@@ -334,10 +334,26 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "472119c85bc6237b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9319180f591efca5",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 223.5390625
+    "width": 320
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -455,7 +471,7 @@
             }
           },
           {
-            "id": "5b5e4c7500a53740",
+            "id": "debf92682e307645",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -488,7 +504,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "eae4cda920c493c0",
+  "active": "debf92682e307645",
   "lastOpenFiles": [
     "10.项目整理/主材任务与流程配置/README.md",
     "10.项目整理/主材任务与流程配置/01-接口速查与curl.md",

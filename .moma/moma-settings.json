@@ -145,8 +145,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-08-27T13:04:29.387Z",
-      "momaCliUpdateAttemptedAt": "2026-08-27T13:04:29.387Z"
+      "autoInstallAttemptedAt": "2026-08-29T12:57:50.598Z",
+      "momaCliUpdateAttemptedAt": "2026-08-29T12:57:50.598Z"
     },
     "strictMarkdown": false
   },
@@ -155,32 +155,25 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1787921175821,
-  "voiceRecordingDefaults": {
-    "storageMode": "text",
-    "storagePath": "/moma_ob/voice_recording/"
-  },
+  "lastGrayReleaseCheck": 1788008269304,
   "voiceRecording": {
     "storageMode": "text",
-    "storagePath": "/moma_ob/voice_recording/"
+    "storagePath": "/录音目录"
   },
   "grayReleaseUpdateEnabled": true,
   "hermesGrayEnabled": true,
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1787835868195,
-    "fetchedPluginVersion": "0.3.11",
+    "fetchedAt": 1788008269303,
+    "fetchedPluginVersion": "0.3.13",
     "envVars": {
       "claude": {
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "200000"
       }
     }
   },
-  "workbenchAutoOpenDismissed": true,
-  "quota": {
-    "limitTitle": "本周额度已达上限"
-  },
+  "workbenchAutoOpenDismissed": false,
   "hostAuthSelfHealGrayEnabled": false,
   "homepageEnabled": false,
   "lastGrayReleaseDismiss": 1787917812884,
