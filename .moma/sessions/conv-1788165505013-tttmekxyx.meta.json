@@ -1,0 +1,24 @@
+{
+  "id": "conv-1788165505013-tttmekxyx",
+  "providerId": "claude",
+  "title": "沉淀工艺节点规则匹配链路表关联关系",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788165505013,
+  "updatedAt": 1788165740597,
+  "lastResponseAt": 1788165740597,
+  "sessionId": "fa7e25c6-4fac-421e-8aa5-befe8f76795e",
+  "providerState": {
+    "providerSessionId": "fa7e25c6-4fac-421e-8aa5-befe8f76795e"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 188,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 54912,
+    "outputTokens": 469,
+    "contextWindow": 200000,
+    "contextTokens": 55100,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}
