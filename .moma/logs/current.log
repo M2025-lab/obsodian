@@ -191,3 +191,22 @@
 13:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:00:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:06:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:06:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:16:34 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:16:35 [INFO] [auth-credential] refresh success, generation=undefined
+14:16:35 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:16:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:20:54 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:20:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:20:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:20:56 [INFO] [moma debug] plugin-settings success
+14:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:26:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
