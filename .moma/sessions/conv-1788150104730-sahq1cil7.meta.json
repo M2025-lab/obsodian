@@ -1,0 +1,24 @@
+{
+  "id": "conv-1788150104730-sahq1cil7",
+  "providerId": "claude",
+  "title": "整理 Maven 灰度发布上线流程文档",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788150104730,
+  "updatedAt": 1788150283668,
+  "lastResponseAt": 1788150283668,
+  "sessionId": "c20ad7be-b7a9-475c-b962-f241b71e1bca",
+  "providerState": {
+    "providerSessionId": "c20ad7be-b7a9-475c-b962-f241b71e1bca"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 233,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 55232,
+    "outputTokens": 341,
+    "contextWindow": 200000,
+    "contextTokens": 55465,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

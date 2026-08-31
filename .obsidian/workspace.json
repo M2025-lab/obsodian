@@ -272,9 +272,23 @@
               "icon": "lucide-file",
               "title": "99-待确认事项"
             }
+          },
+          {
+            "id": "9ba194e45e27cc33",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "20.知识沉淀/📚 上线发布流程SOP与注意事项.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "📚 上线发布流程SOP与注意事项"
+            }
           }
         ],
-        "currentTab": 18
+        "currentTab": 19
       }
     ],
     "direction": "vertical"
@@ -504,12 +518,13 @@
       "moma:Open Moma": false
     }
   },
-  "active": "debf92682e307645",
+  "active": "9ba194e45e27cc33",
   "lastOpenFiles": [
+    "10.项目整理/主材任务与流程配置/99-待确认事项.md",
+    "20.知识沉淀/📚 上线发布流程SOP与注意事项.md",
     "10.项目整理/主材任务与流程配置/README.md",
     "10.项目整理/主材任务与流程配置/01-接口速查与curl.md",
     "00.需求/通知复尺自动化/handleNode.md",
-    "10.项目整理/主材任务与流程配置/99-待确认事项.md",
     "10.项目整理/主材任务与流程配置/05-业务类型与整装零售.md",
     "10.项目整理/主材任务与流程配置/04-任务流转机制.md",
     "10.项目整理/主材任务与流程配置/03-任务生成与数据落表.md",
@@ -534,7 +549,6 @@
     "00.需求/通知复尺自动化/执行方案.md",
     "00.需求/通知复尺自动化/需求回顾总结成长.md",
     "00.需求/通知复尺自动化/需求背景.md",
-    "00.需求/通知复尺自动化/自测造数方案.md",
     "11.数据库表/XXnryY0j",
     "91.copilot/copilot-custom-prompts",
     "91.copilot/copilot-conversations",
