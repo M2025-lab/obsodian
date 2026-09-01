@@ -165,7 +165,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1788235905679,
+    "fetchedAt": 1788267661652,
     "fetchedPluginVersion": "0.3.13",
     "envVars": {
       "claude": {
@@ -176,6 +176,6 @@
   "workbenchAutoOpenDismissed": false,
   "hostAuthSelfHealGrayEnabled": false,
   "homepageEnabled": false,
-  "lastGrayReleaseDismiss": 1787917812884,
-  "lastGrayReleaseDismissVersion": "0.3.13"
+  "lastGrayReleaseDismiss": 1788267609744,
+  "lastGrayReleaseDismissVersion": "0.3.15"
 }

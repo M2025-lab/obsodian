@@ -1,0 +1,24 @@
+{
+  "id": "conv-1788267717501-5frgqbdnv",
+  "providerId": "claude",
+  "title": "配置 Document Type 计算规则",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788267717501,
+  "updatedAt": 1788267896539,
+  "lastResponseAt": 1788267896539,
+  "sessionId": "393a9843-4de1-49a4-be75-da4e5446ae88",
+  "providerState": {
+    "providerSessionId": "393a9843-4de1-49a4-be75-da4e5446ae88"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 433,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 79872,
+    "outputTokens": 1896,
+    "contextWindow": 200000,
+    "contextTokens": 80305,
+    "percentage": 40,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -415,3 +415,183 @@
 20:38:50 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 20:43:49 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 20:43:50 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:49:09 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:49:10 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:53:49 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:53:49 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:58:46 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:58:50 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:58:50 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:00:56 [INFO] [auth-credential] ensureForQuery {"now":1788267656883,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2573,"rtDiffSec":81773,"sinceLastSavedSec":4627}
+21:00:56 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":false}
+21:00:57 [INFO] [auth-credential] ensureForQuery {"now":1788267657128,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2573,"rtDiffSec":81773,"sinceLastSavedSec":4627}
+21:00:57 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:00:57 [INFO] [auth-credential] ensureForQuery {"now":1788267657227,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2573,"rtDiffSec":81773,"sinceLastSavedSec":4627}
+21:00:57 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+21:01:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+21:01:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+21:01:01 [INFO] [moma debug] plugin-settings success
+21:01:01 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+21:01:01 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+21:01:01 [INFO] [moma debug] remote-config-sync quota identical to cache
+21:01:01 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+21:01:01 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+21:01:01 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+21:01:01 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.13"}
+21:01:16 [INFO] [auth-credential] ensureForQuery {"now":1788267676228,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2554,"rtDiffSec":81754,"sinceLastSavedSec":4646}
+21:01:16 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:16 [INFO] [auth-credential] ensureForQuery {"now":1788267676608,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2553,"rtDiffSec":81753,"sinceLastSavedSec":4647}
+21:01:16 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:16 [INFO] [auth-credential] ensureForQuery {"now":1788267676934,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2553,"rtDiffSec":81753,"sinceLastSavedSec":4647}
+21:01:16 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:30 [INFO] [auth-credential] ensureForQuery {"now":1788267690877,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2539,"rtDiffSec":81739,"sinceLastSavedSec":4661}
+21:01:30 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:32 [INFO] [auth-credential] ensureForQuery {"now":1788267692039,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2538,"rtDiffSec":81738,"sinceLastSavedSec":4662}
+21:01:32 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:33 [INFO] [auth-credential] ensureForQuery {"now":1788267693371,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2537,"rtDiffSec":81737,"sinceLastSavedSec":4663}
+21:01:33 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:34 [INFO] [auth-credential] ensureForQuery {"now":1788267694720,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2535,"rtDiffSec":81735,"sinceLastSavedSec":4665}
+21:01:34 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:35 [INFO] [auth-credential] ensureForQuery {"now":1788267695887,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2534,"rtDiffSec":81734,"sinceLastSavedSec":4666}
+21:01:35 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:36 [INFO] [auth-credential] ensureForQuery {"now":1788267696956,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2533,"rtDiffSec":81733,"sinceLastSavedSec":4667}
+21:01:36 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:38 [INFO] [auth-credential] ensureForQuery {"now":1788267698178,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2532,"rtDiffSec":81732,"sinceLastSavedSec":4668}
+21:01:38 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:39 [INFO] [auth-credential] ensureForQuery {"now":1788267699237,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2531,"rtDiffSec":81731,"sinceLastSavedSec":4669}
+21:01:39 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:42 [INFO] [auth-credential] ensureForQuery {"now":1788267702199,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2528,"rtDiffSec":81728,"sinceLastSavedSec":4672}
+21:01:42 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:56 [INFO] [auth-credential] ensureForQuery {"now":1788267716932,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2513,"rtDiffSec":81713,"sinceLastSavedSec":4687}
+21:01:56 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:57 [moma debug] buildTurnSubmission {
+  "contentLength": 54,
+  "turnRequest": {
+    "textLength": 54,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:01:57 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+规则配置中以sale type和business type为主，通过这两个来计算Document Type。
+"""
+
+
+21:01:57 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+21:01:57 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+21:01:57 [INFO] [auth-credential] ensureForQuery {"now":1788267717511,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2512,"rtDiffSec":81712,"sinceLastSavedSec":4688}
+21:01:57 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+21:01:57 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+21:01:57 [moma debug] ColdStartQuery onesToken 存在: true
+21:01:57 [moma debug] ColdStartQuery momaFlagSettings 已注入
+21:01:57 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+21:01:57 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-F8Rb2aYnv4Fgx1DHezcxrQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-F8Rb2aYnv4Fgx1DHezcxrQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+21:01:57 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":52115}
+21:01:57 【发送给 Provider SDK 的 Prompt】
+规则配置中以sale type和business type为主，通过这两个来计算Document Type。
+21:01:57 [INFO] [auth-credential] ensureForQuery {"now":1788267717528,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2512,"rtDiffSec":81712,"sinceLastSavedSec":4688}
+21:01:57 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ezcxrQ"}
+21:01:57 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ezcxrQ"}
+21:01:57 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-F8Rb2aYnv4Fgx1DHezcxrQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+21:01:57 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":52116}
+21:01:57 [INFO] [auth-credential] ensureForQuery {"now":1788267717531,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2512,"rtDiffSec":81712,"sinceLastSavedSec":4688}
+21:01:57 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ezcxrQ"}
+21:01:57 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":false}
+21:01:58 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ezcxrQ"}
+21:01:58 [INFO] [auth-credential] ensureForQuery {"now":1788267718287,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2512,"rtDiffSec":81712,"sinceLastSavedSec":4688}
+21:01:58 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:58 [moma debug] ColdStartQuery session_id: 7315a917-b907-47d6-beb3-8a57e4acfafe
+21:01:58 [INFO] [auth-credential] ensureForQuery {"now":1788267718826,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2511,"rtDiffSec":81711,"sinceLastSavedSec":4689}
+21:01:58 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:59 [INFO] [auth-credential] ensureForQuery {"now":1788267719366,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2511,"rtDiffSec":81711,"sinceLastSavedSec":4689}
+21:01:59 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:01:59 [INFO] [auth-credential] ensureForQuery {"now":1788267719542,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2510,"rtDiffSec":81710,"sinceLastSavedSec":4690}
+21:01:59 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:03 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+21:02:03 [moma debug] ColdStartQuery 完成，共收到消息数: 35 | 响应文本长度: 21
+21:02:07 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":52116,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+21:02:19 [INFO] [auth-credential] ensureForQuery {"now":1788267739935,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2490,"rtDiffSec":81690,"sinceLastSavedSec":4710}
+21:02:19 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:20 [INFO] [auth-credential] ensureForQuery {"now":1788267740858,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2489,"rtDiffSec":81689,"sinceLastSavedSec":4711}
+21:02:20 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:24 [INFO] [auth-credential] ensureForQuery {"now":1788267744934,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2485,"rtDiffSec":81685,"sinceLastSavedSec":4715}
+21:02:24 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:28 [INFO] [auth-credential] ensureForQuery {"now":1788267748385,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2482,"rtDiffSec":81682,"sinceLastSavedSec":4719}
+21:02:28 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:29 [INFO] [auth-credential] ensureForQuery {"now":1788267749684,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2480,"rtDiffSec":81680,"sinceLastSavedSec":4720}
+21:02:29 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:29 [INFO] [auth-credential] ensureForQuery {"now":1788267749853,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2480,"rtDiffSec":81680,"sinceLastSavedSec":4720}
+21:02:29 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:36 [INFO] [auth-credential] ensureForQuery {"now":1788267756828,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2473,"rtDiffSec":81673,"sinceLastSavedSec":4727}
+21:02:36 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:37 [INFO] [auth-credential] ensureForQuery {"now":1788267757342,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2473,"rtDiffSec":81673,"sinceLastSavedSec":4727}
+21:02:37 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:49 [INFO] [auth-credential] ensureForQuery {"now":1788267769772,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2460,"rtDiffSec":81660,"sinceLastSavedSec":4740}
+21:02:49 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:02:50 [INFO] [auth-credential] ensureForQuery {"now":1788267770576,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2459,"rtDiffSec":81659,"sinceLastSavedSec":4741}
+21:02:50 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:03 [INFO] [auth-credential] ensureForQuery {"now":1788267783104,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2447,"rtDiffSec":81647,"sinceLastSavedSec":4753}
+21:03:03 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:28 [INFO] [auth-credential] ensureForQuery {"now":1788267808799,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2421,"rtDiffSec":81621,"sinceLastSavedSec":4779}
+21:03:28 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:31 [INFO] [auth-credential] ensureForQuery {"now":1788267811803,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2418,"rtDiffSec":81618,"sinceLastSavedSec":4782}
+21:03:31 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:31 [INFO] [auth-credential] ensureForQuery {"now":1788267811949,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2418,"rtDiffSec":81618,"sinceLastSavedSec":4782}
+21:03:31 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:37 [INFO] [auth-credential] ensureForQuery {"now":1788267817463,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2412,"rtDiffSec":81612,"sinceLastSavedSec":4788}
+21:03:37 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:40 [INFO] [auth-credential] ensureForQuery {"now":1788267820464,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2409,"rtDiffSec":81609,"sinceLastSavedSec":4791}
+21:03:40 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:40 [INFO] [auth-credential] ensureForQuery {"now":1788267820972,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2409,"rtDiffSec":81609,"sinceLastSavedSec":4791}
+21:03:40 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:03:49 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:03:49 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:03:57 [INFO] [auth-credential] ensureForQuery {"now":1788267837946,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2392,"rtDiffSec":81592,"sinceLastSavedSec":4808}
+21:03:57 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:04:01 [INFO] [auth-credential] ensureForQuery {"now":1788267841127,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2389,"rtDiffSec":81589,"sinceLastSavedSec":4811}
+21:04:01 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:04:01 [INFO] [auth-credential] ensureForQuery {"now":1788267841347,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2389,"rtDiffSec":81589,"sinceLastSavedSec":4811}
+21:04:01 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:04:21 [INFO] [auth-credential] ensureForQuery {"now":1788267861443,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2368,"rtDiffSec":81568,"sinceLastSavedSec":4832}
+21:04:21 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:04:25 [INFO] [auth-credential] ensureForQuery {"now":1788267865101,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2365,"rtDiffSec":81565,"sinceLastSavedSec":4835}
+21:04:25 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:04:52 [INFO] [auth-credential] ensureForQuery {"now":1788267892387,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2338,"rtDiffSec":81538,"sinceLastSavedSec":4863}
+21:04:52 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:00 [INFO] [auth-credential] ensureForQuery {"now":1788267900507,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2329,"rtDiffSec":81529,"sinceLastSavedSec":4871}
+21:05:00 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:05 [INFO] [auth-credential] ensureForQuery {"now":1788267905266,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2325,"rtDiffSec":81525,"sinceLastSavedSec":4875}
+21:05:05 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:16 [INFO] [auth-credential] ensureForQuery {"now":1788267916208,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2314,"rtDiffSec":81514,"sinceLastSavedSec":4886}
+21:05:16 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:43 [INFO] [auth-credential] ensureForQuery {"now":1788267943954,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2286,"rtDiffSec":81486,"sinceLastSavedSec":4914}
+21:05:43 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:47 [INFO] [auth-credential] ensureForQuery {"now":1788267947105,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2283,"rtDiffSec":81483,"sinceLastSavedSec":4917}
+21:05:47 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:05:47 [INFO] [auth-credential] ensureForQuery {"now":1788267947310,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2283,"rtDiffSec":81483,"sinceLastSavedSec":4917}
+21:05:47 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:06:25 [INFO] [auth-credential] ensureForQuery {"now":1788267985774,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2244,"rtDiffSec":81444,"sinceLastSavedSec":4956}
+21:06:25 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:06:31 [INFO] [auth-credential] ensureForQuery {"now":1788267991156,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2239,"rtDiffSec":81439,"sinceLastSavedSec":4961}
+21:06:31 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:06:31 [INFO] [auth-credential] ensureForQuery {"now":1788267991318,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2239,"rtDiffSec":81439,"sinceLastSavedSec":4961}
+21:06:31 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:02 [INFO] [auth-credential] ensureForQuery {"now":1788268022656,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2207,"rtDiffSec":81407,"sinceLastSavedSec":4993}
+21:07:02 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:08 [INFO] [auth-credential] ensureForQuery {"now":1788268028433,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2201,"rtDiffSec":81401,"sinceLastSavedSec":4999}
+21:07:08 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:08 [INFO] [auth-credential] ensureForQuery {"now":1788268028580,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2201,"rtDiffSec":81401,"sinceLastSavedSec":4999}
+21:07:08 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:33 [INFO] [auth-credential] ensureForQuery {"now":1788268053121,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2177,"rtDiffSec":81377,"sinceLastSavedSec":5023}
+21:07:33 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:41 [INFO] [auth-credential] ensureForQuery {"now":1788268061111,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2169,"rtDiffSec":81369,"sinceLastSavedSec":5031}
+21:07:41 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:07:50 [INFO] [auth-credential] ensureForQuery {"now":1788268070645,"at":"…ezcxrQ","rt":"…nfAcjQ","accessExpiresAt":1788270229900,"refreshExpiresAt":1788349429900,"atDiffSec":2159,"rtDiffSec":81359,"sinceLastSavedSec":5041}
+21:07:50 [INFO] [claude-runtime] pushEnv {"envAt":"…ezcxrQ","hashHit":true}
+21:08:49 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:08:50 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
