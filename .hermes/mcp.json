@@ -8,8 +8,7 @@
         "X-Platform": "macOS 25.2.0",
         "X-Plugin-Version": "0.3.13",
         "X-OB-Version": "1.13.7",
-        "X-Plugin-Env": "prod",
-        "X-Plugin-Auth": "Bearer obat-5bZI7YpJAOz-00SgeKSQsg"
+        "X-Plugin-Env": "prod"
       }
     }
   },

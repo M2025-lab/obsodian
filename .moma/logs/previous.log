@@ -1,53 +1,501 @@
-09:39:21 [INFO] [Claudian shell-path] probed {"length":599}
-09:39:21 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:39:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:21 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-09:39:21 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:21 [INFO] [moma debug] plugin-settings success
-09:39:21 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-09:39:21 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-09:39:21 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
-09:39:21 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
-09:39:22 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local"}
-09:39:22 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:22 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:22 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:39:22 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"items\":[],\"total\":0,\"page\":1,\"pageSize\":20}}"}
-09:39:22 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local"}
-09:39:22 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:39:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:23 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:39:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:39:23 [INFO] [moma debug] plugin-settings success
-09:39:23 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-09:39:23 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:39:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:25 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
-09:39:25 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
-09:39:25 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
-09:39:25 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
-09:39:25 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
-09:39:25 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:39:25 [INFO] [moma debug] plugin-settings success
-09:39:25 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
-09:39:26 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
-09:39:26 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
-09:39:26 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
-09:39:26 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
-09:39:27 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
-09:39:27 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
-09:39:27 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
-09:39:31 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:39:31 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
-09:39:31 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:39:32 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.13"}
-09:44:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:44:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:49:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:49:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:54:23 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:54:23 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:20:52 [INFO] [Claudian shell-path] probed {"length":599}
+12:20:53 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:20:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:53 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+12:20:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local"}
+12:20:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+12:20:54 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:54 [INFO] [moma debug] plugin-settings success
+12:20:54 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:20:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:54 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+12:20:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:20:54 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+12:20:54 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+12:20:54 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
+12:20:54 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+12:20:54 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+12:20:55 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+12:20:55 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+12:20:55 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+12:20:55 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+12:20:55 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+12:20:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:55 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"items\":[],\"total\":0,\"page\":1,\"pageSize\":20}}"}
+12:20:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=8a%3Ad9%3Adc%3A19%3A7a%3Acd&hostName=MirrordeMacBook-Pro.local"}
+12:20:55 [INFO] [moma debug] plugin-settings success
+12:20:55 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+12:20:55 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:20:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:55 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+12:20:55 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+12:20:55 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+12:20:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:55 [INFO] [moma debug] plugin-settings success
+12:20:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:20:55 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:20:55 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+12:20:55 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.13"}
+12:20:56 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:20:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:20:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:20:57 [INFO] [moma debug] plugin-settings success
+12:20:57 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+12:20:57 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+12:20:57 [INFO] [moma debug] remote-config-sync quota identical to cache
+12:20:57 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+12:20:57 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+12:20:57 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+12:20:57 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.13"}
+12:20:57 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+12:20:57 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
+12:20:57 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
+12:20:57 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+12:21:44 [moma debug] buildTurnSubmission {
+  "contentLength": 187,
+  "turnRequest": {
+    "textLength": 187,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+12:21:44 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+第一步修改maven 构建api+base
+第二步git创建master合并请求
+构建master
+创建上线计划 填写g
+12:21:44 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+12:21:44 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+12:21:44 [INFO] [auth-credential] ensureForQuery {"now":1788150104740,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7149,"rtDiffSec":86349,"sinceLastSavedSec":51}
+12:21:44 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+12:21:44 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+12:21:44 [moma debug] ColdStartQuery onesToken 存在: true
+12:21:44 [moma debug] ColdStartQuery momaFlagSettings 已注入
+12:21:44 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+12:21:44 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-5bZI7YpJAOz-00SgeKSQsg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-5bZI7YpJAOz-00SgeKSQsg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+12:21:44 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":14795}
+12:21:44 【发送给 Provider SDK 的 Prompt】
+第一步修改maven 构建api+base
+第二步git创建master合并请求
+构建master
+创建上线计划 填写git
+去工作负载master部署 选取目标构建的master 以及灰度发布1台
+上之前Apollo也要看
+
+查询类逻辑 参数小于三个做成get
+全量发布一次两三台 避免负载压力过大造成读超时  帮我整理一下这个上线步骤以及需要注意的事项，沉淀成一个文档。
+12:21:44 [INFO] [auth-credential] ensureForQuery {"now":1788150104751,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7149,"rtDiffSec":86349,"sinceLastSavedSec":51}
+12:21:44 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…eKSQsg"}
+12:21:44 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…eKSQsg"}
+12:21:44 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-5bZI7YpJAOz-00SgeKSQsg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+12:21:44 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":14796}
+12:21:44 [INFO] [auth-credential] ensureForQuery {"now":1788150104754,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7149,"rtDiffSec":86349,"sinceLastSavedSec":51}
+12:21:44 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…eKSQsg"}
+12:21:44 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":false}
+12:21:45 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…eKSQsg"}
+12:21:45 [INFO] [auth-credential] ensureForQuery {"now":1788150105537,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7148,"rtDiffSec":86348,"sinceLastSavedSec":52}
+12:21:45 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:21:45 [moma debug] ColdStartQuery session_id: 18e91f23-a2cd-451b-9fd4-28b52b611997
+12:21:45 [INFO] [auth-credential] ensureForQuery {"now":1788150105953,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7147,"rtDiffSec":86347,"sinceLastSavedSec":53}
+12:21:45 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:21:51 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+12:21:51 [moma debug] ColdStartQuery 完成，共收到消息数: 64 | 响应文本长度: 19
+12:21:52 [INFO] [auth-credential] ensureForQuery {"now":1788150112856,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7140,"rtDiffSec":86340,"sinceLastSavedSec":60}
+12:21:52 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:21:53 [INFO] [auth-credential] ensureForQuery {"now":1788150113095,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7140,"rtDiffSec":86340,"sinceLastSavedSec":60}
+12:21:53 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:21:54 [INFO] [auth-credential] ensureForQuery {"now":1788150114639,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7139,"rtDiffSec":86339,"sinceLastSavedSec":61}
+12:21:54 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:21:54 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":14796,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+12:22:08 [INFO] [auth-credential] ensureForQuery {"now":1788150128207,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7125,"rtDiffSec":86325,"sinceLastSavedSec":75}
+12:22:08 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:22:08 [INFO] [auth-credential] ensureForQuery {"now":1788150128484,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7125,"rtDiffSec":86325,"sinceLastSavedSec":75}
+12:22:08 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:22:45 [INFO] [auth-credential] ensureForQuery {"now":1788150165625,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7088,"rtDiffSec":86288,"sinceLastSavedSec":112}
+12:22:45 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:22:56 [INFO] [auth-credential] ensureForQuery {"now":1788150176469,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7077,"rtDiffSec":86277,"sinceLastSavedSec":123}
+12:22:56 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:05 [INFO] [auth-credential] ensureForQuery {"now":1788150185279,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7068,"rtDiffSec":86268,"sinceLastSavedSec":132}
+12:23:05 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:10 [INFO] [auth-credential] ensureForQuery {"now":1788150190460,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7063,"rtDiffSec":86263,"sinceLastSavedSec":137}
+12:23:10 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:14 [INFO] [auth-credential] ensureForQuery {"now":1788150194957,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7058,"rtDiffSec":86258,"sinceLastSavedSec":142}
+12:23:14 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:22 [INFO] [auth-credential] ensureForQuery {"now":1788150202953,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7050,"rtDiffSec":86250,"sinceLastSavedSec":150}
+12:23:22 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:38 [INFO] [auth-credential] ensureForQuery {"now":1788150218101,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7035,"rtDiffSec":86235,"sinceLastSavedSec":165}
+12:23:38 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:23:53 [INFO] [auth-credential] ensureForQuery {"now":1788150233894,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7019,"rtDiffSec":86219,"sinceLastSavedSec":181}
+12:23:53 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:06 [INFO] [auth-credential] ensureForQuery {"now":1788150246125,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":7007,"rtDiffSec":86207,"sinceLastSavedSec":193}
+12:24:06 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:15 [INFO] [auth-credential] ensureForQuery {"now":1788150255235,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6998,"rtDiffSec":86198,"sinceLastSavedSec":202}
+12:24:15 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:21 [INFO] [auth-credential] ensureForQuery {"now":1788150261859,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6991,"rtDiffSec":86191,"sinceLastSavedSec":209}
+12:24:21 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:27 [INFO] [auth-credential] ensureForQuery {"now":1788150267538,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6986,"rtDiffSec":86186,"sinceLastSavedSec":214}
+12:24:27 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:30 [INFO] [auth-credential] ensureForQuery {"now":1788150270740,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6983,"rtDiffSec":86183,"sinceLastSavedSec":217}
+12:24:30 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:33 [INFO] [auth-credential] ensureForQuery {"now":1788150273808,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6980,"rtDiffSec":86180,"sinceLastSavedSec":220}
+12:24:33 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:24:36 [INFO] [auth-credential] ensureForQuery {"now":1788150276930,"at":"…eKSQsg","rt":"…hklo5A","accessExpiresAt":1788157253336,"refreshExpiresAt":1788236453336,"atDiffSec":6976,"rtDiffSec":86176,"sinceLastSavedSec":224}
+12:24:36 [INFO] [claude-runtime] pushEnv {"envAt":"…eKSQsg","hashHit":true}
+12:25:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:25:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:40:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:40:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:45:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:50:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:55:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+12:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:00:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:05:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:05:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:10:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:10:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:15:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:15:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:20:53 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+13:20:55 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+13:20:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+13:20:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+13:20:56 [INFO] [moma debug] plugin-settings success
+13:20:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:25:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:25:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:40:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:40:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:45:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:50:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:55:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+13:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:00:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:06:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:06:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:16:34 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:16:35 [INFO] [auth-credential] refresh success, generation=undefined
+14:16:35 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:16:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:20:54 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:20:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:20:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:20:56 [INFO] [moma debug] plugin-settings success
+14:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:26:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:36:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:36:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:41:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:41:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:46:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:46:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:51:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:51:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:56:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:56:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:01:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:01:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:06:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:06:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:16:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:20:54 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+15:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:21:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:26:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:31:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:31:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:36:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:36:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:41:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:41:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:46:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:46:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:51:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:51:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:56:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:56:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:01:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:01:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:06:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:06:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:11:34 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+16:11:35 [INFO] [auth-credential] refresh success, generation=undefined
+16:11:35 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:11:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:16:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:20:54 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:20:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:20:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:20:56 [INFO] [moma debug] plugin-settings success
+16:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:21:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:26:25 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:26:26 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:26:26 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:26:27 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:26:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:26:27 [INFO] [moma debug] plugin-settings success
+16:26:27 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:26:27 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:26:27 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:26:27 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+16:26:27 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:26:27 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+16:26:27 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.13"}
+16:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:38:25 [moma debug] buildTurnSubmission {
+  "contentLength": 380,
+  "turnRequest": {
+    "textLength": 380,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+16:38:25 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+入参维度 → delivery_flow_rule_unit（按维度匹配取 rule_id）→ 用 rule_id 关联
+16:38:25 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+16:38:25 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+16:38:25 [INFO] [auth-credential] ensureForQuery {"now":1788165505028,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5590,"rtDiffSec":84790,"sinceLastSavedSec":1610}
+16:38:25 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+16:38:25 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+16:38:25 [moma debug] ColdStartQuery onesToken 存在: true
+16:38:25 [moma debug] ColdStartQuery momaFlagSettings 已注入
+16:38:25 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+16:38:25 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-6pxOXhdnrMcAUpGVu1mulw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-6pxOXhdnrMcAUpGVu1mulw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+16:38:25 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":38058}
+16:38:25 【发送给 Provider SDK 的 Prompt】
+入参维度 → delivery_flow_rule_unit（按维度匹配取 rule_id）→ 用 rule_id 关联 delivery_flow_rule（门禁）+ delivery_flow_rule_category（取 category_id 及品类/材料/供应商明细）→ 用 category_id 关联 n_material_process_define / n_material_node_cfg（取最终工艺节点内容）。templateIdList 实际映射到 n_material_process_define.template_id 列的 IN 查询。所以 delivery_flow_rule_category.category_id 确实 = n_material_process_define.template_id。
+
+总结沉淀下来
+16:38:25 [INFO] [auth-credential] ensureForQuery {"now":1788165505049,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5590,"rtDiffSec":84790,"sinceLastSavedSec":1610}
+16:38:25 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…u1mulw"}
+16:38:25 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…u1mulw"}
+16:38:25 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-6pxOXhdnrMcAUpGVu1mulw\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.13\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+16:38:25 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":38059}
+16:38:25 [INFO] [auth-credential] ensureForQuery {"now":1788165505052,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5590,"rtDiffSec":84790,"sinceLastSavedSec":1610}
+16:38:25 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…u1mulw"}
+16:38:25 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":false}
+16:38:26 [moma debug] ColdStartQuery session_id: 043c9522-fc2f-4a05-97ce-0badffcbe62d
+16:38:26 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…u1mulw"}
+16:38:26 [INFO] [auth-credential] ensureForQuery {"now":1788165506024,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5589,"rtDiffSec":84789,"sinceLastSavedSec":1611}
+16:38:26 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:26 [INFO] [auth-credential] ensureForQuery {"now":1788165506447,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5589,"rtDiffSec":84789,"sinceLastSavedSec":1611}
+16:38:26 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:33 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+16:38:33 [moma debug] ColdStartQuery 完成，共收到消息数: 62 | 响应文本长度: 17
+16:38:35 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":38059,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+16:38:35 [INFO] [auth-credential] ensureForQuery {"now":1788165515433,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5580,"rtDiffSec":84780,"sinceLastSavedSec":1620}
+16:38:35 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:35 [INFO] [auth-credential] ensureForQuery {"now":1788165515766,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5579,"rtDiffSec":84779,"sinceLastSavedSec":1621}
+16:38:35 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:36 [INFO] [auth-credential] ensureForQuery {"now":1788165516414,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5579,"rtDiffSec":84779,"sinceLastSavedSec":1621}
+16:38:36 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:41 [INFO] [auth-credential] ensureForQuery {"now":1788165521706,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5574,"rtDiffSec":84774,"sinceLastSavedSec":1626}
+16:38:41 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:38:42 [INFO] [auth-credential] ensureForQuery {"now":1788165522146,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5573,"rtDiffSec":84773,"sinceLastSavedSec":1627}
+16:38:42 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:39:56 [INFO] [auth-credential] ensureForQuery {"now":1788165596117,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5499,"rtDiffSec":84699,"sinceLastSavedSec":1701}
+16:39:56 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:40:14 [INFO] [auth-credential] ensureForQuery {"now":1788165614897,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5480,"rtDiffSec":84680,"sinceLastSavedSec":1720}
+16:40:14 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:40:43 [INFO] [auth-credential] ensureForQuery {"now":1788165643835,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5451,"rtDiffSec":84651,"sinceLastSavedSec":1749}
+16:40:43 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:40:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:40:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:41:02 [INFO] [auth-credential] ensureForQuery {"now":1788165662397,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5433,"rtDiffSec":84633,"sinceLastSavedSec":1767}
+16:41:02 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:41:17 [INFO] [auth-credential] ensureForQuery {"now":1788165677494,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5418,"rtDiffSec":84618,"sinceLastSavedSec":1782}
+16:41:17 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:41:32 [INFO] [auth-credential] ensureForQuery {"now":1788165692587,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5403,"rtDiffSec":84603,"sinceLastSavedSec":1797}
+16:41:32 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:41:49 [INFO] [auth-credential] ensureForQuery {"now":1788165709278,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5386,"rtDiffSec":84586,"sinceLastSavedSec":1814}
+16:41:49 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:42:00 [INFO] [auth-credential] ensureForQuery {"now":1788165720886,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5374,"rtDiffSec":84574,"sinceLastSavedSec":1826}
+16:42:00 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:42:06 [INFO] [auth-credential] ensureForQuery {"now":1788165726619,"at":"…u1mulw","rt":"…elrHNA","accessExpiresAt":1788171095253,"refreshExpiresAt":1788250295253,"atDiffSec":5369,"rtDiffSec":84569,"sinceLastSavedSec":1831}
+16:42:06 [INFO] [claude-runtime] pushEnv {"envAt":"…u1mulw","hashHit":true}
+16:45:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:50:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:55:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:00:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:05:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:05:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:10:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:10:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:16:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:20:54 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+17:20:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:20:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:20:56 [INFO] [moma debug] plugin-settings success
+17:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:26:12 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:26:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:35:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:35:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:41:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:41:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:45:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:50:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:56:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:56:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:01:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:01:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:06:34 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+18:06:35 [INFO] [auth-credential] refresh success, generation=undefined
+18:06:35 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:06:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:16:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:20:53 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:20:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:20:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:26:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:30:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:41:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:41:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:46:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:46:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:51:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:51:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:56:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:56:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:01:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:01:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:06:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:06:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:16:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:21:34 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:21:34 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+19:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+19:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+19:21:35 [INFO] [moma debug] plugin-settings success
+19:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:26:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:31:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:31:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:40:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:40:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:46:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:46:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:51:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:51:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:55:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:00:55 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+20:00:56 [INFO] [auth-credential] refresh success, generation=undefined
+20:00:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:05:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:05:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:10:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:10:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:16:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:16:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:21:34 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:21:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:26:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:31:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:31:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:36:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:36:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:41:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:41:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:46:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:46:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:51:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:51:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:56:32 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:56:32 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:00:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:00:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:05:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:05:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:11:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:11:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:15:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:15:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:21:34 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+21:21:34 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+21:21:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+21:21:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:21:35 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+21:21:35 [INFO] [moma debug] plugin-settings success
+21:26:34 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:26:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:30:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:30:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:35:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:35:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:40:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:40:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:45:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:50:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
