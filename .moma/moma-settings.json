@@ -112,6 +112,7 @@
   "enableAutoScroll": true,
   "skillHubAutoUpdateEnabled": false,
   "chatViewPlacement": "right-sidebar",
+  "workbenchLeafPlacement": "left-sidebar",
   "requireCommandOrControlEnterToSend": false,
   "expandFileEditsByDefault": false,
   "hiddenProviderCommands": {},
@@ -155,7 +156,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1788263952705,
+  "lastGrayReleaseCheck": 1788314413726,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -165,8 +166,8 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1788267661652,
-    "fetchedPluginVersion": "0.3.13",
+    "fetchedAt": 1788314413724,
+    "fetchedPluginVersion": "0.3.15",
     "envVars": {
       "claude": {
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "200000"

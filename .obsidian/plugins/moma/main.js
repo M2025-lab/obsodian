@@ -1027,19 +1027,25 @@ var init_AuthCredentialService = __esm({
           sinceLastSavedSec: Math.round((now - this._lastSavedAt) / 1e3)
         });
         if (accessToken && now - this._lastSavedAt < REFRESH_COOLDOWN_MS) {
+          momaInfo(`${LOG} ensureForQuery cooldown, skipping`, { sinceLastSavedSec: Math.round((now - this._lastSavedAt) / 1e3) });
           return accessToken;
         }
         if (!accessToken || !refreshToken) {
+          momaInfo(`${LOG} ensureForQuery no token, doCreate`);
           return this._doCreate(plugin);
         }
         const accessNearExpiry = !accessExpiresAt || now >= accessExpiresAt - QUERY_EXPIRY_BUFFER_MS;
         const refreshExpired = !refreshExpiresAt || now >= refreshExpiresAt - QUERY_EXPIRY_BUFFER_MS;
+        momaInfo(`${LOG} ensureForQuery decision`, { accessNearExpiry, refreshExpired });
         if (accessNearExpiry && refreshExpired) {
+          momaInfo(`${LOG} ensureForQuery both expired, doCreate`);
           return this._doCreate(plugin);
         }
         if (accessNearExpiry && !refreshExpired) {
+          momaInfo(`${LOG} ensureForQuery at near-expiry, doRefresh`);
           return this._doRefreshWithFallback(plugin);
         }
+        momaInfo(`${LOG} ensureForQuery at still valid, returning cached`);
         return accessToken;
       }
       /**
@@ -9802,6 +9808,18 @@ function trackLiveSummaryAskSend(param) {
 }
 function trackVoiceRecordingError(action, param = {}) {
   momaDig.report("moma_voice_recording_error", { action, ...param });
+}
+function trackUploadFailed(param) {
+  const payload = {
+    meetingId: param.meetingId,
+    audioFailed: param.audioFailed,
+    transcriptFailed: param.transcriptFailed,
+    isRetry: param.isRetry
+  };
+  if (param.audioErrorKind !== void 0) payload.audioErrorKind = param.audioErrorKind;
+  if (param.transcriptErrorKind !== void 0) payload.transcriptErrorKind = param.transcriptErrorKind;
+  if (param.audioBlobSizeMB !== void 0) payload.audioBlobSizeMB = param.audioBlobSizeMB;
+  trackVoiceRecordingError("upload_failed", payload);
 }
 var init_analytics = __esm({
   "src/features/voice-recording/analytics.ts"() {
@@ -33682,6 +33700,1126 @@ function resolveClaudeCliPath(hostnamePath, legacyPath, envText) {
   return (_b3 = (_a5 = resolveConfiguredPath(hostnamePath)) != null ? _a5 : resolveConfiguredPath(legacyPath)) != null ? _b3 : findClaudeCLIPath(parseEnvironmentVariables(envText || "").PATH);
 }
 
+// src/core/integrations/CliProcessRunner.ts
+var import_child_process9 = require("child_process");
+var import_string_decoder = require("string_decoder");
+init_debug();
+
+// src/core/integrations/CliWorkerProcessExecutor.ts
+var import_child_process8 = require("child_process");
+var import_events3 = require("events");
+var DEFAULT_KILL_TIMEOUT_MS = 3e3;
+var FORCE_SETTLE_TIMEOUT_MS = 1e3;
+var WORKER_WATCHDOG_GRACE_MS = 2e3;
+var PROCESS_TREE_GRACE_MS = 500;
+var PROCESS_TREE_POLL_MS = 25;
+var WINDOWS_TASKKILL_TIMEOUT_MS = 3e3;
+function isWorkerSpawnedMessage(message) {
+  if (!message || typeof message !== "object") return false;
+  const candidate = message;
+  return candidate.type === "spawned" && typeof candidate.pid === "number" && Number.isSafeInteger(candidate.pid) && candidate.pid > 0;
+}
+function isWorkerResultMessage(message) {
+  if (!message || typeof message !== "object") return false;
+  const candidate = message;
+  return candidate.type === "result" && !!candidate.result && typeof candidate.result === "object";
+}
+function restoreWorkerError(error48) {
+  if (!error48) return void 0;
+  const restored = new Error(error48.message);
+  if (error48.code) restored.code = error48.code;
+  return restored;
+}
+function failedWorkerResult(error48, cancelled = false, timedOut = false) {
+  return {
+    exitCode: null,
+    signal: null,
+    stdout: "",
+    stderr: error48.message,
+    timedOut,
+    cancelled,
+    error: error48
+  };
+}
+function wait(delayMs) {
+  return new Promise((resolve14) => setTimeout(resolve14, delayMs));
+}
+var HELPER_STDERR_TAIL_CHARS = 4096;
+var HELPER_TERMINATE_TIMEOUT_MS = 1e3;
+var CliIsolatedProcessHost = class extends import_events3.EventEmitter {
+  constructor(source, options) {
+    var _a5, _b3, _c2;
+    super();
+    this.pendingMessages = [];
+    this.ready = false;
+    this.cancelRequestedBeforeReady = false;
+    this.terminating = false;
+    this.errorReported = false;
+    this.helperStderr = "";
+    this.child = (0, import_child_process8.spawn)(options.executable, ["-"], {
+      env: { ...process.env, ...options.workerData.env },
+      windowsHide: true,
+      stdio: ["pipe", "ignore", "pipe", "ipc"]
+    });
+    (_a5 = this.child.stderr) == null ? void 0 : _a5.on("data", (chunk) => {
+      const text = Buffer.isBuffer(chunk) ? chunk.toString("utf8") : chunk;
+      this.helperStderr = (this.helperStderr + text).slice(-HELPER_STDERR_TAIL_CHARS);
+    });
+    this.child.on("message", (message) => {
+      if ((message == null ? void 0 : message.type) === "ready") {
+        this.ready = true;
+        if (this.cancelRequestedBeforeReady) {
+          this.pendingMessages.length = 0;
+          this.emit("message", {
+            type: "result",
+            result: {
+              exitCode: null,
+              signal: null,
+              stdout: "",
+              stderr: "",
+              timedOut: false,
+              cancelled: true
+            }
+          });
+          return;
+        }
+        this.send({ type: "start", data: options.workerData });
+        for (const pendingMessage of this.pendingMessages.splice(0)) {
+          this.send(pendingMessage);
+        }
+        return;
+      }
+      this.emit("message", message);
+    });
+    this.child.once("error", (error48) => this.reportError(error48));
+    this.child.once("exit", (exitCode) => {
+      if (!this.terminating && !this.ready && this.helperStderr.trim()) {
+        this.reportError(new Error(this.helperStderr.trim()));
+      }
+      this.emit("exit", exitCode != null ? exitCode : -1);
+    });
+    (_b3 = this.child.stdin) == null ? void 0 : _b3.once("error", (error48) => this.reportError(error48));
+    (_c2 = this.child.stdin) == null ? void 0 : _c2.end(source);
+  }
+  on(event, listener) {
+    return super.on(event, listener);
+  }
+  once(event, listener) {
+    return super.once(event, listener);
+  }
+  postMessage(message) {
+    if (!this.ready) {
+      if ((message == null ? void 0 : message.type) === "cancel") {
+        this.cancelRequestedBeforeReady = true;
+        return;
+      }
+      this.pendingMessages.push(message);
+      return;
+    }
+    this.send(message);
+  }
+  async terminate() {
+    var _a5;
+    this.terminating = true;
+    if (this.child.exitCode !== null || this.child.signalCode !== null) {
+      return (_a5 = this.child.exitCode) != null ? _a5 : 0;
+    }
+    return new Promise((resolve14) => {
+      let settled = false;
+      const finish = (exitCode) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeoutHandle);
+        resolve14(exitCode);
+      };
+      const timeoutHandle = setTimeout(() => {
+        try {
+          this.child.kill("SIGKILL");
+        } catch (e2) {
+        }
+        finish(0);
+      }, HELPER_TERMINATE_TIMEOUT_MS);
+      this.child.once("exit", (exitCode) => finish(exitCode != null ? exitCode : 0));
+      if (!this.child.kill()) finish(0);
+    });
+  }
+  send(message) {
+    var _a5, _b3;
+    if (!this.child.connected) {
+      this.reportError(new Error("Isolated CLI process IPC channel is unavailable"));
+      return;
+    }
+    (_b3 = (_a5 = this.child).send) == null ? void 0 : _b3.call(_a5, message, (error48) => {
+      if (error48) this.reportError(error48);
+    });
+  }
+  reportError(error48) {
+    if (this.errorReported || this.terminating) return;
+    this.errorReported = true;
+    const errno = error48;
+    if (errno.code === "ENOENT") {
+      const missingRuntimeError = new Error(
+        "Unable to start isolated CLI process with the current Node.js runtime"
+      );
+      missingRuntimeError.code = "ERR_CLI_ISOLATION_RUNTIME_NOT_FOUND";
+      this.emit("error", missingRuntimeError);
+      return;
+    }
+    this.emit("error", error48);
+  }
+};
+function isUnixProcessGroupAlive(pid) {
+  try {
+    process.kill(-pid, 0);
+    return true;
+  } catch (error48) {
+    return error48.code === "EPERM";
+  }
+}
+async function runWindowsTaskkill(pid) {
+  await new Promise((resolve14, reject) => {
+    let settled = false;
+    const finish = (error48) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeoutHandle);
+      if (error48) reject(error48);
+      else resolve14();
+    };
+    const killer = (0, import_child_process8.spawn)(
+      "taskkill.exe",
+      ["/PID", String(pid), "/T", "/F"],
+      { windowsHide: true, stdio: "ignore" }
+    );
+    const timeoutHandle = setTimeout(() => {
+      killer.kill();
+      finish(new Error(`taskkill timed out for process tree ${pid}`));
+    }, WINDOWS_TASKKILL_TIMEOUT_MS);
+    killer.once("error", (error48) => finish(error48));
+    killer.once("close", (exitCode) => {
+      if (exitCode === 0) finish();
+      else finish(new Error(`taskkill failed for process tree ${pid} with exit code ${exitCode}`));
+    });
+  });
+}
+async function terminateWindowsProcessTree(pid) {
+  let lastError;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      await runWindowsTaskkill(pid);
+      return;
+    } catch (error48) {
+      lastError = error48;
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error(`Unable to terminate Windows process tree ${pid}`);
+}
+async function terminateCliProcessTree(pid) {
+  if (!Number.isSafeInteger(pid) || pid <= 0) return;
+  if (process.platform === "win32") {
+    await terminateWindowsProcessTree(pid);
+    return;
+  }
+  try {
+    process.kill(-pid, "SIGTERM");
+  } catch (error48) {
+    if (error48.code === "ESRCH") return;
+  }
+  const deadline = Date.now() + PROCESS_TREE_GRACE_MS;
+  while (Date.now() < deadline && isUnixProcessGroupAlive(pid)) {
+    await wait(PROCESS_TREE_POLL_MS);
+  }
+  if (!isUnixProcessGroupAlive(pid)) return;
+  try {
+    process.kill(-pid, "SIGKILL");
+  } catch (e2) {
+  }
+}
+function cliWorkerMain() {
+  const { spawn: spawn6 } = require("child_process");
+  const send = (message) => {
+    if (typeof process.send === "function") process.send(message);
+  };
+  let cancelBeforeStart = false;
+  const start = (data) => {
+    var _a5, _b3;
+    const forceSettleTimeoutMs = 1e3;
+    const stdoutTail = Buffer.alloc(Math.max(0, Math.floor(data.stdoutTailBytes)));
+    const stderrTail = Buffer.alloc(Math.max(0, Math.floor(data.stderrTailBytes)));
+    let stdoutWriteOffset = 0;
+    let retainedStdoutBytes = 0;
+    let stderrWriteOffset = 0;
+    let retainedStderrBytes = 0;
+    let stdoutBytes = 0;
+    let stdoutChunks = 0;
+    let stderrBytes = 0;
+    let stderrChunks = 0;
+    let timedOut = false;
+    let cancelled = false;
+    let settled = false;
+    let terminationRequested = false;
+    let timeoutHandle = null;
+    let killHandle = null;
+    let forceSettleHandle = null;
+    let windowsTreeKillTimeoutHandle = null;
+    let windowsTreeKillInFlight = false;
+    let windowsTreeKillSucceeded = false;
+    let unixTreeKillInFlight = false;
+    let cleanupRequired = false;
+    let pendingSettlement = null;
+    const appendTail = (tail, chunk, writeOffset, retainedBytes) => {
+      const capacity = tail.length;
+      if (capacity === 0 || chunk.length === 0) return;
+      if (chunk.length >= capacity) {
+        chunk.copy(tail, 0, chunk.length - capacity);
+        return { writeOffset: 0, retainedBytes: capacity };
+      }
+      const firstLength = Math.min(chunk.length, capacity - writeOffset);
+      chunk.copy(tail, writeOffset, 0, firstLength);
+      const remainingLength = chunk.length - firstLength;
+      if (remainingLength > 0) chunk.copy(tail, 0, firstLength);
+      return {
+        writeOffset: (writeOffset + chunk.length) % capacity,
+        retainedBytes: Math.min(capacity, retainedBytes + chunk.length)
+      };
+    };
+    const tailToString = (tail, writeOffset, retainedBytes) => {
+      if (retainedBytes === 0) return "";
+      const capacity = tail.length;
+      const start2 = (writeOffset - retainedBytes + capacity) % capacity;
+      if (start2 + retainedBytes <= capacity) {
+        return tail.subarray(start2, start2 + retainedBytes).toString("utf8");
+      }
+      const first = tail.subarray(start2);
+      const secondLength = retainedBytes - first.length;
+      return Buffer.concat([first, tail.subarray(0, secondLength)], retainedBytes).toString("utf8");
+    };
+    const appendStdout = (chunk) => {
+      const next = appendTail(stdoutTail, chunk, stdoutWriteOffset, retainedStdoutBytes);
+      if (!next) return;
+      stdoutWriteOffset = next.writeOffset;
+      retainedStdoutBytes = next.retainedBytes;
+    };
+    const appendStderr = (chunk) => {
+      const next = appendTail(stderrTail, chunk, stderrWriteOffset, retainedStderrBytes);
+      if (!next) return;
+      stderrWriteOffset = next.writeOffset;
+      retainedStderrBytes = next.retainedBytes;
+    };
+    let child = null;
+    const settle = (exitCode, signal, error48) => {
+      if (settled) return;
+      if (terminationRequested && (windowsTreeKillInFlight || unixTreeKillInFlight)) {
+        pendingSettlement = { exitCode, signal, ...error48 ? { error: error48 } : {} };
+        return;
+      }
+      settled = true;
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+      if (killHandle) clearTimeout(killHandle);
+      if (forceSettleHandle) clearTimeout(forceSettleHandle);
+      if (windowsTreeKillTimeoutHandle) clearTimeout(windowsTreeKillTimeoutHandle);
+      send({
+        type: "result",
+        cleanupRequired: cleanupRequired || process.platform === "win32" && terminationRequested && !windowsTreeKillSucceeded,
+        result: {
+          exitCode,
+          signal,
+          stdout: tailToString(stdoutTail, stdoutWriteOffset, retainedStdoutBytes),
+          stderr: tailToString(stderrTail, stderrWriteOffset, retainedStderrBytes),
+          timedOut,
+          cancelled,
+          ...error48 ? { error: { message: error48.message, ...error48.code ? { code: error48.code } : {} } } : {},
+          outputStats: {
+            stdoutBytes,
+            stdoutChunks,
+            stderrBytes,
+            stderrChunks,
+            ...retainedStdoutBytes > 0 ? { retainedStdoutBytes } : {},
+            retainedStderrBytes
+          }
+        }
+      });
+    };
+    const startWindowsTreeKill = (pid) => {
+      windowsTreeKillInFlight = true;
+      let taskkillSettled = false;
+      const finishTaskkill = (succeeded) => {
+        var _a6, _b4;
+        if (taskkillSettled || settled) return;
+        taskkillSettled = true;
+        windowsTreeKillInFlight = false;
+        windowsTreeKillSucceeded = succeeded;
+        if (windowsTreeKillTimeoutHandle) {
+          clearTimeout(windowsTreeKillTimeoutHandle);
+          windowsTreeKillTimeoutHandle = null;
+        }
+        const pending = pendingSettlement;
+        pendingSettlement = null;
+        if (!succeeded) {
+          settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
+          return;
+        }
+        if (pending) {
+          settle(pending.exitCode, pending.signal, pending.error);
+          return;
+        }
+        forceSettleHandle = setTimeout(
+          () => settle(null, "SIGKILL"),
+          forceSettleTimeoutMs
+        );
+      };
+      try {
+        const killer = spawn6("taskkill.exe", ["/PID", String(pid), "/T", "/F"], {
+          windowsHide: true,
+          stdio: "ignore"
+        });
+        windowsTreeKillTimeoutHandle = setTimeout(() => {
+          killer.kill();
+          finishTaskkill(false);
+        }, 3e3);
+        killer.once("error", () => finishTaskkill(false));
+        killer.once("close", (exitCode) => finishTaskkill(exitCode === 0));
+      } catch (e2) {
+        finishTaskkill(false);
+      }
+    };
+    const isUnixProcessGroupAlive2 = (pid) => {
+      try {
+        process.kill(-pid, 0);
+        return true;
+      } catch (error48) {
+        return error48.code === "EPERM";
+      }
+    };
+    const finishUnixTreeKill = (pid) => {
+      const deadline = Date.now() + forceSettleTimeoutMs;
+      const poll = () => {
+        var _a6, _b4;
+        if (settled) return;
+        if (isUnixProcessGroupAlive2(pid) && Date.now() < deadline) {
+          forceSettleHandle = setTimeout(poll, 25);
+          return;
+        }
+        cleanupRequired = isUnixProcessGroupAlive2(pid);
+        unixTreeKillInFlight = false;
+        const pending = pendingSettlement;
+        pendingSettlement = null;
+        settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
+      };
+      poll();
+    };
+    const stopProcess = (reason) => {
+      if (reason === "timeout") timedOut = true;
+      else cancelled = true;
+      if (!child || terminationRequested) return;
+      const ownedChild = child;
+      terminationRequested = true;
+      if (process.platform === "win32" && ownedChild.pid) {
+        startWindowsTreeKill(ownedChild.pid);
+      } else if (ownedChild.pid) {
+        unixTreeKillInFlight = true;
+        try {
+          process.kill(-ownedChild.pid, "SIGTERM");
+        } catch (e2) {
+          ownedChild.kill("SIGTERM");
+        }
+      } else {
+        ownedChild.kill("SIGTERM");
+      }
+      if (process.platform === "win32") return;
+      const processGroupPid = ownedChild.pid;
+      killHandle = setTimeout(() => {
+        var _a6, _b4;
+        if (settled) return;
+        if (processGroupPid) {
+          try {
+            process.kill(-processGroupPid, "SIGKILL");
+          } catch (e2) {
+            ownedChild.kill("SIGKILL");
+          }
+        } else {
+          ownedChild.kill("SIGKILL");
+        }
+        if (processGroupPid) {
+          finishUnixTreeKill(processGroupPid);
+        } else {
+          unixTreeKillInFlight = false;
+          const pending = pendingSettlement;
+          pendingSettlement = null;
+          settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
+        }
+      }, data.killTimeoutMs);
+    };
+    process.on("message", (message) => {
+      if ((message == null ? void 0 : message.type) === "cancel") stopProcess("cancel");
+    });
+    if (cancelBeforeStart) {
+      cancelled = true;
+      settle(null, null);
+      return;
+    }
+    try {
+      child = spawn6(data.command, data.args, {
+        cwd: data.cwd,
+        env: data.env,
+        windowsHide: true,
+        detached: process.platform !== "win32",
+        ...data.windowsVerbatimArguments ? { windowsVerbatimArguments: true } : {}
+      });
+    } catch (error48) {
+      const spawnError = error48 instanceof Error ? error48 : new Error(String(error48));
+      appendStderr(Buffer.from(spawnError.message, "utf8"));
+      settle(null, null, spawnError);
+      return;
+    }
+    if (child.pid) {
+      send({ type: "spawned", pid: child.pid });
+    }
+    if (data.timeoutMs && data.timeoutMs > 0) {
+      timeoutHandle = setTimeout(() => stopProcess("timeout"), data.timeoutMs);
+    }
+    (_a5 = child.stdout) == null ? void 0 : _a5.on("data", (chunk) => {
+      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
+      stdoutBytes += buffer.length;
+      stdoutChunks += 1;
+      appendStdout(buffer);
+    });
+    (_b3 = child.stderr) == null ? void 0 : _b3.on("data", (chunk) => {
+      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
+      stderrBytes += buffer.length;
+      stderrChunks += 1;
+      appendStderr(buffer);
+    });
+    child.once("error", (error48) => {
+      if (retainedStderrBytes > 0) appendStderr(Buffer.from("\n", "utf8"));
+      appendStderr(Buffer.from(error48.message, "utf8"));
+      settle(null, null, error48);
+    });
+    child.once("close", (exitCode, signal) => settle(exitCode, signal));
+  };
+  const handleBootstrapMessage = (message) => {
+    const candidate = message;
+    if ((candidate == null ? void 0 : candidate.type) === "cancel") {
+      cancelBeforeStart = true;
+      return;
+    }
+    if ((candidate == null ? void 0 : candidate.type) !== "start") return;
+    process.off("message", handleBootstrapMessage);
+    start(candidate.data);
+  };
+  process.on("message", handleBootstrapMessage);
+  send({ type: "ready" });
+}
+var CLI_WORKER_SOURCE = `(${cliWorkerMain.toString()})()`;
+var CliWorkerProcessExecutor = class {
+  constructor(deps = {}) {
+    var _a5, _b3;
+    this.isolatedProcessFactory = (_a5 = deps.isolatedProcessFactory) != null ? _a5 : ((source, options) => new CliIsolatedProcessHost(source, options));
+    this.terminateProcessTree = (_b3 = deps.terminateProcessTree) != null ? _b3 : terminateCliProcessTree;
+  }
+  /** Starts an isolated process and resolves only from its final structured result. */
+  async run(options) {
+    var _a5;
+    if ((_a5 = options.signal) == null ? void 0 : _a5.aborted) {
+      return {
+        exitCode: null,
+        signal: null,
+        stdout: "",
+        stderr: "",
+        timedOut: false,
+        cancelled: true
+      };
+    }
+    return new Promise((resolve14) => {
+      var _a6, _b3, _c2, _d, _e2;
+      let settled = false;
+      let watchdogHandle = null;
+      let cancelWatchdogHandle = null;
+      let childPid = null;
+      let spawnedReported = false;
+      let isolatedProcess;
+      const clearLifecycleHooks = () => {
+        var _a7;
+        if (watchdogHandle) clearTimeout(watchdogHandle);
+        if (cancelWatchdogHandle) clearTimeout(cancelWatchdogHandle);
+        (_a7 = options.signal) == null ? void 0 : _a7.removeEventListener("abort", abortWorkerCommand);
+      };
+      const finish = async (result) => {
+        if (settled) return;
+        settled = true;
+        childPid = null;
+        clearLifecycleHooks();
+        await isolatedProcess.terminate().catch(() => void 0);
+        resolve14(result);
+      };
+      const failAndCleanup = async (result) => {
+        if (settled) return;
+        settled = true;
+        clearLifecycleHooks();
+        const pid = childPid;
+        childPid = null;
+        let finalResult = result;
+        if (pid !== null) {
+          try {
+            await this.terminateProcessTree(pid);
+          } catch (error48) {
+            const cleanupError = error48 instanceof Error ? error48 : new Error(String(error48));
+            finalResult = {
+              ...result,
+              stderr: [result.stderr, `Process tree cleanup failed: ${cleanupError.message}`].filter(Boolean).join("\n"),
+              ...result.error ? {} : { error: cleanupError }
+            };
+          }
+        }
+        await isolatedProcess.terminate().catch(() => void 0);
+        resolve14(finalResult);
+      };
+      function abortWorkerCommand() {
+        var _a7;
+        if (settled) return;
+        try {
+          isolatedProcess.postMessage({ type: "cancel" });
+        } catch (error48) {
+          const workerError = error48 instanceof Error ? error48 : new Error(String(error48));
+          void failAndCleanup(failedWorkerResult(workerError, true));
+          return;
+        }
+        cancelWatchdogHandle = setTimeout(() => {
+          void failAndCleanup(
+            failedWorkerResult(new Error("Isolated CLI process did not settle after cancellation"), true)
+          );
+        }, ((_a7 = options.killTimeoutMs) != null ? _a7 : DEFAULT_KILL_TIMEOUT_MS) + FORCE_SETTLE_TIMEOUT_MS + WORKER_WATCHDOG_GRACE_MS);
+      }
+      try {
+        isolatedProcess = this.isolatedProcessFactory(CLI_WORKER_SOURCE, {
+          executable: options.isolatedProcessExecutable,
+          workerData: {
+            command: options.command,
+            args: options.args,
+            cwd: options.cwd,
+            env: options.env,
+            windowsVerbatimArguments: options.windowsVerbatimArguments,
+            timeoutMs: options.timeoutMs,
+            killTimeoutMs: (_a6 = options.killTimeoutMs) != null ? _a6 : DEFAULT_KILL_TIMEOUT_MS,
+            stdoutTailBytes: (_b3 = options.stdoutTailBytes) != null ? _b3 : 0,
+            stderrTailBytes: options.stderrTailBytes
+          }
+        });
+      } catch (error48) {
+        const workerError = error48 instanceof Error ? error48 : new Error(String(error48));
+        resolve14(failedWorkerResult(workerError));
+        return;
+      }
+      isolatedProcess.on("message", (message) => {
+        var _a7;
+        if (isWorkerSpawnedMessage(message)) {
+          childPid = message.pid;
+          if (!spawnedReported) {
+            spawnedReported = true;
+            (_a7 = options.onSpawned) == null ? void 0 : _a7.call(options, message.pid);
+          }
+          return;
+        }
+        if (!isWorkerResultMessage(message)) return;
+        const { error: error48, ...result } = message.result;
+        const restoredResult = {
+          ...result,
+          ...error48 ? { error: restoreWorkerError(error48) } : {}
+        };
+        if (message.cleanupRequired) {
+          void failAndCleanup(restoredResult);
+        } else {
+          void finish(restoredResult);
+        }
+      });
+      isolatedProcess.once("error", (error48) => {
+        void failAndCleanup(failedWorkerResult(error48));
+      });
+      isolatedProcess.once("exit", (exitCode) => {
+        if (!settled) {
+          void failAndCleanup(
+            failedWorkerResult(new Error(`Isolated CLI process exited before returning a result (${exitCode})`))
+          );
+        }
+      });
+      (_c2 = options.signal) == null ? void 0 : _c2.addEventListener("abort", abortWorkerCommand, { once: true });
+      if ((_d = options.signal) == null ? void 0 : _d.aborted) abortWorkerCommand();
+      if (options.timeoutMs && options.timeoutMs > 0) {
+        watchdogHandle = setTimeout(() => {
+          void failAndCleanup(
+            failedWorkerResult(new Error("Isolated CLI process exceeded its command timeout"), false, true)
+          );
+        }, options.timeoutMs + ((_e2 = options.killTimeoutMs) != null ? _e2 : DEFAULT_KILL_TIMEOUT_MS) + FORCE_SETTLE_TIMEOUT_MS + WORKER_WATCHDOG_GRACE_MS);
+      }
+    });
+  }
+};
+
+// src/core/integrations/CliProcessRunner.ts
+var DEFAULT_KILL_SIGNAL = "SIGTERM";
+var DEFAULT_FORCE_KILL_SIGNAL = "SIGKILL";
+var DEFAULT_KILL_TIMEOUT_MS2 = 3e3;
+var DEFAULT_FORCE_SETTLE_TIMEOUT_MS = 1e3;
+var WINDOWS_CMD_ARGUMENT_CHARS2 = /[\s"&<>|{}^=;!'+,`~()%@]/u;
+function createTextDecoder() {
+  const decoder = new import_string_decoder.StringDecoder("utf8");
+  return (chunk) => Buffer.isBuffer(chunk) ? decoder.write(chunk) : chunk;
+}
+function appendErrorToStderr(stderr, error48) {
+  return stderr ? `${stderr}
+${error48.message}` : error48.message;
+}
+function appendOutputTail(current, chunk, maxOutputChars) {
+  const combined = current + chunk;
+  if (!maxOutputChars || maxOutputChars <= 0 || combined.length <= maxOutputChars) {
+    return combined;
+  }
+  return combined.slice(-maxOutputChars);
+}
+var FixedByteRingBuffer = class {
+  constructor(capacity) {
+    this.writeOffset = 0;
+    this.retainedBytes = 0;
+    this.buffer = Buffer.alloc(Math.max(0, Math.floor(capacity)));
+  }
+  get byteLength() {
+    return this.retainedBytes;
+  }
+  /** Retains the newest bytes without concatenating the previously retained tail. */
+  append(chunk) {
+    const capacity = this.buffer.length;
+    if (capacity === 0 || chunk.length === 0) return;
+    if (chunk.length >= capacity) {
+      chunk.copy(this.buffer, 0, chunk.length - capacity);
+      this.writeOffset = 0;
+      this.retainedBytes = capacity;
+      return;
+    }
+    const firstLength = Math.min(chunk.length, capacity - this.writeOffset);
+    chunk.copy(this.buffer, this.writeOffset, 0, firstLength);
+    const remainingLength = chunk.length - firstLength;
+    if (remainingLength > 0) {
+      chunk.copy(this.buffer, 0, firstLength);
+    }
+    this.writeOffset = (this.writeOffset + chunk.length) % capacity;
+    this.retainedBytes = Math.min(capacity, this.retainedBytes + chunk.length);
+  }
+  /** Converts the retained tail once when the process settles. */
+  toString() {
+    if (this.retainedBytes === 0) return "";
+    const capacity = this.buffer.length;
+    const start = (this.writeOffset - this.retainedBytes + capacity) % capacity;
+    if (start + this.retainedBytes <= capacity) {
+      return this.buffer.subarray(start, start + this.retainedBytes).toString("utf8");
+    }
+    const first = this.buffer.subarray(start);
+    const secondLength = this.retainedBytes - first.length;
+    return Buffer.concat([first, this.buffer.subarray(0, secondLength)], this.retainedBytes).toString("utf8");
+  }
+};
+function requiresWindowsShellQuoting2(value) {
+  return WINDOWS_CMD_ARGUMENT_CHARS2.test(value) || value.includes("[") || value.includes("]");
+}
+function quoteWindowsShellArgument2(value) {
+  const escapedValue = value.replace(/%/g, "%%");
+  if (!value.length) {
+    return '""';
+  }
+  if (!requiresWindowsShellQuoting2(escapedValue)) {
+    return escapedValue;
+  }
+  return `"${escapedValue.replace(/"/g, '""')}"`;
+}
+function resolveCliSpawnSpec(executable, args) {
+  if (process.platform !== "win32") {
+    return {
+      command: executable,
+      args
+    };
+  }
+  const lowerExecutable = executable.toLowerCase();
+  if (lowerExecutable.endsWith(".cmd") || lowerExecutable.endsWith(".bat")) {
+    const shellCommand = [executable, ...args].map((value) => quoteWindowsShellArgument2(value)).join(" ");
+    return {
+      command: process.env.ComSpec || process.env.comspec || "cmd.exe",
+      args: ["/d", "/s", "/c", `"${shellCommand}"`],
+      windowsVerbatimArguments: true
+    };
+  }
+  if (lowerExecutable.endsWith(".ps1")) {
+    return {
+      command: "powershell.exe",
+      args: [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        executable,
+        ...args
+      ]
+    };
+  }
+  return {
+    command: executable,
+    args
+  };
+}
+var CliProcessRunner = class {
+  constructor(deps = {}) {
+    var _a5;
+    this.workerExecutor = (_a5 = deps.workerExecutor) != null ? _a5 : new CliWorkerProcessExecutor();
+  }
+  /**
+   * Execute a CLI command and resolve with the complete process result.
+   *
+   * The promise does not reject for normal CLI failures. Non-zero exits,
+   * spawn errors, timeouts, and cancellations are represented in the result so
+   * callers can map them into integration-specific recovery states.
+   */
+  async run(options) {
+    var _a5, _b3, _c2, _d, _e2;
+    const spawnSpec = resolveCliSpawnSpec(options.executable, options.args);
+    if (options.executionMode === "worker") {
+      if (!options.isolatedProcessExecutable) {
+        const error48 = new Error("Isolated CLI execution requires an absolute Node.js executable");
+        error48.code = "ERR_CLI_ISOLATION_RUNTIME_NOT_FOUND";
+        return {
+          exitCode: null,
+          signal: null,
+          stdout: "",
+          stderr: error48.message,
+          timedOut: false,
+          cancelled: false,
+          error: error48
+        };
+      }
+      return this.workerExecutor.run({
+        isolatedProcessExecutable: options.isolatedProcessExecutable,
+        command: spawnSpec.command,
+        args: spawnSpec.args,
+        cwd: options.cwd,
+        env: (_a5 = options.env) != null ? _a5 : {},
+        windowsVerbatimArguments: spawnSpec.windowsVerbatimArguments,
+        timeoutMs: options.timeoutMs,
+        killTimeoutMs: options.killTimeoutMs,
+        stdoutTailBytes: (_c2 = (_b3 = options.outputCapture) == null ? void 0 : _b3.stdoutTailBytes) != null ? _c2 : 0,
+        stderrTailBytes: (_e2 = (_d = options.outputCapture) == null ? void 0 : _d.stderrTailBytes) != null ? _e2 : 0,
+        signal: options.signal,
+        onSpawned: options.onSpawned
+      });
+    }
+    return new Promise((resolve14) => {
+      var _a6, _b4, _c3, _d2, _e3, _f2, _g, _h2;
+      let stdout = "";
+      let stderr = "";
+      const decodeStdout = createTextDecoder();
+      const decodeStderr = createTextDecoder();
+      let settled = false;
+      let timedOut = false;
+      let cancelled = false;
+      let timeoutHandle = null;
+      let killTimeoutHandle = null;
+      let forceSettleTimeoutHandle = null;
+      let terminationRequested = false;
+      let child = null;
+      const outputCapture = options.outputCapture;
+      const lowOutputCapture = (outputCapture == null ? void 0 : outputCapture.mode) === "low-output";
+      const stdoutTail = new FixedByteRingBuffer((_a6 = outputCapture == null ? void 0 : outputCapture.stdoutTailBytes) != null ? _a6 : 0);
+      const stderrTail = new FixedByteRingBuffer((_b4 = outputCapture == null ? void 0 : outputCapture.stderrTailBytes) != null ? _b4 : 0);
+      const outputStats = {
+        stdoutBytes: 0,
+        stdoutChunks: 0,
+        stderrBytes: 0,
+        stderrChunks: 0,
+        retainedStderrBytes: 0
+      };
+      const settle = (result) => {
+        var _a7;
+        if (settled) {
+          return;
+        }
+        settled = true;
+        if (timeoutHandle) {
+          clearTimeout(timeoutHandle);
+        }
+        if (killTimeoutHandle) {
+          clearTimeout(killTimeoutHandle);
+        }
+        if (forceSettleTimeoutHandle) {
+          clearTimeout(forceSettleTimeoutHandle);
+        }
+        (_a7 = options.signal) == null ? void 0 : _a7.removeEventListener("abort", abortProcess);
+        if (stdoutTail.byteLength > 0) outputStats.retainedStdoutBytes = stdoutTail.byteLength;
+        outputStats.retainedStderrBytes = stderrTail.byteLength;
+        resolve14({
+          ...result,
+          stdout: lowOutputCapture ? stdoutTail.toString() : stdout,
+          stderr: lowOutputCapture ? stderrTail.toString() : stderr,
+          timedOut,
+          cancelled,
+          ...lowOutputCapture ? { outputStats: { ...outputStats } } : {}
+        });
+      };
+      const stopProcess = (reason) => {
+        var _a7;
+        if (reason === "timeout") {
+          timedOut = true;
+        } else {
+          cancelled = true;
+        }
+        if (!child || terminationRequested) {
+          return;
+        }
+        terminationRequested = true;
+        child.kill(DEFAULT_KILL_SIGNAL);
+        killTimeoutHandle = setTimeout(() => {
+          if (settled || !child) {
+            return;
+          }
+          child.kill(DEFAULT_FORCE_KILL_SIGNAL);
+          forceSettleTimeoutHandle = setTimeout(() => {
+            settle({
+              exitCode: null,
+              signal: DEFAULT_FORCE_KILL_SIGNAL
+            });
+          }, DEFAULT_FORCE_SETTLE_TIMEOUT_MS);
+        }, (_a7 = options.killTimeoutMs) != null ? _a7 : DEFAULT_KILL_TIMEOUT_MS2);
+      };
+      function abortProcess() {
+        stopProcess("cancel");
+      }
+      if ((_c3 = options.signal) == null ? void 0 : _c3.aborted) {
+        cancelled = true;
+        settle({
+          exitCode: null,
+          signal: null
+        });
+        return;
+      }
+      const spawnOptions = {
+        cwd: options.cwd,
+        env: (_d2 = options.env) != null ? _d2 : {},
+        windowsHide: true
+      };
+      if (spawnSpec.windowsVerbatimArguments) {
+        spawnOptions.windowsVerbatimArguments = true;
+      }
+      momaInfo("[CliProcessRunner] spawn", {
+        executable: options.executable,
+        command: spawnSpec.command,
+        args: spawnSpec.args
+      });
+      try {
+        child = (0, import_child_process9.spawn)(spawnSpec.command, spawnSpec.args, spawnOptions);
+        if (child.pid) (_e3 = options.onSpawned) == null ? void 0 : _e3.call(options, child.pid);
+      } catch (error48) {
+        const spawnError = error48 instanceof Error ? error48 : new Error(String(error48));
+        if (lowOutputCapture) {
+          stderrTail.append(Buffer.from(spawnError.message, "utf8"));
+        } else {
+          stderr = appendErrorToStderr(stderr, spawnError);
+        }
+        settle({
+          exitCode: null,
+          signal: null,
+          error: spawnError
+        });
+        return;
+      }
+      (_f2 = options.signal) == null ? void 0 : _f2.addEventListener("abort", abortProcess, { once: true });
+      if (options.timeoutMs && options.timeoutMs > 0) {
+        timeoutHandle = setTimeout(() => {
+          stopProcess("timeout");
+        }, options.timeoutMs);
+      }
+      (_g = child.stdout) == null ? void 0 : _g.on("data", (chunk) => {
+        var _a7;
+        if (lowOutputCapture) {
+          const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
+          outputStats.stdoutBytes += buffer.length;
+          outputStats.stdoutChunks += 1;
+          stdoutTail.append(buffer);
+          return;
+        }
+        const text = decodeStdout(chunk);
+        stdout = appendOutputTail(stdout, text, options.maxOutputChars);
+        (_a7 = options.onStdout) == null ? void 0 : _a7.call(options, text);
+      });
+      (_h2 = child.stderr) == null ? void 0 : _h2.on("data", (chunk) => {
+        var _a7;
+        if (lowOutputCapture) {
+          const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
+          outputStats.stderrBytes += buffer.length;
+          outputStats.stderrChunks += 1;
+          stderrTail.append(buffer);
+          return;
+        }
+        const text = decodeStderr(chunk);
+        stderr = appendOutputTail(stderr, text, options.maxOutputChars);
+        (_a7 = options.onStderr) == null ? void 0 : _a7.call(options, text);
+      });
+      child.once("error", (error48) => {
+        if (lowOutputCapture) {
+          if (stderrTail.byteLength > 0) stderrTail.append(Buffer.from("\n", "utf8"));
+          stderrTail.append(Buffer.from(error48.message, "utf8"));
+        } else {
+          stderr = appendErrorToStderr(stderr, error48);
+        }
+        settle({
+          exitCode: null,
+          signal: null,
+          error: error48
+        });
+      });
+      child.once("close", (exitCode, signal) => {
+        settle({
+          exitCode,
+          signal
+        });
+      });
+    });
+  }
+};
+
+// src/features/sync/cli/cliRunner.ts
+init_debug();
+
+// src/features/sync/cli/errors.ts
+var CliError = class extends Error {
+  constructor(message, exitCode, stderr, stdout = "", reason = "other") {
+    super(message);
+    this.exitCode = exitCode;
+    this.stderr = stderr;
+    this.stdout = stdout;
+    this.reason = reason;
+    this.name = "CliError";
+  }
+};
+var AuthRequiredError = class extends CliError {
+  constructor(stderr) {
+    super("CLI authentication required", 1, stderr);
+    this.name = "AuthRequiredError";
+  }
+};
+var CliNotFoundError = class extends Error {
+  constructor(cliPath) {
+    super(`CLI not found at ${cliPath}`);
+    this.cliPath = cliPath;
+    this.name = "CliNotFoundError";
+  }
+};
+
+// src/features/sync/cli/cliRunner.ts
+var AUTH_PATTERNS = [
+  /authentication required/i,
+  /please run.+init/i,
+  /not logged in/i,
+  /token (expired|invalid)/i
+];
+function isEnoent(error48) {
+  return (error48 == null ? void 0 : error48.code) === "ENOENT";
+}
+function createCliRunner(cfg = {}) {
+  var _a5, _b3;
+  const processRunner = (_a5 = cfg.processRunner) != null ? _a5 : new CliProcessRunner();
+  const resolveIsolatedProcessExecutable = (_b3 = cfg.resolveIsolatedProcessExecutable) != null ? _b3 : findNodeExecutableAsync;
+  async function runText(opts) {
+    var _a6, _b4, _c2, _d, _e2, _f2, _g, _h2;
+    const enhancedPath = (_a6 = opts.enhancedPath) != null ? _a6 : getEnhancedPath(void 0, opts.cli);
+    const env = buildChildProcessEnv((_b4 = opts.env) != null ? _b4 : {}, enhancedPath);
+    let isolatedProcessExecutable;
+    if (opts.executionMode === "worker") {
+      isolatedProcessExecutable = (_c2 = await resolveIsolatedProcessExecutable(enhancedPath)) != null ? _c2 : void 0;
+      if (!isolatedProcessExecutable) {
+        throw new CliNotFoundError(process.platform === "win32" ? "node.exe" : "node");
+      }
+    }
+    const result = await processRunner.run({
+      executable: opts.cli,
+      args: [...opts.args],
+      cwd: opts.cwd,
+      env,
+      ...opts.timeoutMs !== void 0 ? { timeoutMs: opts.timeoutMs } : {},
+      ...opts.maxOutputChars !== void 0 ? { maxOutputChars: opts.maxOutputChars } : {},
+      ...opts.outputCapture !== void 0 ? { outputCapture: opts.outputCapture } : {},
+      ...opts.executionMode !== void 0 ? { executionMode: opts.executionMode } : {},
+      ...isolatedProcessExecutable !== void 0 ? { isolatedProcessExecutable } : {},
+      ...opts.onSpawned !== void 0 ? { onSpawned: opts.onSpawned } : {}
+    });
+    if (isEnoent(result.error)) {
+      momaInfo("[moma npm spawn] ENOENT", { cli: opts.cli, errorCode: (_d = result.error) == null ? void 0 : _d.code });
+      throw new CliNotFoundError(opts.cli);
+    }
+    if (result.timedOut) {
+      throw new CliError("CLI command timed out", (_e2 = result.exitCode) != null ? _e2 : -1, result.stderr, result.stdout, "timeout");
+    }
+    if (result.cancelled) {
+      throw new CliError("CLI command cancelled", (_f2 = result.exitCode) != null ? _f2 : -1, result.stderr, result.stdout, "cancelled");
+    }
+    if (result.exitCode === 0) {
+      return result.stdout;
+    }
+    if (result.exitCode === 127) {
+      momaInfo("[moma npm spawn] not found", { cli: opts.cli, exitCode: result.exitCode, stderr: (_g = result.stderr) == null ? void 0 : _g.slice(0, 200) });
+      throw new CliNotFoundError(opts.cli);
+    }
+    if (AUTH_PATTERNS.some((p) => p.test(result.stderr))) {
+      throw new AuthRequiredError(result.stderr);
+    }
+    throw new CliError(
+      `CLI exited with code ${result.exitCode}`,
+      (_h2 = result.exitCode) != null ? _h2 : -1,
+      result.stderr,
+      result.stdout,
+      "exit"
+    );
+  }
+  async function runJson(opts) {
+    const text = await runText(opts);
+    try {
+      return JSON.parse(text);
+    } catch (e2) {
+      throw new CliError(`Failed to parse CLI JSON output: ${e2.message}`, 0, text);
+    }
+  }
+  return { runJson, runText };
+}
+
+// src/providers/claude/runtime/claudeCliVersionCache.ts
+init_debug();
+var LOG2 = "[claude-cli-version]";
+var PROBE_TIMEOUT_MS = 5e3;
+var VERSION_PATTERN = /(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)/;
+var cachedVersion = null;
+var probed = false;
+function getCachedClaudeCliVersion() {
+  return cachedVersion;
+}
+async function ensureClaudeCliVersionProbed(cliPath) {
+  var _a5, _b3;
+  if (probed) return;
+  probed = true;
+  if (!cliPath) {
+    momaInfo(`${LOG2} skipped`, { reason: "cli path not resolved" });
+    return;
+  }
+  try {
+    const enhancedPath = await getEnhancedPathAsync(void 0, cliPath);
+    const runner = createCliRunner();
+    const out = await runner.runText({
+      cli: cliPath,
+      args: ["--version"],
+      enhancedPath,
+      timeoutMs: PROBE_TIMEOUT_MS
+    });
+    const version2 = (_b3 = (_a5 = out.match(VERSION_PATTERN)) == null ? void 0 : _a5[1]) != null ? _b3 : null;
+    cachedVersion = version2;
+    momaInfo(`${LOG2} probed`, { version: version2 != null ? version2 : "(unparseable)", raw: out.slice(0, 80) });
+  } catch (e2) {
+    momaInfo(`${LOG2} probe failed`, { cliPath });
+  }
+}
+
 // src/providers/claude/storage/StorageService.ts
 var import_obsidian4 = require("obsidian");
 
@@ -34293,6 +35431,7 @@ var DEFAULT_CLAUDIAN_SETTINGS = {
   enableAutoScroll: true,
   skillHubAutoUpdateEnabled: false,
   chatViewPlacement: "right-sidebar",
+  workbenchLeafPlacement: "left-sidebar",
   requireCommandOrControlEnterToSend: false,
   expandFileEditsByDefault: false,
   hiddenProviderCommands: getDefaultHiddenProviderCommands(),
@@ -72846,12 +73985,12 @@ var https = __toESM(require("https"));
 function createNodeFetch() {
   return async (input, init) => {
     var _a5, _b3, _c2;
-    const requestUrl6 = getRequestUrl(input);
+    const requestUrl7 = getRequestUrl(input);
     const method = (_a5 = init == null ? void 0 : init.method) != null ? _a5 : input instanceof Request ? input.method : "GET";
     const headers = mergeHeaders(input, init);
     const signal = (_b3 = init == null ? void 0 : init.signal) != null ? _b3 : input instanceof Request ? input.signal : void 0;
     const body = await getRequestBody((_c2 = init == null ? void 0 : init.body) != null ? _c2 : input instanceof Request ? input.body : void 0);
-    const transport = requestUrl6.protocol === "https:" ? https : http;
+    const transport = requestUrl7.protocol === "https:" ? https : http;
     return new Promise((resolve14, reject) => {
       let settled = false;
       const fail = (error48) => {
@@ -72870,7 +74009,7 @@ function createNodeFetch() {
         requestHeaders["content-length"] = String(body.byteLength);
       }
       const req = transport.request(
-        requestUrl6,
+        requestUrl7,
         {
           method,
           headers: requestHeaders
@@ -74197,6 +75336,11 @@ function confirmDelete(app, message) {
 function confirm2(app, message, confirmText) {
   return new Promise((resolve14) => {
     new ConfirmModal(app, message, resolve14, confirmText).open();
+  });
+}
+function confirmRich(app, renderMessage, confirmText) {
+  return new Promise((resolve14) => {
+    new ConfirmModal(app, null, resolve14, confirmText, renderMessage).open();
   });
 }
 var ConfirmModal = class extends import_obsidian10.Modal {
@@ -75670,6 +76814,10 @@ async function createClaudeWorkspaceServices(plugin, adapter) {
     claudeStorage.skills,
     (context, signal) => probeRuntimeCommands(plugin, context == null ? void 0 : context.enhancedPath, signal)
   );
+  void ensureClaudeCliVersionProbed(
+    cliResolver.resolveFromSettings(plugin.settings)
+  ).catch(() => {
+  });
   return {
     claudeStorage,
     cliResolver,
@@ -76184,10 +77332,27 @@ var HOST_AUTH_TIMEOUT_MS = 2e4;
 var HOST_AUTH_MAX_SWAPS = 3;
 var HOST_AUTH_ENTRYPOINT = "claude-desktop-3p";
 var HOST_AUTH_RESET_MS = 5 * 60 * 1e3;
-var LOG2 = "[hostAuth]";
+var LOG3 = "[hostAuth]";
 var ERROR_MESSAGE_MAX = 512;
-function isHostAuthSelfHealEnabled(settings11) {
-  return settings11.hostAuthSelfHealEnabled === true || settings11.hostAuthSelfHealGrayEnabled === true;
+var HOST_AUTH_SELF_HEAL_MIN_VERSION = "2.1.145";
+function meetsMinVersion(version2, minVersion) {
+  const parse5 = (v2) => {
+    const parts = v2.split(".").map(Number);
+    if (parts.length !== 3 || parts.some(isNaN)) return null;
+    return parts;
+  };
+  const a = parse5(version2);
+  const b2 = parse5(minVersion);
+  if (!a || !b2) return false;
+  for (let i = 0; i < 3; i++) {
+    if (a[i] !== b2[i]) return a[i] > b2[i];
+  }
+  return true;
+}
+function isHostAuthSelfHealEnabled(settings11, claudeCliVersion) {
+  if (!settings11.hostAuthSelfHealEnabled && !settings11.hostAuthSelfHealGrayEnabled) return false;
+  if (!claudeCliVersion || !meetsMinVersion(claudeCliVersion, HOST_AUTH_SELF_HEAL_MIN_VERSION)) return false;
+  return true;
 }
 function raceBounded(work, opts) {
   return new Promise((resolve14, reject) => {
@@ -76219,13 +77384,14 @@ function createHostAuthRefresher(deps) {
   var _a5, _b3;
   const {
     plugin,
+    claudeCliVersion,
     refreshAccessToken = (p) => authCredentialService.refreshAccessToken(p),
     now = () => Date.now(),
     timeoutMs = HOST_AUTH_TIMEOUT_MS,
     maxSwaps = HOST_AUTH_MAX_SWAPS,
     resetMs = HOST_AUTH_RESET_MS
   } = deps;
-  if (!isHostAuthSelfHealEnabled(plugin.settings)) {
+  if (!isHostAuthSelfHealEnabled(plugin.settings, claudeCliVersion)) {
     return void 0;
   }
   let lastIssued = null;
@@ -76258,7 +77424,7 @@ function createHostAuthRefresher(deps) {
         windowStart = now();
       }
       if (swaps >= maxSwaps) {
-        momaWarn(`${LOG2} swap budget exhausted (${swaps}/${maxSwaps}), fast-failing`);
+        momaWarn(`${LOG3} swap budget exhausted (${swaps}/${maxSwaps}), fast-failing`);
         report("budget_exhausted", { swaps, maxSwaps });
         return fallback();
       }
@@ -76270,13 +77436,13 @@ function createHostAuthRefresher(deps) {
       });
       if (accessToken === null) {
         if (!((_c2 = opts.signal) == null ? void 0 : _c2.aborted)) {
-          momaWarn(`${LOG2} refresh timed out after ${timeoutMs}ms, fast-failing`);
+          momaWarn(`${LOG3} refresh timed out after ${timeoutMs}ms, fast-failing`);
           report("refresh_timeout", { timeoutMs });
         }
         return fallback();
       }
       if (!accessToken.trim()) {
-        momaWarn(`${LOG2} refresh yielded no usable accessToken, fast-failing`);
+        momaWarn(`${LOG3} refresh yielded no usable accessToken, fast-failing`);
         report("empty_access_token", {});
         return fallback();
       }
@@ -76294,7 +77460,7 @@ function createHostAuthRefresher(deps) {
       lastShippedAccessToken = accessToken.trim();
       return composed;
     } catch (err) {
-      momaWarn(`${LOG2} refresh failed, fast-failing`, err);
+      momaWarn(`${LOG3} refresh failed, fast-failing`, err);
       report("refresh_failed", {
         errorMessage: (err instanceof Error ? err.message : String(err)).slice(0, ERROR_MESSAGE_MAX)
       });
@@ -77428,11 +78594,8 @@ function parseClaudePromptPrefixEnvelope(value) {
   };
 }
 
-// src/core/runtime/skillSelection.ts
-var MAX_SELECTED_SKILLS_PER_TURN = 3;
-
 // src/providers/claude/prompt/ClaudeSkillCandidates.ts
-var ENVELOPE_PATTERN2 = /<claudian-turn version="2">([\s\S]*?)<\/claudian-turn>\s*/u;
+var ENVELOPE_PATTERN2 = /<moma-turn version="2">([\s\S]*?)<\/moma-turn>\s*/u;
 var SKILL_ENTRY_PATTERN = /<skill name="([^"]*)"[^>]*(?:\/>|>([\s\S]*?)<\/skill>)/gu;
 var ARG_PATTERN = /<arg(?:\s[^>]*)?>([\s\S]*?)<\/arg>/gu;
 function escapeXmlAttribute(value) {
@@ -77447,7 +78610,7 @@ function decodeXmlText2(value) {
 var SKILL_ARGUMENT_NOTE = "The Skill tool only loads a Skill's instructions and accepts no arguments: after loading each Skill, apply that Skill's own arguments yourself. Never combine, exchange, or infer arguments across Skills, and never probe APIs with Bash to discover a target \u2014 the listed arguments are complete.";
 var MEETING_KNOWLEDGE_POLICY = [
   '1. Pick knowledge entries based on their role, pick-when, and the current discussion. An entry whose pick-when says "\u59CB\u7EC8\u5148\u8BFB" must always be retrieved first \u2014 do not skip it. Match other entries by path, desc, or obvious aliases (for example "\u76EE\u5F55\u4E8C" / "\u76EE\u5F552" refers to \u5F55\u97F3\u76EE\u5F552). If the meeting asks to summarize, analyze, review, or compare a listed entry, pick it.',
-  `2. Retrieve the picked entries one at a time, in listed order, confirming you hold the content before moving on. ${SKILL_ARGUMENT_NOTE}`,
+  `2. Retrieve the picked entries one at a time, in listed order, confirming you hold the content before moving on. When an entry carries <arg> values, those arguments already scope the query \u2014 retrieve strictly within that scope first (do not enumerate the account's full set of assets or spaces up front). Only widen to the full accessible set when the scoped lookup genuinely returns nothing you need. ${SKILL_ARGUMENT_NOTE}`,
   "3. A note entry opens with the Read tool. A folder entry you list first, then read the files the meeting asked for.",
   "4. Leave unpicked entries alone. Do not use Bash or other tools to reach Space paths \u2014 Space content comes from the moma-space Skill only.",
   "5. Before answering, check every picked entry against what you actually retrieved. Invoking a Skill is not the same as holding its content.",
@@ -77459,7 +78622,6 @@ var MEETING_TURN_DUTY = [
   "\u4E0D\u8981\u56E0\u4E3A live summary \u4ECD\u5728\u751F\u6210\u3001\u6216\u5C1A\u672A\u53D6\u56DE\u6240\u5217\u76EE\u5F55\uFF0C\u5C31\u58F0\u79F0\u4E0D\u77E5\u9053\u76EE\u5F55\u662F\u4EC0\u4E48\u6216\u62D2\u7EDD\u9012\u7EB8\u6761\u3002"
 ].join("");
 var AD_HOC_KNOWLEDGE_POLICY = `The user selected these local Skills. Choose only the ones relevant to the request and load each with the Skill tool using its exact name, in the listed order. ${SKILL_ARGUMENT_NOTE} Space content comes from the moma-space Skill only: never open a Space absolute_path with the Read tool, and never append ".md" to a folder path.`;
-var RETAINED_KNOWLEDGE_NOTE = 'Entries marked mode="retrieved" were already fetched earlier in this same conversation. Reuse what you have; do not fetch them again unless that content is missing from your context.';
 var PAPER_RULE_SUPPLEMENT_NOTE = "Deployment-specific addition to the rule above. It refines the rule; where the two conflict, the rule above wins.";
 function normalizeClaudeSkillCandidates(candidates) {
   const normalized = [];
@@ -77477,12 +78639,11 @@ function normalizeClaudeSkillCandidates(candidates) {
       ...candidate.argDescriptions ? { argDescriptions: candidate.argDescriptions } : {},
       ...candidate.role ? { role: candidate.role } : {}
     });
-    if (normalized.length === MAX_SELECTED_SKILLS_PER_TURN) break;
   }
   return normalized;
 }
 function buildClaudeTurnEnvelope(candidates, context, options = {}) {
-  var _a5, _b3, _c2;
+  var _a5, _b3;
   const isMeeting = options.knowledgeMode === "meeting";
   const sections = [
     paperRuleSection(options.paperRule),
@@ -77490,16 +78651,15 @@ function buildClaudeTurnEnvelope(candidates, context, options = {}) {
     knowledgeSection(
       candidates,
       dedupeVaultKnowledge((_a5 = options.vaultKnowledge) != null ? _a5 : []),
-      dedupe((_b3 = options.retainedKnowledge) != null ? _b3 : []),
       isMeeting
     ),
-    isMeeting && ((_c2 = options.paperRule) == null ? void 0 : _c2.instructions.trim()) ? `<duty>
+    isMeeting && ((_b3 = options.paperRule) == null ? void 0 : _b3.instructions.trim()) ? `<duty>
 ${MEETING_TURN_DUTY}
 </duty>
 ` : ""
   ].filter(Boolean);
-  return `<claudian-turn version="2">
-${sections.join("\n")}</claudian-turn>`;
+  return `<moma-turn version="2">
+${sections.join("\n")}</moma-turn>`;
 }
 function paperRuleSection(paperRule) {
   var _a5;
@@ -77522,29 +78682,25 @@ function contextSection(context, isMeeting) {
   return `<${tag}>${escapeXmlText(trimmed)}</${tag}>
 `;
 }
-function knowledgeSection(candidates, vaultKnowledge, retainedKnowledge, isMeeting) {
-  const retained = new Set(retainedKnowledge.map((item) => item.toLowerCase()));
-  const mode = (label) => retained.has(label.toLowerCase()) ? "retrieved" : "available";
+function knowledgeSection(candidates, vaultKnowledge, isMeeting) {
   const entries = [
-    ...candidates.map((candidate) => skillEntry(candidate, mode(candidate.name), isMeeting)),
-    ...vaultKnowledge.map((item) => vaultEntry(item, mode(item.path)))
+    ...candidates.map((candidate) => skillEntry(candidate, isMeeting)),
+    ...vaultKnowledge.map((item) => vaultEntry(item))
   ];
   if (entries.length === 0) return "";
   const policy = isMeeting ? MEETING_KNOWLEDGE_POLICY : AD_HOC_KNOWLEDGE_POLICY;
-  const policyBody = retained.size > 0 ? `${policy}
-${RETAINED_KNOWLEDGE_NOTE}` : policy;
   return `<knowledge>
 ${entries.join("\n")}
 <policy>
-${policyBody}
+${policy}
 </policy>
 </knowledge>
 `;
 }
-function skillEntry(candidate, mode, isMeeting) {
+function skillEntry(candidate, isMeeting) {
   var _a5;
-  const open = `<skill name="${escapeXmlAttribute(candidate.name)}" mode="${mode}">`;
-  const role = mode === "retrieved" ? "" : roleChildren(candidate.role, isMeeting);
+  const open = `<skill name="${escapeXmlAttribute(candidate.name)}" mode="available">`;
+  const role = roleChildren(candidate.role, isMeeting);
   const args = ((_a5 = candidate.args) != null ? _a5 : []).map((arg, index) => {
     var _a6, _b3;
     const description = (_b3 = (_a6 = candidate.argDescriptions) == null ? void 0 : _a6[index]) == null ? void 0 : _b3.trim();
@@ -77567,13 +78723,12 @@ function roleChildren(role, isMeeting) {
 <skip-when>${escapeXmlText(role.skipWhen.trim())}</skip-when>` : ""
   ].join("");
 }
-function vaultEntry(item, mode) {
+function vaultEntry(item) {
   var _a5;
   const isNote = /\.[A-Za-z0-9]{1,16}$/u.test(item.path);
   const tag = isNote ? "note" : "folder";
   const description = ((_a5 = item.description) == null ? void 0 : _a5.trim()) || item.path.split("/").filter(Boolean).at(-1) || item.path;
-  const open = `<${tag} path="${escapeXmlAttribute(item.path)}" mode="${mode}" desc="${escapeXmlAttribute(description)}">`;
-  if (mode === "retrieved") return `${open}</${tag}>`;
+  const open = `<${tag} path="${escapeXmlAttribute(item.path)}" mode="available" desc="${escapeXmlAttribute(description)}">`;
   const roleStr = item.role ? roleChildren(item.role, true) : isNote ? "\n<role>Vault \u7B14\u8BB0\u3002\u4F1A\u8BAE\u70B9\u5230\u8FD9\u4EFD\u6587\u4EF6\u3001\u6216\u5176\u4E3B\u9898\u9700\u8981\u5BF9\u7167\u65F6\uFF0C\u7528 Read \u6253\u5F00\u3002</role>\n<pick-when>\u4F1A\u8BAE\u70B9\u540D\u8FD9\u4EFD\u7B14\u8BB0\uFF0C\u6216\u8981\u6C42\u6C47\u603B\u3001\u5206\u6790\u3001\u56DE\u987E\u5B83\u3002</pick-when>" : "\n<role>Vault \u7B14\u8BB0\u76EE\u5F55\u3002\u5148 List\uFF0C\u518D\u8BFB\u4F1A\u8BAE\u8981\u6C42\u6C47\u603B\u6216\u5BF9\u7167\u7684\u6587\u4EF6\u3002</role>\n<pick-when>\u4F1A\u8BAE\u70B9\u540D\u8FD9\u4E2A\u76EE\u5F55\uFF08\u542B\u300C\u76EE\u5F55\u4E8C\u300D\u300C\u76EE\u5F552\u300D\u7B49\u5BF9 \u5F55\u97F3\u76EE\u5F552 \u7684\u53EB\u6CD5\uFF09\uFF0C\u6216\u8981\u6C42\u6C47\u603B\u3001\u5206\u6790\u3001\u56DE\u987E\u5176\u4E2D\u5185\u5BB9\u3002</pick-when>";
   return `${open}${roleStr}
 </${tag}>`;
@@ -77590,17 +78745,6 @@ function dedupeVaultKnowledge(items) {
       ...item.description ? { description: item.description } : {},
       ...item.role ? { role: item.role } : {}
     });
-  }
-  return result;
-}
-function dedupe(values) {
-  const seen = /* @__PURE__ */ new Set();
-  const result = [];
-  for (const value of values) {
-    const trimmed = value.trim().replace(/^@/, "");
-    if (!trimmed || seen.has(trimmed)) continue;
-    seen.add(trimmed);
-    result.push(trimmed);
   }
   return result;
 }
@@ -79189,7 +80333,7 @@ function neutralizeVisibleCandidateTokens(text, candidateNames) {
   return body.trim();
 }
 function encodeClaudeTurn(request, mcpManager) {
-  var _a5, _b3, _c2, _d;
+  var _a5, _b3, _c2;
   const isCompact = isCompactCommand(request.text);
   let persistedContent = request.text;
   if (!isCompact) {
@@ -79217,8 +80361,7 @@ function encodeClaudeTurn(request, mcpManager) {
     requestedCandidateNames
   ) : preparedPromptBody;
   const vaultKnowledge = isCompact ? [] : (_c2 = request.vaultKnowledge) != null ? _c2 : [];
-  const retainedKnowledge = isCompact ? [] : (_d = request.retainedKnowledge) != null ? _d : [];
-  const usesEnvelope = skillCandidates.length > 0 || hasPaperRule || vaultKnowledge.length > 0 || retainedKnowledge.length > 0;
+  const usesEnvelope = skillCandidates.length > 0 || hasPaperRule || vaultKnowledge.length > 0;
   const contextualPromptBody = request.supplementalContext && !usesEnvelope ? `${transformedPromptBody}
 
 ${request.supplementalContext}` : transformedPromptBody;
@@ -79226,8 +80369,7 @@ ${request.supplementalContext}` : transformedPromptBody;
   const turnEnvelope = usesEnvelope ? buildClaudeTurnEnvelope(skillCandidates, request.supplementalContext, {
     ...hasPaperRule ? { paperRule: request.paperRule } : {},
     vaultKnowledge,
-    ...request.knowledgeMode ? { knowledgeMode: request.knowledgeMode } : {},
-    retainedKnowledge
+    ...request.knowledgeMode ? { knowledgeMode: request.knowledgeMode } : {}
   }) : null;
   const bodyWithCommand = skillCommand ? `${skillCommand}
 
@@ -80724,7 +81866,7 @@ var QueryOptionsBuilder = class _QueryOptionsBuilder {
       claudeCliPath: ctx.cliPath,
       enableChrome: claudeSettings.enableChrome,
       enableAutoMode: claudeSettings.safeMode === "auto",
-      hostAuthSelfHealEnabled: isHostAuthSelfHealEnabled(ctx.settings)
+      hostAuthSelfHealEnabled: isHostAuthSelfHealEnabled(ctx.settings, ctx.claudeCliVersion)
     };
   }
   static buildPersistentQueryOptions(ctx) {
@@ -81254,6 +82396,10 @@ var ClaudianService = class {
     this.pluginManager = (_e2 = legacyPlugin.pluginManager) != null ? _e2 : null;
     this.agentManager = (_f2 = legacyPlugin.agentManager) != null ? _f2 : null;
   }
+  get effectiveClaudeCodeVersion() {
+    var _a5;
+    return (_a5 = this.claudeCodeVersion) != null ? _a5 : getCachedClaudeCliVersion();
+  }
   getLegacyPluginDeps() {
     return this.plugin;
   }
@@ -81474,6 +82620,7 @@ var ClaudianService = class {
     }
     this.shuttingDown = false;
     this.vaultPath = vaultPath;
+    await ensureClaudeCliVersionProbed(cliPath);
     await this.requireMomaAccessTokenForQuery();
     this.messageChannel = new MessageChannel();
     if (resumeSessionId) {
@@ -81640,14 +82787,18 @@ var ClaudianService = class {
       enhancedPath,
       mcpManager: this.mcpManager,
       pluginManager: this.requirePluginManager(),
-      clientMeta: meta3
+      clientMeta: meta3,
+      claudeCliVersion: this.effectiveClaudeCodeVersion
     };
   }
   // 总开关关闭或 momaToken 快照为空时工厂返回 undefined，entrypoint 覆盖随之取消：
   // ClaudeQueryOptionsBuilder 把两者绑在一起，光改 entrypoint 不挂回调等于既关掉
   // applyFlagSettings 推送又没有自愈，严格变差
   createQueryHostAuthRefresher() {
-    return createHostAuthRefresher({ plugin: this.plugin });
+    return createHostAuthRefresher({
+      plugin: this.plugin,
+      claudeCliVersion: this.effectiveClaudeCodeVersion
+    });
   }
   requirePluginManager() {
     var _a5, _b3;
@@ -82927,8 +84078,14 @@ var ClaudianService = class {
    * 抽成独立方法只为可单测：调用点在 async generator 里，直接驱动要搭 messageChannel 全套。
    */
   async ensureSendPathAuth() {
-    var _a5;
-    if ((_a5 = this.currentConfig) == null ? void 0 : _a5.hostAuthSelfHealEnabled) {
+    var _a5, _b3;
+    const selfHeal = (_b3 = (_a5 = this.currentConfig) == null ? void 0 : _a5.hostAuthSelfHealEnabled) != null ? _b3 : false;
+    momaInfo("[claude-runtime] ensureSendPathAuth", {
+      hostAuthSelfHealEnabled: selfHeal,
+      hasConfig: !!this.currentConfig,
+      claudeCodeVersion: this.effectiveClaudeCodeVersion
+    });
+    if (selfHeal) {
       return;
     }
     await this.requireMomaAccessTokenForQuery("main_chat");
@@ -82947,13 +84104,13 @@ var ClaudianService = class {
       sessionId: this.sessionManager.getSessionId()
     });
     const obtainedSuffix = (token == null ? void 0 : token.trim()) ? `\u2026${token.trim().slice(-6)}` : "(empty)";
-    momaInfo("[claude-runtime] requireMomaAT obtained", { obtained: obtainedSuffix });
+    momaInfo("[claude-runtime] requireMomaAT obtained", { obtained: obtainedSuffix, claudeCodeVersion: this.effectiveClaudeCodeVersion });
     if (!((_b3 = this.plugin.settings.accessToken) == null ? void 0 : _b3.trim())) {
       this.plugin.settings.accessToken = token;
     }
     await this.pushAccessTokenEnvToPersistentQuery({ fatal: true });
     const settingsAtSuffix = ((_c2 = this.plugin.settings.accessToken) == null ? void 0 : _c2.trim()) ? `\u2026${this.plugin.settings.accessToken.trim().slice(-6)}` : "(empty)";
-    momaInfo("[claude-runtime] requireMomaAT after push", { settingsAt: settingsAtSuffix });
+    momaInfo("[claude-runtime] requireMomaAT after push", { settingsAt: settingsAtSuffix, claudeCodeVersion: this.effectiveClaudeCodeVersion });
   }
   /**
    * Push current settings.accessToken into the running persistent query env.
@@ -82993,7 +84150,8 @@ var ClaudianService = class {
       const hashHit = hash2 === this._lastPushedEnvHash;
       momaInfo("[claude-runtime] pushEnv", {
         envAt: envAtSuffix,
-        hashHit
+        hashHit,
+        claudeCodeVersion: this.effectiveClaudeCodeVersion
       });
       if (hashHit) {
         return;
@@ -83260,17 +84418,17 @@ var CodexAgentMentionProvider = class {
 };
 
 // src/providers/codex/runtime/CodexAppServerProcess.ts
-var import_child_process8 = require("child_process");
+var import_child_process10 = require("child_process");
 var SIGKILL_TIMEOUT_MS = 3e3;
-var WINDOWS_CMD_ARGUMENT_CHARS2 = /[\s"&<>|{}^=;!'+,`~()%@]/u;
-function requiresWindowsShellQuoting2(value) {
-  return WINDOWS_CMD_ARGUMENT_CHARS2.test(value) || value.includes("[") || value.includes("]");
+var WINDOWS_CMD_ARGUMENT_CHARS3 = /[\s"&<>|{}^=;!'+,`~()%@]/u;
+function requiresWindowsShellQuoting3(value) {
+  return WINDOWS_CMD_ARGUMENT_CHARS3.test(value) || value.includes("[") || value.includes("]");
 }
-function quoteWindowsShellArgument2(value) {
+function quoteWindowsShellArgument3(value) {
   if (!value.length) {
     return '""';
   }
-  if (!requiresWindowsShellQuoting2(value)) {
+  if (!requiresWindowsShellQuoting3(value)) {
     return value;
   }
   return `"${value.replace(/"/g, '""')}"`;
@@ -83286,7 +84444,7 @@ function resolveWindowsSpawnSpec(launchSpec) {
     };
   }
   if (lowerCommand.endsWith(".cmd")) {
-    const shellCommand = [command, ...launchSpec.args].map((value) => quoteWindowsShellArgument2(value)).join(" ");
+    const shellCommand = [command, ...launchSpec.args].map((value) => quoteWindowsShellArgument3(value)).join(" ");
     return {
       command: process.env.ComSpec || process.env.comspec || "cmd.exe",
       args: ["/d", "/s", "/c", `"${shellCommand}"`],
@@ -83310,7 +84468,7 @@ var CodexAppServerProcess = class {
   start() {
     var _a5;
     const resolvedSpawnSpec = resolveWindowsSpawnSpec(this.launchSpec);
-    this.proc = (0, import_child_process8.spawn)(resolvedSpawnSpec.command, resolvedSpawnSpec.args, {
+    this.proc = (0, import_child_process10.spawn)(resolvedSpawnSpec.command, resolvedSpawnSpec.args, {
       stdio: ["pipe", "pipe", "pipe"],
       cwd: this.launchSpec.spawnCwd,
       env: resolvedSpawnSpec.env,
@@ -83368,7 +84526,7 @@ var CodexAppServerProcess = class {
 };
 
 // src/providers/codex/runtime/CodexExecutionTargetResolver.ts
-var import_child_process9 = require("child_process");
+var import_child_process11 = require("child_process");
 function resolveHostPlatformOs(hostPlatform) {
   if (hostPlatform === "win32") {
     return "windows";
@@ -83405,7 +84563,7 @@ function parseDefaultWslDistroListOutput(output) {
 }
 function resolveDefaultWslDistroName() {
   try {
-    const output = (0, import_child_process9.execFileSync)("wsl.exe", ["--list", "--verbose"], {
+    const output = (0, import_child_process11.execFileSync)("wsl.exe", ["--list", "--verbose"], {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
       windowsHide: true
@@ -92599,7 +93757,7 @@ var HermesAcpClient = class {
 };
 
 // src/providers/hermes/runtime/HermesAcpProcess.ts
-var import_child_process10 = require("child_process");
+var import_child_process12 = require("child_process");
 
 // src/providers/hermes/runtime/HermesAcpTransport.ts
 var import_node_stream2 = require("node:stream");
@@ -95148,11 +96306,12 @@ var HermesAcpProcess = class _HermesAcpProcess {
   }
   static async start(spec, options) {
     var _a5;
-    const spawn6 = (_a5 = options.spawn) != null ? _a5 : import_child_process10.spawn;
+    const spawn6 = (_a5 = options.spawn) != null ? _a5 : import_child_process12.spawn;
     const child = spawn6(spec.command, spec.args, {
       cwd: spec.cwd,
       env: spec.env,
-      stdio: ["pipe", "pipe", "pipe"]
+      stdio: ["pipe", "pipe", "pipe"],
+      windowsHide: true
     });
     if (!child.stdin || !child.stdout || !child.stderr) {
       throw new Error("hermes-acp child process is missing stdio pipes");
@@ -96583,987 +97742,6 @@ CliIntegrationRegistry.services = {};
 
 // src/integrations/lark/LarkCliRunner.ts
 var path27 = __toESM(require("path"));
-
-// src/core/integrations/CliProcessRunner.ts
-var import_child_process12 = require("child_process");
-var import_string_decoder = require("string_decoder");
-init_debug();
-
-// src/core/integrations/CliWorkerProcessExecutor.ts
-var import_child_process11 = require("child_process");
-var import_events3 = require("events");
-var DEFAULT_KILL_TIMEOUT_MS = 3e3;
-var FORCE_SETTLE_TIMEOUT_MS = 1e3;
-var WORKER_WATCHDOG_GRACE_MS = 2e3;
-var PROCESS_TREE_GRACE_MS = 500;
-var PROCESS_TREE_POLL_MS = 25;
-var WINDOWS_TASKKILL_TIMEOUT_MS = 3e3;
-function isWorkerSpawnedMessage(message) {
-  if (!message || typeof message !== "object") return false;
-  const candidate = message;
-  return candidate.type === "spawned" && typeof candidate.pid === "number" && Number.isSafeInteger(candidate.pid) && candidate.pid > 0;
-}
-function isWorkerResultMessage(message) {
-  if (!message || typeof message !== "object") return false;
-  const candidate = message;
-  return candidate.type === "result" && !!candidate.result && typeof candidate.result === "object";
-}
-function restoreWorkerError(error48) {
-  if (!error48) return void 0;
-  const restored = new Error(error48.message);
-  if (error48.code) restored.code = error48.code;
-  return restored;
-}
-function failedWorkerResult(error48, cancelled = false, timedOut = false) {
-  return {
-    exitCode: null,
-    signal: null,
-    stdout: "",
-    stderr: error48.message,
-    timedOut,
-    cancelled,
-    error: error48
-  };
-}
-function wait(delayMs) {
-  return new Promise((resolve14) => setTimeout(resolve14, delayMs));
-}
-var HELPER_STDERR_TAIL_CHARS = 4096;
-var HELPER_TERMINATE_TIMEOUT_MS = 1e3;
-var CliIsolatedProcessHost = class extends import_events3.EventEmitter {
-  constructor(source, options) {
-    var _a5, _b3, _c2;
-    super();
-    this.pendingMessages = [];
-    this.ready = false;
-    this.cancelRequestedBeforeReady = false;
-    this.terminating = false;
-    this.errorReported = false;
-    this.helperStderr = "";
-    this.child = (0, import_child_process11.spawn)(options.executable, ["-"], {
-      env: { ...process.env, ...options.workerData.env },
-      windowsHide: true,
-      stdio: ["pipe", "ignore", "pipe", "ipc"]
-    });
-    (_a5 = this.child.stderr) == null ? void 0 : _a5.on("data", (chunk) => {
-      const text = Buffer.isBuffer(chunk) ? chunk.toString("utf8") : chunk;
-      this.helperStderr = (this.helperStderr + text).slice(-HELPER_STDERR_TAIL_CHARS);
-    });
-    this.child.on("message", (message) => {
-      if ((message == null ? void 0 : message.type) === "ready") {
-        this.ready = true;
-        if (this.cancelRequestedBeforeReady) {
-          this.pendingMessages.length = 0;
-          this.emit("message", {
-            type: "result",
-            result: {
-              exitCode: null,
-              signal: null,
-              stdout: "",
-              stderr: "",
-              timedOut: false,
-              cancelled: true
-            }
-          });
-          return;
-        }
-        this.send({ type: "start", data: options.workerData });
-        for (const pendingMessage of this.pendingMessages.splice(0)) {
-          this.send(pendingMessage);
-        }
-        return;
-      }
-      this.emit("message", message);
-    });
-    this.child.once("error", (error48) => this.reportError(error48));
-    this.child.once("exit", (exitCode) => {
-      if (!this.terminating && !this.ready && this.helperStderr.trim()) {
-        this.reportError(new Error(this.helperStderr.trim()));
-      }
-      this.emit("exit", exitCode != null ? exitCode : -1);
-    });
-    (_b3 = this.child.stdin) == null ? void 0 : _b3.once("error", (error48) => this.reportError(error48));
-    (_c2 = this.child.stdin) == null ? void 0 : _c2.end(source);
-  }
-  on(event, listener) {
-    return super.on(event, listener);
-  }
-  once(event, listener) {
-    return super.once(event, listener);
-  }
-  postMessage(message) {
-    if (!this.ready) {
-      if ((message == null ? void 0 : message.type) === "cancel") {
-        this.cancelRequestedBeforeReady = true;
-        return;
-      }
-      this.pendingMessages.push(message);
-      return;
-    }
-    this.send(message);
-  }
-  async terminate() {
-    var _a5;
-    this.terminating = true;
-    if (this.child.exitCode !== null || this.child.signalCode !== null) {
-      return (_a5 = this.child.exitCode) != null ? _a5 : 0;
-    }
-    return new Promise((resolve14) => {
-      let settled = false;
-      const finish = (exitCode) => {
-        if (settled) return;
-        settled = true;
-        clearTimeout(timeoutHandle);
-        resolve14(exitCode);
-      };
-      const timeoutHandle = setTimeout(() => {
-        try {
-          this.child.kill("SIGKILL");
-        } catch (e2) {
-        }
-        finish(0);
-      }, HELPER_TERMINATE_TIMEOUT_MS);
-      this.child.once("exit", (exitCode) => finish(exitCode != null ? exitCode : 0));
-      if (!this.child.kill()) finish(0);
-    });
-  }
-  send(message) {
-    var _a5, _b3;
-    if (!this.child.connected) {
-      this.reportError(new Error("Isolated CLI process IPC channel is unavailable"));
-      return;
-    }
-    (_b3 = (_a5 = this.child).send) == null ? void 0 : _b3.call(_a5, message, (error48) => {
-      if (error48) this.reportError(error48);
-    });
-  }
-  reportError(error48) {
-    if (this.errorReported || this.terminating) return;
-    this.errorReported = true;
-    const errno = error48;
-    if (errno.code === "ENOENT") {
-      const missingRuntimeError = new Error(
-        "Unable to start isolated CLI process with the current Node.js runtime"
-      );
-      missingRuntimeError.code = "ERR_CLI_ISOLATION_RUNTIME_NOT_FOUND";
-      this.emit("error", missingRuntimeError);
-      return;
-    }
-    this.emit("error", error48);
-  }
-};
-function isUnixProcessGroupAlive(pid) {
-  try {
-    process.kill(-pid, 0);
-    return true;
-  } catch (error48) {
-    return error48.code === "EPERM";
-  }
-}
-async function runWindowsTaskkill(pid) {
-  await new Promise((resolve14, reject) => {
-    let settled = false;
-    const finish = (error48) => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timeoutHandle);
-      if (error48) reject(error48);
-      else resolve14();
-    };
-    const killer = (0, import_child_process11.spawn)(
-      "taskkill.exe",
-      ["/PID", String(pid), "/T", "/F"],
-      { windowsHide: true, stdio: "ignore" }
-    );
-    const timeoutHandle = setTimeout(() => {
-      killer.kill();
-      finish(new Error(`taskkill timed out for process tree ${pid}`));
-    }, WINDOWS_TASKKILL_TIMEOUT_MS);
-    killer.once("error", (error48) => finish(error48));
-    killer.once("close", (exitCode) => {
-      if (exitCode === 0) finish();
-      else finish(new Error(`taskkill failed for process tree ${pid} with exit code ${exitCode}`));
-    });
-  });
-}
-async function terminateWindowsProcessTree(pid) {
-  let lastError;
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    try {
-      await runWindowsTaskkill(pid);
-      return;
-    } catch (error48) {
-      lastError = error48;
-    }
-  }
-  throw lastError instanceof Error ? lastError : new Error(`Unable to terminate Windows process tree ${pid}`);
-}
-async function terminateCliProcessTree(pid) {
-  if (!Number.isSafeInteger(pid) || pid <= 0) return;
-  if (process.platform === "win32") {
-    await terminateWindowsProcessTree(pid);
-    return;
-  }
-  try {
-    process.kill(-pid, "SIGTERM");
-  } catch (error48) {
-    if (error48.code === "ESRCH") return;
-  }
-  const deadline = Date.now() + PROCESS_TREE_GRACE_MS;
-  while (Date.now() < deadline && isUnixProcessGroupAlive(pid)) {
-    await wait(PROCESS_TREE_POLL_MS);
-  }
-  if (!isUnixProcessGroupAlive(pid)) return;
-  try {
-    process.kill(-pid, "SIGKILL");
-  } catch (e2) {
-  }
-}
-function cliWorkerMain() {
-  const { spawn: spawn6 } = require("child_process");
-  const send = (message) => {
-    if (typeof process.send === "function") process.send(message);
-  };
-  let cancelBeforeStart = false;
-  const start = (data) => {
-    var _a5, _b3;
-    const forceSettleTimeoutMs = 1e3;
-    const stdoutTail = Buffer.alloc(Math.max(0, Math.floor(data.stdoutTailBytes)));
-    const stderrTail = Buffer.alloc(Math.max(0, Math.floor(data.stderrTailBytes)));
-    let stdoutWriteOffset = 0;
-    let retainedStdoutBytes = 0;
-    let stderrWriteOffset = 0;
-    let retainedStderrBytes = 0;
-    let stdoutBytes = 0;
-    let stdoutChunks = 0;
-    let stderrBytes = 0;
-    let stderrChunks = 0;
-    let timedOut = false;
-    let cancelled = false;
-    let settled = false;
-    let terminationRequested = false;
-    let timeoutHandle = null;
-    let killHandle = null;
-    let forceSettleHandle = null;
-    let windowsTreeKillTimeoutHandle = null;
-    let windowsTreeKillInFlight = false;
-    let windowsTreeKillSucceeded = false;
-    let unixTreeKillInFlight = false;
-    let cleanupRequired = false;
-    let pendingSettlement = null;
-    const appendTail = (tail, chunk, writeOffset, retainedBytes) => {
-      const capacity = tail.length;
-      if (capacity === 0 || chunk.length === 0) return;
-      if (chunk.length >= capacity) {
-        chunk.copy(tail, 0, chunk.length - capacity);
-        return { writeOffset: 0, retainedBytes: capacity };
-      }
-      const firstLength = Math.min(chunk.length, capacity - writeOffset);
-      chunk.copy(tail, writeOffset, 0, firstLength);
-      const remainingLength = chunk.length - firstLength;
-      if (remainingLength > 0) chunk.copy(tail, 0, firstLength);
-      return {
-        writeOffset: (writeOffset + chunk.length) % capacity,
-        retainedBytes: Math.min(capacity, retainedBytes + chunk.length)
-      };
-    };
-    const tailToString = (tail, writeOffset, retainedBytes) => {
-      if (retainedBytes === 0) return "";
-      const capacity = tail.length;
-      const start2 = (writeOffset - retainedBytes + capacity) % capacity;
-      if (start2 + retainedBytes <= capacity) {
-        return tail.subarray(start2, start2 + retainedBytes).toString("utf8");
-      }
-      const first = tail.subarray(start2);
-      const secondLength = retainedBytes - first.length;
-      return Buffer.concat([first, tail.subarray(0, secondLength)], retainedBytes).toString("utf8");
-    };
-    const appendStdout = (chunk) => {
-      const next = appendTail(stdoutTail, chunk, stdoutWriteOffset, retainedStdoutBytes);
-      if (!next) return;
-      stdoutWriteOffset = next.writeOffset;
-      retainedStdoutBytes = next.retainedBytes;
-    };
-    const appendStderr = (chunk) => {
-      const next = appendTail(stderrTail, chunk, stderrWriteOffset, retainedStderrBytes);
-      if (!next) return;
-      stderrWriteOffset = next.writeOffset;
-      retainedStderrBytes = next.retainedBytes;
-    };
-    let child = null;
-    const settle = (exitCode, signal, error48) => {
-      if (settled) return;
-      if (terminationRequested && (windowsTreeKillInFlight || unixTreeKillInFlight)) {
-        pendingSettlement = { exitCode, signal, ...error48 ? { error: error48 } : {} };
-        return;
-      }
-      settled = true;
-      if (timeoutHandle) clearTimeout(timeoutHandle);
-      if (killHandle) clearTimeout(killHandle);
-      if (forceSettleHandle) clearTimeout(forceSettleHandle);
-      if (windowsTreeKillTimeoutHandle) clearTimeout(windowsTreeKillTimeoutHandle);
-      send({
-        type: "result",
-        cleanupRequired: cleanupRequired || process.platform === "win32" && terminationRequested && !windowsTreeKillSucceeded,
-        result: {
-          exitCode,
-          signal,
-          stdout: tailToString(stdoutTail, stdoutWriteOffset, retainedStdoutBytes),
-          stderr: tailToString(stderrTail, stderrWriteOffset, retainedStderrBytes),
-          timedOut,
-          cancelled,
-          ...error48 ? { error: { message: error48.message, ...error48.code ? { code: error48.code } : {} } } : {},
-          outputStats: {
-            stdoutBytes,
-            stdoutChunks,
-            stderrBytes,
-            stderrChunks,
-            ...retainedStdoutBytes > 0 ? { retainedStdoutBytes } : {},
-            retainedStderrBytes
-          }
-        }
-      });
-    };
-    const startWindowsTreeKill = (pid) => {
-      windowsTreeKillInFlight = true;
-      let taskkillSettled = false;
-      const finishTaskkill = (succeeded) => {
-        var _a6, _b4;
-        if (taskkillSettled || settled) return;
-        taskkillSettled = true;
-        windowsTreeKillInFlight = false;
-        windowsTreeKillSucceeded = succeeded;
-        if (windowsTreeKillTimeoutHandle) {
-          clearTimeout(windowsTreeKillTimeoutHandle);
-          windowsTreeKillTimeoutHandle = null;
-        }
-        const pending = pendingSettlement;
-        pendingSettlement = null;
-        if (!succeeded) {
-          settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
-          return;
-        }
-        if (pending) {
-          settle(pending.exitCode, pending.signal, pending.error);
-          return;
-        }
-        forceSettleHandle = setTimeout(
-          () => settle(null, "SIGKILL"),
-          forceSettleTimeoutMs
-        );
-      };
-      try {
-        const killer = spawn6("taskkill.exe", ["/PID", String(pid), "/T", "/F"], {
-          windowsHide: true,
-          stdio: "ignore"
-        });
-        windowsTreeKillTimeoutHandle = setTimeout(() => {
-          killer.kill();
-          finishTaskkill(false);
-        }, 3e3);
-        killer.once("error", () => finishTaskkill(false));
-        killer.once("close", (exitCode) => finishTaskkill(exitCode === 0));
-      } catch (e2) {
-        finishTaskkill(false);
-      }
-    };
-    const isUnixProcessGroupAlive2 = (pid) => {
-      try {
-        process.kill(-pid, 0);
-        return true;
-      } catch (error48) {
-        return error48.code === "EPERM";
-      }
-    };
-    const finishUnixTreeKill = (pid) => {
-      const deadline = Date.now() + forceSettleTimeoutMs;
-      const poll = () => {
-        var _a6, _b4;
-        if (settled) return;
-        if (isUnixProcessGroupAlive2(pid) && Date.now() < deadline) {
-          forceSettleHandle = setTimeout(poll, 25);
-          return;
-        }
-        cleanupRequired = isUnixProcessGroupAlive2(pid);
-        unixTreeKillInFlight = false;
-        const pending = pendingSettlement;
-        pendingSettlement = null;
-        settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
-      };
-      poll();
-    };
-    const stopProcess = (reason) => {
-      if (reason === "timeout") timedOut = true;
-      else cancelled = true;
-      if (!child || terminationRequested) return;
-      const ownedChild = child;
-      terminationRequested = true;
-      if (process.platform === "win32" && ownedChild.pid) {
-        startWindowsTreeKill(ownedChild.pid);
-      } else if (ownedChild.pid) {
-        unixTreeKillInFlight = true;
-        try {
-          process.kill(-ownedChild.pid, "SIGTERM");
-        } catch (e2) {
-          ownedChild.kill("SIGTERM");
-        }
-      } else {
-        ownedChild.kill("SIGTERM");
-      }
-      if (process.platform === "win32") return;
-      const processGroupPid = ownedChild.pid;
-      killHandle = setTimeout(() => {
-        var _a6, _b4;
-        if (settled) return;
-        if (processGroupPid) {
-          try {
-            process.kill(-processGroupPid, "SIGKILL");
-          } catch (e2) {
-            ownedChild.kill("SIGKILL");
-          }
-        } else {
-          ownedChild.kill("SIGKILL");
-        }
-        if (processGroupPid) {
-          finishUnixTreeKill(processGroupPid);
-        } else {
-          unixTreeKillInFlight = false;
-          const pending = pendingSettlement;
-          pendingSettlement = null;
-          settle((_a6 = pending == null ? void 0 : pending.exitCode) != null ? _a6 : null, (_b4 = pending == null ? void 0 : pending.signal) != null ? _b4 : "SIGKILL", pending == null ? void 0 : pending.error);
-        }
-      }, data.killTimeoutMs);
-    };
-    process.on("message", (message) => {
-      if ((message == null ? void 0 : message.type) === "cancel") stopProcess("cancel");
-    });
-    if (cancelBeforeStart) {
-      cancelled = true;
-      settle(null, null);
-      return;
-    }
-    try {
-      child = spawn6(data.command, data.args, {
-        cwd: data.cwd,
-        env: data.env,
-        windowsHide: true,
-        detached: process.platform !== "win32",
-        ...data.windowsVerbatimArguments ? { windowsVerbatimArguments: true } : {}
-      });
-    } catch (error48) {
-      const spawnError = error48 instanceof Error ? error48 : new Error(String(error48));
-      appendStderr(Buffer.from(spawnError.message, "utf8"));
-      settle(null, null, spawnError);
-      return;
-    }
-    if (child.pid) {
-      send({ type: "spawned", pid: child.pid });
-    }
-    if (data.timeoutMs && data.timeoutMs > 0) {
-      timeoutHandle = setTimeout(() => stopProcess("timeout"), data.timeoutMs);
-    }
-    (_a5 = child.stdout) == null ? void 0 : _a5.on("data", (chunk) => {
-      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
-      stdoutBytes += buffer.length;
-      stdoutChunks += 1;
-      appendStdout(buffer);
-    });
-    (_b3 = child.stderr) == null ? void 0 : _b3.on("data", (chunk) => {
-      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
-      stderrBytes += buffer.length;
-      stderrChunks += 1;
-      appendStderr(buffer);
-    });
-    child.once("error", (error48) => {
-      if (retainedStderrBytes > 0) appendStderr(Buffer.from("\n", "utf8"));
-      appendStderr(Buffer.from(error48.message, "utf8"));
-      settle(null, null, error48);
-    });
-    child.once("close", (exitCode, signal) => settle(exitCode, signal));
-  };
-  const handleBootstrapMessage = (message) => {
-    const candidate = message;
-    if ((candidate == null ? void 0 : candidate.type) === "cancel") {
-      cancelBeforeStart = true;
-      return;
-    }
-    if ((candidate == null ? void 0 : candidate.type) !== "start") return;
-    process.off("message", handleBootstrapMessage);
-    start(candidate.data);
-  };
-  process.on("message", handleBootstrapMessage);
-  send({ type: "ready" });
-}
-var CLI_WORKER_SOURCE = `(${cliWorkerMain.toString()})()`;
-var CliWorkerProcessExecutor = class {
-  constructor(deps = {}) {
-    var _a5, _b3;
-    this.isolatedProcessFactory = (_a5 = deps.isolatedProcessFactory) != null ? _a5 : ((source, options) => new CliIsolatedProcessHost(source, options));
-    this.terminateProcessTree = (_b3 = deps.terminateProcessTree) != null ? _b3 : terminateCliProcessTree;
-  }
-  /** Starts an isolated process and resolves only from its final structured result. */
-  async run(options) {
-    var _a5;
-    if ((_a5 = options.signal) == null ? void 0 : _a5.aborted) {
-      return {
-        exitCode: null,
-        signal: null,
-        stdout: "",
-        stderr: "",
-        timedOut: false,
-        cancelled: true
-      };
-    }
-    return new Promise((resolve14) => {
-      var _a6, _b3, _c2, _d, _e2;
-      let settled = false;
-      let watchdogHandle = null;
-      let cancelWatchdogHandle = null;
-      let childPid = null;
-      let spawnedReported = false;
-      let isolatedProcess;
-      const clearLifecycleHooks = () => {
-        var _a7;
-        if (watchdogHandle) clearTimeout(watchdogHandle);
-        if (cancelWatchdogHandle) clearTimeout(cancelWatchdogHandle);
-        (_a7 = options.signal) == null ? void 0 : _a7.removeEventListener("abort", abortWorkerCommand);
-      };
-      const finish = async (result) => {
-        if (settled) return;
-        settled = true;
-        childPid = null;
-        clearLifecycleHooks();
-        await isolatedProcess.terminate().catch(() => void 0);
-        resolve14(result);
-      };
-      const failAndCleanup = async (result) => {
-        if (settled) return;
-        settled = true;
-        clearLifecycleHooks();
-        const pid = childPid;
-        childPid = null;
-        let finalResult = result;
-        if (pid !== null) {
-          try {
-            await this.terminateProcessTree(pid);
-          } catch (error48) {
-            const cleanupError = error48 instanceof Error ? error48 : new Error(String(error48));
-            finalResult = {
-              ...result,
-              stderr: [result.stderr, `Process tree cleanup failed: ${cleanupError.message}`].filter(Boolean).join("\n"),
-              ...result.error ? {} : { error: cleanupError }
-            };
-          }
-        }
-        await isolatedProcess.terminate().catch(() => void 0);
-        resolve14(finalResult);
-      };
-      function abortWorkerCommand() {
-        var _a7;
-        if (settled) return;
-        try {
-          isolatedProcess.postMessage({ type: "cancel" });
-        } catch (error48) {
-          const workerError = error48 instanceof Error ? error48 : new Error(String(error48));
-          void failAndCleanup(failedWorkerResult(workerError, true));
-          return;
-        }
-        cancelWatchdogHandle = setTimeout(() => {
-          void failAndCleanup(
-            failedWorkerResult(new Error("Isolated CLI process did not settle after cancellation"), true)
-          );
-        }, ((_a7 = options.killTimeoutMs) != null ? _a7 : DEFAULT_KILL_TIMEOUT_MS) + FORCE_SETTLE_TIMEOUT_MS + WORKER_WATCHDOG_GRACE_MS);
-      }
-      try {
-        isolatedProcess = this.isolatedProcessFactory(CLI_WORKER_SOURCE, {
-          executable: options.isolatedProcessExecutable,
-          workerData: {
-            command: options.command,
-            args: options.args,
-            cwd: options.cwd,
-            env: options.env,
-            windowsVerbatimArguments: options.windowsVerbatimArguments,
-            timeoutMs: options.timeoutMs,
-            killTimeoutMs: (_a6 = options.killTimeoutMs) != null ? _a6 : DEFAULT_KILL_TIMEOUT_MS,
-            stdoutTailBytes: (_b3 = options.stdoutTailBytes) != null ? _b3 : 0,
-            stderrTailBytes: options.stderrTailBytes
-          }
-        });
-      } catch (error48) {
-        const workerError = error48 instanceof Error ? error48 : new Error(String(error48));
-        resolve14(failedWorkerResult(workerError));
-        return;
-      }
-      isolatedProcess.on("message", (message) => {
-        var _a7;
-        if (isWorkerSpawnedMessage(message)) {
-          childPid = message.pid;
-          if (!spawnedReported) {
-            spawnedReported = true;
-            (_a7 = options.onSpawned) == null ? void 0 : _a7.call(options, message.pid);
-          }
-          return;
-        }
-        if (!isWorkerResultMessage(message)) return;
-        const { error: error48, ...result } = message.result;
-        const restoredResult = {
-          ...result,
-          ...error48 ? { error: restoreWorkerError(error48) } : {}
-        };
-        if (message.cleanupRequired) {
-          void failAndCleanup(restoredResult);
-        } else {
-          void finish(restoredResult);
-        }
-      });
-      isolatedProcess.once("error", (error48) => {
-        void failAndCleanup(failedWorkerResult(error48));
-      });
-      isolatedProcess.once("exit", (exitCode) => {
-        if (!settled) {
-          void failAndCleanup(
-            failedWorkerResult(new Error(`Isolated CLI process exited before returning a result (${exitCode})`))
-          );
-        }
-      });
-      (_c2 = options.signal) == null ? void 0 : _c2.addEventListener("abort", abortWorkerCommand, { once: true });
-      if ((_d = options.signal) == null ? void 0 : _d.aborted) abortWorkerCommand();
-      if (options.timeoutMs && options.timeoutMs > 0) {
-        watchdogHandle = setTimeout(() => {
-          void failAndCleanup(
-            failedWorkerResult(new Error("Isolated CLI process exceeded its command timeout"), false, true)
-          );
-        }, options.timeoutMs + ((_e2 = options.killTimeoutMs) != null ? _e2 : DEFAULT_KILL_TIMEOUT_MS) + FORCE_SETTLE_TIMEOUT_MS + WORKER_WATCHDOG_GRACE_MS);
-      }
-    });
-  }
-};
-
-// src/core/integrations/CliProcessRunner.ts
-var DEFAULT_KILL_SIGNAL = "SIGTERM";
-var DEFAULT_FORCE_KILL_SIGNAL = "SIGKILL";
-var DEFAULT_KILL_TIMEOUT_MS2 = 3e3;
-var DEFAULT_FORCE_SETTLE_TIMEOUT_MS = 1e3;
-var WINDOWS_CMD_ARGUMENT_CHARS3 = /[\s"&<>|{}^=;!'+,`~()%@]/u;
-function createTextDecoder() {
-  const decoder = new import_string_decoder.StringDecoder("utf8");
-  return (chunk) => Buffer.isBuffer(chunk) ? decoder.write(chunk) : chunk;
-}
-function appendErrorToStderr(stderr, error48) {
-  return stderr ? `${stderr}
-${error48.message}` : error48.message;
-}
-function appendOutputTail(current, chunk, maxOutputChars) {
-  const combined = current + chunk;
-  if (!maxOutputChars || maxOutputChars <= 0 || combined.length <= maxOutputChars) {
-    return combined;
-  }
-  return combined.slice(-maxOutputChars);
-}
-var FixedByteRingBuffer = class {
-  constructor(capacity) {
-    this.writeOffset = 0;
-    this.retainedBytes = 0;
-    this.buffer = Buffer.alloc(Math.max(0, Math.floor(capacity)));
-  }
-  get byteLength() {
-    return this.retainedBytes;
-  }
-  /** Retains the newest bytes without concatenating the previously retained tail. */
-  append(chunk) {
-    const capacity = this.buffer.length;
-    if (capacity === 0 || chunk.length === 0) return;
-    if (chunk.length >= capacity) {
-      chunk.copy(this.buffer, 0, chunk.length - capacity);
-      this.writeOffset = 0;
-      this.retainedBytes = capacity;
-      return;
-    }
-    const firstLength = Math.min(chunk.length, capacity - this.writeOffset);
-    chunk.copy(this.buffer, this.writeOffset, 0, firstLength);
-    const remainingLength = chunk.length - firstLength;
-    if (remainingLength > 0) {
-      chunk.copy(this.buffer, 0, firstLength);
-    }
-    this.writeOffset = (this.writeOffset + chunk.length) % capacity;
-    this.retainedBytes = Math.min(capacity, this.retainedBytes + chunk.length);
-  }
-  /** Converts the retained tail once when the process settles. */
-  toString() {
-    if (this.retainedBytes === 0) return "";
-    const capacity = this.buffer.length;
-    const start = (this.writeOffset - this.retainedBytes + capacity) % capacity;
-    if (start + this.retainedBytes <= capacity) {
-      return this.buffer.subarray(start, start + this.retainedBytes).toString("utf8");
-    }
-    const first = this.buffer.subarray(start);
-    const secondLength = this.retainedBytes - first.length;
-    return Buffer.concat([first, this.buffer.subarray(0, secondLength)], this.retainedBytes).toString("utf8");
-  }
-};
-function requiresWindowsShellQuoting3(value) {
-  return WINDOWS_CMD_ARGUMENT_CHARS3.test(value) || value.includes("[") || value.includes("]");
-}
-function quoteWindowsShellArgument3(value) {
-  const escapedValue = value.replace(/%/g, "%%");
-  if (!value.length) {
-    return '""';
-  }
-  if (!requiresWindowsShellQuoting3(escapedValue)) {
-    return escapedValue;
-  }
-  return `"${escapedValue.replace(/"/g, '""')}"`;
-}
-function resolveCliSpawnSpec(executable, args) {
-  if (process.platform !== "win32") {
-    return {
-      command: executable,
-      args
-    };
-  }
-  const lowerExecutable = executable.toLowerCase();
-  if (lowerExecutable.endsWith(".cmd") || lowerExecutable.endsWith(".bat")) {
-    const shellCommand = [executable, ...args].map((value) => quoteWindowsShellArgument3(value)).join(" ");
-    return {
-      command: process.env.ComSpec || process.env.comspec || "cmd.exe",
-      args: ["/d", "/s", "/c", `"${shellCommand}"`],
-      windowsVerbatimArguments: true
-    };
-  }
-  if (lowerExecutable.endsWith(".ps1")) {
-    return {
-      command: "powershell.exe",
-      args: [
-        "-NoProfile",
-        "-ExecutionPolicy",
-        "Bypass",
-        "-File",
-        executable,
-        ...args
-      ]
-    };
-  }
-  return {
-    command: executable,
-    args
-  };
-}
-var CliProcessRunner = class {
-  constructor(deps = {}) {
-    var _a5;
-    this.workerExecutor = (_a5 = deps.workerExecutor) != null ? _a5 : new CliWorkerProcessExecutor();
-  }
-  /**
-   * Execute a CLI command and resolve with the complete process result.
-   *
-   * The promise does not reject for normal CLI failures. Non-zero exits,
-   * spawn errors, timeouts, and cancellations are represented in the result so
-   * callers can map them into integration-specific recovery states.
-   */
-  async run(options) {
-    var _a5, _b3, _c2, _d, _e2;
-    const spawnSpec = resolveCliSpawnSpec(options.executable, options.args);
-    if (options.executionMode === "worker") {
-      if (!options.isolatedProcessExecutable) {
-        const error48 = new Error("Isolated CLI execution requires an absolute Node.js executable");
-        error48.code = "ERR_CLI_ISOLATION_RUNTIME_NOT_FOUND";
-        return {
-          exitCode: null,
-          signal: null,
-          stdout: "",
-          stderr: error48.message,
-          timedOut: false,
-          cancelled: false,
-          error: error48
-        };
-      }
-      return this.workerExecutor.run({
-        isolatedProcessExecutable: options.isolatedProcessExecutable,
-        command: spawnSpec.command,
-        args: spawnSpec.args,
-        cwd: options.cwd,
-        env: (_a5 = options.env) != null ? _a5 : {},
-        windowsVerbatimArguments: spawnSpec.windowsVerbatimArguments,
-        timeoutMs: options.timeoutMs,
-        killTimeoutMs: options.killTimeoutMs,
-        stdoutTailBytes: (_c2 = (_b3 = options.outputCapture) == null ? void 0 : _b3.stdoutTailBytes) != null ? _c2 : 0,
-        stderrTailBytes: (_e2 = (_d = options.outputCapture) == null ? void 0 : _d.stderrTailBytes) != null ? _e2 : 0,
-        signal: options.signal,
-        onSpawned: options.onSpawned
-      });
-    }
-    return new Promise((resolve14) => {
-      var _a6, _b4, _c3, _d2, _e3, _f2, _g, _h2;
-      let stdout = "";
-      let stderr = "";
-      const decodeStdout = createTextDecoder();
-      const decodeStderr = createTextDecoder();
-      let settled = false;
-      let timedOut = false;
-      let cancelled = false;
-      let timeoutHandle = null;
-      let killTimeoutHandle = null;
-      let forceSettleTimeoutHandle = null;
-      let terminationRequested = false;
-      let child = null;
-      const outputCapture = options.outputCapture;
-      const lowOutputCapture = (outputCapture == null ? void 0 : outputCapture.mode) === "low-output";
-      const stdoutTail = new FixedByteRingBuffer((_a6 = outputCapture == null ? void 0 : outputCapture.stdoutTailBytes) != null ? _a6 : 0);
-      const stderrTail = new FixedByteRingBuffer((_b4 = outputCapture == null ? void 0 : outputCapture.stderrTailBytes) != null ? _b4 : 0);
-      const outputStats = {
-        stdoutBytes: 0,
-        stdoutChunks: 0,
-        stderrBytes: 0,
-        stderrChunks: 0,
-        retainedStderrBytes: 0
-      };
-      const settle = (result) => {
-        var _a7;
-        if (settled) {
-          return;
-        }
-        settled = true;
-        if (timeoutHandle) {
-          clearTimeout(timeoutHandle);
-        }
-        if (killTimeoutHandle) {
-          clearTimeout(killTimeoutHandle);
-        }
-        if (forceSettleTimeoutHandle) {
-          clearTimeout(forceSettleTimeoutHandle);
-        }
-        (_a7 = options.signal) == null ? void 0 : _a7.removeEventListener("abort", abortProcess);
-        if (stdoutTail.byteLength > 0) outputStats.retainedStdoutBytes = stdoutTail.byteLength;
-        outputStats.retainedStderrBytes = stderrTail.byteLength;
-        resolve14({
-          ...result,
-          stdout: lowOutputCapture ? stdoutTail.toString() : stdout,
-          stderr: lowOutputCapture ? stderrTail.toString() : stderr,
-          timedOut,
-          cancelled,
-          ...lowOutputCapture ? { outputStats: { ...outputStats } } : {}
-        });
-      };
-      const stopProcess = (reason) => {
-        var _a7;
-        if (reason === "timeout") {
-          timedOut = true;
-        } else {
-          cancelled = true;
-        }
-        if (!child || terminationRequested) {
-          return;
-        }
-        terminationRequested = true;
-        child.kill(DEFAULT_KILL_SIGNAL);
-        killTimeoutHandle = setTimeout(() => {
-          if (settled || !child) {
-            return;
-          }
-          child.kill(DEFAULT_FORCE_KILL_SIGNAL);
-          forceSettleTimeoutHandle = setTimeout(() => {
-            settle({
-              exitCode: null,
-              signal: DEFAULT_FORCE_KILL_SIGNAL
-            });
-          }, DEFAULT_FORCE_SETTLE_TIMEOUT_MS);
-        }, (_a7 = options.killTimeoutMs) != null ? _a7 : DEFAULT_KILL_TIMEOUT_MS2);
-      };
-      function abortProcess() {
-        stopProcess("cancel");
-      }
-      if ((_c3 = options.signal) == null ? void 0 : _c3.aborted) {
-        cancelled = true;
-        settle({
-          exitCode: null,
-          signal: null
-        });
-        return;
-      }
-      const spawnOptions = {
-        cwd: options.cwd,
-        env: (_d2 = options.env) != null ? _d2 : {},
-        windowsHide: true
-      };
-      if (spawnSpec.windowsVerbatimArguments) {
-        spawnOptions.windowsVerbatimArguments = true;
-      }
-      momaInfo("[CliProcessRunner] spawn", {
-        executable: options.executable,
-        command: spawnSpec.command,
-        args: spawnSpec.args
-      });
-      try {
-        child = (0, import_child_process12.spawn)(spawnSpec.command, spawnSpec.args, spawnOptions);
-        if (child.pid) (_e3 = options.onSpawned) == null ? void 0 : _e3.call(options, child.pid);
-      } catch (error48) {
-        const spawnError = error48 instanceof Error ? error48 : new Error(String(error48));
-        if (lowOutputCapture) {
-          stderrTail.append(Buffer.from(spawnError.message, "utf8"));
-        } else {
-          stderr = appendErrorToStderr(stderr, spawnError);
-        }
-        settle({
-          exitCode: null,
-          signal: null,
-          error: spawnError
-        });
-        return;
-      }
-      (_f2 = options.signal) == null ? void 0 : _f2.addEventListener("abort", abortProcess, { once: true });
-      if (options.timeoutMs && options.timeoutMs > 0) {
-        timeoutHandle = setTimeout(() => {
-          stopProcess("timeout");
-        }, options.timeoutMs);
-      }
-      (_g = child.stdout) == null ? void 0 : _g.on("data", (chunk) => {
-        var _a7;
-        if (lowOutputCapture) {
-          const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
-          outputStats.stdoutBytes += buffer.length;
-          outputStats.stdoutChunks += 1;
-          stdoutTail.append(buffer);
-          return;
-        }
-        const text = decodeStdout(chunk);
-        stdout = appendOutputTail(stdout, text, options.maxOutputChars);
-        (_a7 = options.onStdout) == null ? void 0 : _a7.call(options, text);
-      });
-      (_h2 = child.stderr) == null ? void 0 : _h2.on("data", (chunk) => {
-        var _a7;
-        if (lowOutputCapture) {
-          const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk, "utf8");
-          outputStats.stderrBytes += buffer.length;
-          outputStats.stderrChunks += 1;
-          stderrTail.append(buffer);
-          return;
-        }
-        const text = decodeStderr(chunk);
-        stderr = appendOutputTail(stderr, text, options.maxOutputChars);
-        (_a7 = options.onStderr) == null ? void 0 : _a7.call(options, text);
-      });
-      child.once("error", (error48) => {
-        if (lowOutputCapture) {
-          if (stderrTail.byteLength > 0) stderrTail.append(Buffer.from("\n", "utf8"));
-          stderrTail.append(Buffer.from(error48.message, "utf8"));
-        } else {
-          stderr = appendErrorToStderr(stderr, error48);
-        }
-        settle({
-          exitCode: null,
-          signal: null,
-          error: error48
-        });
-      });
-      child.once("close", (exitCode, signal) => {
-        settle({
-          exitCode,
-          signal
-        });
-      });
-    });
-  }
-};
 
 // src/core/integrations/CliBinaryResolver.ts
 var fs23 = __toESM(require("fs"));
@@ -102226,10 +102404,6 @@ var _SlashCommandDropdown = class _SlashCommandDropdown {
     }
     const isAtPosition0 = triggerIndex === 0;
     const selectedSkillNames = this.getNormalizedSelectedSkillNames();
-    if (this.isMultiSkillSelection() && triggerChar === "/" && selectedSkillNames.length >= MAX_SELECTED_SKILLS_PER_TURN) {
-      this.hide();
-      return;
-    }
     const draftWithoutActiveTrigger = `${text.slice(0, triggerIndex)}${text.slice(cursorPos)}`;
     const mode = this.isMultiSkillSelection() && triggerChar === "/" && (selectedSkillNames.length > 0 || draftWithoutActiveTrigger.trim().length > 0) ? "skills-only" : "all";
     this.triggerStartIndex = triggerIndex;
@@ -102529,9 +102703,16 @@ var _SlashCommandDropdown = class _SlashCommandDropdown {
     for (let i = 0; i < this.filteredItems.length; i++) {
       const item = this.filteredItems[i];
       if (this.isMultiSkillSelection() && this.mode === "all" && item.kind !== renderedKind) {
-        this.itemsContainerEl.createDiv({
-          cls: "moma-slash-group-label",
+        const groupLabelEl = this.itemsContainerEl.createDiv({
+          cls: `moma-slash-group-label moma-slash-group-label--${item.kind}`
+        });
+        groupLabelEl.createSpan({
+          cls: "moma-slash-group-title",
           text: item.kind === "skill" ? "Skills" : "Commands"
+        });
+        groupLabelEl.createSpan({
+          cls: "moma-slash-group-hint",
+          text: item.kind === "skill" ? "\u53EF\u591A\u9009\u7EC4\u5408" : "\u9700\u5355\u72EC\u6267\u884C"
         });
         renderedKind = item.kind;
       }
@@ -102637,110 +102818,6 @@ function invalidateProviderCommandDropdownCaches(providerIds) {
 // src/features/sync/lifecycle/momaAutoInstall.ts
 init_debug();
 init_moma();
-
-// src/features/sync/cli/cliRunner.ts
-init_debug();
-
-// src/features/sync/cli/errors.ts
-var CliError = class extends Error {
-  constructor(message, exitCode, stderr, stdout = "", reason = "other") {
-    super(message);
-    this.exitCode = exitCode;
-    this.stderr = stderr;
-    this.stdout = stdout;
-    this.reason = reason;
-    this.name = "CliError";
-  }
-};
-var AuthRequiredError = class extends CliError {
-  constructor(stderr) {
-    super("CLI authentication required", 1, stderr);
-    this.name = "AuthRequiredError";
-  }
-};
-var CliNotFoundError = class extends Error {
-  constructor(cliPath) {
-    super(`CLI not found at ${cliPath}`);
-    this.cliPath = cliPath;
-    this.name = "CliNotFoundError";
-  }
-};
-
-// src/features/sync/cli/cliRunner.ts
-var AUTH_PATTERNS = [
-  /authentication required/i,
-  /please run.+init/i,
-  /not logged in/i,
-  /token (expired|invalid)/i
-];
-function isEnoent(error48) {
-  return (error48 == null ? void 0 : error48.code) === "ENOENT";
-}
-function createCliRunner(cfg = {}) {
-  var _a5, _b3;
-  const processRunner = (_a5 = cfg.processRunner) != null ? _a5 : new CliProcessRunner();
-  const resolveIsolatedProcessExecutable = (_b3 = cfg.resolveIsolatedProcessExecutable) != null ? _b3 : findNodeExecutableAsync;
-  async function runText(opts) {
-    var _a6, _b4, _c2, _d, _e2, _f2, _g, _h2;
-    const enhancedPath = (_a6 = opts.enhancedPath) != null ? _a6 : getEnhancedPath(void 0, opts.cli);
-    const env = buildChildProcessEnv((_b4 = opts.env) != null ? _b4 : {}, enhancedPath);
-    let isolatedProcessExecutable;
-    if (opts.executionMode === "worker") {
-      isolatedProcessExecutable = (_c2 = await resolveIsolatedProcessExecutable(enhancedPath)) != null ? _c2 : void 0;
-      if (!isolatedProcessExecutable) {
-        throw new CliNotFoundError(process.platform === "win32" ? "node.exe" : "node");
-      }
-    }
-    const result = await processRunner.run({
-      executable: opts.cli,
-      args: [...opts.args],
-      cwd: opts.cwd,
-      env,
-      ...opts.timeoutMs !== void 0 ? { timeoutMs: opts.timeoutMs } : {},
-      ...opts.maxOutputChars !== void 0 ? { maxOutputChars: opts.maxOutputChars } : {},
-      ...opts.outputCapture !== void 0 ? { outputCapture: opts.outputCapture } : {},
-      ...opts.executionMode !== void 0 ? { executionMode: opts.executionMode } : {},
-      ...isolatedProcessExecutable !== void 0 ? { isolatedProcessExecutable } : {},
-      ...opts.onSpawned !== void 0 ? { onSpawned: opts.onSpawned } : {}
-    });
-    if (isEnoent(result.error)) {
-      momaInfo("[moma npm spawn] ENOENT", { cli: opts.cli, errorCode: (_d = result.error) == null ? void 0 : _d.code });
-      throw new CliNotFoundError(opts.cli);
-    }
-    if (result.timedOut) {
-      throw new CliError("CLI command timed out", (_e2 = result.exitCode) != null ? _e2 : -1, result.stderr, result.stdout, "timeout");
-    }
-    if (result.cancelled) {
-      throw new CliError("CLI command cancelled", (_f2 = result.exitCode) != null ? _f2 : -1, result.stderr, result.stdout, "cancelled");
-    }
-    if (result.exitCode === 0) {
-      return result.stdout;
-    }
-    if (result.exitCode === 127) {
-      momaInfo("[moma npm spawn] not found", { cli: opts.cli, exitCode: result.exitCode, stderr: (_g = result.stderr) == null ? void 0 : _g.slice(0, 200) });
-      throw new CliNotFoundError(opts.cli);
-    }
-    if (AUTH_PATTERNS.some((p) => p.test(result.stderr))) {
-      throw new AuthRequiredError(result.stderr);
-    }
-    throw new CliError(
-      `CLI exited with code ${result.exitCode}`,
-      (_h2 = result.exitCode) != null ? _h2 : -1,
-      result.stderr,
-      result.stdout,
-      "exit"
-    );
-  }
-  async function runJson(opts) {
-    const text = await runText(opts);
-    try {
-      return JSON.parse(text);
-    } catch (e2) {
-      throw new CliError(`Failed to parse CLI JSON output: ${e2.message}`, 0, text);
-    }
-  }
-  return { runJson, runText };
-}
 
 // src/features/sync/cli/findMomaCliPathAsync.ts
 var fs28 = __toESM(require("fs"));
@@ -102883,7 +102960,7 @@ function verifyExecutable(fullPath) {
   }
   return ok2;
 }
-function dedupe2(entries) {
+function dedupe(entries) {
   const seen = /* @__PURE__ */ new Set();
   const out = [];
   for (const e2 of entries) {
@@ -102914,7 +102991,7 @@ function findCliByName(binName, override) {
   const isWindows2 = process.platform === "win32";
   const candidates = isWindows2 ? [`${binName}.exe`, `${binName}.cmd`, binName] : [binName];
   const enhancedPath = getEnhancedPath();
-  const dirs = dedupe2(enhancedPath.split(path33.delimiter));
+  const dirs = dedupe(enhancedPath.split(path33.delimiter));
   const result = findInDirs(dirs, candidates);
   if (binName === "npm") {
     momaInfo("[moma npm findCliByName]", {
@@ -108209,9 +108286,9 @@ init_MomaHttpClient();
 init_FetchTransport();
 
 // src/features/sync/cli/getMomaCliVersion.ts
-var PROBE_TIMEOUT_MS = 5e3;
+var PROBE_TIMEOUT_MS2 = 5e3;
 var OVERALL_TIMEOUT_MS = 5e3;
-var VERSION_PATTERN = /(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)/;
+var VERSION_PATTERN2 = /(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?)/;
 async function getMomaCliVersion(plugin, deps = {}) {
   var _a5, _b3, _c2;
   const runner = (_a5 = deps.runner) != null ? _a5 : createCliRunner();
@@ -108221,7 +108298,7 @@ async function getMomaCliVersion(plugin, deps = {}) {
     verifyExecutable: verifyExecutable2
   }));
   let version2 = "";
-  let probed = false;
+  let probed2 = false;
   let timedOut = false;
   let timer;
   let enhancedPath = "";
@@ -108233,11 +108310,11 @@ async function getMomaCliVersion(plugin, deps = {}) {
         cli: candidate,
         args: ["--version"],
         enhancedPath,
-        timeoutMs: PROBE_TIMEOUT_MS,
+        timeoutMs: PROBE_TIMEOUT_MS2,
         maxOutputChars: PROBE_OUTPUT_LIMIT
       });
-      version2 = (_b4 = (_a6 = out.match(VERSION_PATTERN)) == null ? void 0 : _a6[1]) != null ? _b4 : "";
-      probed = true;
+      version2 = (_b4 = (_a6 = out.match(VERSION_PATTERN2)) == null ? void 0 : _a6[1]) != null ? _b4 : "";
+      probed2 = true;
       return true;
     } catch (e2) {
       return false;
@@ -108249,7 +108326,7 @@ async function getMomaCliVersion(plugin, deps = {}) {
       const userCliPath = (_c3 = (_b4 = (_a6 = plugin.settings.sync) == null ? void 0 : _a6.moma) == null ? void 0 : _b4.cliPath) != null ? _c3 : "";
       enhancedPath = await resolveEnhancedPath(userCliPath);
       const cliPath = userCliPath || await resolveCliPath(enhancedPath, capture) || "moma";
-      if (!probed) await capture(cliPath);
+      if (!probed2) await capture(cliPath);
       return version2;
     } catch (e2) {
       return "";
@@ -108864,8 +108941,9 @@ function buildWorkbenchSkillToken(skillName, options = {}) {
   return `/${normalized}${options.exclusive ? "\u2063" : "\u200B"}`;
 }
 function buildWorkbenchDisplayText(reference) {
-  var _a5;
-  return ((_a5 = reference.displayMode) != null ? _a5 : "mention") === "mention" ? buildWorkbenchMentionText(reference) : `${reference.label}\u200B`;
+  var _a5, _b3;
+  const label = isCompactWorkbenchReferenceSource(reference.source) ? (_a5 = compactReferenceDisplayLabel(reference, workbenchReferenceRegistry)) != null ? _a5 : reference.label : reference.label;
+  return ((_b3 = reference.displayMode) != null ? _b3 : "mention") === "mention" ? buildWorkbenchMentionText({ label }) : `${label}\u200B`;
 }
 function identity(reference) {
   return `${reference.source}:${reference.key}`;
@@ -108915,41 +108993,6 @@ function compactReferenceDisplayLabel(reference, registry2) {
   }
   return `${label}\uFF08${getWorkbenchReferenceSummaryCount([reference], registry2)}\u9879\uFF09`;
 }
-function insertCompactWorkbenchReferenceMentions(text, references, registry2 = workbenchReferenceRegistry) {
-  var _a5;
-  const groups = /* @__PURE__ */ new Map();
-  for (const reference of references) {
-    if (!isCompactWorkbenchReferenceSource(reference.source)) continue;
-    const skillName = reference.skillName.trim();
-    const label = compactReferenceDisplayLabel(reference, registry2);
-    if (!skillName || !label) continue;
-    const normalizedSkillName = skillName.toLowerCase();
-    const group = (_a5 = groups.get(normalizedSkillName)) != null ? _a5 : { skillName, mentions: [] };
-    const mention = `@${label}`;
-    if (!group.mentions.includes(mention)) group.mentions.push(mention);
-    groups.set(normalizedSkillName, group);
-  }
-  let result = text;
-  for (const group of groups.values()) {
-    const mentions = group.mentions.filter((mention) => !result.includes(mention));
-    if (mentions.length === 0) continue;
-    const escapedSkillName = group.skillName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const skillPattern = new RegExp(
-      `(^|\\s)([/$]${escapedSkillName}(?:[\\u200B\\u2063])?)(?=\\s|$)`,
-      "iu"
-    );
-    if (skillPattern.test(result)) {
-      result = result.replace(
-        skillPattern,
-        (_match, leadingWhitespace, token) => `${leadingWhitespace}${token} ${mentions.join(" ")}`
-      );
-      continue;
-    }
-    const suffix = `${buildWorkbenchSkillToken(group.skillName)} ${mentions.join(" ")}`;
-    result = result ? `${result} ${suffix}` : suffix;
-  }
-  return result;
-}
 function getCommittedWorkbenchSkillNames(text) {
   var _a5;
   const names = [];
@@ -108965,29 +109008,33 @@ function getCommittedWorkbenchSkillNames(text) {
   return names;
 }
 function getWorkbenchSkillNames(text, references = []) {
-  const committedNames = getCommittedWorkbenchSkillNames(text);
-  if (committedNames.length > 0) return committedNames;
-  const names = [];
+  var _a5;
+  const occurrences = [];
   const seen = /* @__PURE__ */ new Set();
-  const append = (skillName) => {
+  const append = (skillName, index) => {
     const name = skillName == null ? void 0 : skillName.trim();
     const normalized = name == null ? void 0 : name.toLowerCase();
     if (!name || !normalized || seen.has(normalized)) return;
     seen.add(normalized);
-    names.push(name);
+    occurrences.push({ index, name, order: occurrences.length });
   };
-  for (const reference of references) {
-    if (isCompactWorkbenchReferenceSource(reference.source)) append(reference.skillName);
+  WORKBENCH_SKILL_TOKEN_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(WORKBENCH_SKILL_TOKEN_PATTERN)) {
+    append(match[3], (_a5 = match.index) != null ? _a5 : text.length);
   }
   for (const reference of references) {
     const skillName = reference.skillName.trim();
-    if (!skillName) continue;
+    if (!skillName || seen.has(skillName.toLowerCase())) continue;
     const escaped = skillName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    if (new RegExp(`(^|\\s)[/$]${escaped}(?=\\s|$)`, "u").test(text)) {
-      append(skillName);
-    }
+    const tokenMatch = new RegExp(`(^|\\s)[/$]${escaped}(?=\\s|$)`, "u").exec(text);
+    if (tokenMatch) append(skillName, tokenMatch.index);
   }
-  return names;
+  for (const reference of references) {
+    if (!isCompactWorkbenchReferenceSource(reference.source)) continue;
+    const mentionIndex = text.indexOf(buildWorkbenchDisplayText(reference).trimEnd());
+    append(reference.skillName, mentionIndex < 0 ? text.length : mentionIndex);
+  }
+  return occurrences.sort((left, right) => left.index - right.index || left.order - right.order).map((occurrence) => occurrence.name);
 }
 function getWorkbenchReferenceSkillNames(references) {
   return new Set(references.flatMap((reference) => {
@@ -109011,7 +109058,7 @@ function getExclusiveWorkbenchSkillNames(text) {
 }
 function filterWorkbenchReferencesForSkillTokens(text, references) {
   const selectedNames = new Set(getCommittedWorkbenchSkillNames(text).map((name) => name.toLowerCase()));
-  return references.filter((reference) => selectedNames.has(reference.skillName.trim().toLowerCase()));
+  return references.filter((reference) => isCompactWorkbenchReferenceSource(reference.source) || selectedNames.has(reference.skillName.trim().toLowerCase()));
 }
 function findLastWorkbenchSkillToken(text) {
   var _a5;
@@ -109085,9 +109132,7 @@ var WorkbenchReferenceStore = class {
     this.references = [];
   }
   syncWithText(text) {
-    this.references = this.references.filter(
-      (reference) => isCompactWorkbenchReferenceSource(reference.source) || hasCommittedMention(text, reference)
-    );
+    this.references = this.references.filter((reference) => hasCommittedMention(text, reference));
   }
   getForText(text) {
     this.syncWithText(text);
@@ -109137,13 +109182,14 @@ var WorkbenchReferenceStore = class {
     for (const oldReference of dropped) {
       text = removeCommittedMention(text, oldReference);
     }
-    const replacement = inserted ? isCompactWorkbenchReferenceSource(reference.source) ? "" : replacesExistingReference && preservesFollowingSeparator ? buildWorkbenchDisplayText(reference).trimEnd() : buildWorkbenchDisplayText(reference) : "";
+    const replacement = inserted ? replacesExistingReference && preservesFollowingSeparator ? buildWorkbenchDisplayText(reference).trimEnd() : buildWorkbenchDisplayText(reference) : "";
     const markerIndex = text.indexOf(insertionMarker);
     const markerTo = markerIndex + insertionMarker.length;
-    const removesFollowingSeparator = replacement === "" && text.charAt(markerTo) === " " && (markerIndex === 0 || text.charAt(markerIndex - 1) === " ");
-    text = removesFollowingSeparator ? `${text.slice(0, markerIndex)}${text.slice(markerTo + 1)}` : text.replace(insertionMarker, replacement);
+    const hasFollowingSeparator = text.charAt(markerTo) === " ";
+    const consumesFollowingSeparator = hasFollowingSeparator && (replacement.endsWith(" ") || replacement === "" && (markerIndex === 0 || text.charAt(markerIndex - 1) === " "));
+    text = consumesFollowingSeparator ? `${text.slice(0, markerIndex)}${replacement}${text.slice(markerTo + 1)}` : text.replace(insertionMarker, replacement);
     const cursor = markerIndex + replacement.length;
-    const referenceFrom = inserted ? isCompactWorkbenchReferenceSource(reference.source) ? null : markerIndex : (_c2 = (_b3 = findCommittedMentionRange(text, reference)) == null ? void 0 : _b3.from) != null ? _c2 : null;
+    const referenceFrom = inserted ? markerIndex : (_c2 = (_b3 = findCommittedMentionRange(text, reference)) == null ? void 0 : _b3.from) != null ? _c2 : null;
     this.references = next;
     return { text, cursor, referenceFrom, references: this.getAll(), inserted };
   }
@@ -111332,7 +111378,11 @@ function buildMentionDecorations(state) {
   COMMITTED_DIRECTIVE_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(COMMITTED_DIRECTIVE_PATTERN)) {
     const from = (_b3 = match.index) != null ? _b3 : 0;
-    ranges.push({ from, to: from + match[0].length, className: "moma-cm-skill" });
+    ranges.push({
+      from,
+      to: from + match[0].length,
+      className: match[0].endsWith("\u2060") ? "moma-cm-command" : "moma-cm-skill"
+    });
   }
   ranges.sort((left, right) => left.from - right.from || left.to - right.to);
   for (const range of ranges) {
@@ -115759,6 +115809,9 @@ var DEFAULT_APPROVAL_DECISION_OPTIONS = Object.entries(APPROVAL_OPTION_MAP).map(
   value: label,
   decision
 }));
+function isCompactCommand3(content) {
+  return /^\/compact(\s|$)/i.test(content);
+}
 function logPreparedTurn(turn) {
   var _a5, _b3, _c2, _d, _e2, _f2;
   if (turn.request.skillInvocation) {
@@ -115847,7 +115900,7 @@ var InputController = class {
   buildSelectedSkillInvocations(content, workbenchReferences) {
     if (/^\/compact(\s|$)/i.test(content)) return [];
     const invocations = buildWorkbenchSkillInvocationsForText(content, workbenchReferences);
-    return this.getActiveProviderId() === "claude" ? invocations.slice(0, MAX_SELECTED_SKILLS_PER_TURN) : invocations.slice(-1);
+    return this.getActiveProviderId() === "claude" ? invocations : invocations.slice(-1);
   }
   /**
    * Returns null when the skill is confirmed available (send normally),
@@ -115893,7 +115946,8 @@ var InputController = class {
       }
       return [{
         name: invocation.name,
-        ...invocation.args && invocation.args.length > 0 ? { args: invocation.args } : {}
+        ...invocation.args && invocation.args.length > 0 ? { args: invocation.args } : {},
+        ...invocation.argDescriptions && invocation.argDescriptions.length > 0 ? { argDescriptions: invocation.argDescriptions } : {}
       }];
     });
     const notices = [];
@@ -115942,6 +115996,7 @@ var InputController = class {
     const content = rawContent.replace(/[\u200B\u2060\u2063]/g, "");
     const workbenchReferences = (_c2 = (_b3 = options == null ? void 0 : options.workbenchReferencesOverride) != null ? _b3 : (_a5 = fileContextManager == null ? void 0 : fileContextManager.getWorkbenchReferencesForText) == null ? void 0 : _a5.call(fileContextManager, rawContent)) != null ? _c2 : [];
     const hasImages = (_d = imageContextManager == null ? void 0 : imageContextManager.hasImages()) != null ? _d : false;
+    const isCompact = isCompactCommand3(content);
     if (!content && !hasImages && workbenchReferences.length === 0) return;
     const builtInCmd = detectBuiltInCommand(content);
     if (builtInCmd) {
@@ -115960,7 +116015,7 @@ var InputController = class {
       return;
     }
     if (state.isStreaming) {
-      const images2 = hasImages ? [...(imageContextManager == null ? void 0 : imageContextManager.getAttachedImages()) || []] : void 0;
+      const images2 = !isCompact && hasImages ? [...(imageContextManager == null ? void 0 : imageContextManager.getAttachedImages()) || []] : void 0;
       const editorContext = selectionController.getContext();
       const browserContext = (_i = browserSelectionController == null ? void 0 : browserSelectionController.getContext()) != null ? _i : null;
       const canvasContext = canvasSelectionController.getContext();
@@ -115980,7 +116035,9 @@ var InputController = class {
         (_l2 = (_k3 = this.deps).onInputCleared) == null ? void 0 : _l2.call(_k3);
         this.deps.resetInputHeight();
       }
-      imageContextManager == null ? void 0 : imageContextManager.clearImages();
+      if (!isCompact) {
+        imageContextManager == null ? void 0 : imageContextManager.clearImages();
+      }
       this.updateQueueIndicator();
       return;
     }
@@ -115988,11 +116045,6 @@ var InputController = class {
       rawContent,
       workbenchReferences
     );
-    const recordedDisplayContent = insertCompactWorkbenchReferenceMentions(
-      rawContent,
-      workbenchReferences
-    );
-    const recordedContent = recordedDisplayContent.replace(/[\u200B\u2060\u2063]/g, "");
     if (shouldUseInput) {
       inputEl.value = "";
       inputEl.dispatchEvent(new Event("input"));
@@ -116011,9 +116063,8 @@ var InputController = class {
       welcomeEl.style.display = "none";
     }
     fileContextManager == null ? void 0 : fileContextManager.startSession();
-    const images = (imageContextManager == null ? void 0 : imageContextManager.getAttachedImages()) || [];
+    const images = isCompact ? [] : (imageContextManager == null ? void 0 : imageContextManager.getAttachedImages()) || [];
     const imagesForMessage = images.length > 0 ? [...images] : void 0;
-    const isCompact = /^\/compact(\s|$)/i.test(content);
     if (content.startsWith("/")) {
       const commandName = isCompact ? "compact" : (_r = (_q3 = content.match(/^\/([a-zA-Z0-9_-]+)/)) == null ? void 0 : _q3[1]) != null ? _r : "";
       if (commandName) {
@@ -116026,11 +116077,11 @@ var InputController = class {
         momaDig.report("command_send", cmdParam);
       }
     }
-    if (shouldUseInput) {
+    if (shouldUseInput && !isCompact) {
       imageContextManager == null ? void 0 : imageContextManager.clearImages();
     }
     const { turnRequest } = this.buildTurnSubmission({
-      content: recordedContent,
+      content,
       images: imagesForMessage,
       workbenchReferences,
       editorContextOverride: options == null ? void 0 : options.editorContextOverride,
@@ -116044,9 +116095,9 @@ var InputController = class {
     const userMsg = {
       id: this.deps.generateId(),
       role: "user",
-      content: recordedContent,
+      content,
       // \u200B-stripped; used for API history reconstruction
-      displayContent: recordedDisplayContent,
+      displayContent: rawContent,
       // \u200B-preserved; for rendering and clipboard copy-paste
       timestamp: Date.now(),
       images: imagesForMessage
@@ -116067,9 +116118,9 @@ var InputController = class {
     this.activeStreamingAssistantMessage = assistantMsg;
     this.activateStreamingAssistantMessage(assistantMsg);
     this.pendingProviderUserMessages = [{
-      displayContent: recordedDisplayContent,
+      displayContent: rawContent,
       // \u200B-preserved for rendering
-      persistedContent: recordedContent,
+      persistedContent: content,
       // \u200B-stripped for API history
       images: imagesForMessage
     }];
@@ -116374,7 +116425,7 @@ var InputController = class {
     const browserContext = options.browserContextOverride !== void 0 ? options.browserContextOverride : (_b3 = browserSelectionController == null ? void 0 : browserSelectionController.getContext()) != null ? _b3 : null;
     const canvasContext = options.canvasContextOverride !== void 0 ? options.canvasContextOverride : canvasSelectionController.getContext();
     const externalContextPaths = externalContextSelector == null ? void 0 : externalContextSelector.getExternalContexts();
-    const isCompact = /^\/compact(\s|$)/i.test(options.content);
+    const isCompact = isCompactCommand3(options.content);
     const transformedMentionText = !isCompact && fileContextManager ? fileContextManager.transformContextMentions(options.content) : options.content;
     if (transformedMentionText !== options.content) {
       debugLog("mention-transform", { original: options.content, transformed: transformedMentionText });
@@ -116390,7 +116441,7 @@ var InputController = class {
       ...skillCandidates && skillCandidates.length > 0 ? { skillCandidates } : {},
       ...skillPromptPrefix ? { skillPromptPrefix } : {},
       ...options.skillUnavailableContext ? { supplementalContext: options.skillUnavailableContext } : {},
-      images: options.images,
+      images: isCompact ? void 0 : options.images,
       currentNotePath: shouldSendCurrentNote && currentNotePath ? currentNotePath : void 0,
       editorSelection: editorContext,
       browserSelection: browserContext,
@@ -116542,7 +116593,7 @@ var InputController = class {
     };
   }
   async steerQueuedMessage() {
-    var _a5, _b3, _c2, _d, _e2, _f2;
+    var _a5, _b3, _c2, _d, _e2;
     if (this.steerInFlight) {
       return;
     }
@@ -116556,22 +116607,17 @@ var InputController = class {
       (_a5 = queuedMessage.displayContent) != null ? _a5 : queuedMessage.content,
       (_b3 = queuedMessage.workbenchReferences) != null ? _b3 : []
     );
-    const recordedDisplayContent = insertCompactWorkbenchReferenceMentions(
-      (_c2 = queuedMessage.displayContent) != null ? _c2 : queuedMessage.content,
-      (_d = queuedMessage.workbenchReferences) != null ? _d : []
-    );
-    const recordedContent = recordedDisplayContent.replace(/[\u200B\u2060\u2063]/g, "");
     state.queuedMessage = null;
     this.pendingSteerMessage = queuedMessage;
     this.steerInFlight = true;
     this.updateQueueIndicator();
     try {
       const { turnRequest } = this.buildTurnSubmission({
-        content: recordedContent,
+        content: queuedMessage.content,
         images: queuedMessage.images,
         workbenchReferences: queuedMessage.workbenchReferences,
         editorContextOverride: queuedMessage.editorContext,
-        browserContextOverride: (_e2 = queuedMessage.browserContext) != null ? _e2 : null,
+        browserContextOverride: (_c2 = queuedMessage.browserContext) != null ? _c2 : null,
         canvasContextOverride: queuedMessage.canvasContext,
         skillInvocation: selectedSkills.skillInvocation,
         skillCandidates: selectedSkills.skillCandidates,
@@ -116587,9 +116633,9 @@ var InputController = class {
         this.restoreQueuedMessageAfterSteerFailure(queuedMessage);
         return;
       }
-      (_f2 = this.deps.getFileContextManager()) == null ? void 0 : _f2.markCurrentNoteSent();
+      (_d = this.deps.getFileContextManager()) == null ? void 0 : _d.markCurrentNoteSent();
       this.pendingProviderUserMessages.push({
-        displayContent: recordedDisplayContent,
+        displayContent: (_e2 = queuedMessage.displayContent) != null ? _e2 : queuedMessage.content,
         persistedContent: preparedTurn.persistedContent,
         currentNote: preparedTurn.isCompact ? void 0 : preparedTurn.request.currentNotePath,
         images: queuedMessage.images
@@ -121598,7 +121644,8 @@ var BangBashService = class {
         env: buildChildProcessEnv({}, this.enhancedPath),
         timeout: TIMEOUT_MS2,
         maxBuffer: MAX_BUFFER,
-        shell: process.platform === "win32" ? "cmd.exe" : "/bin/bash"
+        shell: process.platform === "win32" ? "cmd.exe" : "/bin/bash",
+        windowsHide: true
       }, (error48, stdout, stderr) => {
         if (error48 && "killed" in error48 && error48.killed) {
           const isMaxBuffer = "code" in error48 && error48.code === "ERR_CHILD_PROCESS_STDIO_MAXBUFFER";
@@ -124207,6 +124254,10 @@ var CHIP_CONFIG = {
   local: { label: "local", ariaLabel: "\u672C\u5730\u5F15\u7528" }
 };
 var MAX_VISIBLE_REFERENCE_CHIPS = 3;
+var REFERENCE_CHIP_GAP = 6;
+var REFERENCE_CHIP_MIN_WIDTH = 80;
+var REFERENCE_CHIP_WITH_COUNT_MIN_WIDTH = 104;
+var REFERENCE_OVERFLOW_MIN_WIDTH = 32;
 function isOrdinaryMentionReference(reference) {
   return reference.source === "local";
 }
@@ -124237,50 +124288,114 @@ function overflowAccent(references) {
 }
 var WorkbenchReferenceChipsView = class {
   constructor(containerEl, callbacks) {
+    this.references = [];
+    this.ordinaryReferences = [];
+    this.selectedReference = null;
+    this.availableWidth = 0;
+    var _a5;
     this.containerEl = containerEl;
     this.callbacks = callbacks;
     this.summariesEl = this.containerEl.createDiv({
       cls: "moma-workbench-reference-summaries"
     });
     this.summariesEl.style.display = "none";
+    this.resizeObserver = typeof ResizeObserver === "function" ? new ResizeObserver((entries) => {
+      var _a6, _b3;
+      const width = Math.floor((_b3 = (_a6 = entries[0]) == null ? void 0 : _a6.contentRect.width) != null ? _b3 : 0);
+      if (width <= 0 || width === this.availableWidth) return;
+      this.availableWidth = width;
+      this.renderCurrentState();
+    }) : null;
+    (_a5 = this.resizeObserver) == null ? void 0 : _a5.observe(this.summariesEl);
   }
   render(references, selectedReference = null, ordinaryReferences = []) {
+    this.references = [...references];
+    this.selectedReference = selectedReference ? { ...selectedReference } : null;
+    this.ordinaryReferences = [...ordinaryReferences];
+    this.renderCurrentState();
+  }
+  renderCurrentState() {
     this.summariesEl.empty();
-    const compactReferences = references.filter((reference) => isCompactWorkbenchReferenceSource(reference.source));
-    const allReferences = [...compactReferences, ...ordinaryReferences];
-    const visibleReferences = this.resolveVisibleReferences(allReferences, selectedReference);
+    const compactReferences = this.references.filter((reference) => isCompactWorkbenchReferenceSource(reference.source));
+    const allReferences = [...compactReferences, ...this.ordinaryReferences];
+    const hasReferences = allReferences.length > 0;
+    this.summariesEl.toggleClass("has-context", hasReferences);
+    this.summariesEl.style.display = hasReferences ? "flex" : "none";
+    const visibleReferences = this.resolveResponsiveVisibleReferences(
+      allReferences,
+      this.selectedReference
+    );
     const visibleIds = new Set(visibleReferences.map(referenceIdentity));
     const hiddenReferences = allReferences.filter((reference) => !visibleIds.has(referenceIdentity(reference)));
-    this.summariesEl.toggleClass("has-context", allReferences.length > 0);
-    this.summariesEl.style.display = allReferences.length > 0 ? "flex" : "none";
     if (hiddenReferences.length > 0) this.renderOverflow(hiddenReferences);
     for (const reference of visibleReferences) {
-      this.renderReferenceChip(reference, selectedReference);
+      this.renderReferenceChip(reference, this.selectedReference);
+    }
+    const selectedConfig = this.selectedReference ? CHIP_CONFIG[this.selectedReference.source] : void 0;
+    if (this.selectedReference && selectedConfig && visibleReferences.some((reference) => {
+      var _a5;
+      return reference.source === ((_a5 = this.selectedReference) == null ? void 0 : _a5.source) && reference.key === this.selectedReference.key;
+    })) {
+      const hintEl = this.summariesEl.createDiv({
+        cls: `moma-workbench-reference-keyboard-hint moma-workbench-reference-keyboard-hint--${selectedConfig.label}`,
+        text: "\u2190 \u2192 \u5207\u6362 \xB7 \u9000\u683C\u5220\u9664 \xB7 Esc \u53D6\u6D88"
+      });
+      hintEl.setAttribute("role", "status");
     }
   }
   destroy() {
+    var _a5;
+    (_a5 = this.resizeObserver) == null ? void 0 : _a5.disconnect();
     this.summariesEl.remove();
   }
-  resolveVisibleReferences(references, selectedReference) {
-    const visible = references.slice(-MAX_VISIBLE_REFERENCE_CHIPS);
+  resolveResponsiveVisibleReferences(references, selectedReference) {
+    const maxVisible = Math.min(MAX_VISIBLE_REFERENCE_CHIPS, references.length);
+    const currentWidth = this.summariesEl.clientWidth;
+    const width = currentWidth > 0 ? currentWidth : this.availableWidth;
+    if (!Number.isFinite(width) || width <= 0) {
+      return this.resolveVisibleReferences(references, selectedReference, maxVisible);
+    }
+    for (let visibleCount = maxVisible; visibleCount >= 1; visibleCount--) {
+      const visible = this.resolveVisibleReferences(
+        references,
+        selectedReference,
+        visibleCount
+      );
+      if (this.minimumRequiredWidth(visible, references.length) <= width) return visible;
+    }
+    return this.resolveVisibleReferences(references, selectedReference, 1);
+  }
+  minimumRequiredWidth(visibleReferences, totalReferenceCount) {
+    const hasOverflow = visibleReferences.length < totalReferenceCount;
+    const chipWidth = visibleReferences.reduce((width, reference) => width + (this.showsCount(reference) ? REFERENCE_CHIP_WITH_COUNT_MIN_WIDTH : REFERENCE_CHIP_MIN_WIDTH), 0);
+    const itemCount = visibleReferences.length + (hasOverflow ? 1 : 0);
+    return chipWidth + (hasOverflow ? REFERENCE_OVERFLOW_MIN_WIDTH : 0) + Math.max(0, itemCount - 1) * REFERENCE_CHIP_GAP;
+  }
+  resolveVisibleReferences(references, selectedReference, maxVisible) {
+    const visible = references.slice(-maxVisible);
     if (!selectedReference) return visible;
     const selectedIndex = references.findIndex((reference) => reference.source === selectedReference.source && reference.key === selectedReference.key);
     if (selectedIndex < 0) return visible;
     const start = Math.min(
       selectedIndex,
-      Math.max(0, references.length - MAX_VISIBLE_REFERENCE_CHIPS)
+      Math.max(0, references.length - maxVisible)
     );
-    return references.slice(start, start + MAX_VISIBLE_REFERENCE_CHIPS);
+    return references.slice(start, start + maxVisible);
+  }
+  showsCount(reference) {
+    return !isOrdinaryMentionReference(reference) && reference.nodeKind === "container";
   }
   renderReferenceChip(reference, selectedReference) {
     const config2 = CHIP_CONFIG[reference.source];
     if (!config2) return;
     const isSelected = (selectedReference == null ? void 0 : selectedReference.source) === reference.source && selectedReference.key === reference.key;
     const count = referenceSummaryCount(reference);
+    const showsCount = this.showsCount(reference);
     const entryEl = this.summariesEl.createDiv({
       cls: `moma-workbench-reference-entry moma-workbench-reference-entry--${config2.label}`
     });
     if (isSelected) entryEl.addClass("is-keyboard-selected");
+    if (showsCount) entryEl.addClass("has-count");
     const chipEl = entryEl.createDiv({ cls: "moma-workbench-reference-chip" });
     const tooltip = isOrdinaryMentionReference(reference) ? `${config2.ariaLabel}\uFF1A${reference.label}` : `${config2.ariaLabel}\uFF1A${reference.label}\uFF0C\u5305\u542B ${count} \u9879`;
     chipEl.setAttribute("aria-label", tooltip);
@@ -124294,7 +124409,7 @@ var WorkbenchReferenceChipsView = class {
       cls: "moma-workbench-reference-chip-title",
       text: compactReferenceLabel(reference)
     });
-    if (!isOrdinaryMentionReference(reference) && reference.nodeKind === "container") {
+    if (showsCount) {
       chipEl.createSpan({
         cls: "moma-workbench-reference-chip-count",
         text: String(count)
@@ -124316,13 +124431,6 @@ var WorkbenchReferenceChipsView = class {
         this.callbacks.onRemoveReference(reference);
       }
     });
-    if (isSelected) {
-      const hintEl = entryEl.createDiv({
-        cls: "moma-workbench-reference-keyboard-hint",
-        text: "\u2190 \u2192 \u5207\u6362 \xB7 \u9000\u683C\u5220\u9664 \xB7 Esc \u53D6\u6D88"
-      });
-      hintEl.setAttribute("role", "status");
-    }
   }
   renderOverflow(references) {
     const accent = overflowAccent(references);
@@ -124440,9 +124548,6 @@ var WorkbenchReferenceChipsView = class {
 
 // src/features/chat/ui/FileContext.ts
 var COMMITTED_ORDINARY_MENTION_PATTERN = /@[^@\u200B\n]+\u200B/gu;
-function isOrdinaryMentionChipReference(reference) {
-  return reference.source === "local";
-}
 function ordinaryMentionIdentity(reference) {
   var _a5;
   return `${reference.mentionText}:${(_a5 = reference.attachedPath) != null ? _a5 : ""}`;
@@ -124459,14 +124564,6 @@ function removeOrdinaryMentionsFromText(text, references) {
   for (const reference of references) {
     const escaped = reference.mentionText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     next = next.replace(new RegExp(`${escaped}(?:[ \\t]+)?`, "gu"), "");
-  }
-  return next;
-}
-function removeOrdinaryMentionsFromDisplayText(text, references) {
-  let next = text;
-  for (const reference of references) {
-    const escaped = reference.mentionText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    next = next.replace(new RegExp(`${escaped}(?:[ \\t])?`, "gu"), "");
   }
   return next;
 }
@@ -124726,7 +124823,7 @@ var FileContextManager = class {
     const currentSkillNames = this.getSelectedSkillNames().map((skillName) => skillName.trim().toLowerCase());
     const skillAlreadySelected = currentSkillNames.includes(normalizedSkillName);
     if (this.hasCommittedCommand()) return false;
-    if (this.multipleSkillSelectionEnabled && !skillAlreadySelected && (this.isDirectiveSelectionLocked() || currentSkillNames.length >= MAX_SELECTED_SKILLS_PER_TURN)) {
+    if (this.multipleSkillSelectionEnabled && !skillAlreadySelected && this.isDirectiveSelectionLocked()) {
       return false;
     }
     this.keyboardSelectedReference = null;
@@ -124742,7 +124839,8 @@ var FileContextManager = class {
     let cursor = mutation.cursor;
     let managedReferenceStart = mutation.referenceFrom;
     let insertedSkillToken = false;
-    if (!this.multipleSkillSelectionEnabled) {
+    const isCompactReference = isCompactWorkbenchReferenceSource(reference.source);
+    if (!isCompactReference && !this.multipleSkillSelectionEnabled) {
       const currentSkillToken = findLastWorkbenchSkillToken(text);
       if (currentSkillToken && currentSkillToken.skillName !== reference.skillName) {
         const replacement = buildWorkbenchSkillToken(reference.skillName);
@@ -124761,7 +124859,7 @@ var FileContextManager = class {
     const selectedSkillNames = new Set(
       getWorkbenchSkillNames(text).map((name) => name.toLowerCase())
     );
-    if (!selectedSkillNames.has(reference.skillName.trim().toLowerCase())) {
+    if (!isCompactReference && !selectedSkillNames.has(reference.skillName.trim().toLowerCase())) {
       let referenceStart = managedReferenceStart != null ? managedReferenceStart : cursor;
       if (referenceStart > 0 && !text.slice(0, referenceStart).trim()) {
         text = text.slice(referenceStart);
@@ -124815,12 +124913,6 @@ var FileContextManager = class {
     const alreadySelected = selectedNames.some(
       (name) => name.toLowerCase() === normalizedSkillName.toLowerCase()
     );
-    if (this.multipleSkillSelectionEnabled && !alreadySelected && selectedNames.length >= MAX_SELECTED_SKILLS_PER_TURN) {
-      text = text.replace(marker, "");
-      const nextCursor2 = Math.max(0, tokenFrom);
-      this.replaceComposerText(text, nextCursor2);
-      return false;
-    }
     const markerIndex = text.indexOf(marker);
     const replacement = alreadySelected ? "" : `${buildWorkbenchSkillToken(normalizedSkillName, {
       exclusive: this.multipleSkillSelectionEnabled && this.exclusiveSkillNames.has(normalizedSkillName.toLowerCase())
@@ -125030,9 +125122,8 @@ var FileContextManager = class {
       this.clearKeyboardReferenceSelection();
       return false;
     }
-    const shouldSelectFromBackspace = event.key === "Backspace" && this.isAtReferenceBackspaceBoundary(references);
     const shouldSelectFromArrowUp = event.key === "ArrowUp" && this.isAtReferenceArrowUpBoundary();
-    if (references.length === 0 || !shouldSelectFromBackspace && !shouldSelectFromArrowUp) {
+    if (references.length === 0 || !shouldSelectFromArrowUp) {
       return false;
     }
     const reference = references.at(-1);
@@ -125051,8 +125142,8 @@ var FileContextManager = class {
     const normalizedPath = this.normalizePathForVault(file2.path);
     if (!normalizedPath) return false;
     const mentionPath = file2 instanceof import_obsidian66.TFolder ? `${normalizedPath.replace(/\/+$/, "")}/` : normalizedPath;
-    const mentionText = `@${mentionPath}\u200B `;
     const existingMention = `@${mentionPath}\u200B`;
+    const mentionText = `${existingMention} `;
     const existingIndex = this.inputEl.value.indexOf(existingMention);
     if (file2 instanceof import_obsidian66.TFile) {
       this.state.attachFile(normalizedPath);
@@ -125073,8 +125164,11 @@ var FileContextManager = class {
     const end = (_b3 = this.inputEl.selectionEnd) != null ? _b3 : this.inputEl.value.length;
     const before = this.inputEl.value.slice(0, start);
     const after = this.inputEl.value.slice(end);
-    this.inputEl.value = `${before}${mentionText}${after}`;
-    const cursor = before.length + mentionText.length;
+    const leadingSeparator = before.length > 0 && !/\s$/u.test(before) ? " " : "";
+    const remainingAfter = after.startsWith(" ") ? after.slice(1) : after;
+    const insertion = `${leadingSeparator}${mentionText}`;
+    this.inputEl.value = `${before}${insertion}${remainingAfter}`;
+    const cursor = before.length + insertion.length;
     this.inputEl.setSelectionRange(cursor, cursor);
     this.inputEl.focus();
     this.inputEl.dispatchEvent(new Event("input", { bubbles: true }));
@@ -125146,9 +125240,7 @@ var FileContextManager = class {
       this.keyboardSelectedReference,
       ordinaryReferences
     );
-    (_a5 = getCodeMirrorChatInput(this.inputEl)) == null ? void 0 : _a5.setHiddenMentionTexts(
-      ordinaryReferences.map((reference) => reference.mentionText)
-    );
+    (_a5 = getCodeMirrorChatInput(this.inputEl)) == null ? void 0 : _a5.setHiddenMentionTexts([]);
     (_c2 = (_b3 = this.callbacks).onChipsChanged) == null ? void 0 : _c2.call(_b3);
   }
   getOrdinaryMentionChipReferences() {
@@ -125173,28 +125265,6 @@ var FileContextManager = class {
   }
   isAtReferenceArrowUpBoundary() {
     return this.inputEl.selectionStart === 0 && this.inputEl.selectionEnd === 0;
-  }
-  isAtReferenceBackspaceBoundary(references) {
-    var _a5, _b3;
-    const start = (_a5 = this.inputEl.selectionStart) != null ? _a5 : 0;
-    const end = (_b3 = this.inputEl.selectionEnd) != null ? _b3 : start;
-    if (start !== end) return false;
-    if (start === 0 && end === 0) return true;
-    const ordinaryReferences = references.filter(isOrdinaryMentionChipReference);
-    if (ordinaryReferences.length > 0) {
-      const visibleTextBeforeCursor = removeOrdinaryMentionsFromDisplayText(
-        this.inputEl.value.slice(0, start),
-        this.ordinaryMentionReferences
-      );
-      return visibleTextBeforeCursor.length === 0;
-    }
-    const skillToken = findLastWorkbenchSkillToken(this.inputEl.value);
-    if (!skillToken || !references.some((reference) => !isOrdinaryMentionChipReference(reference) && reference.skillName === skillToken.skillName)) {
-      return this.inputEl.value.length === 0;
-    }
-    const afterToken = skillToken.to;
-    const afterSeparator = this.inputEl.value.charAt(afterToken) === " " ? afterToken + 1 : afterToken;
-    return start === afterToken || start === afterSeparator;
   }
   handleOrdinaryMentionInserted(mentionText, attachedPath) {
     const normalizedMention = mentionText.trimEnd();
@@ -127633,9 +127703,10 @@ function bindMentionDrop(options) {
     if (!dt) return;
     const images = getImageContextManager == null ? void 0 : getImageContextManager();
     if (images == null ? void 0 : images.canHandleDataTransfer(dt)) return;
-    const hasWorkbenchReference = Array.from((_a5 = dt.types) != null ? _a5 : []).includes(WORKBENCH_REFERENCE_MIME_TYPE) || !!dt.getData(WORKBENCH_REFERENCE_MIME_TYPE);
-    const mentionText = hasWorkbenchReference ? "" : dt.getData(SPACE_MENTION_MIME_TYPE);
-    const vaultFile = hasWorkbenchReference || mentionText ? null : getDraggedVaultMentionFile(plugin);
+    const transferTypes = Array.from((_a5 = dt.types) != null ? _a5 : []);
+    const hasWorkbenchReference = transferTypes.includes(WORKBENCH_REFERENCE_MIME_TYPE) || !!dt.getData(WORKBENCH_REFERENCE_MIME_TYPE);
+    const hasSpaceMention = !hasWorkbenchReference && (transferTypes.includes(SPACE_MENTION_MIME_TYPE) || !!dt.getData(SPACE_MENTION_MIME_TYPE));
+    const vaultFile = hasWorkbenchReference || hasSpaceMention ? null : getDraggedVaultMentionFile(plugin);
     if (vaultFile instanceof import_obsidian69.TFile && (images == null ? void 0 : images.canAttachVaultFile(vaultFile))) {
       e2.preventDefault();
       e2.stopPropagation();
@@ -127644,7 +127715,7 @@ function bindMentionDrop(options) {
       return;
     }
     if (vaultFile) images == null ? void 0 : images.hideDropOverlay();
-    if (!hasWorkbenchReference && !mentionText && !vaultFile) return;
+    if (!hasWorkbenchReference && !hasSpaceMention && !vaultFile) return;
     e2.preventDefault();
     e2.stopPropagation();
     dt.dropEffect = "copy";
@@ -128439,7 +128510,7 @@ var MicPermissionDialog = class {
 init_AuthCredentialService();
 init_debug();
 init_moma();
-var LOG3 = "[asr-stream]";
+var LOG4 = "[asr-stream]";
 var UPSTREAM_READY_TIMEOUT_MS = 2e4;
 var AsrStreamSession = class {
   constructor(plugin, callbacks = {}) {
@@ -128466,7 +128537,7 @@ var AsrStreamSession = class {
   }
   async connect() {
     const url2 = await this.buildWsUrl();
-    momaInfo(`${LOG3} opening`, {
+    momaInfo(`${LOG4} opening`, {
       url: url2.replace(/ob_token=[^&]+/u, "ob_token=***").replace(/accessToken=[^&]+/u, "accessToken=***")
     });
     const ws = new WebSocket(url2);
@@ -128476,7 +128547,7 @@ var AsrStreamSession = class {
       this.connectResolve = resolve14;
       this.connectReject = reject;
       ws.onopen = () => {
-        momaInfo(`${LOG3} ws open, sending StartTranscription`);
+        momaInfo(`${LOG4} ws open, sending StartTranscription`);
         ws.send(JSON.stringify({
           header: {
             message_id: crypto.randomUUID(),
@@ -128501,10 +128572,10 @@ var AsrStreamSession = class {
       };
       ws.onmessage = (ev2) => this.handleMessage(ev2);
       ws.onerror = (ev2) => {
-        momaError(`${LOG3} ws error`, ev2);
+        momaError(`${LOG4} ws error`, ev2);
       };
       ws.onclose = (ev2) => {
-        momaInfo(`${LOG3} ws closed`, { code: ev2.code, reason: ev2.reason });
+        momaInfo(`${LOG4} ws closed`, { code: ev2.code, reason: ev2.reason });
         this.handleClose(ev2.code);
       };
     });
@@ -128559,7 +128630,7 @@ var AsrStreamSession = class {
       var _a5;
       this.readyTimeout = null;
       if (this.upstreamReady || this.stopping || this.cancelled) return;
-      momaError(`${LOG3} TranscriptionStarted timeout`);
+      momaError(`${LOG4} TranscriptionStarted timeout`);
       this.pcmBuffer = [];
       (_a5 = this.ws) == null ? void 0 : _a5.close();
     }, UPSTREAM_READY_TIMEOUT_MS);
@@ -128614,7 +128685,7 @@ var AsrStreamSession = class {
       return;
     }
     if (this.cancelled) return;
-    momaError(`${LOG3} unexpected close during recording (code=${code})`);
+    momaError(`${LOG4} unexpected close during recording (code=${code})`);
     (_b3 = (_a5 = this.callbacks).onError) == null ? void 0 : _b3.call(_a5, `\u8BED\u97F3\u8BC6\u522B\u8FDE\u63A5\u4E2D\u65AD (${code})\uFF0C\u8BF7\u91CD\u8BD5`);
   }
   handleMessage(ev2) {
@@ -128624,11 +128695,11 @@ var AsrStreamSession = class {
     try {
       frame = JSON.parse(ev2.data);
     } catch (e2) {
-      momaError(`${LOG3} unparseable message`, ev2.data);
+      momaError(`${LOG4} unparseable message`, ev2.data);
       return;
     }
     if (frame.error_code) {
-      momaError(`${LOG3} server error`, frame);
+      momaError(`${LOG4} server error`, frame);
       const detail = (_a5 = frame.message) == null ? void 0 : _a5.trim();
       this.failSession(
         detail && detail.length > 0 ? `\u8BED\u97F3\u8BC6\u522B\u5931\u8D25: ${detail}` : `\u8BED\u97F3\u8BC6\u522B\u5931\u8D25 (${frame.error_code})\uFF0C\u8BF7\u91CD\u8BD5`
@@ -128638,7 +128709,7 @@ var AsrStreamSession = class {
     const name = (_b3 = frame.header) == null ? void 0 : _b3.name;
     switch (name) {
       case "TranscriptionStarted": {
-        momaInfo(`${LOG3} upstream ready`);
+        momaInfo(`${LOG4} upstream ready`);
         this.clearReadyTimeout();
         this.upstreamReady = true;
         this.flushPcmBuffer();
@@ -128656,7 +128727,7 @@ var AsrStreamSession = class {
         if (text) this.finalParts.push(text);
         this.currentPartial = "";
         this.emitIntermediate();
-        momaInfo(`${LOG3} sentence end`, {
+        momaInfo(`${LOG4} sentence end`, {
           preview: text.slice(0, 40),
           finals: this.finalParts.length
         });
@@ -128664,7 +128735,7 @@ var AsrStreamSession = class {
       }
       case "TranscriptionCompleted": {
         const text = this.getCommittedText();
-        momaInfo(`${LOG3} completed`, { chars: text.length });
+        momaInfo(`${LOG4} completed`, { chars: text.length });
         if (this.stopResolve) {
           this.stopResolve(text);
           this.stopResolve = null;
@@ -128682,7 +128753,7 @@ var AsrStreamSession = class {
         break;
       }
       default:
-        if (name) momaInfo(`${LOG3} rx ${name}`);
+        if (name) momaInfo(`${LOG4} rx ${name}`);
         break;
     }
   }
@@ -140468,9 +140539,8 @@ async function didMomaProvisioningSucceed(result) {
 function briefErrorReason(e2) {
   if (e2 instanceof CliError && e2.stderr.trim()) {
     const lines2 = e2.stderr.split(/\r?\n/).map((l2) => l2.trim()).filter(Boolean);
-    const meaningful = lines2.find((l2) => !/^npm (error|warn|notice) A complete log/i.test(l2) && !/^npm (notice|warn)/i.test(l2));
-    const line = meaningful != null ? meaningful : lines2[0];
-    return line.length > 200 ? line.slice(0, 200) + "\u2026" : line;
+    const meaningful = lines2.filter((l2) => !/^npm (error|warn|notice) A complete log/i.test(l2) && !/^npm (notice|warn)/i.test(l2));
+    return (meaningful.length ? meaningful : lines2.slice(0, 1)).join("\n");
   }
   return e2 instanceof Error ? e2.message : String(e2);
 }
@@ -140675,7 +140745,7 @@ function makeMomaHooks(plugin, def, runner) {
       return lastSkillsInstalled;
     },
     async runInstall() {
-      var _a5;
+      var _a5, _b3;
       if (!getActiveOnesToken(plugin.settings).trim()) {
         return { kind: "noop", notice: "\u8BF7\u5148\u9A8C\u8BC1 Moma Token\uFF0C\u518D\u6267\u884C\u5B89\u88C5" };
       }
@@ -140714,12 +140784,13 @@ function makeMomaHooks(plugin, def, runner) {
             errno: cause.errno,
             errmsg: cause.errmsg
           });
-          return { kind: "error", notice: getMomaProvisionFailureNotice(stage, operation) };
+          const apiReason = ((_b3 = cause.errmsg) == null ? void 0 : _b3.trim()) || cause.kind;
+          return { kind: "error", notice: `${getMomaProvisionFailureNotice(stage, operation)}\uFF1A${apiReason}` };
         }
         const msg = cause instanceof Error ? cause.message : String(cause);
         const detail = cause instanceof CliError ? { exitCode: cause.exitCode, stderr: cause.stderr } : void 0;
         momaError(`${INSTALL_LOG_PREFIX} failed`, { provider: def.id, error: msg, ...detail });
-        return { kind: "error", notice: getMomaProvisionFailureNotice(stage, operation) };
+        return { kind: "error", notice: `${getMomaProvisionFailureNotice(stage, operation)}\uFF1A${briefErrorReason(cause)}` };
       }
     }
   };
@@ -146478,7 +146549,7 @@ async function removeMigratedCredentials(ctx) {
 var fs38 = __toESM(require("fs"));
 var nodePath3 = __toESM(require("path"));
 init_debug();
-var CLEANUP_AGE_MS = 60 * 1e3;
+var CLEANUP_AGE_MS = 3 * 24 * 60 * 60 * 1e3;
 async function cleanupStaleTempAudio(app) {
   try {
     const basePath = app.vault.adapter.basePath;
@@ -147408,6 +147479,156 @@ var fs39 = __toESM(require("fs"));
 var import_obsidian133 = require("obsidian");
 var nodePath4 = __toESM(require("path"));
 init_MomaHttpClient();
+
+// src/api/MultipartUploadApi.ts
+var import_obsidian119 = require("obsidian");
+init_debug();
+init_moma();
+var MULTIPART_THRESHOLD_BYTES = 10 * 1024 * 1024;
+var PART_SIZE_BYTES = 10 * 1024 * 1024;
+var MAX_CONCURRENCY = 3;
+var MAX_PART_RETRIES = 3;
+var RETRY_DELAYS_MS = [1e3, 2e3, 4e3];
+var PART_TIMEOUT_MS = 5 * 60 * 1e3;
+var S3ForbiddenError = class extends Error {
+  constructor() {
+    super("S3 PUT 403: presigned URL expired");
+    this.name = "S3ForbiddenError";
+  }
+};
+function sleep3(ms) {
+  return new Promise((resolve14) => setTimeout(resolve14, ms));
+}
+var MultipartUploadApi = class {
+  constructor(client) {
+    this.client = client;
+  }
+  async uploadAudio(blob, fileName) {
+    var _a5, _b3;
+    const initiateEnv = await this.client.post(
+      "/file/multipart/initiate",
+      { originalFileName: fileName }
+    );
+    const rawData = (_a5 = initiateEnv.data) != null ? _a5 : {};
+    const { uploadId, fileKey } = rawData;
+    if (typeof uploadId !== "string" || !uploadId || typeof fileKey !== "string" || !fileKey) {
+      throw new MomaApiError("invalid_response", "multipart initiate missing uploadId/fileKey");
+    }
+    momaInfo("[multipart] initiated", { uploadId, fileKey, bytes: blob.size });
+    const totalParts = Math.ceil(blob.size / PART_SIZE_BYTES);
+    const partNumbers = Array.from({ length: totalParts }, (_2, i) => i + 1);
+    const uploadedParts = [];
+    let poolError = void 0;
+    const queue = [...partNumbers];
+    const runWorker = async () => {
+      while (queue.length > 0 && poolError === void 0) {
+        const partNumber = queue.shift();
+        if (partNumber === void 0) break;
+        try {
+          const start = (partNumber - 1) * PART_SIZE_BYTES;
+          const end = Math.min(start + PART_SIZE_BYTES, blob.size);
+          const partBlob = blob.slice(start, end);
+          const etag = await this.uploadPartWithRetry(fileKey, uploadId, partNumber, partBlob, blob.type || "audio/webm");
+          uploadedParts.push({ partNumber, etag });
+          momaInfo("[multipart] part uploaded", { partNumber, totalParts });
+        } catch (e2) {
+          poolError = e2;
+          queue.length = 0;
+        }
+      }
+    };
+    const workers = Array.from({ length: Math.min(MAX_CONCURRENCY, totalParts) }, runWorker);
+    await Promise.all(workers);
+    if (poolError !== void 0) {
+      await this.client.post("/file/multipart/abort", { fileKey, uploadId }).catch((e2) => {
+        momaWarn("[multipart] abort failed", { err: String(e2) });
+      });
+      throw poolError;
+    }
+    uploadedParts.sort((a, b2) => a.partNumber - b2.partNumber);
+    const completeEnv = await this.client.post(
+      "/file/multipart/complete",
+      {
+        fileKey,
+        uploadId,
+        parts: uploadedParts.map((p) => ({ partNumber: p.partNumber, etag: p.etag }))
+      }
+    );
+    const completeData = (_b3 = completeEnv.data) != null ? _b3 : {};
+    const { s3Key, s3Url, originalFileName } = completeData;
+    if (typeof s3Key !== "string" || !s3Key || typeof s3Url !== "string" || !s3Url || typeof originalFileName !== "string" || !originalFileName) {
+      throw new MomaApiError("invalid_response", "multipart complete missing s3Key/s3Url/originalFileName");
+    }
+    momaInfo("[multipart] complete", { s3Url, parts: totalParts });
+    return { s3Key, s3Url, originalFileName };
+  }
+  async uploadPartWithRetry(fileKey, uploadId, partNumber, part, contentType) {
+    var _a5;
+    let uploadUrl = null;
+    let lastError;
+    for (let attempt = 0; attempt <= MAX_PART_RETRIES; attempt++) {
+      try {
+        if (uploadUrl === null) {
+          uploadUrl = await this.getUploadUrl(fileKey, uploadId, partNumber);
+        }
+        return await this.putPartToS3(uploadUrl, part, contentType);
+      } catch (e2) {
+        lastError = e2;
+        if (e2 instanceof S3ForbiddenError) {
+          uploadUrl = null;
+        }
+        if (attempt < MAX_PART_RETRIES) {
+          const delay3 = (_a5 = RETRY_DELAYS_MS[attempt]) != null ? _a5 : 4e3;
+          momaWarn("[multipart] part retry", { partNumber, attempt: attempt + 1, delay: delay3, err: String(e2) });
+          await sleep3(delay3);
+        }
+      }
+    }
+    momaError("[multipart] part retries exhausted", { partNumber });
+    throw lastError;
+  }
+  async getUploadUrl(fileKey, uploadId, partNumber) {
+    var _a5;
+    const env = await this.client.post(
+      "/file/multipart/url",
+      { fileKey, uploadId, partNumber }
+    );
+    const urlData = (_a5 = env.data) != null ? _a5 : {};
+    const { uploadUrl } = urlData;
+    if (typeof uploadUrl !== "string" || !uploadUrl) {
+      throw new MomaApiError("invalid_response", "multipart url missing uploadUrl");
+    }
+    return uploadUrl;
+  }
+  async putPartToS3(uploadUrl, part, contentType) {
+    var _a5;
+    const buffer = await part.arrayBuffer();
+    const timeout = new Promise(
+      (_2, reject) => setTimeout(() => reject(new MomaApiError("network", `S3 PUT timed out after ${PART_TIMEOUT_MS / 1e3}s`)), PART_TIMEOUT_MS)
+    );
+    const resp = await Promise.race([
+      (0, import_obsidian119.requestUrl)({
+        url: uploadUrl,
+        method: "PUT",
+        body: buffer,
+        headers: { "Content-Type": contentType },
+        throw: false
+      }),
+      timeout
+    ]);
+    if (resp.status === 403) throw new S3ForbiddenError();
+    if (resp.status < 200 || resp.status >= 300) {
+      throw new MomaApiError("api", `S3 PUT returned HTTP ${resp.status}`);
+    }
+    const etag = (_a5 = resp.headers["etag"]) != null ? _a5 : resp.headers["ETag"];
+    if (!etag) {
+      throw new MomaApiError("invalid_response", `S3 PUT missing ETag header (HTTP ${resp.status})`);
+    }
+    return etag;
+  }
+};
+
+// src/features/voice-recording/ui/WorkbenchPanel.ts
 init_FetchTransport();
 
 // src/api/UserApi.ts
@@ -147578,10 +147799,11 @@ function refreshPassPaperEnabled(plugin, deps = {}) {
 
 // src/features/voice-recording/ui/WorkbenchPanel.ts
 init_debug();
+init_moma();
 init_analytics();
 
 // src/features/voice-recording/meetingTypes.ts
-var import_obsidian119 = require("obsidian");
+var import_obsidian120 = require("obsidian");
 var MAX_MEETING_TYPES = 6;
 var MAX_MEETING_NAME_CHARS = 256;
 var MAX_PAPER_RULE_CHARS = 5e3;
@@ -148131,7 +148353,7 @@ function isKnowledgeMissing(item, vault, remotePresence) {
     if (!path46) return true;
     if (!vault) return false;
     try {
-      return !vault.getAbstractFileByPath((0, import_obsidian119.normalizePath)(path46.replace(/^\/+/, "")));
+      return !vault.getAbstractFileByPath((0, import_obsidian120.normalizePath)(path46.replace(/^\/+/, "")));
     } catch (e2) {
       return false;
     }
@@ -148402,13 +148624,8 @@ function normalizeMeetingTypeTemplate(raw) {
 
 // src/features/voice-recording/ask/meetingAskContext.ts
 var MEETING_ASK_MAX_CHARS = 4e3;
-var MEETING_ASK_MAX_OVERVIEW = 600;
-var MEETING_ASK_MAX_CHAPTERS = 8;
-var MEETING_ASK_MAX_BULLETS = 4;
-var MEETING_ASK_MAX_ACTIONS = 8;
 var MEETING_ASK_MAX_INPUT = 4e3;
 var MEETING_ASK_MAX_REMARKS = 12;
-var MEETING_ASK_MAX_REMARK_CHARS = 160;
 function clipMeetingAskInput(text) {
   const trimmed = text.trim();
   if (trimmed.length <= MEETING_ASK_MAX_INPUT) return trimmed;
@@ -148423,53 +148640,31 @@ function buildPaperRule(paperRule, customRule) {
     ...supplement ? { supplement } : {}
   };
 }
-function buildMeetingAskContext(ctx) {
-  var _a5, _b3;
+function buildMeetingAskContext(ctx, now = /* @__PURE__ */ new Date()) {
   const lines2 = [];
+  lines2.push(`sent_at: ${formatLocalTimestamp2(now)}`);
   lines2.push(`title: ${ctx.fileName || "\u4F1A\u8BAE\u5F55\u97F3"}`);
-  if (ctx.filePath) lines2.push(`note: ${ctx.filePath}`);
-  const overview = clip(ctx.summary.overview.trim(), MEETING_ASK_MAX_OVERVIEW);
-  if (overview) {
-    lines2.push("overview:");
-    lines2.push(overview);
-  }
-  const chapters = ctx.summary.chapters.slice(0, MEETING_ASK_MAX_CHAPTERS);
-  if (chapters.length > 0) {
-    lines2.push("chapters:");
-    for (const chapter of chapters) {
-      lines2.push(`- ${clip(chapter.title, 80)}`);
-      const bullets = ((_a5 = chapter.bullets) != null ? _a5 : []).map((b2) => b2 == null ? void 0 : b2.trim()).filter((b2) => Boolean(b2)).slice(0, MEETING_ASK_MAX_BULLETS);
-      for (const bullet of bullets) {
-        lines2.push(`  - ${clip(bullet, 160)}`);
-      }
-    }
-  }
-  const actions = ctx.summary.action_items.slice(0, MEETING_ASK_MAX_ACTIONS);
-  if (actions.length > 0) {
-    lines2.push("actions:");
-    for (const item of actions) {
-      const owner = item.owner ? ` (${item.owner})` : "";
-      lines2.push(`- ${clip(item.content, 160)}${owner}`);
-    }
-  }
-  const remarks = ((_b3 = ctx.recentRemarks) != null ? _b3 : []).map((item) => ({
-    speaker: item.speaker.trim() || "\u8BF4\u8BDD\u4EBA",
-    text: clip(item.text.trim(), MEETING_ASK_MAX_REMARK_CHARS)
-  })).filter((item) => item.text).slice(-MEETING_ASK_MAX_REMARKS);
-  if (remarks.length > 0) {
-    lines2.push("recent:");
-    for (const item of remarks) {
-      lines2.push(`- ${item.speaker}: ${item.text}`);
-    }
-  }
-  if (!overview && chapters.length === 0 && actions.length === 0) {
-    lines2.push(remarks.length > 0 ? "status: live summary is still generating; recent remarks above are the current discussion" : "status: live summary is still generating");
+  if (ctx.filePath) {
+    lines2.push(`note: ${ctx.filePath}`);
+    lines2.push("\u672C\u4F1A\u8BDD\u6BCF\u4E00\u8F6E\u90FD\u8981\u7528 Read \u6253\u5F00\u4E0A\u9762\u8FD9\u4EFD\u5F55\u97F3\u7B14\u8BB0\uFF0C\u8BFB\u53D6\u5176\u4E2D\u7684\u9010\u5B57\u7A3F\u4E0E\u5B9E\u65F6\u603B\u7ED3\uFF0C\u53D6\u5230\u6700\u65B0\u7684\u8BA8\u8BBA\u5185\u5BB9\u518D\u4F5C\u7B54\uFF08\u5185\u5BB9\u968F\u4F1A\u8BAE\u6301\u7EED\u66F4\u65B0\uFF0C\u4E0D\u8981\u590D\u7528\u4E0A\u4E00\u8F6E\u8BFB\u5230\u7684\u65E7\u5185\u5BB9\uFF09\u3002");
+  } else {
+    lines2.push("status: \u5F55\u97F3\u7B14\u8BB0\u5C1A\u672A\u843D\u76D8\uFF0C\u6682\u65E0\u53EF\u8BFB\u8DEF\u5F84");
   }
   return clip(lines2.join("\n"), MEETING_ASK_MAX_CHARS);
 }
 function clip(text, max) {
   if (text.length <= max) return text;
   return `${text.slice(0, Math.max(0, max - 1))}\u2026`;
+}
+function formatLocalTimestamp2(date7) {
+  const pad3 = (value) => String(value).padStart(2, "0");
+  const y2 = date7.getFullYear();
+  const mo = pad3(date7.getMonth() + 1);
+  const d2 = pad3(date7.getDate());
+  const h2 = pad3(date7.getHours());
+  const mi = pad3(date7.getMinutes());
+  const s2 = pad3(date7.getSeconds());
+  return `${y2}-${mo}-${d2} ${h2}:${mi}:${s2}`;
 }
 
 // src/features/voice-recording/featureFlags.ts
@@ -148495,17 +148690,206 @@ function shouldUploadMeetingFiles(asrV2 = isAsrV2Enabled()) {
 // src/features/voice-recording/ui/WorkbenchPanel.ts
 init_MicrophoneCapture();
 
+// src/features/voice-recording/meetingKnowledgeSend.ts
+var PAPER_SLIP_PROMPT = "\u9012\u7EB8\u6761";
+function isDataGroupKnowledge(item) {
+  return item.source === "data" && (item.key === "by_tag" || item.key === "by_team");
+}
+function knowledgeToWorkbenchReference(item, catalog) {
+  var _a5, _b3, _c2, _d, _e2;
+  if (item.source === "space") {
+    const spaceId = (_a5 = item.spaceId) == null ? void 0 : _a5.trim();
+    const path46 = ((_b3 = item.physicalPath) == null ? void 0 : _b3.trim()) || (item.label.trim() ? `/kespace/${item.label.trim()}` : "");
+    if (!path46) return null;
+    if (!spaceId) return createSpaceReference(path46);
+    const nodeType = (_c2 = resolveSpaceNodeType(item)) != null ? _c2 : "space";
+    const metadata = {
+      space_id: spaceId,
+      type: nodeType,
+      absolute_path: path46
+    };
+    if (nodeType === "space") {
+      metadata.id = spaceId;
+    } else if ((_d = item.nodeId) == null ? void 0 : _d.trim()) {
+      if (nodeType === "folder") metadata.folder_id = item.nodeId.trim();
+      else metadata.file_id = item.nodeId.trim();
+    }
+    const payload = {
+      referred_to_as: path46,
+      metadata
+    };
+    if ((_e2 = item.children) == null ? void 0 : _e2.length) {
+      payload.children = item.children.map((child) => {
+        var _a6;
+        return {
+          id: child.id,
+          name: child.name,
+          type: child.type,
+          physical_path: (_a6 = child.physicalPath) != null ? _a6 : ""
+        };
+      });
+    }
+    return createSpaceReference(path46, payload);
+  }
+  if (item.source !== "data") return null;
+  if (item.key === "asset" && item.assetType && item.assetId !== void 0) {
+    return createMomaDataLeafReference({
+      asset_type: item.assetType,
+      asset_id: item.assetId,
+      name: item.label
+    });
+  }
+  const assets = resolveDataGroupAssets(item, catalog);
+  if (assets.length === 0) return null;
+  if (item.key === "by_tag" && item.tag) {
+    return createMomaDataGroupReference(`tag:${item.tag}`, item.label, assets);
+  }
+  if (item.key === "by_team" && item.teamId !== void 0) {
+    return createMomaDataGroupReference(`team:${String(item.teamId)}`, item.label, assets);
+  }
+  return null;
+}
+function knowledgeToWorkbenchReferences(items, catalog) {
+  if (!(items == null ? void 0 : items.length)) return [];
+  const references = [];
+  for (const item of items) {
+    const reference = knowledgeToWorkbenchReference(item, catalog);
+    if (reference) references.push(reference);
+  }
+  return references;
+}
+function vaultKnowledgeEntries(items) {
+  var _a5;
+  if (!(items == null ? void 0 : items.length)) return [];
+  const entries = [];
+  const seen = /* @__PURE__ */ new Set();
+  for (const item of items) {
+    if (item.source !== "vault") continue;
+    const path46 = (_a5 = item.path) == null ? void 0 : _a5.trim().replace(/^\/+/, "");
+    if (!path46 || seen.has(path46)) continue;
+    seen.add(path46);
+    const description = item.label.trim() || path46.split("/").filter(Boolean).at(-1) || path46;
+    entries.push({ path: path46, description });
+  }
+  return entries;
+}
+function buildPaperSlipText(_references = []) {
+  return PAPER_SLIP_PROMPT;
+}
+function resolveDataGroupAssets(item, catalog) {
+  var _a5, _b3, _c2;
+  if ((_a5 = item.assets) == null ? void 0 : _a5.length) {
+    return item.assets.map((asset) => ({
+      asset_type: asset.asset_type,
+      asset_id: asset.asset_id,
+      name: item.label
+    }));
+  }
+  if (!catalog || !isDataGroupKnowledge(item)) return [];
+  if (item.key === "by_tag") {
+    const match = catalog.by_tag.find((group, index) => tagGroupMatches(group, item, index));
+    return (_b3 = match == null ? void 0 : match.items) != null ? _b3 : [];
+  }
+  if (item.key === "by_team") {
+    const match = catalog.by_team.find((group) => String(group.team_id) === String(item.teamId) || group.team_name === item.label);
+    return (_c2 = match == null ? void 0 : match.items) != null ? _c2 : [];
+  }
+  return [];
+}
+function isDataKnowledgePresent(item, catalog) {
+  if (item.source !== "data") return false;
+  if (item.key === "by_tag") {
+    return catalog.by_tag.some((group, index) => tagGroupMatches(group, item, index));
+  }
+  if (item.key === "by_team") {
+    return catalog.by_team.some((group) => String(group.team_id) === String(item.teamId) || group.team_name === item.label);
+  }
+  if (item.key === "asset" && item.assetType && item.assetId !== void 0) {
+    const assets = [
+      ...catalog.untagged,
+      ...catalog.by_tag.flatMap((group) => group.items),
+      ...catalog.by_team.flatMap((group) => group.items)
+    ];
+    return assets.some((asset) => asset.asset_type === item.assetType && String(asset.asset_id) === String(item.assetId));
+  }
+  const label = item.label.trim();
+  if (!item.key && label) {
+    if (catalog.by_tag.some((group, index) => getMomaDataTagGroupLabel(group, index) === label)) {
+      return true;
+    }
+    if (catalog.by_team.some((group) => group.team_name === label)) return true;
+  }
+  return false;
+}
+async function loadMomaDataCatalog(plugin) {
+  try {
+    return await fetchAccessibleMomaDataAssets(createMomaDataClient(plugin));
+  } catch (e2) {
+    return null;
+  }
+}
+async function hydrateSessionKnowledge(preset, plugin) {
+  var _a5, _b3;
+  const items = (_a5 = preset == null ? void 0 : preset.knowledge) != null ? _a5 : [];
+  if (items.length === 0) return null;
+  const spaceItems = items.filter((item) => {
+    var _a6;
+    return item.source === "space" && !!((_a6 = item.spaceId) == null ? void 0 : _a6.trim());
+  });
+  const spaceApi = spaceItems.length ? new SpaceApiClient(plugin) : null;
+  await Promise.all(spaceItems.map(async (item) => {
+    var _a6;
+    const spaceId = item.spaceId.trim();
+    const parentId = resolveSpaceNodeType(item) === "space" ? void 0 : (_a6 = item.nodeId) == null ? void 0 : _a6.trim();
+    try {
+      const nodes = await spaceApi.fetchFolderContents(spaceId, parentId);
+      item.children = nodes.map((node) => ({
+        id: node.id,
+        name: node.name,
+        type: node.type,
+        physicalPath: node.physicalPath
+      }));
+    } catch (e2) {
+    }
+  }));
+  if (!items.some(isDataGroupKnowledge)) return null;
+  const catalog = await loadMomaDataCatalog(plugin);
+  if (!catalog) return null;
+  for (const item of items) {
+    if (!isDataGroupKnowledge(item) || ((_b3 = item.assets) == null ? void 0 : _b3.length)) continue;
+    try {
+      const assets = resolveDataGroupAssets(item, catalog);
+      if (assets.length) {
+        item.assets = assets.map((asset) => ({
+          asset_type: asset.asset_type,
+          asset_id: asset.asset_id
+        }));
+      }
+    } catch (e2) {
+    }
+  }
+  return catalog;
+}
+function tagGroupMatches(group, item, index) {
+  if (item.tag) {
+    if (group.tag === item.tag || group.tag_name === item.tag || group.name === item.tag) return true;
+    if (String(group.tag_id) === item.tag) return true;
+    if (getMomaDataTagGroupKey(group, index) === `tag:${item.tag}`) return true;
+  }
+  return getMomaDataTagGroupLabel(group, index) === item.label;
+}
+
 // src/features/voice-recording/meetingUploadTimeout.ts
-var MEETING_UPLOAD_TIMEOUT_MS = 15 * 60 * 1e3;
+var MEETING_UPLOAD_TIMEOUT_MS = 2 * 60 * 1e3;
 var FINISH_LOCK_WATCHDOG_MS = MEETING_UPLOAD_TIMEOUT_MS + 45e3;
 function meetingFileUploadsFailed(recording, transcript) {
   return recording.status === "rejected" || transcript.status === "rejected";
 }
 
 // src/features/voice-recording/output/RecordingNoteBuilder.ts
-var import_obsidian120 = require("obsidian");
+var import_obsidian121 = require("obsidian");
 init_debug();
-var LOG4 = "[voice-rec][note]";
+var LOG5 = "[voice-rec][note]";
 var MIN_DURATION_SEC = 5;
 var SUMMARY_HEADING = "## \u5B9E\u65F6\u603B\u7ED3";
 var SUMMARY_CALLOUT_MARKER = "> [!moma-summary]";
@@ -148567,7 +148951,7 @@ var RecordingNoteBuilder = class {
             await this.opts.app.vault.modify(this.tfile, patched);
           }
         } catch (err) {
-          momaError(`${LOG4} setStorageMode cleanup failed`, { err: String(err) });
+          momaError(`${LOG5} setStorageMode cleanup failed`, { err: String(err) });
         }
       });
     }
@@ -148575,13 +148959,13 @@ var RecordingNoteBuilder = class {
   // ── Phase 1: open ──
   async open() {
     const { app, fileName, storagePath } = this.opts;
-    const normalPath = (0, import_obsidian120.normalizePath)(storagePath);
+    const normalPath = (0, import_obsidian121.normalizePath)(storagePath);
     if (!app.vault.getAbstractFileByPath(normalPath)) {
       try {
         await app.vault.createFolder(normalPath);
-        momaInfo(`${LOG4} created folder`, { path: normalPath });
+        momaInfo(`${LOG5} created folder`, { path: normalPath });
       } catch (err) {
-        momaInfo(`${LOG4} createFolder skipped (may already exist)`, { err: String(err) });
+        momaInfo(`${LOG5} createFolder skipped (may already exist)`, { err: String(err) });
       }
     }
     this.filePath = this.resolveFilePath(normalPath, fileName);
@@ -148589,7 +148973,7 @@ var RecordingNoteBuilder = class {
     this.utteranceCount = 0;
     const skeleton = this.buildFrontmatterSkeleton(fileName);
     this.tfile = await app.vault.create(this.filePath, skeleton);
-    momaInfo(`${LOG4} opened`, { path: this.filePath });
+    momaInfo(`${LOG5} opened`, { path: this.filePath });
   }
   // ── Phase 2: append ──
   append(utt, displayName) {
@@ -148614,7 +148998,7 @@ var RecordingNoteBuilder = class {
         const { store } = this.opts;
         const utterances = store.allUtterances();
         if (utterances.length === 0) {
-          momaError(`${LOG4} rewrite skipped \u2014 store empty (preserve live transcript)`, {
+          momaError(`${LOG5} rewrite skipped \u2014 store empty (preserve live transcript)`, {
             path: this.filePath,
             utteranceCount: this.utteranceCount
           });
@@ -148625,7 +149009,7 @@ var RecordingNoteBuilder = class {
           utterances.length
         );
       } catch (err) {
-        momaError(`${LOG4} rewrite failed`, { err: String(err) });
+        momaError(`${LOG5} rewrite failed`, { err: String(err) });
       }
     });
   }
@@ -148646,12 +149030,12 @@ var RecordingNoteBuilder = class {
           overview: previous.overview.trim() ? previous.overview : doc.overview,
           action_items: doc.action_items.length > 0 ? doc.action_items : previous.action_items
         };
-        momaWarn(`${LOG4} summary update kept pending chapters (incoming empty)`, {
+        momaWarn(`${LOG5} summary update kept pending chapters (incoming empty)`, {
           path: this.filePath,
           chapters: next.chapters.length
         });
       } else if (this.lastWrittenChapterCount > 0) {
-        momaWarn(`${LOG4} summary update skipped \u2014 refuse empty overwrite of written chapters`, {
+        momaWarn(`${LOG5} summary update skipped \u2014 refuse empty overwrite of written chapters`, {
           path: this.filePath,
           writtenChapters: this.lastWrittenChapterCount
         });
@@ -148701,18 +149085,18 @@ var RecordingNoteBuilder = class {
         try {
           await this.replaceTranscriptBody(snapshot.map((s2) => s2.line).join(""), snapshot.length);
         } catch (err) {
-          momaError(`${LOG4} finalize rewrite failed`, { err: String(err) });
+          momaError(`${LOG5} finalize rewrite failed`, { err: String(err) });
         }
       });
       await this.writeQueue;
     } else {
-      momaInfo(`${LOG4} finalize skip rewrite \u2014 store empty, preserve live transcript`, {
+      momaInfo(`${LOG5} finalize skip rewrite \u2014 store empty, preserve live transcript`, {
         path: this.filePath,
         utteranceCount: this.utteranceCount
       });
     }
     await this.patchFrontmatter(durationSec, snapshot);
-    momaInfo(`${LOG4} finalized`, { path: this.filePath, durationSec, utterances: this.utteranceCount });
+    momaInfo(`${LOG5} finalized`, { path: this.filePath, durationSec, utterances: this.utteranceCount });
     return this.filePath;
   }
   getFilePath() {
@@ -148740,8 +149124,8 @@ var RecordingNoteBuilder = class {
       if (appliedName === oldName && targetPath === this.tfile.path) {
         return appliedName;
       }
-      const oldAudioPath = (0, import_obsidian120.normalizePath)(`${this.opts.storagePath}/${oldName}.webm`);
-      const newAudioPath = (0, import_obsidian120.normalizePath)(`${this.opts.storagePath}/${appliedName}.webm`);
+      const oldAudioPath = (0, import_obsidian121.normalizePath)(`${this.opts.storagePath}/${oldName}.webm`);
+      const newAudioPath = (0, import_obsidian121.normalizePath)(`${this.opts.storagePath}/${appliedName}.webm`);
       if (oldAudioPath !== newAudioPath) {
         const audioFile = this.opts.app.vault.getAbstractFileByPath(oldAudioPath);
         if (audioFile) {
@@ -148768,7 +149152,7 @@ var RecordingNoteBuilder = class {
         this.filePath = this.tfile.path;
       }
       this.opts.fileName = appliedName;
-      momaInfo(`${LOG4} renamed`, { from: oldName, to: appliedName, path: this.filePath });
+      momaInfo(`${LOG5} renamed`, { from: oldName, to: appliedName, path: this.filePath });
       return appliedName;
     });
     this.writeQueue = result.then(() => void 0, () => void 0);
@@ -148834,7 +149218,7 @@ var RecordingNoteBuilder = class {
         this.lastSummaryMarkdown = markdown;
         this.lastWrittenChapterCount = doc.chapters.length;
       } catch (err) {
-        momaError(`${LOG4} summary write failed`, { err: String(err) });
+        momaError(`${LOG5} summary write failed`, { err: String(err) });
       }
     });
   }
@@ -148860,7 +149244,7 @@ var RecordingNoteBuilder = class {
           await this.writeAppendChunk(chunk);
         }
       } catch (err) {
-        momaError(`${LOG4} append failed`, { err: String(err) });
+        momaError(`${LOG5} append failed`, { err: String(err) });
       }
     });
   }
@@ -148952,7 +149336,7 @@ ${speakersYaml}`);
     const content = await this.opts.app.vault.read(this.tfile);
     const idx = content.indexOf(TRANSCRIPT_HEADING);
     if (idx < 0) {
-      momaError(`${LOG4} rewrite skipped \u2014 missing ## \u9010\u5B57\u7A3F`, { path: this.filePath });
+      momaError(`${LOG5} rewrite skipped \u2014 missing ## \u9010\u5B57\u7A3F`, { path: this.filePath });
       return;
     }
     const afterHeading = idx + TRANSCRIPT_HEADING.length;
@@ -148968,7 +149352,7 @@ ${transcriptBody}`;
     await this.opts.app.vault.modify(this.tfile, next);
     this.utteranceCount = count;
     this.notifyTranscriptWritten();
-    momaInfo(`${LOG4} rewritten from store`, {
+    momaInfo(`${LOG5} rewritten from store`, {
       path: this.filePath,
       count
     });
@@ -148985,20 +149369,20 @@ ${transcriptBody}`;
 ${section}` : section;
     await this.opts.app.vault.modify(this.tfile, next);
     this.summarySectionPresent = true;
-    momaInfo(`${LOG4} summary section updated`, { path: this.filePath });
+    momaInfo(`${LOG5} summary section updated`, { path: this.filePath });
   }
   async saveAudio(audioBlob, fileName, durationSec) {
-    const audioPath = (0, import_obsidian120.normalizePath)(`${this.opts.storagePath}/${fileName}.webm`);
+    const audioPath = (0, import_obsidian121.normalizePath)(`${this.opts.storagePath}/${fileName}.webm`);
     try {
       let buffer = await audioBlob.arrayBuffer();
       if (durationSec > 0) {
         buffer = fixWebmDuration(buffer, durationSec);
       }
       await this.opts.app.vault.createBinary(audioPath, buffer);
-      momaInfo(`${LOG4} audio saved`, { path: audioPath });
+      momaInfo(`${LOG5} audio saved`, { path: audioPath });
     } catch (err) {
-      momaError(`${LOG4} audio save failed`, { err: String(err) });
-      new import_obsidian120.Notice("\u97F3\u9891\u6587\u4EF6\u4FDD\u5B58\u5931\u8D25\uFF0C\u8F6C\u5199\u6587\u672C\u5DF2\u4FDD\u5B58", 5e3);
+      momaError(`${LOG5} audio save failed`, { err: String(err) });
+      new import_obsidian121.Notice("\u97F3\u9891\u6587\u4EF6\u4FDD\u5B58\u5931\u8D25\uFF0C\u8F6C\u5199\u6587\u672C\u5DF2\u4FDD\u5B58", 5e3);
     }
   }
   /**
@@ -149047,13 +149431,13 @@ ${patched.slice(idx)}`;
     if (this.tfile) {
       try {
         await this.opts.app.vault.delete(this.tfile);
-        momaInfo(`${LOG4} discarded`, { reason });
+        momaInfo(`${LOG5} discarded`, { reason });
       } catch (e2) {
       }
       this.tfile = null;
       this.filePath = null;
     }
-    new import_obsidian120.Notice(reason + "\uFF0C\u672C\u6B21\u5F55\u5236\u4E0D\u4FDD\u5B58", 4e3);
+    new import_obsidian121.Notice(reason + "\uFF0C\u672C\u6B21\u5F55\u5236\u4E0D\u4FDD\u5B58", 4e3);
   }
   formatUtteranceLine(utt, displayName) {
     const timeStr = formatUtteranceClock(utt.ts, utt.startMs);
@@ -149064,10 +149448,10 @@ ${patched.slice(idx)}`;
 `;
   }
   resolveFilePath(folderPath, fileName) {
-    const base = (0, import_obsidian120.normalizePath)(`${folderPath}/${fileName}.md`);
+    const base = (0, import_obsidian121.normalizePath)(`${folderPath}/${fileName}.md`);
     if (!this.opts.app.vault.getAbstractFileByPath(base)) return base;
     for (let i = 1; i < 1e3; i++) {
-      const candidate = (0, import_obsidian120.normalizePath)(`${folderPath}/${fileName} ${i}.md`);
+      const candidate = (0, import_obsidian121.normalizePath)(`${folderPath}/${fileName} ${i}.md`);
       if (!this.opts.app.vault.getAbstractFileByPath(candidate)) return candidate;
     }
     return base;
@@ -149075,12 +149459,12 @@ ${patched.slice(idx)}`;
   /** Like resolveFilePath, but treats the current note path as available. */
   resolveRenamePath(fileName) {
     var _a5, _b3;
-    const folderPath = (0, import_obsidian120.normalizePath)(this.opts.storagePath);
+    const folderPath = (0, import_obsidian121.normalizePath)(this.opts.storagePath);
     const currentPath = (_b3 = (_a5 = this.tfile) == null ? void 0 : _a5.path) != null ? _b3 : null;
-    const base = (0, import_obsidian120.normalizePath)(`${folderPath}/${fileName}.md`);
+    const base = (0, import_obsidian121.normalizePath)(`${folderPath}/${fileName}.md`);
     if (base === currentPath || !this.opts.app.vault.getAbstractFileByPath(base)) return base;
     for (let i = 1; i < 1e3; i++) {
-      const candidate = (0, import_obsidian120.normalizePath)(`${folderPath}/${fileName} ${i}.md`);
+      const candidate = (0, import_obsidian121.normalizePath)(`${folderPath}/${fileName} ${i}.md`);
       if (candidate === currentPath || !this.opts.app.vault.getAbstractFileByPath(candidate)) {
         return candidate;
       }
@@ -149363,7 +149747,7 @@ init_AuthCredentialService();
 init_debug();
 init_moma();
 init_analytics();
-var LOG5 = "[voice-rec-v1]";
+var LOG6 = "[voice-rec-v1]";
 var MAX_RECONNECT_ATTEMPTS = 3;
 var RECONNECT_DELAY_MS = 2e3;
 var STABLE_CONNECTION_MS = 5e3;
@@ -149401,7 +149785,7 @@ var RecordingSessionV1 = class {
   async connect() {
     if (this.state !== "idle") throw new Error("RecordingSession already started");
     this.state = "connecting";
-    momaInfo(`${LOG5} connecting`, { clientHint: this.clientHint, meetingId: this.meetingId });
+    momaInfo(`${LOG6} connecting`, { clientHint: this.clientHint, meetingId: this.meetingId });
     this.openWs();
   }
   sendPcmFrame(frame) {
@@ -149415,14 +149799,14 @@ var RecordingSessionV1 = class {
     if (this.state !== "recording") return;
     this.state = "paused";
     this.userPaused = true;
-    momaInfo(`${LOG5} paused`);
+    momaInfo(`${LOG6} paused`);
     this.sendJson({ type: "pause_recording" });
   }
   resume() {
     if (this.state !== "paused") return;
     this.state = "recording";
     this.userPaused = false;
-    momaInfo(`${LOG5} resumed`);
+    momaInfo(`${LOG6} resumed`);
     this.sendJson({ type: "resume_recording" });
   }
   /**
@@ -149451,7 +149835,7 @@ var RecordingSessionV1 = class {
     this.stopTimeoutId = setTimeout(() => {
       this.stopTimeoutId = null;
       if (!this.stopResolve) return;
-      momaError(`${LOG5} stop timed out \u2014 forcing disconnect`);
+      momaError(`${LOG6} stop timed out \u2014 forcing disconnect`);
       const ws = this.ws;
       if (ws && ws.readyState !== WebSocket.CLOSED) {
         try {
@@ -149468,7 +149852,7 @@ var RecordingSessionV1 = class {
     return this.stopPromise;
   }
   destroy() {
-    momaInfo(`${LOG5} destroyed`);
+    momaInfo(`${LOG6} destroyed`);
     this.reconnectAttempts = MAX_RECONNECT_ATTEMPTS + 1;
     this.clearReconnectTimer();
     this.clearStableConnectionTimer();
@@ -149507,7 +149891,7 @@ var RecordingSessionV1 = class {
       this.openWsWithUrl(url2);
     }).catch((err) => {
       this.opening = false;
-      momaError(`${LOG5} buildWsUrl failed`, err);
+      momaError(`${LOG6} buildWsUrl failed`, err);
       if (this.state === "stopping" || this.state === "connecting") {
         this.state = "stopped";
         this.clearStopTimeout();
@@ -149535,7 +149919,7 @@ var RecordingSessionV1 = class {
       } else {
         this.state = "recording";
       }
-      momaInfo(`${LOG5} ws connected \u2014 state=${this.state}`);
+      momaInfo(`${LOG6} ws connected \u2014 state=${this.state}`);
       this.callbacks.onConnected();
     };
     ws.onmessage = (ev2) => {
@@ -149551,11 +149935,11 @@ var RecordingSessionV1 = class {
       this.handleMessage(msg);
     };
     ws.onerror = (ev2) => {
-      momaError(`${LOG5} ws error`, ev2);
+      momaError(`${LOG6} ws error`, ev2);
     };
     ws.onclose = (ev2) => {
       this.ws = null;
-      momaInfo(`${LOG5} ws closed`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, state: this.state });
+      momaInfo(`${LOG6} ws closed`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, state: this.state });
       if (this.state === "stopping" || this.state === "stopped") {
         this.state = "stopped";
         this.clearStopTimeout();
@@ -149567,7 +149951,7 @@ var RecordingSessionV1 = class {
       if (this.reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
         this.reconnectAttempts++;
         if (this.state === "paused") this.userPaused = true;
-        momaError(`${LOG5} \u3010\u5F02\u5E38\u65AD\u5F00\u3011ws \u610F\u5916\u5173\u95ED\uFF0C\u5C1D\u8BD5\u91CD\u8FDE`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, attempt: this.reconnectAttempts, maxAttempts: MAX_RECONNECT_ATTEMPTS });
+        momaError(`${LOG6} \u3010\u5F02\u5E38\u65AD\u5F00\u3011ws \u610F\u5916\u5173\u95ED\uFF0C\u5C1D\u8BD5\u91CD\u8FDE`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, attempt: this.reconnectAttempts, maxAttempts: MAX_RECONNECT_ATTEMPTS });
         trackVoiceRecordingError("ws_unexpected_close", {
           meetingId: this.meetingId,
           wsCode: ev2.code,
@@ -149587,7 +149971,7 @@ var RecordingSessionV1 = class {
       } else {
         this.state = "stopped";
         this.clearStableConnectionTimer();
-        momaError(`${LOG5} max reconnect attempts reached`, { code: ev2.code });
+        momaError(`${LOG6} max reconnect attempts reached`, { code: ev2.code });
         trackVoiceRecordingError("ws_max_reconnect_failed", {
           meetingId: this.meetingId,
           wsCode: ev2.code,
@@ -149607,10 +149991,10 @@ var RecordingSessionV1 = class {
     const ws = this.ws;
     if (!ws) {
       if (this.opening) {
-        momaInfo(`${LOG5} stopping \u2014 handshake in flight, will close on open`);
+        momaInfo(`${LOG6} stopping \u2014 handshake in flight, will close on open`);
         return;
       }
-      momaInfo(`${LOG5} stopping \u2014 no ws, finishing`);
+      momaInfo(`${LOG6} stopping \u2014 no ws, finishing`);
       this.state = "stopped";
       this.clearStopTimeout();
       this.fireDisconnected();
@@ -149618,19 +150002,19 @@ var RecordingSessionV1 = class {
       return;
     }
     if (ws.readyState === WebSocket.OPEN) {
-      momaInfo(`${LOG5} stopping \u2014 sending ws.close(1000)`);
+      momaInfo(`${LOG6} stopping \u2014 sending ws.close(1000)`);
       ws.close(1e3, "session ended");
       return;
     }
     if (ws.readyState === WebSocket.CONNECTING) {
-      momaInfo(`${LOG5} stopping \u2014 ws still connecting, will close on open`);
+      momaInfo(`${LOG6} stopping \u2014 ws still connecting, will close on open`);
       return;
     }
     if (ws.readyState === WebSocket.CLOSING) {
-      momaInfo(`${LOG5} stopping \u2014 ws already closing, waiting for onclose`);
+      momaInfo(`${LOG6} stopping \u2014 ws already closing, waiting for onclose`);
       return;
     }
-    momaInfo(`${LOG5} stopping \u2014 ws already closed`);
+    momaInfo(`${LOG6} stopping \u2014 ws already closed`);
     this.state = "stopped";
     this.clearStopTimeout();
     this.fireDisconnected();
@@ -149647,7 +150031,7 @@ var RecordingSessionV1 = class {
           this.rememberSessionId(sessionId, `system.${event || "unknown"}`);
         }
         if (event === "connected") {
-          momaInfo(`${LOG5} server connected ack`, { sessionId, meetingId: this.meetingId });
+          momaInfo(`${LOG6} server connected ack`, { sessionId, meetingId: this.meetingId });
           this.callbacks.onServerConnected(sessionId);
         }
         break;
@@ -149705,7 +150089,7 @@ var RecordingSessionV1 = class {
         void replacements;
         this.callbacks.onRecluster(mapping);
         if (this.state !== "stopping" && this.state !== "stopped") {
-          momaError(`${LOG5} \u3010\u5F02\u5E38\u65AD\u5F00\u3011\u6536\u5230 recluster \u65F6 state=${this.state}\uFF0C\u89E6\u53D1 fireDisconnected`, { state: this.state });
+          momaError(`${LOG6} \u3010\u5F02\u5E38\u65AD\u5F00\u3011\u6536\u5230 recluster \u65F6 state=${this.state}\uFF0C\u89E6\u53D1 fireDisconnected`, { state: this.state });
           trackVoiceRecordingError("recluster_while_recording", {
             meetingId: this.meetingId,
             sessionState: this.state
@@ -149777,7 +150161,7 @@ var RecordingSessionV1 = class {
       case "error": {
         const code = (_c2 = msg["code"]) != null ? _c2 : 0;
         const message = (_d = msg["message"]) != null ? _d : "\u672A\u77E5\u9519\u8BEF";
-        momaError(`${LOG5} server error`, { code, message });
+        momaError(`${LOG6} server error`, { code, message });
         this.callbacks.onError(code, message);
         break;
       }
@@ -149864,7 +150248,7 @@ init_AuthCredentialService();
 init_debug();
 init_moma();
 init_analytics();
-var LOG6 = "[voice-rec-v2]";
+var LOG7 = "[voice-rec-v2]";
 var MAX_RECONNECT_ATTEMPTS2 = 3;
 var RECONNECT_DELAY_MS2 = 2e3;
 var STABLE_CONNECTION_MS2 = 5e3;
@@ -149913,7 +150297,7 @@ var RecordingSessionV2 = class {
   async connect() {
     if (this.state !== "idle") throw new Error("RecordingSession already started");
     this.state = "connecting";
-    momaInfo(`${LOG6} connecting`, { clientHint: this.clientHint, meetingId: this.meetingId });
+    momaInfo(`${LOG7} connecting`, { clientHint: this.clientHint, meetingId: this.meetingId });
     this.openWs();
   }
   sendPcmFrame(frame) {
@@ -149929,15 +150313,20 @@ var RecordingSessionV2 = class {
     this.state = "paused";
     this.userPaused = true;
     (_a5 = this.ws) == null ? void 0 : _a5.send(JSON.stringify({ type: "asr.suspend" }));
-    momaInfo(`${LOG6} paused`);
+    momaInfo(`${LOG7} paused`);
   }
   resume() {
     var _a5;
     if (this.state !== "paused") return;
-    this.state = "recording";
     this.userPaused = false;
+    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+      this.state = "connecting";
+      momaInfo(`${LOG7} resume \u2014 ws closed, reconnecting`);
+      this.openWs();
+      return;
+    }
     (_a5 = this.ws) == null ? void 0 : _a5.send(JSON.stringify({ type: "asr.resume" }));
-    momaInfo(`${LOG6} resumed`);
+    momaInfo(`${LOG7} resume sent \u2014 waiting for server resumed event`);
   }
   /**
    * Initiates graceful close and returns a Promise that resolves when the socket
@@ -149965,7 +150354,7 @@ var RecordingSessionV2 = class {
     this.stopTimeoutId = setTimeout(() => {
       this.stopTimeoutId = null;
       if (!this.stopResolve) return;
-      momaError(`${LOG6} stop timed out \u2014 forcing disconnect`);
+      momaError(`${LOG7} stop timed out \u2014 forcing disconnect`);
       const ws = this.ws;
       if (ws && ws.readyState !== WebSocket.CLOSED) {
         try {
@@ -149982,7 +150371,7 @@ var RecordingSessionV2 = class {
     return this.stopPromise;
   }
   destroy() {
-    momaInfo(`${LOG6} destroyed`);
+    momaInfo(`${LOG7} destroyed`);
     this.reconnectAttempts = MAX_RECONNECT_ATTEMPTS2 + 1;
     this.clearReconnectTimer();
     this.clearStableConnectionTimer();
@@ -150027,7 +150416,7 @@ var RecordingSessionV2 = class {
       this.openWsWithUrl(url2);
     }).catch((err) => {
       this.opening = false;
-      momaError(`${LOG6} buildWsUrl failed`, err);
+      momaError(`${LOG7} buildWsUrl failed`, err);
       if (this.state === "stopping" || this.state === "connecting") {
         this.state = "stopped";
         this.clearStopTimeout();
@@ -150054,7 +150443,7 @@ var RecordingSessionV2 = class {
       } else {
         this.state = "recording";
       }
-      momaInfo(`${LOG6} ws connected \u2014 state=${this.state}`);
+      momaInfo(`${LOG7} ws connected \u2014 state=${this.state}`);
       this.callbacks.onConnected();
     };
     ws.onmessage = (ev2) => {
@@ -150064,11 +150453,11 @@ var RecordingSessionV2 = class {
       }
     };
     ws.onerror = (ev2) => {
-      momaError(`${LOG6} ws error`, ev2);
+      momaError(`${LOG7} ws error`, ev2);
     };
     ws.onclose = (ev2) => {
       this.ws = null;
-      momaInfo(`${LOG6} ws closed`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, state: this.state });
+      momaInfo(`${LOG7} ws closed`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, state: this.state });
       if (this.state === "stopping" || this.state === "stopped") {
         this.state = "stopped";
         this.clearStopTimeout();
@@ -150077,10 +150466,14 @@ var RecordingSessionV2 = class {
         this.resolveStop();
         return;
       }
+      if (this.state === "paused") {
+        this.userPaused = true;
+        momaInfo(`${LOG7} ws closed while paused \u2014 deferred reconnect until resume`);
+        return;
+      }
       if (this.reconnectAttempts < MAX_RECONNECT_ATTEMPTS2) {
         this.reconnectAttempts++;
-        if (this.state === "paused") this.userPaused = true;
-        momaError(`${LOG6} \u3010\u5F02\u5E38\u65AD\u5F00\u3011ws \u610F\u5916\u5173\u95ED\uFF0C\u5C1D\u8BD5\u91CD\u8FDE`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, attempt: this.reconnectAttempts, maxAttempts: MAX_RECONNECT_ATTEMPTS2 });
+        momaError(`${LOG7} \u3010\u5F02\u5E38\u65AD\u5F00\u3011ws \u610F\u5916\u5173\u95ED\uFF0C\u5C1D\u8BD5\u91CD\u8FDE`, { code: ev2.code, reason: ev2.reason, wasClean: ev2.wasClean, attempt: this.reconnectAttempts, maxAttempts: MAX_RECONNECT_ATTEMPTS2 });
         trackVoiceRecordingError("ws_unexpected_close", {
           meetingId: this.meetingId,
           wsCode: ev2.code,
@@ -150100,7 +150493,7 @@ var RecordingSessionV2 = class {
       } else {
         this.state = "stopped";
         this.clearStableConnectionTimer();
-        momaError(`${LOG6} max reconnect attempts reached`, { code: ev2.code });
+        momaError(`${LOG7} max reconnect attempts reached`, { code: ev2.code });
         trackVoiceRecordingError("ws_max_reconnect_failed", {
           meetingId: this.meetingId,
           wsCode: ev2.code,
@@ -150120,10 +150513,10 @@ var RecordingSessionV2 = class {
     const ws = this.ws;
     if (!ws) {
       if (this.opening) {
-        momaInfo(`${LOG6} stopping \u2014 handshake in flight, will close on open`);
+        momaInfo(`${LOG7} stopping \u2014 handshake in flight, will close on open`);
         return;
       }
-      momaInfo(`${LOG6} stopping \u2014 no ws, finishing`);
+      momaInfo(`${LOG7} stopping \u2014 no ws, finishing`);
       this.state = "stopped";
       this.clearStopTimeout();
       this.fireDisconnected();
@@ -150131,19 +150524,19 @@ var RecordingSessionV2 = class {
       return;
     }
     if (ws.readyState === WebSocket.OPEN) {
-      momaInfo(`${LOG6} stopping \u2014 sending ws.close(1000)`);
+      momaInfo(`${LOG7} stopping \u2014 sending ws.close(1000)`);
       ws.close(1e3, "session ended");
       return;
     }
     if (ws.readyState === WebSocket.CONNECTING) {
-      momaInfo(`${LOG6} stopping \u2014 ws still connecting, will close on open`);
+      momaInfo(`${LOG7} stopping \u2014 ws still connecting, will close on open`);
       return;
     }
     if (ws.readyState === WebSocket.CLOSING) {
-      momaInfo(`${LOG6} stopping \u2014 ws already closing, waiting for onclose`);
+      momaInfo(`${LOG7} stopping \u2014 ws already closing, waiting for onclose`);
       return;
     }
-    momaInfo(`${LOG6} stopping \u2014 ws already closed`);
+    momaInfo(`${LOG7} stopping \u2014 ws already closed`);
     this.state = "stopped";
     this.clearStopTimeout();
     this.fireDisconnected();
@@ -150170,6 +150563,11 @@ var RecordingSessionV2 = class {
       return;
     }
     if (typeof msg["type"] === "string") {
+      const event = typeof msg["event"] === "string" ? msg["event"] : void 0;
+      if (event === "resumed" && this.state === "paused") {
+        this.state = "recording";
+        momaInfo(`${LOG7} ws \u2190 resumed \u2014 upstream ready, recording`);
+      }
       return;
     }
     const header = (_a5 = msg.header) != null ? _a5 : {};
@@ -150177,11 +150575,11 @@ var RecordingSessionV2 = class {
     const name = typeof header["name"] === "string" ? header["name"] : "";
     const status = typeof header["status"] === "number" ? header["status"] : 0;
     if (name === "TranscriptionStarted") {
-      momaInfo(`${LOG6} ws \u2190 name=${name}`, { name, status });
+      momaInfo(`${LOG7} ws \u2190 name=${name}`, { name, status });
     }
     if (status !== 0 && status !== 2e7) {
       const statusMsg = typeof header["status_message"] === "string" ? header["status_message"] : "\u670D\u52A1\u7AEF\u9519\u8BEF";
-      momaError(`${LOG6} server error`, { status, statusMsg, name });
+      momaError(`${LOG7} server error`, { status, statusMsg, name });
       this.callbacks.onError(status, statusMsg);
       return;
     }
@@ -150378,7 +150776,7 @@ function emptyDocument() {
 }
 
 // src/features/voice-recording/session/SummarySessionBase.ts
-var LOG7 = "[summary]";
+var LOG8 = "[summary]";
 var MAX_RECONNECT = 3;
 var RECONNECT_DELAY_MS3 = 1500;
 var STABLE_CONNECTION_MS3 = 5e3;
@@ -150432,7 +150830,7 @@ var SummarySessionBase = class {
       this.openWs(url2);
     }).catch((err) => {
       this.connecting = false;
-      momaError(`${LOG7} build url failed`, err);
+      momaError(`${LOG8} build url failed`, err);
       this.scheduleReconnect("build-url-failed");
     });
   }
@@ -150458,9 +150856,9 @@ var SummarySessionBase = class {
       this.flushNow({ drain: true });
       if (((_a5 = this.ws) == null ? void 0 : _a5.readyState) === WebSocket.OPEN) {
         this.sendJson({ type: "summary.finalize" });
-        momaInfo(`${LOG7} \u2191 summary.finalize sent`, { meetingId: this.meetingId });
+        momaInfo(`${LOG8} \u2191 summary.finalize sent`, { meetingId: this.meetingId });
       } else {
-        momaWarn(`${LOG7} finalize queued \u2014 ws not ready`, {
+        momaWarn(`${LOG8} finalize queued \u2014 ws not ready`, {
           meetingId: this.meetingId,
           connected: this.connected
         });
@@ -150472,7 +150870,7 @@ var SummarySessionBase = class {
         this.finalizeWaitResolve = resolve14;
         this.finalizeWaitTimer = setTimeout(() => {
           this.finalizeWaitTimer = null;
-          momaWarn(`${LOG7} finalize wait timed out`, {
+          momaWarn(`${LOG8} finalize wait timed out`, {
             meetingId: this.meetingId,
             timeoutMs
           });
@@ -150522,7 +150920,7 @@ var SummarySessionBase = class {
     this.clearReconnectTimer();
     this.clearStableConnectionTimer();
     this.resolveFinalizeWait();
-    momaInfo(`${LOG7} destroy`, { meetingId: this.meetingId, revision: this.revision });
+    momaInfo(`${LOG8} destroy`, { meetingId: this.meetingId, revision: this.revision });
     (_a5 = this.ws) == null ? void 0 : _a5.close(1e3, "destroyed");
     this.ws = null;
     this.connected = false;
@@ -150539,7 +150937,7 @@ var SummarySessionBase = class {
       ws = new WebSocket(url2);
     } catch (err) {
       this.connecting = false;
-      momaError(`${LOG7} WebSocket constructor failed`, err);
+      momaError(`${LOG8} WebSocket constructor failed`, err);
       this.scheduleReconnect("constructor-failed");
       return;
     }
@@ -150556,13 +150954,13 @@ var SummarySessionBase = class {
       try {
         msg = JSON.parse(raw);
       } catch (e2) {
-        momaWarn(`${LOG7} \u2193 parse failed`, { preview: raw.slice(0, 200) });
+        momaWarn(`${LOG8} \u2193 parse failed`, { preview: raw.slice(0, 200) });
         return;
       }
       this.handleMessage(msg);
     };
     ws.onerror = () => {
-      momaError(`${LOG7} ws error`, { meetingId: this.meetingId, readyState: ws.readyState });
+      momaError(`${LOG8} ws error`, { meetingId: this.meetingId, readyState: ws.readyState });
     };
     ws.onclose = (ev2) => {
       if (this.ws !== ws) return;
@@ -150571,7 +150969,7 @@ var SummarySessionBase = class {
       this.connecting = false;
       this.clearStableConnectionTimer();
       this.requeueInFlight();
-      momaWarn(`${LOG7} ws closed`, {
+      momaWarn(`${LOG8} ws closed`, {
         meetingId: this.meetingId,
         code: ev2.code,
         reason: ev2.reason || "(empty)",
@@ -150594,7 +150992,7 @@ var SummarySessionBase = class {
           doc = mergeSummaryDocuments(this.document, doc);
           this.revision = Math.max(this.revision, revision2);
           this.document = doc;
-          momaInfo(`${LOG7} \u2193 summary.started merged after rebind`, {
+          momaInfo(`${LOG8} \u2193 summary.started merged after rebind`, {
             revision: this.revision,
             chapters: doc.chapters.length,
             rebindGeneration: this.rebindGeneration,
@@ -150605,12 +151003,12 @@ var SummarySessionBase = class {
           this.flushNow({ drain: this.finalizeSent });
           if (this.finalizeSent && !this.completed && ((_c2 = this.ws) == null ? void 0 : _c2.readyState) === WebSocket.OPEN) {
             this.sendJson({ type: "summary.finalize" });
-            momaInfo(`${LOG7} \u2191 summary.finalize (deferred)`, { meetingId: this.meetingId });
+            momaInfo(`${LOG8} \u2191 summary.finalize (deferred)`, { meetingId: this.meetingId });
           }
           break;
         }
         if (revision2 < this.revision) {
-          momaWarn(`${LOG7} \u2193 summary.started ignored \u2014 older than local`, {
+          momaWarn(`${LOG8} \u2193 summary.started ignored \u2014 older than local`, {
             localRevision: this.revision,
             got: revision2,
             meetingId: this.meetingId
@@ -150629,7 +151027,7 @@ var SummarySessionBase = class {
             overview: doc.overview.trim() ? doc.overview : this.document.overview,
             action_items: doc.action_items.length > 0 ? doc.action_items : this.document.action_items
           };
-          momaWarn(`${LOG7} \u2193 summary.started kept local chapters (snapshot empty)`, {
+          momaWarn(`${LOG8} \u2193 summary.started kept local chapters (snapshot empty)`, {
             revision: revision2,
             chapters: doc.chapters.length,
             meetingId: this.meetingId
@@ -150637,13 +151035,13 @@ var SummarySessionBase = class {
         }
         this.revision = revision2;
         this.document = doc;
-        momaInfo(`${LOG7} \u2193 summary.started`, { revision: revision2, sessionId: msg["session_id"] });
+        momaInfo(`${LOG8} \u2193 summary.started`, { revision: revision2, sessionId: msg["session_id"] });
         this.armStableConnectionTimer();
         this.callbacks.onStarted(doc, revision2);
         this.flushNow({ drain: this.finalizeSent });
         if (this.finalizeSent && !this.completed && ((_e2 = this.ws) == null ? void 0 : _e2.readyState) === WebSocket.OPEN) {
           this.sendJson({ type: "summary.finalize" });
-          momaInfo(`${LOG7} \u2191 summary.finalize (deferred)`, { meetingId: this.meetingId });
+          momaInfo(`${LOG8} \u2191 summary.finalize (deferred)`, { meetingId: this.meetingId });
         }
         break;
       }
@@ -150652,7 +151050,7 @@ var SummarySessionBase = class {
         const revision2 = (_f2 = coerceRevision(msg["revision"])) != null ? _f2 : (baseRevision != null ? baseRevision : this.revision) + 1;
         const patches = parsePatchArray(msg["patches"]);
         if (baseRevision !== null && baseRevision > this.revision) {
-          momaWarn(`${LOG7} \u2193 summary.patch revision gap \u2014 reconnecting`, {
+          momaWarn(`${LOG8} \u2193 summary.patch revision gap \u2014 reconnecting`, {
             expected: this.revision,
             got: baseRevision,
             meetingId: this.meetingId
@@ -150663,7 +151061,7 @@ var SummarySessionBase = class {
         const staleBase = baseRevision !== null && baseRevision < this.revision;
         const toApply = staleBase ? patches.filter((p) => p.op === "upsert_chapter" || this.rebindGeneration > 0 && p.op === "set_overview") : patches;
         if (staleBase && toApply.length === 0) {
-          momaWarn(`${LOG7} \u2193 summary.patch stale \u2014 ignored`, {
+          momaWarn(`${LOG8} \u2193 summary.patch stale \u2014 ignored`, {
             expected: this.revision,
             got: baseRevision,
             meetingId: this.meetingId
@@ -150698,7 +151096,7 @@ var SummarySessionBase = class {
             overview: this.document.overview.trim() ? this.document.overview : doc.overview,
             action_items: doc.action_items.length > 0 ? doc.action_items : this.document.action_items
           };
-          momaWarn(`${LOG7} \u2193 summary.completed kept local chapters (final snapshot empty)`, {
+          momaWarn(`${LOG8} \u2193 summary.completed kept local chapters (final snapshot empty)`, {
             revision: revision2,
             chapters: doc.chapters.length,
             meetingId: this.meetingId
@@ -150710,7 +151108,7 @@ var SummarySessionBase = class {
         this.clearInFlight();
         this.clearReconnectTimer();
         this.clearStableConnectionTimer();
-        momaInfo(`${LOG7} \u2193 summary.completed`, {
+        momaInfo(`${LOG8} \u2193 summary.completed`, {
           revision: revision2,
           chapters: this.document.chapters.length,
           meetingId: this.meetingId
@@ -150723,7 +151121,7 @@ var SummarySessionBase = class {
         const code = typeof msg["code"] === "string" ? msg["code"] : "UNKNOWN";
         const message = typeof msg["message"] === "string" ? msg["message"] : "error";
         const retryable = msg["retryable"] === true;
-        momaError(`${LOG7} \u2193 summary.error`, { code, message, retryable });
+        momaError(`${LOG8} \u2193 summary.error`, { code, message, retryable });
         (_j = (_i = this.callbacks).onError) == null ? void 0 : _j.call(_i, code, message, retryable);
         if (retryable) {
           this.requeueInFlight();
@@ -150830,7 +151228,7 @@ var SummarySessionBase = class {
     if (this.reconnectAttempts >= MAX_RECONNECT) {
       if (!this.reconnectGaveUp) {
         this.reconnectGaveUp = true;
-        momaError(`${LOG7} reconnect gave up`, {
+        momaError(`${LOG8} reconnect gave up`, {
           reason,
           attempts: this.reconnectAttempts,
           meetingId: this.meetingId
@@ -150848,7 +151246,7 @@ var SummarySessionBase = class {
     if (this.reconnectTimer !== null || this.connecting || this.ws) return;
     this.reconnectAttempts += 1;
     const delay3 = RECONNECT_DELAY_MS3 * this.reconnectAttempts;
-    momaWarn(`${LOG7} reconnect scheduled`, {
+    momaWarn(`${LOG8} reconnect scheduled`, {
       reason,
       attempt: this.reconnectAttempts,
       delayMs: delay3,
@@ -150863,7 +151261,7 @@ var SummarySessionBase = class {
   async buildWsUrl() {
     const token = getActiveOnesToken(this.plugin.settings);
     const accessToken = await authCredentialService.ensureAccessToken(this.plugin).catch((err) => {
-      momaWarn(`${LOG7} ensureAccessToken failed`, err);
+      momaWarn(`${LOG8} ensureAccessToken failed`, err);
       return "";
     });
     const httpBase = getMomaBaseUrl(
@@ -150933,26 +151331,26 @@ function parsePatchArray(raw) {
 }
 
 // src/features/voice-recording/session/SummarySessionV1.ts
-var LOG8 = "[summary-v1]";
+var LOG9 = "[summary-v1]";
 var SummarySessionV1 = class extends SummarySessionBase {
   summaryPath() {
     return "/ws/summary";
   }
   afterSocketOpen(_ws) {
-    momaInfo(`${LOG8} ws open \u2014 awaiting summary.started`, { meetingId: this.meetingId });
+    momaInfo(`${LOG9} ws open \u2014 awaiting summary.started`, { meetingId: this.meetingId });
   }
 };
 
 // src/features/voice-recording/session/SummarySessionV2.ts
 init_debug();
-var LOG9 = "[summary-v2]";
+var LOG10 = "[summary-v2]";
 var SummarySessionV2 = class extends SummarySessionBase {
   summaryPath() {
     return "/v2/ws/asr/summary";
   }
   afterSocketOpen(ws) {
     ws.send(JSON.stringify({ type: "summary.start" }));
-    momaInfo(`${LOG9} \u2191 summary.start sent \u2014 awaiting summary.started`, { meetingId: this.meetingId });
+    momaInfo(`${LOG10} \u2191 summary.start sent \u2014 awaiting summary.started`, { meetingId: this.meetingId });
   }
 };
 
@@ -151406,7 +151804,7 @@ function dedupeUserSuggestions(suggestions) {
 }
 
 // src/features/voice-recording/ui/CalendarLaunchPanel.ts
-var import_obsidian121 = require("obsidian");
+var import_obsidian122 = require("obsidian");
 var CalendarLaunchPanel = class {
   constructor(parent, onOpen) {
     this.onOpen = onOpen;
@@ -151416,7 +151814,7 @@ var CalendarLaunchPanel = class {
   build() {
     const card = this.el.createDiv({ cls: "moma-calendar-launch-card" });
     const iconEl = card.createDiv({ cls: "moma-calendar-launch-icon" });
-    (0, import_obsidian121.setIcon)(iconEl, "calendar");
+    (0, import_obsidian122.setIcon)(iconEl, "calendar");
     card.createDiv({ cls: "moma-calendar-launch-title", text: "\u6211\u7684\u65E5\u7A0B" });
     card.createDiv({
       cls: "moma-calendar-launch-desc",
@@ -152478,7 +152876,7 @@ var FloatingMinimizeWindow = class {
 };
 
 // src/features/voice-recording/ui/RecSettingsModal.ts
-var import_obsidian125 = require("obsidian");
+var import_obsidian126 = require("obsidian");
 
 // src/api/MeetingTypeApi.ts
 init_debug();
@@ -152656,141 +153054,6 @@ function createMeetingTypeApi(plugin) {
 
 // src/features/voice-recording/ui/RecSettingsModal.ts
 init_moma();
-
-// src/features/voice-recording/meetingKnowledgeSend.ts
-var PAPER_SLIP_PROMPT = "\u9012\u7EB8\u6761";
-function isDataGroupKnowledge(item) {
-  return item.source === "data" && (item.key === "by_tag" || item.key === "by_team");
-}
-function knowledgeToWorkbenchReference(item, catalog) {
-  var _a5, _b3, _c2, _d;
-  if (item.source === "space") {
-    const spaceId = (_a5 = item.spaceId) == null ? void 0 : _a5.trim();
-    const path46 = ((_b3 = item.physicalPath) == null ? void 0 : _b3.trim()) || (item.label.trim() ? `/kespace/${item.label.trim()}` : "");
-    if (!path46) return null;
-    if (!spaceId) return createSpaceReference(path46);
-    const nodeType = (_c2 = resolveSpaceNodeType(item)) != null ? _c2 : "space";
-    const metadata = {
-      space_id: spaceId,
-      type: nodeType,
-      absolute_path: path46
-    };
-    if (nodeType === "space") {
-      metadata.id = spaceId;
-    } else if ((_d = item.nodeId) == null ? void 0 : _d.trim()) {
-      if (nodeType === "folder") metadata.folder_id = item.nodeId.trim();
-      else metadata.file_id = item.nodeId.trim();
-    }
-    return createSpaceReference(path46, {
-      referred_to_as: path46,
-      metadata
-    });
-  }
-  if (item.source !== "data") return null;
-  if (item.key === "asset" && item.assetType && item.assetId !== void 0) {
-    return createMomaDataLeafReference({
-      asset_type: item.assetType,
-      asset_id: item.assetId,
-      name: item.label
-    });
-  }
-  const assets = resolveDataGroupAssets(item, catalog);
-  if (assets.length === 0) return null;
-  if (item.key === "by_tag" && item.tag) {
-    return createMomaDataGroupReference(`tag:${item.tag}`, item.label, assets);
-  }
-  if (item.key === "by_team" && item.teamId !== void 0) {
-    return createMomaDataGroupReference(`team:${String(item.teamId)}`, item.label, assets);
-  }
-  return null;
-}
-function knowledgeToWorkbenchReferences(items, catalog) {
-  if (!(items == null ? void 0 : items.length)) return [];
-  const references = [];
-  for (const item of items) {
-    const reference = knowledgeToWorkbenchReference(item, catalog);
-    if (reference) references.push(reference);
-  }
-  return references;
-}
-function vaultKnowledgeEntries(items) {
-  var _a5;
-  if (!(items == null ? void 0 : items.length)) return [];
-  const entries = [];
-  const seen = /* @__PURE__ */ new Set();
-  for (const item of items) {
-    if (item.source !== "vault") continue;
-    const path46 = (_a5 = item.path) == null ? void 0 : _a5.trim().replace(/^\/+/, "");
-    if (!path46 || seen.has(path46)) continue;
-    seen.add(path46);
-    const description = item.label.trim() || path46.split("/").filter(Boolean).at(-1) || path46;
-    entries.push({ path: path46, description });
-  }
-  return entries;
-}
-function buildPaperSlipText(_references = []) {
-  return PAPER_SLIP_PROMPT;
-}
-function resolveDataGroupAssets(item, catalog) {
-  var _a5, _b3, _c2;
-  if ((_a5 = item.assets) == null ? void 0 : _a5.length) {
-    return item.assets.map((asset) => ({
-      asset_type: asset.asset_type,
-      asset_id: asset.asset_id,
-      name: item.label
-    }));
-  }
-  if (!catalog || !isDataGroupKnowledge(item)) return [];
-  if (item.key === "by_tag") {
-    const match = catalog.by_tag.find((group, index) => tagGroupMatches(group, item, index));
-    return (_b3 = match == null ? void 0 : match.items) != null ? _b3 : [];
-  }
-  if (item.key === "by_team") {
-    const match = catalog.by_team.find((group) => String(group.team_id) === String(item.teamId) || group.team_name === item.label);
-    return (_c2 = match == null ? void 0 : match.items) != null ? _c2 : [];
-  }
-  return [];
-}
-function isDataKnowledgePresent(item, catalog) {
-  if (item.source !== "data") return false;
-  if (item.key === "by_tag") {
-    return catalog.by_tag.some((group, index) => tagGroupMatches(group, item, index));
-  }
-  if (item.key === "by_team") {
-    return catalog.by_team.some((group) => String(group.team_id) === String(item.teamId) || group.team_name === item.label);
-  }
-  if (item.key === "asset" && item.assetType && item.assetId !== void 0) {
-    const assets = [
-      ...catalog.untagged,
-      ...catalog.by_tag.flatMap((group) => group.items),
-      ...catalog.by_team.flatMap((group) => group.items)
-    ];
-    return assets.some((asset) => asset.asset_type === item.assetType && String(asset.asset_id) === String(item.assetId));
-  }
-  const label = item.label.trim();
-  if (!item.key && label) {
-    if (catalog.by_tag.some((group, index) => getMomaDataTagGroupLabel(group, index) === label)) {
-      return true;
-    }
-    if (catalog.by_team.some((group) => group.team_name === label)) return true;
-  }
-  return false;
-}
-async function loadMomaDataCatalog(plugin) {
-  try {
-    return await fetchAccessibleMomaDataAssets(createMomaDataClient(plugin));
-  } catch (e2) {
-    return null;
-  }
-}
-function tagGroupMatches(group, item, index) {
-  if (item.tag) {
-    if (group.tag === item.tag || group.tag_name === item.tag || group.name === item.tag) return true;
-    if (String(group.tag_id) === item.tag) return true;
-    if (getMomaDataTagGroupKey(group, index) === `tag:${item.tag}`) return true;
-  }
-  return getMomaDataTagGroupLabel(group, index) === item.label;
-}
 
 // src/features/voice-recording/knowledgePresence.ts
 async function resolveRemoteKnowledgePresence(items, plugin) {
@@ -152984,11 +153247,11 @@ var CHEVRON_DOWN_ICON = `<svg class="moma-rec-divider-chevron moma-rec-divider-c
 var CHEVRON_UP_ICON = `<svg class="moma-rec-divider-chevron moma-rec-divider-chevron--up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 15 12 9 18 15"/></svg>`;
 
 // src/features/voice-recording/ui/MeetingKnowledgeField.ts
-var import_obsidian123 = require("obsidian");
+var import_obsidian124 = require("obsidian");
 init_moma();
 
 // src/features/voice-recording/ask/recordingAskMentions.ts
-var import_obsidian122 = require("obsidian");
+var import_obsidian123 = require("obsidian");
 init_moma();
 var MEETING_ASK_HIDDEN_BUILTINS = /* @__PURE__ */ new Set([
   "clear",
@@ -153035,8 +153298,8 @@ function renderSkillWarning(el2, skillName, plugin) {
   });
   const linkBtn = el2.createEl("button", { cls: "moma-skill-warning-link" });
   linkBtn.setAttribute("type", "button");
-  (0, import_obsidian122.setIcon)(linkBtn, "external-link");
-  (0, import_obsidian122.setTooltip)(linkBtn, "\u524D\u5F80\u8FDE\u63A5\u5668\u5B89\u88C5", { delay: 100 });
+  (0, import_obsidian123.setIcon)(linkBtn, "external-link");
+  (0, import_obsidian123.setTooltip)(linkBtn, "\u524D\u5F80\u8FDE\u63A5\u5668\u5B89\u88C5", { delay: 100 });
   linkBtn.addEventListener("click", () => openSkillSettings(plugin));
 }
 function getMeetingAskHiddenCommands(plugin) {
@@ -153178,7 +153441,7 @@ function bindAskComposerKeymapGuard(plugin, inputEl, isMentionOpen, options) {
   const keymap = plugin.app.keymap;
   if (!(keymap == null ? void 0 : keymap.pushScope) || !(keymap == null ? void 0 : keymap.popScope)) return () => {
   };
-  const scope = new import_obsidian122.Scope();
+  const scope = new import_obsidian123.Scope();
   const consumeWhenOpen = (event) => {
     var _a5;
     if (!isMentionOpen()) return void 0;
@@ -153508,7 +153771,7 @@ var MeetingKnowledgeField = class {
       const vault = (_a5 = this.plugin.app) == null ? void 0 : _a5.vault;
       for (const path46 of vaultPaths) {
         const file2 = vault == null ? void 0 : vault.getAbstractFileByPath(path46);
-        if (file2 instanceof import_obsidian123.TFile || file2 instanceof import_obsidian123.TFolder) {
+        if (file2 instanceof import_obsidian124.TFile || file2 instanceof import_obsidian124.TFolder) {
           this.addItem(knowledgeFromVaultFile(file2));
         }
       }
@@ -153523,11 +153786,11 @@ var MeetingKnowledgeField = class {
   addItem(item) {
     const result = mergeKnowledgeItem(this.items, item);
     if (result.reason === "duplicate") {
-      new import_obsidian123.Notice("\u8BE5\u77E5\u8BC6\u5DF2\u6DFB\u52A0");
+      new import_obsidian124.Notice("\u8BE5\u77E5\u8BC6\u5DF2\u6DFB\u52A0");
       return false;
     }
     if (result.reason === "covered") {
-      new import_obsidian123.Notice(`\u5DF2\u5305\u542B\u5728\u300C${result.coveredBy}\u300D\u4E2D`);
+      new import_obsidian124.Notice(`\u5DF2\u5305\u542B\u5728\u300C${result.coveredBy}\u300D\u4E2D`);
       return false;
     }
     this.items = result.items;
@@ -153572,9 +153835,9 @@ var MeetingKnowledgeField = class {
           text: KNOWLEDGE_UNMATCHED_LABEL,
           attr: { "aria-label": reason }
         });
-        (0, import_obsidian123.setTooltip)(chip, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
+        (0, import_obsidian124.setTooltip)(chip, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
       } else if (path46) {
-        (0, import_obsidian123.setTooltip)(chip, path46, KNOWLEDGE_TOOLTIP_OPTS);
+        (0, import_obsidian124.setTooltip)(chip, path46, KNOWLEDGE_TOOLTIP_OPTS);
       }
       const remove = chip.createEl("button", {
         cls: "moma-knowledge-chip-remove",
@@ -153612,7 +153875,7 @@ function sanitizeKnowledgeMentionDraft(text) {
 }
 
 // src/features/voice-recording/ui/RecSettingsView.ts
-var import_obsidian124 = require("obsidian");
+var import_obsidian125 = require("obsidian");
 init_HotWordsApi();
 init_MomaHttpClient();
 init_FetchTransport();
@@ -153834,10 +154097,10 @@ var RecSettingsView = class {
   async openStorageFolder() {
     const raw = this.storagePathInput.value.trim();
     if (!raw) {
-      new import_obsidian124.Notice("\u8BF7\u5148\u586B\u5199\u5B58\u50A8\u5730\u5740");
+      new import_obsidian125.Notice("\u8BF7\u5148\u586B\u5199\u5B58\u50A8\u5730\u5740");
       return;
     }
-    const folderPath = (0, import_obsidian124.normalizePath)(raw);
+    const folderPath = (0, import_obsidian125.normalizePath)(raw);
     const { vault } = this.plugin.app;
     try {
       let folder = vault.getAbstractFileByPath(folderPath);
@@ -153847,8 +154110,8 @@ var RecSettingsView = class {
         folder = vault.getAbstractFileByPath(folderPath);
         created = true;
       }
-      if (!(folder instanceof import_obsidian124.TFolder)) {
-        new import_obsidian124.Notice(
+      if (!(folder instanceof import_obsidian125.TFolder)) {
+        new import_obsidian125.Notice(
           folder ? `\u8DEF\u5F84\u5DF2\u88AB\u6587\u4EF6\u5360\u7528\uFF0C\u65E0\u6CD5\u4F5C\u4E3A\u6587\u4EF6\u5939\u6253\u5F00\uFF1A${folderPath}` : `\u65E0\u6CD5\u521B\u5EFA\u6587\u4EF6\u5939\uFF1A${folderPath}`,
           5e3
         );
@@ -153856,12 +154119,12 @@ var RecSettingsView = class {
       }
       const revealed = await this.revealVaultFolder(folder);
       if (!revealed) {
-        new import_obsidian124.Notice(`\u6587\u4EF6\u5939\u5DF2${created ? "\u521B\u5EFA" : "\u5C31\u7EEA"}\uFF0C\u4F46\u672A\u80FD\u6253\u5F00\u6587\u4EF6\u5217\u8868\uFF1A${folderPath}`, 5e3);
+        new import_obsidian125.Notice(`\u6587\u4EF6\u5939\u5DF2${created ? "\u521B\u5EFA" : "\u5C31\u7EEA"}\uFF0C\u4F46\u672A\u80FD\u6253\u5F00\u6587\u4EF6\u5217\u8868\uFF1A${folderPath}`, 5e3);
         return;
       }
-      if (created) new import_obsidian124.Notice(`\u5DF2\u521B\u5EFA\u5E76\u6253\u5F00\uFF1A${folderPath}`);
+      if (created) new import_obsidian125.Notice(`\u5DF2\u521B\u5EFA\u5E76\u6253\u5F00\uFF1A${folderPath}`);
     } catch (err) {
-      new import_obsidian124.Notice(`\u6253\u5F00\u6587\u4EF6\u5939\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 6e3);
+      new import_obsidian125.Notice(`\u6253\u5F00\u6587\u4EF6\u5939\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 6e3);
     }
   }
   /** Focus the file explorer and expand/select the given vault folder. */
@@ -153890,7 +154153,7 @@ var RecSettingsView = class {
     for (const part of parts) {
       cur = cur ? `${cur}/${part}` : part;
       const existing = vault.getAbstractFileByPath(cur);
-      if (existing instanceof import_obsidian124.TFolder) continue;
+      if (existing instanceof import_obsidian125.TFolder) continue;
       if (existing) {
         throw new Error(`\u8DEF\u5F84\u5DF2\u88AB\u6587\u4EF6\u5360\u7528\uFF1A${cur}`);
       }
@@ -153921,7 +154184,7 @@ var RecSettingsView = class {
       this.hotWordsInput.value = formatHotWordsForEdit(words);
     } catch (err) {
       if (seq2 !== this.hotWordsLoadSeq) return;
-      new import_obsidian124.Notice(`\u70ED\u8BCD\u52A0\u8F7D\u5931\u8D25: ${err instanceof Error ? err.message : String(err)}`, 6e3);
+      new import_obsidian125.Notice(`\u70ED\u8BCD\u52A0\u8F7D\u5931\u8D25: ${err instanceof Error ? err.message : String(err)}`, 6e3);
     }
   }
   populateForm() {
@@ -153941,12 +154204,12 @@ var RecSettingsView = class {
     this.plugin.settings.voiceRecording = next;
     await this.plugin.saveSettings();
     (_c2 = (_b3 = this.callbacks).onSaved) == null ? void 0 : _c2.call(_b3, next != null ? next : {});
-    new import_obsidian124.Notice("\u5DF2\u6062\u590D\u9ED8\u8BA4\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
+    new import_obsidian125.Notice("\u5DF2\u6062\u590D\u9ED8\u8BA4\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
   }
   async persistStoragePath() {
     const storagePath = this.storagePathInput.value.trim();
     if (!storagePath) {
-      new import_obsidian124.Notice("\u8BF7\u586B\u5199\u5B58\u50A8\u5730\u5740");
+      new import_obsidian125.Notice("\u8BF7\u586B\u5199\u5B58\u50A8\u5730\u5740");
       return;
     }
     if (storagePath === getEffectiveStoragePath(this.plugin.settings, this.plugin)) return;
@@ -153964,7 +154227,7 @@ var RecSettingsView = class {
     this.plugin.settings.voiceRecording = next;
     await this.plugin.saveSettings();
     (_e2 = (_d = this.callbacks).onSaved) == null ? void 0 : _e2.call(_d, next);
-    new import_obsidian124.Notice("\u5DF2\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
+    new import_obsidian125.Notice("\u5DF2\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
   }
   async persistHotWords() {
     if (this.savingHotWords) return;
@@ -153974,9 +154237,9 @@ var RecSettingsView = class {
     try {
       await this.makeHotWordsApi().put(hotWords);
       this.hotWordsInput.value = formatHotWordsForEdit(hotWords);
-      new import_obsidian124.Notice("\u70ED\u8BCD\u5DF2\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
+      new import_obsidian125.Notice("\u70ED\u8BCD\u5DF2\u4FDD\u5B58\uFF0C\u4E0B\u6B21\u5F55\u97F3\u751F\u6548");
     } catch (err) {
-      new import_obsidian124.Notice(`\u70ED\u8BCD\u4FDD\u5B58\u5931\u8D25: ${err instanceof Error ? err.message : String(err)}`, 6e3);
+      new import_obsidian125.Notice(`\u70ED\u8BCD\u4FDD\u5B58\u5931\u8D25: ${err instanceof Error ? err.message : String(err)}`, 6e3);
     } finally {
       this.savingHotWords = false;
     }
@@ -154324,7 +154587,7 @@ var RecSettingsModal = class {
       this.types = [];
       this.remotePresence = /* @__PURE__ */ new Map();
       this.renderGrid();
-      new import_obsidian125.Notice("\u4F1A\u8BAE\u7C7B\u578B\u52A0\u8F7D\u5931\u8D25");
+      new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u52A0\u8F7D\u5931\u8D25");
     }
   }
   async refreshRemotePresence() {
@@ -154396,7 +154659,7 @@ var RecSettingsModal = class {
         text: KNOWLEDGE_UNMATCHED_LABEL,
         attr: { "aria-label": "\u90E8\u5206\u77E5\u8BC6\u672A\u5339\u914D" }
       });
-      (0, import_obsidian125.setTooltip)(warn2, "\u90E8\u5206\u77E5\u8BC6\u672A\u5339\u914D", KNOWLEDGE_TOOLTIP_OPTS);
+      (0, import_obsidian126.setTooltip)(warn2, "\u90E8\u5206\u77E5\u8BC6\u672A\u5339\u914D", KNOWLEDGE_TOOLTIP_OPTS);
     }
     const tools = head.createDiv({ cls: "moma-meeting-card-tools" });
     const copyBtn = tools.createEl("button", {
@@ -154451,10 +154714,10 @@ var RecSettingsModal = class {
             cls: "moma-knowledge-unmatched-tag",
             text: KNOWLEDGE_UNMATCHED_LABEL
           });
-          (0, import_obsidian125.setTooltip)(tag, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
+          (0, import_obsidian126.setTooltip)(tag, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
         } else {
           const path46 = knowledgeDisplayPath(item) || knowledgeLine(item);
-          if (path46) (0, import_obsidian125.setTooltip)(tag, path46, KNOWLEDGE_TOOLTIP_OPTS);
+          if (path46) (0, import_obsidian126.setTooltip)(tag, path46, KNOWLEDGE_TOOLTIP_OPTS);
         }
       }
       if (preset.knowledge.length > MAX_KNOWLEDGE_TAGS) {
@@ -154465,7 +154728,7 @@ var RecSettingsModal = class {
           attr: { "aria-label": "\u66F4\u591A\u77E5\u8BC6" }
         });
         if (hiddenLabels.length > 0) {
-          (0, import_obsidian125.setTooltip)(more, hiddenLabels.join("\u3001"), KNOWLEDGE_TOOLTIP_OPTS);
+          (0, import_obsidian126.setTooltip)(more, hiddenLabels.join("\u3001"), KNOWLEDGE_TOOLTIP_OPTS);
         }
       }
     }
@@ -154537,9 +154800,9 @@ var RecSettingsModal = class {
           text: KNOWLEDGE_UNMATCHED_LABEL,
           attr: { "aria-label": reason }
         });
-        (0, import_obsidian125.setTooltip)(chip, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
+        (0, import_obsidian126.setTooltip)(chip, staleKnowledgeTooltip(item), KNOWLEDGE_TOOLTIP_OPTS);
       } else {
-        (0, import_obsidian125.setTooltip)(chip, knowledgeLine(item), KNOWLEDGE_TOOLTIP_OPTS);
+        (0, import_obsidian126.setTooltip)(chip, knowledgeLine(item), KNOWLEDGE_TOOLTIP_OPTS);
       }
     }
   }
@@ -154575,7 +154838,7 @@ var RecSettingsModal = class {
   }
   async openCreate() {
     if (this.types.length >= MAX_MEETING_TYPES) {
-      new import_obsidian125.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
+      new import_obsidian126.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
       return;
     }
     if (this.createBusy) return;
@@ -154585,7 +154848,7 @@ var RecSettingsModal = class {
     try {
       draft = await this.api.template();
     } catch (e2) {
-      new import_obsidian125.Notice("\u4F1A\u8BAE\u7C7B\u578B\u6A21\u677F\u52A0\u8F7D\u5931\u8D25\uFF0C\u5DF2\u4F7F\u7528\u672C\u5730\u9ED8\u8BA4");
+      new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u6A21\u677F\u52A0\u8F7D\u5931\u8D25\uFF0C\u5DF2\u4F7F\u7528\u672C\u5730\u9ED8\u8BA4");
       draft = {
         name: "\u5E38\u89C4\u5F55\u5236",
         knowledge: [],
@@ -154618,7 +154881,7 @@ var RecSettingsModal = class {
       this.replaceCachedType(fresh);
       this.applyEdit(fresh);
     } catch (e2) {
-      new import_obsidian125.Notice("\u4F1A\u8BAE\u7C7B\u578B\u8BE6\u60C5\u52A0\u8F7D\u5931\u8D25");
+      new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u8BE6\u60C5\u52A0\u8F7D\u5931\u8D25");
     }
   }
   replaceCachedType(fresh) {
@@ -154642,14 +154905,14 @@ var RecSettingsModal = class {
   clampRuleInput() {
     if (this.ruleInput.value.length > MAX_PAPER_RULE_CHARS) {
       this.ruleInput.value = this.ruleInput.value.slice(0, MAX_PAPER_RULE_CHARS);
-      new import_obsidian125.Notice(`\u9012\u7EB8\u6761\u89C4\u5219\u6700\u591A ${MAX_PAPER_RULE_CHARS} \u5B57`);
+      new import_obsidian126.Notice(`\u9012\u7EB8\u6761\u89C4\u5219\u6700\u591A ${MAX_PAPER_RULE_CHARS} \u5B57`);
     }
     this.syncRuleCount();
   }
   clampNameInput() {
     if (this.nameInput.value.length <= MAX_MEETING_NAME_CHARS) return;
     this.nameInput.value = this.nameInput.value.slice(0, MAX_MEETING_NAME_CHARS);
-    new import_obsidian125.Notice(`\u4F1A\u8BAE\u7C7B\u578B\u540D\u79F0\u6700\u591A ${MAX_MEETING_NAME_CHARS} \u5B57`);
+    new import_obsidian126.Notice(`\u4F1A\u8BAE\u7C7B\u578B\u540D\u79F0\u6700\u591A ${MAX_MEETING_NAME_CHARS} \u5B57`);
   }
   syncRuleCount() {
     const length = this.ruleInput.value.length;
@@ -154662,12 +154925,12 @@ var RecSettingsModal = class {
     if (this.saveBusy) return;
     const name = normalizeMeetingName(this.nameInput.value);
     if (!name) {
-      new import_obsidian125.Notice("\u8BF7\u8F93\u5165\u4F1A\u8BAE\u7C7B\u578B\u540D\u79F0");
+      new import_obsidian126.Notice("\u8BF7\u8F93\u5165\u4F1A\u8BAE\u7C7B\u578B\u540D\u79F0");
       this.nameInput.focus();
       return;
     }
     if (hasDuplicateMeetingName(name, this.types, (_a5 = this.editingId) != null ? _a5 : void 0)) {
-      new import_obsidian125.Notice("\u5DF2\u6709\u540C\u540D\u4F1A\u8BAE\u7C7B\u578B");
+      new import_obsidian126.Notice("\u5DF2\u6709\u540C\u540D\u4F1A\u8BAE\u7C7B\u578B");
       this.nameInput.focus();
       return;
     }
@@ -154690,29 +154953,29 @@ var RecSettingsModal = class {
         this.selectedId = this.editingId;
       } else {
         if (this.types.length >= MAX_MEETING_TYPES) {
-          new import_obsidian125.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
+          new import_obsidian126.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
           return;
         }
         const created = await this.api.create(write);
         this.selectedId = created.id;
       }
     } catch (err) {
-      new import_obsidian125.Notice(meetingTypeErrorNotice(err, "\u4FDD\u5B58\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
+      new import_obsidian126.Notice(meetingTypeErrorNotice(err, "\u4FDD\u5B58\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
       return;
     } finally {
       this.saveBusy = false;
       this.saveBtn.disabled = false;
     }
     if (this.knowledgeField.hasStale()) {
-      new import_obsidian125.Notice("\u90E8\u5206\u77E5\u8BC6\u8DEF\u5F84\u5DF2\u5931\u6548\uFF0C\u4ECD\u5DF2\u4FDD\u5B58");
+      new import_obsidian126.Notice("\u90E8\u5206\u77E5\u8BC6\u8DEF\u5F84\u5DF2\u5931\u6548\uFF0C\u4ECD\u5DF2\u4FDD\u5B58");
     }
     this.closeEdit();
     await this.reloadTypes();
-    new import_obsidian125.Notice("\u4F1A\u8BAE\u7C7B\u578B\u53CA\u5168\u90E8\u914D\u7F6E\u5DF2\u4FDD\u5B58");
+    new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u53CA\u5168\u90E8\u914D\u7F6E\u5DF2\u4FDD\u5B58");
   }
   async duplicate(id) {
     if (this.types.length >= MAX_MEETING_TYPES) {
-      new import_obsidian125.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
+      new import_obsidian126.Notice(`\u6700\u591A\u4FDD\u5B58 ${MAX_MEETING_TYPES} \u4E2A\u4F1A\u8BAE\u7C7B\u578B`);
       return;
     }
     const source = this.types.find((item) => item.id === id);
@@ -154722,18 +154985,18 @@ var RecSettingsModal = class {
       const created = await this.api.create(toMeetingTypeWrite(copy));
       this.selectedId = created.id;
       await this.reloadTypes();
-      new import_obsidian125.Notice(`\u5DF2\u5B8C\u6574\u590D\u5236\u4E3A\u300C${copy.name}\u300D`);
+      new import_obsidian126.Notice(`\u5DF2\u5B8C\u6574\u590D\u5236\u4E3A\u300C${copy.name}\u300D`);
     } catch (err) {
-      new import_obsidian125.Notice(meetingTypeErrorNotice(err, "\u590D\u5236\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
+      new import_obsidian126.Notice(meetingTypeErrorNotice(err, "\u590D\u5236\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
     }
   }
   requestDelete(id) {
     if (isProtectedMeetingTypeId(id)) {
-      new import_obsidian125.Notice("\u9ED8\u8BA4\u4F1A\u8BAE\u7C7B\u578B\u4E0D\u53EF\u5220\u9664");
+      new import_obsidian126.Notice("\u9ED8\u8BA4\u4F1A\u8BAE\u7C7B\u578B\u4E0D\u53EF\u5220\u9664");
       return;
     }
     if (this.types.length <= 1) {
-      new import_obsidian125.Notice("\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u4F1A\u8BAE\u7C7B\u578B");
+      new import_obsidian126.Notice("\u81F3\u5C11\u4FDD\u7559\u4E00\u4E2A\u4F1A\u8BAE\u7C7B\u578B");
       return;
     }
     this.pendingDeleteId = id;
@@ -154750,14 +155013,14 @@ var RecSettingsModal = class {
     try {
       await this.api.delete(id);
     } catch (err) {
-      new import_obsidian125.Notice(meetingTypeErrorNotice(err, "\u5220\u9664\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
+      new import_obsidian126.Notice(meetingTypeErrorNotice(err, "\u5220\u9664\u4F1A\u8BAE\u7C7B\u578B\u5931\u8D25"));
       return;
     }
     if (this.selectedId === id) this.selectedId = void 0;
     if (this.viewingId === id) this.closeView();
     if (this.editingId === id) this.closeEdit();
     await this.reloadTypes();
-    new import_obsidian125.Notice("\u4F1A\u8BAE\u7C7B\u578B\u5DF2\u5220\u9664");
+    new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u5DF2\u5220\u9664");
   }
   markSelected(id) {
     for (const card of Array.from(this.gridEl.querySelectorAll(".moma-meeting-card"))) {
@@ -154783,7 +155046,7 @@ function meetingTypeErrorNotice(err, fallback) {
 }
 
 // src/features/voice-recording/ui/RecStartModal.ts
-var import_obsidian126 = require("obsidian");
+var import_obsidian127 = require("obsidian");
 var RecStartModal = class {
   constructor(appEl, plugin, callbacks, api) {
     this.appEl = appEl;
@@ -154885,7 +155148,7 @@ var RecStartModal = class {
       this.types = [];
       this.selectedId = "";
       this.renderChoices();
-      new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u52A0\u8F7D\u5931\u8D25");
+      new import_obsidian127.Notice("\u4F1A\u8BAE\u7C7B\u578B\u52A0\u8F7D\u5931\u8D25");
     }
   }
   resolveInitialId(types) {
@@ -154966,7 +155229,7 @@ var RecStartModal = class {
       details = await this.api.get(selectedId);
     } catch (e2) {
       if (gen !== this.confirmGen) return;
-      new import_obsidian126.Notice("\u4F1A\u8BAE\u7C7B\u578B\u8BE6\u60C5\u52A0\u8F7D\u5931\u8D25\uFF0C\u9012\u7EB8\u6761\u6682\u4E0D\u53EF\u7528");
+      new import_obsidian127.Notice("\u4F1A\u8BAE\u7C7B\u578B\u8BE6\u60C5\u52A0\u8F7D\u5931\u8D25\uFF0C\u9012\u7EB8\u6761\u6682\u4E0D\u53EF\u7528");
     }
     if (gen !== this.confirmGen || !this.isOpen()) {
       this.confirmBusy = false;
@@ -154977,7 +155240,7 @@ var RecStartModal = class {
       await this.callbacks.onConfirm(selectedId, details);
     } catch (e2) {
       if (gen !== this.confirmGen) return;
-      new import_obsidian126.Notice("\u5F00\u59CB\u5F55\u5236\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5");
+      new import_obsidian127.Notice("\u5F00\u59CB\u5F55\u5236\u5931\u8D25\uFF0C\u8BF7\u91CD\u8BD5");
       this.confirmBusy = false;
       if (this.isOpen() && this.loaded) this.setConfirmLoading(false);
       return;
@@ -155011,14 +155274,14 @@ var RecStartModal = class {
 };
 
 // src/features/voice-recording/ui/SharePanel.ts
-var import_obsidian129 = require("obsidian");
+var import_obsidian130 = require("obsidian");
 
 // src/features/file-share/FileShareEditModal.ts
-var import_obsidian127 = require("obsidian");
+var import_obsidian128 = require("obsidian");
 function openFileShareEditModal(app, record2, deps) {
   new FileShareEditModal(app, record2, deps).open();
 }
-var FileShareEditModal = class extends import_obsidian127.Modal {
+var FileShareEditModal = class extends import_obsidian128.Modal {
   constructor(app, record2, deps) {
     var _a5;
     super(app);
@@ -155035,12 +155298,12 @@ var FileShareEditModal = class extends import_obsidian127.Modal {
     this.titleEl.empty();
     this.titleEl.addClass("moma-file-share-title");
     const titleLogoEl = this.titleEl.createSpan({ cls: "moma-file-share-title-logo", attr: { "aria-hidden": "true" } });
-    (0, import_obsidian127.setIcon)(titleLogoEl, "moma-logo");
+    (0, import_obsidian128.setIcon)(titleLogoEl, "moma-logo");
     this.titleEl.createSpan({ cls: "moma-file-share-title-text", text: "\u7F16\u8F91\u5206\u4EAB" });
     this.contentEl.empty();
     const fileEl = this.contentEl.createDiv({ cls: "moma-file-share-file" });
     const fileIconEl = fileEl.createDiv({ cls: "moma-file-share-file-icon" });
-    (0, import_obsidian127.setIcon)(fileIconEl, "file");
+    (0, import_obsidian128.setIcon)(fileIconEl, "file");
     fileEl.createSpan({ cls: "moma-file-share-file-name", text: this.record.fileName });
     const loadingEl = this.contentEl.createDiv({ cls: "moma-file-share-edit-loading", text: "\u52A0\u8F7D\u4E2D..." });
     void this.deps.getShareDetail(this.record.shareToken).then((detail) => {
@@ -155118,18 +155381,18 @@ var FileShareEditModal = class extends import_obsidian127.Modal {
         requireLogin: this.requireLogin,
         accessWhitelist
       });
-      new import_obsidian127.Notice("\u8BBF\u95EE\u63A7\u5236\u8BBE\u7F6E\u5DF2\u4FDD\u5B58", 3e3);
+      new import_obsidian128.Notice("\u8BBF\u95EE\u63A7\u5236\u8BBE\u7F6E\u5DF2\u4FDD\u5B58", 3e3);
       this.close();
     } catch (error48) {
       this.saveButtonEl.disabled = false;
       this.saveButtonEl.textContent = "\u4FDD\u5B58\u8BBE\u7F6E";
-      new import_obsidian127.Notice(`\u4FDD\u5B58\u5931\u8D25\uFF1A${error48 instanceof Error ? error48.message : String(error48)}`, 8e3);
+      new import_obsidian128.Notice(`\u4FDD\u5B58\u5931\u8D25\uFF1A${error48 instanceof Error ? error48.message : String(error48)}`, 8e3);
     }
   }
 };
 
 // src/features/file-share/FileShareUpdateContentModal.ts
-var import_obsidian128 = require("obsidian");
+var import_obsidian129 = require("obsidian");
 function openFileShareUpdateContentModal(app, record2, deps) {
   new FileShareUpdateContentModal(app, record2, deps).open();
 }
@@ -155137,7 +155400,7 @@ var ACCEPTED_EXTS = [".html", ".htm", ".md"];
 var SAME_NAME_MATCH_INLINE_LIMIT = 3;
 var MATCH_DROPDOWN_PLACEHOLDER = "\u70B9\u51FB\u9009\u62E9\u8981\u4E0A\u4F20\u7684\u540C\u540D\u6587\u4EF6\u8DEF\u5F84";
 var DROP_EXAMPLE_IMAGE_URL = "https://file.ljcdn.com/codelink-web/ob/1786591633343-e491af50-f868-446c-9656-47c84f1534b2.png";
-var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
+var FileShareUpdateContentModal = class extends import_obsidian129.Modal {
   constructor(app, record2, deps) {
     super(app);
     this.record = record2;
@@ -155190,7 +155453,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
     this.titleEl.removeClass("moma-risk-consent-modal-title");
     this.titleEl.addClass("moma-file-share-title");
     const titleLogoEl = this.titleEl.createSpan({ cls: "moma-file-share-title-logo", attr: { "aria-hidden": "true" } });
-    (0, import_obsidian128.setIcon)(titleLogoEl, "moma-logo");
+    (0, import_obsidian129.setIcon)(titleLogoEl, "moma-logo");
     this.titleEl.createSpan({ cls: "moma-file-share-title-text", text });
   }
   resetShareContentView() {
@@ -155202,7 +155465,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
     this.resetShareContentView();
     const fileEl = this.contentEl.createDiv({ cls: "moma-file-share-file" });
     const fileIconEl = fileEl.createDiv({ cls: "moma-file-share-file-icon" });
-    (0, import_obsidian128.setIcon)(fileIconEl, "file");
+    (0, import_obsidian129.setIcon)(fileIconEl, "file");
     fileEl.createSpan({ cls: "moma-file-share-file-name", text: this.record.fileName });
     this.renderMatchList();
     this.renderDropZone();
@@ -155279,7 +155542,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
       itemEl.setAttribute("data-path", file2.path);
       itemEl.setAttribute("tabindex", "0");
       const iconEl = itemEl.createSpan({ cls: "moma-share-update-match-icon" });
-      (0, import_obsidian128.setIcon)(iconEl, "file-text");
+      (0, import_obsidian129.setIcon)(iconEl, "file-text");
       itemEl.createSpan({ cls: "moma-share-update-match-path", text: file2.path });
       const radioEl = itemEl.createEl("input", {
         cls: "moma-share-update-match-radio"
@@ -155322,7 +155585,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
       cls: "moma-share-update-match-trigger-chevron",
       attr: { "aria-hidden": "true" }
     });
-    (0, import_obsidian128.setIcon)(chevronEl, "chevron-down");
+    (0, import_obsidian129.setIcon)(chevronEl, "chevron-down");
     const menuEl = dropdownEl.createDiv({
       cls: "moma-share-update-match-menu"
     });
@@ -155337,7 +155600,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
       optionEl.setAttribute("data-path", file2.path);
       optionEl.setAttribute("aria-selected", "false");
       const iconEl = optionEl.createSpan({ cls: "moma-share-update-match-option-icon" });
-      (0, import_obsidian128.setIcon)(iconEl, "file-text");
+      (0, import_obsidian129.setIcon)(iconEl, "file-text");
       optionEl.createSpan({ cls: "moma-share-update-match-option-path", text: file2.path });
       optionEl.addEventListener("click", (e2) => {
         e2.stopPropagation();
@@ -155409,7 +155672,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
     this.dropZoneEl = dropZoneEl;
     const innerEl = dropZoneEl.createDiv({ cls: "moma-share-update-dropzone-inner" });
     const iconEl = innerEl.createDiv({ cls: "moma-share-update-dropzone-icon" });
-    (0, import_obsidian128.setIcon)(iconEl, "upload-cloud");
+    (0, import_obsidian129.setIcon)(iconEl, "upload-cloud");
     innerEl.createDiv({
       cls: "moma-share-update-dropzone-hint",
       text: "\u70B9\u51FB\u9009\u62E9\uFF0C\u6216\u4ECE Obsidian / \u672C\u5730\u62D6\u62FD\u5230\u6B64\u5904"
@@ -155552,26 +155815,26 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
     }
     const dm2 = this.app.dragManager;
     const draggable = dm2 == null ? void 0 : dm2.draggable;
-    if ((draggable == null ? void 0 : draggable.type) === "file" && draggable.file instanceof import_obsidian128.TFile) {
+    if ((draggable == null ? void 0 : draggable.type) === "file" && draggable.file instanceof import_obsidian129.TFile) {
       await this.selectVaultFile(draggable.file, { fromMatchList: false });
       return;
     }
     const vaultPath = e2.dataTransfer.getData("text/plain").trim();
     if (vaultPath) {
       const tfile = this.app.vault.getAbstractFileByPath(vaultPath);
-      if (tfile instanceof import_obsidian128.TFile) {
+      if (tfile instanceof import_obsidian129.TFile) {
         await this.selectVaultFile(tfile, { fromMatchList: false });
         return;
       }
     }
-    new import_obsidian128.Notice("\u65E0\u6CD5\u8BC6\u522B\u62D6\u5165\u7684\u6587\u4EF6\uFF0C\u8BF7\u76F4\u63A5\u4ECE\u6587\u4EF6\u7CFB\u7EDF\u62D6\u5165\u6216\u70B9\u51FB\u533A\u57DF\u9009\u62E9", 4e3);
+    new import_obsidian129.Notice("\u65E0\u6CD5\u8BC6\u522B\u62D6\u5165\u7684\u6587\u4EF6\uFF0C\u8BF7\u76F4\u63A5\u4ECE\u6587\u4EF6\u7CFB\u7EDF\u62D6\u5165\u6216\u70B9\u51FB\u533A\u57DF\u9009\u62E9", 4e3);
   }
   async selectMatchedVaultFile(tfile) {
     await this.selectVaultFile(tfile, { fromMatchList: true });
   }
   async selectVaultFile(tfile, options) {
     if (!this.isAccepted(tfile.name)) {
-      new import_obsidian128.Notice(`\u4EC5\u652F\u6301 ${ACCEPTED_EXTS.join(" / ")} \u6587\u4EF6`, 4e3);
+      new import_obsidian129.Notice(`\u4EC5\u652F\u6301 ${ACCEPTED_EXTS.join(" / ")} \u6587\u4EF6`, 4e3);
       return;
     }
     try {
@@ -155579,12 +155842,12 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
       const file2 = new File([buf], tfile.name, { type: this.mimeForExt(tfile.extension) });
       this.applySelectedFile(file2, options.fromMatchList ? tfile.path : null);
     } catch (e2) {
-      new import_obsidian128.Notice("\u8BFB\u53D6\u4ED3\u5E93\u6587\u4EF6\u5931\u8D25", 4e3);
+      new import_obsidian129.Notice("\u8BFB\u53D6\u4ED3\u5E93\u6587\u4EF6\u5931\u8D25", 4e3);
     }
   }
   selectExternalFile(file2) {
     if (!this.isAccepted(file2.name)) {
-      new import_obsidian128.Notice(`\u4EC5\u652F\u6301 ${ACCEPTED_EXTS.join(" / ")} \u6587\u4EF6`, 4e3);
+      new import_obsidian129.Notice(`\u4EC5\u652F\u6301 ${ACCEPTED_EXTS.join(" / ")} \u6587\u4EF6`, 4e3);
       return;
     }
     this.applySelectedFile(file2, null);
@@ -155635,7 +155898,7 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
     this.fileNameEl.style.display = "";
     this.fileNameEl.empty();
     const iconEl = this.fileNameEl.createSpan({ cls: "moma-share-update-selected-icon" });
-    (0, import_obsidian128.setIcon)(iconEl, "file-check");
+    (0, import_obsidian129.setIcon)(iconEl, "file-check");
     this.fileNameEl.createSpan({ cls: "moma-share-update-selected-name", text: fileName });
   }
   async handleConfirm() {
@@ -155686,12 +155949,12 @@ var FileShareUpdateContentModal = class extends import_obsidian128.Modal {
         originalFileS3Url: upload.s3Url,
         fileName: this.selectedFile.name
       });
-      new import_obsidian128.Notice("\u5185\u5BB9\u5DF2\u66F4\u65B0", 3e3);
+      new import_obsidian129.Notice("\u5185\u5BB9\u5DF2\u66F4\u65B0", 3e3);
       this.close();
     } catch (err) {
       if ((err == null ? void 0 : err.name) === "AbortError") return;
       this.renderUpdateForm();
-      new import_obsidian128.Notice(`\u66F4\u65B0\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 8e3);
+      new import_obsidian129.Notice(`\u66F4\u65B0\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 8e3);
     }
   }
   isAccepted(name) {
@@ -155879,12 +156142,12 @@ var SharePanel = class {
     const topRow = body.createDiv({ cls: "moma-share-item-top" });
     const titleWrap = topRow.createDiv({ cls: "moma-share-item-title-wrap" });
     const titleEl = titleWrap.createDiv({ cls: "moma-share-item-title", text: record2.fileName });
-    (0, import_obsidian129.setTooltip)(titleEl, record2.fileName);
+    (0, import_obsidian130.setTooltip)(titleEl, record2.fileName);
     const statusEl = topRow.createDiv({
       cls: `moma-share-status moma-share-status-${getShareStatusClass(record2)}`,
       text: getShareStatusText(record2)
     });
-    (0, import_obsidian129.setTooltip)(statusEl, getShareStatusText(record2));
+    (0, import_obsidian130.setTooltip)(statusEl, getShareStatusText(record2));
     const metaEl = body.createDiv({ cls: "moma-share-item-meta" });
     const expireSpan = metaEl.createSpan();
     expireSpan.appendText("\u6709\u6548\u671F\uFF1A");
@@ -155957,7 +156220,7 @@ var SharePanel = class {
       if (isLoading) button.addClass("moma-share-action-btn-loading");
       if (options.disabled) button.addClass("moma-share-action-btn-disabled");
     }
-    (0, import_obsidian129.setIcon)(button.createSpan({ cls: "moma-share-action-icon" }), isLoading ? "loader-2" : icon);
+    (0, import_obsidian130.setIcon)(button.createSpan({ cls: "moma-share-action-icon" }), isLoading ? "loader-2" : icon);
     button.createSpan({ cls: "moma-share-action-label", text: displayLabel });
     button.addEventListener("click", (e2) => {
       e2.stopPropagation();
@@ -155990,9 +156253,9 @@ var SharePanel = class {
   async copyShareLink(shareUrl) {
     try {
       await copyTextToClipboard(shareUrl);
-      new import_obsidian129.Notice("\u94FE\u63A5\u5DF2\u590D\u5236", 3e3);
+      new import_obsidian130.Notice("\u94FE\u63A5\u5DF2\u590D\u5236", 3e3);
     } catch (e2) {
-      new import_obsidian129.Notice("\u590D\u5236\u5931\u8D25", 4e3);
+      new import_obsidian130.Notice("\u590D\u5236\u5931\u8D25", 4e3);
     }
   }
   async shareMiniProgramLink(record2) {
@@ -156003,7 +156266,7 @@ var SharePanel = class {
       const result = await this.apiClient.getShareWxQrCode(record2.shareToken, record2.shareUrl);
       openShareWxQrCodeModal(this.plugin.app, result.wxQrCodeUrl, record2.fileName);
     } catch (err) {
-      new import_obsidian129.Notice(`\u5C0F\u7A0B\u5E8F\u7801\u751F\u6210\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 5e3);
+      new import_obsidian130.Notice(`\u5C0F\u7A0B\u5E8F\u7801\u751F\u6210\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 5e3);
     } finally {
       this.qrLoadingTokens.delete(record2.shareToken);
       this.setQrButtonLoading(record2.shareToken, false);
@@ -156018,7 +156281,7 @@ var SharePanel = class {
     button.setAttribute("aria-label", label);
     button.setAttribute("title", label);
     const iconEl = button.querySelector(".moma-share-action-icon");
-    if (iconEl) (0, import_obsidian129.setIcon)(iconEl, isLoading ? "loader-2" : "share-2");
+    if (iconEl) (0, import_obsidian130.setIcon)(iconEl, isLoading ? "loader-2" : "share-2");
     const labelEl = button.querySelector(".moma-share-action-label");
     if (labelEl) labelEl.textContent = label;
   }
@@ -156033,9 +156296,9 @@ var SharePanel = class {
     try {
       await this.apiClient.disableShareLink(record2.shareToken);
       void this.loadPage(1);
-      new import_obsidian129.Notice("\u5206\u4EAB\u94FE\u63A5\u5DF2\u5931\u6548", 3e3);
+      new import_obsidian130.Notice("\u5206\u4EAB\u94FE\u63A5\u5DF2\u5931\u6548", 3e3);
     } catch (err) {
-      new import_obsidian129.Notice(`\u5931\u6548\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 5e3);
+      new import_obsidian130.Notice(`\u5931\u6548\u5931\u8D25\uFF1A${err instanceof Error ? err.message : String(err)}`, 5e3);
     }
   }
   destroy() {
@@ -156053,20 +156316,19 @@ init_debug();
 init_analytics();
 
 // src/features/voice-recording/ask/RecordingAskSession.ts
-var import_obsidian130 = require("obsidian");
 init_debug();
 
 // src/features/voice-recording/knowledgeRoles.ts
 var SKILL_ROLES = {
   "moma-data": {
-    purpose: "\u53D6\u56DE\u6307\u6807\u3001\u62A5\u8868\u548C\u67E5\u8BE2\u7ED3\u679C\u7684\u771F\u5B9E\u6570\u503C\u3002\u7528\u5B83\u6838\u5BF9\u4F1A\u4E0A\u8BF4\u51FA\u53E3\u7684\u6570\u5B57\uFF0C\u5305\u62EC\u53E3\u5F84\u3001\u65F6\u95F4\u8303\u56F4\u3001\u540C\u6BD4\u73AF\u6BD4\u3001\u76EE\u6807\u8FBE\u6210\u5EA6\uFF0C\u4EE5\u53CA\u5BF9\u5177\u4F53\u8D44\u4EA7\u7684\u6570\u636E\u67E5\u8BE2\u3002",
+    purpose: "\u53D6\u56DE\u6307\u6807\u3001\u62A5\u8868\u548C\u67E5\u8BE2\u7ED3\u679C\u7684\u771F\u5B9E\u6570\u503C\u3002\u7528\u5B83\u6838\u5BF9\u4F1A\u4E0A\u8BF4\u51FA\u53E3\u7684\u6570\u5B57\uFF0C\u5305\u62EC\u53E3\u5F84\u3001\u65F6\u95F4\u8303\u56F4\u3001\u540C\u6BD4\u73AF\u6BD4\u3001\u76EE\u6807\u8FBE\u6210\u5EA6\uFF0C\u4EE5\u53CA\u5BF9\u5177\u4F53\u8D44\u4EA7\u7684\u6570\u636E\u67E5\u8BE2\u3002\u4F18\u5148\u5728\u672C\u6761\u76EE <arg> \u5708\u5B9A\u7684\u8D44\u4EA7\u8303\u56F4\u5185\u53D6\u6570\uFF1B\u53EA\u6709\u5728\u5708\u5B9A\u8303\u56F4\u91CC\u786E\u5B9E\u67E5\u4E0D\u5230\u9700\u8981\u7684\u6570\u636E\u65F6\uFF0C\u624D\u6269\u5927\u5230\u5168\u90E8\u53EF\u8BBF\u95EE\u8D44\u4EA7\u3002\u4E0D\u8981\u4E00\u4E0A\u6765\u5C31\u679A\u4E3E\u8D26\u53F7\u4E0B\u7684\u5168\u90E8\u8D44\u4EA7\u3002",
     pickWhen: '\u73B0\u573A\u51FA\u73B0\u5177\u4F53\u6570\u5B57\u3001\u589E\u957F\u6216\u4E0B\u964D\u7684\u8BF4\u6CD5\u3001\u76EE\u6807\u5B8C\u6210\u60C5\u51B5\u3001\u6709\u4EBA\u5BF9\u6570\u636E\u53E3\u5F84\u5B58\u7591\uFF0C\u6216\u63D0\u5230"\u6570\u636E""\u8D44\u4EA7""data"\u7B49\u9700\u8981\u67E5\u5B9E\u9645\u6570\u503C\u7684\u573A\u666F\u3002',
     skipWhen: "\u53EA\u627E\u6587\u6863\u3001\u65B9\u6848\u3001\u5386\u53F2\u7ED3\u8BBA\u65F6\u4E0D\u8981\u7528\u5B83\uFF0C\u5B83\u4E0D\u68C0\u7D22\u6587\u5B57\u6750\u6599\u3002"
   },
   "moma-space": {
-    purpose: "\u53D6\u56DE Space \u91CC\u7684\u6587\u6863\u3001\u76EE\u5F55\u548C\u4EA7\u7269\u5185\u5BB9\u3002\u7528\u5B83\u627E\u5230\u65E2\u6709\u65B9\u6848\u3001\u89C4\u8303\u3001\u5386\u53F2\u7ED3\u8BBA\uFF0C\u6216\u679A\u4E3E\u67D0\u4E2A\u7A7A\u95F4\u4E0B\u7684\u4EA7\u7269\u5217\u8868\uFF0C\u627E\u51FA\u4E0E\u73B0\u573A\u8BF4\u6CD5\u7684\u51FA\u5165\u6216\u672A\u95ED\u73AF\u9879\u3002",
+    purpose: "\u53D6\u56DE Space \u91CC\u7684\u6587\u6863\u3001\u76EE\u5F55\u548C\u4EA7\u7269\u5185\u5BB9\u3002\u7528\u5B83\u627E\u5230\u65E2\u6709\u65B9\u6848\u3001\u89C4\u8303\u3001\u5386\u53F2\u7ED3\u8BBA\uFF0C\u6216\u679A\u4E3E\u67D0\u4E2A\u7A7A\u95F4\u4E0B\u7684\u4EA7\u7269\u5217\u8868\uFF0C\u627E\u51FA\u4E0E\u73B0\u573A\u8BF4\u6CD5\u7684\u51FA\u5165\u6216\u672A\u95ED\u73AF\u9879\u3002\u4F18\u5148\u5728\u672C\u6761\u76EE <arg> \u5708\u5B9A\u7684\u7A7A\u95F4\u4E0E\u8DEF\u5F84\u8303\u56F4\u5185\u68C0\u7D22\uFF1B\u53EA\u6709\u5728\u5708\u5B9A\u8303\u56F4\u91CC\u786E\u5B9E\u627E\u4E0D\u5230\u9700\u8981\u7684\u5185\u5BB9\u65F6\uFF0C\u624D\u6269\u5927\u5230\u5176\u4ED6\u7A7A\u95F4\u3002\u4E0D\u8981\u4E00\u4E0A\u6765\u5C31\u679A\u4E3E\u8D26\u53F7\u4E0B\u7684\u5168\u90E8\u7A7A\u95F4\u3002",
     pickWhen: '\u8BA8\u8BBA\u6D89\u53CA"\u7A7A\u95F4""space"\u4E0B\u7684\u5185\u5BB9\u6216\u4EA7\u7269\u3001\u5DF2\u6709\u65B9\u6848\u3001\u89C4\u8303\u6216\u8FC7\u5F80\u51B3\u7B56\uFF0C\u9700\u8981\u679A\u4E3E\u6216\u6C47\u603B\u7A7A\u95F4\u4EA7\u7269\uFF0C\u6216\u9700\u8981\u786E\u8BA4\u67D0\u4EF6\u4E8B\u6B64\u524D\u662F\u5426\u5DF2\u7ECF\u5B9A\u8FC7\u3002',
-    skipWhen: '\u4E0D\u8981\u7528\u5B83\u67E5\u6570\u503C\u3002Space \u5185\u5BB9\u53EA\u80FD\u7ECF\u672C\u6280\u80FD\u53D6\u56DE\uFF1A\u7EDD\u4E0D\u7528 Read \u6253\u5F00 absolute_path\uFF08\u5373\u4F7F vault \u91CC\u6709\u540C\u540D\u6587\u4EF6\uFF09\uFF0C\u7EDD\u4E0D\u7ED9\u6587\u4EF6\u5939\u8DEF\u5F84\u8865 ".md"\u3002'
+    skipWhen: '\u4E0D\u8981\u7528\u5B83\u67E5\u6570\u503C\u3002Space \u5185\u5BB9\u53EA\u80FD\u7ECF\u672C\u6280\u80FD\u53D6\u56DE\uFF1A\u7EDD\u4E0D\u7528 Read \u6253\u5F00 absolute_path\u3001physical_path\uFF08\u5373\u4F7F vault \u91CC\u6709\u540C\u540D\u6587\u4EF6\uFF09\uFF0C\u7EDD\u4E0D\u7ED9\u6587\u4EF6\u5939\u8DEF\u5F84\u8865 ".md"\u3002'
   }
 };
 function knowledgeSkillRole(skillName) {
@@ -156134,6 +156396,17 @@ var SKILL_RETRIEVAL_COST = {
   "moma-data": 0,
   "moma-space": 1
 };
+var PAPER_SLIP_ALLOWED_TOOLS = [
+  TOOL_READ,
+  TOOL_BASH,
+  TOOL_BASH_OUTPUT,
+  TOOL_KILL_SHELL
+];
+var SUSTAINED_PAPER_SLIP_DIRECTIVE = [
+  "\u9012\u7EB8\u6761\u3002",
+  "\u5148\u7528 Read \u91CD\u65B0\u8BFB\u53D6\u5F53\u524D\u5F55\u97F3\u7B14\u8BB0\u7684\u9010\u5B57\u7A3F\u4E0E\u5B9E\u65F6\u603B\u7ED3\uFF08\u4E24\u8005\u90FD\u8981\u8BFB\uFF0C\u5185\u5BB9\u968F\u4F1A\u8BAE\u6301\u7EED\u66F4\u65B0\uFF0C\u4E0D\u8981\u590D\u7528\u4E0A\u4E00\u8F6E\u7684\u65E7\u5185\u5BB9\uFF09\u3002",
+  "\u518D\u57FA\u4E8E\u672C\u4F1A\u8BDD\u9996\u6B21\u5DF2\u9644\u5E26\u7684\u77E5\u8BC6\u5E93\u3001\u6CBF\u7528\u672C\u4F1A\u8BDD\u9996\u6B21\u7ED9\u51FA\u7684\u7EB8\u6761\u89C4\u5219\uFF0C\u9488\u5BF9\u6700\u65B0\u8BA8\u8BBA\u5224\u65AD\u662F\u5426\u9012\u7EB8\u6761\u5E76\u6309\u89C4\u5219\u64B0\u5199\u3002"
+].join("");
 function orderByRetrievalCost(invocations) {
   const cost = (invocation) => {
     var _a5;
@@ -156176,6 +156449,12 @@ var RecordingAskSession = class {
      * earlier turn is still in context. Refetching it costs a round trip the meeting can feel.
      */
     this.retrievedKnowledge = /* @__PURE__ */ new Set();
+    /**
+     * True once a full paper slip (paper-rule + meeting knowledge) has gone out this conversation.
+     * The rule and knowledge then live in context, so later slips send a reuse directive instead of
+     * re-authoring either — the rule reaches the model exactly once per meeting.
+     */
+    this.paperSlipSent = false;
     this.conversationId = null;
     var _a5;
     this.plugin = opts.plugin;
@@ -156225,6 +156504,23 @@ var RecordingAskSession = class {
       if (this.sendInFlight === job) this.sendInFlight = null;
     }
   }
+  /**
+   * Stop the in-flight turn without tearing down the session. The runtime and its
+   * conversation stay alive so later asks / paper slips reuse the meeting context.
+   */
+  cancel() {
+    var _a5;
+    if (this.destroyed || !this.state.isStreaming) return;
+    this.state.cancelRequested = true;
+    this.state.bumpStreamGeneration();
+    this.state.isStreaming = false;
+    try {
+      (_a5 = this.runtime) == null ? void 0 : _a5.cancel();
+    } catch (e2) {
+    }
+    this.streamController.hideThinkingIndicator();
+    this.streamController.hideStreamingDots();
+  }
   destroy() {
     this.destroyed = true;
     this.unbindAutoScroll();
@@ -156248,7 +156544,7 @@ var RecordingAskSession = class {
     }
   }
   async runTurn(text, options) {
-    var _a5, _b3, _c2, _d, _e2, _f2, _g, _h2, _i, _j, _k3, _l2, _m, _n;
+    var _a5, _b3, _c2, _d, _e2, _f2, _g, _h2, _i, _j, _k3, _l2, _m;
     this.state.isStreaming = true;
     this.state.cancelRequested = false;
     this.state.autoScrollEnabled = (_a5 = this.plugin.settings.enableAutoScroll) != null ? _a5 : true;
@@ -156259,70 +156555,12 @@ var RecordingAskSession = class {
       this.state.isStreaming = false;
       return;
     }
-    try {
-      await this.ensureRuntime();
-    } catch (err) {
-      this.state.isStreaming = false;
-      const message = err instanceof Error ? err.message : String(err);
-      new import_obsidian130.Notice(`\u65E0\u6CD5\u542F\u52A8\u4F1A\u8BAE\u95EE\u7B54\uFF1A${message}`, 5e3);
-      return;
-    }
-    const runtime = this.runtime;
-    if (this.destroyed || !runtime) {
-      this.state.isStreaming = false;
-      return;
-    }
-    const workbenchReferences = (_b3 = options.workbenchReferences) != null ? _b3 : [];
     const ctx = this.getContext();
     const stripped = text.replace(/[\u200B\u2060\u2063]/g, "");
     const isPaperSlip = stripped === PAPER_SLIP_PROMPT || stripped.startsWith(`${PAPER_SLIP_PROMPT}
 `);
+    const isSustainedPaperSlip = isPaperSlip && this.paperSlipSent;
     const displayContent = isPaperSlip ? PAPER_SLIP_PROMPT : text;
-    const transformedText = options.transformMentions ? options.transformMentions(isPaperSlip ? PAPER_SLIP_PROMPT : stripped) : isPaperSlip ? PAPER_SLIP_PROMPT : stripped;
-    const meetingVaultKnowledge = resolveVaultKnowledge((_c2 = options.vaultKnowledge) != null ? _c2 : [], options.transformMentions);
-    const transcriptEntry = isPaperSlip && ctx.transcriptPath ? {
-      path: ctx.transcriptPath,
-      description: "\u5F53\u524D\u5F55\u97F3\u9010\u5B57\u7A3F\u4E0E\u5B9E\u65F6\u603B\u7ED3",
-      role: {
-        purpose: "\u5F53\u524D\u6B63\u5728\u5F55\u5236\u7684\u4F1A\u8BAE\u9010\u5B57\u7A3F\u548C\u5B9E\u65F6\u603B\u7ED3\u3002\u8BFB\u8FD9\u4EFD\u6587\u4EF6\u624D\u80FD\u770B\u5230\u6700\u65B0\u7684\u8BA8\u8BBA\u5185\u5BB9\u3002",
-        pickWhen: "\u59CB\u7EC8\u5148\u8BFB\u3002\u8FD9\u662F\u5224\u65AD\u5176\u4ED6\u77E5\u8BC6\u662F\u5426\u6709\u7528\u7684\u524D\u63D0\u3002"
-      }
-    } : null;
-    const vaultKnowledge = transcriptEntry ? [transcriptEntry, ...meetingVaultKnowledge] : meetingVaultKnowledge;
-    const skillSubmission = this.buildSkillSubmission(text, workbenchReferences);
-    const knowledge = this.splitRetainedKnowledge(skillSubmission.skillCandidates, vaultKnowledge);
-    const paperRule = isPaperSlip ? buildPaperRule(ctx.paperRule, ctx.customRule) : void 0;
-    const meetingContext = buildMeetingAskContext(ctx);
-    const supplementalContext = skillSubmission.unavailableContext ? `${meetingContext}
-
-${skillSubmission.unavailableContext}` : meetingContext;
-    const hasMeetingKnowledge = knowledge.skillCandidates.length > 0 || knowledge.vaultKnowledge.length > 0 || knowledge.retainedKnowledge.length > 0;
-    const externalContextPaths = (_e2 = (_d = options.externalContextPaths) == null ? void 0 : _d.filter(Boolean)) != null ? _e2 : [];
-    const enabledMcpServers = options.enabledMcpServers && options.enabledMcpServers.size > 0 ? new Set(options.enabledMcpServers) : void 0;
-    const turnRequest = {
-      text: transformedText,
-      supplementalContext,
-      ...paperRule ? { paperRule } : {},
-      // Paper slips already carry the recording path inside meeting-context. linked_note
-      // on the body is enough to send the model Reading that file instead of knowledge folders.
-      ...!isPaperSlip && ctx.filePath ? { currentNotePath: ctx.filePath } : {},
-      ...knowledge.skillCandidates.length > 0 ? { skillCandidates: knowledge.skillCandidates } : {},
-      ...knowledge.vaultKnowledge.length > 0 ? { vaultKnowledge: knowledge.vaultKnowledge } : {},
-      ...hasMeetingKnowledge ? { knowledgeMode: "meeting" } : {},
-      ...knowledge.retainedKnowledge.length > 0 ? { retainedKnowledge: knowledge.retainedKnowledge } : {},
-      ...externalContextPaths.length > 0 ? { externalContextPaths } : {},
-      ...enabledMcpServers ? { enabledMcpServers } : {}
-    };
-    momaInfo("[voice-rec] ask turn", {
-      isPaperSlip,
-      displayContent,
-      text: transformedText,
-      skillCandidates: (_f2 = turnRequest.skillCandidates) != null ? _f2 : null,
-      vaultKnowledge: (_g = turnRequest.vaultKnowledge) != null ? _g : null,
-      retainedKnowledge: (_h2 = turnRequest.retainedKnowledge) != null ? _h2 : null,
-      paperRule: paperRule != null ? paperRule : null,
-      supplementalContext
-    });
     const userMsg = {
       id: generateMessageId2(),
       role: "user",
@@ -156344,6 +156582,84 @@ ${skillSubmission.unavailableContext}` : meetingContext;
     this.activateAssistant(assistantMsg);
     this.streamController.showThinkingIndicator();
     stickMessagesToBottom(this.messagesEl);
+    let workbenchReferences = (_b3 = options.workbenchReferences) != null ? _b3 : [];
+    let resolvedVaultKnowledge = (_c2 = options.vaultKnowledge) != null ? _c2 : [];
+    if (options.resolveKnowledge) {
+      try {
+        const resolved = await options.resolveKnowledge();
+        workbenchReferences = resolved.workbenchReferences;
+        resolvedVaultKnowledge = resolved.vaultKnowledge;
+      } catch (e2) {
+      }
+      if (this.destroyed || this.state.streamGeneration !== streamGeneration) {
+        this.state.isStreaming = false;
+        return;
+      }
+    }
+    const transformedText = isSustainedPaperSlip ? SUSTAINED_PAPER_SLIP_DIRECTIVE : options.transformMentions ? options.transformMentions(isPaperSlip ? PAPER_SLIP_PROMPT : stripped) : isPaperSlip ? PAPER_SLIP_PROMPT : stripped;
+    const meetingVaultKnowledge = isSustainedPaperSlip ? [] : resolveVaultKnowledge(resolvedVaultKnowledge, options.transformMentions);
+    const transcriptEntry = isPaperSlip && !isSustainedPaperSlip && ctx.transcriptPath ? {
+      path: ctx.transcriptPath,
+      description: "\u5F53\u524D\u5F55\u97F3\u9010\u5B57\u7A3F\u4E0E\u5B9E\u65F6\u603B\u7ED3",
+      role: {
+        purpose: "\u5F53\u524D\u6B63\u5728\u5F55\u5236\u7684\u4F1A\u8BAE\u9010\u5B57\u7A3F\u548C\u5B9E\u65F6\u603B\u7ED3\u3002\u8BFB\u8FD9\u4EFD\u6587\u4EF6\u624D\u80FD\u770B\u5230\u6700\u65B0\u7684\u8BA8\u8BBA\u5185\u5BB9\u3002",
+        pickWhen: "\u59CB\u7EC8\u5148\u8BFB\u3002\u8FD9\u662F\u5224\u65AD\u5176\u4ED6\u77E5\u8BC6\u662F\u5426\u6709\u7528\u7684\u524D\u63D0\u3002"
+      }
+    } : null;
+    const vaultKnowledge = transcriptEntry ? [transcriptEntry, ...meetingVaultKnowledge] : meetingVaultKnowledge;
+    const skillSubmission = isSustainedPaperSlip ? { skillCandidates: [] } : this.buildSkillSubmission(text, workbenchReferences);
+    const knowledge = this.splitRetainedKnowledge(skillSubmission.skillCandidates, vaultKnowledge);
+    const paperRule = isPaperSlip && !isSustainedPaperSlip ? buildPaperRule(ctx.paperRule, ctx.customRule) : void 0;
+    const meetingContext = buildMeetingAskContext(ctx);
+    const supplementalContext = skillSubmission.unavailableContext ? `${meetingContext}
+
+${skillSubmission.unavailableContext}` : meetingContext;
+    const hasMeetingKnowledge = knowledge.skillCandidates.length > 0 || knowledge.vaultKnowledge.length > 0;
+    const externalContextPaths = (_e2 = (_d = options.externalContextPaths) == null ? void 0 : _d.filter(Boolean)) != null ? _e2 : [];
+    const enabledMcpServers = options.enabledMcpServers && options.enabledMcpServers.size > 0 ? new Set(options.enabledMcpServers) : void 0;
+    const turnRequest = {
+      text: transformedText,
+      supplementalContext,
+      ...paperRule ? { paperRule } : {},
+      // Paper slips already carry the recording path inside meeting-context. linked_note
+      // on the body is enough to send the model Reading that file instead of knowledge folders.
+      ...!isPaperSlip && ctx.filePath ? { currentNotePath: ctx.filePath } : {},
+      ...knowledge.skillCandidates.length > 0 ? { skillCandidates: knowledge.skillCandidates } : {},
+      ...knowledge.vaultKnowledge.length > 0 ? { vaultKnowledge: knowledge.vaultKnowledge } : {},
+      ...hasMeetingKnowledge ? { knowledgeMode: "meeting" } : {},
+      ...externalContextPaths.length > 0 ? { externalContextPaths } : {},
+      ...enabledMcpServers ? { enabledMcpServers } : {}
+    };
+    momaInfo("[voice-rec] ask turn", {
+      isPaperSlip,
+      isSustainedPaperSlip,
+      allowedTools: isPaperSlip ? PAPER_SLIP_ALLOWED_TOOLS : null,
+      displayContent,
+      text: transformedText,
+      skillCandidates: (_f2 = turnRequest.skillCandidates) != null ? _f2 : null,
+      vaultKnowledge: (_g = turnRequest.vaultKnowledge) != null ? _g : null,
+      paperRule: paperRule != null ? paperRule : null,
+      supplementalContext
+    });
+    try {
+      await this.ensureRuntime();
+    } catch (err) {
+      if (!this.destroyed && this.state.streamGeneration === streamGeneration) {
+        const message = err instanceof Error ? err.message : String(err);
+        this.streamController.hideThinkingIndicator();
+        this.streamController.hideStreamingDots();
+        await this.streamController.appendText(`
+
+**Error:** ${message}`);
+      }
+      this.state.isStreaming = false;
+      return;
+    }
+    const runtime = this.runtime;
+    if (this.destroyed || this.state.streamGeneration !== streamGeneration || !runtime) {
+      this.state.isStreaming = false;
+      return;
+    }
     let turnFailed = false;
     try {
       const prepared = runtime.prepareTurn(turnRequest);
@@ -156352,9 +156668,10 @@ ${skillSubmission.unavailableContext}` : meetingContext;
         prompt: prepared.prompt
       });
       userMsg.content = prepared.persistedContent;
-      userMsg.currentNote = (_j = (_i = prepared.request.currentNotePath) != null ? _i : ctx.filePath) != null ? _j : userMsg.currentNote;
+      userMsg.currentNote = (_i = (_h2 = prepared.request.currentNotePath) != null ? _h2 : ctx.filePath) != null ? _i : userMsg.currentNote;
       const previous = this.state.messages.slice(0, -2);
-      for await (const chunk of runtime.query(prepared, previous)) {
+      const queryOptions = isPaperSlip ? { allowedTools: [...PAPER_SLIP_ALLOWED_TOOLS] } : void 0;
+      for await (const chunk of runtime.query(prepared, previous, queryOptions)) {
         if (this.destroyed || this.state.streamGeneration !== streamGeneration) break;
         if (this.state.cancelRequested) break;
         await this.streamController.handleStreamChunk(chunk, assistantMsg);
@@ -156370,10 +156687,11 @@ ${skillSubmission.unavailableContext}` : meetingContext;
     } finally {
       if (!turnFailed && !this.destroyed && !this.state.cancelRequested) {
         for (const key of knowledge.keys) this.retrievedKnowledge.add(key);
+        if (isPaperSlip) this.paperSlipSent = true;
       }
-      const turnMetadata = (_l2 = (_k3 = this.runtime) == null ? void 0 : _k3.consumeTurnMetadata()) != null ? _l2 : {};
-      userMsg.userMessageId = (_m = turnMetadata.userMessageId) != null ? _m : userMsg.userMessageId;
-      assistantMsg.assistantMessageId = (_n = turnMetadata.assistantMessageId) != null ? _n : assistantMsg.assistantMessageId;
+      const turnMetadata = (_k3 = (_j = this.runtime) == null ? void 0 : _j.consumeTurnMetadata()) != null ? _k3 : {};
+      userMsg.userMessageId = (_l2 = turnMetadata.userMessageId) != null ? _l2 : userMsg.userMessageId;
+      assistantMsg.assistantMessageId = (_m = turnMetadata.assistantMessageId) != null ? _m : assistantMsg.assistantMessageId;
       this.streamController.hideThinkingIndicator();
       this.streamController.hideStreamingDots();
       this.streamController.finalizeCurrentThinkingBlock(assistantMsg);
@@ -156420,26 +156738,27 @@ ${skillSubmission.unavailableContext}` : meetingContext;
     this.runtime = runtime;
   }
   /**
-   * Keeps every knowledge entry in the list and marks the ones this conversation already
-   * pulled in, so a follow-up does not refetch Space or notes the model already holds.
+   * Drops knowledge this conversation already pulled in, so a follow-up never re-sends the
+   * full arg payload (Space children, Data assets) the model still holds in context. Only
+   * genuinely new entries reach the turn — they are always listed as `available`.
    */
   splitRetainedKnowledge(skillCandidates, vaultKnowledge) {
-    const retainedKnowledge = [];
     const keys = [];
-    const mark = (key, label) => {
-      keys.push(key);
-      if (this.retrievedKnowledge.has(key)) retainedKnowledge.push(label);
-    };
+    const freshSkills = [];
+    const freshVault = [];
     for (const candidate of skillCandidates) {
-      mark(skillKnowledgeKey(candidate), candidate.name);
+      const key = skillKnowledgeKey(candidate);
+      keys.push(key);
+      if (!this.retrievedKnowledge.has(key)) freshSkills.push(candidate);
     }
     for (const item of vaultKnowledge) {
-      mark(vaultKnowledgeKey(item.path), item.path);
+      const key = vaultKnowledgeKey(item.path);
+      keys.push(key);
+      if (!this.retrievedKnowledge.has(key)) freshVault.push(item);
     }
     return {
-      skillCandidates: [...skillCandidates],
-      vaultKnowledge: [...vaultKnowledge],
-      retainedKnowledge,
+      skillCandidates: freshSkills,
+      vaultKnowledge: freshVault,
       keys
     };
   }
@@ -156451,7 +156770,7 @@ ${skillSubmission.unavailableContext}` : meetingContext;
     var _a5;
     const invocations = orderByRetrievalCost(
       buildWorkbenchSkillInvocationsForText(content, workbenchReferences)
-    ).slice(0, MAX_SELECTED_SKILLS_PER_TURN);
+    );
     if (invocations.length === 0) return { skillCandidates: [] };
     const guardedSkillNames = getWorkbenchReferenceSkillNames(workbenchReferences);
     const unavailableNames = [];
@@ -156788,6 +157107,7 @@ var MeetingAskPanel = class {
     this.streaming = false;
     this.onSubmit = null;
     this.onPaperSlip = null;
+    this.onStop = null;
     this.mentionHost = null;
     this.paperEnabled = false;
     this.paperUsed = false;
@@ -156854,6 +157174,9 @@ var MeetingAskPanel = class {
   setOnPaperSlip(handler) {
     this.onPaperSlip = handler;
   }
+  setOnStop(handler) {
+    this.onStop = handler;
+  }
   setPaperEnabled(enabled) {
     this.paperEnabled = enabled;
     this.syncPaperButton();
@@ -156904,6 +157227,7 @@ var MeetingAskPanel = class {
     this.askInputEl.toggleAttribute("disabled", streaming);
     this.syncAskEditorEnabled();
     this.askSendEl.classList.toggle("is-busy", streaming);
+    this.renderSendButton();
     this.syncComposerState();
   }
   focusAsk() {
@@ -156944,6 +157268,8 @@ var MeetingAskPanel = class {
     this.askInputEl.toggleAttribute("disabled", false);
     this.syncAskEditorEnabled();
     (_a5 = this.mentionHost) == null ? void 0 : _a5.clearWorkbenchReferences();
+    this.askSendEl.classList.remove("is-busy");
+    this.renderSendButton();
     this.renderFileChip();
     this.syncComposerState();
     this.syncPaperButton();
@@ -157002,7 +157328,14 @@ var MeetingAskPanel = class {
       event.preventDefault();
       this.submit("enter");
     });
-    this.askSendEl.addEventListener("click", () => this.submit("button"));
+    this.askSendEl.addEventListener("click", () => {
+      var _a5;
+      if (this.streaming) {
+        (_a5 = this.onStop) == null ? void 0 : _a5.call(this);
+        return;
+      }
+      this.submit("button");
+    });
   }
   submit(submitVia) {
     var _a5, _b3, _c2, _d, _e2, _f2;
@@ -157051,9 +157384,14 @@ var MeetingAskPanel = class {
   }
   syncComposerState() {
     const ready = this.canSubmit();
-    this.askSendEl.classList.toggle("is-ready", ready);
-    this.askSendEl.toggleAttribute("disabled", !ready);
+    this.askSendEl.classList.toggle("is-ready", ready || this.streaming);
+    this.askSendEl.toggleAttribute("disabled", !ready && !this.streaming);
     this.syncPaperButton();
+  }
+  renderSendButton() {
+    this.askSendEl.classList.toggle("is-stop", this.streaming);
+    this.askSendEl.setText(this.streaming ? "\u25A0" : "\u2191");
+    this.askSendEl.setAttribute("title", this.streaming ? "\u505C\u6B62" : "\u53D1\u9001");
   }
   syncAskEditorEnabled() {
     const editor = getCodeMirrorChatInput(this.askInputEl);
@@ -157116,6 +157454,9 @@ var LiveSummaryPanel = class {
   }
   setOnPaperSlip(handler) {
     this.ask.setOnPaperSlip(handler ? (p) => handler(p) : null);
+  }
+  setOnStop(handler) {
+    this.ask.setOnStop(handler);
   }
   setPaperEnabled(enabled) {
     this.ask.setPaperEnabled(enabled);
@@ -157385,6 +157726,11 @@ var _VoiceRecordingModal = class _VoiceRecordingModal {
       });
       this.liveSummary.setOnPaperSlip(() => {
         void this.handlePaperSlip();
+      });
+      this.liveSummary.setOnStop(() => {
+        var _a6, _b4;
+        (_a6 = this.askSession) == null ? void 0 : _a6.cancel();
+        (_b4 = this.liveSummary) == null ? void 0 : _b4.setStreaming(false);
       });
       const host = (_b3 = (_a5 = this.callbacks).getAskContext) == null ? void 0 : _b3.call(_a5);
       if (host) {
@@ -158165,17 +158511,19 @@ var _VoiceRecordingModal = class _VoiceRecordingModal {
     summary.setStreaming(true);
     (_c2 = this.askMentions) == null ? void 0 : _c2.setStreaming(true);
     try {
-      const knowledge = await this.getSendableSessionKnowledge();
-      const sessionRefs = await this.knowledgeToReferences(knowledge);
-      const seen = new Set(sessionRefs.map((item) => `${item.source}:${item.key}`));
-      const workbenchReferences = [
-        ...sessionRefs,
-        ...payload.workbenchReferences.filter((item) => !seen.has(`${item.source}:${item.key}`))
-      ];
-      const vaultKnowledge = vaultKnowledgeEntries(knowledge);
+      const resolveKnowledge = async () => {
+        const knowledge = await this.getSendableSessionKnowledge();
+        const sessionRefs = await this.knowledgeToReferences(knowledge);
+        const seen = new Set(sessionRefs.map((item) => `${item.source}:${item.key}`));
+        const workbenchReferences = [
+          ...sessionRefs,
+          ...payload.workbenchReferences.filter((item) => !seen.has(`${item.source}:${item.key}`))
+        ];
+        return { workbenchReferences, vaultKnowledge: vaultKnowledgeEntries(knowledge) };
+      };
       await this.askSession.send(payload.text, {
-        workbenchReferences,
-        vaultKnowledge,
+        workbenchReferences: payload.workbenchReferences,
+        resolveKnowledge,
         transformMentions: (text) => {
           var _a6, _b4;
           return (_b4 = (_a6 = this.askMentions) == null ? void 0 : _a6.fileContextManager.transformContextMentions(text)) != null ? _b4 : text;
@@ -158866,6 +159214,10 @@ var WorkbenchPanel = class {
     this.mediaRecorder = null;
     this.audioChunks = [];
     this.audioTempPath = null;
+    // Serial write queue: prevents out-of-order appendFile calls and tracks write errors.
+    // When a temp path is available, chunks go to disk instead of audioChunks.
+    this.writeQueue = Promise.resolve();
+    this.audioWriteError = false;
     /** Latest partial text from ASR; included in recentAskRemarks so paper slips see in-flight speech. */
     this._currentPartial = "";
     this.entries = [];
@@ -159188,6 +159540,7 @@ var WorkbenchPanel = class {
     this.recSettingsModal.setMeetingTypesEnabled(this.passPaperEnabled);
     this.recStartModal = new RecStartModal(root, this.plugin, {
       onConfirm: async (_meetingTypeId, details) => {
+        await hydrateSessionKnowledge(details, this.plugin);
         this.sessionMeetingType = details;
         await this.requestStartRecording();
       }
@@ -159627,6 +159980,7 @@ var WorkbenchPanel = class {
               activeDurationSec: this.elapsedSec
             });
             let uploadFailed = false;
+            let audioTmpPathOnFailure = null;
             if (savedPath && meetingId !== null && shouldUploadMeetingFiles()) {
               this.setFinishStage("uploading");
               const tmpPathSnapshot = this.audioTempPath;
@@ -159641,13 +159995,56 @@ var WorkbenchPanel = class {
                 fs39.promises.unlink(tmpPathSnapshot).catch((err) => {
                   momaWarn("[voice-rec] failed to delete temp audio file", { err: String(err) });
                 });
+              } else if (uploadFailed) {
+                audioTmpPathOnFailure = tmpPathSnapshot;
               }
             }
             if (savedPath && !this.quitMode) {
-              new import_obsidian133.Notice(
-                uploadFailed ? `\u5F55\u5236\u5DF2\u4FDD\u5B58\uFF0C\u4E0A\u4F20\u5931\u8D25\uFF1A${savedPath}` : `\u5F55\u5236\u5DF2\u4FDD\u5B58\uFF1A${savedPath}`,
-                5e3
-              );
+              if (uploadFailed) {
+                this.setFinishStage(null);
+                const shouldRetry = await confirmRich(
+                  this.plugin.app,
+                  (el2) => {
+                    el2.setText("\u5F55\u5236\u5DF2\u4FDD\u5B58\u5230\u672C\u5730\uFF0C\u4F46\u4E0A\u4F20\u670D\u52A1\u5668\u5931\u8D25\u3002\u662F\u5426\u91CD\u65B0\u4E0A\u4F20\uFF1F");
+                  },
+                  "\u91CD\u65B0\u4E0A\u4F20"
+                );
+                if (shouldRetry && meetingId !== null && this.finishEpoch === epoch) {
+                  this.setFinishStage("uploading");
+                  let retryAudioBlob = audioBlob != null ? audioBlob : void 0;
+                  if (!retryAudioBlob && audioTmpPathOnFailure) {
+                    try {
+                      const buf = await fs39.promises.readFile(audioTmpPathOnFailure);
+                      retryAudioBlob = new Blob([buf], { type: "audio/webm" });
+                    } catch (err) {
+                      momaWarn("[voice-rec] failed to read tmp audio for retry", { err: String(err) });
+                    }
+                  }
+                  try {
+                    uploadFailed = await this.uploadMeetingFiles(meetingId, retryAudioBlob, savedPath, true);
+                  } catch (err) {
+                    uploadFailed = true;
+                    momaError("[voice-rec] uploadMeetingFiles retry failed", { meetingId, err: String(err) });
+                  }
+                  if (!uploadFailed && audioTmpPathOnFailure) {
+                    this.audioTempPath = null;
+                    fs39.promises.unlink(audioTmpPathOnFailure).catch((err) => {
+                      momaWarn("[voice-rec] failed to delete temp audio file after retry", { err: String(err) });
+                    });
+                    audioTmpPathOnFailure = null;
+                  }
+                }
+                if (uploadFailed) {
+                  const audioHint = audioTmpPathOnFailure ? `
+\u97F3\u9891\u6587\u4EF6\u4FDD\u7559\u5728\uFF1A${audioTmpPathOnFailure}` : "";
+                  new import_obsidian133.Notice(`\u5F55\u5236\u5DF2\u4FDD\u5B58\uFF0C\u4E0A\u4F20\u5931\u8D25${audioHint}
+\u8F6C\u5199\u7A3F\uFF1A${savedPath}`, 0);
+                } else {
+                  new import_obsidian133.Notice(`\u5F55\u5236\u5DF2\u4FDD\u5B58\uFF1A${savedPath}`, 5e3);
+                }
+              } else {
+                new import_obsidian133.Notice(`\u5F55\u5236\u5DF2\u4FDD\u5B58\uFF1A${savedPath}`, 5e3);
+              }
             }
             const doAutoTitle = savedPath && meetingId !== null && ENABLE_AUTO_TITLE && !this.userHasSetTitle;
             if (doAutoTitle) {
@@ -160317,17 +160714,24 @@ var WorkbenchPanel = class {
     const client = new MomaHttpClient(this.plugin, new FetchTransport());
     return new FileUploadApi(client, (f9) => this.plugin.app.vault.readBinary(f9));
   }
+  makeMultipartUploadApi() {
+    const client = new MomaHttpClient(this.plugin, new ObsidianTransport());
+    return new MultipartUploadApi(client);
+  }
   /**
    * Upload the recording audio and the transcript markdown file to S3,
    * then report the resulting URLs to the backend via updateFiles.
    * Errors are non-fatal — called with void + catch in finishRecording().
    */
-  async uploadMeetingFiles(meetingId, audioBlob, transcriptPath) {
+  async uploadMeetingFiles(meetingId, audioBlob, transcriptPath, isRetry = false) {
     var _a5, _b3, _c2, _d;
     const uploadApi = this.makeFileUploadApi();
     const meetingApi = this.makeMeetingApi();
     const [recordingResult, transcriptResult] = await Promise.allSettled([
-      audioBlob ? uploadApi.uploadFile(
+      audioBlob ? audioBlob.size > MULTIPART_THRESHOLD_BYTES ? this.makeMultipartUploadApi().uploadAudio(
+        audioBlob,
+        `meeting_${meetingId}_recording.webm`
+      ) : uploadApi.uploadFile(
         new File([audioBlob], `meeting_${meetingId}_recording.webm`, { type: audioBlob.type || "audio/webm" }),
         { timeoutMs: MEETING_UPLOAD_TIMEOUT_MS }
       ) : Promise.resolve(null),
@@ -160352,7 +160756,19 @@ var WorkbenchPanel = class {
     if (recordingS3Url !== null || transcriptS3Url !== null) {
       await meetingApi.updateFiles(meetingId, { recordingS3Url, transcriptS3Url });
     }
-    return meetingFileUploadsFailed(recordingResult, transcriptResult);
+    const failed = meetingFileUploadsFailed(recordingResult, transcriptResult);
+    if (failed) {
+      trackUploadFailed({
+        meetingId,
+        audioFailed: recordingResult.status === "rejected",
+        transcriptFailed: transcriptResult.status === "rejected",
+        audioErrorKind: recordingResult.status === "rejected" ? recordingResult.reason instanceof MomaApiError ? recordingResult.reason.kind : "unknown" : void 0,
+        transcriptErrorKind: transcriptResult.status === "rejected" ? transcriptResult.reason instanceof MomaApiError ? transcriptResult.reason.kind : "unknown" : void 0,
+        audioBlobSizeMB: audioBlob ? Math.round(audioBlob.size / 1024 / 1024 * 10) / 10 : void 0,
+        isRetry
+      });
+    }
+    return failed;
   }
   /** Latest spoken lines for paper slips; live summary lags ASR and is often still empty. */
   recentAskRemarks() {
@@ -160620,6 +161036,8 @@ var WorkbenchPanel = class {
     var _a5;
     this.audioChunks = [];
     this.audioTempPath = null;
+    this.writeQueue = Promise.resolve();
+    this.audioWriteError = false;
     const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus" : MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "";
     try {
       this.mediaRecorder = new MediaRecorder(stream, mimeType ? { mimeType } : {});
@@ -160640,14 +161058,19 @@ var WorkbenchPanel = class {
     }
     this.mediaRecorder.ondataavailable = (e2) => {
       if (e2.data.size === 0) return;
-      this.audioChunks.push(e2.data);
-      if (this.audioTempPath) {
+      if (this.audioTempPath && !this.audioWriteError) {
         const tmpPath = this.audioTempPath;
-        e2.data.arrayBuffer().then((buf) => {
-          return fs39.promises.appendFile(tmpPath, Buffer.from(buf));
+        const chunk = e2.data;
+        this.writeQueue = this.writeQueue.then(async () => {
+          const buf = await chunk.arrayBuffer();
+          await fs39.promises.appendFile(tmpPath, Buffer.from(buf));
         }).catch((err) => {
-          momaWarn("[voice-rec] temp audio append failed", { err: String(err) });
+          momaWarn("[voice-rec] temp audio write failed, falling back to memory", { err: String(err) });
+          this.audioWriteError = true;
+          this.audioChunks.push(chunk);
         });
+      } else {
+        this.audioChunks.push(e2.data);
       }
     };
     this.mediaRecorder.start(1e3);
@@ -160668,6 +161091,24 @@ var WorkbenchPanel = class {
     if (this.recState === "recording") this.setPaused(true);
     new import_obsidian133.Notice("\u97F3\u9891\u8BBE\u5907\u5DF2\u65AD\u5F00\uFF0C\u5F55\u97F3\u5DF2\u6682\u505C\u3002\u8BF7\u91CD\u65B0\u8FDE\u63A5\u6216\u5207\u6362\u97F3\u9891\u8BBE\u5907\u540E\u70B9\u51FB\u7EE7\u7EED\u3002", 8e3);
   }
+  /**
+   * Wait for the serialized disk-write queue to drain, then assemble the final Blob.
+   * Reads from the temp file when healthy; falls back to in-memory chunks otherwise.
+   */
+  async drainAndBuild(mimeType, fallbackChunks) {
+    await this.writeQueue.catch(() => {
+    });
+    const tmpPath = this.audioTempPath;
+    if (tmpPath && !this.audioWriteError) {
+      try {
+        const data = await fs39.promises.readFile(tmpPath);
+        return new Blob([data], { type: mimeType });
+      } catch (err) {
+        momaWarn("[voice-rec] failed to read temp audio file, falling back to chunks", { err: String(err) });
+      }
+    }
+    return fallbackChunks.length > 0 ? new Blob(fallbackChunks, { type: mimeType }) : null;
+  }
   stopMediaRecorderAsync() {
     return new Promise((resolve14) => {
       const mr = this.mediaRecorder;
@@ -160686,17 +161127,27 @@ var WorkbenchPanel = class {
         resolve14(blob);
       };
       const timer = setTimeout(() => {
-        momaWarn("[voice-rec] MediaRecorder stop timed out \u2014 using buffered chunks");
+        momaWarn("[voice-rec] MediaRecorder stop timed out \u2014 reading temp file or using buffered chunks");
         try {
           mr.stop();
         } catch (e2) {
         }
-        finish(chunks.length > 0 ? new Blob(chunks, { type: mimeType }) : null);
+        const tmpPath = this.audioTempPath;
+        const doFinish = async () => {
+          if (tmpPath && !this.audioWriteError) {
+            try {
+              const data = await fs39.promises.readFile(tmpPath);
+              return new Blob([data], { type: mimeType });
+            } catch (e2) {
+            }
+          }
+          return chunks.length > 0 ? new Blob(chunks, { type: mimeType }) : null;
+        };
+        void doFinish().then(finish);
       }, MEDIA_RECORDER_STOP_TIMEOUT_MS);
       mr.onstop = () => {
         clearTimeout(timer);
-        const blob = chunks.length > 0 ? new Blob(chunks, { type: mimeType }) : null;
-        finish(blob);
+        void this.drainAndBuild(mimeType, chunks).then(finish);
       };
       if (mr.state === "recording" || mr.state === "paused") {
         mr.requestData();
@@ -160805,6 +161256,8 @@ var WorkbenchPanel = class {
     }
     this.mediaRecorder = null;
     this.audioChunks = [];
+    this.writeQueue = Promise.resolve();
+    this.audioWriteError = false;
     (_b3 = this.recModal) == null ? void 0 : _b3.destroy();
     (_c2 = this.floatingBar) == null ? void 0 : _c2.destroy();
     (_d = this.micPermDialog) == null ? void 0 : _d.destroy();
@@ -164292,6 +164745,18 @@ var ClaudianPlugin = class extends import_obsidian137.Plugin {
         tasks.add(() => stopPlanLocalDaemonIfLast());
       })
     );
+    this.registerEvent(
+      this.app.workspace.on("layout-change", () => {
+        var _a5;
+        const leaf = this.app.workspace.getLeavesOfType(VIEW_TYPE_WORKBENCH)[0];
+        if (!leaf) return;
+        const placement = this.getWorkbenchLeafPlacement(leaf);
+        if (placement !== ((_a5 = this.settings.workbenchLeafPlacement) != null ? _a5 : "left-sidebar")) {
+          this.settings.workbenchLeafPlacement = placement;
+          void this.saveSettings();
+        }
+      })
+    );
     this.homepageFeature = new HomepageFeature(this);
     await this.homepageFeature.onload();
     this.settingsRecoveryUiReady = true;
@@ -164413,7 +164878,7 @@ var ClaudianPlugin = class extends import_obsidian137.Plugin {
       void this.saveSettings();
     }
     if (!existing) {
-      const workbenchLeaf = workspace.getLeftLeaf(true);
+      const workbenchLeaf = this.createWorkbenchLeaf();
       if (workbenchLeaf) {
         await workbenchLeaf.setViewState({ type: VIEW_TYPE_WORKBENCH, active: false });
       }
@@ -164544,7 +165009,7 @@ var ClaudianPlugin = class extends import_obsidian137.Plugin {
     await this.refreshWorkbenchTabs();
     let leaf = workspace.getLeavesOfType(VIEW_TYPE_WORKBENCH)[0];
     if (!leaf) {
-      const newLeaf = workspace.getLeftLeaf(true);
+      const newLeaf = this.createWorkbenchLeaf();
       if (newLeaf) {
         await newLeaf.setViewState({ type: VIEW_TYPE_WORKBENCH, active: true });
         leaf = newLeaf;
@@ -165779,6 +166244,42 @@ var ClaudianPlugin = class extends import_obsidian137.Plugin {
   }
   getWorkbenchViews() {
     return this.app.workspace.getLeavesOfType(VIEW_TYPE_WORKBENCH).map((leaf) => leaf.view).filter((view) => view instanceof WorkbenchView);
+  }
+  /**
+   * 按 settings 中记录的位置创建 Workbench leaf。
+   * 移动端不支持弹出窗口时降级到左侧栏。
+   */
+  createWorkbenchLeaf() {
+    var _a5, _b3, _c2;
+    const { workspace } = this.app;
+    const placement = (_a5 = this.settings.workbenchLeafPlacement) != null ? _a5 : "left-sidebar";
+    switch (placement) {
+      case "right-sidebar":
+        return workspace.getRightLeaf(true);
+      case "main-tab":
+        return workspace.getLeaf("tab");
+      case "floating":
+        try {
+          return (_c2 = (_b3 = workspace.openPopoutLeaf) == null ? void 0 : _b3.call(workspace)) != null ? _c2 : workspace.getLeftLeaf(true);
+        } catch (e2) {
+          return workspace.getLeftLeaf(true);
+        }
+      default:
+        return workspace.getLeftLeaf(true);
+    }
+  }
+  /**
+   * 通过 leaf.getRoot() 与已知分区比对，推断 workbench 当前所在位置。
+   * floatingSplit 是桌面端弹出窗口的根节点，通过类型断言访问（无公开 API）。
+   */
+  getWorkbenchLeafPlacement(leaf) {
+    const { workspace } = this.app;
+    const root = leaf.getRoot();
+    if (root === workspace.leftSplit) return "left-sidebar";
+    if (root === workspace.rightSplit) return "right-sidebar";
+    const floating = workspace.floatingSplit;
+    if (floating && root === floating) return "floating";
+    return "main-tab";
   }
   findConversationAcrossViews(conversationId) {
     for (const view of this.getAllViews()) {

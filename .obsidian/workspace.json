@@ -328,7 +328,6 @@
       {
         "id": "f0a68f72e63f0118",
         "type": "tabs",
-        "dimension": 75.18610421836227,
         "children": [
           {
             "id": "dd95499e7ada39e4",
@@ -379,12 +378,11 @@
         "currentTab": 1
       },
       {
-        "id": "472119c85bc6237b",
+        "id": "84c5549a7770209f",
         "type": "tabs",
-        "dimension": 24.81389578163772,
         "children": [
           {
-            "id": "9319180f591efca5",
+            "id": "a8febd5dc3a9cdf7",
             "type": "leaf",
             "state": {
               "type": "moma-workbench",
@@ -515,7 +513,7 @@
             }
           },
           {
-            "id": "debf92682e307645",
+            "id": "68b7ac5e62aed7c8",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -548,7 +546,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "debf92682e307645",
+  "active": "68b7ac5e62aed7c8",
   "lastOpenFiles": [
     "10.项目整理/业务知识沉淀/新人测试环境配置实操指南.md",
     "90.AI学习/第一阶段/day2.md",
