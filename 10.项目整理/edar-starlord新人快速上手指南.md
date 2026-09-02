@@ -1253,6 +1253,121 @@ Mode 决定走哪套任务模板/激活/考核逻辑，是理解业务差异的�
 - **品类供应商匹配**：品类+供应商为最小粒度；可设"不限制"匹配全部供应商（三种：单个/多个/不限制）。【已确认】
 - **八合一**：北京+全国共 8 套配置页面集成，双写同步到履约配置侧，存在时序异常风险。【已确认】
 
+#### 11.4.1 单据类型与销售类型怎么算（OFC 回调入口，易踩坑）
+
+OFC 履约侧回调 starlord 查配置时，入参是 OMS 订单三要素 `businessType + mainType + secondType`，starlord 需要把它转成排程配置的匹配维度 `saleType + documentType`。入口：`ConfigConvertService#convertOfcParam`（`edar-starlord-service/.../deliveryflow/ConfigConvertService.java:209-228`）。【已确认】
+
+> ⚠️ **关键认知**：`saleType` 和 `documentType` **不是"前者算后者"的因果关系，而是同根兄弟**——都从 `(businessType, secondType)` 派生；`mainType` 虽然作为参数传进了 `calculateDocumentType`，但匹配逻辑里**完全没用**。新人排查数据时别误以为三者平权参与计算。
+
+```
+OMS 订单三要素: businessType(业务类型) + mainType(主类型) + secondType(子类型)
+        │
+        │  ① StarlordEnumConvert.getSaleTypeByBusinessType(businessType, secondType)
+        ├──→ saleType (1-6 销售类型)
+        │
+        │  ② ConfigConvertService.calculateDocumentType
+        │     → DocumentTypeEnum.getByBusinessTypeAndSecondTypeSupportComplex(businessType, secondType)
+        └──→ documentType (单据类型 value)
+           ※ mainType 传了但匹配逻辑未用
+```
+
+**① saleType 派生**（`StarlordEnumConvert.java:11-30`）：【已确认】
+
+| businessType | secondType | → saleType |
+|---|---|---|
+| 整装 DECORATE | 任意 | 1 整装/配套 |
+| 零售 RETAIL | 配套单 INTEGRATE_RETAIL_ORDER | 1 整装/配套 |
+| 零售 RETAIL | 其他（纯定软电等） | 2 纯定软电 |
+| 团装 GROUP | 任意 | 4 团装/配套 |
+| 局装 PARTIAL_DECORATION | 任意 | 6 局装/配套 |
+
+**② documentType 派生**（`DocumentTypeEnum.java:125-156` 的 `getByBusinessTypeAndSecondTypeSupportComplex`）：【已确认】
+- **复合归并**（硬编码）：整装/团装/局装的 `MASTER` 或 `INTEGRATE_RETAIL_ORDER` → 复合单据 `-99/-98/-97`（配置页用复合单代表"整装&配套同单"等场景）。
+- **零售特例**：RETAIL + `SD_RETAIL_ORDER` → 单据 12（纯定软电单）；RETAIL + `INTEGRATE_RETAIL_ORDER` → 归并进 `-99`。
+- **其余**：按 `(businessType, secondType)` 在 `DocumentTypeEnum` 里精确匹配（如整装+MASTER→1、整装+辅材→3、团装+小主材→24 等，完整映射见 [[10.项目整理/全部枚举类型梳理]] 的 DocumentTypeEnum）。
+
+> **为什么 mainType 传了却没用**：`calculateDocumentType` 签名带 `mainType`（常规/补货/领用），但 `getByBusinessTypeAndSecondTypeSupportComplex` 只按 `businessType + secondType` 匹配。补货 vs 常规靠 `secondType` 里的 `REPLENISH_BEFORE_COMPLETION_DECORATE` / `REPLENISH_AFTER_COMPLETION` 区分，不靠 mainType。改这块逻辑时别被 mainType 参数误导。
+
+#### 11.4.2 排程配置的两层结构（rule_unit × rule_category）
+
+排程材料配置（Mode=7）的 `delivery_flow_rule` 体系是**两层结构**，通过 `rule_id`（规则头主键）关联。理解这个分层是看懂排程匹配机制的前提。【已确认】
+
+| 层 | 表 | 维度（匹配条件） | 关联键 | 存什么 |
+|---|---|---|---|---|
+| **一层（规则单元）** | `delivery_flow_rule_unit` | 业务类型(saleType) + 套餐(productCombo) + 单据类型(documentType) + 分公司(mdmCompany) + 项目版本 | `rule_id` | "在哪个分公司/套餐/单据/业务下"命中哪条规则 |
+| **二层（品类规则）** | `delivery_flow_rule_category` | 品类(materialCode) + 供应商(supplierCode) + 节点流程(node_process) | `rule_id` | "这个品类×供应商走哪套节点流程模板"，指向 `category_id`（长 ID → `n_material_process_define`） |
+| 规则头 | `delivery_flow_rule` | — | `id` = 两层的 `rule_id` | 规则状态、关联排程流程配置 `delivery_process_cfg_id` |
+
+> **一句话**：一层回答"这条订单命中哪条规则"，二层回答"这条规则下，这个品类×供应商走哪套节点流程"。两层都挂在同一个 `rule_id` 下。
+
+#### 11.4.3 两层结构的查询流程（OFC 回调查配置）
+
+OFC 履约侧回调 starlord 查配置时（入口 `ConfigQueryServiceImpl#queryConfigOFCList` / `queryCategoryConfigOFCList`），把一层和二层的维度**同时**塞进查询条件，靠 `deliveryFlowRuleDao.matchConfigByParam` 一次 SQL 三表 JOIN 命中。【已确认】代码：`DeliveryFlowRuleExtMapper.xml:231-270`。
+
+```
+① OFC 回调入参: 分公司 + 业务类型 + 套餐 + 单据类型 + 项目版本 + 品类 + 供应商
+        │
+        │  ConfigConvertService.convertOfcParam 把 OMS 三要素派生成 saleType + documentType（见 11.4.1）
+        ↓
+② 组装 DeliveryFlowRuleQueryCondition（一层维度 + 二层维度都在里面）
+        │
+        │  deliveryFlowRuleDao.matchConfigByParam
+        ↓
+③ 一条 SQL 三表 JOIN 命中:
+   delivery_flow_rule (state=1)
+     JOIN delivery_flow_rule_unit   一层维度过滤: 分公司/套餐/单据/业务/版本
+     JOIN delivery_flow_rule_category  二层维度过滤: 品类/供应商 (state in 1,4)
+        │
+        ↓
+④ 命中行直接带回 category_id（二层的主键，长 ID）
+        │
+        │  用 category_id 作为 template_id 去 n_material_process_define 查节点流程定义
+        ↓
+⑤ 拿到该品类×供应商的完整节点流程（复尺/下单/送货/安装等任务类型 + 节点链）
+```
+
+> ⚠️ **"先一层拿任务 ID 再查二层"是逻辑视角，不是物理查询**。两层通过 `rule_id` 关联这点没错，但实际查询是**一次 JOIN 同时过滤两层维度**，命中后直接拿到二层的 `category_id`，不存在"先查一层拿到 ID 再回表查二层"的两步查询。新人排查慢查询时盯 `matchConfigByParam` 这一条 SQL 即可，别去找"第二次查询"。
+>
+> 另一个易混点：关联两层的键是 `rule_id`（规则头 ID），不是"任务 ID"。真正用来取节点流程的是二层的 `category_id`，它作为长 ID 直接当 `n_material_process_define.template_id` 用。`delivery_flow_rule_category` 的 `category_code` 是同业务品类共享的编码、`category_id` 是版本级主键（编辑会生成新 categoryId，旧版变 DELETE，见 §11.4.4）。
+
+#### 11.4.4 两层结构 + 查询流程图
+
+```mermaid
+flowchart TB
+    REQ["OFC 回调入参<br/>分公司+业务类型+套餐+单据类型+版本+品类+供应商"]
+    REQ --> CONV["ConfigConvertService.convertOfcParam<br/>OMS 三要素 → saleType + documentType<br/>见 11.4.1"]
+
+    CONV --> COND["组装查询条件<br/>一层维度 + 二层维度"]
+    COND --> SQL["matchConfigByParam<br/>一次 SQL 三表 JOIN"]
+
+    subgraph JOIN["三表 JOIN（同一 rule_id 串联）"]
+        direction TB
+        HEAD["delivery_flow_rule（规则头）<br/>id = rule_id<br/>state=1"]
+        L1["delivery_flow_rule_unit（一层·规则单元）<br/>rule_id 关联<br/>维度: 业务类型+套餐+单据类型+分公司+版本"]
+        L2["delivery_flow_rule_category（二层·品类规则）<br/>rule_id 关联<br/>维度: 品类+供应商+节点流程<br/>state in 1,4"]
+        HEAD --- L1
+        HEAD --- L2
+    end
+    SQL --> JOIN
+
+    JOIN --> CID["命中行带回 category_id<br/>（二层主键，长 ID）"]
+    CID --> DEF["用 category_id 作 template_id<br/>查 n_material_process_define"]
+    DEF --> OUT["拿到节点流程定义<br/>复尺/下单/送货/安装等任务类型 + 节点链"]
+
+    classDef io fill:#e8f0fe,stroke:#4285f4,stroke-width:2px,color:#1a1a1a
+    classDef proc fill:#fef7e0,stroke:#f9ab00,stroke-width:2px,color:#1a1a1a
+    classDef l1 fill:#fce8e6,stroke:#ea4335,stroke-width:2px,color:#1a1a1a
+    classDef l2 fill:#e6f4ea,stroke:#34a853,stroke-width:2px,color:#1a1a1a
+    classDef head fill:#f3e8fd,stroke:#a142f4,stroke-width:2px,color:#1a1a1a
+    class REQ,OUT io
+    class CONV,COND,SQL,CID,DEF proc
+    class L1 l1
+    class L2 l2
+    class HEAD head
+```
+
+> **看图重点**：左半部分（一层）和右半部分（二层）**通过 `rule_id` 挂在同一个规则头下**，查询时一次性 JOIN，不是两步。命中后用 `category_id`（二层主键）去取节点流程定义，这才是真正驱动"生成哪些任务/节点"的钥匙。
+
 ### 11.5 配置体系全景
 
 ```
