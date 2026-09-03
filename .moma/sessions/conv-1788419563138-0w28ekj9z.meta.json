@@ -1,0 +1,25 @@
+{
+  "id": "conv-1788419563138-0w28ekj9z",
+  "providerId": "claude",
+  "title": "制定数据库迁移方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788419563138,
+  "updatedAt": 1788419945049,
+  "lastResponseAt": 1788419945049,
+  "sessionId": "fc7c7c2a-7b05-49ea-b37e-3cb39f65b642",
+  "providerState": {
+    "providerSessionId": "fc7c7c2a-7b05-49ea-b37e-3cb39f65b642"
+  },
+  "currentNote": "数据库迁移方案.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 149,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68992,
+    "outputTokens": 410,
+    "contextWindow": 200000,
+    "contextTokens": 69141,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}
