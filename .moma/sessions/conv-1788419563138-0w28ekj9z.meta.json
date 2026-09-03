@@ -4,8 +4,8 @@
   "title": "制定数据库迁移方案",
   "titleGenerationStatus": "success",
   "createdAt": 1788419563138,
-  "updatedAt": 1788419945049,
-  "lastResponseAt": 1788419945049,
+  "updatedAt": 1788421452282,
+  "lastResponseAt": 1788421452282,
   "sessionId": "fc7c7c2a-7b05-49ea-b37e-3cb39f65b642",
   "providerState": {
     "providerSessionId": "fc7c7c2a-7b05-49ea-b37e-3cb39f65b642"
@@ -13,13 +13,13 @@
   "currentNote": "数据库迁移方案.md",
   "usage": {
     "model": "haiku",
-    "inputTokens": 149,
+    "inputTokens": 226,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 68992,
-    "outputTokens": 410,
+    "cacheReadInputTokens": 79872,
+    "outputTokens": 334,
     "contextWindow": 200000,
-    "contextTokens": 69141,
-    "percentage": 35,
+    "contextTokens": 80098,
+    "percentage": 40,
     "contextWindowIsAuthoritative": true
   }
 }
