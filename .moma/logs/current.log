@@ -676,3 +676,114 @@ Generate a title for thi
 15:45:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 15:50:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 15:50:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:52:01 [moma debug] buildTurnSubmission {
+  "contentLength": 58,
+  "turnRequest": {
+    "textLength": 58,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+15:52:01 【发送给 Provider SDK 的 Prompt】
+事务传播：`REQUIRED`；超时设置合理上限（如 30s/单 rule），防止单条慢 SQL 拖垮批次。什么意思
+
+<editor_selection path="数据库迁移方案.md" lines="131-131">
+事务传播：`REQUIRED`；超时设置合理上限（如 30s/单 rule），防止单条慢 SQL 拖垮批次。
+</editor_selection>
+15:52:01 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+15:52:01 [INFO] [auth-credential] ensureForQuery {"now":1788421921622,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4842,"rtDiffSec":84042,"sinceLastSavedSec":2358}
+15:52:01 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:52:01 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:52:01 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…PDYTHw","claudeCodeVersion":"2.1.206"}
+15:52:01 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:52:01 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…PDYTHw","claudeCodeVersion":"2.1.206"}
+15:52:01 [INFO] [auth-credential] ensureForQuery {"now":1788421921622,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4842,"rtDiffSec":84042,"sinceLastSavedSec":2358}
+15:52:01 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:52:01 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:52:01 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:52:01 [INFO] [auth-credential] ensureForQuery {"now":1788421921639,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4842,"rtDiffSec":84042,"sinceLastSavedSec":2358}
+15:52:01 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:52:01 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:52:01 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:20 [moma debug] buildTurnSubmission {
+  "contentLength": 82,
+  "turnRequest": {
+    "textLength": 82,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+15:54:20 【发送给 Provider SDK 的 Prompt】
+`status`         varchar(16)  NOT NULL DEFAULT '' COMMENT 'SUCCESS / FAIL',状态改为01。
+
+<editor_selection path="数据库迁移方案.md" lines="205-205">
+`status`         varchar(16)  NOT NULL DEFAULT '' COMMENT 'SUCCESS / FAIL',
+</editor_selection>
+15:54:20 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+15:54:20 [INFO] [auth-credential] ensureForQuery {"now":1788422060924,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4703,"rtDiffSec":83903,"sinceLastSavedSec":2497}
+15:54:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:54:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:54:20 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…PDYTHw","claudeCodeVersion":"2.1.206"}
+15:54:20 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:20 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…PDYTHw","claudeCodeVersion":"2.1.206"}
+15:54:20 [INFO] [auth-credential] ensureForQuery {"now":1788422060925,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4703,"rtDiffSec":83903,"sinceLastSavedSec":2497}
+15:54:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:54:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:54:20 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:20 [INFO] [auth-credential] ensureForQuery {"now":1788422060940,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4703,"rtDiffSec":83903,"sinceLastSavedSec":2497}
+15:54:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:54:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:54:20 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:47 [INFO] [auth-credential] ensureForQuery {"now":1788422087726,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4676,"rtDiffSec":83876,"sinceLastSavedSec":2524}
+15:54:47 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:54:47 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:54:47 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:57 [INFO] [auth-credential] ensureForQuery {"now":1788422097624,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4666,"rtDiffSec":83866,"sinceLastSavedSec":2534}
+15:54:57 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:54:57 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:54:57 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:01 [INFO] [auth-credential] ensureForQuery {"now":1788422101753,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4662,"rtDiffSec":83862,"sinceLastSavedSec":2538}
+15:55:01 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:01 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:01 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:07 [INFO] [auth-credential] ensureForQuery {"now":1788422107245,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4657,"rtDiffSec":83857,"sinceLastSavedSec":2543}
+15:55:07 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:07 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:07 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:11 [INFO] [auth-credential] ensureForQuery {"now":1788422111868,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4652,"rtDiffSec":83852,"sinceLastSavedSec":2548}
+15:55:11 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:11 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:11 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:18 [INFO] [auth-credential] ensureForQuery {"now":1788422118195,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4646,"rtDiffSec":83846,"sinceLastSavedSec":2554}
+15:55:18 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:18 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:18 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:22 [INFO] [auth-credential] ensureForQuery {"now":1788422122451,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4642,"rtDiffSec":83842,"sinceLastSavedSec":2558}
+15:55:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:22 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:26 [INFO] [auth-credential] ensureForQuery {"now":1788422126083,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4638,"rtDiffSec":83838,"sinceLastSavedSec":2562}
+15:55:26 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:26 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:26 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:30 [INFO] [auth-credential] ensureForQuery {"now":1788422130897,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4633,"rtDiffSec":83833,"sinceLastSavedSec":2567}
+15:55:30 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:30 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:30 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:34 [INFO] [auth-credential] ensureForQuery {"now":1788422134067,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4630,"rtDiffSec":83830,"sinceLastSavedSec":2570}
+15:55:34 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:34 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:34 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:37 [INFO] [auth-credential] ensureForQuery {"now":1788422137144,"at":"…PDYTHw","rt":"…5Pzxww","accessExpiresAt":1788426764074,"refreshExpiresAt":1788505964074,"atDiffSec":4627,"rtDiffSec":83827,"sinceLastSavedSec":2573}
+15:55:37 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:55:37 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:55:37 [INFO] [claude-runtime] pushEnv {"envAt":"…PDYTHw","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:55:53 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+15:55:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:55:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

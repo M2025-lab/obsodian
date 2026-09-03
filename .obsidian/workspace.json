@@ -555,7 +555,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 371.10546875
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -576,8 +576,9 @@
   },
   "active": "6e66bab7a9085725",
   "lastOpenFiles": [
-    "📚 ....md",
+    "20.知识沉淀/📚 Spring事务失效排查手册.md",
     "数据库迁移方案.md",
+    "📚 ....md",
     "10.项目整理/edar-starlord新人快速上手指南.md",
     "20.知识沉淀/材料自流程支持纯零售-代码与库表学习指南.md",
     "10.项目整理/业务知识沉淀/新人测试环境配置实操指南.md",
@@ -602,7 +603,6 @@
     "90.AI学习/第一阶段/day4.md",
     "90.AI学习/第一阶段/day3.md",
     "90.AI学习/Agent学习计划.md",
-    "00.需求/通知复尺自动化/sendPushMsg.md",
     "未命名.canvas",
     "未命名 1.canvas",
     "11.数据库表/XXnryY0j",
