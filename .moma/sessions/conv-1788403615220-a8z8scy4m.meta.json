@@ -1,0 +1,24 @@
+{
+  "id": "conv-1788403615220-a8z8scy4m",
+  "providerId": "claude",
+  "title": "查询 starlord.n_material_process_template 数据来源",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788403615220,
+  "updatedAt": 1788403641309,
+  "lastResponseAt": 1788403641309,
+  "sessionId": "bfecb28f-bd08-49ef-8de9-fce12bcdf28c",
+  "providerState": {
+    "providerSessionId": "bfecb28f-bd08-49ef-8de9-fce12bcdf28c"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 3227,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 39168,
+    "outputTokens": 534,
+    "contextWindow": 200000,
+    "contextTokens": 42395,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -156,7 +156,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1788399503732,
+  "lastGrayReleaseCheck": 1788404018148,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -166,7 +166,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1788399495936,
+    "fetchedAt": 1788403607238,
     "fetchedPluginVersion": "0.3.15",
     "envVars": {
       "claude": {
