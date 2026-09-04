@@ -326,3 +326,77 @@
 10:41:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 10:41:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 10:46:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:46:05 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:46:23 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:46:25 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:46:25 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:46:25 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:46:25 [INFO] [moma debug] plugin-settings success
+10:47:22 [moma debug] buildTurnSubmission {
+  "contentLength": 59,
+  "turnRequest": {
+    "textLength": 59,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+10:47:22 【发送给 Provider SDK 的 Prompt】
+可配置，备注：开始节点可配置首个节点提示激活时间，通知复尺节点有首次执行结算后时间和重启考核时间，以及最早可上门时间。
+10:47:22 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+10:47:22 [INFO] [auth-credential] ensureForQuery {"now":1788490042033,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3766,"rtDiffSec":82966,"sinceLastSavedSec":3434}
+10:47:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:47:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:47:22 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:47:22 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:47:22 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:47:22 [INFO] [auth-credential] ensureForQuery {"now":1788490042034,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3766,"rtDiffSec":82966,"sinceLastSavedSec":3434}
+10:47:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:47:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:47:22 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:47:22 [INFO] [auth-credential] ensureForQuery {"now":1788490042066,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3766,"rtDiffSec":82966,"sinceLastSavedSec":3434}
+10:47:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:47:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:47:22 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:47:53 [INFO] [auth-credential] ensureForQuery {"now":1788490073137,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3735,"rtDiffSec":82935,"sinceLastSavedSec":3465}
+10:47:53 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:47:53 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:47:53 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:50:35 [moma debug] buildTurnSubmission {
+  "contentLength": 4,
+  "turnRequest": {
+    "textLength": 4,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+10:50:35 【发送给 Provider SDK 的 Prompt】
+不可配置
+10:50:35 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+10:50:35 [INFO] [auth-credential] ensureForQuery {"now":1788490235654,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3572,"rtDiffSec":82772,"sinceLastSavedSec":3628}
+10:50:35 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:50:35 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:50:35 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:50:35 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:50:35 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:50:35 [INFO] [auth-credential] ensureForQuery {"now":1788490235654,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3572,"rtDiffSec":82772,"sinceLastSavedSec":3628}
+10:50:35 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:50:35 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:50:35 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:50:35 [INFO] [auth-credential] ensureForQuery {"now":1788490235681,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3572,"rtDiffSec":82772,"sinceLastSavedSec":3628}
+10:50:35 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:50:35 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:50:35 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:50:44 [INFO] [auth-credential] ensureForQuery {"now":1788490244274,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":3564,"rtDiffSec":82764,"sinceLastSavedSec":3636}
+10:50:44 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:50:44 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:50:44 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:51:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:51:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
