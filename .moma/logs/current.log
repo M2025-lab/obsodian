@@ -806,3 +806,38 @@ Generate a title for this conversation:
 14:29:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:29:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:34:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:34:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:37:38 [moma debug] buildTurnSubmission {
+  "contentLength": 261,
+  "turnRequest": {
+    "textLength": 261,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+14:37:38 【发送给 Provider SDK 的 Prompt】
+这个是排程的配置不是八合一。可配。备注：测量任务的开始节点可配。通知节点有执行结算或重启执行考核，但是没有考核时间。也没有终极考核时间。但是有作业耗时。设计节点也有开始节点可配。排程的设计，有通知设计、设计派单、设计、设计验收。每个任务都有开始节点和工期。备货任务为开始、接单、备货、进仓。每个节点任务都会有执行结束和重启执行结束，以及作业耗时，其他的没有。送货任务有4种方式，备货任务也有4种方式。送货的四种方式，其开始节点的激活条件比较多。会有节点验收，客户工程款支付比例、资金存款订单解冻比例等。合并操作规则是什么？
+14:37:38 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+14:37:38 [INFO] [auth-credential] ensureForQuery {"now":1788503858850,"at":"…J8JjXA","rt":"…a-mVrA","accessExpiresAt":1788508867089,"refreshExpiresAt":1788588067089,"atDiffSec":5008,"rtDiffSec":84208,"sinceLastSavedSec":2192}
+14:37:38 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+14:37:38 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+14:37:38 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…J8JjXA","claudeCodeVersion":"2.1.206"}
+14:37:38 [INFO] [claude-runtime] pushEnv {"envAt":"…J8JjXA","hashHit":false,"claudeCodeVersion":"2.1.206"}
+14:37:38 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…J8JjXA","claudeCodeVersion":"2.1.206"}
+14:37:38 [INFO] [auth-credential] ensureForQuery {"now":1788503858892,"at":"…J8JjXA","rt":"…a-mVrA","accessExpiresAt":1788508867089,"refreshExpiresAt":1788588067089,"atDiffSec":5008,"rtDiffSec":84208,"sinceLastSavedSec":2192}
+14:37:38 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+14:37:38 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+14:37:38 [INFO] [claude-runtime] pushEnv {"envAt":"…J8JjXA","hashHit":true,"claudeCodeVersion":"2.1.206"}
+14:37:38 [INFO] [auth-credential] ensureForQuery {"now":1788503858929,"at":"…J8JjXA","rt":"…a-mVrA","accessExpiresAt":1788508867089,"refreshExpiresAt":1788588067089,"atDiffSec":5008,"rtDiffSec":84208,"sinceLastSavedSec":2192}
+14:37:38 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+14:37:38 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+14:37:38 [INFO] [claude-runtime] pushEnv {"envAt":"…J8JjXA","hashHit":true,"claudeCodeVersion":"2.1.206"}
+14:38:08 [INFO] [auth-credential] ensureForQuery {"now":1788503888175,"at":"…J8JjXA","rt":"…a-mVrA","accessExpiresAt":1788508867089,"refreshExpiresAt":1788588067089,"atDiffSec":4979,"rtDiffSec":84179,"sinceLastSavedSec":2221}
+14:38:08 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+14:38:08 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+14:38:08 [INFO] [claude-runtime] pushEnv {"envAt":"…J8JjXA","hashHit":true,"claudeCodeVersion":"2.1.206"}
+14:39:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

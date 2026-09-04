@@ -4,8 +4,8 @@
   "title": "整理文档表格并新增维度总结可配置属性",
   "titleGenerationStatus": "success",
   "createdAt": 1788487696431,
-  "updatedAt": 1788494271494,
-  "lastResponseAt": 1788494271494,
+  "updatedAt": 1788503909049,
+  "lastResponseAt": 1788503909049,
   "sessionId": "7a3885b5-9740-4317-992c-6a6dd01a22a0",
   "providerState": {
     "providerSessionId": "7a3885b5-9740-4317-992c-6a6dd01a22a0"
@@ -13,13 +13,13 @@
   "currentNote": "未命名.md",
   "usage": {
     "model": "haiku",
-    "inputTokens": 535,
+    "inputTokens": 22643,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 63584,
-    "outputTokens": 158,
+    "cacheReadInputTokens": 42785,
+    "outputTokens": 623,
     "contextWindow": 200000,
-    "contextTokens": 64119,
-    "percentage": 32,
+    "contextTokens": 65428,
+    "percentage": 33,
     "contextWindowIsAuthoritative": true
   }
 }
