@@ -841,3 +841,5 @@ Generate a title for this conversation:
 14:38:08 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
 14:38:08 [INFO] [claude-runtime] pushEnv {"envAt":"…J8JjXA","hashHit":true,"claudeCodeVersion":"2.1.206"}
 14:39:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:39:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:44:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
