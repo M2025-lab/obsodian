@@ -1,0 +1,51 @@
+{
+  "onesToken": "sk-b5ded371a0f864330707582d73b49d14",
+  "remoteSync": {
+    "s3": {
+      "s3Endpoint": "https://next.ke.com/ob/api/s3",
+      "s3Region": "ap-beijing",
+      "s3AccessKeyID": "",
+      "s3SecretAccessKey": "",
+      "s3BucketName": "codelink-web",
+      "bypassCorsLocally": true,
+      "partsConcurrency": 20,
+      "forcePathStyle": true,
+      "remotePrefix": "",
+      "useAccurateMTime": false,
+      "reverseProxyNoSignUrl": "",
+      "generateFolderObject": true
+    },
+    "password": "",
+    "serviceType": "s3",
+    "currLogLevel": "info",
+    "autoRunEveryMilliseconds": -1,
+    "initRunAfterMilliseconds": -1,
+    "syncOnSaveAfterMilliseconds": -1,
+    "agreeToUploadExtraMetadata": true,
+    "concurrency": 5,
+    "syncConfigDir": false,
+    "syncBookmarks": false,
+    "syncUnderscoreItems": false,
+    "lang": "auto",
+    "logToDB": false,
+    "skipSizeLargerThan": -1,
+    "ignorePaths": [],
+    "onlyAllowPaths": [],
+    "allowedFileSuffixes": [],
+    "enableStatusBarInfo": true,
+    "deleteToWhere": "system",
+    "conflictAction": "keep_newer",
+    "howToCleanEmptyFolder": "clean_both",
+    "protectModifyPercentage": 100,
+    "syncDirection": "bidirectional",
+    "obfuscateSettingFile": false,
+    "enableMobileStatusBar": false,
+    "encryptionMethod": "rclone-base64",
+    "profiler": {
+      "enable": false,
+      "enablePrinting": false,
+      "recordSize": false
+    },
+    "remoteRepo": ""
+  }
+}

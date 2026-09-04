@@ -1,0 +1,10 @@
+{
+  "id": "moma-obsidian-sync",
+  "name": "Moma Obsidian Sync",
+  "version": "0.1.6",
+  "minAppVersion": "1.4.5",
+  "description": "将 Obsidian 笔记云同步到 Moma Space 存储",
+  "author": "moma.ke.com",
+  "authorUrl": "moma.ke.com",
+  "isDesktopOnly": true
+}
