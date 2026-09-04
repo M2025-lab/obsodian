@@ -637,3 +637,5 @@ Generate a title for this conversation:
 11:46:25 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 11:46:25 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 11:46:25 [INFO] [moma debug] plugin-settings success
+11:51:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:51:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
