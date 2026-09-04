@@ -639,3 +639,99 @@ Generate a title for this conversation:
 11:46:25 [INFO] [moma debug] plugin-settings success
 11:51:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 11:51:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:53:41 [moma debug] buildTurnSubmission {
+  "contentLength": 13,
+  "turnRequest": {
+    "textLength": 13,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+11:53:41 【发送给 Provider SDK 的 Prompt】
+可配置，配置测量无开始节点
+11:53:41 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+11:53:41 [INFO] [auth-credential] ensureForQuery {"now":1788494021109,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5839,"rtDiffSec":85039,"sinceLastSavedSec":1361}
+11:53:41 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:53:41 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:53:41 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:53:41 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:53:41 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:53:41 [INFO] [auth-credential] ensureForQuery {"now":1788494021109,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5839,"rtDiffSec":85039,"sinceLastSavedSec":1361}
+11:53:41 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:53:41 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:53:41 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:53:41 [INFO] [auth-credential] ensureForQuery {"now":1788494021152,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5839,"rtDiffSec":85039,"sinceLastSavedSec":1361}
+11:53:41 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:53:41 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:53:41 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:53:54 [INFO] [auth-credential] ensureForQuery {"now":1788494034068,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5826,"rtDiffSec":85026,"sinceLastSavedSec":1374}
+11:53:54 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:53:54 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:53:54 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:11 [moma debug] buildTurnSubmission {
+  "contentLength": 4,
+  "turnRequest": {
+    "textLength": 4,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+11:54:11 【发送给 Provider SDK 的 Prompt】
+不可配置
+11:54:11 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+11:54:11 [INFO] [auth-credential] ensureForQuery {"now":1788494051606,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5809,"rtDiffSec":85009,"sinceLastSavedSec":1391}
+11:54:11 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:11 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:11 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:54:11 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:11 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:54:11 [INFO] [auth-credential] ensureForQuery {"now":1788494051607,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5809,"rtDiffSec":85009,"sinceLastSavedSec":1391}
+11:54:11 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:11 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:11 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:11 [INFO] [auth-credential] ensureForQuery {"now":1788494051643,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5809,"rtDiffSec":85009,"sinceLastSavedSec":1391}
+11:54:11 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:11 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:11 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:24 [INFO] [auth-credential] ensureForQuery {"now":1788494064859,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5796,"rtDiffSec":84996,"sinceLastSavedSec":1405}
+11:54:24 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:24 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:24 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:33 [moma debug] buildTurnSubmission {
+  "contentLength": 13,
+  "turnRequest": {
+    "textLength": 13,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+11:54:33 【发送给 Provider SDK 的 Prompt】
+总结一下可配置的备注信息。
+11:54:33 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+11:54:33 [INFO] [auth-credential] ensureForQuery {"now":1788494073343,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5787,"rtDiffSec":84987,"sinceLastSavedSec":1413}
+11:54:33 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:33 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:33 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:54:33 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":false,"claudeCodeVersion":"2.1.206"}
+11:54:33 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…gpCFJg","claudeCodeVersion":"2.1.206"}
+11:54:33 [INFO] [auth-credential] ensureForQuery {"now":1788494073363,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5787,"rtDiffSec":84987,"sinceLastSavedSec":1413}
+11:54:33 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:33 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:33 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:54:33 [INFO] [auth-credential] ensureForQuery {"now":1788494073375,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":5787,"rtDiffSec":84987,"sinceLastSavedSec":1413}
+11:54:33 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:54:33 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:54:33 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:56:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:56:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

@@ -528,7 +528,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 358.7265625
+    "width": 570.15625
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -547,7 +547,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "4dde6a05d5990f5d",
+  "active": "dc1f28298a63f0a9",
   "lastOpenFiles": [
     "20.知识沉淀/材料自流程支持纯零售-代码与库表学习指南.md",
     "未命名.md",
