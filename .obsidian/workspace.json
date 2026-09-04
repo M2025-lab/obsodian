@@ -390,10 +390,27 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "2f080871a55a7e07",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d250d2871c29c239",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 320
+    "width": 320,
+    "collapsed": true
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -511,7 +528,7 @@
             }
           },
           {
-            "id": "68b7ac5e62aed7c8",
+            "id": "dc1f28298a63f0a9",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -544,7 +561,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "c24b45fede324a50",
+  "active": "dc1f28298a63f0a9",
   "lastOpenFiles": [
     "📚 ....md",
     "未命名.md",

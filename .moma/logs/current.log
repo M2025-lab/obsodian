@@ -65,3 +65,162 @@
 09:50:10 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
 09:50:10 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.15"}
 09:50:11 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:08:16 [moma debug] buildTurnSubmission {
+  "contentLength": 60,
+  "turnRequest": {
+    "textLength": 60,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "currentNotePath": "未命名.md",
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+10:08:16 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+帮我整理一下这个文档中的表格，之后我也会加入系统版本 订单类型 分公司 套餐 品类 供应商节点流程维度 来总结是否可配置
+10:08:16 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+10:08:16 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+10:08:16 [INFO] [auth-credential] ensureForQuery {"now":1788487696450,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6112,"rtDiffSec":85312,"sinceLastSavedSec":1088}
+10:08:16 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:16 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:16 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+10:08:16 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+10:08:16 [moma debug] ColdStartQuery onesToken 存在: true
+10:08:16 [moma debug] ColdStartQuery momaFlagSettings 已注入
+10:08:16 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+10:08:16 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+10:08:16 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":7479}
+10:08:16 【发送给 Provider SDK 的 Prompt】
+帮我整理一下这个文档中的表格，之后我也会加入系统版本 订单类型 分公司 套餐 品类 供应商节点流程维度 来总结是否可配置
+
+<linked_note>
+未命名.md
+</linked_note>
+10:08:16 [INFO] [auth-credential] ensureForQuery {"now":1788487696474,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6112,"rtDiffSec":85312,"sinceLastSavedSec":1088}
+10:08:16 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:16 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:16 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:08:16 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:08:16 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+10:08:16 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":7480}
+10:08:16 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+10:08:16 [INFO] [auth-credential] ensureForQuery {"now":1788487696477,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6112,"rtDiffSec":85312,"sinceLastSavedSec":1088}
+10:08:16 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:16 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:16 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:08:16 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":false,"claudeCodeVersion":"2.1.206"}
+10:08:17 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:08:17 [INFO] [auth-credential] ensureForQuery {"now":1788487697349,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6111,"rtDiffSec":85311,"sinceLastSavedSec":1089}
+10:08:17 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:17 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:17 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:17 [moma debug] ColdStartQuery session_id: 2568e4b3-6fb4-44b1-9fa7-730c7193bfac
+10:08:17 [INFO] [auth-credential] ensureForQuery {"now":1788487697724,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6110,"rtDiffSec":85310,"sinceLastSavedSec":1090}
+10:08:17 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:17 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:17 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:22 [INFO] [auth-credential] ensureForQuery {"now":1788487702484,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6106,"rtDiffSec":85306,"sinceLastSavedSec":1094}
+10:08:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:22 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:24 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+10:08:24 [moma debug] ColdStartQuery 完成，共收到消息数: 18 | 响应文本长度: 18
+10:08:24 [INFO] [auth-credential] ensureForQuery {"now":1788487704403,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6104,"rtDiffSec":85304,"sinceLastSavedSec":1096}
+10:08:24 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:24 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:24 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:26 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":7480,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+10:08:59 [INFO] [auth-credential] ensureForQuery {"now":1788487739363,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6069,"rtDiffSec":85269,"sinceLastSavedSec":1131}
+10:08:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:59 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:59 [INFO] [auth-credential] ensureForQuery {"now":1788487739365,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6069,"rtDiffSec":85269,"sinceLastSavedSec":1131}
+10:08:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:59 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:08:59 [INFO] [auth-credential] ensureForQuery {"now":1788487739381,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6069,"rtDiffSec":85269,"sinceLastSavedSec":1131}
+10:08:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:08:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:08:59 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:09:03 [INFO] [auth-credential] ensureForQuery {"now":1788487743638,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":6064,"rtDiffSec":85264,"sinceLastSavedSec":1136}
+10:09:03 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:09:03 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:09:03 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:02 [INFO] [auth-credential] ensureForQuery {"now":1788487862869,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5945,"rtDiffSec":85145,"sinceLastSavedSec":1255}
+10:11:02 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:02 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:02 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:23 [INFO] [auth-credential] ensureForQuery {"now":1788487883029,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5925,"rtDiffSec":85125,"sinceLastSavedSec":1275}
+10:11:23 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:23 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:23 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:29 [INFO] [auth-credential] ensureForQuery {"now":1788487889031,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5919,"rtDiffSec":85119,"sinceLastSavedSec":1281}
+10:11:29 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:29 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:29 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:36 [INFO] [auth-credential] ensureForQuery {"now":1788487896445,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5912,"rtDiffSec":85112,"sinceLastSavedSec":1288}
+10:11:36 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:36 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:36 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:39 [INFO] [auth-credential] ensureForQuery {"now":1788487899496,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5909,"rtDiffSec":85109,"sinceLastSavedSec":1291}
+10:11:39 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:39 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:39 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:11:43 [INFO] [auth-credential] ensureForQuery {"now":1788487903185,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5905,"rtDiffSec":85105,"sinceLastSavedSec":1295}
+10:11:43 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:11:43 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:11:43 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:12:20 [moma debug] buildTurnSubmission {
+  "contentLength": 4,
+  "turnRequest": {
+    "textLength": 4,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 2,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+10:12:20 【发送给 Provider SDK 的 Prompt】
+不可配置
+10:12:20 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+10:12:20 [INFO] [auth-credential] ensureForQuery {"now":1788487940178,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5868,"rtDiffSec":85068,"sinceLastSavedSec":1332}
+10:12:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:12:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:12:20 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:12:20 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:12:20 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:12:20 [INFO] [auth-credential] ensureForQuery {"now":1788487940178,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5868,"rtDiffSec":85068,"sinceLastSavedSec":1332}
+10:12:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:12:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:12:20 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:12:20 [INFO] [auth-credential] ensureForQuery {"now":1788487940610,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5867,"rtDiffSec":85067,"sinceLastSavedSec":1333}
+10:12:20 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:12:20 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:12:20 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:12:35 [INFO] [auth-credential] ensureForQuery {"now":1788487955693,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5852,"rtDiffSec":85052,"sinceLastSavedSec":1348}
+10:12:35 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:12:35 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:12:35 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:12:48 [INFO] [auth-credential] ensureForQuery {"now":1788487968884,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5839,"rtDiffSec":85039,"sinceLastSavedSec":1361}
+10:12:48 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:12:48 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:12:48 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+10:15:52 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+10:15:52 [INFO] [auth-credential] ensureForQuery {"now":1788488152422,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":5656,"rtDiffSec":84856,"sinceLastSavedSec":1544}
+10:15:52 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:15:52 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:15:52 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:15:52 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+10:15:52 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+10:15:52 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":8222}
+10:16:02 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+10:16:02 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":8222,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+10:16:03 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+10:16:03 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:16:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:21:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:21:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

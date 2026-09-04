@@ -1,0 +1,25 @@
+{
+  "id": "conv-1788487696431-jkcgzmtyn",
+  "providerId": "claude",
+  "title": "整理文档表格并新增维度总结可配置属性",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788487696431,
+  "updatedAt": 1788488151847,
+  "lastResponseAt": 1788487975926,
+  "sessionId": "7a3885b5-9740-4317-992c-6a6dd01a22a0",
+  "providerState": {
+    "providerSessionId": "7a3885b5-9740-4317-992c-6a6dd01a22a0"
+  },
+  "currentNote": "未命名.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 250,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 45434,
+    "outputTokens": 287,
+    "contextWindow": 200000,
+    "contextTokens": 45684,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}
