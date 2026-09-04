@@ -844,3 +844,128 @@ Generate a title for this conversation:
 14:39:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:44:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 14:44:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:51:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:51:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:54:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:54:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:59:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+14:59:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:04:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:04:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:04:45 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+15:09:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:09:28 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:14:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:14:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:19:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:19:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:24:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:24:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:29:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:29:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:34:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:34:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:35:50 [moma debug] buildTurnSubmission {
+  "contentLength": 1157,
+  "turnRequest": {
+    "textLength": 1157,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+15:35:50 【发送给 Provider SDK 的 Prompt】
+可配置除此之外，在整个文档的下面，再帮我记录一下排程，每个任务以及节点任务的配置有什么。排程的复尺开始节点会查到生成后的立即激活以及节点验收当中四个阶段，开工交底、技术交底、水电验收、基装验收。之后写的话就写节点验收和立即激活。通知复尺任务有执行决策和重启决策，以及作业耗时。作业耗时有当天结束和非当天结束，非当天结束又有按规则递增可选。通知类任务都会有一个最早可上门时间的列表。复尺任务和通知复尺任务基本上一致，有执行角色和重启执行角色，以及作业耗时，但是没有最早的上门时间，复尺节点多了一个是否可重启。下单的开始节点，激活条件比复尺又多了一个，该品类下复尺节点完成的选项。下单任务的下单节点。执行角色配置不可修改，但是作业耗时时间可改，无其他可配置。备货再次分为三部分，代销直送、代销自提、代销配送。代销直送开始节点激活条件写死。备货的代销直送接单节点执行角色也写死，可配置作业耗时。备货的代销直送备货节点执行角色也写死，可配置作业耗时。备货节点的代销直送可分为接单备货。代销自提可分为接单、备货、进仓。其开始节点激活也写死。接单节点，执行角色也写死，只可配作业耗时。同样备货节点也执行角色写死，这可配作业耗时。进仓节点也写死，可配作业耗时。代销配送有接单、备货、进仓。其开始接单、备货、进仓四个节点，执行角色均写死，开始的激活条件也写死，只可配置接单、备货、进仓的作业耗时。送货任务分为代销直送、仓库配送、代销自提、代销配送。送货的代销直送的开始节点，其激活条件有立即激活和送货限制，分为节点验收或单节点、客户合同工程款支付比例以及资金存款订单解冻比例等条件。代销直送的通知送货，除了执行决策配置之外，以及作业耗时之外，还有合并逻辑。送货的执行角色不可配，只有作业耗时可配。签收节点有执行角色和作业耗时两个配置，都可配。仓库配送的流程和代销直送的流程一致，其节点也一致。预埋件安装的开始节点也需要配置首个节点的激活条件。通知的预埋件安装，可配执行角色和作业耗时，以及最早的上门时间。预埋件安装分为两个流程，一个是提交自检，一个是提交自检加自检验收。提交自检需要配置执行角色，以及是否可重启和作业耗时。自检验收一样。安装的首个激活节点条件，有生成后激活和安装限制，安装限制里面有节点验收、工程款支付比例、货单节点和节点依赖。安装类，通知安装可配置执行角色，作业耗时，最早可上门时间。安装分为项目经理和供应商作业工种。二者执行不同的配置，项目经理有派单。派单由派单系统执行角色配置，只可配作业耗时。进场节点也是，执行角色为作业工种写死，可配是否重启以及作业耗时。完工自检和实地验收也只可配执行角色和作业耗时以及是否重启。供应商为作业工种的安装，可选送装一体和送装分离两种方式。其开始节点的激活条件和项目经理一样。
+15:35:50 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+15:35:50 [INFO] [auth-credential] ensureForQuery {"now":1788507350706,"at":"…J8JjXA","rt":"…a-mVrA","accessExpiresAt":1788508867089,"refreshExpiresAt":1788588067089,"atDiffSec":1516,"rtDiffSec":80716,"sinceLastSavedSec":5684}
+15:35:50 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":true,"refreshExpired":false}
+15:35:50 [INFO] [auth-credential] ensureForQuery at near-expiry, doRefresh
+15:35:50 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+15:35:51 [INFO] [auth-credential] refresh success, generation=undefined
+15:35:51 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…C7PtMQ","claudeCodeVersion":"2.1.206"}
+15:35:51 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":false,"claudeCodeVersion":"2.1.206"}
+15:35:51 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…C7PtMQ","claudeCodeVersion":"2.1.206"}
+15:35:51 [INFO] [auth-credential] ensureForQuery {"now":1788507351374,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7200,"rtDiffSec":86400,"sinceLastSavedSec":0}
+15:35:51 [INFO] [auth-credential] ensureForQuery cooldown, skipping {"sinceLastSavedSec":0}
+15:35:51 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:35:51 [INFO] [auth-credential] ensureForQuery {"now":1788507351408,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7200,"rtDiffSec":86400,"sinceLastSavedSec":0}
+15:35:51 [INFO] [auth-credential] ensureForQuery cooldown, skipping {"sinceLastSavedSec":0}
+15:35:51 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:36:23 [INFO] [auth-credential] ensureForQuery {"now":1788507383622,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7168,"rtDiffSec":86368,"sinceLastSavedSec":32}
+15:36:23 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:36:23 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:36:23 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:36:34 [INFO] [auth-credential] ensureForQuery {"now":1788507394010,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7157,"rtDiffSec":86357,"sinceLastSavedSec":43}
+15:36:34 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:36:34 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:36:34 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:36:39 [INFO] [auth-credential] ensureForQuery {"now":1788507399972,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7151,"rtDiffSec":86351,"sinceLastSavedSec":49}
+15:36:39 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:36:39 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:36:39 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:37:19 [INFO] [auth-credential] ensureForQuery {"now":1788507439266,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":7112,"rtDiffSec":86312,"sinceLastSavedSec":88}
+15:37:19 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:37:19 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:37:19 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:39:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:39:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:44:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:44:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:49:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:49:28 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:49:59 [moma debug] buildTurnSubmission {
+  "contentLength": 40,
+  "turnRequest": {
+    "textLength": 40,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+15:49:59 【发送给 Provider SDK 的 Prompt】
+送货任务也有首个节点激活条件中也会有生成后立即激活和送货限制，并不只是安装会有。
+15:49:59 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+15:49:59 [INFO] [auth-credential] ensureForQuery {"now":1788508199943,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":6351,"rtDiffSec":85551,"sinceLastSavedSec":849}
+15:49:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:49:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:49:59 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…C7PtMQ","claudeCodeVersion":"2.1.206"}
+15:49:59 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:49:59 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…C7PtMQ","claudeCodeVersion":"2.1.206"}
+15:49:59 [INFO] [auth-credential] ensureForQuery {"now":1788508199943,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":6351,"rtDiffSec":85551,"sinceLastSavedSec":849}
+15:49:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:49:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:49:59 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:49:59 [INFO] [auth-credential] ensureForQuery {"now":1788508199959,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":6351,"rtDiffSec":85551,"sinceLastSavedSec":849}
+15:49:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:49:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:49:59 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:50:16 [INFO] [auth-credential] ensureForQuery {"now":1788508216974,"at":"…C7PtMQ","rt":"…m1jIdw","accessExpiresAt":1788514551314,"refreshExpiresAt":1788593751314,"atDiffSec":6334,"rtDiffSec":85534,"sinceLastSavedSec":866}
+15:50:16 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+15:50:16 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+15:50:16 [INFO] [claude-runtime] pushEnv {"envAt":"…C7PtMQ","hashHit":true,"claudeCodeVersion":"2.1.206"}
+15:54:26 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:54:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:59:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:59:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:04:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:04:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:05:17 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:05:19 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:05:19 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:05:20 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:05:20 [INFO] [moma debug] plugin-settings success
+16:09:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:09:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:14:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:14:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:19:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:19:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:24:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:24:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:29:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:29:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
