@@ -1,0 +1,25 @@
+{
+  "id": "conv-1788491834038-o6dcvl7m0",
+  "providerId": "claude",
+  "title": "查看可配置项数量",
+  "titleGenerationStatus": "success",
+  "createdAt": 1788491834038,
+  "updatedAt": 1788491866124,
+  "lastResponseAt": 1788491866124,
+  "sessionId": "c1ed5449-c1da-4346-9237-59faf23f6b4c",
+  "providerState": {
+    "providerSessionId": "c1ed5449-c1da-4346-9237-59faf23f6b4c"
+  },
+  "currentNote": "未命名.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 3267,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36864,
+    "outputTokens": 1598,
+    "contextWindow": 200000,
+    "contextTokens": 40131,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}

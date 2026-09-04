@@ -442,3 +442,113 @@
 11:11:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 11:11:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
 11:16:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:16:05 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:16:52 [moma debug] buildTurnSubmission {
+  "contentLength": 82,
+  "turnRequest": {
+    "textLength": 82,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "images": 1,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+11:16:52 【发送给 Provider SDK 的 Prompt】
+可配置，备注：开始节点可以配置激活时间，通知节点有首次执行的决策和时间和重启考核时间，安装类节点，有提交自检和自检验收两种，完工自检类有正单考核和竣工前补货单考核。
+11:16:52 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+11:16:52 [INFO] [auth-credential] ensureForQuery {"now":1788491812623,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1995,"rtDiffSec":81195,"sinceLastSavedSec":5205}
+11:16:52 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:16:52 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:16:52 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:16:52 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:16:52 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:16:52 [INFO] [auth-credential] ensureForQuery {"now":1788491812624,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1995,"rtDiffSec":81195,"sinceLastSavedSec":5205}
+11:16:52 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:16:52 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:16:52 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:16:52 [INFO] [auth-credential] ensureForQuery {"now":1788491812693,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1995,"rtDiffSec":81195,"sinceLastSavedSec":5205}
+11:16:52 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:16:52 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:16:52 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:14 [moma debug] buildTurnSubmission {
+  "contentLength": 8,
+  "turnRequest": {
+    "textLength": 8,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "currentNotePath": "未命名.md",
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+11:17:14 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+有几个可配置的了
+"""
+
+Generate a title for this conversation:
+11:17:14 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+11:17:14 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+11:17:14 [INFO] [auth-credential] ensureForQuery {"now":1788491834060,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1974,"rtDiffSec":81174,"sinceLastSavedSec":5226}
+11:17:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:14 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+11:17:14 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+11:17:14 [moma debug] ColdStartQuery onesToken 存在: true
+11:17:14 [moma debug] ColdStartQuery momaFlagSettings 已注入
+11:17:14 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+11:17:14 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"…(truncated)
+11:17:14 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":18422}
+11:17:14 【发送给 Provider SDK 的 Prompt】
+有几个可配置的了
+
+<linked_note>
+未命名.md
+</linked_note>
+11:17:14 [INFO] [auth-credential] ensureForQuery {"now":1788491834070,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1974,"rtDiffSec":81174,"sinceLastSavedSec":5226}
+11:17:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:14 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-MY_13cApsvpRHocdA05YHg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.15\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+11:17:14 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":18423}
+11:17:14 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":false,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [auth-credential] ensureForQuery {"now":1788491834073,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1974,"rtDiffSec":81174,"sinceLastSavedSec":5226}
+11:17:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:14 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":false,"claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…A05YHg","claudeCodeVersion":"2.1.206"}
+11:17:14 [INFO] [auth-credential] ensureForQuery {"now":1788491834871,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1973,"rtDiffSec":81173,"sinceLastSavedSec":5227}
+11:17:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:14 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:14 [moma debug] ColdStartQuery session_id: 0af36c21-48f6-4882-a843-686f01b74a47
+11:17:14 [INFO] [auth-credential] ensureForQuery {"now":1788491834958,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1973,"rtDiffSec":81173,"sinceLastSavedSec":5227}
+11:17:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:14 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:15 [INFO] [auth-credential] ensureForQuery {"now":1788491835462,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1973,"rtDiffSec":81173,"sinceLastSavedSec":5227}
+11:17:15 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:15 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:15 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:19 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+11:17:19 [moma debug] ColdStartQuery 完成，共收到消息数: 31 | 响应文本长度: 8
+11:17:21 [INFO] [auth-credential] ensureForQuery {"now":1788491841268,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1967,"rtDiffSec":81167,"sinceLastSavedSec":5233}
+11:17:21 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:21 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:21 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:22 [INFO] [auth-credential] ensureForQuery {"now":1788491842677,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1965,"rtDiffSec":81165,"sinceLastSavedSec":5235}
+11:17:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:22 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:17:24 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":18423,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+11:17:26 [INFO] [auth-credential] ensureForQuery {"now":1788491846936,"at":"…A05YHg","rt":"…ynnfNA","accessExpiresAt":1788493808026,"refreshExpiresAt":1788573008026,"atDiffSec":1961,"rtDiffSec":81161,"sinceLastSavedSec":5239}
+11:17:26 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:17:26 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:17:26 [INFO] [claude-runtime] pushEnv {"envAt":"…A05YHg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:21:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:21:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
