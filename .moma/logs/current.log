@@ -584,3 +584,14 @@ Generate a title for this conversation:
 11:31:00 [INFO] [auth-credential] ensureForQuery cooldown, skipping {"sinceLastSavedSec":0}
 11:31:00 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
 11:31:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:31:05 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:31:22 [INFO] [auth-credential] ensureForQuery {"now":1788492682819,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":7178,"rtDiffSec":86378,"sinceLastSavedSec":22}
+11:31:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:31:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:31:22 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:31:31 [INFO] [auth-credential] ensureForQuery {"now":1788492691756,"at":"…gpCFJg","rt":"…3vQhMw","accessExpiresAt":1788499860379,"refreshExpiresAt":1788579060379,"atDiffSec":7169,"rtDiffSec":86369,"sinceLastSavedSec":31}
+11:31:31 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+11:31:31 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+11:31:31 [INFO] [claude-runtime] pushEnv {"envAt":"…gpCFJg","hashHit":true,"claudeCodeVersion":"2.1.206"}
+11:36:04 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+11:36:04 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
