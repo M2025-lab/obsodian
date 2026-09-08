@@ -376,6 +376,22 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "8bd3a4b6a060a030",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f95fe61368760573",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
