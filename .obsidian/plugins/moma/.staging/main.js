@@ -277504,6 +277504,19 @@ var DocumentPreviewView = class _DocumentPreviewView extends import_obsidian83.F
   }
 };
 
+// src/features/document-preview/registerDocumentPreviewExtensions.ts
+function registerDocumentPreviewExtensions(plugin, viewType) {
+  for (const extension of DOCUMENT_PREVIEW_EXTENSIONS) {
+    try {
+      plugin.registerExtensions([extension], viewType);
+    } catch (error49) {
+      if (!(error49 instanceof Error) || error49.message !== `Attempting to register an existing file extension "${extension}"`) {
+        throw error49;
+      }
+    }
+  }
+}
+
 // src/features/feedback/LogStore.ts
 init_debug();
 init_logBuffer();
@@ -309004,7 +309017,7 @@ var ClaudianPlugin = class extends import_obsidian142.Plugin {
       VIEW_TYPE_DOCUMENT_PREVIEW,
       (leaf) => new DocumentPreviewView(leaf)
     );
-    this.registerExtensions([...DOCUMENT_PREVIEW_EXTENSIONS], VIEW_TYPE_DOCUMENT_PREVIEW);
+    registerDocumentPreviewExtensions(this, VIEW_TYPE_DOCUMENT_PREVIEW);
     this.registerView(
       VIEW_TYPE_MEETING_AUDIO_PREVIEW,
       (leaf) => new MeetingAudioPreviewView(leaf, this)
