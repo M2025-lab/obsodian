@@ -13,7 +13,7 @@ confidence: high
 # AcceptanceReportService 验收报告服务
 
 ## 概述
-管理安装工验收报告的全生命周期：获取验收模板、提交验收报告（单条/批量）、查询验收详情、合并验收报告。支持施工验收标准和套餐验收。与 [[task-dispatch-v2]] 的 TaskDispatchNode 紧密关联。
+管理安装工验收报告的全生命周期：获取验收模板、提交验收报告（单条/批量）、查询验收详情、合并验收报告。支持施工验收标准和套餐验收。与 [[12.项目分析/edar-starlord项目学习/接口分析]] 的 TaskDispatchNode 紧密关联。
 
 ## Key Methods
 

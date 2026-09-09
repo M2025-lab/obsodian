@@ -17,7 +17,7 @@ confidence: high
 # DispatchActivateService 任务调度激活服务
 
 ## 概述
-定时扫描所有计划激活时间为当天的 TaskDispatch（任务调度单），调用 DispatchCreateService 触发实际的任务创建流程。是交付流程的"定时启动器"，确保配置好的物料任务按计划时间自动生效。搭配 [[task-dispatch-v2]] 和 [[material-schedule]] 使用。
+定时扫描所有计划激活时间为当天的 TaskDispatch（任务调度单），调用 DispatchCreateService 触发实际的任务创建流程。是交付流程的"定时启动器"，确保配置好的物料任务按计划时间自动生效。搭配 [[12.项目分析/edar-starlord项目学习/接口分析]] 和 [[material-schedule]] 使用。
 
 ## Key Methods
 
@@ -57,5 +57,5 @@ MaterialTaskSchedule (定时触发)
 ```
 
 ## 相关页面
-- [[task-dispatch-v2]] — 任务调度V2
+- [[12.项目分析/edar-starlord项目学习/接口分析]] — 任务调度V2
 - [[material-schedule]] — 物料排期
