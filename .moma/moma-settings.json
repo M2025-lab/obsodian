@@ -50,7 +50,8 @@
         "MirrordeMacBook-Pro.local": "native-windows",
         "bogon": "native-windows",
         "PC-20200915PKWW.ljstaff.com": "native-windows",
-        "PC-20210913TEUN.ljstaff.com": "native-windows"
+        "PC-20210913TEUN.ljstaff.com": "native-windows",
+        "DESKTOP-NL09F7A.ljstaff.com": "native-windows"
       },
       "wslDistroOverridesByHost": {}
     }
@@ -147,8 +148,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-09-08T01:51:53.272Z",
-      "momaCliUpdateAttemptedAt": "2026-09-08T01:51:53.272Z"
+      "autoInstallAttemptedAt": "2026-09-09T01:43:59.439Z",
+      "momaCliUpdateAttemptedAt": "2026-09-09T01:43:59.439Z"
     },
     "strictMarkdown": false
   },
@@ -157,7 +158,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1788839544401,
+  "lastGrayReleaseCheck": 1788918237899,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -167,7 +168,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1788832308559,
+    "fetchedAt": 1788918235708,
     "fetchedPluginVersion": "0.3.15",
     "envVars": {
       "claude": {
