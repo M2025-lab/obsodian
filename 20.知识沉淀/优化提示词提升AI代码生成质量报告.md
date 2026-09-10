@@ -292,8 +292,4 @@ B4 两段执行：
 3. 顺序：`queryConfigOFCList` 新逻辑结果在前；`queryCategoryConfigOFCList` 旧逻辑结果在前；
 
 4. 落点：T2 的灰度块在 `setProductComboIds(null)` 之后；T3 的 `documentTypeList` 为 `[12]`；T1/T4 的开关入参为 `Collections.singletonList(mdmCode)`；
-
-5. 未越界：改动 diff 中不出现 `MaterialCreateV2ServiceImpl`、`ComboInfoManager` / `ComboInfoManagerImpl`、`pom.xml`；
-
-6. 编译：`./mvnw -o compile -pl edar-starlord-service -am -Dmaven.test.skip=true` 通过。
 ```
