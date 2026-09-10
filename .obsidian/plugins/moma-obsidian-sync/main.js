@@ -30046,6 +30046,14 @@ function getMomaBaseUrl(backendEnv, customUrl) {
   return MOMA_PROD_BASE_URL;
 }
 var MOMA_BASE_URL = getMomaBaseUrl();
+function getActiveOnesToken(settings) {
+  var _a3;
+  return (_a3 = true ? settings.onesToken : settings.onesTokenTest) != null ? _a3 : "";
+}
+function setActiveOnesToken(settings, token) {
+  if (true) settings.onesToken = token;
+  else settings.onesTokenTest = token;
+}
 var MOMA_VALIDATE_KEY_PATH = "/token/verify";
 var MOMA_SYNC_SPACES_PATH = "/sync/spaces";
 var MOMA_SYNC_SETTINGS_PATH = "/sync/settings";
@@ -30276,7 +30284,7 @@ var TokenInputModal = class extends import_obsidian.Modal {
       this.showError("Token \u65E0\u6548\uFF0C\u8BF7\u91CD\u65B0\u8F93\u5165");
       return;
     }
-    this.plugin.settings.onesToken = token.trim();
+    setActiveOnesToken(this.plugin.settings, token.trim());
     await this.plugin.saveSettings();
     this.close();
     (_a3 = this.onSuccess) == null ? void 0 : _a3.call(this);
@@ -52321,7 +52329,11 @@ var getSyncPlanInplace = async (mixedEntityMappings, skipSizeLargerThan, conflic
               mixedEntry.change = true;
             }
           } else {
-            if (syncDirection === "incremental_push_only" || syncDirection === "incremental_push_and_delete_only") {
+            if (remote.synthesizedFolder === true) {
+              mixedEntry.decisionBranch = 141;
+              mixedEntry.decision = "folder_to_skip";
+              mixedEntry.change = false;
+            } else if (syncDirection === "incremental_push_only" || syncDirection === "incremental_push_and_delete_only") {
               mixedEntry.decisionBranch = 131;
               mixedEntry.decision = "folder_to_skip";
               mixedEntry.change = false;
@@ -53437,15 +53449,17 @@ var RemoteSyncService = class {
     this.enableInitSyncIfSet();
     this.toggleSyncOnSaveIfSet();
     await this.setupStatusBar(this.plugin.addStatusBarItem.bind(this.plugin));
-    this.plugin.registerEvent(
-      this.plugin.app.workspace.on("moma-main:logout", () => void this.logout())
-    );
-    this.plugin.registerEvent(
-      this.plugin.app.workspace.on("moma-main:login", () => void this._tryLoadTokenFromMomaSettings())
-    );
+    if (true) {
+      this.plugin.registerEvent(
+        this.plugin.app.workspace.on("moma-main:logout", () => void this.logout())
+      );
+      this.plugin.registerEvent(
+        this.plugin.app.workspace.on("moma-main:login", () => void this._tryLoadTokenFromMomaSettings())
+      );
+    }
   }
   async logout() {
-    this.plugin.settings.onesToken = "";
+    setActiveOnesToken(this.plugin.settings, "");
     this.settings.s3.s3AccessKeyID = "";
     this.settings.s3.s3SecretAccessKey = "";
     await this.saveSettings();
@@ -53459,8 +53473,7 @@ var RemoteSyncService = class {
    * （那会整体写盘 plugin.settings，在 bindSpace 回滚窗口造成内存/磁盘分裂）。
    */
   async listSpaces() {
-    var _a3;
-    const onesToken = (_a3 = this.plugin.settings.onesToken) == null ? void 0 : _a3.trim();
+    const onesToken = getActiveOnesToken(this.plugin.settings).trim();
     if (!onesToken) throw new Error("\u4E91\u540C\u6B65\u9700\u8981\u5148\u767B\u5F55\uFF0C\u8BF7\u5B8C\u6210 Token \u9A8C\u8BC1\u540E\u518D\u4F7F\u7528\u3002");
     const baseUrl = normalizeMomaApiBaseUrl(
       getMomaBaseUrl(this.plugin.settings.backendEnv, this.plugin.settings.backendCustomUrl)
@@ -53496,7 +53509,19 @@ var RemoteSyncService = class {
     }
     return adapter.getResourcePath("").split("?")[0];
   }
+  /**
+   * 从主插件的 `.moma/moma-settings.json` 继承 token —— **仅正式包**。
+   *
+   * 主插件按 backendEnv 把线上/测试 token 分开存(`onesToken` / `onesTokenTest`),这里只读
+   * 它的 `onesToken`;而非正式包的 API 域名是构建期钉死的测试/本地后端(getMomaBaseUrl:15)。
+   * 继续继承就是"测试后端 + 线上 token",鉴权必然 401。所以非正式包一律不继承,
+   * 由开发者在设置页或 TokenInputModal 自己填一个对得上环境的 token。
+   *
+   * 本地也分槽存(setActiveOnesToken),所以这里写入只会落到正式槽位 —— 正式包继承一次
+   * 不会冲掉测试包那个,来回切包两边的 token 都还在。
+   */
   async _tryLoadTokenFromMomaSettings() {
+    if (false) return;
     const adapter = this.plugin.app.vault.adapter;
     const filePath = ".moma/moma-settings.json";
     try {
@@ -53505,7 +53530,7 @@ var RemoteSyncService = class {
       const parsed = JSON.parse(raw);
       const token = typeof parsed.onesToken === "string" ? parsed.onesToken.trim() : "";
       if (token) {
-        this.plugin.settings.onesToken = token;
+        setActiveOnesToken(this.plugin.settings, token);
         await this.plugin.saveSettings();
       }
     } catch (e2) {
@@ -53518,7 +53543,7 @@ var RemoteSyncService = class {
    * Throws with a user-facing Chinese message on any failure.
    */
   async ensureS3Credentials() {
-    var _a3, _b2, _c2, _d2, _e2;
+    var _a3, _b2, _c2, _d2;
     const spaceId = (_a3 = this.settings.spaceId) != null ? _a3 : "";
     if (!spaceId) throw new Error("\u8BF7\u5148\u5728\u8BBE\u7F6E\u9875\u7ED1\u5B9A Space\u3002");
     const setRemoteSync = (s2) => {
@@ -53535,7 +53560,7 @@ var RemoteSyncService = class {
       }
       return;
     }
-    const onesToken = (_b2 = this.plugin.settings.onesToken) == null ? void 0 : _b2.trim();
+    const onesToken = getActiveOnesToken(this.plugin.settings).trim();
     if (!onesToken) throw new Error("\u4E91\u540C\u6B65\u9700\u8981\u5148\u767B\u5F55\uFF0C\u8BF7\u5728\u804A\u5929\u9875\u5B8C\u6210 Token \u9A8C\u8BC1\u540E\u518D\u4F7F\u7528\u3002");
     const baseUrl = normalizeMomaApiBaseUrl(
       getMomaBaseUrl(this.plugin.settings.backendEnv, this.plugin.settings.backendCustomUrl)
@@ -53549,10 +53574,10 @@ var RemoteSyncService = class {
     if (!credResp.ok) throw new Error(`\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25\uFF08HTTP ${credResp.status}\uFF09`);
     const credJson = await credResp.json();
     if (credJson.errno !== 0 || !credJson.data) {
-      throw new Error(String((_c2 = credJson.error) != null ? _c2 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25"));
+      throw new Error(String((_b2 = credJson.error) != null ? _b2 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25"));
     }
-    const accessKeyId = (_d2 = credJson.data.accessKeyId) != null ? _d2 : "";
-    const secretKey = (_e2 = credJson.data.secretKey) != null ? _e2 : "";
+    const accessKeyId = (_c2 = credJson.data.accessKeyId) != null ? _c2 : "";
+    const secretKey = (_d2 = credJson.data.secretKey) != null ? _d2 : "";
     if (!accessKeyId || !secretKey) throw new Error("\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25\uFF1A\u51ED\u8BC1\u4E3A\u7A7A");
     const previous = this.settings;
     const next = structuredClone(previous);
@@ -53578,17 +53603,17 @@ var RemoteSyncService = class {
    * @returns 本次是否真的把新值落了盘。设置页靠它决定要不要重画,失败与"没变化"都是 false。
    */
   async refreshAllowedFileSuffixes() {
-    var _a3, _b2;
+    var _a3;
     try {
       const baseUrl = normalizeMomaApiBaseUrl(
         getMomaBaseUrl(this.plugin.settings.backendEnv, this.plugin.settings.backendCustomUrl)
       );
       const { suffixes, policy } = await fetchSyncSettings(
-        (_a3 = this.plugin.settings.onesToken) != null ? _a3 : "",
+        getActiveOnesToken(this.plugin.settings),
         { baseUrl }
       );
       const previous = this.settings;
-      if (sameStringList((_b2 = previous.allowedFileSuffixes) != null ? _b2 : [], suffixes) && samePolicy(previous.fileUploadPolicy, policy)) {
+      if (sameStringList((_a3 = previous.allowedFileSuffixes) != null ? _a3 : [], suffixes) && samePolicy(previous.fileUploadPolicy, policy)) {
         return false;
       }
       const next = structuredClone(previous);
@@ -53609,7 +53634,7 @@ var RemoteSyncService = class {
     }
   }
   async syncRun(triggerSource = "manual") {
-    var _a3, _b2, _c2, _d2, _e2, _f, _g, _h2, _i2, _j, _k, _l;
+    var _a3, _b2, _c2, _d2, _e2, _f, _g, _h2, _i2, _j, _k;
     const t8 = (x2, vars) => this.i18n.t(x2, vars);
     const getNotice = (s2, msg, timeout) => {
       if (s2 === "manual" || s2 === "dry") new import_obsidian5.Notice(msg, timeout);
@@ -53624,7 +53649,7 @@ var RemoteSyncService = class {
         );
       }
       await this._tryLoadTokenFromMomaSettings();
-      if (!((_b2 = this.plugin.settings.onesToken) == null ? void 0 : _b2.trim())) {
+      if (!getActiveOnesToken(this.plugin.settings).trim()) {
         if (triggerSource === "manual" || triggerSource === "dry") {
           new TokenInputModal(this.plugin.app, this.plugin, () => void this.syncRun(triggerSource)).open();
         }
@@ -53634,7 +53659,7 @@ var RemoteSyncService = class {
         getNotice(triggerSource, "\u8BF7\u5148\u5728\u8BBE\u7F6E\u9875\u7ED1\u5B9A Space\uFF0C\u518D\u5F00\u59CB\u540C\u6B65\u3002");
         return;
       }
-      const spaceBlockReason = await checkSpaceBeforeSync(this.plugin.settings.onesToken.trim(), {
+      const spaceBlockReason = await checkSpaceBeforeSync(getActiveOnesToken(this.plugin.settings).trim(), {
         baseUrl: getMomaBaseUrl(this.plugin.settings.backendEnv, this.plugin.settings.backendCustomUrl),
         spaceId: this.settings.spaceId
       });
@@ -53647,28 +53672,28 @@ var RemoteSyncService = class {
         await this.ensureS3Credentials();
       } catch (e2) {
         console.error("[RemoteSync] ensureS3Credentials failed:", e2);
-        getNotice(triggerSource, (_c2 = e2.message) != null ? _c2 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25");
+        getNotice(triggerSource, (_b2 = e2.message) != null ? _b2 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25");
         return;
       }
       await this.refreshAllowedFileSuffixes();
       const s2 = this.settings;
       let profiler;
-      if ((_d2 = s2.profiler) == null ? void 0 : _d2.enable) {
-        profiler = new Profiler(void 0, (_e2 = s2.profiler.enablePrinting) != null ? _e2 : false, (_f = s2.profiler.recordSize) != null ? _f : false);
+      if ((_c2 = s2.profiler) == null ? void 0 : _c2.enable) {
+        profiler = new Profiler(void 0, (_d2 = s2.profiler.enablePrinting) != null ? _d2 : false, (_e2 = s2.profiler.recordSize) != null ? _e2 : false);
       }
       const fsLocal = new FakeFsLocal(
         this.plugin.app.vault,
-        (_g = s2.syncConfigDir) != null ? _g : false,
-        (_h2 = s2.syncBookmarks) != null ? _h2 : false,
+        (_f = s2.syncConfigDir) != null ? _f : false,
+        (_g = s2.syncBookmarks) != null ? _g : false,
         this.plugin.app.vault.configDir,
         this.manifest.id,
         profiler,
-        (_i2 = s2.deleteToWhere) != null ? _i2 : "system",
+        (_h2 = s2.deleteToWhere) != null ? _h2 : "system",
         this.manifest.version
       );
       s2.s3.s3Endpoint = `${normalizeMomaApiBaseUrl(getMomaBaseUrl(this.plugin.settings.backendEnv, this.plugin.settings.backendCustomUrl))}/s3`;
       const fsRemote = getClient(s2, this.plugin.app.vault.getName(), () => this.saveSettings());
-      const fsEncrypt = new FakeFsEncrypt(fsRemote, (_j = s2.password) != null ? _j : "", (_k = s2.encryptionMethod) != null ? _k : "rclone-base64");
+      const fsEncrypt = new FakeFsEncrypt(fsRemote, (_i2 = s2.password) != null ? _i2 : "", (_j = s2.encryptionMethod) != null ? _j : "rclone-base64");
       const profileID = this._getCurrProfileID();
       const getProtectError = (protectModifyPercentage, realModifyDeleteCount, allFilesCount) => {
         const percent = (100 * realModifyDeleteCount / allFilesCount).toFixed(1);
@@ -53771,7 +53796,7 @@ var RemoteSyncService = class {
         }
         profiler == null ? void 0 : profiler.clear();
         try {
-          (_l = this.syncEvent) == null ? void 0 : _l.trigger("SYNC_DONE");
+          (_k = this.syncEvent) == null ? void 0 : _k.trigger("SYNC_DONE");
         } catch (e2) {
           console.warn("[RemoteSync] SYNC_DONE handler failed:", e2);
         }
@@ -53986,14 +54011,14 @@ var RemoteSyncService = class {
     modal.open();
   }
   async checkConnectivity() {
-    var _a3, _b2;
+    var _a3;
     if (!this.lock.tryClaim("checking")) {
       new import_obsidian5.Notice("\u540C\u6B65\u6216\u914D\u7F6E\u64CD\u4F5C\u6B63\u5728\u8FDB\u884C\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5");
       return;
     }
     try {
       await this._tryLoadTokenFromMomaSettings();
-      if (!((_a3 = this.plugin.settings.onesToken) == null ? void 0 : _a3.trim())) {
+      if (!getActiveOnesToken(this.plugin.settings).trim()) {
         new TokenInputModal(this.plugin.app, this.plugin, () => void this.checkConnectivity()).open();
         return;
       }
@@ -54005,7 +54030,7 @@ var RemoteSyncService = class {
       try {
         await this.ensureS3Credentials();
       } catch (e2) {
-        new import_obsidian5.Notice((_b2 = e2.message) != null ? _b2 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25");
+        new import_obsidian5.Notice((_a3 = e2.message) != null ? _a3 : "\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u5931\u8D25");
         return;
       }
       new import_obsidian5.Notice("\u6B63\u5728\u68C0\u67E5\u8FDE\u63A5\u2026");
@@ -54236,15 +54261,15 @@ var SelectSpaceModal = class extends import_obsidian6.Modal {
   }
 };
 function renderRemoteSyncSettingsUI(containerEl, service, app) {
-  var _a3, _b2, _c2;
+  var _a3, _b2;
   containerEl.empty();
   const t8 = (x2, vars) => service.i18n.t(x2, vars);
   const s2 = service.settings;
   const s3Div = containerEl.createEl("div");
   new import_obsidian6.Setting(s3Div).setName(t8("settings_s3")).setHeading();
-  const momaPluginExists = !!((_b2 = (_a3 = app.plugins) == null ? void 0 : _a3.getPlugin) == null ? void 0 : _b2.call(_a3, "moma"));
-  const hasToken = !!((_c2 = service.plugin.settings.onesToken) == null ? void 0 : _c2.trim());
-  if (momaPluginExists) {
+  const inheritsTokenFromMoma = !!((_b2 = (_a3 = app.plugins) == null ? void 0 : _a3.getPlugin) == null ? void 0 : _b2.call(_a3, "moma"));
+  const hasToken = !!getActiveOnesToken(service.plugin.settings).trim();
+  if (inheritsTokenFromMoma) {
     if (!hasToken) {
       new import_obsidian6.Setting(s3Div).setName("API Token").setDesc("\u5C1A\u672A\u767B\u5F55\uFF0C\u8BF7\u5148\u5728 Moma \u4E2D\u767B\u5F55\u3002");
     }
@@ -54252,9 +54277,8 @@ function renderRemoteSyncSettingsUI(containerEl, service, app) {
     const tokenSetting = new import_obsidian6.Setting(s3Div).setName("API Token").setDesc("Moma \u4E91\u540C\u6B65\u8EAB\u4EFD\u51ED\u8BC1\uFF0C\u4FEE\u6539\u540E\u5C06\u91CD\u65B0\u83B7\u53D6\u5B58\u50A8\u51ED\u8BC1\u3002");
     let tokenInputEl;
     tokenSetting.addText((text) => {
-      var _a4;
       wrapTextWithPasswordHide(text);
-      text.setPlaceholder("\u7C98\u8D34\u4F60\u7684 Token\u2026").setValue((_a4 = service.plugin.settings.onesToken) != null ? _a4 : "");
+      text.setPlaceholder("\u7C98\u8D34\u4F60\u7684 Token\u2026").setValue(getActiveOnesToken(service.plugin.settings));
       text.inputEl.style.width = "260px";
       tokenInputEl = text.inputEl;
     });
@@ -54262,7 +54286,7 @@ function renderRemoteSyncSettingsUI(containerEl, service, app) {
       btn.setButtonText("\u4FDD\u5B58").setCta();
       btn.onClick(async () => {
         const trimmed = tokenInputEl.value.trim();
-        service.plugin.settings.onesToken = trimmed;
+        setActiveOnesToken(service.plugin.settings, trimmed);
         service.settings.s3.s3AccessKeyID = "";
         service.settings.s3.s3SecretAccessKey = "";
         await service.saveSettings();
@@ -54393,11 +54417,11 @@ function renderRemoteSyncSettingsUI(containerEl, service, app) {
   });
   const suffixSetting = new import_obsidian6.Setting(basicDiv).setName("\u670D\u52A1\u7AEF\u652F\u6301\u7684\u6587\u4EF6\u7C7B\u578B");
   const renderSuffixList = () => {
-    var _a4, _b3, _c3;
+    var _a4, _b3, _c2;
     const cur = service.settings;
     const policy = cur.fileUploadPolicy;
     const suffixes = (_b3 = (_a4 = policy == null ? void 0 : policy.withExtension) != null ? _a4 : cur.allowedFileSuffixes) != null ? _b3 : [];
-    const fileNames = (_c3 = policy == null ? void 0 : policy.withoutExtension) != null ? _c3 : [];
+    const fileNames = (_c2 = policy == null ? void 0 : policy.withoutExtension) != null ? _c2 : [];
     const el = suffixSetting.descEl;
     el.empty();
     if (suffixes.length === 0 && fileNames.length === 0) {
@@ -54572,8 +54596,8 @@ var MomaObsidianSyncSettingsTab = class extends import_obsidian7.PluginSettingTa
     const { containerEl } = this;
     containerEl.empty();
     new import_obsidian7.Setting(containerEl).setName("Moma Token").setDesc("\u7528\u4E8E\u767B\u5F55\u8BA4\u8BC1\u7684 Token\uFF08\u5728\u804A\u5929\u9875\u5B8C\u6210\u767B\u5F55\u540E\u83B7\u53D6\uFF09").addText((text) => {
-      text.setPlaceholder("\u8F93\u5165 Token").setValue(this.plugin.settings.onesToken).onChange(async (value) => {
-        this.plugin.settings.onesToken = value;
+      text.setPlaceholder("\u8F93\u5165 Token").setValue(getActiveOnesToken(this.plugin.settings)).onChange(async (value) => {
+        setActiveOnesToken(this.plugin.settings, value);
         await this.plugin.saveSettings();
       });
       text.inputEl.setAttribute("type", "password");
