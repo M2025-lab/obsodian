@@ -1,0 +1,25 @@
+{
+  "id": "conv-1789025624834-66kl7b4h8",
+  "providerId": "claude",
+  "title": "分析报告缺失内容",
+  "titleGenerationStatus": "success",
+  "createdAt": 1789025624834,
+  "updatedAt": 1789026378329,
+  "lastResponseAt": 1789026378329,
+  "sessionId": "f1142be0-7b4b-4da8-a552-5c6ad0c19027",
+  "providerState": {
+    "providerSessionId": "f1142be0-7b4b-4da8-a552-5c6ad0c19027"
+  },
+  "currentNote": "20.知识沉淀/优化提示词提升AI代码生成质量报告.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 1213,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 58240,
+    "outputTokens": 114,
+    "contextWindow": 200000,
+    "contextTokens": 59453,
+    "percentage": 30,
+    "contextWindowIsAuthoritative": true
+  }
+}
