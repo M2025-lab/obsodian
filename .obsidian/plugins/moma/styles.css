@@ -3683,9 +3683,17 @@ body.theme-dark .moma-tool-content-todo {
   font-size: 12px;
   color: var(--text-muted);
   font-style: normal;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 0 2px 8px 2px;
+}
+
+/* One line per coexisting slot: in-flight steer and/or a freshly queued steer */
+.moma-queue-indicator-line {
+  display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 2px 8px 2px;
 }
 
 .moma-queue-indicator-text {
@@ -10580,7 +10588,15 @@ body.theme-light .moma-space-panel {
   overflow: hidden;
 }
 
-/* Binary file fallback */
+/* 文档预览自己管理工具栏和滚动容器，避免与 Space 正文产生双重内边距或滚动条。 */
+.moma-space-file-body.moma-space-file-body--document {
+  min-height: 0;
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 二进制文件的回退展示 */
 .moma-space-file-sync-btn {
   color: var(--interactive-accent);
   cursor: pointer;
@@ -10630,6 +10646,12 @@ body.theme-light .moma-space-panel {
   color: var(--text-normal);
 }
 
+.moma-space-file-unsupported-title {
+  color: var(--text-normal);
+  font-size: 16px;
+  font-weight: 600;
+}
+
 /* Stale binary placeholder (blob URL invalidated after restart) */
 .moma-space-file-stale-placeholder {
   display: flex;
@@ -10659,23 +10681,6 @@ body.theme-light .moma-space-panel {
 .moma-space-file-stale-hint {
   font-size: 13px;
   color: var(--text-muted);
-}
-
-.moma-space-file-download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 4px;
-  background: var(--interactive-normal);
-  color: var(--text-normal);
-  font-size: 13px;
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-
-.moma-space-file-download-btn:hover {
-  background: var(--interactive-hover);
 }
 
 .moma-space-file-image {
@@ -11941,6 +11946,931 @@ body.theme-dark .moma-space-submenu {
   }
 
   .moma-transcription-notice-button {
+    transition: none;
+  }
+}
+
+
+/* ============================================
+   features/document-preview.css
+   ============================================ */
+.moma-document-preview {
+  --moma-document-preview-accent: var(--interactive-accent);
+  --moma-ppt-sidebar-width: 164px;
+  --moma-ppt-thumbnail-width: 128px;
+  --moma-word-outline-width: 220px;
+  container-name: moma-document-preview;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: var(--background-secondary);
+}
+
+.moma-document-preview-banner {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: color-mix(in srgb, var(--background-primary) 94%, var(--moma-document-preview-accent) 6%);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+}
+
+.moma-document-preview-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.moma-document-preview-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border: 1px solid color-mix(in srgb, var(--moma-document-preview-accent) 35%, transparent);
+  border-radius: 999px;
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--moma-document-preview-accent) 10%, var(--background-primary));
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
+}
+
+.moma-document-preview-badge-icon {
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+}
+
+.moma-document-preview-details {
+  min-width: 0;
+}
+
+.moma-document-preview-name {
+  overflow: hidden;
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  font-weight: var(--font-semibold);
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-document-preview-meta {
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-document-preview-open-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  width: auto;
+  min-height: 30px;
+  padding: 4px 10px;
+  border: 1px solid var(--interactive-accent) !important;
+  border-radius: var(--button-radius);
+  color: var(--text-on-accent) !important;
+  background-color: var(--interactive-accent) !important;
+  box-shadow: none !important;
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.moma-document-preview-open-button:hover {
+  border-color: var(--interactive-accent-hover) !important;
+  color: var(--text-on-accent) !important;
+  background-color: var(--interactive-accent-hover) !important;
+}
+
+.moma-document-preview-toolbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 42px;
+  padding: 5px 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+  scrollbar-width: none;
+}
+
+.moma-document-preview-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+.moma-document-preview-toolbar-group {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 3px;
+}
+
+.moma-document-preview-toolbar-group + .moma-document-preview-toolbar-group {
+  padding-left: 10px;
+  border-left: 1px solid var(--background-modifier-border);
+}
+
+.moma-document-preview-toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.moma-document-preview-toolbar-button:hover:not(:disabled),
+.moma-document-preview-toolbar-button.is-active {
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 11%, var(--background-primary));
+}
+
+.moma-document-preview-toolbar-button:focus-visible {
+  outline: 2px solid var(--interactive-accent);
+  outline-offset: 1px;
+}
+
+.moma-document-preview-toolbar-text-button {
+  width: auto;
+  min-width: 30px;
+  gap: 5px;
+  padding: 0 8px;
+  font-size: var(--font-ui-smaller);
+}
+
+.moma-document-preview-toolbar-value,
+.moma-document-preview-toolbar-page {
+  min-width: 58px;
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.moma-document-preview-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  user-select: text;
+  background:
+    radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--interactive-accent) 5%, transparent), transparent 30%),
+    var(--background-secondary);
+}
+
+.moma-document-preview-viewport.has-ppt-thumbnails {
+  display: grid;
+  grid-template-columns: var(--moma-ppt-sidebar-width) minmax(0, 1fr);
+  align-items: start;
+}
+
+.moma-document-preview-search {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+
+.moma-document-preview-search[hidden] {
+  display: none;
+}
+
+.moma-document-preview-search-input-wrap {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  max-width: 420px;
+  min-width: 120px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--input-radius);
+  background: var(--background-modifier-form-field);
+}
+
+.moma-document-preview-search-input-wrap:focus-within {
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--interactive-accent) 18%, transparent);
+}
+
+.moma-document-preview-search-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  margin-left: 9px;
+  color: var(--text-muted);
+}
+
+.moma-document-preview-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 30px;
+  padding: 4px 8px;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.moma-document-preview-search-count {
+  flex: 0 0 auto;
+  min-width: 54px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.moma-document-preview-search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.moma-document-preview-search-button:hover:not(:disabled) {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.moma-document-preview-search-mark {
+  padding: 0;
+  border-radius: 2px;
+  color: inherit;
+  background: color-mix(in srgb, var(--color-yellow) 52%, transparent);
+}
+
+.moma-document-preview-search-mark.is-active {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--interactive-accent) 28%, transparent);
+}
+
+.moma-document-preview-loading,
+.moma-document-preview-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  padding: 40px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.moma-document-preview-loading-spinner {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 14px;
+  border: 3px solid var(--background-modifier-border);
+  border-top-color: var(--moma-document-preview-accent);
+  border-radius: 50%;
+  animation: moma-document-preview-spin 0.8s linear infinite;
+}
+
+.moma-document-preview-loading-title,
+.moma-document-preview-error-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  font-weight: var(--font-semibold);
+}
+
+.moma-document-preview-loading-note,
+.moma-document-preview-error-message {
+  max-width: 560px;
+  margin-top: 6px;
+  font-size: var(--font-ui-small);
+  overflow-wrap: anywhere;
+}
+
+.moma-document-preview-loading-cancel {
+  margin-top: 16px;
+  color: var(--text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.moma-document-preview-loading-cancel:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.moma-document-preview-large-warning {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  padding: 48px 28px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.moma-document-preview-large-warning-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  color: var(--color-yellow);
+  background: color-mix(in srgb, var(--color-yellow) 12%, var(--background-primary));
+}
+
+.moma-document-preview-large-warning-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  font-weight: var(--font-semibold);
+}
+
+.moma-document-preview-large-warning-message {
+  max-width: 520px;
+  margin-top: 7px;
+  line-height: 1.55;
+}
+
+.moma-document-preview-large-warning-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.moma-document-preview-error-icon {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 12px;
+  color: var(--text-warning);
+}
+
+.moma-document-preview-unsupported-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  margin: 12px 0;
+  padding: 18px;
+  border: 1px dashed var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  color: var(--text-muted);
+  background: var(--background-secondary);
+  font-size: var(--font-ui-small);
+  text-align: center;
+}
+
+@keyframes moma-document-preview-spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ============================================
+   features/document-preview-office.css
+   ============================================ */
+.moma-document-preview-word-stage,
+.moma-document-preview-powerpoint-stage {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+}
+
+.moma-document-preview-word-stage {
+  padding: 28px 22px 64px;
+}
+
+.moma-document-preview-viewport.has-word-outline {
+  display: grid;
+  grid-template-columns: var(--moma-word-outline-width) minmax(0, 1fr);
+  align-items: start;
+}
+
+.moma-document-preview-viewport.has-word-outline .moma-document-preview-word-stage {
+  grid-column: 2;
+}
+
+.moma-document-preview-word-outline,
+.moma-document-preview-thumbnails {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  grid-column: 1;
+  grid-row: 1;
+  box-sizing: border-box;
+  height: 100%;
+  max-height: 100%;
+  padding: 10px 8px 32px;
+  overflow: auto;
+  border-right: 1px solid var(--background-modifier-border);
+  background: color-mix(in srgb, var(--background-primary) 96%, var(--interactive-accent) 4%);
+}
+
+.moma-document-preview-word-outline {
+  width: var(--moma-word-outline-width);
+}
+
+.moma-document-preview-word-outline-item {
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 6px 8px 6px calc(8px + var(--moma-word-outline-indent));
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: var(--font-ui-smaller);
+  line-height: 1.35;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-document-preview-word-outline-item:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover) !important;
+}
+
+.moma-document-preview-word-outline-item.is-active {
+  color: var(--text-accent);
+  background: color-mix(in srgb, var(--interactive-accent) 8%, transparent) !important;
+}
+
+.moma-document-preview-word,
+.moma-document-preview-powerpoint {
+  width: 100%;
+  min-width: 0;
+}
+
+.moma-document-preview-word .moma-docx-wrapper {
+  padding: 0;
+  background: transparent;
+}
+
+.moma-document-preview-word .moma-docx-wrapper > section.moma-docx {
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.moma-document-preview-word--legacy .moma-document-preview-legacy-word-page {
+  box-sizing: border-box;
+  width: min(816px, 100%);
+  min-height: 1056px;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+}
+
+.moma-document-preview-word--legacy .msdoc-root {
+  min-height: 1056px;
+}
+
+.moma-document-preview-powerpoint-stage {
+  padding: 28px 24px 64px;
+}
+
+.moma-document-preview-viewport.has-ppt-thumbnails .moma-document-preview-powerpoint-stage {
+  grid-column: 2;
+}
+
+.moma-document-preview-powerpoint [data-slide-index] {
+  scroll-margin-top: 20px;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.14));
+}
+
+.moma-document-preview-powerpoint--legacy .rpv-root,
+.moma-document-preview-powerpoint--legacy .rpv-stage,
+.moma-document-preview-powerpoint--legacy .rpv-viewport {
+  border: 0;
+  background: transparent;
+}
+
+.moma-document-preview-powerpoint--legacy .rpv-viewport {
+  min-height: 0;
+  padding: 0;
+}
+
+.moma-document-preview-slide-label {
+  padding: 6px 4px 2px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.moma-document-preview-thumbnails {
+  width: var(--moma-ppt-sidebar-width);
+}
+
+.moma-document-preview-thumbnail {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 0 0 8px;
+  padding: 6px;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.moma-document-preview-thumbnail:hover,
+.moma-document-preview-thumbnail.is-active {
+  border-color: color-mix(in srgb, var(--interactive-accent) 55%, var(--background-modifier-border));
+  color: var(--text-normal);
+  background: color-mix(in srgb, var(--interactive-accent) 9%, var(--background-secondary));
+}
+
+.moma-document-preview-thumbnail-canvas {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--moma-ppt-thumbnail-width);
+  min-height: 72px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--background-secondary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+}
+
+.moma-document-preview-thumbnail-canvas > [data-pptx-thumbnail="true"] {
+  display: block;
+  max-width: 100%;
+}
+
+.moma-document-preview-thumbnail-label {
+  font-family: var(--font-monospace);
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+
+/* ============================================
+   features/document-preview-text.css
+   ============================================ */
+.moma-document-preview-text {
+  width: min(100%, 1080px);
+  min-height: calc(100% - 48px);
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+.moma-document-preview-text.is-virtualized {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 48px);
+  min-height: 360px;
+}
+
+.moma-document-preview-virtual-text {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  background: var(--background-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.moma-document-preview-virtual-text .cm-editor {
+  height: 100%;
+  color: var(--text-normal);
+  background: transparent;
+  font-family: var(--font-monospace);
+  font-size: var(--font-smaller);
+}
+
+.moma-document-preview-virtual-text .cm-scroller {
+  overflow: auto;
+  font-family: inherit;
+  line-height: 1.65;
+}
+
+.moma-document-preview-virtual-text .cm-content {
+  padding: 20px 24px 64px;
+  caret-color: transparent;
+}
+
+.moma-document-preview-virtual-text .cm-activeLine,
+.moma-document-preview-virtual-text .cm-activeLineGutter {
+  background: transparent;
+}
+
+.moma-document-preview-virtual-text .cm-selectionBackground,
+.moma-document-preview-virtual-text .cm-content ::selection {
+  background: color-mix(in srgb, var(--interactive-accent) 35%, transparent) !important;
+}
+
+.moma-document-preview-code {
+  box-sizing: border-box;
+  min-height: 100%;
+  margin: 0;
+  padding: 24px 28px;
+  overflow: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-l);
+  color: var(--text-normal);
+  background: var(--background-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-monospace);
+  font-size: var(--font-smaller);
+  line-height: 1.65;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.moma-document-preview-inline-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 11px;
+  border: 1px solid color-mix(in srgb, var(--color-yellow) 35%, var(--background-modifier-border));
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--color-yellow) 8%, var(--background-primary));
+  font-size: var(--font-ui-smaller);
+}
+
+.moma-document-preview-text-content {
+  min-height: calc(100% - 48px);
+}
+
+.moma-document-preview-text.is-virtualized .moma-document-preview-text-content {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.moma-document-preview-external-link {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+.moma-document-preview-external-link::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 0.2em;
+  color: var(--text-accent);
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+.moma-document-preview-link--blocked {
+  color: var(--text-muted);
+  text-decoration: line-through dotted;
+  cursor: not-allowed;
+}
+
+
+/* ============================================
+   features/document-preview-lightbox.css
+   ============================================ */
+.moma-document-preview-zoomable-image {
+  cursor: zoom-in;
+  transition: filter 120ms ease, opacity 120ms ease;
+  user-select: none;
+}
+
+.moma-document-preview-zoomable-image:hover {
+  filter: brightness(0.96);
+  opacity: 0.96;
+}
+
+.moma-document-image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  opacity: 0;
+  background: rgba(10, 12, 16, 0.88);
+  backdrop-filter: blur(10px);
+  transition: opacity 140ms ease;
+}
+
+.moma-document-image-lightbox.is-open {
+  opacity: 1;
+}
+
+.moma-document-image-lightbox-stage {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 40px 96px;
+  overflow: auto;
+}
+
+.moma-document-image-lightbox-image {
+  display: block;
+  max-width: min(88vw, 1400px);
+  max-height: 76vh;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 140ms ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.moma-document-image-lightbox-image.is-wheel-zooming {
+  transition: none;
+}
+
+.moma-document-image-lightbox-toolbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(25, 28, 34, 0.9);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.36);
+  transform: translateX(-50%);
+}
+
+.moma-document-image-lightbox-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid transparent !important;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.68) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.moma-document-image-lightbox-action:hover {
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.96) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.moma-document-image-lightbox-action:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.moma-document-image-lightbox-action:focus-visible {
+  border-color: var(--interactive-accent) !important;
+  outline: 2px solid color-mix(in srgb, var(--interactive-accent) 72%, white);
+  outline-offset: 2px;
+  color: var(--text-on-accent) !important;
+  background-color: var(--interactive-accent) !important;
+}
+
+.moma-document-image-lightbox-action:active {
+  border-color: var(--interactive-accent-hover) !important;
+  color: var(--text-on-accent) !important;
+  background-color: var(--interactive-accent-hover) !important;
+}
+
+.moma-document-image-lightbox-scale {
+  width: 48px;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  text-align: center;
+}
+
+.moma-document-image-lightbox-divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 3px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* ============================================
+   features/document-preview-responsive.css
+   ============================================ */
+@container moma-document-preview (max-width: 700px) {
+  .moma-document-preview-viewport {
+    --moma-ppt-sidebar-width: 132px;
+    --moma-ppt-thumbnail-width: 100px;
+    --moma-word-outline-width: 176px;
+  }
+
+  .moma-document-preview-word-stage,
+  .moma-document-preview-powerpoint-stage {
+    padding: 16px 8px 48px;
+  }
+
+  .moma-document-preview-toolbar {
+    padding-inline: 8px;
+  }
+
+  .moma-document-preview-toolbar-text-button svg {
+    display: none;
+  }
+
+  .moma-document-preview-thumbnail-canvas {
+    min-height: 56px;
+  }
+
+  .moma-document-image-lightbox-stage {
+    padding-inline: 16px;
+  }
+}
+
+@container moma-document-preview (max-width: 460px) {
+  .moma-document-preview-viewport {
+    --moma-ppt-sidebar-width: 108px;
+    --moma-ppt-thumbnail-width: 80px;
+    --moma-word-outline-width: 140px;
+  }
+
+  .moma-document-preview-banner {
+    gap: 8px;
+    padding-inline: 10px;
+  }
+
+  .moma-document-preview-details {
+    max-width: calc(100cqw - 120px);
+  }
+}
+
+@container moma-document-preview (max-width: 360px) {
+  .moma-document-preview-viewport {
+    --moma-ppt-sidebar-width: 96px;
+    --moma-ppt-thumbnail-width: 68px;
+  }
+
+  .moma-document-preview-viewport.is-ppt-compact:not(.has-ppt-thumbnails) {
+    display: block;
+  }
+
+  .moma-document-preview-viewport.is-ppt-compact .moma-document-preview-powerpoint-stage {
+    grid-column: auto;
+  }
+
+  .moma-document-preview-toolbar {
+    gap: 6px;
+  }
+
+  .moma-document-preview-toolbar-group + .moma-document-preview-toolbar-group {
+    padding-left: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moma-document-preview-loading-spinner,
+  .moma-document-preview-zoomable-image,
+  .moma-document-image-lightbox,
+  .moma-document-image-lightbox-image {
+    animation: none;
     transition: none;
   }
 }
@@ -16398,6 +17328,11 @@ body.theme-dark .moma-rec-session__placeholder-chip:hover {
 
 .moma-modal--rec-start .moma-modal-ft {
   padding: 11px 18px;
+}
+
+/* Push "新建会议类型" to the bottom-left, keep 取消/开始录制 on the right. */
+.moma-rec-start-ft .moma-rec-start-create {
+  margin-right: auto;
 }
 
 .moma-rec-start-lead {

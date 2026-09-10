@@ -102,7 +102,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 255.5546875
+    "width": 320
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -220,7 +220,7 @@
             }
           },
           {
-            "id": "dc1f28298a63f0a9",
+            "id": "c7ced3753a7200d5",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -253,7 +253,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "417e10a3bd073154",
+  "active": "c7ced3753a7200d5",
   "lastOpenFiles": [
     "12.项目分析/edar-starlord项目学习/接口分析.md",
     "20.知识沉淀/📚 纯零售接入排程改造复盘（方案vs实现差异）.md",
