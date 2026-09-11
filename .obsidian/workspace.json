@@ -263,7 +263,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 699.28515625
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -282,7 +282,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "7ad4e307e86cbc38",
+  "active": "c7ced3753a7200d5",
   "lastOpenFiles": [
     "20.知识沉淀/优化提示词提升AI代码生成质量报告.md",
     "00.需求/云仓-支持tms工人复尺/需求背景.md",
