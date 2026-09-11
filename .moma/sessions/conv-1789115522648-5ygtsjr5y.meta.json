@@ -1,0 +1,24 @@
+{
+  "id": "conv-1789115522648-5ygtsjr5y",
+  "providerId": "claude",
+  "title": "查找业务翻新的别称",
+  "titleGenerationStatus": "success",
+  "createdAt": 1789115522648,
+  "updatedAt": 1789115844296,
+  "lastResponseAt": 1789115560612,
+  "sessionId": "e40be562-5c8d-4b7a-bdef-85e7d3135579",
+  "providerState": {
+    "providerSessionId": "e40be562-5c8d-4b7a-bdef-85e7d3135579"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 41911,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "outputTokens": 653,
+    "contextWindow": 200000,
+    "contextTokens": 41911,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}
