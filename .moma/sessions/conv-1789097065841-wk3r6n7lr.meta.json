@@ -1,0 +1,24 @@
+{
+  "id": "conv-1789097065841-wk3r6n7lr",
+  "providerId": "claude",
+  "title": "沉淀父子任务共用线程池导致超时无返回问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1789097065841,
+  "updatedAt": 1789097366834,
+  "lastResponseAt": 1789097366834,
+  "sessionId": "6167d14f-f38c-44c9-a1f4-21ff4f68b1d9",
+  "providerState": {
+    "providerSessionId": "6167d14f-f38c-44c9-a1f4-21ff4f68b1d9"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 553,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 54784,
+    "outputTokens": 369,
+    "contextWindow": 200000,
+    "contextTokens": 55337,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

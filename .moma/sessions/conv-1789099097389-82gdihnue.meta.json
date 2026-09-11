@@ -1,0 +1,24 @@
+{
+  "id": "conv-1789099097389-82gdihnue",
+  "providerId": "claude",
+  "title": "创建云仓TMS工人复尺需求文档",
+  "titleGenerationStatus": "success",
+  "createdAt": 1789099097389,
+  "updatedAt": 1789099800756,
+  "lastResponseAt": 1789099800756,
+  "sessionId": "4fab6593-ed81-4feb-89b5-e8a1d4360962",
+  "providerState": {
+    "providerSessionId": "4fab6593-ed81-4feb-89b5-e8a1d4360962"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 234,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 45376,
+    "outputTokens": 336,
+    "contextWindow": 200000,
+    "contextTokens": 45610,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}
