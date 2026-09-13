@@ -3177,71 +3177,6 @@ body.theme-dark .moma-tool-content-todo {
    (Previously hidden; restored to expose the multi-provider model picker
    so users can switch between Claude / Codex / Hermes models.) */
 
-/* File indicator (attached files) */
-.moma-file-indicator {
-  display: none;
-  flex-wrap: wrap;
-  gap: 6px;
-  min-width: 0;
-}
-
-.moma-file-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 6px 3px 8px;
-  background: var(--background-primary);
-  border: 1px solid var(--background-modifier-border);
-  border-radius: 12px;
-  font-size: 12px;
-  line-height: 1;
-  max-width: 200px;
-  min-width: 0;
-  cursor: pointer;
-}
-
-.moma-file-chip-icon {
-  display: flex;
-  align-items: center;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.moma-file-chip-icon svg {
-  width: 12px;
-  height: 12px;
-}
-
-.moma-file-chip-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: var(--text-normal);
-}
-
-.moma-file-chip-remove {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.moma-file-chip-remove:hover {
-  background: var(--background-modifier-hover);
-  color: var(--text-normal);
-}
-
-.moma-file-chip:hover {
-  background: var(--background-modifier-hover);
-}
-
 /* Composer references stay out of the editor body as semantic root chips. */
 .moma-workbench-reference-summaries {
   position: relative;
@@ -13240,19 +13175,54 @@ body.theme-dark .moma-space-submenu {
   color: var(--text-normal);
 }
 
-.moma-rec-finish-status .moma-rec-progress {
-  display: block;
-  flex: none;
-  max-width: none;
+.moma-rec-finish-description, .moma-rec-finish-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+.moma-rec-finish-status button.moma-rec-finish-status-bar {
+  display: flex;
+  gap: 4px;
   width: 100%;
-  height: 3px;
-  margin-top: 8px;
-  background: rgba(var(--moma-brand-rgb), 0.16);
+  height: 28px;
+  padding: 14px 0 6px;
+  margin-top: 4px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
 }
-
-.moma-rec-finish-status .moma-rec-progress-fill {
-  background: var(--moma-brand);
+.moma-rec-finish-segment {
+  display: block;
+  position: relative;
+  flex: 1;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--background-modifier-border);
 }
+.moma-rec-finish-segment[data-state='success'] { background: var(--color-green); }
+.moma-rec-finish-segment.is-current { flex: 1.8; background: rgba(var(--moma-brand-rgb), .18); }
+.moma-rec-finish-segment-fill { display: block; height: 100%; border-radius: 3px; background: var(--moma-brand); }
+.moma-rec-finish-percent { position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; color: var(--moma-brand); font-size: 10px; line-height: 12px; }
+.moma-rec-finish-details { position: fixed; z-index: 10000; padding: 14px 16px; background: var(--background-primary); color: var(--text-normal); border: 1px solid var(--background-modifier-border); border-radius: 9px; box-shadow: 0 8px 24px rgba(38, 52, 63, .12); max-height: calc(100vh - 16px); overflow-y: auto; }
+.moma-rec-finish-details[hidden] { display: none; }
+.moma-rec-finish-detail-title { font-size: 13px; font-weight: 600; margin-bottom: 9px; }
+.moma-rec-finish-detail-row { display: grid; grid-template-columns: 16px 1fr; gap: 7px; padding: 7px 0; border-top: 1px solid var(--background-modifier-border); }
+.moma-rec-finish-detail-mark { font-size: 12px; line-height: 1.4; text-align: center; }
+.moma-rec-finish-detail-mark.is-done { color: var(--color-green); }
+.moma-rec-finish-detail-mark.is-current { color: var(--moma-brand); }
+.moma-rec-finish-detail-mark.is-failed { color: var(--text-error); }
+.moma-rec-finish-detail-mark.is-pending { color: var(--text-faint); }
+.moma-rec-finish-detail-name { font-size: 12px; font-weight: 550; }
+.moma-rec-finish-detail-description { color: var(--text-muted); font-size: 11px; margin-top: 1px; }
+.moma-rec-finish-status.is-failed .moma-rec-finish-status-spin { animation: none; border-color: var(--text-error); }
+.moma-rec-finish-actions { display: flex; gap: 8px; margin-top: 8px; }
+.moma-rec-finish-actions[hidden] { display: none; }
+.moma-rec-finish-retry-btn, .moma-rec-finish-dismiss-btn {
+  flex: 1; height: 28px; border-radius: 6px; font-size: 12px; cursor: pointer;
+}
+.moma-rec-finish-retry-btn { border: 0; color: var(--text-on-accent); background: var(--moma-brand); }
+.moma-rec-finish-retry-btn:disabled { opacity: .5; cursor: default; }
+.moma-rec-finish-dismiss-btn { border: 1px solid var(--background-modifier-border); color: var(--text-muted); background: transparent; }
 
 .moma-rec-mode-dd {
   position: relative;
@@ -14916,7 +14886,6 @@ body.theme-dark .moma-space-submenu {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--background-modifier-border);
 }
 
 /* ── Pane area: fills left column above footer ── */
@@ -15160,6 +15129,29 @@ body.theme-dark .moma-space-submenu {
   padding: 0 14px 12px;
 }
 
+
+/* ── Horizontal split handle (left ↔ right) ── */
+
+/* .moma-rec-vsplit appearance is set via inline style in VoiceRecordingModal.ts */
+.moma-rec-vsplit {
+  cursor: col-resize;
+}
+
+/* ── Resize zones (8 directions) ── */
+
+.moma-rec-resize-zone {
+  position: absolute;
+  z-index: 10;
+}
+
+.moma-rec-resize-zone--n  { top: -4px;  left: 8px;    right: 8px;   height: 8px;  cursor: n-resize; }
+.moma-rec-resize-zone--s  { bottom: -4px; left: 8px;  right: 8px;   height: 8px;  cursor: s-resize; }
+.moma-rec-resize-zone--e  { right: -4px; top: 8px;    bottom: 8px;  width: 8px;   cursor: e-resize; }
+.moma-rec-resize-zone--w  { left: -4px;  top: 8px;    bottom: 8px;  width: 8px;   cursor: w-resize; }
+.moma-rec-resize-zone--ne { top: -4px;   right: -4px; width: 16px;  height: 16px; cursor: ne-resize; }
+.moma-rec-resize-zone--nw { top: -4px;   left: -4px;  width: 16px;  height: 16px; cursor: nw-resize; }
+.moma-rec-resize-zone--se { bottom: -4px; right: -4px; width: 16px; height: 16px; cursor: se-resize; }
+.moma-rec-resize-zone--sw { bottom: -4px; left: -4px;  width: 16px; height: 16px; cursor: sw-resize; }
 
 /* ── Right column: session Q&A (~42%) ── */
 
@@ -25812,6 +25804,669 @@ body.theme-dark .moma-skill-card:hover {
 
 
 /* ============================================
+   settings/moma-remote-settings.css
+   ============================================ */
+.moma-sync-connector-body--remote {
+  background: var(--background-primary);
+}
+
+.moma-remote-dashboard { padding: 12px; }
+
+.moma-remote-overview {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 13px;
+  align-items: center;
+  min-height: 90px;
+  padding: 16px;
+  overflow: hidden;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  background: var(--background-secondary);
+}
+
+.moma-remote-overview-visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--text-muted);
+  background: var(--background-modifier-hover);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+}
+
+.moma-remote-overview.is-online .moma-remote-overview-visual {
+  color: var(--color-green);
+  background: color-mix(in srgb, var(--color-green) 12%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--color-green) 28%, var(--background-modifier-border));
+}
+
+.moma-remote-overview.is-error .moma-remote-overview-visual {
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 10%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--text-error) 24%, var(--background-modifier-border));
+}
+
+.moma-remote-overview.is-warning .moma-remote-overview-visual,
+.moma-remote-overview.is-connecting .moma-remote-overview-visual {
+  color: var(--color-orange);
+  background: color-mix(in srgb, var(--color-orange) 10%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--color-orange) 24%, var(--background-modifier-border));
+}
+
+.moma-remote-signal,
+.moma-remote-signal svg { width: 21px; height: 21px; }
+
+.moma-remote-signal-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+
+.moma-remote-overview.is-online .moma-remote-signal-pulse,
+.moma-remote-overview.is-connecting .moma-remote-signal-pulse,
+.moma-remote-overview.is-warning .moma-remote-signal-pulse {
+  animation: moma-remote-pulse 2.2s ease-out infinite;
+}
+
+@keyframes moma-remote-pulse {
+  0% { opacity: 0.55; transform: translate(-50%, -50%) scale(0.8); }
+  75%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(4.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moma-remote-signal-pulse { animation: none !important; }
+}
+
+.moma-remote-overview-main { z-index: 1; min-width: 0; }
+
+.moma-remote-overview-heading,
+.moma-remote-platform-title-row,
+.moma-remote-channel-heading,
+.moma-remote-metrics,
+.moma-remote-channel-meta,
+.moma-remote-footnote { display: flex; align-items: center; }
+
+.moma-remote-overview-heading { gap: 8px; }
+
+.moma-remote-overview-title {
+  color: var(--text-normal);
+  font-size: var(--font-ui-medium);
+  font-weight: 720;
+  line-height: 1.3;
+}
+
+.moma-remote-status-pill,
+.moma-remote-channel-state {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  background: var(--background-modifier-hover);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+}
+
+.moma-remote-status-pill { padding: 4px 8px; }
+
+.moma-remote-status-pill.is-online,
+.moma-remote-channel-state.is-online {
+  color: var(--color-green);
+  background: color-mix(in srgb, var(--color-green) 9%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--color-green) 24%, var(--background-modifier-border));
+}
+
+.moma-remote-status-pill.is-error,
+.moma-remote-channel-state.is-error {
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 8%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--text-error) 22%, var(--background-modifier-border));
+}
+
+.moma-remote-status-pill.is-warning,
+.moma-remote-status-pill.is-connecting,
+.moma-remote-channel-state.is-warning,
+.moma-remote-channel-state.is-connecting {
+  color: var(--color-orange);
+  background: color-mix(in srgb, var(--color-orange) 8%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--color-orange) 22%, var(--background-modifier-border));
+}
+
+.moma-remote-overview-detail {
+  margin-top: 4px;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-remote-metrics { flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; }
+
+.moma-remote-metric {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.2;
+}
+
+.moma-remote-metric-icon,
+.moma-remote-metric-icon svg { width: 12px; height: 12px; }
+
+.moma-remote-overview-controls {
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.moma-remote-master {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 5px 7px 5px 10px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: 600;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--background-primary) 82%, transparent);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 999px;
+}
+
+button.moma-remote-icon-button,
+button.moma-remote-add-button,
+button.moma-remote-empty-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+button.moma-remote-icon-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--text-muted);
+  background: color-mix(in srgb, var(--background-primary) 84%, transparent);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 9px;
+}
+
+button.moma-remote-icon-button:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+  border-color: var(--background-modifier-border-hover);
+}
+
+button.moma-remote-icon-button.is-danger:hover {
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 9%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--text-error) 24%, var(--background-modifier-border));
+}
+
+button.moma-remote-icon-button svg { width: 15px; height: 15px; }
+
+.moma-remote-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.moma-remote-platform {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+}
+
+.moma-remote-section-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 13px 12px;
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.moma-remote-platform-identity { display: flex; gap: 9px; align-items: center; min-width: 0; }
+
+.moma-remote-platform-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--color-blue);
+  background: color-mix(in srgb, var(--color-blue) 10%, var(--background-primary));
+  border: 1px solid color-mix(in srgb, var(--color-blue) 22%, var(--background-modifier-border));
+  border-radius: 9px;
+}
+
+.moma-remote-platform.is-weixin .moma-remote-platform-icon {
+  color: var(--color-green);
+  background: color-mix(in srgb, var(--color-green) 10%, var(--background-primary));
+  border-color: color-mix(in srgb, var(--color-green) 22%, var(--background-modifier-border));
+}
+
+.moma-remote-platform-icon svg { width: 17px; height: 17px; }
+.moma-remote-platform-copy { min-width: 0; }
+.moma-remote-platform-title-row { gap: 6px; }
+
+.moma-remote-section-title,
+.moma-remote-channel-name,
+.moma-remote-empty-title,
+.moma-remote-error-title { color: var(--text-normal); font-weight: 650; }
+
+.moma-remote-count {
+  min-width: 17px;
+  padding: 2px 5px;
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+  background: var(--background-modifier-hover);
+  border-radius: 999px;
+}
+
+.moma-remote-platform-subtitle,
+.moma-remote-channel-detail,
+.moma-remote-channel-meta,
+.moma-remote-empty-detail,
+.moma-remote-error-detail,
+.moma-remote-qr-status {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+}
+
+button.moma-remote-add-button,
+button.moma-remote-empty-action {
+  gap: 5px;
+  height: 30px;
+  padding: 0 10px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-weight: 650;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+}
+
+button.moma-remote-add-button:hover,
+button.moma-remote-empty-action:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+  border-color: var(--background-modifier-border-hover);
+}
+
+.moma-remote-button-icon,
+.moma-remote-button-icon svg { width: 13px; height: 13px; }
+
+.moma-remote-channel-list { padding: 5px 9px 9px; }
+
+.moma-remote-channel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+  min-height: 61px;
+  padding: 9px 5px;
+  border-bottom: 1px solid color-mix(in srgb, var(--background-modifier-border) 64%, transparent);
+}
+
+.moma-remote-channel:last-child { border-bottom: 0; }
+
+.moma-remote-channel-dot {
+  width: 7px;
+  height: 7px;
+  margin-left: 2px;
+  background: var(--text-faint);
+  border-radius: 50%;
+}
+
+.moma-remote-channel-dot.is-online {
+  background: var(--color-green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-green) 15%, transparent);
+}
+
+.moma-remote-channel-dot.is-error {
+  background: var(--text-error);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--text-error) 12%, transparent);
+}
+
+.moma-remote-channel-dot.is-warning,
+.moma-remote-channel-dot.is-connecting {
+  background: var(--color-orange);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-orange) 12%, transparent);
+}
+
+.moma-remote-channel-info { min-width: 0; }
+.moma-remote-channel-heading { gap: 6px; }
+
+.moma-remote-channel-name {
+  overflow: hidden;
+  font-size: var(--font-ui-small);
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-remote-channel-state { padding: 3px 6px; font-size: 10px; }
+
+.moma-remote-channel-detail {
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.moma-remote-channel.is-error .moma-remote-channel-detail { color: var(--text-error); }
+
+.moma-remote-channel-meta { gap: 5px; margin-top: 4px; color: var(--text-faint); }
+.moma-remote-channel-meta span + span::before { margin-right: 5px; content: "·"; }
+
+.moma-remote-channel-actions { display: flex; gap: 5px; align-items: center; }
+.moma-remote-channel-actions .checkbox-container { margin-right: 2px; transform: scale(0.88); }
+
+.moma-remote-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 145px;
+  padding: 20px 16px 22px;
+  text-align: center;
+}
+
+.moma-remote-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 9px;
+  color: var(--text-faint);
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+}
+
+.moma-remote-empty-icon svg { width: 17px; height: 17px; }
+.moma-remote-empty-title { font-size: var(--font-ui-small); }
+.moma-remote-empty-detail { max-width: 250px; margin-top: 3px; }
+
+button.moma-remote-empty-action {
+  margin-top: 12px;
+  color: var(--text-on-accent);
+  background: var(--interactive-accent);
+  border-color: var(--interactive-accent);
+}
+
+button.moma-remote-empty-action:hover {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent-hover);
+  border-color: var(--interactive-accent-hover);
+}
+
+.moma-remote-footnote {
+  gap: 6px;
+  padding: 10px 4px 1px;
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.35;
+}
+
+.moma-remote-footnote-icon,
+.moma-remote-footnote-icon svg { flex: 0 0 auto; width: 13px; height: 13px; }
+
+.moma-remote-skeleton { padding: 18px; }
+
+.moma-remote-skeleton-line,
+.moma-remote-skeleton-panels {
+  background: linear-gradient(90deg, var(--background-modifier-hover), var(--background-secondary), var(--background-modifier-hover));
+  background-size: 220% 100%;
+  border-radius: 8px;
+  animation: moma-remote-shimmer 1.4s ease-in-out infinite;
+}
+
+.moma-remote-skeleton-line { width: 46%; height: 10px; margin-bottom: 9px; }
+.moma-remote-skeleton-line.is-wide { width: 72%; height: 14px; }
+.moma-remote-skeleton-panels { height: 125px; margin-top: 18px; }
+
+@keyframes moma-remote-shimmer {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+.moma-remote-error {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 12px;
+  padding: 13px;
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 7%, var(--background-primary));
+  border: 1px solid color-mix(in srgb, var(--text-error) 22%, var(--background-modifier-border));
+  border-radius: 10px;
+}
+
+.moma-remote-error-icon,
+.moma-remote-error-icon svg { flex: 0 0 auto; width: 19px; height: 19px; }
+.moma-remote-error-copy { min-width: 0; margin-right: auto; }
+
+.modal.moma-remote-modal {
+  width: min(600px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.moma-remote-modal .modal-content {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0;
+}
+
+.moma-remote-modal-body {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 2px 12px;
+  overscroll-behavior: contain;
+}
+
+/* Override host first/last-row spacing so fields stay inside their cards. */
+.moma-remote-modal .setting-item,
+.moma-remote-modal .setting-item:first-child,
+.moma-remote-modal .setting-item:last-child {
+  margin: 0;
+  padding: 14px 12px !important;
+  gap: 16px;
+  align-items: center;
+}
+
+.moma-remote-modal .setting-item-info {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-right: 0;
+  overflow-wrap: anywhere;
+}
+
+.moma-remote-modal .setting-item-control {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+
+.moma-remote-modal-lead {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 12px 13px;
+  margin-bottom: 12px;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 11px;
+}
+
+.moma-remote-modal-lead-icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--color-green);
+  background: color-mix(in srgb, var(--color-green) 12%, var(--background-primary));
+  border-radius: 9px;
+}
+
+.moma-remote-modal-lead-icon svg { width: 18px; height: 18px; }
+.moma-remote-modal-lead-copy { min-width: 0; }
+.moma-remote-modal-lead-title { color: var(--text-normal); font-weight: 680; }
+
+.moma-remote-modal-lead-detail {
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1.4;
+}
+
+.moma-remote-form-card {
+  padding: 0;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 11px;
+}
+
+.moma-remote-form-card .setting-item + .setting-item { border-top: 1px solid var(--background-modifier-border); }
+
+.moma-remote-advanced {
+  margin-top: 10px;
+  overflow: hidden;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+}
+
+.moma-remote-advanced summary {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 11px 12px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.moma-remote-advanced summary::-webkit-details-marker { display: none; }
+.moma-remote-advanced summary:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+.moma-remote-advanced[open] summary { color: var(--text-normal); border-bottom: 1px solid var(--background-modifier-border); }
+
+.moma-remote-advanced-icon,
+.moma-remote-advanced-icon svg,
+.moma-remote-advanced-chevron,
+.moma-remote-advanced-chevron svg { width: 14px; height: 14px; }
+
+.moma-remote-advanced-chevron { margin-left: auto; transition: transform 140ms ease; }
+.moma-remote-advanced[open] .moma-remote-advanced-chevron { transform: rotate(180deg); }
+.moma-remote-advanced .setting-item { padding-right: 12px; padding-left: 12px; }
+.moma-remote-advanced .setting-item + .setting-item { border-top: 1px solid var(--background-modifier-border); }
+
+.moma-remote-modal .setting-item.moma-remote-modal-enabled { margin-top: 12px; }
+.moma-remote-modal .setting-item.moma-remote-modal-actions {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  padding: 16px 2px 0 !important;
+  border-top: 1px solid var(--background-modifier-border);
+  background: var(--background-primary);
+}
+.moma-remote-modal-actions .setting-item-info { display: none; }
+
+.moma-remote-modal .setting-item-control input[type="text"],
+.moma-remote-modal .setting-item-control input[type="password"] { width: 100%; min-width: 0; max-width: 100%; }
+
+.moma-remote-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  margin: 8px 0;
+}
+
+.moma-remote-qr img {
+  width: 220px;
+  height: 220px;
+  padding: 9px;
+  background: #fff;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 13px;
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--background-modifier-box-shadow) 45%, transparent);
+}
+
+.moma-remote-qr-status { margin-top: 9px; }
+
+@media (max-width: 620px) {
+  .moma-remote-overview { grid-template-columns: auto minmax(0, 1fr); }
+  .moma-remote-overview-controls { grid-column: 1 / -1; justify-content: flex-end; }
+}
+
+@media (max-width: 440px) {
+  .moma-remote-dashboard { padding: 8px; }
+  .moma-remote-overview { padding: 13px; }
+  .moma-remote-metrics { display: none; }
+  .moma-remote-channel { align-items: start; }
+  .moma-remote-channel-actions { grid-column: 2 / -1; }
+  .moma-remote-overview-detail { white-space: normal; }
+}
+
+@media (max-width: 600px) {
+  .moma-remote-modal .setting-item:not(.moma-remote-modal-enabled):not(.moma-remote-modal-actions) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .moma-remote-modal .setting-item-control { flex-wrap: wrap; }
+  .moma-remote-modal .modal-content { padding-inline: 0; }
+  .moma-remote-overview-heading,
+  .moma-remote-channel-heading,
+  .moma-remote-channel-meta { flex-wrap: wrap; }
+}
+
+
+/* ============================================
    accessibility.css
    ============================================ */
 /* Accessibility - Focus Visible Styles */
@@ -25831,10 +26486,9 @@ body.theme-dark .moma-skill-card:hover {
 /* outline + offset only */
 .moma-action-btn:focus-visible,
 .moma-toggle-switch:focus-visible,
-.moma-file-chip:focus-visible,
 .moma-image-chip:focus-visible,
-.moma-file-chip-remove:focus-visible,
 .moma-image-remove:focus-visible,
+.moma-workbench-reference-chip-remove:focus-visible,
 .moma-workbench-reference-summary-clear:focus-visible,
 .moma-workbench-reference-item-remove:focus-visible,
 .moma-image-modal-close:focus-visible,

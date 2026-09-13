@@ -104,7 +104,6 @@
       {
         "id": "f0a68f72e63f0118",
         "type": "tabs",
-        "dimension": 67.6328502415459,
         "children": [
           {
             "id": "dd95499e7ada39e4",
@@ -153,23 +152,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "8bd3a4b6a060a030",
-        "type": "tabs",
-        "dimension": 32.367149758454104,
-        "children": [
-          {
-            "id": "f95fe61368760573",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
