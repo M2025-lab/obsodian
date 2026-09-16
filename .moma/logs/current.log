@@ -33,3 +33,8 @@
 09:43:37 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
 09:43:37 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
 09:43:38 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+10:58:42 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:58:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:58:44 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:58:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:58:45 [INFO] [moma debug] plugin-settings success
