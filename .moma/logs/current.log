@@ -38,3 +38,4 @@
 10:58:44 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 10:58:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 10:58:45 [INFO] [moma debug] plugin-settings success
+11:58:42 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
