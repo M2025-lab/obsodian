@@ -258737,6 +258737,16 @@ function requirePlausibleText(text2) {
   }
   return text2;
 }
+function requireTolerableReplacementCount(text2) {
+  let replacements = 0;
+  for (const character of text2) {
+    if (character === "\uFFFD") replacements++;
+  }
+  if (replacements > Math.max(8, Math.floor(text2.length * 1e-3))) {
+    throw new UnsupportedTextEncodingError();
+  }
+  return text2;
+}
 function countMatchingCharacters(value, matcher) {
   let count2 = 0;
   for (const character of value) {
@@ -258785,7 +258795,13 @@ function decodeTextDocument(buffer) {
     try {
       return requirePlausibleText(decode3(bytes, "gb18030"));
     } catch (e12) {
-      throw new UnsupportedTextEncodingError();
+      try {
+        return requirePlausibleText(requireTolerableReplacementCount(
+          decode3(bytes, "gb18030", false)
+        ));
+      } catch (e13) {
+        throw new UnsupportedTextEncodingError();
+      }
     }
   }
 }
@@ -258858,7 +258874,8 @@ var DOCUMENT_PREVIEW_EXTENSIONS = [
   ...WORD_DOCUMENT_EXTENSIONS,
   ...POWERPOINT_DOCUMENT_EXTENSIONS,
   ...PLAIN_TEXT_DOCUMENT_EXTENSIONS,
-  ...DELIMITED_TEXT_DOCUMENT_EXTENSIONS
+  ...DELIMITED_TEXT_DOCUMENT_EXTENSIONS,
+  ...SPREADSHEET_DOCUMENT_EXTENSIONS
 ];
 var EXTENSION_KIND = new Map([
   ...WORD_DOCUMENT_EXTENSIONS.map((extension) => [extension, "word"]),
@@ -283408,12 +283425,30 @@ function appendElement(parent, tagName, className) {
   parent.appendChild(element);
   return element;
 }
-function delimiterForExtension(extension) {
-  return extension.trim().toLowerCase().replace(/^\./u, "") === "tsv" ? "	" : ",";
+function delimiterForDocument(value, extension) {
+  const fallback = extension.trim().toLowerCase().replace(/^\./u, "") === "tsv" ? "	" : ",";
+  let commas = 0;
+  let tabs = 0;
+  let inQuotes = false;
+  const sampleLength = Math.min(value.length, 64 * 1024);
+  for (let index = 0; index < sampleLength; index += 1) {
+    const character = value[index];
+    if (character === '"') {
+      if (inQuotes && value[index + 1] === '"') index += 1;
+      else inQuotes = !inQuotes;
+      continue;
+    }
+    if (inQuotes) continue;
+    if (character === ",") commas += 1;
+    else if (character === "	") tabs += 1;
+  }
+  if (commas === tabs) return fallback;
+  return tabs > commas ? "	" : ",";
 }
 function renderDelimitedTextDocumentPreview(viewport, buffer, extension, messages2) {
   var _a8, _b5;
-  const parsed = parseDelimitedText(decodeTextDocument(buffer), delimiterForExtension(extension));
+  const text2 = decodeTextDocument(buffer);
+  const parsed = parseDelimitedText(text2, delimiterForDocument(text2, extension));
   const root = appendElement(viewport, "div", "moma-document-preview-delimited");
   if (parsed.rows.length === 0) {
     const empty = appendElement(root, "div", "moma-document-preview-delimited-empty");
@@ -291371,7 +291406,15 @@ function registerMomaHtmlFileView(plugin) {
     VIEW_TYPE_MOMA_HTML,
     (leaf) => new MomaHtmlFileView(leaf, plugin)
   );
-  plugin.registerExtensions(["html", "htm"], VIEW_TYPE_MOMA_HTML);
+  for (const extension of ["html", "htm"]) {
+    try {
+      plugin.registerExtensions([extension], VIEW_TYPE_MOMA_HTML);
+    } catch (error49) {
+      if (!(error49 instanceof Error) || error49.message !== `Attempting to register an existing file extension "${extension}"`) {
+        throw error49;
+      }
+    }
+  }
 }
 
 // src/features/inline-edit/InlineEditMenu.ts
