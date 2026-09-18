@@ -149,3 +149,7 @@ Generate a title for this conversation
 18:12:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 18:12:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 18:12:40 [INFO] [moma debug] plugin-settings success
+19:32:55 [INFO] [moma debug] file-upload request {"fileName":"image.png"}
+19:32:55 [INFO] [MomaHttpClient] → (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload"}
+19:32:56 [INFO] [MomaHttpClient] ← (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"s3Key\":\"/codelink-web/ob/1789731176048-888f7280-c957-4b86-a594-8d7dbbd41104.png\",\"s3Url\":\"https://file.ljcdn.com/codelink-web/ob/1789731176048-888f7280-c957-4b86-a594-8d7dbbd41104.png\",\"originalFileName\":\"image.png\"}}"}
+19:32:56 [INFO] [moma debug] file-upload success {"fileName":"image.png","originalFileName":"image.png"}
