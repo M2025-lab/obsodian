@@ -1,0 +1,24 @@
+{
+  "id": "conv-1789725899879-yl8qrqh1j",
+  "providerId": "claude",
+  "title": "新建一品多商需求文件夹",
+  "titleGenerationStatus": "success",
+  "createdAt": 1789725899879,
+  "updatedAt": 1789725955192,
+  "lastResponseAt": 1789725955192,
+  "sessionId": "4c57b2d5-be16-4db9-8257-176205834980",
+  "providerState": {
+    "providerSessionId": "4c57b2d5-be16-4db9-8257-176205834980"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 659,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 42176,
+    "outputTokens": 241,
+    "contextWindow": 200000,
+    "contextTokens": 42835,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}
