@@ -1,23 +1,160 @@
-09:08:58 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
-09:08:58 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-09:08:58 [INFO] [Claudian shell-path] probed {"length":599}
-09:08:59 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:08:59 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:08:59 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
+09:09:00 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+09:09:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:09:00 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+09:09:00 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+09:09:00 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:00 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:00 [INFO] [Claudian shell-path] probed {"length":599}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
+09:09:01 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:09:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:09:03 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+09:09:03 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
+09:09:04 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
+09:09:05 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+10:09:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:09:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:09:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:09:02 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:09:02 [INFO] [moma debug] plugin-settings success
+11:09:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+11:09:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+11:09:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+11:09:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+11:09:00 [INFO] [moma debug] plugin-settings success
+12:09:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+12:09:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:09:00 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+12:09:01 [INFO] [auth-credential] refresh success, generation=undefined
+12:09:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:09:02 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:09:02 [INFO] [moma debug] plugin-settings success
+14:06:43 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:06:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:06:43 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:06:43 [INFO] [auth-credential] refresh success, generation=undefined
+14:06:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:06:44 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:06:44 [INFO] [moma debug] plugin-settings success
+15:06:43 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:06:48 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:06:48 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:06:48 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+16:06:49 [INFO] [auth-credential] refresh success, generation=undefined
+16:06:49 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:06:50 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:06:50 [INFO] [moma debug] plugin-settings success
+17:09:39 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+17:09:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:09:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:09:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:09:39 [INFO] [moma debug] plugin-settings success
+18:04:44 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:04:44 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+18:04:44 [INFO] [auth-credential] refresh success, generation=undefined
+18:04:44 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+18:04:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+18:04:45 [INFO] [moma debug] plugin-settings success
+18:04:45 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+18:04:45 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+18:04:45 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
+18:04:45 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+18:04:45 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+18:04:47 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+18:04:47 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+18:04:47 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+18:04:47 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+18:04:47 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+18:04:47 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+18:04:47 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+18:04:47 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+18:04:47 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+18:04:47 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:04:47 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+18:04:47 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.20"}
+18:04:48 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+18:04:59 [moma debug] buildTurnSubmission {
+  "contentLength": 16,
+  "turnRequest": {
+    "textLength": 16,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:04:59 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+新建一个需求文件夹，叫一品多商。
+"""
+
+Generate a title for this conversation
+18:04:59 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+18:04:59 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+18:04:59 [INFO] [auth-credential] ensureForQuery {"now":1789725899889,"at":"…3T8mvg","rt":"…BwXYgw","accessExpiresAt":1789733084584,"refreshExpiresAt":1789812284584,"atDiffSec":7185,"rtDiffSec":86385,"sinceLastSavedSec":15}
+18:04:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+18:04:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+18:04:59 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+18:04:59 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+18:04:59 [moma debug] ColdStartQuery onesToken 存在: true
+18:04:59 [moma debug] ColdStartQuery momaFlagSettings 已注入
+18:04:59 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+18:04:59 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.20\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-fmNevmTFMX45hr303T8mvg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.20\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-fmNevmTFMX45hr303T8mvg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"cwd":"/Users/…(truncated)
+18:04:59 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":51371}
+18:04:59 【发送给 Provider SDK 的 Prompt】
+新建一个需求文件夹，叫一品多商。
+18:04:59 [INFO] [auth-credential] ensureForQuery {"now":1789725899903,"at":"…3T8mvg","rt":"…BwXYgw","accessExpiresAt":1789733084584,"refreshExpiresAt":1789812284584,"atDiffSec":7185,"rtDiffSec":86385,"sinceLastSavedSec":15}
+18:04:59 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+18:04:59 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+18:04:59 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…3T8mvg","claudeCodeVersion":"2.1.206"}
+18:04:59 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…3T8mvg","claudeCodeVersion":"2.1.206"}
+18:04:59 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.20\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-fmNevmTFMX45hr303T8mvg\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"200000\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","adaptive","--effort","low","--model","haiku","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"claude-4.6-sonnet\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.20\\nX-OB-Version: 1.13.7\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-…(truncated)
+18:04:59 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":51372}
+18:04:59 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+18:05:00 [moma debug] ColdStartQuery session_id: 90e11662-517b-486c-a164-2817cbae210b
+18:05:04 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+18:05:04 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 11
+18:05:09 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":51372,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+18:07:13 [INFO] [moma debug] file-upload request {"fileName":"image.png"}
+18:07:13 [INFO] [MomaHttpClient] → (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload"}
+18:07:14 [INFO] [MomaHttpClient] ← (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"s3Key\":\"/codelink-web/ob/1789726034424-7e88199b-9a43-4694-96f6-78b80fde9e1a.png\",\"s3Url\":\"https://file.ljcdn.com/codelink-web/ob/1789726034424-7e88199b-9a43-4694-96f6-78b80fde9e1a.png\",\"originalFileName\":\"image.png\"}}"}
+18:07:14 [INFO] [moma debug] file-upload success {"fileName":"image.png","originalFileName":"image.png"}
+18:12:39 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:12:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:12:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+18:12:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+18:12:40 [INFO] [moma debug] plugin-settings success
+19:32:55 [INFO] [moma debug] file-upload request {"fileName":"image.png"}
+19:32:55 [INFO] [MomaHttpClient] → (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload"}
+19:32:56 [INFO] [MomaHttpClient] ← (form) {"method":"POST","url":"https://next.ke.com/ob/api/file/upload","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"s3Key\":\"/codelink-web/ob/1789731176048-888f7280-c957-4b86-a594-8d7dbbd41104.png\",\"s3Url\":\"https://file.ljcdn.com/codelink-web/ob/1789731176048-888f7280-c957-4b86-a594-8d7dbbd41104.png\",\"originalFileName\":\"image.png\"}}"}
+19:32:56 [INFO] [moma debug] file-upload success {"fileName":"image.png","originalFileName":"image.png"}
+19:45:27 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:45:27 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+19:45:27 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+19:45:28 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+19:45:28 [INFO] [moma debug] plugin-settings success
