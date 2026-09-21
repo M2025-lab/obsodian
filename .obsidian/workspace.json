@@ -11,10 +11,14 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/云仓-支持tms工人复尺/未命名.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "未命名"
             }
           }
         ]
@@ -233,6 +237,7 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/云仓-支持tms工人复尺/未命名.md",
     "20.知识沉淀/agent上下文管理-方法级实现详解.md",
     "20.知识沉淀/agent上下文管理-claude-code与deepharness.md",
@@ -241,7 +246,6 @@
     "00.需求/一品多商",
     "未命名.md",
     "未命名",
-    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "20.知识沉淀/手机号隐藏.md",
     "20.知识沉淀/优化提示词提升AI代码生成质量报告.md",
     "20.知识沉淀/需求 → 提示词「硬化」模板（附本任务逐节示例）.md",
