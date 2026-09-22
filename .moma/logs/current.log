@@ -40,3 +40,10 @@
 11:45:38 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
 11:45:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
 11:45:39 [INFO] [moma debug] plugin-settings success
+14:01:16 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:01:17 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:01:17 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:01:18 [INFO] [auth-credential] refresh success, generation=undefined
+14:01:18 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:01:19 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:01:19 [INFO] [moma debug] plugin-settings success
