@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 0001: 上下文管理的心智模型与两大哲学</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<h1>🧠 上下文管理：为什么、是什么、两大做法</h1>
+
+<p class="note">
+  学完本节你能：① 用一句话说清"上下文管理解决什么问题"；② 画出 <strong>Raw Log ≠ Surface</strong> 的关系；
+  ③ 说出 Claude Code 与 DeepHarness 两家思路的<strong>相同</strong>与<strong>不同</strong>。
+  这是理解后面所有机制的总开关。
+</p>
+
+<h2>1. 先从一个真实场景说起</h2>
+
+<p>你让一个 coding agent 干活：</p>
+<ul>
+  <li>读了一个 <strong>8000 行</strong>的配置文件；</li>
+  <li>跑了一遍构建，日志 <strong>5000 行</strong>；</li>
+  <li>连续改了 20 个文件，每步都有工具调用和结果。</li>
+</ul>
+<p>模型<strong>每次推理</strong>，只能看到"当前上下文窗口"里的东西。窗口是有限的、且按 token 计费。于是问题来了：</p>
+
+<div class="flow-box">
+  <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="a1" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d97706"/></marker></defs>
+    <rect x="10" y="20" width="190" height="120" rx="8" fill="#fff7ed" stroke="#d97706" stroke-width="1.5"/>
+    <text x="105" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#d97706">桶满了</text>
+    <text x="105" y="80" text-anchor="middle" font-size="11" fill="#333">窗口 token 超限</text>
+    <text x="105" y="102" text-anchor="middle" font-size="11" fill="#333">或最早信息被挤出</text>
+
+    <line x1="200" y1="80" x2="255" y2="80" stroke="#d97706" stroke-width="2" marker-end="url(#a1)"/>
+
+    <rect x="260" y="20" width="200" height="120" rx="8" fill="#fef2f2" stroke="#991b1b" stroke-width="1.5"/>
+    <text x="360" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">两种灾难</text>
+    <text x="360" y="80" text-anchor="middle" font-size="11" fill="#333">① 直接报错 (overflow)</text>
+    <text x="360" y="102" text-anchor="middle" font-size="11" fill="#333">② 模型"失忆"乱改</text>
+
+    <line x1="460" y1="80" x2="515" y2="80" stroke="#d97706" stroke-width="2" marker-end="url(#a1)"/>
+
+    <rect x="520" y="20" width="150" height="120" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="595" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb">解法</text>
+    <text x="595" y="80" text-anchor="middle" font-size="11" fill="#333">上下文管理</text>
+    <text x="595" y="102" text-anchor="middle" font-size="11" fill="#333">永远留够信息</text>
+  </svg>
+</div>
+
+<p><strong>一句话定义上下文管理</strong>：在有限的、昂贵的窗口里，始终让模型看到<strong>"够它做下一个决策的最小信息集"</strong>。
+不是"塞得越多越好"，而是"留得准"。</p>
+
+<h2>2. 心智模型：上下文窗口 = 一个"展示桶"</h2>
+
+<p>把上下文窗口想成一个固定容量、按 token 计费的<strong>透明桶</strong>：</p>
+<table>
+  <thead><tr><th>桶的属性</th><th>对系统的含义</th></tr></thead>
+  <tbody>
+    <tr><td>容量固定</td><td>满了就必须有人决定：哪些拿走、哪些留下、哪些不进桶</td></tr>
+    <tr><td>整体发送</td><td>每轮推理，桶被<strong>整体</strong>发给模型，模型只看桶内</td></tr>
+    <tr><td>按量计费</td><td>越满越贵，所以"压缩"本身也要算成本（不能乱调 LLM）</td></tr>
+  </tbody>
+</table>
+
+<p>三类操作覆盖全部上下文管理手段：</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 150" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="a2" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+    <rect x="10" y="25" width="200" height="100" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="110" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb">① 压缩历史</text>
+    <text x="110" y="85" text-anchor="middle" font-size="11" fill="#333">旧对话变小</text>
+    <text x="110" y="105" text-anchor="middle" font-size="10" fill="#666">compaction</text>
+
+    <rect x="240" y="25" width="200" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="340" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">② 外置大块</text>
+    <text x="340" y="85" text-anchor="middle" font-size="11" fill="#333">不进桶，给指针</text>
+    <text x="340" y="105" text-anchor="middle" font-size="10" fill="#666">spill</text>
+
+    <rect x="470" y="25" width="200" height="100" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="570" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#ca8a04">③ 注入时裁剪</text>
+    <text x="570" y="85" text-anchor="middle" font-size="11" fill="#333">按需才放进桶</text>
+    <text x="570" y="105" text-anchor="middle" font-size="10" fill="#666">context</text>
+  </svg>
+</div>
+
+<h2>3. 整件事的基石：Raw Log ≠ Surface</h2>
+
+<p>这是 DeepHarness 最关键的一句，也是读懂全部机制的开关。记牢：</p>
+<div class="note note-read">
+  <strong>Raw Log（原始日志）</strong> = 完整记录"发生过什么"的 append-only 事件流。可回放、可审计。<br>
+  <strong>Surface（表面投影）</strong> = 模型"现在应该看到"的那一份，是 Raw Log 的一个<strong>投影（视图）</strong>。
+</div>
+
+<div class="flow-box">
+  <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="a3" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/></marker></defs>
+    <!-- Raw Log -->
+    <rect x="20" y="15" width="290" height="200" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="165" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#7c3aed">Raw Log（全量·只增不减）</text>
+    <circle cx="60" cy="70" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="60" y="74" text-anchor="middle" font-size="10" fill="#7c3aed">1</text>
+    <circle cx="120" cy="70" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="120" y="74" text-anchor="middle" font-size="10" fill="#7c3aed">2</text>
+    <circle cx="180" cy="70" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="180" y="74" text-anchor="middle" font-size="10" fill="#7c3aed">3</text>
+    <circle cx="240" cy="70" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="240" y="74" text-anchor="middle" font-size="10" fill="#7c3aed">4</text>
+    <circle cx="60" cy="110" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="60" y="114" text-anchor="middle" font-size="10" fill="#7c3aed">5</text>
+    <circle cx="120" cy="110" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="120" y="114" text-anchor="middle" font-size="10" fill="#7c3aed">6</text>
+    <circle cx="180" cy="110" r="13" fill="#fde68a" stroke="#ca8a04"/><text x="180" y="114" text-anchor="middle" font-size="10" fill="#92400e">7</text>
+    <circle cx="240" cy="110" r="13" fill="#fde68a" stroke="#ca8a04"/><text x="240" y="114" text-anchor="middle" font-size="10" fill="#92400e">8</text>
+    <circle cx="60" cy="150" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="60" y="154" text-anchor="middle" font-size="10" fill="#7c3aed">9</text>
+    <circle cx="120" cy="150" r="13" fill="#ede9fe" stroke="#7c3aed"/><text x="120" y="154" text-anchor="middle" font-size="10" fill="#7c3aed">10</text>
+    <text x="165" y="192" text-anchor="middle" font-size="10" fill="#666">压缩只往这里追加事件，不删</text>
+
+    <!-- arrow projection -->
+    <line x1="310" y1="115" x2="370" y2="115" stroke="#7c3aed" stroke-width="2" marker-end="url(#a3)"/>
+    <text x="340" y="105" text-anchor="middle" font-size="10" fill="#7c3aed">投影</text>
+
+    <!-- Surface -->
+    <rect x="380" y="15" width="280" height="200" rx="8" fill="#ecfeff" stroke="#0891b2" stroke-width="1.5"/>
+    <text x="520" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#0891b2">Surface（模型现在看的）</text>
+    <circle cx="420" cy="70" r="13" fill="#cffafe" stroke="#0891b2"/><text x="420" y="74" text-anchor="middle" font-size="10" fill="#0891b2">9</text>
+    <circle cx="470" cy="70" r="13" fill="#cffafe" stroke="#0891b2"/><text x="470" y="74" text-anchor="middle" font-size="10" fill="#0891b2">10</text>
+    <rect x="510" y="58" width="60" height="26" rx="6" fill="#fef9c3" stroke="#ca8a04"/>
+    <text x="540" y="75" text-anchor="middle" font-size="9" fill="#92400e">摘要(1-8)</text>
+    <circle cx="420" cy="110" r="13" fill="#cffafe" stroke="#0891b2"/><text x="420" y="114" text-anchor="middle" font-size="10" fill="#0891b2">11</text>
+    <circle cx="470" cy="110" r="13" fill="#cffafe" stroke="#0891b2"/><text x="470" y="114" text-anchor="middle" font-size="10" fill="#0891b2">12</text>
+    <circle cx="420" cy="150" r="13" fill="#cffafe" stroke="#0891b2"/><text x="420" y="154" text-anchor="middle" font-size="10" fill="#0891b2">13</text>
+    <text x="520" y="192" text-anchor="middle" font-size="10" fill="#666">原文 1-8 已"投影掉"，没删</text>
+  </svg>
+</div>
+
+<p><strong>关键推论（务必记住）</strong>：<strong>压缩 ≠ 删除历史</strong>。压缩只是"改 Surface 投影"——把原始对话从 Surface 抹掉、换成一条摘要；Raw Log 一行不少。
+这带来三大好处：<strong>可逆</strong>（想恢复就改回投影）、<strong>可审计</strong>（日志完整）、<strong>可调试</strong>（能回放）。</p>
+
+<h2>4. 两大设计哲学</h2>
+
+<h3>哲学 A — Claude Code：单一循环 + 5 层懒惰降级阶梯</h3>
+<p>永远先试<strong>最便宜</strong>的操作，逐级升级，目标是在"最大化工作记忆"和"最小化缓存失效"间取平衡：</p>
+<table>
+  <thead><tr><th>层级</th><th>手段</th><th>成本</th></tr></thead>
+  <tbody>
+    <tr><td>⑤</td><td><strong>预算削减</strong>：超大工具输出 → 换成"结果已存 X 路径"的指针</td><td>最便宜</td></tr>
+    <tr><td>④</td><td><strong>裁剪</strong>：删掉历史里特定大块文本（如巨型 build 日志）</td><td>低</td></tr>
+    <tr><td>③</td><td><strong>微压缩</strong>：细粒度、缓存感知的压缩</td><td>中</td></tr>
+    <tr><td>②</td><td><strong>上下文坍缩</strong>：读取时合并多条消息（视觉合并不删）</td><td>中</td></tr>
+    <tr><td>①</td><td><strong>自动压缩</strong>：调 LLM 把最早对话摘要成一条 system 消息</td><td>最贵·有损</td></tr>
+  </tbody>
+</table>
+<div class="note note-write">
+  <strong>经济学洞察</strong>：<code>CLAUDE.md</code> <strong>不进 system prompt</strong>。它被包在标签里当 <code>message</code> 注入，并附"这段可能相关也可能不相关"。
+  原因纯经济——system prompt 对所有用户完全相同才能共享 90% 折扣的 prompt cache；若 CLAUDE.md 进 system prompt，每个用户单独缓存，产品经济学崩塌。
+</div>
+
+<h3>哲学 B — DeepHarness：事件溯源 + 可插拔 seam</h3>
+<p>把"发生过什么"和"现在看什么"彻底分开（即第 3 节的 Raw Log/Surface）。压缩、裁剪都是<strong>往 Raw Log 追加几条事件 + 改 Surface</strong>，日志只增不减，因此干净、可逆、可审计。</p>
+
+<table>
+  <thead><tr><th>维度</th><th>Claude Code（逆向）</th><th>DeepHarness（开源）</th></tr></thead>
+  <tbody>
+    <tr><td>架构哲学</td><td>单一循环 + 5 层降级阶梯</td><td>事件溯源 + 可插拔能力 seam</td></tr>
+    <tr><td>压缩触发</td><td>阈值监控，循环内暂停</td><td>pressure / context-overflow 事件</td></tr>
+    <tr><td>压缩策略</td><td>5 层逐级升级，先便宜</td><td>先确定性剪枝，不够才 LLM 摘要</td></tr>
+    <tr><td>超大输出</td><td>预算削减（指针替换）</td><td>spill（存全文 + locator 预览）</td></tr>
+    <tr><td>可审计性</td><td>较隐式</td><td>极强：Raw Log 完整，Surface 是投影</td></tr>
+    <tr><td>缓存经济</td><td>CLAUDE.md 踢出 system prompt</td><td>request/header 单独记录</td></tr>
+  </tbody>
+</table>
+
+<h2>5. 两家的共识（你真正该记住的）</h2>
+<div class="flow-box">
+  <p style="margin-top:0"><strong>共识 1 · 懒惰降级</strong>：先试最便宜的压缩手段，LLM 摘要是最后手段（贵 + 有损）。</p>
+  <p><strong>共识 2 · 超大输出外置</strong>：别把 8000 行塞进桶，存盘 + 预览 + 定位符。名不同（budget reduction / spill），理一样。</p>
+  <p style="margin-bottom:0"><strong>共识 3 · 缓存经济优先于便利</strong>：共享 prompt cache 比"什么都塞进 system prompt"重要得多。</p>
+</div>
+
+<h2>✏️ 小测验（做完看解析）</h2>
+<div class="quiz">
+  <div class="quiz-question" data-correct="B" data-explain="上下文管理不是塞满，而是在有限窗口里始终保留'够决策的最小信息集'。">
+    <p>Q1. 上下文管理的根本目标是什么？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="A">把历史全部塞进窗口不丢失</label>
+      <label><input type="radio" name="q1" value="B">让模型始终看到够决策的最小信息</label>
+      <label><input type="radio" name="q1" value="C">尽可能多用昂贵的 LLM 摘要</label>
+      <label><input type="radio" name="q1" value="D">把所有工具结果完整保留下来</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="C" data-explain="Surface 是 Raw Log 的投影；压缩改 Surface、不改 Raw Log，所以可逆转、可审计。">
+    <p>Q2. Raw Log 与 Surface 的正确关系是？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q2" value="A">两者是同一份，压缩会删 Raw Log</label>
+      <label><input type="radio" name="q2" value="B">Surface 更全，Raw Log 是其摘要</label>
+      <label><input type="radio" name="q2" value="C">Surface 是 Raw Log 的投影，压缩只改投影</label>
+      <label><input type="radio" name="q2" value="D">Raw Log 会随压缩被永久销毁</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="A" data-explain="LLM 摘要既贵又有损，所以先做免费/廉价的剪枝与外置，最后才调模型。">
+    <p>Q3. 为什么两家都把 LLM 摘要当"最后手段"？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q3" value="A">因为贵且有损，先做免费压缩</label>
+      <label><input type="radio" name="q3" value="B">因为模型摘要比人写得更准确</label>
+      <label><input type="radio" name="q3" value="C">因为只有这样缓存才生效</label>
+      <label><input type="radio" name="q3" value="D">因为外置大块会丢失信息</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+</div>
+
+<div class="footer">
+  下一节：<a href="0002-deepharness-pipeline.html">Lesson 0002 · DeepHarness 压缩流水线：一步步看怎么做</a><br>
+  名词查 <a href="../reference/glossary.html">术语表</a> ·
+  一手来源见 <a href="../RESOURCES.md">RESOURCES.md</a><br>
+  有不清楚的，随时问你的老师（agent）。
+</div>
+
+<script>
+document.querySelectorAll('.quiz-question').forEach((q) => {
+  const opts = q.querySelectorAll('input[type=radio]');
+  const fb = q.querySelector('.quiz-feedback');
+  const correct = q.dataset.correct;
+  const explain = q.dataset.explain;
+  opts.forEach(o => o.addEventListener('change', () => {
+    if (o.value === correct) {
+      fb.className = 'quiz-feedback correct';
+      fb.textContent = '✅ 正确。' + explain;
+    } else {
+      fb.className = 'quiz-feedback wrong';
+      fb.textContent = '❌ 再想想。' + explain;
+    }
+    fb.style.display = 'block';
+  }));
+});
+</script>
+
+</body>
+</html>

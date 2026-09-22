@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 0002: DeepHarness 压缩流水线：一步步看怎么做</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<h1>🔧 DeepHarness 压缩流水线：一步步看怎么做</h1>
+
+<p class="note">
+  学完本节你能：① 默写出 <code>compactIfNeeded</code> 的<strong>决策树</strong>；② 说清
+  <code>compaction/start → summary → end</code> 锁的作用；③ 用一段伪代码描述一个最小 <code>CompactionEngine</code>。
+  建议先读完 <a href="0001-context-mental-model.html">Lesson 0001</a>。
+</p>
+
+<h2>1. 用一条时间线串起全场</h2>
+<p>场景：agent 已读 8000 行 config、构建日志 5000 行、改了 3 个文件。token 计量显示 Surface 接近上限。下面是它"怎么做"：</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="b0" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+    <rect x="10" y="30" width="150" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="85" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#2563eb">① 触发</text>
+    <text x="85" y="76" text-anchor="middle" font-size="10" fill="#555">pressure/overflow</text>
+    <line x1="160" y1="60" x2="195" y2="60" stroke="#2563eb" stroke-width="2" marker-end="url(#b0)"/>
+
+    <rect x="200" y="30" width="150" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="275" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">② 免费剪枝</text>
+    <text x="275" y="76" text-anchor="middle" font-size="10" fill="#555">toolResultPruner</text>
+    <line x1="350" y1="60" x2="385" y2="60" stroke="#2563eb" stroke-width="2" marker-end="url(#b0)"/>
+
+    <rect x="390" y="30" width="150" height="60" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="465" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#ca8a04">③ 够了吗？</text>
+    <text x="465" y="76" text-anchor="middle" font-size="10" fill="#555">重算 token</text>
+    <line x1="540" y1="60" x2="575" y2="60" stroke="#2563eb" stroke-width="2" marker-end="url(#b0)"/>
+
+    <rect x="580" y="30" width="90" height="60" rx="8" fill="#fee2e2" stroke="#991b1b" stroke-width="1.5"/>
+    <text x="625" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">④ 摘要</text>
+    <text x="625" y="76" text-anchor="middle" font-size="10" fill="#555">上 LLM</text>
+  </svg>
+</div>
+
+<h2>2. 触发：两种信号</h2>
+<table>
+  <thead><tr><th>信号</th><th>来源</th><th>含义</th></tr></thead>
+  <tbody>
+    <tr><td><code>pressure</code></td><td>本地 token 计量超阈值</td><td>compaction-basic 挂 <code>agent/pre-step</code> 监听，每轮推理前检查</td></tr>
+    <tr><td><code>context-overflow</code></td><td>服务端返回窗口溢出错误</td><td>挂 <code>request-error</code> 监听，强制回收</td></tr>
+  </tbody>
+</table>
+
+<h2>3. 决策树（"怎么做"的灵魂）</h2>
+<p>整条流水线的核心逻辑，用一张图说清：</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 470" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="b1" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+
+    <rect x="200" y="10" width="280" height="42" rx="20" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="340" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#2563eb">触发 pressure / overflow</text>
+
+    <line x1="340" y1="52" x2="340" y2="78" stroke="#2563eb" stroke-width="2" marker-end="url(#b1)"/>
+
+    <rect x="150" y="80" width="380" height="46" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="340" y="103" text-anchor="middle" font-size="11.5" font-weight="600" fill="#16a34a">② 免费剪枝：toolResultPruner</text>
+    <text x="340" y="120" text-anchor="middle" font-size="10" fill="#555">超预算工具结果裁中间，留 head/tail，按 code point 切防乱码</text>
+
+    <line x1="340" y1="126" x2="340" y2="152" stroke="#2563eb" stroke-width="2" marker-end="url(#b1)"/>
+
+    <rect x="190" y="154" width="300" height="40" rx="20" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="340" y="179" text-anchor="middle" font-size="11.5" font-weight="700" fill="#ca8a04">③ tokenMeter 重新计量</text>
+
+    <line x1="340" y1="194" x2="340" y2="220" stroke="#2563eb" stroke-width="2" marker-end="url(#b1)"/>
+
+    <polygon points="340,222 420,252 340,282 260,252" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="340" y="248" text-anchor="middle" font-size="11" font-weight="700" fill="#2563eb">够低了？</text>
+    <text x="340" y="265" text-anchor="middle" font-size="9" fill="#666">≤ 阈值</text>
+
+    <!-- yes branch -->
+    <line x1="260" y1="252" x2="120" y2="252" stroke="#16a34a" stroke-width="2" marker-end="url(#b1)"/>
+    <text x="180" y="242" text-anchor="middle" font-size="10" fill="#16a34a">是</text>
+    <rect x="10" y="222" width="110" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="65" y="248" text-anchor="middle" font-size="11" font-weight="700" fill="#166534">直接推进</text>
+    <text x="65" y="268" text-anchor="middle" font-size="9.5" fill="#166534">Surface 不改</text>
+    <text x="65" y="282" text-anchor="middle" font-size="9.5" fill="#166534">不调 LLM</text>
+
+    <!-- no branch -->
+    <line x1="420" y1="252" x2="540" y2="252" stroke="#991b1b" stroke-width="2" marker-end="url(#b1)"/>
+    <text x="470" y="242" text-anchor="middle" font-size="10" fill="#991b1b">否</text>
+    <rect x="545" y="222" width="130" height="60" rx="8" fill="#fee2e2" stroke="#991b1b" stroke-width="1.5"/>
+    <text x="610" y="248" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">选段 + 摘要</text>
+    <text x="610" y="268" text-anchor="middle" font-size="9.5" fill="#991b1b">上 LLM（贵）</text>
+
+    <line x1="610" y1="282" x2="610" y2="312" stroke="#991b1b" stroke-width="2" marker-end="url(#b1)"/>
+    <rect x="500" y="314" width="220" height="40" rx="8" fill="#fef2f2" stroke="#991b1b" stroke-width="1.2"/>
+    <text x="610" y="338" text-anchor="middle" font-size="11" fill="#991b1b">校验：摘要必须比原文小（收敛）</text>
+
+    <line x1="610" y1="354" x2="610" y2="380" stroke="#991b1b" stroke-width="2" marker-end="url(#b1)"/>
+    <rect x="500" y="382" width="220" height="46" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="610" y="406" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed">写回：user/message</text>
+    <text x="610" y="423" text-anchor="middle" font-size="10" fill="#555">surfaceOp.replace 抹掉原区间</text>
+  </svg>
+</div>
+
+<p><strong>一句话记住决策树</strong>：<em>先免费剪枝 → 重算 → 够就停（不调模型）→ 不够才选段调 LLM → 校验收敛 → 写回投影</em>。
+绝大多数情况在"免费剪枝"后就停了，几乎零成本。</p>
+
+<h2>4. 事务锁：防止两个压缩并发改同一 Surface</h2>
+<p>压缩是"读 Surface → 生成摘要 → 改 Surface"的多步操作，必须原子。DeepHarness 用三条 log-only 事件当锁：</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 110" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="b2" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/></marker></defs>
+    <rect x="10" y="30" width="190" height="55" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="105" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed">compaction/start</text>
+    <text x="105" y="73" text-anchor="middle" font-size="10" fill="#555">冻结 marker</text>
+    <line x1="200" y1="57" x2="235" y2="57" stroke="#7c3aed" stroke-width="2" marker-end="url(#b2)"/>
+
+    <rect x="240" y="30" width="190" height="55" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="335" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed">compaction/summary</text>
+    <text x="335" y="73" text-anchor="middle" font-size="10" fill="#555">生成摘要体</text>
+    <line x1="430" y1="57" x2="465" y2="57" stroke="#7c3aed" stroke-width="2" marker-end="url(#b2)"/>
+
+    <rect x="470" y="30" width="200" height="55" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="570" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">compaction/end</text>
+    <text x="570" y="73" text-anchor="middle" font-size="10" fill="#555">提交·解锁</text>
+  </svg>
+</div>
+<ul>
+  <li><strong>中途崩溃</strong> → 留下"有 start 无 end"的<strong>遗留锁</strong> → 阻塞所有入口点（任何新操作先检查遗留锁）。保证不会两个压缩同时改同一 Surface。</li>
+  <li>手动压缩有 6 类预期失败（<code>busy / cancelled / changed / summary / commit / persistence</code>）：失败被当一等公民记录，每种都定义 Surface 影响与日志影响。</li>
+</ul>
+
+<h2>5. shadowed：压缩为什么可逆</h2>
+<p>被摘要替换掉的原始对话<strong>不删</strong>，仍在 Raw Log，只是<strong>不进 Surface</strong>。于是：</p>
+<div class="note note-read">
+  <code>shadowedRange</code> 是 Surface 里的<strong>位置跨度</strong>（不是数值 seq 区间）。因为新摘要节点的 seq 更高、但位置更早，所以 <code>start</code> 可能 &gt; <code>end</code>。
+  想恢复？把 Surface 投影改回去即可，Raw Log 原样不动。
+</div>
+
+<h2>6. 你要怎么实现：最小 CompactionEngine 伪代码</h2>
+<p>把上面所有概念收成一个可运行的骨架（TypeScript 风格）。重点看注释里的"对应哪一节"：</p>
+<pre><code>interface Surface { nodes: Node[] }            // 模型看到的历史
+interface RawLog { events: Event[] }           // 全量事件，只增不减
+
+class CompactionEngine {
+  constructor(private meter: TokenMeter, private llm: Summarizer) {}
+
+  // §2 触发入口
+  compactIfNeeded(surface: Surface, raw: RawLog): void {
+    if (!this.meter.overThreshold(surface)) return;   // pressure/overflow
+
+    // §3 ② 先免费剪枝（不调模型）
+    const pruned = toolResultPruner(surface);
+    if (!this.meter.overThreshold(pruned)) {
+      this.commit(pruned, raw);                        // ③ 够就停，不调 LLM
+      return;
+    }
+
+    // §3 ④ 不够才选段 + 调 LLM
+    const range = selectCompactableRange(pruned);      // 留尾部 + 不切工具对
+    const summary = this.llm.summarize(range);         // 上 LLM（贵·有损）
+    if (this.meter.tokensOf(summary) >= this.meter.tokensOf(range)) {
+      throw new Error('未收敛：摘要不比原文小');          // §3 校验收敛
+    }
+
+    // §4 + §5 事务锁 + 写回投影（Raw Log 不动）
+    raw.events.push({ type: 'compaction/start', range });
+    raw.events.push({ type: 'compaction/summary', text: summary });
+    surface.replace(range, summaryNode);               // surfaceOp.replace
+    raw.events.push({ type: 'compaction/end' });
+  }
+
+  private commit(s: Surface, raw: RawLog) { /* 推进 surface，追加日志 */ }
+}
+
+// §1 压力唯一来源：所有判断读这一个单例
+class TokenMeter {
+  measure(surface: Surface): Measurement { /* 按 surface 位置计价 */ }
+  overThreshold(s: Surface): boolean { return this.measure(s).total &gt; LIMIT; }
+}</code></pre>
+
+<p>对照 Lesson 0001 的"三类操作"：<code>toolResultPruner</code> 属 ① 压缩、<code>spill</code>（超大结果外置）属 ②、注入时裁剪属 ③。决策树就是 <code>compactIfNeeded</code> 的 if/else。</p>
+
+<h2>✏️ 小测验</h2>
+<div class="quiz">
+  <div class="quiz-question" data-correct="C" data-explain="先免费剪枝，重算后仍超阈值才选段调 LLM；多数情况剪枝后就停，几乎零成本。">
+    <p>Q1. compactIfNeeded 第一步做什么？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="A">立刻调 LLM 做全文摘要</label>
+      <label><input type="radio" name="q1" value="B">先把整段历史删掉重来</label>
+      <label><input type="radio" name="q1" value="C">先免费剪枝再判断是否需摘要</label>
+      <label><input type="radio" name="q1" value="D">直接把 Surface 全部外置到磁盘</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="B" data-explain="compaction/start→summary→end 是事务锁；崩溃留'有start无end'的遗留锁，阻塞所有入口点防并发。">
+    <p>Q2. start→summary→end 三条事件的主要作用是？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q2" value="A">给模型发三条系统提示词</label>
+      <label><input type="radio" name="q2" value="B">当锁，防止两个压缩并发改 Surface</label>
+      <label><input type="radio" name="q2" value="C">记录用户每次提问的时间戳</label>
+      <label><input type="radio" name="q2" value="D">把摘要同步到远程向量数据库</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="A" data-explain="压缩只改 Surface 投影、不删 Raw Log，所以被替换的原文仍在日志里，改回投影即可恢复。">
+    <p>Q3. 为什么 DeepHarness 的压缩是可逆的？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q3" value="A">原文仍在 Raw Log，只改了投影</label>
+      <label><input type="radio" name="q3" value="B">LLM 摘要本身可被撤销</label>
+      <label><input type="radio" name="q3" value="C">压缩前自动做了全量备份</label>
+      <label><input type="radio" name="q3" value="D">Surface 与 Raw Log 是同一份</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+</div>
+
+<div class="footer">
+  上一节：<a href="0001-context-mental-model.html">Lesson 0001 · 心智模型与两大哲学</a> ·
+  名词查 <a href="../reference/glossary.html">术语表</a><br>
+  想深挖真实源码，见 <a href="../RESOURCES.md">RESOURCES.md</a>（deepseek-harness 各包）。<br>
+  有不清楚的，随时问你的老师（agent）。
+</div>
+
+<script>
+document.querySelectorAll('.quiz-question').forEach((q) => {
+  const opts = q.querySelectorAll('input[type=radio]');
+  const fb = q.querySelector('.quiz-feedback');
+  const correct = q.dataset.correct;
+  const explain = q.dataset.explain;
+  opts.forEach(o => o.addEventListener('change', () => {
+    if (o.value === correct) {
+      fb.className = 'quiz-feedback correct';
+      fb.textContent = '✅ 正确。' + explain;
+    } else {
+      fb.className = 'quiz-feedback wrong';
+      fb.textContent = '❌ 再想想。' + explain;
+    }
+    fb.style.display = 'block';
+  }));
+});
+</script>
+
+</body>
+</html>

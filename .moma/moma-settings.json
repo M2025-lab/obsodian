@@ -158,7 +158,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1790071290157,
+  "lastGrayReleaseCheck": 1790081243120,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -179,6 +179,6 @@
   "workbenchAutoOpenDismissed": false,
   "hostAuthSelfHealGrayEnabled": true,
   "homepageEnabled": true,
-  "lastGrayReleaseDismiss": 1789625599937,
-  "lastGrayReleaseDismissVersion": "0.3.19"
+  "lastGrayReleaseDismiss": 1790081166649,
+  "lastGrayReleaseDismissVersion": "0.3.21"
 }

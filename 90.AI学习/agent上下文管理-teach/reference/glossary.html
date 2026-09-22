@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>术语表：Agent 上下文管理</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<h1>📖 术语表：Agent 上下文管理</h1>
+<p class="note">本课程所有章节共用这套名词。遇到不认识的词，先来这里查。</p>
+
+<table>
+  <thead><tr><th>术语</th><th>一句话定义</th><th>类比</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Context Window</strong><br>上下文窗口</td>
+      <td>模型单次推理能"看到"的 token 总量上限。固定大小、按 token 计费。</td>
+      <td>一个固定容量、很贵的"展示桶"</td>
+    </tr>
+    <tr>
+      <td><strong>Raw Log</strong><br>原始日志</td>
+      <td>append-only 事件流，完整记录"发生过什么"。可回放、可审计。<strong>压缩不改它。</strong></td>
+      <td>监控录像（全量保存）</td>
+    </tr>
+    <tr>
+      <td><strong>Surface</strong><br>表面投影</td>
+      <td>模型"现在应该看到"的那一份历史，是 Raw Log 的投影（视图）。压缩 = 改它。</td>
+      <td>当下正在看的屏幕（可切）</td>
+    </tr>
+    <tr>
+      <td><strong>Event Sourcing</strong><br>事件溯源</td>
+      <td>状态由"追加的事件序列"派生，而非直接改状态。DeepHarness 的基石。</td>
+      <td>记账用流水，不用余额覆盖</td>
+    </tr>
+    <tr>
+      <td><strong>Lazy Degradation</strong><br>懒惰降级</td>
+      <td>永远先试最便宜的压缩手段，逐级升级，LLM 摘要是最后手段。</td>
+      <td>先关灯省电，不行再关空调</td>
+    </tr>
+    <tr>
+      <td><strong>Compaction</strong><br>压缩</td>
+      <td>把一段旧对话摘要成一条，从 Surface 移出原文。DeepHarness 中靠追加事件实现。</td>
+      <td>把一摞旧笔记缩成一张摘要卡</td>
+    </tr>
+    <tr>
+      <td><strong>Spill</strong><br>外置</td>
+      <td>工具结果超阈值时存盘，上下文只留 head/tail 预览 + locator（定位符）。</td>
+      <td>大文件存 U 盘，桌面只放快捷方式</td>
+    </tr>
+    <tr>
+      <td><strong>Shadowed</strong><br>遮蔽</td>
+      <td>被摘要替换掉的原文不删，只是"不进 Surface"。压缩可逆的关键。</td>
+      <td>笔记收进抽屉，没扔</td>
+    </tr>
+    <tr>
+      <td><strong>Token Meter</strong><br>计量器</td>
+      <td>回放快照，按 Surface 位置计算每个节点的 token 数。压缩决策的唯一压力来源。</td>
+      <td>实时水位计</td>
+    </tr>
+    <tr>
+      <td><strong>Prompt Cache</strong><br>提示缓存</td>
+      <td>相同前缀可复用 KV cache，享折扣。Claude Code 为此把 CLAUDE.md 踢出 system prompt。</td>
+      <td>公共前缀的"团购折扣"</td>
+    </tr>
+    <tr>
+      <td><strong>Locator</strong><br>定位符</td>
+      <td>spill 后留在上下文里的"去哪读全文"的指针（路径 + 预览）。</td>
+      <td>文件快捷方式</td>
+    </tr>
+    <tr>
+      <td><strong>Shadowed Range</strong></td>
+      <td>被压缩区间在 Surface 里的<strong>位置跨度</strong>（非数值 seq 区间，start 可能 &gt; end）。</td>
+      <td>抽屉里那一格的范围</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  回到 <a href="../lessons/0001-context-mental-model.html">Lesson 0001 · 心智模型与两大哲学</a> ·
+  <a href="../lessons/0002-deepharness-pipeline.html">Lesson 0002 · 压缩流水线</a><br>
+  有不清楚的地方，随时问你的老师（agent）。
+</div>
+
+</body>
+</html>
