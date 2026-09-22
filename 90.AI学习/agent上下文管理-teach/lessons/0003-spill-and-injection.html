@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 0003: 补齐拼图 — 外置(spill) 与 注入裁剪(agent-instructions)</title>
+<link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+<h1>🧩 补齐拼图：外置(spill) 与 注入裁剪(agent-instructions)</h1>
+
+<p class="note">
+  学完本节你能：① 说清 spill 的 <strong>head/tail + locator</strong> 机制；② 说清 agent-instructions
+  <strong>何时增量刷新、为何按字节预算截断</strong>；③ 把"三类操作"拼成一张完整的上下文管理地图。
+  建议先读完 <a href="0001-context-mental-model.html">0001</a> 与 <a href="0002-deepharness-pipeline.html">0002</a>。
+</p>
+
+<h2>1. 回顾：三类操作还差两块</h2>
+<p>Lesson 0001 把手段分成三类，0002 只展开了 <strong>① 压缩</strong>。本节补齐 ②③：</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 110" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="c0" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+    <rect x="10" y="25" width="200" height="60" rx="8" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="110" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#555">① 压缩历史</text>
+    <text x="110" y="70" text-anchor="middle" font-size="10" fill="#777">已在 0002 讲</text>
+
+    <rect x="240" y="25" width="200" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="340" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#16a34a">② 外置大块</text>
+    <text x="340" y="70" text-anchor="middle" font-size="10" fill="#777">本节 · spill</text>
+
+    <rect x="470" y="25" width="200" height="60" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="570" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#ca8a04">③ 注入时裁剪</text>
+    <text x="570" y="70" text-anchor="middle" font-size="10" fill="#777">本节 · agent-instructions</text>
+  </svg>
+</div>
+
+<h2>2. ② 外置(spill)：桶装不下就存盘，留指针</h2>
+<p><strong>触发</strong>：某个工具结果超过 <code>maxInlineBytes</code>（比如读了 8000 行文件）。</p>
+<p><strong>做法</strong>：全文存到 spill 文件，上下文里<strong>只留预览 + 定位符（locator）</strong>。模型需要细节时，按 <code>retrievalHint</code> 去 <code>read</code>/<code>grep</code>。</p>
+<div class="flow-box">
+  <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="c1" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#16a34a"/></marker></defs>
+    <rect x="20" y="20" width="230" height="50" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="135" y="42" text-anchor="middle" font-size="11.5" font-weight="700" fill="#16a34a">工具结果 &gt; maxInlineBytes?</text>
+    <text x="135" y="60" text-anchor="middle" font-size="10" fill="#555">（如 8000 行文件）</text>
+
+    <line x1="135" y1="70" x2="135" y2="95" stroke="#16a34a" stroke-width="2" marker-end="url(#c1)"/>
+    <line x1="250" y1="45" x2="300" y2="45" stroke="#16a34a" stroke-width="2" marker-end="url(#c1)"/>
+    <text x="275" y="35" text-anchor="middle" font-size="10" fill="#16a34a">否</text>
+    <rect x="305" y="20" width="150" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+    <text x="380" y="50" text-anchor="middle" font-size="11" fill="#166534">直接内联进桶</text>
+
+    <text x="135" y="112" text-anchor="middle" font-size="10" fill="#16a34a">是</text>
+    <rect x="20" y="120" width="300" height="60" rx="8" fill="#ecfeff" stroke="#0891b2" stroke-width="1.5"/>
+    <text x="170" y="145" text-anchor="middle" font-size="11.5" font-weight="700" fill="#0891b2">LocalSpillStore.saveText</text>
+    <text x="170" y="165" text-anchor="middle" font-size="10" fill="#555">全文落盘：0700 私有根 / 0600 独占写 / 30天清理</text>
+
+    <line x1="320" y1="150" x2="370" y2="150" stroke="#0891b2" stroke-width="2" marker-end="url(#c1)"/>
+    <rect x="375" y="120" width="290" height="60" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="520" y="145" text-anchor="middle" font-size="11.5" font-weight="700" fill="#92400e">上下文只留：head + tail + locator</text>
+    <text x="520" y="165" text-anchor="middle" font-size="10" fill="#555">替换后总大小绝不超 cap；失败则降级保留内联</text>
+  </svg>
+</div>
+<p><strong>为什么只留 head/tail？</strong> 模型通常只需要<strong>头</strong>（文件签名/结构）和<strong>尾</strong>（报错往往在最后一行），中间细节按需再读。这就是 Claude Code "预算削减" 与 DeepHarness "spill" 殊途同归的地方。</p>
+
+<pre><code>function spillReplacement(result, cap):
+  if len(result) &lt;= maxInlineBytes: return result          // 不大 → 内联
+  path = spillStore.saveText(result)                        // 全文落盘
+  if path == null: return result                            // 落盘失败 → 降级保留内联（绝不丢）
+  head = result.head(PREVIEW)
+  tail = result.tail(PREVIEW)
+  return { preview: head + '…(已外置 ' + len + ' 字符)…' + tail,
+           locator: path,
+           retrievalHint: 'read/grep 此路径' }              // 替换后绝不超 cap</code></pre>
+
+<h2>3. ③ 注入时裁剪(agent-instructions)：往桶里放什么，且别塞爆</h2>
+<p>这一步决定<strong>初始</strong>往 Surface 放什么。它管三样：工作区指令（AGENTS.md）、跨会话引用、时间上下文。</p>
+<table>
+  <thead><tr><th>关注点</th><th>做法</th><th>为什么</th></tr></thead>
+  <tbody>
+    <tr><td>字节预算截断</td><td>AGENTS.md 超预算就截断</td><td>不能把指令全文无脑塞爆桶</td></tr>
+    <tr><td>增量刷新</td><td>文件被 read/write/edit 触碰 → 对应 projection 标脏，下次 compose 重算</td><td>不必每轮全量重渲染，省成本</td></tr>
+    <tr><td>按需投射</td><td>只把"当前 step 打开的"相关投影放进去</td><td>模型只看当下该看的</td></tr>
+  </tbody>
+</table>
+<div class="flow-box">
+  <svg viewBox="0 0 680 120" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="c2" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#ca8a04"/></marker></defs>
+    <rect x="20" y="30" width="180" height="55" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="110" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">compose()</text>
+    <text x="110" y="73" text-anchor="middle" font-size="10" fill="#555">渲染 AGENTS.md</text>
+    <line x1="200" y1="57" x2="240" y2="57" stroke="#ca8a04" stroke-width="2" marker-end="url(#c2)"/>
+    <rect x="245" y="30" width="190" height="55" rx="8" fill="#fef9c3" stroke="#ca8a04" stroke-width="1.2"/>
+    <text x="340" y="55" text-anchor="middle" font-size="11" fill="#92400e">超预算？→ 截断</text>
+    <text x="340" y="73" text-anchor="middle" font-size="10" fill="#555">按字节预算</text>
+    <line x1="435" y1="57" x2="475" y2="57" stroke="#ca8a04" stroke-width="2" marker-end="url(#c2)"/>
+    <rect x="480" y="30" width="180" height="55" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="570" y="55" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">touch(file)</text>
+    <text x="570" y="73" text-anchor="middle" font-size="10" fill="#555">标脏→增量重算</text>
+  </svg>
+</div>
+<pre><code>compose():
+  text = render(AGENTS.md)
+  if bytes(text) &gt; budget: text = truncate(text, budget)   // 字节预算截断
+  return text
+on touch(file): dirtyProjections.add(file)                 // 文件被读/写/改 → 标脏
+syncInbox(): for p in dirtyProjections: reproject(p)        // 增量重算，不全量</code></pre>
+
+<h2>4. 横切：token-meter 是决策的尺子</h2>
+<p>0001/0002 反复说"读 tokenMeter"。它到底是什么？——<strong>所有压缩/外置触发判断的唯一压力来源</strong>。</p>
+<ul>
+  <li><strong>按 Surface 位置计价</strong>：回放快照，给每个 surface 节点算 token 数（surface 顺序权威）。</li>
+  <li><strong>两层计价</strong>：固定估计（约 4 字符/token）+ 路由计价（用真实图片/文件单价替换固定启发式）。</li>
+  <li><strong>单例</strong>：压缩决策基于<strong>真实 token 压力</strong>，不是拍脑袋。</li>
+</ul>
+
+<h2>5. 全景地图：把三块拼成闭环</h2>
+<div class="flow-box">
+  <svg viewBox="0 0 680 230" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:680px;">
+    <defs><marker id="c3" markerWidth="9" markerHeight="7" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/></marker></defs>
+    <!-- injection -->
+    <rect x="20" y="20" width="180" height="55" rx="8" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5"/>
+    <text x="110" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">③ 注入时裁剪</text>
+    <text x="110" y="63" text-anchor="middle" font-size="10" fill="#555">决定初始放什么</text>
+    <line x1="200" y1="47" x2="245" y2="47" stroke="#2563eb" stroke-width="2" marker-end="url(#c3)"/>
+
+    <!-- surface bucket -->
+    <rect x="250" y="15" width="180" height="65" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="340" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="#2563eb">Surface（桶）</text>
+    <text x="340" y="60" text-anchor="middle" font-size="10" fill="#555">模型每轮看到的历史</text>
+    <line x1="340" y1="80" x2="340" y2="115" stroke="#2563eb" stroke-width="2" marker-end="url(#c3)"/>
+
+    <!-- meter -->
+    <rect x="250" y="120" width="180" height="45" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="340" y="147" text-anchor="middle" font-size="11" font-weight="700" fill="#7c3aed">token-meter 计量</text>
+
+    <!-- two ops -->
+    <rect x="20" y="175" width="180" height="45" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="110" y="202" text-anchor="middle" font-size="11" font-weight="700" fill="#16a34a">② 外置 spill</text>
+    <rect x="480" y="175" width="180" height="45" rx="8" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.5"/>
+    <text x="570" y="202" text-anchor="middle" font-size="11" font-weight="700" fill="#555">① 压缩 compaction</text>
+
+    <line x1="110" y1="175" x2="110" y2="135" stroke="#16a34a" stroke-width="1.5" marker-end="url(#c3)"/>
+    <line x1="570" y1="175" x2="570" y2="135" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#c3)"/>
+    <line x1="430" y1="142" x2="430" y2="47" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#c3)"/>
+    <text x="445" y="100" text-anchor="middle" font-size="10" fill="#2563eb">超阈值→触发</text>
+  </svg>
+</div>
+<p>闭环逻辑：<strong>③注入时裁剪</strong>决定初始放什么 → 进 <strong>Surface（桶）</strong> → 运行中 <strong>token-meter</strong> 持续计量，超阈值就触发 <strong>①压缩</strong> 或 <strong>②外置</strong> 维持水位。这就是"上下文管理"的全貌。</p>
+
+<h2>✏️ 小测验</h2>
+<div class="quiz">
+  <div class="quiz-question" data-correct="B" data-explain="spill 只留 head/tail，因为模型通常只需头(结构)和尾(报错)，中间细节按需 read/grep，不必全进桶。">
+    <p>Q1. spill 为什么只留 head/tail 预览？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q1" value="A">因为中间内容永远不会被用到</label>
+      <label><input type="radio" name="q1" value="B">因为模型通常只需头尾，中间按需再读</label>
+      <label><input type="radio" name="q1" value="C">因为中间会被系统自动删除掉</label>
+      <label><input type="radio" name="q1" value="D">因为 head/tail 比中间更便宜计费</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="B" data-explain="agent-instructions 用 'touch' 标脏：文件被 read/write/edit 触碰后才增量重算投影，不必每轮全量重渲染。">
+    <p>Q2. agent-instructions 何时重算投影？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q2" value="A">每生成一个 token 都全量重算</label>
+      <label><input type="radio" name="q2" value="B">仅当相关文件被触碰并标脏时增量算</label>
+      <label><input type="radio" name="q2" value="C">只在会话开始时计算一次</label>
+      <label><input type="radio" name="q2" value="D">投影一旦生成就永不重算</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="quiz-question" data-correct="B" data-explain="所有压缩/外置的触发判断，压力数据都来自 tokenMeter.measure 这一个单例，按 surface 位置真实计价。">
+    <p>Q3. 压缩/外置的触发压力从哪来？</p>
+    <div class="quiz-options">
+      <label><input type="radio" name="q3" value="A">由模型自己估算剩余空间</label>
+      <label><input type="radio" name="q3" value="B">来自 tokenMeter.measure 这一个单例</label>
+      <label><input type="radio" name="q3" value="C">来自一个随机设定的阈值</label>
+      <label><input type="radio" name="q3" value="D">由用户每次手动输入字数</label>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+</div>
+
+<div class="footer">
+  上一节：<a href="0002-deepharness-pipeline.html">Lesson 0002 · 压缩流水线</a> ·
+  总纲：<a href="0001-context-mental-model.html">Lesson 0001 · 心智模型</a><br>
+  名词查 <a href="../reference/glossary.html">术语表</a> ·
+  想深挖源码见 <a href="../RESOURCES.md">RESOURCES.md</a><br>
+  有不清楚的，随时问你的老师（agent）。
+</div>
+
+<script>
+document.querySelectorAll('.quiz-question').forEach((q) => {
+  const opts = q.querySelectorAll('input[type=radio]');
+  const fb = q.querySelector('.quiz-feedback');
+  const correct = q.dataset.correct;
+  const explain = q.dataset.explain;
+  opts.forEach(o => o.addEventListener('change', () => {
+    if (o.value === correct) {
+      fb.className = 'quiz-feedback correct';
+      fb.textContent = '✅ 正确。' + explain;
+    } else {
+      fb.className = 'quiz-feedback wrong';
+      fb.textContent = '❌ 再想想。' + explain;
+    }
+    fb.style.display = 'block';
+  }));
+});
+</script>
+
+</body>
+</html>
