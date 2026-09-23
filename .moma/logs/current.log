@@ -1,0 +1,82 @@
+09:46:12 [INFO] [启动耗时] 读取 manifest 版本: 13ms（累计 13ms）
+09:46:12 [INFO] [启动耗时][loadSettings] storage.initialize: 2ms（累计 2ms）
+09:46:12 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 33 个 + 旧目录 0 个，并发): 0ms
+09:46:12 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 33 个文件）: 0ms（累计 0ms）
+09:46:12 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×33: 4ms（累计 4ms）
+09:46:12 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×33: 1ms（累计 5ms）
+09:46:12 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 6ms（累计 8ms）
+09:46:12 [INFO] [启动耗时] loadSettings: 9ms（累计 22ms）
+09:46:12 [INFO] [启动耗时] logStore.rotate: 1ms（累计 23ms）
+09:46:12 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 24ms）
+09:46:12 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 2ms（累计 26ms）
+09:46:12 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 9ms（累计 35ms）
+09:46:12 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 35ms）
+09:46:12 [INFO] [启动耗时] initializeMomaRemoteChannels: 1ms（累计 36ms）
+09:46:12 [INFO] [启动耗时] registerView ×10: 12ms（累计 48ms）
+09:46:12 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:46:12 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 2ms（累计 50ms）
+09:46:12 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 1ms（累计 1ms）
+09:46:12 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
+09:46:12 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:46:12 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:46:12 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:46:12 [INFO] [启动耗时][homepage.activate] loadSettings: 21ms（累计 21ms）
+09:46:12 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 21ms）
+09:46:12 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 21ms）
+09:46:12 [INFO] [启动耗时][homepage] reconcile: 22ms（累计 23ms）
+09:46:12 [INFO] [启动耗时] homepageFeature.onload: 23ms（累计 73ms）
+09:46:12 [INFO] [启动耗时] onload 总耗时: 73ms
+09:46:12 [INFO] [Claudian shell-path] probed {"length":599}
+09:46:12 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:46:12 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:46:12 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+09:46:12 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+09:46:12 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+09:46:13 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+09:46:13 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:46:13 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+09:46:13 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:46:13 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+09:46:13 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+09:46:13 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+09:46:13 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+09:46:13 [INFO] [moma debug] plugin-settings success
+09:46:13 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+09:46:13 [INFO] [moma debug] plugin-settings success
+09:46:13 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+09:46:13 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+09:46:13 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
+09:46:13 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW"]},"affectedProviderIds":[]}
+09:46:13 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+09:46:14 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+09:46:14 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+09:46:14 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+09:46:14 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+09:46:14 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+09:46:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+09:46:14 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+09:46:14 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+09:46:14 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+09:46:14 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+09:46:15 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+09:46:15 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
+09:46:15 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
+09:46:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:46:15 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+09:46:15 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.21"}
+09:46:15 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+09:46:15 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:51:15 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+09:51:15 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+09:56:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+09:56:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:01:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:01:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:06:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:06:15 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:11:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:11:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:16:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:16:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:21:15 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+10:21:15 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

@@ -52061,14 +52061,17 @@ var getSkipItemsByList = (skipOrNotResults) => {
       if (!skipOrNotResults[key].isExplictlyIgnored && skipOrNotResults[key].isExplictlyAllowed) {
         const parents = getFolderLevels(key, true).reverse();
         for (const key2 of parents) {
-          if (key2 in skipOrNotResults && !skipOrNotResults[key2].isExplictlyIgnored && !explictlyIgnoredSet.has(key2)) {
-            skipOrNotResults[key2].isExplictlyAllowed = true;
-            skipOrNotResults[key2].finalIsIgnored = false;
-          } else {
-            throw Error(
-              `${key}'s parent ${key2} in abnormal state: ${JSON.stringify(skipOrNotResults[key2])}`
+          if (!(key2 in skipOrNotResults)) {
+            console.warn(
+              `${key} is explictly allowed but its parent ${key2} is not a key, likely a stale prevSync record; not relaxing it`
             );
+            continue;
           }
+          if (skipOrNotResults[key2].isExplictlyIgnored || explictlyIgnoredSet.has(key2)) {
+            continue;
+          }
+          skipOrNotResults[key2].isExplictlyAllowed = true;
+          skipOrNotResults[key2].finalIsIgnored = false;
         }
       }
     }
