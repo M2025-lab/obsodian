@@ -11,10 +11,14 @@
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/云仓-支持tms工人复尺/未命名.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "未命名"
             }
           }
         ]
@@ -247,8 +251,9 @@
       "moma:Open Moma": false
     }
   },
-  "active": "b7b8c1d646bb34b2",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/云仓-支持tms工人复尺/未命名.md",
     "90.AI学习/agent上下文管理-teach/lessons/0003-spill-and-injection.html",
     "90.AI学习/agent上下文管理-teach/learning-records/0001-prior-knowledge-and-zone.md",
@@ -264,7 +269,6 @@
     "90.AI学习/agent上下文管理-teach/learning-records",
     "90.AI学习/agent上下文管理-teach/assets",
     "90.AI学习/agent上下文管理-teach",
-    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "20.知识沉淀/agent上下文管理-方法级实现详解.md",
     "20.知识沉淀/agent上下文管理-claude-code与deepharness.md",
     "00.需求/一品多商/接口.md",
