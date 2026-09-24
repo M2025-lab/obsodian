@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>第三课：Jenkins 日常使用教程</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="page">
+  <p class="kicker">Jenkins 从零到一 · 第三课</p>
+  <h1>Jenkins 日常使用教程：建任务、配触发、看结果、排障</h1>
+  <p class="sub">装好 Jenkins 之后，你每天打交道的是这些：怎么建一个任务、怎么让它自动跑、怎么读构建结果、怎么把产出留下来、跑挂了怎么定位。本课全部用你的 edar-starlord 当例子。</p>
+</header>
+
+<section>
+  <p>前两课你完成了"把构建翻译成 Jenkinsfile"和"本地跑通一次构建"。从今天起你就是 Jenkins 的长期用户了——这一课教的是<strong>日常操作面</strong>，不讲原理，讲"点哪里、看哪里、卡住看哪"。</p>
+</section>
+
+<section>
+  <h2>1. 先认清两种任务（你只用 Pipeline）</h2>
+  <figure>
+    <svg viewBox="0 0 700 150" role="img" aria-label="任务类型对比">
+      <rect x="20" y="20" width="320" height="110" rx="10" fill="#f3f1ea" stroke="#b4541b" stroke-width="2"/>
+      <text x="180" y="55" text-anchor="middle" font-size="15" font-weight="700" fill="#b4541b">Freestyle Project</text>
+      <text x="180" y="80" text-anchor="middle" font-size="13" fill="#6b7280">在网页表单上勾选步骤</text>
+      <text x="180" y="100" text-anchor="middle" font-size="13" fill="#6b7280">灵活但难版本化</text>
+
+      <rect x="360" y="20" width="320" height="110" rx="10" fill="#e6eef4" stroke="#1f5673" stroke-width="2"/>
+      <text x="520" y="55" text-anchor="middle" font-size="15" font-weight="700" fill="#1f5673">Pipeline</text>
+      <text x="520" y="80" text-anchor="middle" font-size="13" fill="#6b7280">步骤写在 Jenkinsfile 里</text>
+      <text x="520" y="100" text-anchor="middle" font-size="13" fill="#1f5673">代码化，随仓库走 ★</text>
+
+      <line x1="340" y1="75" x2="358" y2="75" stroke="#1f5673" stroke-width="2" marker-end="url(#ar3)"/>
+      <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1f5673"/></marker></defs>
+    </svg>
+    <figcaption>图 1：Pipeline 把"怎么做构建"写进代码，能进 Git、能 review，是现在的主流</figcaption>
+  </figure>
+  <div class="callout"><b>一句话</b>：你前两课建的就是 Pipeline 任务。记住一个原则——<strong>凡是能写进 Jenkinsfile 的，别在网页上手动勾</strong>。网页只用来"首次创建任务 + 指认 Jenkinsfile 在哪"。</div>
+</section>
+
+<section>
+  <h2>2. 创建一个 Pipeline 任务的完整配置项</h2>
+  <p>新建 <b>New Item → 填名 → 选 Pipeline → OK</b> 之后，页面上你真正要填的就这么几处（其余保持默认）：</p>
+  <ul>
+    <li><b>Definition</b>：选 <code>Pipeline script from SCM</code>（从 Git 读 Jenkinsfile，最规范）。只有临时试验才用 <code>Pipeline script</code> 直接粘脚本。</li>
+    <li><b>SCM</b>：选 <code>Git</code>，填仓库 URL。
+      <ul>
+        <li>远程仓库（公司 GitLab）：<code>git@git.xxx.com:group/edar-starlord.git</code>（需 Jenkins 配 SSH 凭据）</li>
+        <li>本机同机（你现在的情况）：<code>file:///Users/mirror/IdeaProjects/edar-starlord</code></li>
+      </ul>
+    </li>
+    <li><b>Branches to build</b>：填 <code>*/master</code> 或你当前开发分支，如 <code>*/dev</code>。</li>
+    <li><b>Script Path</b>：填 <code>Jenkinsfile</code>（仓库里那个文件名，默认就在根目录）。</li>
+  </ul>
+  <p>配完点 <b>Save</b>。注意：你<strong>不在网页里写构建步骤</strong>，步骤全在仓库的 Jenkinsfile 里。</p>
+</section>
+
+<section>
+  <h2>3. 构建触发器：让 Jenkins 自动跑，而不是你手动点</h2>
+  <p>手动点 <b>Build Now</b> 只是验证用。真 CI 要让它"代码一变就跑"。三种触发方式按成熟度排：</p>
+  <table style="width:100%; border-collapse:collapse; margin:14px 0; font-size:14.5px;">
+    <thead>
+      <tr style="background:var(--accent-soft);">
+        <th style="border:1px solid var(--line); padding:8px 10px; text-align:left;">触发方式</th>
+        <th style="border:1px solid var(--line); padding:8px 10px; text-align:left;">怎么配</th>
+        <th style="border:1px solid var(--line); padding:8px 10px; text-align:left;">适合</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border:1px solid var(--line); padding:8px 10px;"><b>手动</b><br>Build Now</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">不用配，点就行</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">调试、临时跑</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid var(--line); padding:8px 10px;"><b>SCM 轮询</b><br>Poll SCM</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">任务里勾 <code>Poll SCM</code>，填 <code>H/5 * * * *</code>（每5分钟看一次 Git 有没有新提交）</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">内网 Jenkins 连不上外网 webhook 时的折中</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid var(--line); padding:8px 10px;"><b>Webhook</b><br>（推荐）</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">任务勾 <code>GitHub hook trigger</code> / GitLab 装插件；在 Git 仓库设置里填 Jenkins 的 webhook URL</td>
+        <td style="border:1px solid var(--line); padding:8px 10px;">推送即构建，最即时、最省资源</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout warn">Webhook 需要 Jenkins 能被 Git 服务器访问到（公网或同内网）。你本机 <code>127.0.0.1:8080</code> 公司内部 GitLab 推不过来，得用 SCM 轮询或把 Jenkins 部署到能互通的机器上。</div>
+</section>
+
+<section>
+  <h2>4. 参数化构建：同一个任务，传不同参数跑</h2>
+  <p>比如"我想构建不同的分支"或"我想选择打测试包还是生产包"。在 Jenkinsfile 里用 <code>parameters</code> 块声明，网页上任务就会多一个 <b>Build with Parameters</b> 按钮：</p>
+  <pre><code>pipeline {
+  agent any
+  parameters {
+    choice(name: 'ENV', choices: ['test', 'prod'], description: '构建目标环境')
+    string(name: 'BRANCH', defaultValue: 'master', description: '要构建的分支')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        echo "环境=${params.ENV} 分支=${params.BRANCH}"
+        sh './mvnw -o clean package -Dmaven.test.skip=true'
+      }
+    }
+  }
+}</code></pre>
+  <p>运行时点 <b>Build with Parameters</b>，下拉选 / 填值，再点 <b>Build</b>。脚本里用 <code>params.ENV</code> 取到你传的值。</p>
+</section>
+
+<section>
+  <h2>5. 读懂构建结果：状态球、控制台、变更集</h2>
+  <figure>
+    <svg viewBox="0 0 700 130" role="img" aria-label="构建结果界面">
+      <circle cx="40" cy="60" r="22" fill="#2b8a3e"/>
+      <text x="40" y="66" text-anchor="middle" font-size="22" fill="#fff">✓</text>
+      <text x="80" y="55" font-size="14" fill="#1f2328">蓝/绿 = 成功</text>
+      <text x="80" y="74" font-size="12" fill="#6b7280">构建通过</text>
+
+      <circle cx="270" cy="60" r="22" fill="#c92a2a"/>
+      <text x="270" y="66" text-anchor="middle" font-size="22" fill="#fff">✕</text>
+      <text x="310" y="55" font-size="14" fill="#1f2328">红 = 失败</text>
+      <text x="310" y="74" font-size="12" fill="#6b7280">点进去看 Console</text>
+
+      <circle cx="500" cy="60" r="22" fill="#f08c00"/>
+      <text x="500" y="66" text-anchor="middle" font-size="20" fill="#fff">!</text>
+      <text x="540" y="55" font-size="14" fill="#1f2328">黄 = 不稳定</text>
+      <text x="540" y="74" font-size="12" fill="#6b7280">测试有失败但编译过</text>
+    </svg>
+    <figcaption>图 2：任务首页左侧 #1 #2 #3… 列表，每行的圆点就是状态</figcaption>
+  </figure>
+  <ul>
+    <li><b>Console Output</b>（每次构建点进去第一项）：<strong>排障唯一真相源</strong>。失败看最后几十行，找 <code>ERROR</code> / <code>BUILD FAILURE</code> / 红字异常。</li>
+    <li><b>Changes</b>：这次构建包含了哪些 Git 提交（谁、改了啥）。定位"哪次提交把构建搞挂了"靠它。</li>
+    <li><b>状态球含义</b>：蓝/绿=成功，红=失败，黄=不稳定（编译过但测试挂），灰=还没跑/中止。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>6. 把产出留下来：制品归档</h2>
+  <p>构建出的 <code>target/*.jar</code>、<code>release.tar.gz</code> 默认只在 workspace 里，下次构建可能被清。要"长期可下载"就用 <code>archiveArtifacts</code>：</p>
+  <pre><code>stage('Package') {
+  steps {
+    sh 'tar czvf release.tar.gz release'
+    archiveArtifacts artifacts: 'release.tar.gz', fingerprint: true
+  }
+}</code></pre>
+  <ul>
+    <li>归档后，任务首页会出现 <b>Last Successful Artifacts</b>，点开能下载历史任意一次成功的包。</li>
+    <li><code>fingerprint: true</code> 让 Jenkins 记录文件哈希，能反向查"这个 jar 是哪个构建产出的"。</li>
+  </ul>
+  <div class="callout">配合第二课的 <code>release.tar.gz</code>，你已经能把"编译打包好的可部署包"在 Jenkins 上点一下就下载到手——这就是最朴素的 CD 雏形。</div>
+</section>
+
+<section>
+  <h2>7. 工作空间与构建历史管理</h2>
+  <ul>
+    <li><b>Workspace</b>：<code>~/.jenkins/workspace/&lt;任务名&gt;/</code>。这是 Jenkins 每次从 Git 拉代码、跑构建、放产出的地方。出问题先来这看真实文件。</li>
+    <li><b>清 workspace</b>：任务页左侧 <b>Workspace</b> → <b>Wipe out workspace</b>。当"明明改了却没生效"时，先清它再构建，能排除脏缓存。</li>
+    <li><b>删构建记录</b>：任务页左侧 <b>Build History</b> 里某次构建 → <b>Delete Build</b>。旧构建占磁盘，可在任务配置里设 <code>Discard old builds</code>（保留天数/次数）自动清理。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>8. 高频排障清单（贴墙级）</h2>
+  <ul>
+    <li><b>红点 + <code>mvnw: Permission denied</code></b>：终端 <code>chmod +x /Users/mirror/IdeaProjects/edar-starlord/mvnw</code>。</li>
+    <li><b>红点 + <code>Could not find or load main class</code> / 编译报错</b>：看 Console 最后 30 行，多半是 pom 依赖或代码问题，不是 Jenkins 问题。</li>
+    <li><b>任务一直排队不跑（灰）</b>：可能没可用的 agent/executor。你本地单节点一般够用；若是分布式，检查节点是否在线。</li>
+    <li><b>改了 Jenkinsfile 不生效</b>：确认是改了<strong>仓库里的</strong>那份且已提交；并清一下 workspace 再构建。</li>
+    <li><b>插件装不上（卡联网）</b>：内网环境，找 <code>jenkins-cli</code> 离线装，或让我帮你出离线方案。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>9. 本课小练习</h2>
+  <div class="callout"><b>练习 A（必做）</b>：给你的 <code>edar-build</code> 任务加上 <code>parameters</code> 块（照第 4 节），用 <b>Build with Parameters</b> 选不同 ENV 跑一次，确认控制台打印出你传的值。</div>
+  <div class="callout"><b>练习 B（核心）</b>：确认构建成功后，任务首页出现 <b>Last Successful Artifacts</b>，点开能下载到 <code>release.tar.gz</code>。</div>
+  <div class="callout"><b>练习 C（排障演练）</b>：故意把 Jenkinsfile 里 <code>./mvnw</code> 改成 <code>./mvnwxxx</code> 提交，构建必红——练一次"点 Console 看错、定位、改回、重跑"的完整闭环。</div>
+</section>
+
+<section>
+  <h2>10. 检索练习</h2>
+  <div class="quiz">
+    <h4>凭记忆答，答完点"看答案"。</h4>
+    <div class="q">
+      <p>① 日常使用中，构建步骤应该写在哪里？</p>
+      <div class="opts">
+        <label><input type="radio" name="q1" onchange="reveal('a1')">Jenkins 网页的任务配置表单里</label>
+        <label><input type="radio" name="q1" onchange="reveal('a1')">仓库里的 Jenkinsfile 里（代码化）</label>
+        <label><input type="radio" name="q1" onchange="reveal('a1')">随便，两边一样</label>
+      </div>
+      <div id="a1" class="answer">答案是 <b>仓库里的 Jenkinsfile</b>。网页只用来"创建任务 + 指认 Jenkinsfile 位置"，步骤进代码才能版本化、可 review。</div>
+    </div>
+    <div class="q">
+      <p>② 你本机 <code>127.0.0.1:8080</code> 的 Jenkins，公司内部 GitLab 推送能不能直接 webhook 触发构建？</p>
+      <div class="opts">
+        <label><input type="radio" name="q2" onchange="reveal('a2')">能，配好 URL 就行</label>
+        <label><input type="radio" name="q2" onchange="reveal('a2')">不能，GitLab 访问不到你本机回环地址，得用 SCM 轮询或部署到互通机器</label>
+        <label><input type="radio" name="q2" onchange="reveal('a2')">webhook 不需要网络</label>
+      </div>
+      <div id="a2" class="answer">答案是 <b>不能</b>。回环地址只有你本机能访问，GitLab 推不过来。折中是 <code>Poll SCM</code> 定时拉，或把 Jenkins 放到与 GitLab 互通的环境。</div>
+    </div>
+    <div class="q">
+      <p>③ 构建红了，第一反应该点哪里定位？</p>
+      <div class="opts">
+        <label><input type="radio" name="q3" onchange="reveal('a3')">Changes 看谁提交的</label>
+        <label><input type="radio" name="q3" onchange="reveal('a3')">Console Output 看最后几十行报错</label>
+        <label><input type="radio" name="q3" onchange="reveal('a3')">直接删了重构建</label>
+      </div>
+      <div id="a3" class="answer">答案是 <b>Console Output</b>。它是排障唯一真相源，找 <code>ERROR</code> / <code>BUILD FAILURE</code>；Changes 用来辅助定位"哪次提交引入的问题"。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>下一步 & 推荐源</h2>
+  <p>下一课讲 <b>Jenkinsfile 进阶</b>：<code>environment</code> 注入变量、<code>credentials</code> 安全用账号密码/令牌（比如发版要登录服务器）、<code>post</code> 构建后发钉钉/飞书通知、把"测试"真正接进来。这些是 demo 变"能用的流水线"的最后一块。</p>
+  <p>推荐主源：<a href="https://www.jenkins.io/doc/book/pipeline/jenkinsfile">使用 Jenkinsfile</a> · <a href="https://www.jenkins.io/doc/book/using/using-credentials/">使用凭据</a> · 速查：<a href="../reference/jenkins-glossary.html">核心概念速查表</a> · 上一课：<a href="./0002-install-and-first-build.html">安装并跑通第一次构建</a></p>
+  <div class="callout">任何一步卡住——插件联网、webhook 配不通、构建红得看不懂——把 Console 报错贴给我，我是你的老师，按你的疑问走。</div>
+</section>
+
+<footer class="page">
+  Jenkins 从零到一 · 第三课（日常使用教程） · 课程目录见 <a href="../MISSION.md">MISSION.md</a>
+</footer>
+</div>
+
+<script>
+function reveal(id){
+  var el = document.getElementById(id);
+  el.style.display = 'block';
+  el.className = 'answer ok';
+}
+</script>
+</body>
+</html>

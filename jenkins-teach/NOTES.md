@@ -11,3 +11,9 @@
   - 关键教学点：Jenkins 主程序需要 Java 17/21，与构建目标 Java 8 是两套 JVM。
 - 教学节奏：一次一小课 + 可立即上手的小练习；进度跟用户疑问走。
 - 复用 kafka-teach 的 `assets/style.css`（Tufte 风、浅色），色值改为深蓝以区分课程。
+
+## 课程进度
+- L1 从 build.sh 到 Pipeline（心智模型 + stage 翻译 + 最小 Jenkinsfile）
+- L2 安装并跑通第一次构建（brew jenkins-lts + openjdk@21 / 解锁 / hello / 接本地 git 跑 mvnw）
+- L3 日常使用教程（任务类型 / 配置项 / 触发方式 / 参数化 / 读结果 / 制品归档 / 排障清单）
+- 待续 L4：Jenkinsfile 进阶（environment / credentials / post 通知 / 接测试）

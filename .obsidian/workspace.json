@@ -253,6 +253,7 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "jenkins-teach/lessons/0003-daily-usage.html",
     "jenkins-teach/lessons/0002-install-and-first-build.html",
     "jenkins-teach/lessons/0001-build-to-pipeline.html",
     "jenkins-teach/reference/jenkins-glossary.html",
@@ -270,7 +271,6 @@
     "00.需求/云仓-支持tms工人复尺/未命名.md",
     "90.AI学习/agent上下文管理-teach/lessons/0003-spill-and-injection.html",
     "90.AI学习/agent上下文管理-teach/learning-records/0001-prior-knowledge-and-zone.md",
-    "90.AI学习/agent上下文管理-teach/lessons/0002-deepharness-pipeline.html",
     "90.AI学习/agent上下文管理-teach/MISSION.md",
     "90.AI学习/agent上下文管理-teach/NOTES.md",
     "90.AI学习/agent上下文管理-teach/RESOURCES.md",
