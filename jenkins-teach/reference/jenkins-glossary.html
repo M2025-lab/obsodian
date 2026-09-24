@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jenkins 核心概念速查表</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="page">
+  <p class="kicker">Reference · 速查</p>
+  <h1>Jenkins 核心概念速查表</h1>
+  <p class="sub">打印出来贴在显示器旁。每课都会引用这里的词条。</p>
+</header>
+
+<section>
+  <p>本表是 <code>jenkins-teach</code> 课程的通用词汇表。凡是课里出现但你不熟的词，先来这里查。</p>
+
+  <h2>角色与机器</h2>
+  <ul>
+    <li><b>Controller（控制器 / Master）</b>：Jenkins 的"大脑"，跑 Web 界面、调度任务、管插件与凭据。<b>它不一定要亲自干活</b>。</li>
+    <li><b>Agent / Node（节点）</b>：真正执行构建的机器（或容器）。可以给节点打 <code>label</code>（如 <code>maven</code>、<code>docker</code>）让特定任务只跑在带有该标签的机器上。</li>
+    <li><b>Executor（执行器）</b>：节点上的一条"构建通道"，一个节点可配多个 executor，决定它能<b>并行</b>跑几个任务。</li>
+    <li><b>Workspace（工作区）</b>：每次构建克隆代码、产出文件的<b>独立目录</b>（如 <code>.../workspace/my-pipeline/</code>）。不同构建默认互不干扰。</li>
+  </ul>
+
+  <h2>任务与运行</h2>
+  <ul>
+    <li><b>Job / Item（任务）</b>：Jenkins 里一个可配置、可触发的东西。常见类型：Freestyle（自由风格）、Pipeline（流水线）。</li>
+    <li><b>Pipeline（流水线）</b>：用代码（Jenkinsfile）描述的一整条交付流程，分多个 <code>stage</code>，可入库版本化。本课主角。</li>
+    <li><b>Build（构建 / 一次运行）</b>：Pipeline 跑起来的一次实例，有编号 #1、#2…… 每次都有独立的日志和产出。</li>
+    <li><b>Stage（阶段）</b>：流水线上一个"有名字的段落"，如 <code>Build</code> / <code>Test</code> / <code>Deploy</code>。UI 上以彩色方块展示进度。</li>
+    <li><b>Step（步骤）</b>：stage 里的一个具体动作，如 <code>sh 'mvn clean package'</code>、<code>echo 'hi'</code>。</li>
+  </ul>
+
+  <h2>代码与文件</h2>
+  <ul>
+    <li><b>Jenkinsfile</b>：放在项目<b>根目录</b>、入库（Git）的文本文件，是流水线的"源代码"。最佳实践：流水线定义都写在这里，而不是在 UI 里手敲。</li>
+    <li><b>Declarative Pipeline（声明式）</b>：固定结构（<code>pipeline { agent {…} stages {…} }</code>），官方推荐、好读。本课只用这种。</li>
+    <li><b>Scripted Pipeline（脚本式）</b>：基于 Groovy，更灵活但更难读。老项目兼容用。本课不展开。</li>
+    <li><b>agent</b>：指令，告诉 Jenkins <b>在哪</b>跑（<code>any</code> / 某 <code>label</code> / 某个 <code>docker</code> 镜像）。声明式必填。</li>
+    <li><b>SCM（源码管理）</b>：Git/SVN 等。Jenkinsfile 通常随代码一起存在 Git 里（"Pipeline as Code"）。</li>
+    <li><b>Artifact（制品）</b>：构建产出的可部署物，本项目中就是 <code>release.tar.gz</code> 或 <code>edar-starlord-web/target/*.jar</code>。</li>
+  </ul>
+
+  <div class="callout">
+    <b>一句话记牢</b>：Controller 调度 → Agent 上的 Executor 在 Workspace 里跑一个 Pipeline（由 Jenkinsfile 定义），Pipeline 分成多个 Stage，每个 Stage 里是若干 Step，最后留下 Artifact。
+  </div>
+</section>
+
+<footer class="page">
+  相关：<a href="../lessons/0001-build-to-pipeline.html">第一课：从 build.sh 到 Pipeline</a> ·
+  来源：<a href="https://www.jenkins.io/doc/book/pipeline/">Jenkins 官方 Pipeline 文档</a>
+</footer>
+</div>
+</body>
+</html>
