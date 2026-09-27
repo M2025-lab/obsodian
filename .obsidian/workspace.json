@@ -81,6 +81,22 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "cc3b0ff92c379e3b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "829b9f9e54f25da0",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -235,8 +251,9 @@
       "moma:Open Moma": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "b54f696b5c388094",
   "lastOpenFiles": [
+    "90.AI学习/未命名",
     "jenkins-teach/lessons/0003-daily-usage.html",
     "jenkins-teach/lessons/0002-install-and-first-build.html",
     "jenkins-teach/lessons/0001-build-to-pipeline.html",
@@ -253,7 +270,6 @@
     "jenkins-teach",
     "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/云仓-支持tms工人复尺/未命名.md",
-    "90.AI学习/agent上下文管理-teach/lessons/0003-spill-and-injection.html",
     "90.AI学习/agent上下文管理-teach/learning-records/0001-prior-knowledge-and-zone.md",
     "90.AI学习/agent上下文管理-teach/MISSION.md",
     "90.AI学习/agent上下文管理-teach/NOTES.md",
