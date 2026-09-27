@@ -1,0 +1,24 @@
+{
+  "id": "conv-1790482530838-ewmjqgelp",
+  "providerId": "claude",
+  "title": "克隆 llm-master 仓库到指定目录",
+  "titleGenerationStatus": "success",
+  "createdAt": 1790482530838,
+  "updatedAt": 1790482561000,
+  "lastResponseAt": 1790482561000,
+  "sessionId": "dd69c306-7c6b-47dd-bd1f-16dfb91c6e46",
+  "providerState": {
+    "providerSessionId": "dd69c306-7c6b-47dd-bd1f-16dfb91c6e46"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 37309,
+    "cacheCreationInputTokens": 185,
+    "cacheReadInputTokens": 39035,
+    "outputTokens": 126,
+    "contextWindow": 200000,
+    "contextTokens": 76529,
+    "percentage": 38,
+    "contextWindowIsAuthoritative": true
+  }
+}
