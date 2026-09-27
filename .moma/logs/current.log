@@ -119,3 +119,6 @@
 14:18:07 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
 14:18:08 [ERROR] [auth-credential] network error {"op":"refresh","url":"https://next.ke.com/ob/api/auth/credential/refresh","error":"Failed to fetch"}
 14:18:08 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+15:26:17 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+15:26:17 [ERROR] [auth-credential] network error {"op":"refresh","url":"https://next.ke.com/ob/api/auth/credential/refresh","error":"Failed to fetch"}
+15:26:17 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}

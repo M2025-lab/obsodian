@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/intro/app_dev_overview.md",
+                "file": "90.AI学习/llm-agent/llm-master/docs/llm/intro/llm_keywords.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "app_dev_overview"
+              "title": "llm_keywords"
             }
           }
         ]
@@ -254,6 +254,7 @@
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
     "90.AI学习/llm-agent/llm-master/docs/llm/intro/llm_learning_roadmap.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/intro/app_dev_overview.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/intro/application_development.md",
     "90.AI学习/llm-agent/llm-master/docs/roadmap/beginner.md",
     "90.AI学习/llm-agent/llm-master/README.md",
@@ -278,7 +279,6 @@
     "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-harness-guide.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4-price.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4-official-api-pricing.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/transformer",
     "90.AI学习/llm-agent/llm-master/docs/llm/news",
     "90.AI学习/llm-agent/llm-master/docs/llm/intro",
