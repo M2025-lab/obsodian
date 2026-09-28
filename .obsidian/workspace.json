@@ -10,18 +10,73 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/intro/llm_keywords.md",
+                "file": "90.AI学习/llm-agent/llm-master/docs/roadmap/agent.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "agent"
+            }
+          },
+          {
+            "id": "b01a2d6a66170eca",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "90.AI学习/llm-agent/未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "llm_keywords"
+              "title": "未命名"
+            }
+          },
+          {
+            "id": "c5fe35590421fef1",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "ab79cd1b0b863825",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/function_calling.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "function_calling"
+            }
+          },
+          {
+            "id": "df0175939a759a43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_tool_design.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "agent_tool_design"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -81,22 +136,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "cc3b0ff92c379e3b",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "829b9f9e54f25da0",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
@@ -228,7 +267,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 6
       }
     ],
     "direction": "horizontal",
@@ -251,54 +290,54 @@
       "moma:Open Moma": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "df0175939a759a43",
   "lastOpenFiles": [
-    "90.AI学习/llm-agent/llm-master/docs/llm/intro/llm_learning_roadmap.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/intro/app_dev_overview.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/intro/application_development.md",
-    "90.AI学习/llm-agent/llm-master/docs/roadmap/beginner.md",
-    "90.AI学习/llm-agent/llm-master/README.md",
-    "90.AI学习/llm-agent/未命名.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/qoder-security.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4-flash-official.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/openai-cursor-partnership-end.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-6-astra.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/minimax-m3.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/kimi-k3.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/hunyuan-hy4-preview.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/kimi-k2-7-code.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-6-pro-rollout.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-5-6-no-superpowers.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-6-astra-amazing-cases.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-5-6.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/gpt-5-5.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/glm-5-3-flash.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/glm-5-2.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/glm-5-3.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4-pro-permanent-price-cut.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-harness-guide.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news/deepseek-v4-price.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/transformer",
-    "90.AI学习/llm-agent/llm-master/docs/llm/news",
-    "90.AI学习/llm-agent/llm-master/docs/llm/intro",
-    "90.AI学习/llm-agent/llm-master/docs/llm/claude",
-    "90.AI学习/llm-agent/llm-master/docs/llm/app",
-    "90.AI学习/llm-agent/llm-master/docs/jianli/llm",
-    "90.AI学习/llm-agent/llm-master/docs/interview/llm",
-    "90.AI学习/llm-agent/llm-master/docs/interview/java",
-    "90.AI学习/llm-agent/llm-master/docs/interview/cpp",
-    "90.AI学习/llm-agent/llm-master/docs/topics",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig4.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig3.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig2.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig4 500.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig3 420.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig2 500.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig1.png",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig4.svg",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig3.svg",
-    "00.需求/通知复尺自动化/专利-一种基于图像识别结果的工地任务通知方法-20260913/images/fig1.svg",
+    "90.AI学习/llm-agent/llm-master/docs/roadmap/agent.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/function_calling.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_vs_workflow.md",
+    "90.AI学习/helloagent/hello-agents/读者群二维码.png",
+    "90.AI学习/helloagent/hello-agents/读者反馈问卷.png",
+    "90.AI学习/helloagent/hello-agents/fix_bold_format.py",
+    "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-3.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-2.webp",
+    "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-1.webp",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-9.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-8.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-7.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-6.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-5.png",
+    "90.AI学习/helloagent/hello-agents/docs/images/9-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/8-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/7-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/6-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/5-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/4-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/3-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/2-figures",
+    "90.AI学习/helloagent/hello-agents/docs/images/16-figures",
+    "90.AI学习/helloagent/hello-agents/docs/chapter9/第九章 上下文工程.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter9/Chapter9-Context-Engineering.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter8/第八章 记忆与检索.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter8/Chapter8-Memory-and-Retrieval.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter7/第七章 构建你的Agent框架.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter7/Chapter7-Building-Your-Agent-Framework.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter6/第六章 框架开发实践.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter6/Chapter6-Framework-Development-Practice.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter5/第五章 基于低代码平台的智能体搭建.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter5/Chapter5-Building-Agents-with-Low-Code-Platforms.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter4/第四章 智能体经典范式构建.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter4/Chapter4-Building-Classic-Agent-Paradigms.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter3/第三章 大语言模型基础.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter3/Chapter3-Fundamentals-of-Large-Language-Models.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter2/第二章 智能体发展史.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter2/Chapter2-History-of-Agents.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter16/第十六章 毕业设计.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter16/Chapter16-Graduation-Project.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter15/第十五章 构建赛博小镇.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter15/Chapter15-Building-Cyber-Town.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter13/第十三章 智能旅行助手.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter13/Chapter13-Intelligent-Travel-Assistant.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter14/第十四章 自动化深度研究智能体.md",
     "未命名.canvas",
     "未命名 1.canvas"
   ]
