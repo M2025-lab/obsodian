@@ -24,87 +24,37 @@
             }
           },
           {
-            "id": "b01a2d6a66170eca",
+            "id": "aef6d1c6747dcee2",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "90.AI学习/helloagent/hello-agents/README.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "ed7bebcc76596c41",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90.AI学习/llm-agent/未命名.md",
+                "file": "90.AI学习/helloagent/hello-agents/docs/chapter4/第四章 智能体经典范式构建.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "未命名"
-            }
-          },
-          {
-            "id": "c5fe35590421fef1",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
-            "id": "ab79cd1b0b863825",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/function_calling.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "function_calling"
-            }
-          },
-          {
-            "id": "df0175939a759a43",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_tool_design.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "agent_tool_design"
-            }
-          },
-          {
-            "id": "0b4a48bec3afa17f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/react_reflection_planning.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "react_reflection_planning"
-            }
-          },
-          {
-            "id": "6de5283519c6dba1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/llm/app/plan_execute_dag.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "plan_execute_dag"
+              "title": "第四章 智能体经典范式构建"
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -315,7 +265,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 344.72265625
+    "width": 344.72265625,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -334,11 +285,24 @@
       "moma:Open Moma": false
     }
   },
-  "active": "6de5283519c6dba1",
+  "active": "ed7bebcc76596c41",
   "lastOpenFiles": [
+    "90.AI学习/helloagent/hello-agents/README.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter4/第四章 智能体经典范式构建.md",
+    "90.AI学习/helloagent/hello-agents/docs/chapter1/第一章 初识智能体.md",
+    "90.AI学习/helloagent/hello-agents/docs/前言.md",
     "90.AI学习/llm-agent/llm-master/docs/roadmap/agent.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/app/react_reflection_planning.md",
+    "90.AI学习/llm-agent/llm-master/docs/topics/agent.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/multi_agent_context_governance.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/token_cost_latency.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/multi_agent_roles.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_tool_design.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_evaluation.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_failure_modes.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_memory.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/mcp_protocol.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/plan_execute_dag.md",
+    "90.AI学习/llm-agent/llm-master/docs/llm/app/react_reflection_planning.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/app/function_calling.md",
     "90.AI学习/llm-agent/llm-master/docs/llm/app/agent_vs_workflow.md",
     "90.AI学习/helloagent/hello-agents/读者群二维码.png",
@@ -369,19 +333,6 @@
     "90.AI学习/helloagent/hello-agents/docs/chapter7/Chapter7-Building-Your-Agent-Framework.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter6/第六章 框架开发实践.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter6/Chapter6-Framework-Development-Practice.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter5/第五章 基于低代码平台的智能体搭建.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter5/Chapter5-Building-Agents-with-Low-Code-Platforms.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter4/第四章 智能体经典范式构建.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter4/Chapter4-Building-Classic-Agent-Paradigms.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter3/第三章 大语言模型基础.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter3/Chapter3-Fundamentals-of-Large-Language-Models.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter2/第二章 智能体发展史.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter2/Chapter2-History-of-Agents.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter16/第十六章 毕业设计.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter16/Chapter16-Graduation-Project.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter15/第十五章 构建赛博小镇.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter15/Chapter15-Building-Cyber-Town.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter13/第十三章 智能旅行助手.md",
     "未命名.canvas",
     "未命名 1.canvas"
   ]
