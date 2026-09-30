@@ -1,0 +1,24 @@
+{
+  "id": "conv-1790666589163-ozo30gxfy",
+  "providerId": "claude",
+  "title": "追溯 AssistantAgent 来源",
+  "titleGenerationStatus": "success",
+  "createdAt": 1790666589163,
+  "updatedAt": 1790666634081,
+  "lastResponseAt": 1790666634081,
+  "sessionId": "c5aace21-896c-41e0-8092-dd602b8c8ff4",
+  "providerState": {
+    "providerSessionId": "c5aace21-896c-41e0-8092-dd602b8c8ff4"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 37291,
+    "cacheCreationInputTokens": 1155,
+    "cacheReadInputTokens": 39244,
+    "outputTokens": 403,
+    "contextWindow": 200000,
+    "contextTokens": 77690,
+    "percentage": 39,
+    "contextWindowIsAuthoritative": true
+  }
+}

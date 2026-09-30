@@ -1,0 +1,24 @@
+{
+  "id": "conv-1790670131088-g4u7xnq46",
+  "providerId": "claude",
+  "title": "调试框架开发输出中断问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1790670131088,
+  "updatedAt": 1790684319853,
+  "lastResponseAt": 1790684319853,
+  "sessionId": "9719f2f6-680d-472c-9110-aa0e7197cc02",
+  "providerState": {
+    "providerSessionId": "9719f2f6-680d-472c-9110-aa0e7197cc02"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 40189,
+    "cacheCreationInputTokens": 2092,
+    "cacheReadInputTokens": 61765,
+    "outputTokens": 2493,
+    "contextWindow": 200000,
+    "contextTokens": 104046,
+    "percentage": 52,
+    "contextWindowIsAuthoritative": true
+  }
+}
