@@ -142,22 +142,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "8f185a12f44b5f3f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "25b1e86059f6c774",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
@@ -314,6 +298,9 @@
   },
   "active": "3cfe76156dfa7124",
   "lastOpenFiles": [
+    "90.AI学习/helloagent/hello-agents/uv.lock",
+    "90.AI学习/helloagent/hello-agents/pyproject.toml",
+    "90.AI学习/helloagent/hello-agents/main.py",
     "90.AI学习/helloagent/hello-agents/code/chapter6/AgentScopeDemo/requirements.txt",
     "90.AI学习/helloagent/hello-agents/code/chapter6/AgentScopeDemo/README.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter6/第六章 框架开发实践.md",
@@ -353,8 +340,6 @@
     "90.AI学习/helloagent/hello-agents/docs/images/6-figures",
     "90.AI学习/helloagent/hello-agents/docs/images/5-figures",
     "90.AI学习/helloagent/hello-agents/docs/images/4-figures",
-    "90.AI学习/helloagent/hello-agents/docs/images/3-figures",
-    "90.AI学习/helloagent/hello-agents/docs/images/2-figures",
     "90.AI学习/helloagent/hello-agents/docs/chapter9/第九章 上下文工程.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter9/Chapter9-Context-Engineering.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter8/第八章 记忆与检索.md",
