@@ -1,0 +1,24 @@
+{
+  "id": "conv-1791431378478-o7mh2m83w",
+  "providerId": "claude",
+  "title": "解释 DeepHarness 上下文管理三个包",
+  "titleGenerationStatus": "success",
+  "createdAt": 1791431378478,
+  "updatedAt": 1791464453810,
+  "lastResponseAt": 1791450532784,
+  "sessionId": "27373467-1723-4660-85c0-3ee1e45b2efa",
+  "providerState": {
+    "providerSessionId": "27373467-1723-4660-85c0-3ee1e45b2efa"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 49867,
+    "cacheCreationInputTokens": 394,
+    "cacheReadInputTokens": 53734,
+    "outputTokens": 272,
+    "contextWindow": 200000,
+    "contextTokens": 103995,
+    "percentage": 52,
+    "contextWindowIsAuthoritative": true
+  }
+}

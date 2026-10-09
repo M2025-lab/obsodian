@@ -80,7 +80,9 @@
   "savedProviderThinkingBudget": {
     "claude": "off"
   },
-  "savedProviderPermissionMode": {},
+  "savedProviderPermissionMode": {
+    "claude": "yolo"
+  },
   "lastCustomModel": "",
   "backendEnv": "prod",
   "audioFileRecognition": {
@@ -158,7 +160,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1791424158449,
+  "lastGrayReleaseCheck": 1791510728897,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -168,7 +170,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1791424158540,
+    "fetchedAt": 1791464436477,
     "fetchedPluginVersion": "0.3.21",
     "envVars": {
       "claude": {
@@ -176,7 +178,7 @@
       }
     }
   },
-  "workbenchAutoOpenDismissed": false,
+  "workbenchAutoOpenDismissed": true,
   "hostAuthSelfHealGrayEnabled": true,
   "homepageEnabled": true,
   "lastGrayReleaseDismiss": 1790081166649,

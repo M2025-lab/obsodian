@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>第 4 课 · Claude Code 五层如何实现（带源码出处）</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+<main class="lesson">
+  <h1>第 4 课 · Claude Code 的"五层"到底怎么实现的</h1>
+  <p class="subtitle">来源诚实声明 → 真实循环顺序 → 逐层实现（标注能不能验证）</p>
+
+  <div class="callout">
+    <strong>⚠️ 先说清出处（这是硬规矩，不编）：</strong>
+    你看到的那张"五层从便宜到贵"是我<strong>上一轮的教学性重构</strong>，不是 Claude Code 源码里的字面分层。
+    真实代码来自逆向仓库 <code>codezjx/claude-code-source-code</code>（Claude Code v2.1.88 反编译版，源自 2026-03 npm <code>.map</code> 泄露）。
+    其中三个层被 <strong>死代码消除（DCE）</strong> 从 npm 发布包里剔除了，仓库里只剩调用点、没有实现——这些我只能讲<em>设计意图</em>，并明确标注"⚠️ 代码不可见"。
+  </div>
+
+  <h2>1. 真实的循环顺序（已验证，来自 <code>src/query.ts</code> 的 <code>queryLoop</code>）</h2>
+  <p>每一轮 agent 循环、在调用模型之前，按顺序跑这些。源码注释原话：</p>
+  <blockquote>"Runs BEFORE autocompact so that if collapse gets us under the autocompact threshold, autocompact is a no-op and we keep granular context instead of a single summary."</blockquote>
+  <p>→ <strong>便宜手段先跑，贵的总结最后兜底</strong>。我说的"懒惰降级阶梯"这个思想是真实存在的，只是名字和我的不完全对应。</p>
+
+  <svg viewBox="0 0 680 200" width="100%" role="img" aria-label="真实循环顺序">
+    <rect x="10" y="70" width="110" height="56" rx="8" fill="#E8F0FE" stroke="#4285F4"/>
+    <text x="65" y="95" text-anchor="middle" font-size="13" fill="#1a1a1a">snip</text>
+    <text x="65" y="113" text-anchor="middle" font-size="10" fill="#555">HISTORY_SNIP</text>
+
+    <rect x="140" y="70" width="120" height="56" rx="8" fill="#E8F0FE" stroke="#4285F4"/>
+    <text x="200" y="95" text-anchor="middle" font-size="13" fill="#1a1a1a">microcompact</text>
+    <text x="200" y="113" text-anchor="middle" font-size="10" fill="#555">API 原生清除</text>
+
+    <rect x="280" y="70" width="120" height="56" rx="8" fill="#E8F0FE" stroke="#4285F4"/>
+    <text x="340" y="95" text-anchor="middle" font-size="13" fill="#1a1a1a">contextCollapse</text>
+    <text x="340" y="113" text-anchor="middle" font-size="10" fill="#555">投影合并 90/95%</text>
+
+    <rect x="420" y="70" width="120" height="56" rx="8" fill="#FCE8E6" stroke="#EA4335"/>
+    <text x="480" y="95" text-anchor="middle" font-size="13" fill="#1a1a1a">autocompact</text>
+    <text x="480" y="113" text-anchor="middle" font-size="10" fill="#555">LLM 总结 ~93%</text>
+
+    <rect x="560" y="70" width="110" height="56" rx="8" fill="#FEF7E0" stroke="#F9AB00"/>
+    <text x="615" y="95" text-anchor="middle" font-size="13" fill="#1a1a1a">reactive</text>
+    <text x="615" y="113" text-anchor="middle" font-size="10" fill="#555">413 兜底</text>
+
+    <line x1="120" y1="98" x2="140" y2="98" stroke="#999" marker-end="url(#arrow)"/>
+    <line x1="260" y1="98" x2="280" y2="98" stroke="#999" marker-end="url(#arrow)"/>
+    <line x1="400" y1="98" x2="420" y2="98" stroke="#999" marker-end="url(#arrow)"/>
+    <line x1="540" y1="98" x2="560" y2="98" stroke="#999" marker-end="url(#arrow)"/>
+    <text x="340" y="160" text-anchor="middle" font-size="11" fill="#777">若前面任一步把上下文压到阈值下 → autocompact 变 no-op，保留细粒度上下文</text>
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#999"/>
+      </marker>
+    </defs>
+  </svg>
+
+  <h2>2. 五层 ↔ 真实代码 对照表（标注可靠性）</h2>
+  <table>
+    <thead>
+      <tr><th>我的叫法</th><th>真实代码</th><th>可靠性</th><th>说明</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>⑤ Auto-compact</td><td><code>src/services/compact/autoCompact.ts</code></td><td class="ok">✅ 完整可读</td><td>LLM 总结旧消息</td></tr>
+      <tr><td>③ Microcompact</td><td><code>src/services/compact/apiMicrocompact.ts</code></td><td class="ok">✅ 完整可读</td><td>声明式策略交给 API 原生裁</td></tr>
+      <tr><td>② Snip</td><td><code>snipCompact.js</code> (HISTORY_SNIP)</td><td class="warn">⚠️ DCE 剔除</td><td>仅调用点 <code>snipCompactIfNeeded()</code></td></tr>
+      <tr><td>④ Context collapse</td><td><code>contextCollapse/</code> (CONTEXT_COLLAPSE)</td><td class="warn">⚠️ DCE 剔除</td><td>仅 <code>applyCollapsesIfNeeded()</code> / <code>recoverFromOverflow()</code></td></tr>
+      <tr><td>① Budget reduction</td><td>无同名模块（我的措辞）</td><td class="warn">⚠️ 我的框架</td><td>对应工具输出体积控制 + API 原生清除</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. ⑤ Auto-compact —— <code>autoCompact.ts</code>（真实实现）</h2>
+  <h3>阈值数学（<code>:62, :72-91</code>）</h3>
+  <ul>
+    <li>有效窗口 = 模型上下文窗口 − <code>MAX_OUTPUT_TOKENS_FOR_SUMMARY = 20_000</code>（基于"压缩摘要输出 p99.99 = 17,387 token"实测留余量）。</li>
+    <li><strong>触发阈值</strong> = 有效窗口 − <code>AUTOCOMPACT_BUFFER_TOKENS = 13_000</code> → 约在 <strong>~93%</strong> 处开火。</li>
+    <li>判断式：<code>tokenCountWithEstimation(messages) − snipTokensFreed ≥ 阈值</code>。减 <code>snipTokensFreed</code> 是因为 snip 后 assistant 的 usage 仍是裁剪前的，不扣会算错。</li>
+  </ul>
+  <h3>两个硬核工程细节（真实，不是我总结）</h3>
+  <p><strong>① 熔断器</strong>（<code>:70, :260-265, :343</code>）：<code>MAX_CONSECUTIVE_AUTOCOMPACT_FAILURES = 3</code>。注释写明原因——"1,279 个会话出现过 50+ 次连续失败（最多 3,272 次），每天白白浪费约 25 万次 API 调用"。连续失败 3 次就跳过，不再用注定失败的压缩轰炸 API。</p>
+  <p><strong>② 先试 session memory 压缩</strong>（<code>:288</code> <code>trySessionMemoryCompaction</code>）：把可归档记忆抽出去，比直接 LLM 总结旧对话更省。</p>
+  <p>主流程 <code>autoCompactIfNeeded</code>：递归保护（session_memory / compact 分叉会死锁，跳过）→ 熔断检查 → <code>shouldAutoCompact</code> → 先试 session memory → 不行就 <code>compactConversation(...)</code> → 成功重置失败计数，失败累加。</p>
+
+  <h2>4. ③ Microcompact —— <code>apiMicrocompact.ts</code>（真实实现，思路很妙）</h2>
+  <p>这一层<strong>完全不是"客户端总结"</strong>，而是把一个<strong>声明式策略交给 API 原生上下文管理</strong>（<code>:35-61, :112-149</code>）：</p>
+  <ul>
+    <li>策略 <code>clear_tool_uses_20250919</code>：当 <code>input_tokens ≥ 180_000</code>（默认警告阈值）触发，<strong>保留最近 40_000 token</strong>，把旧的工具结果/工具调用清掉（<code>TOOLS_CLEARABLE_RESULTS</code> = SHELL / GLOB / GREP / FILE_READ / WEB_FETCH / WEB_SEARCH 等）。</li>
+    <li>策略 <code>clear_thinking_20251015</code>：保留推理模型的思考块（只清旧的）。</li>
+    <li>关键：<strong>让 API 自己去裁</strong>，客户端只声明"超阈值就清哪些"，不消耗一次 LLM 调用、不丢语义颗粒度。注释 "Keep last 40k tokens like client-side"——和客户端 microcompact 的 token 值对齐。</li>
+  </ul>
+  <p>这就是"先试最便宜手段"的极致：<strong>连一次总结调用都不花</strong>，纯靠 API 侧原生裁剪。</p>
+
+  <h2>5. ② Snip + ④ Context collapse（⚠️ 代码被 DCE 剔除，讲设计意图）</h2>
+  <p><strong>② Snip（HISTORY_SNIP）</strong>：从 <code>query.ts</code> 调用 <code>snipModule!.snipCompactIfNeeded()</code> 返回 <code>snipTokensFreed</code> 可知——它<strong>定点切除"僵尸消息"</strong>（如巨型 build 日志这种特定大块），不总结整段。像剪刀剪掉某几段，不是把整本日记重写。</p>
+  <p><strong>④ Context collapse（CONTEXT_COLLAPSE）</strong>：<code>autoCompact.ts</code> 注释把真实设计讲透了——"Collapse 开启时它就是上下文管理系统，<strong>90% 提交 / 95% 阻塞-分叉</strong>的流程 own 了 headroom 问题"；"autocompact 在 effective-13k（~93%）开火，正好夹在 collapse 的 commit-start(90%) 和 blocking(95%) 之间"。所以它是<strong>读取时投影合并</strong>：把多条消息合成一份折叠投影（视觉合并、不删），90% 提交折叠省 headroom，95% 快溢出时 <code>recoverFromOverflow()</code> 把已暂存折叠提交掉兜底。<code>reactiveCompact</code> 是 413（prompt-too-long）时的最后兜底。</p>
+
+  <h2>6. ① Budget reduction（⚠️ 我的措辞，无同名模块）</h2>
+  <p>真实里没有这个独立模块。它对应"别让单个工具输出把桶撑爆"——工具层对超大输出做截断/限制，加上 microcompact 里 API 原生清旧工具结果那一步。我单列成第①层是为了讲清"最便宜 = 根本不让大东西进桶"，但严格说它不是 Claude Code 的一个独立命名层。</p>
+
+  <h2>7. 收口：和 DeepHarness 对照（你前面学的没白学）</h2>
+  <ul>
+    <li><strong>共同点</strong>：懒惰降级（便宜先上、LLM 总结兜底）——Claude Code 的 <code>query.ts</code> 顺序和 DeepHarness 的 <code>compactIfNeeded</code>（先免费剪枝再调 LLM）是同一哲学，且都<strong>已验证</strong>。</li>
+    <li><strong>最大差异</strong>：Claude Code 把 microcompact 做成<strong>交给 API 原生裁</strong>（声明式、零额外调用）；DeepHarness 的 spill/pruner 是<strong>客户端确定性剪枝 + 显式外置</strong>。前者更"借力 API"，后者更"自己可控、可审计"。</li>
+    <li><strong>想看逐行可读实现</strong>：Claude Code 三个层被 DCE 剔除，反而 <strong>DeepHarness 是 MIT 全开源、每行可读</strong>（你 0001–0003 课学的就是它）。所以"学会上下文管理"这条线，DeepHarness 才是能让你照着写骨架的那份。</li>
+  </ul>
+
+  <h2>小测验</h2>
+  <div class="quiz" data-quiz="cc-layers">
+    <div class="q" data-answer="2">
+      <p>1. 下面哪些层的<strong>实现代码</strong>在反编译仓库里被 DCE 剔除了（只剩调用点、无实现可读）？</p>
+      <button>① 和 ③</button>
+      <button>② snip 和 ④ contextCollapse</button>
+      <button>⑤ autoCompact</button>
+      <button>全部都在</button>
+      <p class="fb"></p>
+    </div>
+    <div class="q" data-answer="1">
+      <p>2. autoCompact 的触发阈值是多少（基于真实常量）？</p>
+      <button>固定 100k token</button>
+      <button>有效上下文窗口 − 13_000（AUTOCOMPACT_BUFFER_TOKENS）</button>
+      <button>有效上下文窗口 − 20_000</button>
+      <button>90% 处</button>
+      <p class="fb"></p>
+    </div>
+    <div class="q" data-answer="0">
+      <p>3. microcompact（apiMicrocompact）的核心思想是什么？</p>
+      <button>把"超阈值就清哪些旧工具结果/思考块"作为声明式策略交给 API 原生裁，不花额外 LLM 调用</button>
+      <button>客户端用 LLM 把旧对话总结成一条</button>
+      <button>把所有工具结果存盘只留指针</button>
+      <button>直接删掉最早的消息</button>
+      <p class="fb"></p>
+    </div>
+    <div class="q" data-answer="3">
+      <p>4. 为什么 autoCompact 里有"连续失败 3 次就跳过"的熔断器？</p>
+      <button>为了加快压缩速度</button>
+      <button>为了省钱买 token</button>
+      <button>为了防止重复压缩同一段</button>
+      <button>因为实测有会话出现上千次注定失败的压缩，每天浪费约 25 万次 API 调用</button>
+      <p class="fb"></p>
+    </div>
+  </div>
+</main>
+<script>
+document.querySelectorAll('.quiz .q').forEach(function(q){
+  var ans = parseInt(q.getAttribute('data-answer'),10);
+  var btns = q.querySelectorAll('button');
+  btns.forEach(function(b,i){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.disabled=true;});
+      var fb = q.querySelector('.fb');
+      if(i===ans){ b.classList.add('right'); fb.textContent='✅ 答对了。'; fb.className='fb ok'; }
+      else { b.classList.add('wrong'); btns[ans].classList.add('right'); fb.textContent='❌ 看解析。'; fb.className='fb wrong'; }
+    });
+  });
+});
+</script>
+</body>
+</html>
