@@ -174,11 +174,11 @@
         "currentTab": 1
       },
       {
-        "id": "fb93925995d5186d",
+        "id": "066669071fceaac3",
         "type": "tabs",
         "children": [
           {
-            "id": "5744440a0dfffd00",
+            "id": "7da845ba737ac6bf",
             "type": "leaf",
             "state": {
               "type": "moma-workbench",
@@ -309,7 +309,7 @@
             }
           },
           {
-            "id": "b7b8c1d646bb34b2",
+            "id": "c783e2beee6eb8fe",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -341,7 +341,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "a6ab274148a2b348",
+  "active": "c783e2beee6eb8fe",
   "lastOpenFiles": [
     "90.AI学习/helloagent/hello-agents/README.md",
     "20.知识沉淀/agent上下文管理-claude-code与deepharness.md",
