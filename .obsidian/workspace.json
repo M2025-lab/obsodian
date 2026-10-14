@@ -110,9 +110,23 @@
               "icon": "lucide-file",
               "title": "未命名"
             }
+          },
+          {
+            "id": "1e19b8a9879faca9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "视频识别的提示词.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "视频识别的提示词"
+            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -174,11 +188,11 @@
         "currentTab": 1
       },
       {
-        "id": "5ac69436386a8934",
+        "id": "d23109e1067f3013",
         "type": "tabs",
         "children": [
           {
-            "id": "9073e8c2ce4a27db",
+            "id": "e3f9d364adf493d0",
             "type": "leaf",
             "state": {
               "type": "moma-workbench",
@@ -309,7 +323,7 @@
             }
           },
           {
-            "id": "c783e2beee6eb8fe",
+            "id": "c5953f5433ca45d8",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -341,8 +355,10 @@
       "moma:Open Moma": false
     }
   },
-  "active": "a6ab274148a2b348",
+  "active": "c5953f5433ca45d8",
   "lastOpenFiles": [
+    "未命名.md",
+    "视频识别的提示词.md",
     "starlord_整装业务流程全景.html",
     "90.AI学习/helloagent/hello-agents/docs/chapter6/第六章 框架开发实践.md",
     "20.知识沉淀/📚 常用接口手册.md",
@@ -373,7 +389,6 @@
     "90.AI学习/helloagent/hello-agents/code/chapter6/AgentScopeDemo/README.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter1/第一章 初识智能体.md",
     "90.AI学习/helloagent/hello-agents/docs/前言.md",
-    "90.AI学习/llm-agent/llm-master/docs/llm/app/token_cost_latency.md",
     "90.AI学习/helloagent/hello-agents/读者群二维码.png",
     "90.AI学习/helloagent/hello-agents/读者反馈问卷.png",
     "90.AI学习/helloagent/hello-agents/fix_bold_format.py",
@@ -388,7 +403,6 @@
     "90.AI学习/helloagent/hello-agents/docs/images/9-figures",
     "90.AI学习/helloagent/hello-agents/docs/images/8-figures",
     "90.AI学习/helloagent/hello-agents/docs/images/7-figures",
-    "90.AI学习/helloagent/hello-agents/docs/images/6-figures",
     "未命名.canvas",
     "未命名 1.canvas"
   ]
