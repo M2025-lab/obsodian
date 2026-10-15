@@ -186,22 +186,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "d23109e1067f3013",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "e3f9d364adf493d0",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
