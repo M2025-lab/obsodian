@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792502183574-whnjhhfgr",
+  "providerId": "claude",
+  "title": "解释 Java allMatch 方法逻辑含义",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792502183574,
+  "updatedAt": 1792502222023,
+  "lastResponseAt": 1792502222023,
+  "sessionId": "6b3cb232-2351-482f-9481-982dc8283b2b",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "6b3cb232-2351-482f-9481-982dc8283b2b"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25081,
+    "cacheCreationInputTokens": 1127,
+    "cacheReadInputTokens": 28925,
+    "outputTokens": 753,
+    "contextWindow": 200000,
+    "contextTokens": 55133,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

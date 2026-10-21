@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792488779337-yfgvb1rga",
+  "providerId": "claude",
+  "title": "解析 Java 时间戳常量对应的日期",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792488779337,
+  "updatedAt": 1792502090950,
+  "lastResponseAt": 1792489138126,
+  "sessionId": "d005d592-1cb7-4cf8-ae82-70dd41c9652d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "d005d592-1cb7-4cf8-ae82-70dd41c9652d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25998,
+    "cacheCreationInputTokens": 919,
+    "cacheReadInputTokens": 31176,
+    "outputTokens": 2181,
+    "contextWindow": 200000,
+    "contextTokens": 58093,
+    "percentage": 29,
+    "contextWindowIsAuthoritative": true
+  }
+}

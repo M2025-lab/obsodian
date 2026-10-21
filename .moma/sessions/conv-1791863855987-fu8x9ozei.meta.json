@@ -4,7 +4,7 @@
   "title": "记录 UC 账号 ID 映射查询接口",
   "titleGenerationStatus": "success",
   "createdAt": 1791863855987,
-  "updatedAt": 1792069664131,
+  "updatedAt": 1792502086501,
   "lastResponseAt": 1792069664131,
   "sessionId": "05e195b1-7c89-4b92-901b-6fd1a2eec2c1",
   "lastEffectiveModel": "auto",
@@ -12,7 +12,7 @@
     "providerSessionId": "05e195b1-7c89-4b92-901b-6fd1a2eec2c1"
   },
   "usage": {
-    "model": "auto",
+    "model": "haiku",
     "inputTokens": 31100,
     "cacheCreationInputTokens": 873,
     "cacheReadInputTokens": 58206,
@@ -20,6 +20,6 @@
     "contextWindow": 200000,
     "contextTokens": 90179,
     "percentage": 45,
-    "contextWindowIsAuthoritative": true
+    "contextWindowIsAuthoritative": false
   }
 }

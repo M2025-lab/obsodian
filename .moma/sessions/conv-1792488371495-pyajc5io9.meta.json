@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792488371495-pyajc5io9",
+  "providerId": "claude",
+  "title": "安装代码修改实现 skill",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792488371495,
+  "updatedAt": 1792502087989,
+  "lastResponseAt": 1792488520874,
+  "sessionId": "1e0b61c0-e71b-4269-a916-e6e1e08fdfc6",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1e0b61c0-e71b-4269-a916-e6e1e08fdfc6"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 26356,
+    "cacheCreationInputTokens": 321,
+    "cacheReadInputTokens": 35065,
+    "outputTokens": 204,
+    "contextWindow": 200000,
+    "contextTokens": 61742,
+    "percentage": 31,
+    "contextWindowIsAuthoritative": true
+  }
+}

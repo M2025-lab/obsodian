@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792501007588-d9fwguasi",
+  "providerId": "claude",
+  "title": "分析飞书文档新增表及作用",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792501007588,
+  "updatedAt": 1792501101284,
+  "lastResponseAt": 1792501101284,
+  "sessionId": "9c073f85-7106-4b5d-8754-462ce67eccfd",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "9c073f85-7106-4b5d-8754-462ce67eccfd"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25126,
+    "cacheCreationInputTokens": 724,
+    "cacheReadInputTokens": 37443,
+    "outputTokens": 834,
+    "contextWindow": 200000,
+    "contextTokens": 63293,
+    "percentage": 32,
+    "contextWindowIsAuthoritative": true
+  }
+}

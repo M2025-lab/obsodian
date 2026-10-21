@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792489512208-gk08l5hg8",
+  "providerId": "claude",
+  "title": "同步 Markdown 笔记到飞书",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792489512208,
+  "updatedAt": 1792502091622,
+  "lastResponseAt": 1792491412330,
+  "sessionId": "24e73308-f1bd-41c4-9f1f-b41dbd2c0595",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "24e73308-f1bd-41c4-9f1f-b41dbd2c0595"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 28319,
+    "cacheCreationInputTokens": 286,
+    "cacheReadInputTokens": 50737,
+    "outputTokens": 279,
+    "contextWindow": 200000,
+    "contextTokens": 79342,
+    "percentage": 40,
+    "contextWindowIsAuthoritative": true
+  }
+}

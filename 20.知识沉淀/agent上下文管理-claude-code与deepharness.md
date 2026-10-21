@@ -1,8 +1,10 @@
 # Agent 上下文管理：Claude Code 与 DeepHarness 拆解
 
+> 🔗 飞书：https://beike.feishu.cn/docx/KYfTd1LtvoEnr9xQi2UcqkIhnFZ
+>
 > 来源：Claude Code 逆向自 v2.1.88 npm `.map` 泄露（codezjx/claude-code-source-code 的 DeepWiki 分析）；DeepHarness 为 MIT 开源，源码在 github.com/deepseek-ai/deepseek-harness（docs/subsystems/compaction.zh.md、spill.zh.md、session-projection.zh.md、token-meter.zh.md）。
 
-## 0. 核心矛盾
+	## 0. 核心矛盾
 
 LLM 有固定上下文窗口（Claude 200K，可开 1M）。Agent 跑长任务时，对话历史 + 工具输出（bash 的 stdout、文件内容、搜索结果）很快把窗口塞满。满了之后：模型看不全、看不到关键东西、成本爆炸。
 
