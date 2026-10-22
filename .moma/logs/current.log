@@ -1,83 +1,96 @@
-09:46:47 [INFO] [启动耗时] 读取 manifest 版本: 6ms（累计 6ms）
-09:46:47 [INFO] [启动耗时][loadSettings] storage.initialize: 6ms（累计 6ms）
-09:46:47 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 46 个 + 旧目录 0 个，并发): 3ms
-09:46:47 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 46 个文件）: 3ms（累计 3ms）
-09:46:47 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×46: 32ms（累计 35ms）
-09:46:47 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×46: 2ms（累计 37ms）
-09:46:47 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 37ms（累计 43ms）
-09:46:47 [INFO] [启动耗时] loadSettings: 45ms（累计 51ms）
-09:46:47 [INFO] [启动耗时] logStore.rotate: 5ms（累计 56ms）
-09:46:47 [INFO] [启动耗时] settingsChangeMonitor.start: 21ms（累计 77ms）
-09:46:47 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 5ms（累计 82ms）
-09:46:47 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 66ms（累计 148ms）
-09:46:47 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 148ms）
-09:46:47 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 148ms）
-09:46:47 [INFO] [启动耗时] registerView ×10: 0ms（累计 148ms）
-09:46:47 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 149ms）
-09:46:47 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 1ms（累计 1ms）
-09:46:47 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
-09:46:47 [INFO] [启动耗时][homepage.activate] loadSettings: 1ms（累计 1ms）
-09:46:47 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 1ms）
-09:46:47 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 1ms）
-09:46:47 [INFO] [启动耗时][homepage] reconcile: 1ms（累计 2ms）
-09:46:47 [INFO] [启动耗时] homepageFeature.onload: 2ms（累计 151ms）
-09:46:47 [INFO] [启动耗时] onload 总耗时: 151ms
-09:46:47 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-09:46:47 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
-09:46:54 [WARN] [Claudian shell-path] probe failed, falling back to heuristic {"reason":"shell PATH probe timed out after 2500ms"}
-09:46:54 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=2a%3A69%3A72%3Acf%3A07%3A4e&hostName=MirrordeMacBook-Pro.local"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:54 [INFO] [claude-cli-version] probe failed {"cliPath":"/opt/homebrew/bin/claude"}
-09:46:54 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:46:54 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:46:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:46:55 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=2a%3A69%3A72%3Acf%3A07%3A4e&hostName=MirrordeMacBook-Pro.local","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"items\":[],\"total\":0,\"page\":1,\"pageSize\":20}}"}
-09:46:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=2a%3A69%3A72%3Acf%3A07%3A4e&hostName=MirrordeMacBook-Pro.local"}
-09:46:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:55 [INFO] [moma debug] plugin-settings success
-09:46:55 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/…(truncated)
-09:46:55 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:55 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:46:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:46:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:56 [INFO] [moma debug] plugin-settings success
-09:46:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:46:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-09:46:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-09:46:56 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/…(truncated)
-09:46:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:56 [INFO] [moma debug] plugin-settings success
-09:46:56 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-09:46:56 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-09:46:56 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
-09:46:56 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-09:46:56 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-09:46:57 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":16,"result":"/opt/homebrew/bin/npm"}
-09:46:57 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
-09:46:57 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
-09:46:57 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
-09:46:57 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
-09:46:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-09:46:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/…(truncated)
-09:46:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/…(truncated)
-09:46:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-09:46:57 [INFO] [moma debug] plugin-settings success
-09:46:57 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
-09:46:57 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
-09:46:57 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
-09:46:57 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
-09:46:57 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
-09:46:57 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
-09:46:57 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
-09:46:58 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+10:23:13 [INFO] [启动耗时] 读取 manifest 版本: 6ms（累计 6ms）
+10:23:13 [INFO] [启动耗时][loadSettings] storage.initialize: 3ms（累计 3ms）
+10:23:13 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 49 个 + 旧目录 0 个，并发): 4ms
+10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 49 个文件）: 4ms（累计 4ms）
+10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×49: 8ms（累计 12ms）
+10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×49: 4ms（累计 16ms）
+10:23:13 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 16ms（累计 19ms）
+10:23:13 [INFO] [启动耗时] loadSettings: 21ms（累计 27ms）
+10:23:13 [INFO] [启动耗时] logStore.rotate: 1ms（累计 28ms）
+10:23:13 [INFO] [启动耗时] settingsChangeMonitor.start: 2ms（累计 30ms）
+10:23:13 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 2ms（累计 32ms）
+10:23:13 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 11ms（累计 43ms）
+10:23:13 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 1ms（累计 44ms）
+10:23:13 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 44ms）
+10:23:13 [INFO] [启动耗时] registerView ×10: 0ms（累计 44ms）
+10:23:13 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 3ms（累计 47ms）
+10:23:13 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 1ms（累计 1ms）
+10:23:13 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
+10:23:13 [INFO] [启动耗时][homepage.activate] loadSettings: 0ms（累计 0ms）
+10:23:13 [INFO] [启动耗时][homepage.activate] getHomepage: 1ms（累计 1ms）
+10:23:13 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 1ms）
+10:23:13 [INFO] [启动耗时][homepage] reconcile: 2ms（累计 3ms）
+10:23:13 [INFO] [启动耗时] homepageFeature.onload: 3ms（累计 50ms）
+10:23:13 [INFO] [启动耗时] onload 总耗时: 50ms
+10:23:13 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+10:23:13 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:23:13 [INFO] [Claudian shell-path] probed {"length":617}
+10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [WARN] GrayReleaseService.syncUpdateChannel：同步更新通道失败，沿用本地配置 {"cause":{},"currentVersion":"0.3.26"}
+10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:15 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
+10:23:16 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:23:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:23:16 [WARN] GrayReleaseService.checkOnce：获取更新配置失败 {"cause":{},"currentVersion":"0.3.26","manual":false}

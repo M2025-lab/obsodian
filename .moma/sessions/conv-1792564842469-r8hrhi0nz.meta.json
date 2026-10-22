@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792564842469-r8hrhi0nz",
+  "providerId": "claude",
+  "title": "安装 Kibana 日志查询 skill",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792564842469,
+  "updatedAt": 1792565061238,
+  "lastResponseAt": 1792565061238,
+  "sessionId": "3baee1e8-1a48-47e6-9992-5ee3a20d5ffb",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "3baee1e8-1a48-47e6-9992-5ee3a20d5ffb"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25764,
+    "cacheCreationInputTokens": 456,
+    "cacheReadInputTokens": 35109,
+    "outputTokens": 628,
+    "contextWindow": 200000,
+    "contextTokens": 61329,
+    "percentage": 31,
+    "contextWindowIsAuthoritative": true
+  }
+}

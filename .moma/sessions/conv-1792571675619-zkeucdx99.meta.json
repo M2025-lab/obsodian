@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792571675619-zkeucdx99",
+  "providerId": "claude",
+  "title": "排查橱柜安装兜底逻辑失效问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792571675619,
+  "updatedAt": 1792591164144,
+  "lastResponseAt": 1792591164144,
+  "sessionId": "5a1a6d9d-047c-4565-a2be-65190c086a01",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "5a1a6d9d-047c-4565-a2be-65190c086a01"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 44931,
+    "cacheCreationInputTokens": 4132,
+    "cacheReadInputTokens": 146384,
+    "outputTokens": 2074,
+    "contextWindow": 200000,
+    "contextTokens": 195447,
+    "percentage": 98,
+    "contextWindowIsAuthoritative": true
+  }
+}

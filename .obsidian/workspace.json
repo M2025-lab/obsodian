@@ -158,22 +158,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "bc80127a5ba7546b",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "e9109b84f9cbe46c",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
@@ -309,7 +293,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 680.2890625
+    "width": 797.8203125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -327,7 +311,7 @@
       "moma:Open Moma": false
     }
   },
-  "active": "152bef15c55e0755",
+  "active": "c5953f5433ca45d8",
   "lastOpenFiles": [
     "lark-auth-qr.png",
     "视频识别的提示词.md",
