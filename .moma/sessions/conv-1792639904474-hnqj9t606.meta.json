@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792639904474-hnqj9t606",
+  "providerId": "claude",
+  "title": "排查甲醛检测误生成通知安装任务原因",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792639904474,
+  "updatedAt": 1792642451308,
+  "lastResponseAt": 1792642451308,
+  "sessionId": "584406d9-239d-4ca2-9868-7c70e493f624",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "584406d9-239d-4ca2-9868-7c70e493f624"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 26644,
+    "cacheCreationInputTokens": 3845,
+    "cacheReadInputTokens": 101569,
+    "outputTokens": 6577,
+    "contextWindow": 200000,
+    "contextTokens": 132058,
+    "percentage": 66,
+    "contextWindowIsAuthoritative": true
+  }
+}

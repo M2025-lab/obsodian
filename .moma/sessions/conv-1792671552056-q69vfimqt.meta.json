@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792671552056-q69vfimqt",
+  "providerId": "claude",
+  "title": "排查接口配置查询异常原因",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792671552056,
+  "updatedAt": 1792672710116,
+  "lastResponseAt": 1792672710116,
+  "sessionId": "122a2780-eb22-4b9d-b506-7d6ba22e5d9f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "122a2780-eb22-4b9d-b506-7d6ba22e5d9f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 27340,
+    "cacheCreationInputTokens": 4165,
+    "cacheReadInputTokens": 125338,
+    "outputTokens": 2370,
+    "contextWindow": 200000,
+    "contextTokens": 156843,
+    "percentage": 78,
+    "contextWindowIsAuthoritative": true
+  }
+}

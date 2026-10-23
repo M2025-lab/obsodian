@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792656921328-rkyf40qgt",
+  "providerId": "claude",
+  "title": "排查施工包错误激活的短路问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792656921328,
+  "updatedAt": 1792658468547,
+  "lastResponseAt": 1792658468547,
+  "sessionId": "71a1f04c-00d5-4c29-82ad-6087f731165d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "71a1f04c-00d5-4c29-82ad-6087f731165d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 31009,
+    "cacheCreationInputTokens": 9460,
+    "cacheReadInputTokens": 103148,
+    "outputTokens": 5820,
+    "contextWindow": 200000,
+    "contextTokens": 143617,
+    "percentage": 72,
+    "contextWindowIsAuthoritative": true
+  }
+}

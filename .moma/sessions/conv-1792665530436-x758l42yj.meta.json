@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792665530436-x758l42yj",
+  "providerId": "claude",
+  "title": "分析跟单任务 ES 查询接口实现",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792665530436,
+  "updatedAt": 1792665823578,
+  "lastResponseAt": 1792665823578,
+  "sessionId": "19446c3a-a711-4bac-876f-0afbd4103ebb",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "19446c3a-a711-4bac-876f-0afbd4103ebb"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 27851,
+    "cacheCreationInputTokens": 2427,
+    "cacheReadInputTokens": 54631,
+    "outputTokens": 296,
+    "contextWindow": 200000,
+    "contextTokens": 84909,
+    "percentage": 42,
+    "contextWindowIsAuthoritative": true
+  }
+}

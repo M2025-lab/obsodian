@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792671216830-yulb9ygdc",
+  "providerId": "claude",
+  "title": "同步接口梳理文档到飞书",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792671216830,
+  "updatedAt": 1792671263981,
+  "lastResponseAt": 1792671263981,
+  "sessionId": "0253afe0-6e90-42b2-a344-3824d22592f7",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0253afe0-6e90-42b2-a344-3824d22592f7"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 27805,
+    "cacheCreationInputTokens": 389,
+    "cacheReadInputTokens": 33314,
+    "outputTokens": 121,
+    "contextWindow": 200000,
+    "contextTokens": 61508,
+    "percentage": 31,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "conv-1792667594571-44yvvc0p2",
+  "providerId": "claude",
+  "title": "查询 StarLoad 接口返回值",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792667594571,
+  "updatedAt": 1792671196043,
+  "lastResponseAt": 1792671196043,
+  "sessionId": "3de8eb6e-5ccf-4638-9fa4-0fc3e1f89ce5",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "3de8eb6e-5ccf-4638-9fa4-0fc3e1f89ce5"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25828,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 25828,
+    "percentage": 13
+  }
+}

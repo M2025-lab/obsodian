@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792658464173-4kdbmbgv4",
+  "providerId": "claude",
+  "title": "排查接口返回数据缺失问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792658464173,
+  "updatedAt": 1792659972822,
+  "lastResponseAt": 1792659972822,
+  "sessionId": "ab211d47-cbdf-4476-9f25-e57e27533d4f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "ab211d47-cbdf-4476-9f25-e57e27533d4f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 28977,
+    "cacheCreationInputTokens": 994,
+    "cacheReadInputTokens": 68023,
+    "outputTokens": 690,
+    "contextWindow": 200000,
+    "contextTokens": 97994,
+    "percentage": 49,
+    "contextWindowIsAuthoritative": true
+  }
+}

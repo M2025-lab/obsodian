@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792671271303-w17ppatr8",
+  "providerId": "claude",
+  "title": "排查 trace 只查到单条配置的原因",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792671271303,
+  "updatedAt": 1792672111972,
+  "lastResponseAt": 1792672111972,
+  "sessionId": "ab0ae36e-f0b2-4ca2-aa4b-923f1ec90c42",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "ab0ae36e-f0b2-4ca2-aa4b-923f1ec90c42"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 27139,
+    "cacheCreationInputTokens": 942,
+    "cacheReadInputTokens": 101561,
+    "outputTokens": 2973,
+    "contextWindow": 200000,
+    "contextTokens": 129642,
+    "percentage": 65,
+    "contextWindowIsAuthoritative": true
+  }
+}
