@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792722499259-2o6xemvr1",
+  "providerId": "claude",
+  "title": "调研阿里云PHP问题并撰写报告",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792722499259,
+  "updatedAt": 1792728048727,
+  "lastResponseAt": 1792728048727,
+  "sessionId": "2db6d935-93a4-4e4b-81ea-a53f2a051279",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "2db6d935-93a4-4e4b-81ea-a53f2a051279"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25568,
+    "cacheCreationInputTokens": 1128,
+    "cacheReadInputTokens": 28893,
+    "outputTokens": 506,
+    "contextWindow": 200000,
+    "contextTokens": 55589,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

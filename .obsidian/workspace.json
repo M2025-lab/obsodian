@@ -325,8 +325,13 @@
       "moma:Open Moma": false
     }
   },
-  "active": "3911ee279ec6b771",
+  "active": "c5953f5433ca45d8",
   "lastOpenFiles": [
+    "20.知识沉淀/📚 阿里云PHP部署方案选型调研.md",
+    "20.知识沉淀/📚 阿里云 PHP 部署方案调研 2026.md",
+    "90.AI学习/helloagent/draft-reports/verifier-3-SAE不推荐PHP微服务.claim.md",
+    "90.AI学习/helloagent/draft-reports/verifier-1-SAE支持PHP.claim.md",
+    "90.AI学习/helloagent/draft-reports",
     "20.知识沉淀/agent上下文管理-claude-code与deepharness.md",
     "工作文档/跟单任务搜索接口逻辑梳理（artisan-construction）.md",
     "lark-auth-qr.png",
@@ -351,15 +356,11 @@
     "20.知识沉淀/agent上下文管理-方法级实现详解.md",
     "20.知识沉淀/Obsidian知识库归类方案.md",
     "90.AI学习/helloagent/hello-agents/docs/chapter7/第七章 构建你的Agent框架.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter4/第四章 智能体经典范式构建.md",
     "90.AI学习/agent上下文管理-teach/lessons/0004-claude-code-five-layers-implementation.html",
-    "90.AI学习/helloagent/hello-agents/docs/chapter5/第五章 基于低代码平台的智能体搭建.md",
     "90.AI学习/helloagent/hello-agents/uv.lock",
     "90.AI学习/helloagent/hello-agents/pyproject.toml",
     "90.AI学习/helloagent/hello-agents/main.py",
     "90.AI学习/helloagent/hello-agents/code/chapter6/AgentScopeDemo/requirements.txt",
-    "90.AI学习/helloagent/hello-agents/code/chapter6/AgentScopeDemo/README.md",
-    "90.AI学习/helloagent/hello-agents/docs/chapter1/第一章 初识智能体.md",
     "90.AI学习/helloagent/hello-agents/读者群二维码.png",
     "90.AI学习/helloagent/hello-agents/读者反馈问卷.png",
     "90.AI学习/helloagent/hello-agents/fix_bold_format.py",
@@ -372,7 +373,6 @@
     "90.AI学习/helloagent/hello-agents/docs/images/8-figures/8-6.png",
     "90.AI学习/helloagent/hello-agents/docs/images/9-figures",
     "90.AI学习/helloagent/hello-agents/docs/images/8-figures",
-    "90.AI学习/helloagent/hello-agents/docs/images/7-figures",
     "未命名.canvas",
     "未命名 1.canvas"
   ]

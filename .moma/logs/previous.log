@@ -1,132 +1,185 @@
-10:23:13 [INFO] [启动耗时] 读取 manifest 版本: 6ms（累计 6ms）
-10:23:13 [INFO] [启动耗时][loadSettings] storage.initialize: 3ms（累计 3ms）
-10:23:13 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 49 个 + 旧目录 0 个，并发): 4ms
-10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 49 个文件）: 4ms（累计 4ms）
-10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×49: 8ms（累计 12ms）
-10:23:13 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×49: 4ms（累计 16ms）
-10:23:13 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 16ms（累计 19ms）
-10:23:13 [INFO] [启动耗时] loadSettings: 21ms（累计 27ms）
-10:23:13 [INFO] [启动耗时] logStore.rotate: 1ms（累计 28ms）
-10:23:13 [INFO] [启动耗时] settingsChangeMonitor.start: 2ms（累计 30ms）
-10:23:13 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 2ms（累计 32ms）
-10:23:13 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 11ms（累计 43ms）
-10:23:13 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 1ms（累计 44ms）
-10:23:13 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 44ms）
-10:23:13 [INFO] [启动耗时] registerView ×10: 0ms（累计 44ms）
-10:23:13 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 3ms（累计 47ms）
-10:23:13 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 1ms（累计 1ms）
-10:23:13 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
-10:23:13 [INFO] [启动耗时][homepage.activate] loadSettings: 0ms（累计 0ms）
-10:23:13 [INFO] [启动耗时][homepage.activate] getHomepage: 1ms（累计 1ms）
-10:23:13 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 1ms）
-10:23:13 [INFO] [启动耗时][homepage] reconcile: 2ms（累计 3ms）
-10:23:13 [INFO] [启动耗时] homepageFeature.onload: 3ms（累计 50ms）
-10:23:13 [INFO] [启动耗时] onload 总耗时: 50ms
-10:23:13 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
-10:23:13 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-10:23:13 [INFO] [Claudian shell-path] probed {"length":617}
-10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:13 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:14 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [WARN] GrayReleaseService.syncUpdateChannel：同步更新通道失败，沿用本地配置 {"cause":{},"currentVersion":"0.3.26"}
-10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-10:23:15 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:15 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
-10:23:16 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-10:23:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-10:23:16 [WARN] GrayReleaseService.checkOnce：获取更新配置失败 {"cause":{},"currentVersion":"0.3.26","manual":false}
-10:23:18 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
-10:23:18 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
-10:23:18 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
-10:23:18 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
-11:31:33 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-11:31:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-11:31:33 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-11:31:34 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-11:31:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-11:31:34 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-11:31:34 [INFO] [moma debug] plugin-settings success
-11:31:34 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-11:31:34 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-11:31:34 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
-11:31:34 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-11:31:34 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-11:31:34 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
-11:31:34 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
-11:31:34 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
-11:31:34 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
-11:31:34 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
-11:31:34 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
-11:31:35 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
-11:31:35 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
-11:31:35 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
-11:31:35 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:31:35 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
-11:31:35 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-11:31:36 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:31:44 [moma debug] buildTurnSubmission {
-  "contentLength": 77,
+10:25:15 [INFO] [启动耗时] 读取 manifest 版本: 6ms（累计 6ms）
+10:25:15 [INFO] [启动耗时][loadSettings] storage.initialize: 3ms（累计 3ms）
+10:25:15 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 58 个 + 旧目录 0 个，并发): 0ms
+10:25:15 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 58 个文件）: 0ms（累计 0ms）
+10:25:15 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×58: 8ms（累计 8ms）
+10:25:15 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×58: 5ms（累计 13ms）
+10:25:15 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 13ms（累计 16ms）
+10:25:15 [INFO] [启动耗时] loadSettings: 18ms（累计 24ms）
+10:25:15 [INFO] [启动耗时] logStore.rotate: 5ms（累计 29ms）
+10:25:15 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 30ms）
+10:25:15 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 2ms（累计 32ms）
+10:25:15 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 6ms（累计 38ms）
+10:25:15 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 38ms）
+10:25:15 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 38ms）
+10:25:15 [INFO] [启动耗时] registerView ×10: 1ms（累计 39ms）
+10:25:15 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 40ms）
+10:25:15 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 1ms（累计 1ms）
+10:25:15 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
+10:25:15 [INFO] [启动耗时][homepage.activate] loadSettings: 0ms（累计 0ms）
+10:25:15 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 0ms）
+10:25:15 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 0ms）
+10:25:15 [INFO] [启动耗时][homepage] reconcile: 1ms（累计 2ms）
+10:25:15 [INFO] [启动耗时] homepageFeature.onload: 2ms（累计 42ms）
+10:25:15 [INFO] [启动耗时] onload 总耗时: 42ms
+10:25:15 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+10:25:15 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+10:25:15 [INFO] [Claudian shell-path] probed {"length":617}
+10:25:16 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:16 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:16 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:16 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:17 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:17 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+10:25:18 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:25:18 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [WARN] GrayReleaseService.syncUpdateChannel：同步更新通道失败，沿用本地配置 {"cause":{},"currentVersion":"0.3.26"}
+10:25:18 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
+10:25:18 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+10:25:18 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:25:18 [WARN] GrayReleaseService.checkOnce：获取更新配置失败 {"cause":{},"currentVersion":"0.3.26","manual":false}
+10:25:21 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+10:25:21 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
+10:25:24 [INFO] [moma npm probe] failed {"fullPath":"/opt/homebrew/bin/wecom-cli"}
+10:25:24 [INFO] [CliProcessRunner] spawn {"executable":"wecom-cli","command":"wecom-cli","args":["auth","show"]}
+10:25:26 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+10:27:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:27:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:41 [INFO] [moma debug] plugin-settings success
+10:27:41 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+10:27:41 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+10:27:41 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
+10:27:41 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+10:27:41 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+10:27:41 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+10:27:41 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+10:27:41 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+10:27:41 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+10:27:41 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+10:27:42 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+10:27:42 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+10:27:42 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+10:27:42 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+10:27:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:27:43 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+10:27:43 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
+10:27:44 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+10:27:45 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:27:45 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:45 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+10:27:45 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:45 [INFO] [moma debug] plugin-settings success
+10:27:45 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+10:27:45 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+10:27:45 [INFO] [moma debug] remote-config-sync quota identical to cache
+10:27:45 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+10:27:45 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+10:27:45 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+10:27:45 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
+10:27:46 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
+10:27:46 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+10:27:55 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+10:27:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:55 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+10:27:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+10:27:56 [INFO] [moma debug] plugin-settings success
+10:27:56 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+10:27:56 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+10:27:56 [INFO] [moma debug] remote-config-sync quota identical to cache
+10:27:56 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+10:27:56 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+10:27:56 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+10:27:56 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
+10:27:56 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
+10:27:56 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+10:28:19 [moma debug] buildTurnSubmission {
+  "contentLength": 21,
   "turnRequest": {
-    "textLength": 77,
+    "textLength": 21,
     "hasSkillInvocation": false,
     "hasSkillPromptPrefix": false,
     "hasEditorSelection": false,
@@ -134,805 +187,99 @@
     "hasCanvasSelection": false
   }
 }
-11:31:44 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+10:28:19 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
 """
-826061422000004679 模式7 甲醛检测  配置无通知安装（6.4改的配置） 本单6.28正签——不该生成
-11:31:44 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-11:31:44 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-11:31:44 [INFO] [auth-credential] ensureForQuery {"now":1792639904494,"at":"…ngwD_Q","rt":"…E6QSeA","accessExpiresAt":1792647093383,"refreshExpiresAt":1792726293383,"atDiffSec":7189,"rtDiffSec":86389,"sinceLastSavedSec":11}
-11:31:44 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-11:31:44 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-11:31:44 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-11:31:44 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-11:31:44 [moma debug] ColdStartQuery onesToken 存在: true
-11:31:44 [moma debug] ColdStartQuery momaFlagSettings 已注入
-11:31:44 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-11:31:44 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-11:31:44 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":11896,"resume":"(none)"}
-11:31:44 【发送给 Provider SDK 的 Prompt】
-826061422000004679 模式7 甲醛检测  配置无通知安装（6.4改的配置） 本单6.28正签——不该生成通知安装任务  查一下为什么生成了
-11:31:44 [INFO] [auth-credential] ensureForQuery {"now":1792639904508,"at":"…ngwD_Q","rt":"…E6QSeA","accessExpiresAt":1792647093383,"refreshExpiresAt":1792726293383,"atDiffSec":7189,"rtDiffSec":86389,"sinceLastSavedSec":11}
-11:31:44 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-11:31:44 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-11:31:44 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-11:31:44 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-11:31:44 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-11:31:44 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":11897,"resume":"(none)"}
-11:31:44 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-11:31:44 [INFO] [claude-model-switch] {"phase":"skipped","pid":11897,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mviziiv3-1","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-11:31:45 [moma debug] ColdStartQuery session_id: 11699393-1a87-40fe-acb4-54a22586dbd0
-11:31:45 [INFO] [claude-model-switch] {"phase":"query_route","pid":11897,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-11:31:46 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-11:31:46 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 17
-11:31:54 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":11897,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-11:31:55 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:31:55 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:31:56 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:31:56 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-11:42:29 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-11:42:32 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-11:42:32 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-11:42:32 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-11:42:32 [INFO] [moma debug] plugin-settings success
-11:49:42 [moma debug] buildTurnSubmission {
-  "contentLength": 18,
-  "turnRequest": {
-    "textLength": 18,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-11:49:42 【发送给 Provider SDK 的 Prompt】
-内网 Kibana 的完整地址是什么
-11:49:42 [INFO] [auth-credential] ensureForQuery {"now":1792640982313,"at":"…ngwD_Q","rt":"…E6QSeA","accessExpiresAt":1792647093383,"refreshExpiresAt":1792726293383,"atDiffSec":6111,"rtDiffSec":85311,"sinceLastSavedSec":1089}
-11:49:42 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-11:49:42 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-11:49:42 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-11:49:42 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-11:49:42 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--resume","5a1a6d9d-047c-4565-a2be-65190c086a01","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--resume","5a1a6d9d-047c-4565-a2be-65190c086a01","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.…(truncated)
-11:49:42 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":13627,"resume":"5a1a6d9d-047c-4565-a2be-65190c086a01"}
-11:49:42 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-11:49:42 [INFO] [claude-model-switch] {"phase":"skipped","pid":13627,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"5a1a6d9d-047c-4565-a2be-65190c086a01","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj05mia-2","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-11:49:43 [INFO] [claude-model-switch] {"phase":"query_route","pid":13627,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"5a1a6d9d-047c-4565-a2be-65190c086a01","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-11:49:52 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":13627,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-11:50:26 [moma debug] buildTurnSubmission {
-  "contentLength": 51,
-  "turnRequest": {
-    "textLength": 51,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-11:50:26 【发送给 Provider SDK 的 Prompt】
-https://fast105-kibana-logcenter-intra.intra.ke.com
-11:50:26 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-11:50:26 [INFO] [claude-model-switch] {"phase":"skipped","pid":11897,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"584406d9-239d-4ca2-9868-7c70e493f624","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj06khl-3","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-11:50:26 [INFO] [claude-model-switch] {"phase":"query_route","pid":11897,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"584406d9-239d-4ca2-9868-7c70e493f624","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-11:54:11 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-11:54:11 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-11:54:11 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-11:54:12 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-11:54:12 [INFO] [moma debug] plugin-settings success
-11:54:12 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-11:54:12 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-11:54:12 [INFO] [moma debug] remote-config-sync quota identical to cache
-11:54:12 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-11:54:12 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-11:54:12 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-11:54:12 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-11:54:12 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-11:54:12 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-12:06:57 [moma debug] buildTurnSubmission {
-  "contentLength": 100,
-  "turnRequest": {
-    "textLength": 100,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-12:06:57 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-826032523000003897（模式5） 老板电器 通知安装——主材任务已通知（主材进展同步） 、但施工包显示待预
-12:06:57 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-12:06:57 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-12:06:57 [INFO] [auth-credential] ensureForQuery {"now":1792642017740,"at":"…ngwD_Q","rt":"…E6QSeA","accessExpiresAt":1792647093383,"refreshExpiresAt":1792726293383,"atDiffSec":5076,"rtDiffSec":84276,"sinceLastSavedSec":2124}
-12:06:57 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-12:06:57 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-12:06:57 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-12:06:57 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-12:06:57 [moma debug] ColdStartQuery onesToken 存在: true
-12:06:57 [moma debug] ColdStartQuery momaFlagSettings 已注入
-12:06:57 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-12:06:57 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-12:06:57 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":18077,"resume":"(none)"}
-12:06:57 【发送给 Provider SDK 的 Prompt】
-826032523000003897（模式5） 老板电器 通知安装——主材任务已通知（主材进展同步） 、但施工包显示待预约
-（7.17生成、10.10激活、主材任务显示9.26完成通知）  查一下日志
-12:06:57 [INFO] [auth-credential] ensureForQuery {"now":1792642017756,"at":"…ngwD_Q","rt":"…E6QSeA","accessExpiresAt":1792647093383,"refreshExpiresAt":1792726293383,"atDiffSec":5076,"rtDiffSec":84276,"sinceLastSavedSec":2124}
-12:06:57 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-12:06:57 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-12:06:57 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-12:06:57 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ngwD_Q","claudeCodeVersion":"2.1.206"}
-12:06:57 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-eVRJJ993-HDoNW0PngwD_Q\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-12:06:57 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":18078,"resume":"(none)"}
-12:06:57 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-12:06:57 [INFO] [claude-model-switch] {"phase":"skipped","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj0rtgf-4","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-12:06:58 [moma debug] ColdStartQuery session_id: 37f10c33-9015-4414-9dd9-74a7e3fb195e
-12:06:58 [INFO] [claude-model-switch] {"phase":"query_route","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-12:07:00 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-12:07:00 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 15
-12:07:05 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-12:07:05 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-12:07:05 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-12:07:05 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-12:07:07 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":18078,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-13:09:03 [moma debug] buildTurnSubmission {
-  "contentLength": 13,
-  "turnRequest": {
-    "textLength": 13,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-13:09:03 【发送给 Provider SDK 的 Prompt】
-7月17为什么没激活施工包
-13:09:03 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-13:09:03 [INFO] [claude-model-switch] {"phase":"skipped","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"7ae5be42-0f8f-4669-96b2-0ecf4f34323c","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj2zo2s-5","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-13:09:03 [INFO] [claude-model-switch] {"phase":"query_route","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"7ae5be42-0f8f-4669-96b2-0ecf4f34323c","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-13:09:25 [moma debug] buildTurnSubmission {
-  "contentLength": 35,
-  "turnRequest": {
-    "textLength": 35,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-13:09:25 【发送给 Provider SDK 的 Prompt】
-7月17为什么没激活施工包 ，按逻辑来说主材任务激活后施工包也应该激活
-13:09:25 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-13:09:25 [INFO] [claude-model-switch] {"phase":"skipped","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"7ae5be42-0f8f-4669-96b2-0ecf4f34323c","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj305bh-6","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-13:09:25 [INFO] [claude-model-switch] {"phase":"query_route","pid":18078,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"7ae5be42-0f8f-4669-96b2-0ecf4f34323c","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-13:38:25 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-13:38:27 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-13:38:27 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
-13:38:27 [INFO] [auth-credential] refresh success, generation=undefined
-13:38:27 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-13:38:27 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-13:38:27 [INFO] [moma debug] plugin-settings success
-14:44:34 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-14:44:37 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-14:44:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-14:44:37 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-14:44:37 [INFO] [moma debug] plugin-settings success
-15:45:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-15:45:40 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-15:45:40 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
-15:45:41 [INFO] [auth-credential] refresh success, generation=undefined
-15:45:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-15:45:41 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-15:45:41 [INFO] [moma debug] plugin-settings success
-16:14:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:14:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:14:43 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:14:43 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-16:14:43 [INFO] [moma debug] plugin-settings success
-16:14:43 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-16:14:43 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-16:14:43 [INFO] [moma debug] remote-config-sync quota identical to cache
-16:14:43 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-16:14:43 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-16:14:43 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-16:14:43 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-16:14:44 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-16:14:44 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:15:21 [moma debug] buildTurnSubmission {
-  "contentLength": 2253,
-  "turnRequest": {
-    "textLength": 2253,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-16:15:21 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-排查一下施工包错误激活的问题，这是施工包的日志记录： 查到实证了。那行校验确实存在，但它在实际执行时被短路掉了，而且这种
-16:15:21 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-16:15:21 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-16:15:21 [INFO] [auth-credential] ensureForQuery {"now":1792656921344,"at":"…oBha6A","rt":"…JWxMZA","accessExpiresAt":1792662341253,"refreshExpiresAt":1792741541253,"atDiffSec":5420,"rtDiffSec":84620,"sinceLastSavedSec":1780}
-16:15:21 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-16:15:21 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-16:15:21 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-16:15:21 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-16:15:21 [moma debug] ColdStartQuery onesToken 存在: true
-16:15:21 [moma debug] ColdStartQuery momaFlagSettings 已注入
-16:15:21 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-16:15:21 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-16:15:21 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":46467,"resume":"(none)"}
-16:15:21 【发送给 Provider SDK 的 Prompt】
-排查一下施工包错误激活的问题，这是施工包的日志记录： 查到实证了。那行校验确实存在，但它在实际执行时被短路掉了，而且这种短路出现了两次。证据来自 starlord 在 2026-10-08 00:00:08.274 那条 request_out。cube 激活这个包时调用了 /material-task/template/list-all-compatibility，即 processCode=20260523111110001_006&stateIn=[1]；它返回的模板 id=20260922101023001（材料 029006003 集成吊顶材料，供应商 1026182 美的集吊，北京 V201601528）字段是：
-    
-      activateMode              = 0      （节点验收，也就是计划时间模式）
-      activateScheduleRelation  = 1      （之前）
-      activateRelationCode      = ""     （空字符串）
-      activateRelationType      = 0
-      activateDuration          = 0
-    
-    按 PcAcitvateServiceImpl:234-248 的判定逐行看：
-    
-      238  relationEnum = ScheduleRelationEnum.getByValue(1)  → BEFORE(之前)
-      240  if (ActivateModeEnum.isPlanTime(0) && afterTodayRelationList.contains(BEFORE))
-            →  ActivateModeEnum.isPlanTime(0) = true（0 就是 PLAN_TIME）
-            →  afterTodayRelationList = [TODAY(2), AFTER(3)]（L61-62），BEFORE(1) 不在里面
-            →  整个 if 为 false
-      247  return true   ← 直接放行，canActivateByProjectOrderStatus 根本没被调用
-    
-    即使把 activateScheduleRelation 改成 2 或 3，让它进入那个 if，也会被第二道短路挡住：activateRelationCode=""，MajorSequenceEnum.getByCode("") 里 StringUtils.isBlank 判空返回 null（MajorSequenceEnum:40-50），随后 canActivateByProjectOrderStatus 第一行 if (Objects.isNull(majorSequenceEnum)) return true;（L252-255）再放行一次。
-    
-    换句话说，这个方法只在「计划时间模式 + 当天/之后 + 配了具体节点编码」三个条件同时满足时才真正生效。这个工艺的配置是「节点验收 + 之前 + 空编码」，同时触发了两种短路，等于主动放弃了校验。
-    
-    反过来说，如果这条配置真按你想的那样配对（基装验收 00008 + 当天），它其实会拦住这个包：BASE_COMPLETION_ACCEPTANCE = "00008" 映射到订单状态 305，而 305 就是“油工工程”（StatusEnum:81）。canActivateByProjectOrderStatus 用的是严格大于：PROJECT_ORDER_STATUS_SORT.indexOf(status) > indexOf(305)。这单 10-08 时订单还在 305 油工工程，indexOf 都是 4，4 > 4 为 false → 不激活。
-    
-    所以准确的说法是：
-    
-      1. 校验没有 bug，是配置短路——任务模板里 activateScheduleRelation=1、activateRelationCode 为空，两个条件都不满足，代码走默认放行分支。
-      2. 这三个 activate 字段不是来自 n_material_node_transfer_condition，而是主材任务模板从 n_material_node_cfg 的首父节点复制过来的（MaterialTemplateV2ServiceImpl:3140-3158，取 parentMaterialNodeList.iterator(…(truncated)
-16:15:21 [INFO] [auth-credential] ensureForQuery {"now":1792656921367,"at":"…oBha6A","rt":"…JWxMZA","accessExpiresAt":1792662341253,"refreshExpiresAt":1792741541253,"atDiffSec":5420,"rtDiffSec":84620,"sinceLastSavedSec":1780}
-16:15:21 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-16:15:21 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-16:15:21 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…oBha6A","claudeCodeVersion":"2.1.206"}
-16:15:21 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…oBha6A","claudeCodeVersion":"2.1.206"}
-16:15:21 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-16:15:21 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":46468,"resume":"(none)"}
-16:15:21 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-16:15:21 [INFO] [claude-model-switch] {"phase":"skipped","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj9n95n-7","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-16:15:22 [moma debug] ColdStartQuery session_id: 25bb42c6-8d2c-4ff5-ad9d-9644aa00daf4
-16:15:22 [INFO] [claude-model-switch] {"phase":"query_route","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-16:15:23 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-16:15:23 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 14
-16:15:31 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":46468,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-16:15:31 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:15:31 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:15:32 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:15:32 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:23:45 [moma debug] buildTurnSubmission {
-  "contentLength": 54,
-  "turnRequest": {
-    "textLength": 54,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-16:23:45 【发送给 Provider SDK 的 Prompt】
-cube说查到的配置为空，导致的施工包校验逻辑失效，怎么引发的错误激活？为什么说starlord查到配置为空
-16:23:45 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-16:23:45 [INFO] [claude-model-switch] {"phase":"skipped","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"71a1f04c-00d5-4c29-82ad-6087f731165d","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvj9y1u6-8","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-16:23:45 [INFO] [claude-model-switch] {"phase":"query_route","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"71a1f04c-00d5-4c29-82ad-6087f731165d","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-16:27:31 [moma debug] buildTurnSubmission {
-  "contentLength": 2,
-  "turnRequest": {
-    "textLength": 2,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-16:27:31 【发送给 Provider SDK 的 Prompt】
-继续
-16:27:31 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-16:27:31 [INFO] [claude-model-switch] {"phase":"skipped","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"71a1f04c-00d5-4c29-82ad-6087f731165d","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvja2wqm-9","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-16:27:31 [INFO] [claude-model-switch] {"phase":"query_route","pid":46468,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"71a1f04c-00d5-4c29-82ad-6087f731165d","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-16:40:14 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:40:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:40:14 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:40:15 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-16:40:15 [INFO] [moma debug] plugin-settings success
-16:40:15 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-16:40:15 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-16:40:15 [INFO] [moma debug] remote-config-sync quota identical to cache
-16:40:15 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-16:40:15 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-16:40:15 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-16:40:15 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-16:40:15 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-16:40:15 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:41:04 [moma debug] buildTurnSubmission {
-  "contentLength": 179,
-  "turnRequest": {
-    "textLength": 179,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-16:41:04 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-http://i.starlord.home.ke.com/api/material-measure/v2/get-ta
-16:41:04 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-16:41:04 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-16:41:04 [INFO] [auth-credential] ensureForQuery {"now":1792658464183,"at":"…oBha6A","rt":"…JWxMZA","accessExpiresAt":1792662341253,"refreshExpiresAt":1792741541253,"atDiffSec":3877,"rtDiffSec":83077,"sinceLastSavedSec":3323}
-16:41:04 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-16:41:04 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-16:41:04 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-16:41:04 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-16:41:04 [moma debug] ColdStartQuery onesToken 存在: true
-16:41:04 [moma debug] ColdStartQuery momaFlagSettings 已注入
-16:41:04 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-16:41:04 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-16:41:04 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":52275,"resume":"(none)"}
-16:41:04 【发送给 Provider SDK 的 Prompt】
-http://i.starlord.home.ke.com/api/material-measure/v2/get-task?categoryId=029006004&projectOrderId=826062115000002021&taskDispatchNodeId=37014445
-查一下日志，为什么specAttrs.specValMap只有一条
-16:41:04 [INFO] [auth-credential] ensureForQuery {"now":1792658464197,"at":"…oBha6A","rt":"…JWxMZA","accessExpiresAt":1792662341253,"refreshExpiresAt":1792741541253,"atDiffSec":3877,"rtDiffSec":83077,"sinceLastSavedSec":3323}
-16:41:04 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-16:41:04 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-16:41:04 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…oBha6A","claudeCodeVersion":"2.1.206"}
-16:41:04 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…oBha6A","claudeCodeVersion":"2.1.206"}
-16:41:04 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-aQ1ALs8r8xJPRYSCoBha6A\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-16:41:04 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":52276,"resume":"(none)"}
-16:41:04 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-16:41:04 [INFO] [claude-model-switch] {"phase":"skipped","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjakbm0-10","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-16:41:05 [moma debug] ColdStartQuery session_id: cd0cbe09-0c0b-40c5-bcfb-6ecb30fb485d
-16:41:05 [INFO] [claude-model-switch] {"phase":"query_route","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-16:41:06 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-16:41:06 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 12
-16:41:11 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:41:11 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:41:11 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:41:11 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-16:41:14 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":52276,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-16:45:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-16:50:32 [moma debug] buildTurnSubmission {
-  "contentLength": 17,
-  "turnRequest": {
-    "textLength": 17,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-16:50:32 【发送给 Provider SDK 的 Prompt】
-被拦住的那个是什么品？什么供应商？
-16:50:32 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-16:50:32 [INFO] [claude-model-switch] {"phase":"skipped","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjawhz3-11","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-16:50:32 [INFO] [claude-model-switch] {"phase":"query_route","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-17:01:41 [moma debug] buildTurnSubmission {
-  "contentLength": 16,
-  "turnRequest": {
-    "textLength": 16,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-17:01:41 【发送给 Provider SDK 的 Prompt】
-调atom接口的返回值是哪几个值
-17:01:41 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-17:01:41 [INFO] [claude-model-switch] {"phase":"skipped","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjbatzb-12","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-17:01:41 [INFO] [claude-model-switch] {"phase":"query_route","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-17:05:53 [moma debug] buildTurnSubmission {
-  "contentLength": 19,
-  "turnRequest": {
-    "textLength": 19,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-17:05:53 【发送给 Provider SDK 的 Prompt】
-给我这个查atom接口的traceId
-17:05:53 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-17:05:53 [INFO] [claude-model-switch] {"phase":"skipped","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjbg8p7-13","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-17:05:53 [INFO] [claude-model-switch] {"phase":"query_route","pid":52276,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"ab211d47-cbdf-4476-9f25-e57e27533d4f","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-17:45:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-17:45:40 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-17:45:40 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
-17:45:41 [INFO] [auth-credential] refresh success, generation=undefined
-17:45:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-17:45:42 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-17:45:42 [INFO] [moma debug] plugin-settings success
-18:28:00 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-18:28:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-18:28:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-18:28:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-18:28:00 [INFO] [moma debug] plugin-settings success
-18:28:00 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-18:28:00 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-18:28:00 [INFO] [moma debug] remote-config-sync quota identical to cache
-18:28:00 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-18:28:00 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-18:28:00 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-18:28:00 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-18:28:00 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-18:28:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-18:38:50 [moma debug] buildTurnSubmission {
-  "contentLength": 1697,
-  "turnRequest": {
-    "textLength": 1697,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-18:38:50 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-@PostMapping(value = "api/construction/follow-up/task/search
-18:38:50 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-18:38:50 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-18:38:50 [INFO] [auth-credential] ensureForQuery {"now":1792665530473,"at":"…i9IM9Q","rt":"…FJ6pmw","accessExpiresAt":1792669541569,"refreshExpiresAt":1792748741569,"atDiffSec":4011,"rtDiffSec":83211,"sinceLastSavedSec":3189}
-18:38:50 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-18:38:50 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-18:38:50 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-18:38:50 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-18:38:50 [moma debug] ColdStartQuery onesToken 存在: true
-18:38:50 [moma debug] ColdStartQuery momaFlagSettings 已注入
-18:38:50 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-18:38:50 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-18:38:50 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":66788,"resume":"(none)"}
-18:38:50 【发送给 Provider SDK 的 Prompt】
-@PostMapping(value = "api/construction/follow-up/task/search")
-    @ApiOperation(value = "跟单任务 ES 条件查询（返回完整 DTO，ES 只出 id，与 page 同结构可平替）", notes = "分公司取服务端配置 follow.up.task.companies，项目状态固定为302、303、304、305、306、310，查询订单后与入参订单条件取交集；未配置有效分公司或交集为空时返回空页；支持排序与跟进人/大区筛选；支持按下次跟进时间区间（nextFollowUpTimeBegin/nextFollowUpTimeEnd，闭区间，取值来自跟进记录 follow_up_record 最新一条约跟进的 next_follow_up_time）筛选，未约下次跟进的任务不命中")
-    ResultDTO<Page<FollowUpTaskDTO>> search(@RequestBody FollowUpTaskPageQueryParam param);
-
-    @PostMapping(value = "api/construction/follow-up/task/order/search")
-    @ApiOperation(value = "模糊搜索查项目订单 id 列表（页面模糊搜索配套，先查订单再查任务）", notes = "订单号/小区/业主/服务者等模糊搜索；分公司取服务端跟进公司配置（follow.up.task.companies），不接受入参指定；项目状态由服务端枚举固定，结果与跟单范围交集后截断 100")
-    ResultDTO<List<String>> searchOrderIds(@RequestBody @Validated FollowUpOrderSearchParam param);
-
-@PostMapping(value = "api/construction/follow-up/task/materials")
-    @ApiOperation(value = "查询配置的跟单品类列表", notes = "查询 Apollo 跟单生成规则中配置的品类，名称匹配029履约类目")
-    ResultDTO<List<FollowUpMaterialDTO>> queryMaterials();
-    @PostMapping(value = "api/construction/follow-up/task/companies")
-    @ApiOperation(value = "查询跟单可选公司", notes = "返回配置的公司名称和分公司编码 mdmCode")
-    ResultDTO<List<FollowUpCompanyDTO>> queryCompanies();
-
-    @PostMapping(value = "api/construction/follow-up/task/project-statuses")
-    @ApiOperation(value = "查询跟单可选项目状态", notes = "与订单搜索使用相同的 StatusEnum 状态：302、303、304、305、306、310，按编码升序")
-    ResultDTO<List<FollowUpProjectStatusDTO>> queryProjectStatuses();
-/Users/mirror/IdeaProjects/artisan-construction梳理这个项目中的如上四个接口逻辑，以功能视角来（如，这个接口默认只筛选施工阶段的项目以及开启大区内的分公司的项目；增加了按照下次跟进时间查询的功能；以及返回值的排序逻辑）
-参考这个文档1. https://beike.feishu.cn/docx/J83Rd9Lp8oKVH3x9gOtcCqmhn8A
-18:38:50 [INFO] [auth-credential] ensureForQuery {"now":1792665530497,"at":"…i9IM9Q","rt":"…FJ6pmw","accessExpiresAt":1792669541569,"refreshExpiresAt":1792748741569,"atDiffSec":4011,"rtDiffSec":83211,"sinceLastSavedSec":3189}
-18:38:50 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-18:38:50 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-18:38:50 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…i9IM9Q","claudeCodeVersion":"2.1.206"}
-18:38:50 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…i9IM9Q","claudeCodeVersion":"2.1.206"}
-18:38:50 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-18:38:50 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":66789,"resume":"(none)"}
-18:38:50 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-18:38:50 [INFO] [claude-model-switch] {"phase":"skipped","pid":66789,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjers09-14","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-18:38:51 [moma debug] ColdStartQuery session_id: 48486d15-79b5-44e6-9c95-48e339077483
-18:38:51 [INFO] [claude-model-switch] {"phase":"query_route","pid":66789,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-18:38:52 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-18:38:52 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 16
-18:39:00 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":66789,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-18:42:35 [moma debug] buildTurnSubmission {
-  "contentLength": 16,
-  "turnRequest": {
-    "textLength": 16,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-18:42:35 【发送给 Provider SDK 的 Prompt】
-把这个落在文档中 放在工作文档中
-18:42:35 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-18:42:35 [INFO] [claude-model-switch] {"phase":"skipped","pid":66789,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"19446c3a-a711-4bac-876f-0afbd4103ebb","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjewlam-15","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-18:42:35 [INFO] [claude-model-switch] {"phase":"query_route","pid":66789,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"19446c3a-a711-4bac-876f-0afbd4103ebb","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-18:45:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-19:13:01 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-19:13:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-19:13:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-19:13:01 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-19:13:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-19:13:02 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-19:13:02 [INFO] [moma debug] plugin-settings success
-19:13:02 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-19:13:02 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-19:13:02 [INFO] [moma debug] remote-config-sync quota identical to cache
-19:13:02 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-19:13:02 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-19:13:02 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-19:13:02 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-19:13:14 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-19:13:14 [moma debug] buildTurnSubmission {
-  "contentLength": 77,
-  "turnRequest": {
-    "textLength": 77,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-19:13:14 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-/package/construction/query-order-nos-by-packageCode查一下StarL
-19:13:14 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-19:13:14 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-19:13:14 [INFO] [auth-credential] ensureForQuery {"now":1792667594610,"at":"…i9IM9Q","rt":"…FJ6pmw","accessExpiresAt":1792669541569,"refreshExpiresAt":1792748741569,"atDiffSec":1947,"rtDiffSec":81147,"sinceLastSavedSec":5253}
-19:13:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-19:13:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-19:13:14 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-19:13:14 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-19:13:14 [moma debug] ColdStartQuery onesToken 存在: true
-19:13:14 [moma debug] ColdStartQuery momaFlagSettings 已注入
-19:13:14 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-19:13:14 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-19:13:14 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":72472,"resume":"(none)"}
-19:13:14 【发送给 Provider SDK 的 Prompt】
-/package/construction/query-order-nos-by-packageCode查一下StarLoad当中这个接口的反馈值是什么？
-19:13:14 [INFO] [auth-credential] ensureForQuery {"now":1792667594629,"at":"…i9IM9Q","rt":"…FJ6pmw","accessExpiresAt":1792669541569,"refreshExpiresAt":1792748741569,"atDiffSec":1947,"rtDiffSec":81147,"sinceLastSavedSec":5253}
-19:13:14 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-19:13:14 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-19:13:14 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…i9IM9Q","claudeCodeVersion":"2.1.206"}
-19:13:14 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…i9IM9Q","claudeCodeVersion":"2.1.206"}
-19:13:14 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-tAmh0PYhEPZJy4ZYi9IM9Q\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-19:13:14 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":72473,"resume":"(none)"}
-19:13:14 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-19:13:14 [INFO] [claude-model-switch] {"phase":"skipped","pid":72473,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjg00p7-16","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-19:13:15 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-19:13:15 [moma debug] ColdStartQuery session_id: 2cad4131-2e6d-4843-847f-1bfe25572119
-19:13:15 [INFO] [claude-model-switch] {"phase":"query_route","pid":72473,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-19:13:16 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-19:13:16 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 17
-19:13:24 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":72473,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-20:10:27 [moma debug] buildTurnSubmission {
-  "contentLength": 3,
-  "turnRequest": {
-    "textLength": 3,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-20:10:27 【发送给 Provider SDK 的 Prompt】
-推飞书
-20:10:27 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-20:10:27 [INFO] [claude-model-switch] {"phase":"skipped","pid":72473,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"3de8eb6e-5ccf-4638-9fa4-0fc3e1f89ce5","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvji1leu-17","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-20:10:27 [INFO] [claude-model-switch] {"phase":"query_route","pid":72473,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":"3de8eb6e-5ccf-4638-9fa4-0fc3e1f89ce5","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-20:10:28 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
-20:10:29 [INFO] [auth-credential] refresh success, generation=undefined
-20:10:29 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:10:29 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:13:19 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-20:13:19 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-20:13:19 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:13:20 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-20:13:20 [INFO] [moma debug] plugin-settings success
-20:13:20 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-20:13:20 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-20:13:20 [INFO] [moma debug] remote-config-sync quota identical to cache
-20:13:20 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-20:13:20 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-20:13:20 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-20:13:20 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-20:13:20 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-20:13:20 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:13:36 [moma debug] buildTurnSubmission {
-  "contentLength": 47,
-  "turnRequest": {
-    "textLength": 47,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-20:13:36 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-@工作文档/跟单任务搜索接口逻辑梳理（artisan-construction）.md​ 推飞书
+帮我调研一下阿里云的PHP问题，写一份报告
 """
 
-Genera
-20:13:36 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-20:13:36 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-20:13:36 [INFO] [auth-credential] ensureForQuery {"now":1792671216838,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":7012,"rtDiffSec":86212,"sinceLastSavedSec":188}
-20:13:36 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:13:36 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:13:36 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-20:13:36 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-20:13:36 [moma debug] ColdStartQuery onesToken 存在: true
-20:13:36 [moma debug] ColdStartQuery momaFlagSettings 已注入
-20:13:36 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-20:13:36 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-20:13:36 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94258,"resume":"(none)"}
-20:13:36 【发送给 Provider SDK 的 Prompt】
-@工作文档/跟单任务搜索接口逻辑梳理（artisan-construction）.md 推飞书
-20:13:36 [INFO] [auth-credential] ensureForQuery {"now":1792671216850,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":7012,"rtDiffSec":86212,"sinceLastSavedSec":188}
-20:13:36 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:13:36 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:13:36 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:13:36 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:13:36 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-20:13:36 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94259,"resume":"(none)"}
-20:13:36 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-20:13:36 [INFO] [claude-model-switch] {"phase":"skipped","pid":94259,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvji5nmc-18","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-20:13:37 [moma debug] ColdStartQuery session_id: a724f7f6-5a66-4b11-bdba-93c3c60fc055
-20:13:38 [INFO] [claude-model-switch] {"phase":"query_route","pid":94259,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-20:13:39 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-20:13:39 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 11
-20:13:47 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":94259,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-20:13:57 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-20:13:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-20:13:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:13:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-20:13:58 [INFO] [moma debug] plugin-settings success
-20:13:58 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-20:13:58 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-20:13:58 [INFO] [moma debug] remote-config-sync quota identical to cache
-20:13:58 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-20:13:58 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-20:13:58 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-20:13:58 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-20:13:58 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-20:13:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:14:19 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-20:14:21 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-20:14:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-20:14:22 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-20:14:22 [INFO] [moma debug] plugin-settings success
-20:14:31 [moma debug] buildTurnSubmission {
-  "contentLength": 99,
-  "turnRequest": {
-    "textLength": 99,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-20:14:31 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-"453315-10.215.62.48-244-1792670531291-416"根据这个trace查日志以及sta
-20:14:31 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-20:14:31 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-20:14:31 [INFO] [auth-credential] ensureForQuery {"now":1792671271312,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":6958,"rtDiffSec":86158,"sinceLastSavedSec":242}
-20:14:31 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:14:31 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:14:31 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-20:14:31 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-20:14:31 [moma debug] ColdStartQuery onesToken 存在: true
-20:14:31 [moma debug] ColdStartQuery momaFlagSettings 已注入
-20:14:31 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-20:14:31 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-20:14:31 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94404,"resume":"(none)"}
-20:14:31 【发送给 Provider SDK 的 Prompt】
-"453315-10.215.62.48-244-1792670531291-416"根据这个trace查日志以及starlord代码看看为什么只查到20261022174611001_006的配置
-20:14:31 [INFO] [auth-credential] ensureForQuery {"now":1792671271319,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":6958,"rtDiffSec":86158,"sinceLastSavedSec":242}
-20:14:31 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:14:31 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:14:31 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:14:31 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:14:31 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-20:14:31 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94405,"resume":"(none)"}
-20:14:31 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-20:14:31 [INFO] [claude-model-switch] {"phase":"skipped","pid":94405,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvji6tnc-19","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-20:14:31 [moma debug] ColdStartQuery session_id: 95b67b1a-efe2-4bc5-a9ac-55bd762d739f
-20:14:32 [INFO] [claude-model-switch] {"phase":"query_route","pid":94405,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-20:14:32 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-20:14:32 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 19
-20:14:38 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:14:38 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:14:39 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:14:39 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:14:41 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":94405,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-20:18:53 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-20:18:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-20:18:53 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:18:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-20:18:53 [INFO] [moma debug] plugin-settings success
-20:18:53 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
-20:18:53 [INFO] [moma debug] remote-config-sync fileShare identical to cache
-20:18:53 [INFO] [moma debug] remote-config-sync quota identical to cache
-20:18:53 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
-20:18:53 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190632_624/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/im…(truncated)
-20:18:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-20:18:53 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
-20:18:53 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
-20:18:53 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.26"}
-20:19:12 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:19:12 [moma debug] buildTurnSubmission {
-  "contentLength": 97,
-  "turnRequest": {
-    "textLength": 97,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-20:19:12 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
-"""
-/dispatch/common/package-appoint-time-limit 根据这个接口查日志以及starl
-20:19:12 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
-20:19:12 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
-20:19:12 [INFO] [auth-credential] ensureForQuery {"now":1792671552065,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":6677,"rtDiffSec":85877,"sinceLastSavedSec":523}
-20:19:12 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:19:12 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:19:12 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
-20:19:12 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
-20:19:12 [moma debug] ColdStartQuery onesToken 存在: true
-20:19:12 [moma debug] ColdStartQuery momaFlagSettings 已注入
-20:19:12 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
-20:19:12 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
-20:19:12 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94945,"resume":"(none)"}
-20:19:12 【发送给 Provider SDK 的 Prompt】
-/dispatch/common/package-appoint-time-limit 根据这个接口查日志以及starlord代码看看为什么只查到20261022174611001_006的配置
-20:19:12 [INFO] [auth-credential] ensureForQuery {"now":1792671552076,"at":"…QSP6EQ","rt":"…RywJWA","accessExpiresAt":1792678229152,"refreshExpiresAt":1792757429152,"atDiffSec":6677,"rtDiffSec":85877,"sinceLastSavedSec":523}
-20:19:12 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
-20:19:12 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
-20:19:12 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:19:12 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…QSP6EQ","claudeCodeVersion":"2.1.206"}
-20:19:12 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-uMINvRgHR5lKLckCQSP6EQ\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
-20:19:12 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":94946,"resume":"(none)"}
-20:19:12 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
-20:19:12 [INFO] [claude-model-switch] {"phase":"skipped","pid":94946,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvjicua6-20","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
-20:19:12 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:19:12 [moma debug] ColdStartQuery session_id: 33705287-e742-4b25-9dd5-dfb75f063f3b
-20:19:13 [INFO] [claude-model-switch] {"phase":"query_route","pid":94946,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
-20:19:14 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
-20:19:14 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 12
-20:19:22 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":94946,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
-20:20:58 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:20:58 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:20:58 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:20:58 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
-20:31:41 [moma debug] buildTurnSubmission {
-  "contentLength": 8,
-  "turnRequest": {
-    "textLength": 8,
-    "hasSkillInvocation": false,
-    "hasSkillPromptPrefix": false,
-    "hasEditorSelection": false,
-    "hasBrowserSelection": false,
-    "hasCanvasSelection": false
-  }
-}
-20:31:41 【发送给 Provider SDK 的 Prompt】
-定位过去一小时的
-21:14:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-21:14:37 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-21:14:37 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-21:14:38 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-21:14:38 [INFO] [moma debug] plugin-settings success
-21:14:38 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+Generate a title for this convers
+10:28:19 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+10:28:19 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+10:28:19 [INFO] [auth-credential] ensureForQuery {"now":1792722499273,"at":"…ktXQ2w","rt":"…s-VgSQ","accessExpiresAt":1792729659825,"refreshExpiresAt":1792808859825,"atDiffSec":7161,"rtDiffSec":86361,"sinceLastSavedSec":39}
+10:28:19 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:28:19 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:28:19 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+10:28:19 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+10:28:19 [moma debug] ColdStartQuery onesToken 存在: true
+10:28:19 [moma debug] ColdStartQuery momaFlagSettings 已注入
+10:28:19 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+10:28:19 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-TUGIoyBJvzM6EKONktXQ2w\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-TUGIoyBJvzM6EKONktXQ2w\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_…(truncated)
+10:28:19 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":2489,"resume":"(none)"}
+10:28:19 【发送给 Provider SDK 的 Prompt】
+帮我调研一下阿里云的PHP问题，写一份报告
+10:28:19 [INFO] [auth-credential] ensureForQuery {"now":1792722499299,"at":"…ktXQ2w","rt":"…s-VgSQ","accessExpiresAt":1792729659825,"refreshExpiresAt":1792808859825,"atDiffSec":7161,"rtDiffSec":86361,"sinceLastSavedSec":39}
+10:28:19 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+10:28:19 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+10:28:19 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…ktXQ2w","claudeCodeVersion":"2.1.206"}
+10:28:19 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…ktXQ2w","claudeCodeVersion":"2.1.206"}
+10:28:19 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude\\nAccept: text/event-stream\\nX-Plugin-Auth: Bearer obat-TUGIoyBJvzM6EKONktXQ2w\\nX-Select-Model: true\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"X-Plugin-Version: 0.3.26\\nX-OB-Version: 1.14.4\\nX-Platform: macOS 25.2.0\\nX-Plugin-Env: prod\\nX-Request-Source: claude…(truncated)
+10:28:19 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":2490,"resume":"(none)"}
+10:28:19 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+10:28:19 [INFO] [claude-model-switch] {"phase":"skipped","pid":2490,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mvkcotew-1","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+10:28:20 [moma debug] ColdStartQuery session_id: 0179e7e4-6d41-4c7f-9b90-688096aaae96
+10:28:20 [INFO] [claude-model-switch] {"phase":"query_route","pid":2490,"cliVersion":"2.1.206","pluginVersion":"0.3.26","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+10:28:21 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+10:28:21 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 15
+10:28:29 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":2490,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+11:28:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+11:28:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+11:28:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+11:28:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+11:28:40 [INFO] [moma debug] plugin-settings success
+12:00:10 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:00:10 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:00:11 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:00:11 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:27:41 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+12:27:42 [INFO] [auth-credential] refresh success, generation=undefined
+12:27:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:27:43 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+12:28:37 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+12:28:39 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+12:28:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+12:28:40 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+12:28:40 [INFO] [moma debug] plugin-settings success
+12:28:41 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+13:33:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+13:33:02 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+13:33:02 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+13:33:03 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+13:33:03 [INFO] [moma debug] plugin-settings success
+13:33:03 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+14:33:10 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+14:33:13 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+14:33:13 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+14:33:13 [INFO] [auth-credential] refresh success, generation=undefined
+14:33:13 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+14:33:14 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+14:33:14 [INFO] [moma debug] plugin-settings success
+14:33:14 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+16:17:40 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:17:42 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:17:42 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:17:42 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:17:42 [INFO] [moma debug] plugin-settings success
+16:17:44 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+17:21:36 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+17:21:38 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:21:38 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+17:21:39 [INFO] [auth-credential] refresh success, generation=undefined
+17:21:39 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:21:39 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:21:39 [INFO] [moma debug] plugin-settings success
+17:21:39 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+18:24:21 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+18:24:21 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+18:24:21 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+18:24:22 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+18:24:22 [INFO] [moma debug] plugin-settings success
+18:24:22 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
+19:24:06 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:27:41 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:27:41 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+20:27:41 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+20:27:41 [INFO] [auth-credential] refresh success, generation=undefined
+20:27:41 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+20:27:42 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+20:27:42 [INFO] [moma debug] plugin-settings success
+20:27:43 [WARN] GrayReleaseService.checkOnce：下载或校验更新候选版本失败 {"cause":{"cause":{"journalPath":"/Users/mirror/wiki/.obsidian/plugins/moma/.moma-update/transaction.json"}},"currentVersion":"0.3.26","targetVersion":"0.3.27"}
