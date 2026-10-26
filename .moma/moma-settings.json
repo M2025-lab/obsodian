@@ -116,6 +116,7 @@
   "skillHubAutoUpdateEnabled": false,
   "chatViewPlacement": "right-sidebar",
   "workbenchLeafPlacement": "left-sidebar",
+  "expandDataAssetGroupsByDefault": true,
   "requireCommandOrControlEnterToSend": false,
   "expandFileEditsByDefault": false,
   "hiddenProviderCommands": {},
@@ -149,8 +150,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-10-23T02:27:43.419Z",
-      "momaCliUpdateAttemptedAt": "2026-10-23T02:27:43.419Z"
+      "autoInstallAttemptedAt": "2026-10-24T06:57:44.352Z",
+      "momaCliUpdateAttemptedAt": "2026-10-24T06:57:44.352Z"
     },
     "strictMarkdown": false
   },
@@ -159,7 +160,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1792818650878,
+  "lastGrayReleaseCheck": 1792979558338,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -169,8 +170,8 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1792722476303,
-    "fetchedPluginVersion": "0.3.26",
+    "fetchedAt": 1792900586903,
+    "fetchedPluginVersion": "0.3.27",
     "envVars": {
       "claude": {
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "800000",

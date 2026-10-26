@@ -1,0 +1,25 @@
+{
+  "id": "conv-1792900609109-iudgzadss",
+  "providerId": "claude",
+  "title": "克隆 Graphify 并启动 IDEA 项目",
+  "titleGenerationStatus": "success",
+  "createdAt": 1792900609109,
+  "updatedAt": 1792901109225,
+  "lastResponseAt": 1792901109225,
+  "sessionId": "59bd29d6-21bf-461a-a435-ad3ce000f70f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "59bd29d6-21bf-461a-a435-ad3ce000f70f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25826,
+    "cacheCreationInputTokens": 126,
+    "cacheReadInputTokens": 40530,
+    "outputTokens": 534,
+    "contextWindow": 200000,
+    "contextTokens": 66482,
+    "percentage": 33,
+    "contextWindowIsAuthoritative": true
+  }
+}
