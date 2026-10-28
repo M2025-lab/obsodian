@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793083909346-kmkajsr0g",
+  "providerId": "claude",
+  "title": "分析通知数据统计需求并编写SQL",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793083909346,
+  "updatedAt": 1793109233274,
+  "lastResponseAt": 1793109233274,
+  "sessionId": "513a6176-d2c5-40d9-8689-5d2b66af62ce",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "513a6176-d2c5-40d9-8689-5d2b66af62ce"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 30515,
+    "cacheCreationInputTokens": 208,
+    "cacheReadInputTokens": 48064,
+    "outputTokens": 282,
+    "contextWindow": 200000,
+    "contextTokens": 78787,
+    "percentage": 39,
+    "contextWindowIsAuthoritative": true
+  }
+}

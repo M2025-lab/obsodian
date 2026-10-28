@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793069109454-olfy09vm4",
+  "providerId": "claude",
+  "title": "更新测试文档 DDL 建表语句",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793069109454,
+  "updatedAt": 1793076091998,
+  "lastResponseAt": 1793076091998,
+  "sessionId": "688472d4-4205-43b2-9b4f-c01c4e44fc6e",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "688472d4-4205-43b2-9b4f-c01c4e44fc6e"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 36473,
+    "cacheCreationInputTokens": 506,
+    "cacheReadInputTokens": 49105,
+    "outputTokens": 411,
+    "contextWindow": 200000,
+    "contextTokens": 86084,
+    "percentage": 43,
+    "contextWindowIsAuthoritative": true
+  }
+}

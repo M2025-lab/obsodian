@@ -4,8 +4,8 @@
   "title": "实现通知任务系统识别结果应用判定",
   "titleGenerationStatus": "success",
   "createdAt": 1792825390542,
-  "updatedAt": 1792995128323,
-  "lastResponseAt": 1792995128323,
+  "updatedAt": 1793073856799,
+  "lastResponseAt": 1793073856799,
   "sessionId": "55a178e1-34fc-4604-94da-0a86fc91784a",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -982,13 +982,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 46084,
-    "cacheCreationInputTokens": 1906,
-    "cacheReadInputTokens": 118084,
-    "outputTokens": 560,
+    "inputTokens": 50117,
+    "cacheCreationInputTokens": 536,
+    "cacheReadInputTokens": 129498,
+    "outputTokens": 567,
     "contextWindow": 200000,
-    "contextTokens": 166074,
-    "percentage": 83,
+    "contextTokens": 180151,
+    "percentage": 90,
     "contextWindowIsAuthoritative": true
   }
 }
