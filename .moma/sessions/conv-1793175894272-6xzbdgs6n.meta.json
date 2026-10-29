@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793175894272-6xzbdgs6n",
+  "providerId": "claude",
+  "title": "适配大数据表名与分区改写通知指标SQL",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793175894272,
+  "updatedAt": 1793178668082,
+  "lastResponseAt": 1793178668082,
+  "sessionId": "585e7a59-1251-4d18-bef5-a0474bf558c5",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "585e7a59-1251-4d18-bef5-a0474bf558c5"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 31234,
+    "cacheCreationInputTokens": 3663,
+    "cacheReadInputTokens": 58737,
+    "outputTokens": 444,
+    "contextWindow": 200000,
+    "contextTokens": 93634,
+    "percentage": 47,
+    "contextWindowIsAuthoritative": true
+  }
+}

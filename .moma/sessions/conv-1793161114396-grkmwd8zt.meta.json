@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793161114396-grkmwd8zt",
+  "providerId": "claude",
+  "title": "解析催返补下单任务技术方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793161114396,
+  "updatedAt": 1793170313142,
+  "lastResponseAt": 1793170313142,
+  "sessionId": "8f243a69-fd87-4c06-9176-edc69fdd704f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "8f243a69-fd87-4c06-9176-edc69fdd704f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 34502,
+    "cacheCreationInputTokens": 1789,
+    "cacheReadInputTokens": 53591,
+    "outputTokens": 557,
+    "contextWindow": 200000,
+    "contextTokens": 89882,
+    "percentage": 45,
+    "contextWindowIsAuthoritative": true
+  }
+}

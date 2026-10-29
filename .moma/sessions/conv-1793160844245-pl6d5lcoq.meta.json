@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793160844245-pl6d5lcoq",
+  "providerId": "claude",
+  "title": "整理技术方案文档格式",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793160844245,
+  "updatedAt": 1793161089462,
+  "lastResponseAt": 1793161057938,
+  "sessionId": "a8184f9d-14af-4590-a8c4-031140ead3e3",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a8184f9d-14af-4590-a8c4-031140ead3e3"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 31533,
+    "cacheCreationInputTokens": 8678,
+    "cacheReadInputTokens": 34892,
+    "outputTokens": 481,
+    "contextWindow": 200000,
+    "contextTokens": 75103,
+    "percentage": 38,
+    "contextWindowIsAuthoritative": true
+  }
+}
