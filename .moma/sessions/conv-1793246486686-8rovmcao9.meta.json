@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793246486686-8rovmcao9",
+  "providerId": "claude",
+  "title": "修复 Markdown 技术方案文档格式",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793246486686,
+  "updatedAt": 1793259609147,
+  "lastResponseAt": 1793259609147,
+  "sessionId": "7bb06bb5-42be-4b49-9a22-fdf52ad42861",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "7bb06bb5-42be-4b49-9a22-fdf52ad42861"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 41495,
+    "cacheCreationInputTokens": 2859,
+    "cacheReadInputTokens": 115142,
+    "outputTokens": 1445,
+    "contextWindow": 200000,
+    "contextTokens": 159496,
+    "percentage": 80,
+    "contextWindowIsAuthoritative": true
+  }
+}

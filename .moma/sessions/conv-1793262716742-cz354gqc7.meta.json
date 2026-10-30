@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793262716742-cz354gqc7",
+  "providerId": "claude",
+  "title": "扫描ideaproject目录生成后端项目索引",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793262716742,
+  "updatedAt": 1793264150255,
+  "lastResponseAt": 1793262837559,
+  "sessionId": "2c3a58ce-7121-4b2a-9ecf-73b3a2c1a6ca",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "2c3a58ce-7121-4b2a-9ecf-73b3a2c1a6ca"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25144,
+    "cacheCreationInputTokens": 308,
+    "cacheReadInputTokens": 32472,
+    "outputTokens": 447,
+    "contextWindow": 200000,
+    "contextTokens": 57924,
+    "percentage": 29,
+    "contextWindowIsAuthoritative": true
+  }
+}
