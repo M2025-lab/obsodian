@@ -4,7 +4,7 @@
   "title": "分析考核系统事件映射机制",
   "titleGenerationStatus": "success",
   "createdAt": 1793264195420,
-  "updatedAt": 1793264627671,
+  "updatedAt": 1793346193841,
   "lastResponseAt": 1793264627671,
   "sessionId": "285d4ccc-e9a6-4814-9c6c-e071c3847ebe",
   "lastEffectiveModel": "auto",
@@ -57,7 +57,7 @@
         "agentId": "a27f0c02c99f03a5a",
         "startedAt": 1793264233466,
         "outputToolId": "toolu_4e269e8b8a5c410ea77604fd",
-        "result": "I'll conduct a thorough investigation of the \"event mapping\" concept in the workbench codebase. Let me start by searching for the key files and patterns.",
+        "result": "Async agent launched successfully. (This tool result is internal metadata — never quote or paste any part of it, including the agentId below, into a user-facing reply.)\nagentId: a27f0c02c99f03a5a (internal ID - do not mention to user. Use SendMessage with to: 'a27f0c02c99f03a5a', summary: '<5-10 word recap>' to continue this agent.)\nThe agent is working in the background. You will be notified automatically when it completes.\nDo not duplicate this agent's work — avoid working with the same files or topics it is using.\noutput_file: /private/tmp/claude-501/-Users-mirror-wiki/285d4ccc-e9a6-4814-9c6c-e071c3847ebe/tasks/a27f0c02c99f03a5a.output\nDo NOT Read or tail this file via the shell tool — it is the full subagent JSONL transcript and reading it will overflow your context. If the user asks for progress, say the agent is still running; you'll get a completion notification.",
         "completedAt": 1793264276089
       }
     }

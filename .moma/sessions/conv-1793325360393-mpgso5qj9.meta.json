@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793325360393-mpgso5qj9",
+  "providerId": "claude",
+  "title": "整理云仓复尺需求文档格式",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793325360393,
+  "updatedAt": 1793346194243,
+  "lastResponseAt": 1793325430305,
+  "sessionId": "a7d4a9fa-7289-40a5-a0d3-20559ef593b8",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a7d4a9fa-7289-40a5-a0d3-20559ef593b8"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 26529,
+    "cacheCreationInputTokens": 1870,
+    "cacheReadInputTokens": 27974,
+    "outputTokens": 307,
+    "contextWindow": 200000,
+    "contextTokens": 56373,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

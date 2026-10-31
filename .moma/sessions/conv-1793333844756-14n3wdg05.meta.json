@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793333844756-14n3wdg05",
+  "providerId": "claude",
+  "title": "新增驳回标记统计指标SQL",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793333844756,
+  "updatedAt": 1793346198497,
+  "lastResponseAt": 1793344174075,
+  "sessionId": "82f13651-33ff-45e8-8289-64f931547f02",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "82f13651-33ff-45e8-8289-64f931547f02"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 33960,
+    "cacheCreationInputTokens": 508,
+    "cacheReadInputTokens": 112676,
+    "outputTokens": 290,
+    "contextWindow": 200000,
+    "contextTokens": 147144,
+    "percentage": 74,
+    "contextWindowIsAuthoritative": true
+  }
+}

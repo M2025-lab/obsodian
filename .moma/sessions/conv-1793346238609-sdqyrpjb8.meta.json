@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793346238609-sdqyrpjb8",
+  "providerId": "claude",
+  "title": "查询考核系统DAG节点依赖功能",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793346238609,
+  "updatedAt": 1793346587025,
+  "lastResponseAt": 1793346587025,
+  "sessionId": "141876c5-d610-41bc-99b8-1fe6ddfd83f4",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "141876c5-d610-41bc-99b8-1fe6ddfd83f4"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 34867,
+    "cacheCreationInputTokens": 2005,
+    "cacheReadInputTokens": 53605,
+    "outputTokens": 2001,
+    "contextWindow": 200000,
+    "contextTokens": 90477,
+    "percentage": 45,
+    "contextWindowIsAuthoritative": true
+  }
+}

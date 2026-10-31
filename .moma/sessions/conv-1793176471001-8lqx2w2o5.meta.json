@@ -4,7 +4,7 @@
   "title": "重构 Starlord 接口为消息接收模式",
   "titleGenerationStatus": "success",
   "createdAt": 1793176471001,
-  "updatedAt": 1793181203511,
+  "updatedAt": 1793346193479,
   "lastResponseAt": 1793181203511,
   "sessionId": "1bb48bd2-ad5f-4903-aa76-2b9e65b5b927",
   "lastEffectiveModel": "auto",
@@ -137,7 +137,7 @@
           }
         ],
         "isExpanded": false,
-        "result": "<｜DSML｜tool_calls>\n<｜DSML｜invoke name=\"Bash\">\n<｜DSML｜parameter name=\"command\" string=\"true\">find /Users/mirror/IdeaProjects/edar-starlord -type f -name \"NotifyTaskResultParam.java\" 2>/dev/null</｜DSML｜parameter>\n<｜DSML｜parameter name=\"description\" string=\"true\">Find NotifyTaskResultParam DTO</｜DSML｜parameter>\n</｜DSML｜invoke>\n</｜DSML｜tool_calls>"
+        "result": "\n\n<｜DSML｜tool_calls>\n<｜DSML｜invoke name=\"Bash\">\n<｜DSML｜parameter name=\"command\" string=\"true\">find /Users/mirror/IdeaProjects/edar-starlord -type f -name \"NotifyTaskResultParam.java\" 2>/dev/null</｜DSML｜parameter>\n<｜DSML｜parameter name=\"description\" string=\"true\">Find NotifyTaskResultParam DTO</｜DSML｜parameter>\n</｜DSML｜invoke>\n</｜DSML｜tool_calls>"
       }
     }
   },
