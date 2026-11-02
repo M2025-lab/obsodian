@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793531933838-1q87a01k6",
+  "providerId": "claude",
+  "title": "解析考核系统四类任务概念",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793531933838,
+  "updatedAt": 1793532012686,
+  "lastResponseAt": 1793532012686,
+  "sessionId": "937ec82f-0683-4a2f-a2f5-577b71710c71",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "937ec82f-0683-4a2f-a2f5-577b71710c71"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 42269,
+    "cacheCreationInputTokens": 989,
+    "cacheReadInputTokens": 44295,
+    "outputTokens": 1426,
+    "contextWindow": 200000,
+    "contextTokens": 87553,
+    "percentage": 44,
+    "contextWindowIsAuthoritative": true
+  }
+}

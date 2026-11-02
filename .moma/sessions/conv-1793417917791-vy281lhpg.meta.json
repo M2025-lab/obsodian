@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793417917791-vy281lhpg",
+  "providerId": "claude",
+  "title": "抓取飞书文档导入考核系统知识库",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793417917791,
+  "updatedAt": 1793418190559,
+  "lastResponseAt": 1793418190559,
+  "sessionId": "fdb646c0-1f35-40a0-b40a-662e8cfbf486",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "fdb646c0-1f35-40a0-b40a-662e8cfbf486"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 25800,
+    "cacheCreationInputTokens": 509,
+    "cacheReadInputTokens": 45605,
+    "outputTokens": 485,
+    "contextWindow": 200000,
+    "contextTokens": 71914,
+    "percentage": 36,
+    "contextWindowIsAuthoritative": true
+  }
+}
