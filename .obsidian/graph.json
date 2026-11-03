@@ -5,8 +5,16 @@
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:00.需求 path:11.数据库表 tag:#1（system tag:#1（system tag:#1（system tag:#1（system tag:#1（system tag:#1（system tag:#1（system path:10.工作 path:10.工作 path:10.工作 path:10.工作 path:00.需求 [\"created\":",
+      "color": {
+        "a": 1,
+        "rgb": 14048348
+      }
+    }
+  ],
   "collapse-display": true,
   "showArrow": true,
   "textFadeMultiplier": -2.3,
@@ -17,6 +25,6 @@
   "repelStrength": 8.80697050938338,
   "linkStrength": 0.598190348525469,
   "linkDistance": 347,
-  "scale": 0.1433768026909077,
+  "scale": 0.09419976448087322,
   "close": true
 }

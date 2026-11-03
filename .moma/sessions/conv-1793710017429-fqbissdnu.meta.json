@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793710017429-fqbissdnu",
+  "providerId": "claude",
+  "title": "解释考核系统中的事件映射机制",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793710017429,
+  "updatedAt": 1793711179680,
+  "lastResponseAt": 1793711179680,
+  "sessionId": "5c4c9d03-2820-4b8e-9296-98fab12b9ae3",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "5c4c9d03-2820-4b8e-9296-98fab12b9ae3"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 31610,
+    "cacheCreationInputTokens": 342,
+    "cacheReadInputTokens": 46914,
+    "outputTokens": 1344,
+    "contextWindow": 200000,
+    "contextTokens": 78866,
+    "percentage": 39,
+    "contextWindowIsAuthoritative": true
+  }
+}

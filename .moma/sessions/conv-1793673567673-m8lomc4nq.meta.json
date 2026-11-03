@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793673567673-m8lomc4nq",
+  "providerId": "claude",
+  "title": "分析考核系统刷数接口调用方式",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793673567673,
+  "updatedAt": 1793689818025,
+  "lastResponseAt": 1793686349365,
+  "sessionId": "cef596c5-0414-4964-9c29-ae03516f27d4",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "cef596c5-0414-4964-9c29-ae03516f27d4"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 29030,
+    "cacheCreationInputTokens": 2584,
+    "cacheReadInputTokens": 90356,
+    "outputTokens": 299,
+    "contextWindow": 200000,
+    "contextTokens": 121970,
+    "percentage": 61,
+    "contextWindowIsAuthoritative": true
+  }
+}

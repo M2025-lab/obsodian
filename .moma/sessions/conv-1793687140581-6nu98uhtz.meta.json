@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793687140581-6nu98uhtz",
+  "providerId": "claude",
+  "title": "新增系统自动通知统计SQL指标",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793687140581,
+  "updatedAt": 1793687252641,
+  "lastResponseAt": 1793687252641,
+  "sessionId": "0019ff57-88b5-4dfc-a734-6bec92e846be",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0019ff57-88b5-4dfc-a734-6bec92e846be"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 34999,
+    "cacheCreationInputTokens": 1354,
+    "cacheReadInputTokens": 38755,
+    "outputTokens": 483,
+    "contextWindow": 200000,
+    "contextTokens": 75108,
+    "percentage": 38,
+    "contextWindowIsAuthoritative": true
+  }
+}

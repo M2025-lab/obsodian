@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793689843823-xa69yg86t",
+  "providerId": "claude",
+  "title": "查询考核系统日历与工期接口",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793689843823,
+  "updatedAt": 1793712306366,
+  "lastResponseAt": 1793712306366,
+  "sessionId": "1f15a26c-e803-4c8e-9cc0-834ef424ecf1",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1f15a26c-e803-4c8e-9cc0-834ef424ecf1"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 39480,
+    "cacheCreationInputTokens": 92822,
+    "cacheReadInputTokens": 0,
+    "outputTokens": 2200,
+    "contextWindow": 200000,
+    "contextTokens": 132302,
+    "percentage": 66,
+    "contextWindowIsAuthoritative": true
+  }
+}
