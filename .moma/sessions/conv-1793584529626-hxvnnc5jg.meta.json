@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793584529626-hxvnnc5jg",
+  "providerId": "claude",
+  "title": "补充适配手册变更影响原因列",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793584529626,
+  "updatedAt": 1793608039346,
+  "lastResponseAt": 1793584962790,
+  "sessionId": "308dd7c9-8d8c-4e6b-9fd4-4fa5084b7cb5",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "308dd7c9-8d8c-4e6b-9fd4-4fa5084b7cb5"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 30878,
+    "cacheCreationInputTokens": 20631,
+    "cacheReadInputTokens": 23895,
+    "outputTokens": 649,
+    "contextWindow": 200000,
+    "contextTokens": 75404,
+    "percentage": 38,
+    "contextWindowIsAuthoritative": true
+  }
+}

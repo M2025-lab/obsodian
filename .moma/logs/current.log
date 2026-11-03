@@ -1,83 +1,97 @@
-09:47:40 [INFO] [启动耗时] 读取 manifest 版本: 5ms（累计 5ms）
-09:47:40 [INFO] [启动耗时][loadSettings] storage.initialize: 18ms（累计 18ms）
-09:47:40 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 79 个 + 旧目录 0 个，并发): 1ms
-09:47:40 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 79 个文件）: 1ms（累计 1ms）
-09:47:40 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×79: 13ms（累计 14ms）
-09:47:40 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×79: 6ms（累计 20ms）
-09:47:40 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 20ms（累计 38ms）
-09:47:40 [INFO] [启动耗时] loadSettings: 40ms（累计 45ms）
-09:47:40 [INFO] [启动耗时] logStore.rotate: 2ms（累计 47ms）
-09:47:40 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 48ms）
-09:47:40 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 1ms（累计 49ms）
-09:47:40 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 8ms（累计 57ms）
-09:47:40 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 57ms）
-09:47:40 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 57ms）
-09:47:40 [INFO] [启动耗时] registerView ×10: 1ms（累计 58ms）
-09:47:40 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 59ms）
-09:47:40 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 0ms（累计 0ms）
-09:47:40 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
-09:47:40 [INFO] [启动耗时][homepage.activate] loadSettings: 0ms（累计 0ms）
-09:47:40 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 0ms）
-09:47:40 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 0ms）
-09:47:40 [INFO] [启动耗时][homepage] reconcile: 1ms（累计 1ms）
-09:47:40 [INFO] [启动耗时] homepageFeature.onload: 2ms（累计 61ms）
-09:47:40 [INFO] [启动耗时] onload 总耗时: 61ms
-09:47:40 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
-09:47:40 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-09:47:40 [INFO] [Claudian shell-path] probed {"length":617}
-09:47:41 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:41 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:41 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:41 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:41 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:41 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:41 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-09:47:42 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
-09:47:42 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-09:47:42 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:42 [INFO] [PreviewBundleTrace] {"at":"2026-11-02T01:47:42.715Z","instanceId":"bf9f99e8-65f9-4163-a75c-5bea339fa32b","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"scheduled-after-view-ready"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
-09:47:43 [INFO] [PreviewBundleTrace] {"at":"2026-11-02T01:47:43.242Z","instanceId":"bf9f99e8-65f9-4163-a75c-5bea339fa32b","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bootstrap-start"}
-09:47:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [WARN] GrayReleaseService.syncUpdateChannel：同步更新通道失败，沿用本地配置 {"cause":{},"currentVersion":"0.3.27"}
-09:47:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:47:43 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
-09:47:43 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
-09:47:43 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
-09:47:43 [WARN] GrayReleaseService.checkOnce：获取更新配置失败 {"cause":{},"currentVersion":"0.3.27","manual":false}
-09:47:43 [INFO] [PreviewBundleTrace] {"at":"2026-11-02T01:47:43.316Z","instanceId":"bf9f99e8-65f9-4163-a75c-5bea339fa32b","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"offline-cache-verified"}
-09:47:43 [INFO] [PreviewBundleTrace] {"at":"2026-11-02T01:47:43.316Z","instanceId":"bf9f99e8-65f9-4163-a75c-5bea339fa32b","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bundle-ready"}
+09:59:00 [INFO] [启动耗时] 读取 manifest 版本: 6ms（累计 6ms）
+09:59:00 [INFO] [启动耗时][loadSettings] storage.initialize: 3ms（累计 3ms）
+09:59:00 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 88 个 + 旧目录 0 个，并发): 1ms
+09:59:00 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 88 个文件）: 1ms（累计 1ms）
+09:59:00 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×88: 16ms（累计 17ms）
+09:59:00 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×88: 11ms（累计 28ms）
+09:59:00 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 28ms（累计 31ms）
+09:59:00 [INFO] [启动耗时] loadSettings: 32ms（累计 38ms）
+09:59:00 [INFO] [启动耗时] logStore.rotate: 2ms（累计 40ms）
+09:59:00 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 41ms）
+09:59:00 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 1ms（累计 42ms）
+09:59:00 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 8ms（累计 50ms）
+09:59:00 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 1ms（累计 51ms）
+09:59:00 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 51ms）
+09:59:00 [INFO] [启动耗时] registerView ×10: 0ms（累计 51ms）
+09:59:00 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 52ms）
+09:59:00 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 0ms（累计 0ms）
+09:59:00 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
+09:59:00 [INFO] [启动耗时][homepage.activate] loadSettings: 1ms（累计 1ms）
+09:59:00 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 1ms）
+09:59:00 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 1ms）
+09:59:00 [INFO] [启动耗时][homepage] reconcile: 1ms（累计 1ms）
+09:59:00 [INFO] [启动耗时] homepageFeature.onload: 3ms（累计 55ms）
+09:59:00 [INFO] [启动耗时] onload 总耗时: 55ms
+09:59:00 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+09:59:00 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+09:59:00 [INFO] [Claudian shell-path] probed {"length":617}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:01 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:01 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:02 [INFO] [PreviewBundleTrace] {"at":"2026-11-03T01:59:02.326Z","instanceId":"22cc5720-e0cc-46cd-8b4d-2238067fb59c","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"scheduled-after-view-ready"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [WARN] [model catalog] GET /model/switchable-models failed {"providers":["claude"],"model":"auto","cause":{}}
+09:59:02 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [WARN] GrayReleaseService.syncUpdateChannel：同步更新通道失败，沿用本地配置 {"cause":{},"currentVersion":"0.3.27"}
+09:59:02 [INFO] [PreviewBundleTrace] {"at":"2026-11-03T01:59:02.895Z","instanceId":"22cc5720-e0cc-46cd-8b4d-2238067fb59c","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bootstrap-start"}
+09:59:02 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:02 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:02 [INFO] [PreviewBundleTrace] {"at":"2026-11-03T01:59:02.914Z","instanceId":"22cc5720-e0cc-46cd-8b4d-2238067fb59c","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"offline-cache-verified"}
+09:59:02 [INFO] [PreviewBundleTrace] {"at":"2026-11-03T01:59:02.914Z","instanceId":"22cc5720-e0cc-46cd-8b4d-2238067fb59c","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bundle-ready"}
+09:59:03 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:59:03 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+09:59:03 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:03 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:03 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:03 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:03 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:03 [ERROR] [auth-credential] network error {"op":"create","url":"https://next.ke.com/ob/api/auth/credential/create","error":"Failed to fetch"}
+09:59:03 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+09:59:03 [WARN] [moma debug] remote-config-sync fetch failed, keeping prior cache {"error":"Failed to obtain access token (X-Plugin-Auth): Network error: Failed to fetch"}
+09:59:03 [WARN] GrayReleaseService.checkOnce：获取更新配置失败 {"cause":{},"currentVersion":"0.3.27","manual":false}

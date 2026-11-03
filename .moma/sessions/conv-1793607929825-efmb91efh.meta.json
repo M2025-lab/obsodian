@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793607929825-efmb91efh",
+  "providerId": "claude",
+  "title": "分析排程新增任务类型对考核侧的影响",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793607929825,
+  "updatedAt": 1793612200993,
+  "lastResponseAt": 1793612200993,
+  "sessionId": "f1c3b4e7-53d9-4ea7-8c88-d6c604eea89d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "f1c3b4e7-53d9-4ea7-8c88-d6c604eea89d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 32924,
+    "cacheCreationInputTokens": 1213,
+    "cacheReadInputTokens": 85820,
+    "outputTokens": 3050,
+    "contextWindow": 200000,
+    "contextTokens": 119957,
+    "percentage": 60,
+    "contextWindowIsAuthoritative": true
+  }
+}

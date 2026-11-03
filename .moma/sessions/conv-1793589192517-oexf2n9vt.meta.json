@@ -1,0 +1,24 @@
+{
+  "id": "conv-1793589192517-oexf2n9vt",
+  "providerId": "claude",
+  "title": "实现starlord自动通知复尺push功能",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793589192517,
+  "updatedAt": 1793608040212,
+  "lastResponseAt": 1793590736033,
+  "sessionId": "afa0c047-b837-4407-ae40-e31dae9b2c30",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "afa0c047-b837-4407-ae40-e31dae9b2c30"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 33358,
+    "cacheCreationInputTokens": 855,
+    "cacheReadInputTokens": 103827,
+    "outputTokens": 168,
+    "contextWindow": 200000,
+    "contextTokens": 138040,
+    "percentage": 69
+  }
+}

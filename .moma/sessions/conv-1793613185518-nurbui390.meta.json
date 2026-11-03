@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793613185518-nurbui390",
+  "providerId": "claude",
+  "title": "分析 EvalScheduleOrderService 计算逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793613185518,
+  "updatedAt": 1793616101728,
+  "lastResponseAt": 1793616101727,
+  "sessionId": "f2b705bf-37c4-4811-b880-33ac578c5fd3",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "f2b705bf-37c4-4811-b880-33ac578c5fd3"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 33457,
+    "cacheCreationInputTokens": 3220,
+    "cacheReadInputTokens": 81002,
+    "outputTokens": 2414,
+    "contextWindow": 200000,
+    "contextTokens": 117679,
+    "percentage": 59,
+    "contextWindowIsAuthoritative": true
+  }
+}
