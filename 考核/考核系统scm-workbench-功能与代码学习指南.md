@@ -166,12 +166,12 @@
 
 **② 指标配置——新版(2.5 重构,`doc/refactor2.5.sql`)**
 
-| 表 | 存什么 |
-|---|---|
-| `n_indicator_base_config` | 新版底线维度表(指标名+配置方+考核节点+订单类型+角色) |
-| `n_indicator_cus_config` | 新版城市维度表(+颗粒度等级/区域/分公司/店铺/送货方) |
-| `indicator_compute_rule` | **新版核心规则表**:`source_id`+`source_type`(0=底线→n_base,1=城市→n_cus)关联维度表;`from_nodes`/`to_node` 定义节点间规则;`base_compute_rule`/`cus_compute_rule` 存计算规则 JSON;`version`+`start_time`/`end_time` 做版本管理 |
-| `indicator_compute_rule_history` | 计算规则变更历史 |
+| 表                                | 存什么                                                                                                                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `n_indicator_base_config`        | 新版底线维度表(指标名+配置方+考核节点+订单类型+角色)                                                                                                                                                               |
+| `n_indicator_cus_config`         | 新版城市维度表(+颗粒度等级/区域/分公司/店铺/送货方)                                                                                                                                                               |
+| `indicator_compute_rule`         | **新版核心规则表**:`source_id`+`source_type`(0=底线→n_base,1=城市→n_cus)关联维度表;`from_nodes`/`to_node` 定义节点间规则;`base_compute_rule`/`cus_compute_rule` 存计算规则 JSON;`version`+`start_time`/`end_time` 做版本管理 |
+| `indicator_compute_rule_history` | 计算规则变更历史                                                                                                                                                                                    |
 
 **③ 考核订单与结果(考核引擎的输入输出)**
 

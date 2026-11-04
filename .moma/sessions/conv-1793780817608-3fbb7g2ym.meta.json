@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793780817608-3fbb7g2ym",
+  "providerId": "claude",
+  "title": "分析 OfcFulfillmentEventHandler 主材监听双路径原因",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793780817608,
+  "updatedAt": 1793781641272,
+  "lastResponseAt": 1793781641272,
+  "sessionId": "352ebcd9-f6cf-41a2-802a-294f36aaee81",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "352ebcd9-f6cf-41a2-802a-294f36aaee81"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1817,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 45440,
+    "outputTokens": 1561,
+    "contextWindow": 200000,
+    "contextTokens": 47257,
+    "percentage": 24,
+    "contextWindowIsAuthoritative": true
+  }
+}

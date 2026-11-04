@@ -1,0 +1,24 @@
+{
+  "id": "conv-1793780553432-e0v3pqi87",
+  "providerId": "claude",
+  "title": "解释 OfcFulfillmentEventHandler 进厅主材双路径设计",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793780553432,
+  "updatedAt": 1793780799302,
+  "lastResponseAt": 1793780794260,
+  "sessionId": "2079a74d-9999-4645-88b6-f611d5af0637",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "2079a74d-9999-4645-88b6-f611d5af0637"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 522,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 49408,
+    "outputTokens": 74,
+    "contextWindow": 200000,
+    "contextTokens": 49930,
+    "percentage": 25
+  }
+}
