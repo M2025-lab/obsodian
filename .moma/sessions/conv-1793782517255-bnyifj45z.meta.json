@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793782517255-bnyifj45z",
+  "providerId": "claude",
+  "title": "下载飞书技术文档到需求文件夹",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793782517255,
+  "updatedAt": 1793799522387,
+  "lastResponseAt": 1793799522386,
+  "sessionId": "71b493cf-5e49-4b44-b203-82f65f4bde33",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "71b493cf-5e49-4b44-b203-82f65f4bde33"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 852,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 159232,
+    "outputTokens": 7221,
+    "contextWindow": 200000,
+    "contextTokens": 160084,
+    "percentage": 80,
+    "contextWindowIsAuthoritative": true
+  }
+}

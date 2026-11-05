@@ -160,7 +160,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1793782497718,
+  "lastGrayReleaseCheck": 1793843121386,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -170,7 +170,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1793782498064,
+    "fetchedAt": 1793797209795,
     "fetchedPluginVersion": "0.3.27",
     "envVars": {
       "claude": {
@@ -183,7 +183,7 @@
   "workbenchAutoOpenDismissed": false,
   "hostAuthSelfHealGrayEnabled": true,
   "homepageEnabled": true,
-  "lastGrayReleaseDismiss": 1793780559800,
+  "lastGrayReleaseDismiss": 1793782631378,
   "lastGrayReleaseDismissVersion": "0.3.28",
   "voiceBotEnabled": false,
   "codexGrayEnabled": false

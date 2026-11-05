@@ -1,0 +1,14 @@
+{
+  "id": "conv-1793784528780-z1a0j1xra",
+  "providerId": "claude",
+  "title": "创建后门刷数接口分析调用链文档",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793784528780,
+  "updatedAt": 1793784550060,
+  "lastResponseAt": 1793784547909,
+  "sessionId": "21cfca1f-04a1-44f3-a09d-0d8c168990bf",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "21cfca1f-04a1-44f3-a09d-0d8c168990bf"
+  }
+}

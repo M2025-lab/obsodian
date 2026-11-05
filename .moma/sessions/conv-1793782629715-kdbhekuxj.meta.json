@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793782629715-kdbhekuxj",
+  "providerId": "claude",
+  "title": "分析考核系统排期接口及内部调用链",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793782629715,
+  "updatedAt": 1793784148068,
+  "lastResponseAt": 1793784148068,
+  "sessionId": "85945a92-c986-40ed-97ed-a67e52c0de90",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "85945a92-c986-40ed-97ed-a67e52c0de90"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1155,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 148544,
+    "outputTokens": 547,
+    "contextWindow": 200000,
+    "contextTokens": 149699,
+    "percentage": 75,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,76 +1,804 @@
-16:54:50 [INFO] [启动耗时] 读取 manifest 版本: 1ms（累计 1ms）
-16:54:50 [INFO] [启动耗时][loadSettings] storage.initialize: 1ms（累计 1ms）
-16:54:50 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 96 个 + 旧目录 0 个，并发): 2ms
-16:54:50 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 96 个文件）: 2ms（累计 2ms）
-16:54:50 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×96: 24ms（累计 26ms）
-16:54:50 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×96: 11ms（累计 37ms）
-16:54:50 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 37ms（累计 38ms）
-16:54:50 [INFO] [启动耗时] loadSettings: 39ms（累计 40ms）
-16:54:50 [INFO] [启动耗时] logStore.rotate: 1ms（累计 41ms）
-16:54:50 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 42ms）
-16:54:50 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 1ms（累计 43ms）
-16:54:50 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 7ms（累计 50ms）
-16:54:50 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 50ms）
-16:54:50 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 50ms）
-16:54:50 [INFO] [启动耗时] registerView ×10: 0ms（累计 50ms）
-16:54:50 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 51ms）
-16:54:50 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时][homepage.activate] loadSettings: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时][homepage] reconcile: 0ms（累计 0ms）
-16:54:50 [INFO] [启动耗时] homepageFeature.onload: 0ms（累计 51ms）
-16:54:50 [INFO] [启动耗时] onload 总耗时: 51ms
-16:54:50 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
-16:54:50 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
-16:54:50 [INFO] [Claudian shell-path] probed {"length":617}
-16:54:50 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
-16:54:51 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:51.613Z","instanceId":"9897bbe2-4b31-4330-b693-e8d8af2b1c6e","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"scheduled-after-view-ready"}
-16:54:51 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:51.695Z","instanceId":"9897bbe2-4b31-4330-b693-e8d8af2b1c6e","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bootstrap-start"}
-16:54:51 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:54:51 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:51 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:52 [INFO] [moma debug] plugin-settings success
-16:54:52 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:52.259Z","instanceId":"9897bbe2-4b31-4330-b693-e8d8af2b1c6e","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"config-received","enabled":true,"configVersion":"0.3.27","configBuildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795"}
-16:54:52 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:52.267Z","instanceId":"9897bbe2-4b31-4330-b693-e8d8af2b1c6e","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"cache-verified"}
-16:54:52 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:52.267Z","instanceId":"9897bbe2-4b31-4330-b693-e8d8af2b1c6e","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bundle-ready"}
-16:54:52 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
-16:54:52 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:54:52 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:52 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:52 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:52 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
-16:54:52 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:52 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
-16:54:52 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:52 [INFO] [moma debug] plugin-settings success
-16:54:52 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
-16:54:52 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
-16:54:53 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:53 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:53 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
-16:54:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
-16:54:53 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:55 [INFO] [启动耗时] 读取 manifest 版本: 0ms（累计 0ms）
+16:54:55 [INFO] [启动耗时][loadSettings] storage.initialize: 2ms（累计 2ms）
+16:54:55 [INFO] [启动耗时][SessionStorage.listUniqueMetadataFiles] listFiles(当前目录 96 个 + 旧目录 0 个，并发): 1ms
+16:54:55 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] listUniqueMetadataFiles（共 96 个文件）: 1ms（累计 1ms）
+16:54:55 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] readMany 批量读取 ×96: 20ms（累计 21ms）
+16:54:55 [INFO] [启动耗时][SessionStorage.scanMetadataFiles] 解析与旧目录迁移 ×96: 11ms（累计 32ms）
+16:54:55 [INFO] [启动耗时][loadSettings] getTabManagerState + loadMetadataForStartup（并发）: 32ms（累计 34ms）
+16:54:55 [INFO] [启动耗时] loadSettings: 35ms（累计 35ms）
+16:54:55 [INFO] [启动耗时] logStore.rotate: 1ms（累计 36ms）
+16:54:55 [INFO] [启动耗时] settingsChangeMonitor.start: 1ms（累计 37ms）
+16:54:55 [INFO] [启动耗时] SkillRegistryStore.loadWithMigration: 1ms（累计 38ms）
+16:54:55 [INFO] [启动耗时] ProviderWorkspaceRegistry.initializeAll: 7ms（累计 45ms）
+16:54:55 [INFO] [启动耗时] CliIntegrationRegistry.initializeAll: 0ms（累计 45ms）
+16:54:55 [INFO] [启动耗时] initializeMomaRemoteChannels: 0ms（累计 45ms）
+16:54:55 [INFO] [启动耗时] registerView ×10: 0ms（累计 45ms）
+16:54:55 [INFO] [启动耗时] addCommand/ribbon/事件注册等: 1ms（累计 46ms）
+16:54:55 [INFO] [启动耗时][homepage] migrateNativeSettingsOnce: 0ms（累计 0ms）
+16:54:55 [INFO] [启动耗时][homepage.activate] patchReleaseNotes/patchOpeningBehaviour: 0ms（累计 0ms）
+16:54:55 [INFO] [启动耗时][homepage.activate] loadSettings: 1ms（累计 1ms）
+16:54:55 [INFO] [启动耗时][homepage.activate] getHomepage: 0ms（累计 1ms）
+16:54:55 [INFO] [启动耗时][homepage.activate] registerCommands: 0ms（累计 1ms）
+16:54:55 [INFO] [启动耗时][homepage] reconcile: 1ms（累计 1ms）
+16:54:55 [INFO] [启动耗时] homepageFeature.onload: 1ms（累计 47ms）
+16:54:55 [INFO] [启动耗时] onload 总耗时: 47ms
+16:54:55 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/claude","command":"/opt/homebrew/bin/claude","args":["--version"]}
+16:54:55 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+16:54:55 [INFO] [Claudian shell-path] probed {"length":617}
+16:54:56 [INFO] [claude-cli-version] probed {"version":"2.1.206","raw":"2.1.206 (Claude Code)\n"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=e2%3A77%3A3d%3A09%3A39%3Aba&hostName=MirrordeMacBook-Pro.local"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+16:54:56 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:56.866Z","instanceId":"3e785dcd-4654-4c2b-bb13-8e3208bd6e11","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"scheduled-after-view-ready"}
+16:54:56 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:56.954Z","instanceId":"3e785dcd-4654-4c2b-bb13-8e3208bd6e11","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bootstrap-start"}
+16:54:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:56 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:54:56 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=e2%3A77%3A3d%3A09%3A39%3Aba&hostName=MirrordeMacBook-Pro.local","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":{\"items\":[],\"total\":0,\"page\":1,\"pageSize\":20}}"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/scheduled-tasks/list?environment=all&page=1&pageSize=20&macAddress=e2%3A77%3A3d%3A09%3A39%3Aba&hostName=MirrordeMacBook-Pro.local"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:57 [INFO] [moma debug] plugin-settings success
+16:54:57 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:57.294Z","instanceId":"3e785dcd-4654-4c2b-bb13-8e3208bd6e11","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"config-received","enabled":true,"configVersion":"0.3.27","configBuildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795"}
+16:54:57 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:57.301Z","instanceId":"3e785dcd-4654-4c2b-bb13-8e3208bd6e11","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"cache-verified"}
+16:54:57 [INFO] [PreviewBundleTrace] {"at":"2026-11-04T08:54:57.301Z","instanceId":"3e785dcd-4654-4c2b-bb13-8e3208bd6e11","pluginVersion":"0.3.27","buildId":"0.3.27+production+2f6794b0-cd2f-42e5-a137-b4111b2e0795","event":"bundle-ready"}
+16:54:57 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:57 [INFO] [moma debug] plugin-settings success
+16:54:57 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/workbench/tabs"}
+16:54:57 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:58 [INFO] [moma debug] plugin-settings success
+16:54:58 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:54:58 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:54:58 [INFO] [moma debug] remote-config-sync quota applied (memory-only) {"limitTitle":"本周额度已达上限"}
+16:54:58 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+16:54:58 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:54:58 [INFO] [moma npm findCliByName] {"binName":"npm","candidates":["npm"],"dirsSearched":27,"result":"/opt/homebrew/bin/npm"}
+16:54:58 [INFO] [moma npm resolve] findCliByName result {"found":"/opt/homebrew/bin/npm","platform":"darwin"}
+16:54:58 [INFO] [CliProcessRunner] spawn {"executable":"moma","command":"moma","args":["--version"]}
+16:54:58 [INFO] [moma npm spawn] ENOENT {"cli":"moma","errorCode":"ENOENT"}
+16:54:58 [INFO] [Claudian Sync moma auto-install] probe {"provider":"moma","status":"not_installed"}
+16:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:54:58 [INFO] [moma debug] plugin-settings success
+16:54:58 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["--version"]}
+16:54:58 [INFO] [Claudian Sync moma auto-install] npm install {"provider":"moma","installSpec":"https://moma.ke.com/gw/moma-cli-package/ob/api/cli-install"}
+16:54:58 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["root","-g"]}
+16:54:58 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/npm","command":"/opt/homebrew/bin/npm","args":["config","get","prefix"]}
+16:54:58 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:58 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+16:54:58 [ERROR] [Claudian Sync moma auto-install] failed {"error":"CLI exited with code 1"}
+16:54:58 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.27"}
+16:54:59 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:59 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:59 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+16:54:59 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:54:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:54:59 [INFO] [Claudian Sync space-cleanup] already attempted, skipping {"attemptedAt":"2026-08-12T10:23:09.994Z"}
+16:54:59 [INFO] [Claudian Sync wecom-legacy-auth] residue probed {"configDir":"/Users/mirror/.config/wecom","botProbe":"present","credentialsProbe":"absent"}
+16:55:00 [INFO] [CliProcessRunner] spawn {"executable":"/opt/homebrew/bin/wecom-cli","command":"/opt/homebrew/bin/wecom-cli","args":["auth","show"]}
+16:55:00 [WARN] [Claudian Sync wecom-legacy-auth] no unambiguous Bot ID, retrying next launch
+16:55:00 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:55:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:55:00 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",…(truncated)
+16:55:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude&model=auto"}
+16:55:17 [moma debug] buildTurnSubmission {
+  "contentLength": 82,
+  "turnRequest": {
+    "textLength": 82,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+16:55:17 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+把这个需求的技术文档扒下来https://beike.feishu.cn/docx/VvsNdIVKjoprIyxYzb
+16:55:17 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+16:55:17 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+16:55:17 [INFO] [auth-credential] ensureForQuery {"now":1793782517268,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":7179,"rtDiffSec":86379,"sinceLastSavedSec":21}
+16:55:17 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+16:55:17 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+16:55:17 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+16:55:17 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+16:55:17 [moma debug] ColdStartQuery onesToken 存在: true
+16:55:17 [moma debug] ColdStartQuery momaFlagSettings 已注入
+16:55:17 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+16:55:17 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.comate/zulu-cli/bin","/Users/mirror/.comate/bin","/Users/mirror/hermes","/Users/mirror/.local/bin"]},"windowsVerbatimArguments":false,"stderr":"pipe","ANTHROPIC_BASE_URL":"ht…(truncated)
+16:55:17 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":48590,"resume":"(none)"}
+16:55:17 【发送给 Provider SDK 的 Prompt】
+把这个需求的技术文档扒下来https://beike.feishu.cn/docx/VvsNdIVKjoprIyxYzbOcW6uCnbK 放在需求文件夹下的大宅下
+16:55:17 [INFO] [auth-credential] ensureForQuery {"now":1793782517277,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":7179,"rtDiffSec":86379,"sinceLastSavedSec":21}
+16:55:17 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+16:55:17 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+16:55:17 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+16:55:17 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+16:55:17 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+16:55:17 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":48591,"resume":"(none)"}
+16:55:17 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+16:55:17 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1vsoio-1","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+16:55:18 [moma debug] ColdStartQuery session_id: c2d5f5a2-2659-41ee-b1fb-159cfebaf470
+16:55:19 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+16:55:20 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+16:55:20 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 14
+16:55:27 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":48591,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+16:56:30 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+16:56:30 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+16:56:30 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+16:56:30 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+16:56:30 [INFO] [moma debug] plugin-settings success
+16:56:30 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+16:56:30 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+16:56:30 [INFO] [moma debug] remote-config-sync quota identical to cache
+16:56:30 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+16:56:30 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+16:56:30 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+16:56:30 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.27"}
+16:56:30 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
+16:56:30 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+16:57:09 [moma debug] buildTurnSubmission {
+  "contentLength": 69,
+  "turnRequest": {
+    "textLength": 69,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+16:57:09 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+我需要完全掌握考核系统中的这个接口/api/refresh/eval/schedule/projectOrder
+以及其
+16:57:09 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+16:57:09 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+16:57:09 [INFO] [auth-credential] ensureForQuery {"now":1793782629727,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":7067,"rtDiffSec":86267,"sinceLastSavedSec":133}
+16:57:09 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+16:57:09 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+16:57:09 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+16:57:09 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+16:57:09 [moma debug] ColdStartQuery onesToken 存在: true
+16:57:09 [moma debug] ColdStartQuery momaFlagSettings 已注入
+16:57:09 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+16:57:09 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.comate/zulu-cli/bin","/Users/mirror/.comate/bin","/Users/mirror/hermes","/Users/mirror/.local/bin"]},"windowsVerbatimArguments":false,"stderr":"pipe","ANTHROPIC_BASE_URL":"ht…(truncated)
+16:57:09 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":48941,"resume":"(none)"}
+16:57:09 【发送给 Provider SDK 的 Prompt】
+我需要完全掌握考核系统中的这个接口/api/refresh/eval/schedule/projectOrder
+以及其内部调用的所有接口
+16:57:09 [INFO] [auth-credential] ensureForQuery {"now":1793782629735,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":7067,"rtDiffSec":86267,"sinceLastSavedSec":133}
+16:57:09 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+16:57:09 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+16:57:09 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+16:57:09 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+16:57:09 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+16:57:09 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":48942,"resume":"(none)"}
+16:57:09 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+16:57:09 [INFO] [claude-model-switch] {"phase":"skipped","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1vv3ai-2","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+16:57:10 [moma debug] ColdStartQuery session_id: 6675f8f7-4074-4d64-984c-5f2d5635894e
+16:57:10 [INFO] [claude-model-switch] {"phase":"query_route","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+16:57:14 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+16:57:14 [moma debug] ColdStartQuery 完成，共收到消息数: 23 | 响应文本长度: 16
+16:57:19 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":48942,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+16:59:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+16:59:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:04:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:04:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:08:53 [moma debug] buildTurnSubmission {
+  "contentLength": 32,
+  "turnRequest": {
+    "textLength": 32,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:08:53 【发送给 Provider SDK 的 Prompt】
+放在考核文件夹下，既要有通俗的逻辑表述，又要有带着代码的逻辑分析
+17:08:53 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:08:53 [INFO] [claude-model-switch] {"phase":"skipped","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"85945a92-c986-40ed-97ed-a67e52c0de90","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1wa6p2-3","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:08:53 [INFO] [claude-model-switch] {"phase":"query_route","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"85945a92-c986-40ed-97ed-a67e52c0de90","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:09:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:09:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:11:42 [moma debug] buildTurnSubmission {
+  "contentLength": 42,
+  "turnRequest": {
+    "textLength": 42,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:11:42 【发送给 Provider SDK 的 Prompt】
+这个需求中考核系统已经写完了，但是我没看懂为什么这么改，帮我结合系统分析详细讲解一下
+17:11:42 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:11:42 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1wdswr-4","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:11:42 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:14:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:14:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:17:29 [moma debug] buildTurnSubmission {
+  "contentLength": 87,
+  "turnRequest": {
+    "textLength": 87,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:17:29 【发送给 Provider SDK 的 Prompt】
+这个文档我希望是这样的格式：从顶层开始，讲每一部分代码实现的功能是什么，如何实现的；顶层讲完之后，再深入下一层；然后告诉我，这个功能又是由哪几个功能块实现的；再依次往下递归。
+17:17:29 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:17:29 [INFO] [claude-model-switch] {"phase":"skipped","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"85945a92-c986-40ed-97ed-a67e52c0de90","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1wl8ik-5","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:17:29 [INFO] [claude-model-switch] {"phase":"query_route","pid":48942,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"85945a92-c986-40ed-97ed-a67e52c0de90","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:19:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:19:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:23:59 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:23:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:23:59 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+17:23:59 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
+17:23:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+17:24:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:24:00 [INFO] [moma debug] plugin-settings success
+17:24:00 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+17:24:00 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+17:24:00 [INFO] [moma debug] remote-config-sync quota identical to cache
+17:24:00 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+17:24:00 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+17:24:00 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+17:24:00 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.27"}
+17:24:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:24:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:28:48 [moma debug] buildTurnSubmission {
+  "contentLength": 206,
+  "turnRequest": {
+    "textLength": 206,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": true,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:28:48 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+在考核系统下，新建一个文件夹，叫后门刷数接口分析。/api/refresh/eval/schedule/projectO
+17:28:48 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+17:28:48 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+17:28:48 [INFO] [auth-credential] ensureForQuery {"now":1793784528803,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":5168,"rtDiffSec":84368,"sinceLastSavedSec":2032}
+17:28:48 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+17:28:48 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+17:28:48 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+17:28:48 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+17:28:48 [moma debug] ColdStartQuery onesToken 存在: true
+17:28:48 [moma debug] ColdStartQuery momaFlagSettings 已注入
+17:28:48 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+17:28:48 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.comate/zulu-cli/bin","/Users/mirror/.comate/bin","/Users/mirror/hermes","/Users/mirror/.local/bin"]},"windowsVerbatimArguments":false,"stderr":"pipe","ANTHROPIC_BASE_URL":"ht…(truncated)
+17:28:48 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":54773,"resume":"(none)"}
+17:28:48 【发送给 Provider SDK 的 Prompt】
+在考核系统下，新建一个文件夹，叫后门刷数接口分析。/api/refresh/eval/schedule/projectOrder 针对这个接口调用的所有方法，一直追溯到RPC或者DB。比如A方法中调用了B、C，则新建一个文档来介绍A的逻辑、功能、以及为什么调用BC，简单介绍BC的功能。之后新建B、C的介绍文档，按照A的文档结构，若B、C中调用了其他接口，依次按照A中的文档结构进行描述并新建对应的文档。明白了不
+
+<editor_selection path="考核/排程考核重算接口完全解析（refresh-eval-schedule全链路）.md" lines="37-37">
+/api/refresh/eval/schedule/projectOrder 
+</editor_selection>
+17:28:48 [INFO] [auth-credential] ensureForQuery {"now":1793784528831,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":5168,"rtDiffSec":84368,"sinceLastSavedSec":2032}
+17:28:48 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+17:28:48 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+17:28:48 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:28:48 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:28:48 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+17:28:48 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":54774,"resume":"(none)"}
+17:28:48 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:28:48 [INFO] [claude-model-switch] {"phase":"skipped","pid":54774,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1wzsnc-6","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:28:49 [moma debug] ColdStartQuery session_id: de995c8e-c55e-4ea8-b964-46f96e009408
+17:28:49 [INFO] [claude-model-switch] {"phase":"query_route","pid":54774,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:28:50 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+17:28:50 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 15
+17:28:58 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":54774,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+17:29:10 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":1,"signal":null}
+17:29:10 [INFO] [auth-credential] ensureForQuery {"now":1793784550128,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":5147,"rtDiffSec":84347,"sinceLastSavedSec":2053}
+17:29:10 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+17:29:10 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+17:29:10 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:29:10 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:29:10 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+17:29:10 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":54826,"resume":"(none)"}
+17:29:11 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:29:11 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:29:11 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+17:29:12 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:29:12 [INFO] [moma debug] plugin-settings success
+17:29:12 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+17:29:12 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+17:29:12 [INFO] [moma debug] remote-config-sync quota identical to cache
+17:29:12 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+17:29:12 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+17:29:12 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+17:29:12 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.27"}
+17:29:12 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
+17:29:12 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+17:29:20 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":54826,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+17:29:22 [moma debug] buildTurnSubmission {
+  "contentLength": 207,
+  "turnRequest": {
+    "textLength": 207,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:29:22 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+在考核文件夹下，新建一个文件夹，叫后门刷数接口分析。/api/refresh/eval/schedule/project
+17:29:22 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+17:29:22 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+17:29:22 [INFO] [auth-credential] ensureForQuery {"now":1793784562571,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":5134,"rtDiffSec":84334,"sinceLastSavedSec":2066}
+17:29:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+17:29:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+17:29:22 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+17:29:22 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+17:29:22 [moma debug] ColdStartQuery onesToken 存在: true
+17:29:22 [moma debug] ColdStartQuery momaFlagSettings 已注入
+17:29:22 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+17:29:22 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.comate/zulu-cli/bin","/Users/mirror/.comate/bin","/Users/mirror/hermes","/Users/mirror/.local/bin"]},"windowsVerbatimArguments":false,"stderr":"pipe","ANTHROPIC_BASE_URL":"ht…(truncated)
+17:29:22 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":54859,"resume":"(none)"}
+17:29:22 【发送给 Provider SDK 的 Prompt】
+在考核文件夹下，新建一个文件夹，叫后门刷数接口分析。/api/refresh/eval/schedule/projectOrder 针对这个接口调用的所有方法，一直追溯到RPC或者DB。比如A方法中调用了B、C，则新建一个文档来介绍A的逻辑、功能、以及为什么调用BC，简单介绍BC的功能。之后新建B、C的介绍文档，按照A的文档结构，若B、C中调用了其他接口，依次按照A中的文档结构进行描述并新建对应的文档。明白了不
+17:29:22 [INFO] [auth-credential] ensureForQuery {"now":1793784562579,"at":"…-S2LEg","rt":"…ps_oGg","accessExpiresAt":1793789696661,"refreshExpiresAt":1793868896661,"atDiffSec":5134,"rtDiffSec":84334,"sinceLastSavedSec":2066}
+17:29:22 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+17:29:22 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+17:29:22 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:29:22 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…-S2LEg","claudeCodeVersion":"2.1.206"}
+17:29:22 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+17:29:22 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":54860,"resume":"(none)"}
+17:29:22 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:29:22 [INFO] [claude-model-switch] {"phase":"skipped","pid":54860,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1x0ior-7","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:29:22 [moma debug] ColdStartQuery session_id: 5e5a30bc-2681-4468-ae22-390f26c40548
+17:29:23 [INFO] [claude-model-switch] {"phase":"query_route","pid":54860,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:29:24 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+17:29:24 [moma debug] ColdStartQuery 完成，共收到消息数: 15 | 响应文本长度: 16
+17:29:32 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":54860,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+17:29:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:29:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:34:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:34:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:40:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:40:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:45:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:45:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:50:29 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:50:29 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:54:55 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+17:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:54:57 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+17:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+17:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+17:54:58 [INFO] [moma debug] plugin-settings success
+17:58:35 [moma debug] buildTurnSubmission {
+  "contentLength": 22,
+  "turnRequest": {
+    "textLength": 22,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+17:58:35 【发送给 Provider SDK 的 Prompt】
+我还是不懂345的逻辑，为什么要加这14条？
+17:58:35 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+17:58:35 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1y23lg-8","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+17:58:35 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+17:59:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+17:59:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:04:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:04:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:10:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:10:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:14:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:14:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:19:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:19:57 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:21:34 [moma debug] buildTurnSubmission {
+  "contentLength": 57,
+  "turnRequest": {
+    "textLength": 57,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:21:34 【发送给 Provider SDK 的 Prompt】
+我还有个问题：为什么要驳回这个时间表？直接从外部触发，或者从外部拉不就可以了吗？为什么要有那个BaseEvent？
+18:21:34 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+18:21:34 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1yvngm-9","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+18:21:34 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+18:22:01 [moma debug] buildTurnSubmission {
+  "contentLength": 54,
+  "turnRequest": {
+    "textLength": 54,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:22:01 【发送给 Provider SDK 的 Prompt】
+我还有个问题：为什么要有事件表？直接从外部触发，或者从外部拉不就可以了吗？为什么要有那个BaseEvent？
+18:22:01 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+18:22:01 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1yw87j-10","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+18:22:01 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+18:24:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:24:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:29:46 [moma debug] buildTurnSubmission {
+  "contentLength": 41,
+  "turnRequest": {
+    "textLength": 41,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:29:46 【发送给 Provider SDK 的 Prompt】
+这个表的作用是什么？没有它的话，也可以排程或者其他服务，拉到这个项目下所属的任务。
+18:29:46 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+18:29:46 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1z66x7-11","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+18:29:46 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+18:29:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:29:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:34:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:34:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:37:19 [moma debug] buildTurnSubmission {
+  "contentLength": 80,
+  "turnRequest": {
+    "textLength": 80,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+18:37:19 【发送给 Provider SDK 的 Prompt】
+我并不是要改动这个系统，而是要通过反例来验证这个表的功能，让我理解它到底做了什么。那假设没有这个表的话，任务是每个项目一份，但它的规则是可配的，这样不也可以吗？
+18:37:19 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+18:37:19 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw1zfw3d-12","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+18:37:19 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+18:39:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+18:39:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:01:10 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+19:01:10 [INFO] [auth-credential] refresh success, generation=undefined
+19:01:10 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:01:10 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:06:10 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:06:10 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:39:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+19:39:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:39:58 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+19:39:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+19:39:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:39:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+19:39:59 [INFO] [moma debug] plugin-settings success
+19:44:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:44:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:47:05 [moma debug] buildTurnSubmission {
+  "contentLength": 46,
+  "turnRequest": {
+    "textLength": 46,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+19:47:05 【发送给 Provider SDK 的 Prompt】
+所以，以后一旦要加新的任务类型，都需要新增这个表。另外这个EVENT_NAME_TDC是什么
+19:47:05 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+19:47:05 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw21xm98-13","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+19:47:05 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+19:47:06 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+19:47:07 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+19:49:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:49:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:54:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:59:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+19:59:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:05:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:05:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:10:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:10:00 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:14:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:14:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:20:00 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:20:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:25:01 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:25:01 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:29:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:29:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:34:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:34:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:39:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+20:39:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:39:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:44:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:44:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:49:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:49:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:54:57 [INFO] [auth-credential] refresh {"url":"https://next.ke.com/ob/api/auth/credential/refresh"}
+20:54:58 [INFO] [auth-credential] refresh success, generation=undefined
+20:54:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:54:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:59:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+20:59:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:00:08 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+21:00:08 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+21:00:08 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+21:00:09 [INFO] [ObsidianTransport] {"method":"GET","url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude","status":200,"body":"{\"errno\":0,\"error\":\"success\",\"data\":[{\"model\":\"auto\",\"aliasName\":\"auto\",\"tag\":\"\",\"multiplier\":1,\"description\":\"\",\"promptHint\":\"\",\"icon\":\"\",\"active\":true},{\"model\":\"GLM-5.3-Flash\",\"aliasName\":\"GLM-5.3-Flash\",\"tag\":\"\",\"multiplier\":0.1,\"description\":\"智谱新一代高速多模态模型，适合日常问答和高并发场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_160244_122/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.3\",\"aliasName\":\"GLM-5.3\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"旗舰模型，擅长复杂软件工程与长程 Agent 任务\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190433_032/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"GLM-5.2\",\"aliasName\":\"GLM-5.2-hs\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"一款稳定可靠的通用模型，擅长复杂推理、长文本理解和结构化内容生成，支持工具调用，适合智能问答、知识分析及业务 Agent 场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_190700_418/%E6%99%BA%E6%99%AE.jpg\",\"active\":false},{\"model\":\"deepseek-v4-pro-ga\",\"aliasName\":\"deepseek-v4-pro-ga\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"DeepSeek 专业模型，适合深度推理、代码和复杂分析。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193322_545/deepseek.jpg\",\"active\":false},{\"model\":\"doubao-seed-2.1-pro\",\"aliasName\":\"doubao-seed-2.1-pro\",\"tag\":\"\",\"multiplier\":1.0,\"description\":\"综合型多模态模型，擅长复杂指令理解、视觉分析和内容生成，支持工具调用与批量推理，适合多模态应用及业务自动化场景。\",\"promptHint\":\"\",\"icon\":\"https://img.ljcdn.com/moma-img/image/uploads/user/20261013_193445_002/Doubao%20%28%E8%B1%86%E5%8C%85%29%20Logo%20-%20Colored%20-%20244x256%20-%20zonalogo.jpg\",\"active\":false},{\"model\":\"qwen3.8-max\",\"aliasName\":\"qwen3.8-max\",\"tag\":\"深度推理\",\"multiplier\":1.33,\"description\":\"适合高质量推理、多模态理解和复杂任务。\",\"promptHint\":\"\",\"icon\":\"…(truncated)
+21:00:09 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/model/switchable-models?channel=claude"}
+21:00:09 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+21:00:09 [INFO] [moma debug] plugin-settings success
+21:00:09 [INFO] [moma debug] remote-config-sync audioFileRecognition identical to cache
+21:00:09 [INFO] [moma debug] remote-config-sync fileShare identical to cache
+21:00:09 [INFO] [moma debug] remote-config-sync quota identical to cache
+21:00:09 [INFO] [moma debug] remote-agent-config applied {"providers":{"claude":["CLAUDE_CODE_AUTO_COMPACT_WINDOW","CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC","CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS"]},"affectedProviderIds":[]}
+21:00:09 [INFO] [moma debug] remote-config-sync payload identical to cache, no live restart needed
+21:00:09 [INFO] [Claudian Sync moma auto-install] skip (startup already handled)
+21:00:09 [INFO] [Claudian Sync moma-provision] skip (startup already handled) {"version":"0.3.27"}
+21:01:18 [moma debug] buildTurnSubmission {
+  "contentLength": 243,
+  "turnRequest": {
+    "textLength": 243,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:01:18 [moma debug] ColdStartQuery 开始，prompt 前80字: User's request:
+"""
+以后执行任务时，要执行这些约束：
+1. 前置校验：执行任务前先排查问题本身的错误前提、逻辑断层和信息缺口，避免带着漏洞一
+21:01:18 [moma debug] ColdStartQuery vaultPath: /Users/mirror/wiki
+21:01:18 [moma debug] ColdStartQuery claudePath: /opt/homebrew/bin/claude
+21:01:18 [INFO] [auth-credential] ensureForQuery {"now":1793797278333,"at":"…y94FHg","rt":"…ELUFJg","accessExpiresAt":1793804098779,"refreshExpiresAt":1793883298779,"atDiffSec":6820,"rtDiffSec":86020,"sinceLastSavedSec":380}
+21:01:18 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+21:01:18 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+21:01:18 [moma debug] ColdStartQuery model: claude-haiku-4-5 | loadUserSettings: true
+21:01:18 [moma debug] ColdStartQuery backendEnv: prod | backendCustomUrl: undefined
+21:01:18 [moma debug] ColdStartQuery onesToken 存在: true
+21:01:18 [moma debug] ColdStartQuery momaFlagSettings 已注入
+21:01:18 [moma debug] ColdStartQuery 调用 agentQuery，开始迭代消息...
+21:01:18 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--thinking","disabled","--model","claude-haiku-4-5","--tools","","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--no-session-persistence","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.comate/zulu-cli/bin","/Users/mirror/.comate/bin","/Users/mirror/hermes","/Users/mirror/.local/bin"]},"windowsVerbatimArguments":false,"stderr":"pipe","ANTHROPIC_BASE_URL":"ht…(truncated)
+21:01:18 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":75982,"resume":"(none)"}
+21:01:18 【发送给 Provider SDK 的 Prompt】
+以后执行任务时，要执行这些约束：
+1. 前置校验：执行任务前先排查问题本身的错误前提、逻辑断层和信息缺口，避免带着漏洞一路错到底
+
+2. 独立判断：不做“用户说什么都照做”的执行者，主动把事实、预测和主观看法做明确区分
+
+3. 溯源核对：涉及数字、人名、关键结论的内容主动核对出处，减少AI幻觉输出
+
+4. 纠错机制：发现用户表述错误时，先指明问题、讲清依据和风险，再给出合理解释，而不是将错就错
+
+5. 兜底提醒：主动补充用户容易忽略的隐藏变量、潜在成本和认知偏见，帮用户补全决策盲区
+21:01:18 [INFO] [auth-credential] ensureForQuery {"now":1793797278356,"at":"…y94FHg","rt":"…ELUFJg","accessExpiresAt":1793804098779,"refreshExpiresAt":1793883298779,"atDiffSec":6820,"rtDiffSec":86020,"sinceLastSavedSec":380}
+21:01:18 [INFO] [auth-credential] ensureForQuery decision {"accessNearExpiry":false,"refreshExpired":false}
+21:01:18 [INFO] [auth-credential] ensureForQuery at still valid, returning cached
+21:01:18 [INFO] [claude-runtime] requireMomaAT obtained {"obtained":"…y94FHg","claudeCodeVersion":"2.1.206"}
+21:01:18 [INFO] [claude-runtime] requireMomaAT after push {"settingsAt":"…y94FHg","claudeCodeVersion":"2.1.206"}
+21:01:18 [INFO] [moma debug] 启动 Claude CLI 子进程 {"originalCommand":"/opt/homebrew/bin/claude","originalArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"resolvedCommand":"/opt/homebrew/bin/claude","resolvedArgs":["--output-format","stream-json","--verbose","--input-format","stream-json","--model","auto","--permission-prompt-tool","stdio","--disallowedTools","WebSearch,Task(statusline-setup)","--setting-sources=user,project","--permission-mode","bypassPermissions","--allow-dangerously-skip-permissions","--include-partial-messages","--settings","{\"env\":{\"ANTHROPIC_BASE_URL\":\"https://next.ke.com/ob/api\",\"ANTHROPIC_API_KEY\":\"[redacted]\",\"ANTHROPIC_AUTH_TOKEN\":\"[redacted]\",\"ANTHROPIC_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_HAIKU_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_SONNET_MODEL\":\"auto\",\"ANTHROPIC_DEFAULT_OPUS_MODEL\":\"auto\",\"ANTHROPIC_CUSTOM_HEADERS\":\"[redacted]\",\"CLAUDE_CODE_AUTO_COMPACT_WINDOW\":\"800000\",\"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\":\"1\",\"CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS\":\"1\",\"ANTHROPIC_CUSTOM_MODEL_OPTION\":\"auto\"}}"],"cwd":"/Users/mirror/wiki","platform":"darwin","path":{"key":"PATH","length":846,"preview":["/opt/homebrew/bin","/Users/mirror/.co…(truncated)
+21:01:18 [INFO] [moma debug] 子进程已启动 PID {"command":"/opt/homebrew/bin/claude","pid":75983,"resume":"(none)"}
+21:01:18 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:01:18 [INFO] [claude-model-switch] {"phase":"skipped","pid":75983,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw24l28m-14","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:01:19 [moma debug] ColdStartQuery session_id: d5bcce4d-07ba-47e0-96ba-b603ad133590
+21:01:19 [INFO] [claude-model-switch] {"phase":"query_route","pid":75983,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":null,"backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:01:20 [INFO] [moma debug] 子进程已退出 {"command":"/opt/homebrew/bin/claude","code":0,"signal":null}
+21:01:20 [moma debug] ColdStartQuery 完成，共收到消息数: 3 | 响应文本长度: 15
+21:01:28 [INFO] [moma debug] 子进程仍在运行 {"command":"/opt/homebrew/bin/claude","pid":75983,"killed":false,"exitCode":null,"stdinWritableEnded":false,"stdinDestroyed":false,"stdoutDestroyed":false,"stderrDestroyed":false}
+21:04:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:04:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:05:08 [moma debug] buildTurnSubmission {
+  "contentLength": 12,
+  "turnRequest": {
+    "textLength": 12,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:05:08 【发送给 Provider SDK 的 Prompt】
+考核系统中为什么会有配置
+21:05:08 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:05:08 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw24pzgq-15","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:05:08 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:05:09 [INFO] [MomaHttpClient] → {"method":"POST","url":"https://next.ke.com/ob/api/telemetry/plugin"}
+21:05:10 [INFO] [MomaHttpClient] ← {"method":"POST","status":200,"url":"https://next.ke.com/ob/api/telemetry/plugin"}
+21:07:40 [moma debug] buildTurnSubmission {
+  "contentLength": 47,
+  "turnRequest": {
+    "textLength": 47,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:07:40 【发送给 Provider SDK 的 Prompt】
+配置不应该从排程或者主材或者货单中拿吗，为什么维护了indicator_base_config
+21:07:40 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:07:40 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw24t986-16","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:07:40 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:09:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:09:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:14:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:14:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:16:25 [moma debug] buildTurnSubmission {
+  "contentLength": 68,
+  "turnRequest": {
+    "textLength": 68,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:16:25 【发送给 Provider SDK 的 Prompt】
+① ScheduleEventNameEnum +14 个枚举  ③ EVENT_ENTITY +14 条：事件的“载体定位” 什么区别
+21:16:25 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:16:25 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw254i1j-17","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:16:25 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:19:01 [moma debug] buildTurnSubmission {
+  "contentLength": 18,
+  "turnRequest": {
+    "textLength": 18,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:19:01 【发送给 Provider SDK 的 Prompt】
+再讲一下EVENT_NAME_TDC
+21:19:01 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:19:01 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw257uaa-18","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:19:01 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:19:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:19:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:24:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:24:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:28:01 [moma debug] buildTurnSubmission {
+  "contentLength": 39,
+  "turnRequest": {
+    "textLength": 39,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:28:01 【发送给 Provider SDK 的 Prompt】
+所以，它是一个事件的映射：把前端任务转为一个事件，然后去排程那边查规则，对吧？
+21:28:01 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:28:01 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw25jf0d-19","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:28:01 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:29:20 [moma debug] buildTurnSubmission {
+  "contentLength": 62,
+  "turnRequest": {
+    "textLength": 62,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:29:20 【发送给 Provider SDK 的 Prompt】
+也就是说，主材到考核通过Dispatch Event Name来转换，而考核到排程是通过Event Name TDC转换的。
+21:29:20 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:29:20 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw25l47x-20","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:29:20 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:29:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:29:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:34:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:34:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:35:07 [moma debug] buildTurnSubmission {
+  "contentLength": 26,
+  "turnRequest": {
+    "textLength": 26,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:35:07 【发送给 Provider SDK 的 Prompt】
+EVENT_ENTITY 而这个就是考核内部使用的。
+21:35:07 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:35:07 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw25sk6s-21","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:35:07 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:36:47 [moma debug] buildTurnSubmission {
+  "contentLength": 27,
+  "turnRequest": {
+    "textLength": 27,
+    "hasSkillInvocation": false,
+    "hasSkillPromptPrefix": false,
+    "hasEditorSelection": false,
+    "hasBrowserSelection": false,
+    "hasCanvasSelection": false
+  }
+}
+21:36:47 【发送给 Provider SDK 的 Prompt】
+三座城、一个广场、四张门牌 在帮我详细解释一下这个模型
+21:36:47 [INFO] [claude-runtime] ensureSendPathAuth {"hostAuthSelfHealEnabled":true,"hasConfig":true,"claudeCodeVersion":"2.1.206"}
+21:36:47 [INFO] [claude-model-switch] {"phase":"skipped","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"diagnosticId":"switch-mw25uoxj-22","previousModel":"auto","targetModel":"auto","explicitModelSelection":false,"thinkingBudget":"off","effortLevel":"low","observationScope":"sdk_control","reason":"same_model"}
+21:36:47 [INFO] [claude-model-switch] {"phase":"query_route","pid":48591,"cliVersion":"2.1.206","pluginVersion":"0.3.27","sessionId":"71b493cf-5e49-4b44-b203-82f65f4bde33","backendUrl":"https://next.ke.com/ob/api","environmentModel":null,"route":"persistent","targetModel":"auto","configModel":"auto","explicitModelSelection":false,"observationScope":"sdk_control"}
+21:39:56 [INFO] [plan-local daemon] moma CLI unavailable, skipping daemon start {"error":"Error: moma CLI not found"}
+21:39:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:39:58 [INFO] [moma debug] plugin-settings request {"path":"/plugin/settings"}
+21:39:58 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/plugin/settings"}
+21:39:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:39:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/plugin/settings"}
+21:39:58 [INFO] [moma debug] plugin-settings success
+21:44:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:44:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:49:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:49:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:54:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:54:59 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:59:57 [INFO] [MomaHttpClient] → {"method":"GET","url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
+21:59:58 [INFO] [MomaHttpClient] ← {"method":"GET","status":200,"url":"https://next.ke.com/ob/api/space/proxy/api/v1/spaces"}
