@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793883990154-pgot8hxww",
+  "providerId": "claude",
+  "title": "分析飞书会议纪要中云助理工作事项",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793883990154,
+  "updatedAt": 1793889495638,
+  "lastResponseAt": 1793889495638,
+  "sessionId": "80d90b6d-936e-46f1-8d94-f1ffb41987e9",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "80d90b6d-936e-46f1-8d94-f1ffb41987e9"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 531,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 152512,
+    "outputTokens": 392,
+    "contextWindow": 200000,
+    "contextTokens": 153043,
+    "percentage": 77,
+    "contextWindowIsAuthoritative": true
+  }
+}

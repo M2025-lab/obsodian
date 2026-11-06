@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793880149902-5lbfk1m53",
+  "providerId": "claude",
+  "title": "分析 starlord handleNode 节点重启状态同步逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793880149902,
+  "updatedAt": 1793881787595,
+  "lastResponseAt": 1793881787595,
+  "sessionId": "ed8ccc42-2924-44a4-ab31-827c6eed1b12",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "ed8ccc42-2924-44a4-ab31-827c6eed1b12"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1009,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 64576,
+    "outputTokens": 8098,
+    "contextWindow": 200000,
+    "contextTokens": 65585,
+    "percentage": 33,
+    "contextWindowIsAuthoritative": true
+  }
+}
