@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793936112795-0h96yxz39",
+  "providerId": "claude",
+  "title": "分析考核系统任务激活消息的数据库及查询方法",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793936112795,
+  "updatedAt": 1793952265167,
+  "lastResponseAt": 1793952265167,
+  "sessionId": "1a004e41-326d-4bb1-80dd-2ea2dea80f92",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1a004e41-326d-4bb1-80dd-2ea2dea80f92"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 233,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 149440,
+    "outputTokens": 11681,
+    "contextWindow": 200000,
+    "contextTokens": 149673,
+    "percentage": 75,
+    "contextWindowIsAuthoritative": true
+  }
+}

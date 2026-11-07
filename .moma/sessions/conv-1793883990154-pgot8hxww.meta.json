@@ -4,8 +4,8 @@
   "title": "分析飞书会议纪要中云助理工作事项",
   "titleGenerationStatus": "success",
   "createdAt": 1793883990154,
-  "updatedAt": 1793889495638,
-  "lastResponseAt": 1793889495638,
+  "updatedAt": 1793959731429,
+  "lastResponseAt": 1793959731429,
   "sessionId": "80d90b6d-936e-46f1-8d94-f1ffb41987e9",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 531,
+    "inputTokens": 261,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 152512,
-    "outputTokens": 392,
+    "cacheReadInputTokens": 160448,
+    "outputTokens": 391,
     "contextWindow": 200000,
-    "contextTokens": 153043,
-    "percentage": 77,
+    "contextTokens": 160709,
+    "percentage": 80,
     "contextWindowIsAuthoritative": true
   }
 }

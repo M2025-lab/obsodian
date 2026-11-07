@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793954733890-xxwzz0f6x",
+  "providerId": "claude",
+  "title": "调试 starlord 日志考核时间为 null 问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793954733890,
+  "updatedAt": 1793957142978,
+  "lastResponseAt": 1793957142978,
+  "sessionId": "0c34c892-3f9c-4b75-beb8-16ec118c7a7a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0c34c892-3f9c-4b75-beb8-16ec118c7a7a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 489,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 92416,
+    "outputTokens": 3038,
+    "contextWindow": 200000,
+    "contextTokens": 92905,
+    "percentage": 46,
+    "contextWindowIsAuthoritative": true
+  }
+}

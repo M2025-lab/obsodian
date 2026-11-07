@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793946352374-1p9a200v3",
+  "providerId": "claude",
+  "title": "分析 starlord 接口返回7001错误原因",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793946352374,
+  "updatedAt": 1793947211159,
+  "lastResponseAt": 1793947211159,
+  "sessionId": "e9e76d62-862a-4ef7-ac38-0c16f458d208",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "e9e76d62-862a-4ef7-ac38-0c16f458d208"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 733,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 73152,
+    "outputTokens": 2206,
+    "contextWindow": 200000,
+    "contextTokens": 73885,
+    "percentage": 37,
+    "contextWindowIsAuthoritative": true
+  }
+}

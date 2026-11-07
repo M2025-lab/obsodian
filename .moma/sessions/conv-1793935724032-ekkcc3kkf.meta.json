@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793935724032-ekkcc3kkf",
+  "providerId": "claude",
+  "title": "查询 VHVS 含义",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793935724032,
+  "updatedAt": 1793935962653,
+  "lastResponseAt": 1793935962653,
+  "sessionId": "f469995c-768c-4a9b-90a5-3cc7f38b5237",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "f469995c-768c-4a9b-90a5-3cc7f38b5237"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 3282,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 43264,
+    "outputTokens": 1692,
+    "contextWindow": 200000,
+    "contextTokens": 46546,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}

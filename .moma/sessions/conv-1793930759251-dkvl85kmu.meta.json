@@ -1,0 +1,25 @@
+{
+  "id": "conv-1793930759251-dkvl85kmu",
+  "providerId": "claude",
+  "title": "分析 starlord 节点考核时间重置时机",
+  "titleGenerationStatus": "success",
+  "createdAt": 1793930759251,
+  "updatedAt": 1793934792392,
+  "lastResponseAt": 1793934792392,
+  "sessionId": "b9119f94-b783-43ce-874d-6f2ebd135eb8",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "b9119f94-b783-43ce-874d-6f2ebd135eb8"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 209,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 84160,
+    "outputTokens": 5576,
+    "contextWindow": 200000,
+    "contextTokens": 84369,
+    "percentage": 42,
+    "contextWindowIsAuthoritative": true
+  }
+}
