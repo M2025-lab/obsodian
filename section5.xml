@@ -1,0 +1,25 @@
+<h1>五、接口改动</h1>
+<p>新服务全量新建，无存量接口改动。「接口改动」列全部为新服务新增入口：</p>
+<table>
+  <colgroup><col span="4" width="200"/></colgroup>
+  <thead><tr><th background-color="light-gray">接口路径</th><th background-color="light-gray">接口文档</th><th background-color="light-gray">改动点</th><th background-color="light-gray">估时</th></tr></thead>
+  <tbody>
+    <tr><td>POST /api/assistant/roomie/msg/event</td><td>Roomie 企微群聊消息事件回调（weapons 1994890，4.1 推送通道）</td><td>新增：接收事件 → 幂等落消息表</td><td></td></tr>
+    <tr><td>定时任务：消息兜底拉取（4.1）</td><td>调 /api/common/chat/group/pageQueryChatRecord（weapons 1995213）</td><td>新增：游标管理 + 增量拉取 + 幂等落库</td><td></td></tr>
+    <tr><td>定时任务：Excel 兜底解析（4.2）</td><td>—</td><td>新增：扫描当日未落库文件消息补解析</td><td></td></tr>
+    <tr><td>定时任务：工地快照拉取 + 视觉判断（4.3）</td><td>调工地监控平台接口 + 视觉模型</td><td>新增：次日有送货计划的项目 → 拉快照 → 视觉判断落工地快照表（依赖 4.3 TODO 调研结论，未定则不上）</td><td></td></tr>
+    <tr><td>定时任务：消息清洗打标（4.4）</td><td>—</td><td>新增：未清洗消息扫描 + 上下文构造 + LLM 调用 + 问题表写入</td><td></td></tr>
+    <tr><td>定时任务：超时监控（4.7 + 3.4 漏答提醒）</td><td>—</td><td>新增：双向扫描——① 已转发问题供应商 SLA 未回 → 提醒云助理外呼；② 问题库 PENDING 超时无回复 → 漏答提醒（哪群哪条多久没回）</td><td></td></tr>
+    <tr><td>定时任务：每日汇总推送（4.2，小工具逻辑迁移）</td><td>内调 /api/msg/pushMsg（weapons 1879071）</td><td>新增：汇总拼接规则照搬现有 MOMA 小工具 → 定时推送 PM 作业群（19:30 可配）；3 个在线文档取数方式随迁移按现状定</td><td></td></tr>
+    <tr><td>POST /api/assistant/excel/notify</td><td>企微回调：群文件消息 → 解析落库</td><td>新增：按群路由解析器 + EasyExcel 解析 + 幂等落库</td><td></td></tr>
+    <tr><td>GET /api/assistant/project/progress</td><td>能力1：项目进度查询</td><td>新增：路由鲁班/内部接口/进展库聚合查询</td><td></td></tr>
+    <tr><td>GET /api/assistant/supplier/plan</td><td>能力5：供应商排期查询</td><td>新增：查排线落库表 + 未命中提示</td><td></td></tr>
+    <tr><td>GET /api/assistant/issue/list</td><td>侧边栏：问题列表（待确认/待转发/超时）</td><td>新增：问题表分页查询 + <b>以人为维度分组聚合</b>（按提问人归集，4.4）</td><td></td></tr>
+    <tr><td>POST /api/assistant/issue/confirm</td><td>侧边栏：确认/修正标签（4.4 半自动）</td><td>新增：更新 confirm_status + 触发流转</td><td></td></tr>
+    <tr><td>POST /api/assistant/issue/forward</td><td>侧边栏：一键转发（4.7 方案B）；内调 /api/msg/pushMsg（weapons 1879071）</td><td>新增：组装文案 + 调 Roomie 发消息接口 + 问题表闭环</td><td></td></tr>
+    <tr><td>POST /api/assistant/call/callback</td><td>Roomie 回调：外呼结果回流（能力2）</td><td>新增：通话记录落问题表</td><td></td></tr>
+  </tbody>
+</table>
+<blockquote>
+  <p>⚠️ Roomie 平台侧需要的能力配合（消息事件/聊天记录/发消息/外呼/侧边栏功能位）除<b>外呼外</b>均为开放服务已发布接口（见第 1 节接口依据）；外呼接口未在开放服务文档中，见第 6 节 #5。</p>
+</blockquote>

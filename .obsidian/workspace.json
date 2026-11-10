@@ -173,6 +173,20 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "00.需求/roomie/架构整理后.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "架构整理后"
+            }
+          },
+          {
+            "id": "2ebc96a799ab2c9d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "00.需求/roomie/数据架构和流向.md",
                 "mode": "source",
                 "source": false
@@ -182,7 +196,7 @@
             }
           }
         ],
-        "currentTab": 11
+        "currentTab": 12
       }
     ],
     "direction": "vertical"
@@ -242,6 +256,22 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "df1ee55a313dccf2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d82b100ae7db0c10",
+            "type": "leaf",
+            "state": {
+              "type": "moma-workbench",
+              "state": {},
+              "icon": "moma-logo",
+              "title": "工作台"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -377,7 +407,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 509.421875
+    "width": 812.7265625
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -395,40 +425,42 @@
       "moma:Open Moma": false
     }
   },
-  "active": "542c14fdb7e29631",
+  "active": "2ebc96a799ab2c9d",
   "lastOpenFiles": [
+    "00.需求/roomie/架构整理后.md",
+    "未命名.md",
+    "00.需求/roomie/数据架构和流向.md",
+    "_tp_c10_tmp.md",
+    "_tp_c9_tmp.md",
+    "_tp_c8_tmp.md",
+    "_tp_c7_tmp.md",
+    "_tp_c6_tmp.md",
+    "_tp_c5_tmp.md",
+    "_tp_c4_tmp.md",
+    "_tp_c3_tmp.md",
+    "_tp_c2_tmp.md",
+    "_tp_c1_tmp.md",
+    "section5.xml",
+    "_tp_skeleton_tmp.md",
+    "_plan_sec3_tmp.md",
+    "_da_intro_tmp.md",
+    "_da_sec3_tmp.md",
+    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
+    "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
+    "00.需求/云仓-支持tms工人复尺/未命名.md",
+    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg.png",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg",
     "00.需求/roomie/attachments/系统结构.png",
+    "00.需求/技术设计文档模板.md",
+    "10.工作/技术方案/云助理Roomie-群场景提效-技术方案.md",
     "00.需求/roomie/attachments",
-    "00.需求/roomie/架构整理后.md",
-    "00.需求/roomie/数据架构和流向.md",
     "00.需求/roomie/架构初稿.md",
     "00.需求/roomie/会议记录.md",
     "未命名 1.md",
-    "未命名.md",
     "00.需求/未命名",
     "考核/考核系统上下游交互清单（对端系统×交互信息总表）.md",
-    "考核/考核系统开发维护注意事项（上下游变更适配手册）.md",
-    "考核/考核系统交接-需求与计划分析-20261102会议.md",
-    "考核/考核系统汇报-技术版（面向业务组长）.md",
-    "考核/考核时间计算逻辑梳理（工作日自然日与节假日日历）.md",
-    "考核/排程考核重算接口完全解析（refresh-eval-schedule全链路）.md",
-    "考核/排程考核（ScheduleIndicator）刷新与规则构建业务流梳理.md",
-    "考核/考核系统scm-workbench-功能与代码学习指南.md",
-    "考核/考核系统事件映射梳理（Handler对照表与Key拼接规则）.md",
-    "考核/考核系统刷数接口使用指南（重算入口×批量调用SOP）.md",
-    "00.需求/数据统计/五项通知指标SQL.md",
-    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
-    "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
     "00.需求/roomie",
-    "考核/后门刷数接口分析/23.ConstructionScheduleService-sendAssessmentChange.md",
-    "考核/后门刷数接口分析/22.IndicatorChangedListener.md",
-    "考核/后门刷数接口分析/21.SyncMaterialTaskService-syncAssessmentTime.md",
-    "考核/后门刷数接口分析/11.ConstructionScheduleRpcService.md",
-    "考核/后门刷数接口分析/10.EdarStarlordRpc.md",
-    "考核/后门刷数接口分析/15.HolidayService.md",
-    "考核/后门刷数接口分析/20.EvalOrderService-selectFinalTimeline-mergeIndicator.md",
     "考核/后门刷数接口分析",
     "00.需求/北京大宅/fig/排程修改记录-递增规则diff示例.png",
     "00.需求/北京大宅/fig",
@@ -436,13 +468,11 @@
     "00.需求/北京大宅-递增规则与任务类型增加/fig/排程修改记录-递增规则diff示例.png",
     "00.需求/北京大宅-递增规则与任务类型增加/fig",
     "00.需求/北京大宅-递增规则与任务类型增加",
-    "考核/考核时间计算逻辑梳理（工作日自然日与节假日日历）.md.tmp.9824.04c82b5743a3",
     "lark_auth_qr.png",
     "lark-auth-qr.png",
     "90.AI学习/helloagent/hello-agents/读者群二维码.png",
     "90.AI学习/helloagent/hello-agents/读者反馈问卷.png",
     "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-3.png",
-    "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-2.webp",
     "未命名.canvas",
     "未命名 1.canvas"
   ]

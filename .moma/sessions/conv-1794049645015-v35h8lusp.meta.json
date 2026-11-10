@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794049645015-v35h8lusp",
+  "providerId": "claude",
+  "title": "分析考核系统主材考核时间计算逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794049645015,
+  "updatedAt": 1794049903867,
+  "lastResponseAt": 1794049903867,
+  "sessionId": "7873b130-cd8f-4df4-a06d-fdb4d0732b8a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "7873b130-cd8f-4df4-a06d-fdb4d0732b8a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1310,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 72704,
+    "outputTokens": 4427,
+    "contextWindow": 200000,
+    "contextTokens": 74014,
+    "percentage": 37,
+    "contextWindowIsAuthoritative": true
+  }
+}

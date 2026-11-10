@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794229300443-t03nwdtyl",
+  "providerId": "claude",
+  "title": "讲解今日推送 agenda 中代码逻辑的实现",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794229300443,
+  "updatedAt": 1794233072239,
+  "lastResponseAt": 1794233072239,
+  "sessionId": "d1b42931-041c-4c7c-bec4-611be0b087f2",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "d1b42931-041c-4c7c-bec4-611be0b087f2"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 388,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 86080,
+    "outputTokens": 840,
+    "contextWindow": 200000,
+    "contextTokens": 86468,
+    "percentage": 43,
+    "contextWindowIsAuthoritative": true
+  }
+}

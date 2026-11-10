@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794143007905-n2vvsfpi4",
+  "providerId": "claude",
+  "title": "生成考核系统两个接口的 CURL 命令",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794143007905,
+  "updatedAt": 1794143174890,
+  "lastResponseAt": 1794143174890,
+  "sessionId": "8e56584e-03c7-45b5-b5df-c2c111030d4c",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "8e56584e-03c7-45b5-b5df-c2c111030d4c"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 421,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68864,
+    "outputTokens": 3189,
+    "contextWindow": 200000,
+    "contextTokens": 69285,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

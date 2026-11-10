@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794213766971-yhc4hqv7a",
+  "providerId": "claude",
+  "title": "接入 agenda 服务 Kafka Topic 消息消费",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794213766971,
+  "updatedAt": 1794214355277,
+  "lastResponseAt": 1794214355277,
+  "sessionId": "5d5bb345-038c-4939-9c13-808229dfbe89",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "5d5bb345-038c-4939-9c13-808229dfbe89"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1399,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 59136,
+    "outputTokens": 13256,
+    "contextWindow": 200000,
+    "contextTokens": 60535,
+    "percentage": 30,
+    "contextWindowIsAuthoritative": true
+  }
+}
