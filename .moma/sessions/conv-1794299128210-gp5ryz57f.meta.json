@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794299128210-gp5ryz57f",
+  "providerId": "claude",
+  "title": "同步Excel与项目信息接入文档至飞书",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794299128210,
+  "updatedAt": 1794313456354,
+  "lastResponseAt": 1794299170484,
+  "sessionId": "1929efeb-5689-4354-b280-2695d93a4049",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1929efeb-5689-4354-b280-2695d93a4049"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 310,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 30720,
+    "outputTokens": 157,
+    "contextWindow": 200000,
+    "contextTokens": 31030,
+    "percentage": 16,
+    "contextWindowIsAuthoritative": true
+  }
+}

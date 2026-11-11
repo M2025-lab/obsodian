@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794303139849-w1ammwvsk",
+  "providerId": "claude",
+  "title": "调试 starlord 消息消费失败问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794303139849,
+  "updatedAt": 1794313433162,
+  "lastResponseAt": 1794304778766,
+  "sessionId": "cc6bdca9-0cf1-4fef-a0d4-fd34eb5be099",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "cc6bdca9-0cf1-4fef-a0d4-fd34eb5be099"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1823,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 79360,
+    "outputTokens": 903,
+    "contextWindow": 200000,
+    "contextTokens": 81183,
+    "percentage": 41,
+    "contextWindowIsAuthoritative": true
+  }
+}

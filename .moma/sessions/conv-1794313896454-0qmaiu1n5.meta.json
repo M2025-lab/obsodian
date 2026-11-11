@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794313896454-0qmaiu1n5",
+  "providerId": "claude",
+  "title": "安装下载目录中的材料专家 Skill",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794313896454,
+  "updatedAt": 1794314340468,
+  "lastResponseAt": 1794314340468,
+  "sessionId": "dcafa048-a966-4bb5-ba43-15638d435cdd",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "dcafa048-a966-4bb5-ba43-15638d435cdd"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 350,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 54976,
+    "outputTokens": 2899,
+    "contextWindow": 200000,
+    "contextTokens": 55326,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
+}

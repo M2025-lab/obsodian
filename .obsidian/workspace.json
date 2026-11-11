@@ -194,9 +194,37 @@
               "icon": "lucide-file",
               "title": "数据架构和流向"
             }
+          },
+          {
+            "id": "b32c2fde840803e6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/roomie/execl和项目信息接入.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "execl和项目信息接入"
+            }
+          },
+          {
+            "id": "1888833ff6ada65a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/roomie/功能-报表群内通知.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "功能-报表群内通知"
+            }
           }
         ],
-        "currentTab": 12
+        "currentTab": 14
       }
     ],
     "direction": "vertical"
@@ -256,26 +284,10 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "df1ee55a313dccf2",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d82b100ae7db0c10",
-            "type": "leaf",
-            "state": {
-              "type": "moma-workbench",
-              "state": {},
-              "icon": "moma-logo",
-              "title": "工作台"
-            }
-          }
-        ]
       }
     ],
     "direction": "horizontal",
-    "width": 320
+    "width": 333.44140625
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -407,7 +419,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 812.7265625
+    "width": 527.1171875
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -425,11 +437,17 @@
       "moma:Open Moma": false
     }
   },
-  "active": "2ebc96a799ab2c9d",
+  "active": "1888833ff6ada65a",
   "lastOpenFiles": [
     "00.需求/roomie/架构整理后.md",
-    "未命名.md",
     "00.需求/roomie/数据架构和流向.md",
+    "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
+    "00.需求/roomie/功能-报表群内通知.md",
+    "录音目录/20261110-170225-云助理接入Roomie工作台与数据落库进展.md",
+    "00.需求/roomie/架构初稿.md",
+    "00.需求/roomie/execl和项目信息接入.md",
+    "录音目录",
+    "未命名.md",
     "_tp_c10_tmp.md",
     "_tp_c9_tmp.md",
     "_tp_c8_tmp.md",
@@ -446,20 +464,14 @@
     "_da_intro_tmp.md",
     "_da_sec3_tmp.md",
     "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
-    "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
     "00.需求/云仓-支持tms工人复尺/未命名.md",
     "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg.png",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg",
     "00.需求/roomie/attachments/系统结构.png",
     "00.需求/技术设计文档模板.md",
-    "10.工作/技术方案/云助理Roomie-群场景提效-技术方案.md",
     "00.需求/roomie/attachments",
-    "00.需求/roomie/架构初稿.md",
-    "00.需求/roomie/会议记录.md",
-    "未命名 1.md",
     "00.需求/未命名",
-    "考核/考核系统上下游交互清单（对端系统×交互信息总表）.md",
     "00.需求/roomie",
     "考核/后门刷数接口分析",
     "00.需求/北京大宅/fig/排程修改记录-递增规则diff示例.png",
@@ -467,7 +479,6 @@
     "00.需求/北京大宅",
     "00.需求/北京大宅-递增规则与任务类型增加/fig/排程修改记录-递增规则diff示例.png",
     "00.需求/北京大宅-递增规则与任务类型增加/fig",
-    "00.需求/北京大宅-递增规则与任务类型增加",
     "lark_auth_qr.png",
     "lark-auth-qr.png",
     "90.AI学习/helloagent/hello-agents/读者群二维码.png",

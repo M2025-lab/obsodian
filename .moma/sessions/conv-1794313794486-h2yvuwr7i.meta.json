@@ -1,0 +1,24 @@
+{
+  "id": "conv-1794313794486-h2yvuwr7i",
+  "providerId": "claude",
+  "title": "安装衣柜到货进度 skill",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794313794486,
+  "updatedAt": 1794313877802,
+  "lastResponseAt": 1794313857683,
+  "sessionId": "a7da567b-e978-459a-82d5-13308171cade",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a7da567b-e978-459a-82d5-13308171cade"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 280,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 41024,
+    "outputTokens": 1198,
+    "contextWindow": 200000,
+    "contextTokens": 41304,
+    "percentage": 21
+  }
+}

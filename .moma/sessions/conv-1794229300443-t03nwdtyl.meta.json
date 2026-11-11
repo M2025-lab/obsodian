@@ -4,8 +4,8 @@
   "title": "讲解今日推送 agenda 中代码逻辑的实现",
   "titleGenerationStatus": "success",
   "createdAt": 1794229300443,
-  "updatedAt": 1794233072239,
-  "lastResponseAt": 1794233072239,
+  "updatedAt": 1794277952216,
+  "lastResponseAt": 1794277952216,
   "sessionId": "d1b42931-041c-4c7c-bec4-611be0b087f2",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,12 +13,12 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 388,
+    "inputTokens": 85797,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 86080,
-    "outputTokens": 840,
+    "cacheReadInputTokens": 320,
+    "outputTokens": 2937,
     "contextWindow": 200000,
-    "contextTokens": 86468,
+    "contextTokens": 86117,
     "percentage": 43,
     "contextWindowIsAuthoritative": true
   }

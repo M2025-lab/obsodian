@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794290961067-4jpkczfp7",
+  "providerId": "claude",
+  "title": "分析Excel与项目信息接入实现方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794290961067,
+  "updatedAt": 1794299116867,
+  "lastResponseAt": 1794296782211,
+  "sessionId": "6d2fb8bd-296f-4c1d-8fee-2271e8132a31",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "6d2fb8bd-296f-4c1d-8fee-2271e8132a31"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 874,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 63744,
+    "outputTokens": 390,
+    "contextWindow": 200000,
+    "contextTokens": 64618,
+    "percentage": 32,
+    "contextWindowIsAuthoritative": true
+  }
+}
