@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794364394045-wh9k2o2r7",
+  "providerId": "claude",
+  "title": "解释企微外部群自动推送消息方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794364394045,
+  "updatedAt": 1794377913457,
+  "lastResponseAt": 1794366016869,
+  "sessionId": "86ad2eee-fa0f-4f43-b765-9a96f740777d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "86ad2eee-fa0f-4f43-b765-9a96f740777d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 4600,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 88064,
+    "outputTokens": 2673,
+    "contextWindow": 200000,
+    "contextTokens": 92664,
+    "percentage": 46,
+    "contextWindowIsAuthoritative": true
+  }
+}

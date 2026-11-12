@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794404461548-ax80n3ip9",
+  "providerId": "claude",
+  "title": "移植 KdocsDownloadService 到 agenda 实现 Excel 下载",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794404461548,
+  "updatedAt": 1794405771541,
+  "lastResponseAt": 1794405771541,
+  "sessionId": "cd9ddfcc-f682-4f88-a9d5-d00f7e0d4c2d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "cd9ddfcc-f682-4f88-a9d5-d00f7e0d4c2d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 215,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 77120,
+    "outputTokens": 395,
+    "contextWindow": 200000,
+    "contextTokens": 77335,
+    "percentage": 39,
+    "contextWindowIsAuthoritative": true
+  }
+}

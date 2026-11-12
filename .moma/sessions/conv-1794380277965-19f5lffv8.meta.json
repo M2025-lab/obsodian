@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794380277965-19f5lffv8",
+  "providerId": "claude",
+  "title": "在agenda中增加推送群消息接口",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794380277965,
+  "updatedAt": 1794389717862,
+  "lastResponseAt": 1794389717862,
+  "sessionId": "27497594-4fa1-48c2-88b9-f5456f3dcebb",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "27497594-4fa1-48c2-88b9-f5456f3dcebb"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 702,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 48768,
+    "outputTokens": 333,
+    "contextWindow": 200000,
+    "contextTokens": 49470,
+    "percentage": 25,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794377923484-ec9um0nxm",
+  "providerId": "claude",
+  "title": "整理Roomie报表群内通知需求文档",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794377923484,
+  "updatedAt": 1794381437485,
+  "lastResponseAt": 1794381437485,
+  "sessionId": "07cc782b-cf14-4ac3-8d26-32e8537d68ec",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "07cc782b-cf14-4ac3-8d26-32e8537d68ec"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 435,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 40192,
+    "outputTokens": 196,
+    "contextWindow": 200000,
+    "contextTokens": 40627,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}

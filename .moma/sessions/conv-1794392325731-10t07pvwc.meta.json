@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794392325731-10t07pvwc",
+  "providerId": "claude",
+  "title": "了解 VSS 前端项目 fontProject",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794392325731,
+  "updatedAt": 1794404166190,
+  "lastResponseAt": 1794404166190,
+  "sessionId": "1482d25b-f7a8-4f5e-bbc4-5b1d8a3dd492",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1482d25b-f7a8-4f5e-bbc4-5b1d8a3dd492"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 2744,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 42496,
+    "outputTokens": 1603,
+    "contextWindow": 200000,
+    "contextTokens": 45240,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
+}
