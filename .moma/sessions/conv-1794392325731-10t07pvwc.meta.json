@@ -4,8 +4,8 @@
   "title": "了解 VSS 前端项目 fontProject",
   "titleGenerationStatus": "success",
   "createdAt": 1794392325731,
-  "updatedAt": 1794404166190,
-  "lastResponseAt": 1794404166190,
+  "updatedAt": 1794469268560,
+  "lastResponseAt": 1794460315399,
   "sessionId": "1482d25b-f7a8-4f5e-bbc4-5b1d8a3dd492",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 2744,
+    "inputTokens": 623,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 42496,
-    "outputTokens": 1603,
+    "cacheReadInputTokens": 80384,
+    "outputTokens": 2446,
     "contextWindow": 200000,
-    "contextTokens": 45240,
-    "percentage": 23,
+    "contextTokens": 81007,
+    "percentage": 41,
     "contextWindowIsAuthoritative": true
   }
 }

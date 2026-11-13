@@ -222,9 +222,51 @@
               "icon": "lucide-file",
               "title": "功能-报表群内通知"
             }
+          },
+          {
+            "id": "c8f50ea214bb3852",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/roomie/execl和项目信息接入.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "execl和项目信息接入"
+            }
+          },
+          {
+            "id": "f42afa340f576210",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/roomie/eden-agenda-Excel推送链路迁移-技术方案.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "eden-agenda-Excel推送链路迁移-技术方案"
+            }
+          },
+          {
+            "id": "3d9ae8cf516555d0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00.需求/roomie/字段映射-四板块汇总与源表对照.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "字段映射-四板块汇总与源表对照"
+            }
           }
         ],
-        "currentTab": 14
+        "currentTab": 17
       }
     ],
     "direction": "vertical"
@@ -283,11 +325,11 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 283.27734375
+    "width": 320
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -419,7 +461,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 545.4296875
+    "width": 847.18359375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -437,17 +479,21 @@
       "moma:Open Moma": false
     }
   },
-  "active": "1888833ff6ada65a",
+  "active": "ff81f4753f1be4a9",
   "lastOpenFiles": [
-    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
+    "00.需求/roomie/eden-agenda-Excel推送链路迁移-技术方案.md",
+    "00.需求/roomie/字段映射-四板块汇总与源表对照.md",
+    "10.工作/技术方案/eden-agenda-Excel推送链路迁移-技术方案.md",
+    "00.需求/roomie/execl和项目信息接入.md",
+    "00.需求/roomie/文档处理逻辑.md",
     "00.需求/roomie/功能-报表群内通知.md",
+    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
     "00.需求/roomie/数据架构和流向.md",
     "录音目录/20261110-170225-云助理接入Roomie工作台与数据落库进展.md",
     "录音目录/20261111-102834-云助理从材料环节切入为项目经理提效.md",
     "00.需求/roomie/架构整理后.md",
     "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
     "00.需求/roomie/架构初稿.md",
-    "00.需求/roomie/execl和项目信息接入.md",
     "录音目录",
     "未命名.md",
     "_tp_c10_tmp.md",
@@ -464,13 +510,9 @@
     "_tp_skeleton_tmp.md",
     "_plan_sec3_tmp.md",
     "_da_intro_tmp.md",
-    "_da_sec3_tmp.md",
-    "00.需求/云仓-支持tms工人复尺/未命名.md",
-    "00.需求/云仓-支持tms工人复尺/需求背景.md",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg.png",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg",
     "00.需求/roomie/attachments/系统结构.png",
-    "00.需求/技术设计文档模板.md",
     "00.需求/roomie/attachments",
     "00.需求/未命名",
     "00.需求/roomie",
