@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794563599359-cneve9rsl",
+  "providerId": "claude",
+  "title": "设计 roomie 群消息 AI 总结落库方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794563599359,
+  "updatedAt": 1794564578315,
+  "lastResponseAt": 1794564578315,
+  "sessionId": "1fb5a3de-5d50-4abb-802a-25b408303cbd",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1fb5a3de-5d50-4abb-802a-25b408303cbd"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 31,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 96576,
+    "outputTokens": 728,
+    "contextWindow": 200000,
+    "contextTokens": 96607,
+    "percentage": 48,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794558047941-a3120jygm",
+  "providerId": "claude",
+  "title": "批量查询订单号列表数据",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794558047941,
+  "updatedAt": 1794558583627,
+  "lastResponseAt": 1794558250850,
+  "sessionId": "3e373c1c-395e-44ca-a368-09a2d1e977e2",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "3e373c1c-395e-44ca-a368-09a2d1e977e2"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 342,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 37888,
+    "outputTokens": 456,
+    "contextWindow": 200000,
+    "contextTokens": 38230,
+    "percentage": 19,
+    "contextWindowIsAuthoritative": true
+  }
+}
