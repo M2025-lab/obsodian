@@ -4,6 +4,22 @@
   "title": "分析 zeus 项目 AI 大模型接入方式",
   "titleGenerationStatus": "success",
   "createdAt": 1794711819054,
-  "updatedAt": 1794711821584,
-  "sessionId": null
+  "updatedAt": 1794711932450,
+  "lastResponseAt": 1794711932450,
+  "sessionId": "eae46acf-34b5-48c8-bab7-317afb8ead82",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "eae46acf-34b5-48c8-bab7-317afb8ead82"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1572,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 44864,
+    "outputTokens": 2299,
+    "contextWindow": 200000,
+    "contextTokens": 46436,
+    "percentage": 23,
+    "contextWindowIsAuthoritative": true
+  }
 }

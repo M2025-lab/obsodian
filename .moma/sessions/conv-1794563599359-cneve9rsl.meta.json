@@ -4,8 +4,8 @@
   "title": "设计 roomie 群消息 AI 总结落库方案",
   "titleGenerationStatus": "success",
   "createdAt": 1794563599359,
-  "updatedAt": 1794564578315,
-  "lastResponseAt": 1794564578315,
+  "updatedAt": 1794742878599,
+  "lastResponseAt": 1794742878599,
   "sessionId": "1fb5a3de-5d50-4abb-802a-25b408303cbd",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 31,
+    "inputTokens": 387,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 96576,
-    "outputTokens": 728,
+    "cacheReadInputTokens": 93568,
+    "outputTokens": 3482,
     "contextWindow": 200000,
-    "contextTokens": 96607,
-    "percentage": 48,
+    "contextTokens": 93955,
+    "percentage": 47,
     "contextWindowIsAuthoritative": true
   }
 }
