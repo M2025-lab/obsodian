@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794824297606-6dndbprkm",
+  "providerId": "claude",
+  "title": "分析 Java RpcHelper 是否发起 RPC 调用",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794824297606,
+  "updatedAt": 1794825590570,
+  "lastResponseAt": 1794824358453,
+  "sessionId": "babd9d05-db3b-400d-b1ec-be1cf20c9766",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "babd9d05-db3b-400d-b1ec-be1cf20c9766"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1130,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 30528,
+    "outputTokens": 1764,
+    "contextWindow": 200000,
+    "contextTokens": 31658,
+    "percentage": 16,
+    "contextWindowIsAuthoritative": true
+  }
+}

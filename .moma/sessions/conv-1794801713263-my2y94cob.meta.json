@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794801713263-my2y94cob",
+  "providerId": "claude",
+  "title": "新增 FollowUpTaskFeignService 项目范围查询方法",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794801713263,
+  "updatedAt": 1794810770640,
+  "lastResponseAt": 1794801890493,
+  "sessionId": "7cb7cb71-11d3-4f7b-baf5-4b6483f1187a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "7cb7cb71-11d3-4f7b-baf5-4b6483f1187a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 16264,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 22976,
+    "outputTokens": 585,
+    "contextWindow": 200000,
+    "contextTokens": 39240,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}

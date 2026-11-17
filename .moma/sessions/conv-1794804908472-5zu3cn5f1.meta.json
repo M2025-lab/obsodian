@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794804908472-5zu3cn5f1",
+  "providerId": "claude",
+  "title": "生成SQL分批查询语句",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794804908472,
+  "updatedAt": 1794810763444,
+  "lastResponseAt": 1794805745531,
+  "sessionId": "33ec14b8-6ab1-463b-a92a-0ddc9456e950",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "33ec14b8-6ab1-463b-a92a-0ddc9456e950"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 302,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 39616,
+    "outputTokens": 102,
+    "contextWindow": 200000,
+    "contextTokens": 39918,
+    "percentage": 20,
+    "contextWindowIsAuthoritative": true
+  }
+}

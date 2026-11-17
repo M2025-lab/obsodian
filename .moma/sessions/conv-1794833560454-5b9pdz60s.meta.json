@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794833560454-5b9pdz60s",
+  "providerId": "claude",
+  "title": "定位 steward 复尺提交页面",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794833560454,
+  "updatedAt": 1794838049932,
+  "lastResponseAt": 1794838049932,
+  "sessionId": "73f7fd3d-f16a-45a2-8568-12a134a20c8a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "73f7fd3d-f16a-45a2-8568-12a134a20c8a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 178,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 135360,
+    "outputTokens": 382,
+    "contextWindow": 200000,
+    "contextTokens": 135538,
+    "percentage": 68,
+    "contextWindowIsAuthoritative": true
+  }
+}
