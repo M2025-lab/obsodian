@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794906629663-ztb8es9oh",
+  "providerId": "claude",
+  "title": "测试数据库连接可用性",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794906629663,
+  "updatedAt": 1794906785240,
+  "lastResponseAt": 1794906740877,
+  "sessionId": "24efb967-e27d-4867-8760-5b908a1e8aec",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "24efb967-e27d-4867-8760-5b908a1e8aec"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1439,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 40256,
+    "outputTokens": 68,
+    "contextWindow": 200000,
+    "contextTokens": 41695,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}

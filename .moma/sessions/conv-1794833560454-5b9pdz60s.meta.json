@@ -4,8 +4,8 @@
   "title": "定位 steward 复尺提交页面",
   "titleGenerationStatus": "success",
   "createdAt": 1794833560454,
-  "updatedAt": 1794838049932,
-  "lastResponseAt": 1794838049932,
+  "updatedAt": 1794906788124,
+  "lastResponseAt": 1794880387538,
   "sessionId": "73f7fd3d-f16a-45a2-8568-12a134a20c8a",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 178,
+    "inputTokens": 234,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 135360,
-    "outputTokens": 382,
+    "cacheReadInputTokens": 140608,
+    "outputTokens": 1838,
     "contextWindow": 200000,
-    "contextTokens": 135538,
-    "percentage": 68,
+    "contextTokens": 140842,
+    "percentage": 70,
     "contextWindowIsAuthoritative": true
   }
 }

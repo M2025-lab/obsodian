@@ -285,12 +285,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
+                "file": "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "群消息问题归类汇总-技术方案"
+              "title": "LLM聊天记录分析-测试方案"
             }
           }
         ],
@@ -356,11 +356,11 @@
         "currentTab": 1
       },
       {
-        "id": "26bfd79bd5ef1f89",
+        "id": "c5d52820d286b346",
         "type": "tabs",
         "children": [
           {
-            "id": "a1d411c482ad3c98",
+            "id": "3ea21a7f5fbfe2b7",
             "type": "leaf",
             "state": {
               "type": "moma-workbench",
@@ -491,7 +491,7 @@
             }
           },
           {
-            "id": "ff81f4753f1be4a9",
+            "id": "11e9d4908c9a145f",
             "type": "leaf",
             "state": {
               "type": "moma-view",
@@ -505,7 +505,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 661.015625
+    "width": 616.27734375
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -523,12 +523,15 @@
       "moma:Open Moma": false
     }
   },
-  "active": "ff81f4753f1be4a9",
+  "active": "d4385e1c18a32121",
   "lastOpenFiles": [
+    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md.tmp.39070.858bfa863c4e",
+    "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
+    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
+    "00.需求/roomie/赵公口与永外-主材问题台账.xlsx",
     "00.需求/roomie/项目过滤/eden-agenda-大区分组分析-技术方案.md",
     "00.需求/roomie/项目过滤",
     "00.需求/roomie/execl和项目信息接入.md",
-    "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
     "00.需求/roomie/群消息汇总",
     "00.需求/roomie/未命名.md",
     "00.需求/roomie/字段映射-四板块汇总与源表对照.md",
@@ -553,8 +556,6 @@
     "_tp_c5_tmp.md",
     "_tp_c4_tmp.md",
     "_tp_c3_tmp.md",
-    "_tp_c2_tmp.md",
-    "_tp_c1_tmp.md",
     "section5.xml",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg.png",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg",
@@ -564,7 +565,6 @@
     "00.需求/roomie",
     "考核/后门刷数接口分析",
     "00.需求/北京大宅/fig/排程修改记录-递增规则diff示例.png",
-    "00.需求/北京大宅/fig",
     "00.需求/北京大宅-递增规则与任务类型增加/fig/排程修改记录-递增规则diff示例.png",
     "lark_auth_qr.png",
     "lark-auth-qr.png",
