@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794988179021-yfge6rt93",
+  "providerId": "claude",
+  "title": "创建agenda agent测试前端页面",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794988179021,
+  "updatedAt": 1794997082777,
+  "lastResponseAt": 1794989321010,
+  "sessionId": "e225b590-3df4-4fa3-b3c5-b6fb43a6acdb",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "e225b590-3df4-4fa3-b3c5-b6fb43a6acdb"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 624,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 86528,
+    "outputTokens": 671,
+    "contextWindow": 200000,
+    "contextTokens": 87152,
+    "percentage": 44,
+    "contextWindowIsAuthoritative": true
+  }
+}

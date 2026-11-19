@@ -1,0 +1,25 @@
+{
+  "id": "conv-1794988323133-6yanouxjg",
+  "providerId": "claude",
+  "title": "为 ConstructionAgentFeign 接口编写测试 CURL",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794988323133,
+  "updatedAt": 1794997075321,
+  "lastResponseAt": 1794988380225,
+  "sessionId": "2bc83c7c-76ff-4c16-9d36-e2e225b690bf",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "2bc83c7c-76ff-4c16-9d36-e2e225b690bf"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 596,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 31232,
+    "outputTokens": 1587,
+    "contextWindow": 200000,
+    "contextTokens": 31828,
+    "percentage": 16,
+    "contextWindowIsAuthoritative": true
+  }
+}

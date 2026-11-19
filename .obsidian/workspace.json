@@ -292,9 +292,21 @@
               "icon": "lucide-file",
               "title": "LLM聊天记录分析-测试方案"
             }
+          },
+          {
+            "id": "56fed0a4e7a163e3",
+            "type": "leaf",
+            "state": {
+              "type": "moma-html-file",
+              "state": {
+                "file": "00.需求/roomie/roomie问题闭环-详情联调页.html"
+              },
+              "icon": "file-code-2",
+              "title": "roomie问题闭环-详情联调页"
+            }
           }
         ],
-        "currentTab": 19
+        "currentTab": 20
       }
     ],
     "direction": "vertical"
@@ -505,7 +517,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 616.27734375
+    "width": 629.64453125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -523,11 +535,12 @@
       "moma:Open Moma": false
     }
   },
-  "active": "d4385e1c18a32121",
+  "active": "11e9d4908c9a145f",
   "lastOpenFiles": [
+    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
+    "00.需求/roomie/roomie问题闭环-详情联调页.html",
     "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md.tmp.39070.858bfa863c4e",
     "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
-    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
     "00.需求/roomie/赵公口与永外-主材问题台账.xlsx",
     "00.需求/roomie/项目过滤/eden-agenda-大区分组分析-技术方案.md",
     "00.需求/roomie/项目过滤",
@@ -562,8 +575,6 @@
     "00.需求/roomie/attachments/系统结构.png",
     "00.需求/roomie/attachments",
     "00.需求/未命名",
-    "00.需求/roomie",
-    "考核/后门刷数接口分析",
     "00.需求/北京大宅/fig/排程修改记录-递增规则diff示例.png",
     "00.需求/北京大宅-递增规则与任务类型增加/fig/排程修改记录-递增规则diff示例.png",
     "lark_auth_qr.png",

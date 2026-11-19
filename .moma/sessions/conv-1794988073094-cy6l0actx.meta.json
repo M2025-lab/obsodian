@@ -1,0 +1,23 @@
+{
+  "id": "conv-1794988073094-cy6l0actx",
+  "providerId": "claude",
+  "title": "为Agent小师傅功能创建测试前端页面",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794988073094,
+  "updatedAt": 1794988093259,
+  "lastResponseAt": 1794988086494,
+  "sessionId": "b5e6ae8b-a949-4c63-930d-77c4fbedc672",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "b5e6ae8b-a949-4c63-930d-77c4fbedc672"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}

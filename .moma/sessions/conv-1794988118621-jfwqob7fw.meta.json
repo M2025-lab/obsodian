@@ -1,0 +1,24 @@
+{
+  "id": "conv-1794988118621-jfwqob7fw",
+  "providerId": "claude",
+  "title": "创建小时服务测试页面与接口",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794988118621,
+  "updatedAt": 1794988154316,
+  "lastResponseAt": 1794988150851,
+  "sessionId": "735f0026-b57e-470f-b239-8912ecafce28",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "735f0026-b57e-470f-b239-8912ecafce28"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 2797,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 23872,
+    "outputTokens": 1837,
+    "contextWindow": 200000,
+    "contextTokens": 26669,
+    "percentage": 13
+  }
+}

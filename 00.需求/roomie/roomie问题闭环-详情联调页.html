@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<title>roomie 问题闭环 · 详情 / 回复联调页</title>
+<style>
+:root{--blue:#1a66ff;--ink:#172b46;--muted:#61728a;--line:#dde5ee;--paper:#fff;--wash:#f3f6fb;--green:#16805c;--red:#c0392b;--orange:#bc741f;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:880px;margin:0 auto;padding:34px 26px 80px}
+h1{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 26px}
+.sub code{font-family:var(--mono);font-size:12px;background:var(--wash);padding:1px 6px;border-radius:4px}
+.card{border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 22px;background:#fcfdff}
+.card>h2{font-size:16px;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+.card>h2 .n{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400}
+label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px;letter-spacing:.04em}
+textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--ink);background:#fff;resize:vertical}
+textarea:focus{outline:2px solid #c9dbff}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 16px;font-size:13px}
+.btn:hover{border-color:var(--blue);color:var(--blue)}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.primary:hover{opacity:.9}
+.err{display:none;color:var(--red);font-size:12.5px;background:#fdf2f0;border:1px solid #f3d6d0;border-radius:8px;padding:8px 12px;margin-top:12px;font-family:var(--mono)}
+.err.on{display:block}
+.grid{display:grid;grid-template-columns:140px 1fr;row-gap:0;font-size:14px}
+.grid>dt{color:var(--muted);padding:7px 0;border-bottom:1px dashed var(--line)}
+.grid>dd{margin:0;padding:7px 0 7px 14px;border-bottom:1px dashed var(--line);word-break:break-all}
+.grid>dt:last-of-type,.grid>dd:last-of-type{border-bottom:none}
+.tag{display:inline-block;font-size:11.5px;padding:1px 10px;border-radius:999px;font-weight:600;letter-spacing:.03em}
+.tag.ok{background:#e5f4ee;color:var(--green)}
+.tag.no{background:#fbeae4;color:var(--orange)}
+.trace{margin:0;padding:0;list-style:none}
+.trace li{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--wash);border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0 0 8px;word-break:break-all;white-space:pre-wrap}
+.reply{font-size:15px;line-height:1.9;background:#f7fbf5;border:1px solid #d8ecdd;border-radius:8px;padding:14px 18px;white-space:pre-wrap}
+.mono{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.empty{display:none;color:var(--muted);font-size:13px;padding:26px 0;text-align:center}
+.block.on{display:block}
+</style>
+</head>
+<body>
+<header class="wrap" style="padding-bottom:0">
+<h1>roomie 问题闭环 · 详情 / 回复联调页</h1>
+<p class="sub">对应 eden-agenda 两个联调接口：<code>issue-detail</code>（问题详情）与
+<code>issue-reply</code>（自动闭环回复）—— 页面不直接出网，
+把接口返回的 <code>ResultDTO</code> JSON 粘贴进来即可渲染（联调期演示用）。</p>
+</header>
+<main class="wrap">
+<section class="card">
+<h2>① 粘贴接口返回 <span class="n">curl 拿到的 JSON 直接贴，含 data 外壳也行</span></h2>
+<label for="detail-json">issue-detail 返回（ResultDTO&lt;IssueDetailVO&gt;）</label>
+<textarea id="detail-json" placeholder='{"code":200,"message":"success","data":{"id":1,"groupName":"…","detail":"…","resolved":false}}'></textarea>
+<label for="reply-json" style="margin-top:12px">issue-reply 返回（ResultDTO&lt;IssueReplyVO&gt;，可只贴详情，回复区隐藏）</label>
+<textarea id="reply-json" placeholder='{"code":200,"data":{"reply":"…","messageId":"68f2…","costMs":41026}}'></textarea>
+<div class="row">
+<button class="btn primary" id="render-btn">渲染</button>
+<button class="btn" id="demo-btn">载入示例数据</button>
+<button class="btn" id="clear-btn">清空</button>
+</div>
+<div class="err" id="parse-err"></div>
+</section>
+<section class="card">
+<h2>② 问题详情 <span class="n">IssueDetailVO</span></h2>
+<div class="empty block" id="detail-empty">粘贴 issue-detail 返回后点「渲染」——或先「载入示例数据」看效果</div>
+<dl class="grid" id="detail-grid" style="display:none">
+<dt>问题 ID</dt><dd id="d-id">—</dd>
+<dt>来源群</dt><dd id="d-group">—</dd>
+<dt>提问人</dt><dd id="d-sender">—</dd>
+<dt>问题描述</dt><dd id="d-detail" style="line-height:1.8">—</dd>
+<dt>问题类型</dt><dd id="d-type">—</dd>
+<dt>是否已解决</dt><dd id="d-resolved">—</dd>
+<dt>提问时间</dt><dd id="d-issue-time">—</dd>
+<dt>解决时间</dt><dd id="d-resolve-time">—</dd>
+<dt>关联消息</dt><dd id="d-msg-ids" class="mono">—</dd>
+</dl>
+</section>
+<section class="card" id="reply-card" style="display:none">
+<h2>③ 自动闭环回复 <span class="n">IssueReplyVO · 小师父 Agent</span></h2>
+<dl class="grid">
+<dt>耗时</dt><dd id="r-cost">—</dd>
+<dt>messageId</dt><dd id="r-msg-id" class="mono">—</dd>
+</dl>
+<p style="margin:16px 0 8px;font-size:13px;color:var(--muted)">Agent 最终回复：</p>
+<div class="reply" id="r-reply">—</div>
+<p class="mono" style="margin:12px 0 0">排障：拿 messageId 去小师父后台查 Agent 全过程（模型/工具编排都在它那边跑）。</p>
+</section>
+<section class="card">
+<h2>④ 字段对照 <span class="n">排障时对着改</span></h2>
+<dl class="grid">
+<dt>resolved</dt><dd>status=1 已解决 / status=0 未解决；后端在未解决时把 resolveTime 置 null（遮掉 1970 哨兵值），前端不再需要判</dd>
+<dt>questionTypeName</dt><dd>type 1橱柜/定制柜进度 2主材整改 3主材进度 4云助理取消 5其他</dd>
+<dt>senderName</dt><dd>首问发送人＝项目经理（三锚定位的锚2），闭环回复里的「提问人」就是他</dd>
+<dt>messageId</dt><dd>小师父异步任务标识——排障时拿它去小师父后台查 Agent 全过程（模型/工具编排在它那边）</dd>
+</dl>
+</section>
+</main>
+<footer class="wrap" style="padding-top:0">
+<p class="mono">本页纯本地渲染：无出网、无 moma runtime 授权、粘贴即显。后端代码：eden-agenda MsgAnalyzeService（issueDetail / reply 两个方法，reply 走小师父 Agent 服务）。</p>
+</footer>
+<script>
+"use strict";
+var DEMO = {
+  detail: {"code":200,"message":"success","data":{
+    "id":42,"groupId":"wrQ7xxxx","groupName":"赵公口项目对接群",
+    "senderName":"李四","senderId":"wm8cxxx",
+    "detail":"张三家的橱柜定制柜什么时候能进场？上周说好这周的。",
+    "type":1,"questionTypeName":"橱柜/定制柜进度",
+    "resolved":false,"resolveTime":null,
+    "issueTime":"2026-11-17 09:41:00","groupMessageIds":"[\"msg-101\",\"msg-102\"]"}},
+  reply: {"code":200,"data":{
+    "issueId":42,
+    "detail":"张三家的橱柜定制柜什么时候能进场？上周说好这周的。",
+    "reply":"张三家橱柜预计本周四（11/19）进场。当前进度：测量已完成，图纸确认待业主回复，下单还未激活——卡在图纸确认环节。建议今天先催一下张三家图纸确认，确认后我这边同步推下单。",
+    "messageId":"68f2c1a9-2e3b-4d57-9a10-8b6f4a2c7e55",
+    "costMs":41026}}
+};
+function $(id){return document.getElementById(id)}
+function unwrap(json){
+  // 兼容：整个 ResultDTO（取 data） / 裸 VO / code!=200 时给 message（失败响应常无 data 字段，先判 code）
+  if(json && typeof json==="object" && !Array.isArray(json)){
+    if(json.code!=null && json.code!==200){throw new Error("接口返回 code="+json.code+(json.message?"："+json.message:""))}
+    if("data" in json) return json.data;
+  }
+  return json;
+}
+function txt(v,empty){return (v===null||v===undefined||v==="")?(empty||"—"):String(v)}
+function renderDetail(vo){
+  $("detail-empty").classList.remove("on");
+  $("detail-grid").style.display="";
+  $("d-id").textContent=txt(vo.id);
+  $("d-group").textContent=txt(vo.groupName)+(vo.groupId?"（"+vo.groupId+"）":"");
+  $("d-sender").textContent=txt(vo.senderName)+(vo.senderId?" · "+vo.senderId:"");
+  $("d-detail").textContent=txt(vo.detail);
+  $("d-type").textContent=txt(vo.questionTypeName,"—（type="+txt(vo.type)+")");
+  var resolved=vo.resolved===true;
+  $("d-resolved").innerHTML=resolved?'<span class="tag ok">已解决</span>':'<span class="tag no">未解决</span>';
+  $("d-issue-time").textContent=txt(vo.issueTime);
+  $("d-resolve-time").textContent=resolved?txt(vo.resolveTime):"—（未解决）";
+  $("d-msg-ids").textContent=txt(vo.groupMessageIds);
+}
+function renderReply(vo){
+  if(!vo||!vo.reply){ $("reply-card").style.display="none"; return }
+  $("reply-card").style.display="";
+  $("r-cost").textContent=txt(vo.costMs)+" ms";
+  $("r-msg-id").textContent=txt(vo.messageId);
+  $("r-reply").textContent=txt(vo.reply);
+}
+function parseBox(id){
+  var raw=$(id).value.trim();
+  if(!raw) return null;
+  var json=JSON.parse(raw); // 解析失败直接抛给统一 err
+  return unwrap(json);
+}
+function render(){
+  var errEl=$("parse-err"); errEl.classList.remove("on");
+  try{
+    var detail=parseBox("detail-json");
+    var reply=parseBox("reply-json");
+    if(!detail && !reply) throw new Error("两个框都是空的——至少贴一个接口返回");
+    if(detail) renderDetail(detail);
+    renderReply(reply);
+  }catch(e){
+    errEl.textContent="解析失败："+e.message+" ——检查贴的是不是完整 JSON（curl 记得 -d '' 或引号转义）";
+    errEl.classList.add("on");
+  }
+}
+$("render-btn").addEventListener("click",render);
+$("demo-btn").addEventListener("click",function(){
+  $("detail-json").value=JSON.stringify(DEMO.detail,null,2);
+  $("reply-json").value=JSON.stringify(DEMO.reply,null,2);
+  render();
+});
+$("clear-btn").addEventListener("click",function(){
+  $("detail-json").value=""; $("reply-json").value="";
+  $("parse-err").classList.remove("on");
+  $("detail-grid").style.display="none";
+  $("detail-empty").classList.add("on");
+  $("reply-card").style.display="none";
+});
+document.addEventListener("keydown",function(e){
+  if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){render()}
+});
+</script>
+</body>
+</html>

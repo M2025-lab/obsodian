@@ -1,0 +1,24 @@
+{
+  "id": "conv-1794986211172-xolis5j6i",
+  "providerId": "claude",
+  "title": "接入小师傅 Feign 客户端到 agenda 项目",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794986211172,
+  "updatedAt": 1794988048403,
+  "lastResponseAt": 1794987897189,
+  "sessionId": "00954063-fb92-4810-9908-16473ceb41a6",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "00954063-fb92-4810-9908-16473ceb41a6"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 256,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 99968,
+    "outputTokens": 18,
+    "contextWindow": 200000,
+    "contextTokens": 100224,
+    "percentage": 50
+  }
+}

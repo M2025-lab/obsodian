@@ -1,0 +1,23 @@
+{
+  "id": "conv-1794988096791-p1e2wirmf",
+  "providerId": "claude",
+  "title": "排查未知命令 /moma-html-page 并创建 HTML 页面",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794988096791,
+  "updatedAt": 1794988099827,
+  "lastResponseAt": 1794988097601,
+  "sessionId": "b0786bd1-f871-4b5b-b240-023165f1cf75",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "b0786bd1-f871-4b5b-b240-023165f1cf75"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}

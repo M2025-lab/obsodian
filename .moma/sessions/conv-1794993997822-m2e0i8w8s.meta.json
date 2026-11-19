@@ -1,0 +1,28 @@
+{
+  "id": "conv-1794993997822-m2e0i8w8s",
+  "providerId": "claude",
+  "title": "查询starlord主材任务42329105复尺完成情况",
+  "titleGenerationStatus": "success",
+  "createdAt": 1794993997822,
+  "updatedAt": 1794997067057,
+  "lastResponseAt": 1794994659329,
+  "sessionId": "0d0a40da-4e4b-4d7f-934f-75ccae380483",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0d0a40da-4e4b-4d7f-934f-75ccae380483",
+    "previousProviderSessionIds": [
+      "2d0a033d-7c3f-4f50-ae4d-4b1642a71753"
+    ]
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1570,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68544,
+    "outputTokens": 4456,
+    "contextWindow": 200000,
+    "contextTokens": 70114,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}
