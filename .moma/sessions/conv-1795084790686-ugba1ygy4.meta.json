@@ -4,8 +4,8 @@
   "title": "分析 Starlord 问答未调用 skill 的调整方案",
   "titleGenerationStatus": "success",
   "createdAt": 1795084790686,
-  "updatedAt": 1795097204041,
-  "lastResponseAt": 1795085370686,
+  "updatedAt": 1795144679949,
+  "lastResponseAt": 1795144679949,
   "sessionId": "c19e0b29-b579-40a0-b2f1-d0e4dfa2acba",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 1204,
+    "inputTokens": 6926,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 64576,
-    "outputTokens": 14565,
+    "cacheReadInputTokens": 70912,
+    "outputTokens": 8032,
     "contextWindow": 200000,
-    "contextTokens": 65780,
-    "percentage": 33,
+    "contextTokens": 77838,
+    "percentage": 39,
     "contextWindowIsAuthoritative": true
   }
 }

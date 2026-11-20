@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795165722703-bu7noh2yv",
+  "providerId": "claude",
+  "title": "撰写本季度个人 OKR 目标",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795165722703,
+  "updatedAt": 1795171176487,
+  "lastResponseAt": 1795171176487,
+  "sessionId": "24eecc90-3176-47f2-9362-39ad9d2e7f60",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "24eecc90-3176-47f2-9362-39ad9d2e7f60"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1171,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 86464,
+    "outputTokens": 445,
+    "contextWindow": 200000,
+    "contextTokens": 87635,
+    "percentage": 44,
+    "contextWindowIsAuthoritative": true
+  }
+}

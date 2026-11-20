@@ -55,17 +55,19 @@ POST /api/v1/open/excel-push/push
 
 ### 3.2 queryPlan 契约（edar-starlord-api，feat/50559773/suppliertime）
 
+> **契约改版 2026-11-20**（上游 c96ee7d96「对外接口queryPlan」）：行结构去掉了 `taskDispatchId / waybillNo / supplierOrderNo`，**加回 `projectOrderId`（String，delivery_progress 关联）并新增 `materialCode / materialName / supplierCode / supplierName` 四列**（starlord queryPage 按 orderNo 关联 delivery_progress 装配，orderNo 关联不到时四列为 null）。agenda 侧链路已同步迁移（2026-11-20，「有的字段赋值、没有的字段不管」口径）：projectOrderId → projectId 赋值、material/supplier 直接带出、taskDispatchId 恒 null（RowVO 字段保留维持 Excel 中立结构）、orderNo 无 waybill 退化键（toRow 直接取，空即空）。
+
 | 项 | 内容 |
 |-|-|
 | 入口 | `TaskSupplierFeign#queryPlan`（`@FeignClient("edar-starlord")`），POST `/task-supplier/plan/query` |
 | 出参 | `TaskSupplierPlanPageVO{pageNo, pageSize, total, totalPages, list<TaskSupplierPlanQueryVO>}` |
-| 行结构 | `id / projectOrderId / orderNo / taskDispatchId / waybillNo / supplierOrderNo / taskType / flowType / expectedTime / factTime / createTime / modifyTime / remark / status` |
+| 行结构 | `id / projectOrderId / orderNo / materialCode / materialName / supplierCode / supplierName / taskType / flowType / expectedTime / factTime / createTime / modifyTime / remark / status`（~~taskDispatchId / waybillNo / supplierOrderNo~~ 已删） |
 | taskType | **8 备货 / 5 送货 / 14 进仓**（枚举同 `task_dispatch.task_type`；7 接单不属于本表） |
 | flowType | **0 正单 / 1 返补** |
 | 时间语义 | 备货行 expectedTime=备货预计；送货行 expectedTime=送货预计；进仓行 expectedTime=进仓预计 + **factTime=实际进仓**（备货/送货 factTime 恒 null） |
-| 占位约定 | 库里 1900-01-01 = 没有时间，出参统一转 null；`taskDispatchId=0` = 无关联任务；`orderNo` 空串 = 上游没给货单号 |
+| 占位约定 | 库里 1900-01-01 = 没有时间，出参统一转 null；`orderNo` 空串 = 上游没给货单号；projectOrderId/material/supplier 五列依赖 orderNo 关联 delivery_progress，**关联不到时为 null（行仍在，只是这五列空）** |
 | 分页 | pageNo 从 1，pageSize 默认 500 **上限 2000（超了报错不截断）**；orderBy 白名单 id/createTime/modifyTime/expectedTime/factTime |
-| 一行 = | 一个货单下的一个具体任务实例，业务键 `orderNo+flowType+taskType+taskDispatchId`；同键可多行（一单多次返补） |
+| 一行 = | 一个货单下的一个具体任务实例，业务键 `orderNo+flowType+taskType`；同键可多行（一单多次返补） |
 
 **测试环境实测**（2026-11-19，`skills/starlord-supplier-plan-test`）：全表 16502 行——送货行 7941 / 进仓行 4471 / 备货行 4090；正单 12437 / 返补 4065。**当日的预计进仓仅个位数行**（当日日期窗内 5 行），数据稀疏是常态（台账按供应商同步节奏写入，非每日全量）。
 
@@ -125,8 +127,8 @@ Excel 版口径 → 台账字段口径的一一对应（业务语义「哪些单
 **「在库未送」判据细则**（最复杂的板块，单独交代）：
 
 - 候选行（查②）：`taskType=14` + `factTime` 有值且 **在今天之前**（当日刚进仓的不提醒，明日再看）；factTime 加 30 天下界护栏（`planpush.stale-days`，超期陈旧行不再提醒，待确认①）。
-- 送货任务存在性（查⑤）：拿②候选行的 `orderNo` 集合走 `orderNos` 批查 `taskType=5` 行——**查得到任何送货行的单 = 已排送（无论 scheduled 未来还是过去）→ 从在库未送剔除**；查不到的留在板块。orderNo 空串的行退化用 `projectOrderId` 关联（同项目有送货行即视为已排送）。
-- 送货行本身没有 factTime（送货完成不回写本表），「已送完成」不可从台账单独判断——**送货完成态依赖任务系统**（`taskDispatchId` 关联 task_dispatch 的 state，本期不做，见风险 3）。这是接口版与 Excel 版口径**已知不可完全对齐**的点（Excel 版 D 列「在库已送」自愈，接口版靠 30 天护栏兜），双跑对账时按此预期评估差异。
+- 送货任务存在性（查⑤）：拿②候选行的 `orderNo` 集合走 `orderNos` 批查 `taskType=5` 行——**查得到任何送货行的单 = 已排送（无论 scheduled 未来还是过去）→ 从在库未送剔除**；查不到的留在板块。orderNo 空串的行无独立关联键（契约改版后无 waybill/project 退化键，projectOrderId 本身按 orderNo 关联带出），**留在库未送板块不参与剔除**。
+- 送货行本身没有 factTime（送货完成不回写本表），「已送完成」不可从台账单独判断——**送货完成态依赖任务系统**（task_dispatch 按 orderNo 关联的 state，本期不做，见风险 3）。这是接口版与 Excel 版口径**已知不可完全对齐**的点（Excel 版 D 列「在库已送」自愈，接口版靠 30 天护栏兜），双跑对账时按此预期评估差异。
 
 **去重规则**：原「出现在明日送货的项目，在库未送不再提醒」在接口版判据下**天然成立**（有送货行的单在查②+⑤环节即被剔除，根本进不了在库未送板块），渲染层无需跨板块过滤逻辑——这是查②⑤口径对比原设计的核心简化。
 
@@ -188,10 +190,11 @@ DailyPushPlanAnalyzeServiceImpl.analyze()
   ├─ 取数（4.1/4.3）：TaskSupplierPlanManager 五次拉取——查①正单进仓 / 查②在库候选 /
   │     查③返补进仓 / 查④送货计划（均服务端条件 + 翻页）+ 查⑤按②单号集批查送货行
   ├─ 板块组装：DailyPushPlanAssembler（新类，独立于 Excel 版 filterXxx）
-  │     台账行 → DailyPushRowVO：projectId←projectOrderId、planDate←expectedTime/factTime、
-  │     orderNo←orderNo(空则supplierOrderNo)、sectionCode 照旧四值；
-  │     progressSuffix/typeDesc 置空（仅 Excel 源用的字段，渲染不依赖）
-  │     在库未送 = 查② 剔除查⑤命中单（含 orderNo 空退化 project 关联）后的余集
+  │     台账行 → DailyPushRowVO（契约 2026-11-20）：projectId←projectOrderId、
+  │     supplier/material 四列←VO 自带、planDate←expectedTime/factTime、
+  │     orderNo←orderNo（无退化键）、taskDispatchId 不赋值（VO 已删，恒 null）、
+  │     sectionCode 照旧四值；progressSuffix/typeDesc 置空（仅 Excel 源用的字段，渲染不依赖）
+  │     在库未送 = 查② 剔除查⑤命中单（orderNo 唯一关联键）后的余集
   ├─ 大区批查/分桶/renumber（方法级复用）：DailyPushRegionBuckets，口径同 Excel 版
   ├─ enrich（4.5，新：DailyPushPlanEnricher 四板块公共补齐）
   └─ 返回 LinkedHashMap<大区code, DailyPushReportVO>（sourceType="plan"）
@@ -204,17 +207,17 @@ DailyPushPlanAnalyzeServiceImpl.analyze()
 
 台账行只有单号/类型/时间，渲染需要的「供应商 / 品类 / 业主 / 工长」全靠 enrich——**接口路径这步是三板块公共的新增步骤**（Excel 路径这些列源表自带；原 Excel 版仅反补板块走订单 API 回查业主/工长）。
 
-字段来源（**口径定稿 2026-11-19**：品类/供应商台账自带、人员三列订单 API 反查；**仅接口路径调用，Excel 路径不动**）：
+字段来源（**口径定稿 2026-11-19、契约同步 2026-11-20**：品类/供应商查询 VO 自带（delivery_progress 关联）、人员三列订单 API 反查；**仅接口路径调用，Excel 路径不动**）：
 
 | 渲染列 | Excel 路径来源（不动） | 接口路径来源 | 批查方式 |
 |---|---|---|---|
-| 品类 | sheet 品类/套餐列 | **台账自带**：`task_supplier_plan` 加 `material_code/material_name/supplier_code/supplier_name` 四列（starlord 侧 DDL + VO 加字段，写入方 batchSave 从任务行带出） | Assembler 直接映射，零反查 |
-| 供应商 | sheet 品牌/商户列 | 同上（台账自带） | 同上 |
+| 品类 | sheet 品类/套餐列 | **查询 VO 自带**：queryPage 按 orderNo 关联 `delivery_progress` 带出 materialCode/Name（契约 2026-11-20 改版：starlord 侧关联查询而非台账加列） | Assembler 直接映射，零反查 |
+| 供应商 | sheet 品牌/商户列 | 同上：supplierCode/Name（同一次 orderNo 关联） | 同上 |
 | 工长 | sheet 工长姓名列（反补走订单 API） | `ProjectOrderInfoDTO.foremanName` | `ProjectOrderManager.batchQueryProjectOrderList(null, orderIds)` 按 projectId 批查（不依赖 taskDispatchId） |
 | 业主 | sheet 姓名/业主列（反补走订单 API） | `ProjectOrderInfoDTO.homeownerName` | 同上（同一次调用带回） |
 | 工程经理 | sheet 工程经理列 | `ProjectOrderInfoDTO.assistantName`（管家即工程经理，Excel 版同口径） | 同上 |
 
-- **enrich 只剩订单 API 一条通道**（口径定稿 2026-11-19）：按 `projectId` 批查 `batchQueryProjectOrderList` 一次带回业主/工长/工程经理三列，不依赖 taskDispatchId、不反查任务系统。品类/供应商由台账自带（上表首两行）——**原 MaterialTaskManager 主通道已删除**（首次联调发现测试环境台账与任务系统 ID 脱节，且台账加列后无需反查；`DailyPushPlanEnricher` 只留 enrichPersonNames 一条路径）。
+- **enrich 只剩订单 API 一条通道**（口径定稿 2026-11-19；契约同步 2026-11-20）：按 `projectId` 批查 `batchQueryProjectOrderList` 一次带回业主/工长/工程经理三列，不反查任务系统。品类/供应商由查询 VO 自带（delivery_progress 关联，上表首两行）——**原 MaterialTaskManager 主通道已删除**（首次联调发现测试环境台账与任务系统 ID 脱节，且 VO 关联带出后无需反查；`DailyPushPlanEnricher` 只留 enrichPersonNames 一条路径）。
 - 业主通道沿用 `enrichReworkPersons` 的既有实现模式（异常 log 后跳过，人员列可缺省——降级语义与大区失败语义不同，见 4.7）。**新代码不碰 `DailyPushExcelAnalyzeServiceImpl.enrichReworkPersons`**——enrich 逻辑落在新链路侧（`DailyPushPlanEnricher` 新类），Excel 路径的反补回查原样保留，两路径互不牵动。
 - ~~MaterialTaskManager 返回 null 坑~~（通道已删，仅 Excel 路径 enrichReworkPersons 沿用订单 API，无 null 坑面）。
 - enrich 编排位置：板块组装之后、大区分桶之前（接口路径自己的编排序；Excel 路径 enrich 在分桶后，互不影响）。
@@ -255,7 +258,7 @@ DailyPushPlanAnalyzeServiceImpl.analyze()
 |---|---|---|---|
 | 1 | **`edar-starlord-api` 含 `TaskSupplierFeign` 的正式版本**（≥ 2.7.6 发版；现状 2.4.5 无此类） | Feign 客户端 + Param/VO 契约 | **是——starlord 发版是前置条件**（测试环境可用 SNAPSHOT 联调） |
 | 2 | starlord 线上部署含 queryPlan 的服务版本（`feat/50559773/suppliertime` 已合并待上线） | 线上数据源 | 是（与 #1 同窗口上线） |
-| 3 | ~~MaterialTaskManager~~（enrich 口径变更后不再使用） | ~~品类/供应商/工长 enrich~~（改台账自带 + 订单 API，见 4.5） | 否 |
+| 3 | ~~MaterialTaskManager~~（enrich 口径变更后不再使用） | ~~品类/供应商/工长 enrich~~（改查询 VO 自带 + 订单 API，见 4.5） | 否 |
 | 4 | `ProjectOrderManager.batchQueryProjectOrderList`（既有） | 业主 enrich | 否 |
 | 5 | `ConstructionManager.queryRegionByProjectOrderIds`（既有） | 大区分组（两路径共用） | 否 |
 | 6 | kdocs 下载链路（既有） | Excel 路径数据源（持续运行至退役） | 否（接口路径稳定后退役，见 Check List） |
@@ -270,7 +273,7 @@ DailyPushPlanAnalyzeServiceImpl.analyze()
 |---|---|---|
 | 1 | **覆盖度不足（最大风险）**：台账 16502 行 vs Excel 版日均在库未送 233 行/正单在施数百行——台账是否已同步到能撑起四板块的量级，测试环境当日进仓仅 5 行，**不能证明线上够用**（测试环境数据稀疏 ≠ 线上稀疏，但也不能反证充足） | 上线前用 prod skill 对线上只读核一次量级（四个板块判据各跑一次，行数与 Excel 路径当日分析对照）；量级撑不起时**不退役 Excel 路径**（双 Controller 架构的红利——两路径长期并存无技术障碍，退役决策纯粹看数据成熟度） |
 | 2 | **口径等价性**：「在库未送」Excel 版是 sheet 自维护状态列（D 列），接口版用「factTime 有值 ∧ 送货未发生」拼——**两版对同一项目可能判定不一致**（同步延迟、送货行缺失都造成偏差） | 双跑对账：对账期两 URL 同日各跑一次 analyze，板块行集按 projectId+orderNo 对齐出差异清单，评审通过才推群（对账期接口路径只 analyze 不 push，见 Check List 推送纪律） |
-| 3 | **「已送」判断缺失**：台账送货行无 factTime，在库未送板块无法识别「已送完成」的行——已送未更新的行会被长期重复提醒（Excel 版 D 列「在库已送」自愈这个） | 本期护栏：查② factTime 30 天下界（`planpush.stale-days`，factTime 距今 >30 天的行不进板块）+ 超窗剔除行 log 留痕；长期：taskDispatchId 关联 task_dispatch.state 判断任务完成态（TODO，见 Check List） |
+| 3 | **「已送」判断缺失**：台账送货行无 factTime，在库未送板块无法识别「已送完成」的行——已送未更新的行会被长期重复提醒（Excel 版 D 列「在库已送」自愈这个） | 本期护栏：查② factTime 30 天下界（`planpush.stale-days`，factTime 距今 >30 天的行不进板块）+ 超窗剔除行 log 留痕；长期：task_dispatch 按 orderNo 关联 state 判断任务完成态（契约改版后 taskDispatchId 已从 VO 删除，长期解的关联键改为 orderNo；TODO，见 Check List） |
 | 4 | 翻页漂移：翻页期间台账写入导致 offset 页错位 | 4.3 的页首 id 校验 + 单次重查 + 二次漂移抛错；分析是分钟级人工触发，窗口极小 |
 | 5 | enrich 放大：四板块行全部走订单 API 批查（Excel 版只反补走订单 API）——量级从 ~13 行升到 ~300 行涉及 ~200 项目 | `batchQueryProjectOrderList` 按 projectId 集一次批查，单次调用；既有 enrichReworkPersons 同款调用模式已验证批查能力；失败 log 跳过不阻断（4.7） |
 | 6 | 时间语义偏差：台账 expectedTime 全是 00:00:00（实测无时分秒），「今天之后/之前」按自然日切（From=当日 00:00:00 / To=当日 23:59:59）——与 Excel 版自然日语义一致 | 无偏差（两侧都是自然日语义）；闭区间边界已在 Param 契约写死 |
@@ -286,7 +289,7 @@ DailyPushPlanAnalyzeServiceImpl.analyze()
 - [ ] 上线顺序：共享层重命名先行（独立 commit，excel-push 输出 diff 验证回归）→ starlord 发版（api + 服务）→ agenda 升 api 依赖 → 联调（测试环境接口路径跑通四板块）→ 接口路径上线（无总开关，URL 即边界）→ **双跑对账期**（两 URL 同日各跑 analyze 出差异清单评审；期间日报仍走 Excel 路径推送）→ 差异收敛后接口路径开始推日报（Excel 路径停推）→ 稳定一个考核周期后 Excel 路径退役（删 Controller/Service/html + KdocsDownloadService 推送用途停用，另期单独变更）
 - [ ] 回滚方案：接口路径无独立开关，**回滚 = revert 接口路径新增代码**（`plan-push` Controller/Service/manager + 渲染器 null 门控），Excel 路径判据从未动过零回滚成本；渲染器第四板块段如出问题，Excel 路径输出不受影响（null 门控跳过该段），单独 revert 渲染器即可；共享层重命名如出问题，编译期即暴露（不会带病上线）
 - [ ] TODO（上线前必做）：prod skill 线上量级核查（风险 1）——四板块判据各跑一次与 Excel 路径对照
-- [ ] TODO（后续需求）：① taskDispatchId 关联 task_dispatch.state 判断送货完成态（风险 3 长期解）；② 按大区定向分群推送（`roomie.push.group-ids` 升级，大区分组方案遗留 TODO 一并承接）；③ Excel 路径退役（删 `/excel-push/*` + `DailyPushExcelAnalyzeServiceImpl`（Excel 路径独占类）+ `excelpush.html`，KdocsDownloadService 是否保留取决于其他消费方；共享层 `DailyPush*` 类保留——接口路径在用）
+- [ ] TODO（后续需求）：① task_dispatch 按 orderNo 关联 state 判断送货完成态（风险 3 长期解；契约改版后 VO 无 taskDispatchId，关联键为 orderNo）；② 按大区定向分群推送（`roomie.push.group-ids` 升级，大区分组方案遗留 TODO 一并承接）；③ Excel 路径退役（删 `/excel-push/*` + `DailyPushExcelAnalyzeServiceImpl`（Excel 路径独占类）+ `excelpush.html`，KdocsDownloadService 是否保留取决于其他消费方；共享层 `DailyPush*` 类保留——接口路径在用）
 - [ ] 待确认（评审）：① 在库未送板块 30 天护栏阈值（`planpush.stale-days`）；② 送货计划板块工程经理列是否本期就要从订单 API 取（方案按「置 -」）；③ 对账期长短（方案按「差异收敛 + 一个完整月度推送周期」预估）；④ 送货计划板块是「今天之后全部」还是收窄回「明日一天」（用户口径为今天之后，方案按此落地；若线上量级大再收窄）
 - [x] ~~重命名范围确认~~（**已定稿 2026-11-19**：全量重命名 `ExcelPush*`→`DailyPush*`，不取保守退路）
 

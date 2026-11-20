@@ -4,8 +4,8 @@
   "title": "对比新版聊天记录分析召回率与问题",
   "titleGenerationStatus": "success",
   "createdAt": 1795061287097,
-  "updatedAt": 1795097204041,
-  "lastResponseAt": 1795083492280,
+  "updatedAt": 1795164226764,
+  "lastResponseAt": 1795164226764,
   "sessionId": "a2f43ae4-2f42-4ac0-b059-33b331d69c24",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 705,
+    "inputTokens": 2148,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 99712,
-    "outputTokens": 776,
+    "cacheReadInputTokens": 34944,
+    "outputTokens": 9586,
     "contextWindow": 200000,
-    "contextTokens": 100417,
-    "percentage": 50,
+    "contextTokens": 37092,
+    "percentage": 19,
     "contextWindowIsAuthoritative": true
   }
 }

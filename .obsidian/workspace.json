@@ -70,231 +70,21 @@
             }
           },
           {
-            "id": "3b3868131a2dd63b",
+            "id": "145a6e09b4548b00",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "考核/考核系统上下游交互清单（对端系统×交互信息总表）.md",
+                "file": "80.日报周报/季度OKR-2026Q4.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "考核系统上下游交互清单（对端系统×交互信息总表）"
-            }
-          },
-          {
-            "id": "90960295fc65fd41",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "考核/考核系统scm-workbench-功能与代码学习指南.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "考核系统scm-workbench-功能与代码学习指南"
-            }
-          },
-          {
-            "id": "a74738c84b5f5507",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "云助理群场景提效·Roomie接入初版方案"
-            }
-          },
-          {
-            "id": "542c0693b1f23b90",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "云助理群场景提效·Roomie接入初版方案"
-            }
-          },
-          {
-            "id": "47844bc97c75d9ed",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/会议记录.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "会议记录"
-            }
-          },
-          {
-            "id": "23d4b9e662e744c0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/架构初稿.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "架构初稿"
-            }
-          },
-          {
-            "id": "bf23b7ef81aa864c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/架构整理后.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "架构整理后"
-            }
-          },
-          {
-            "id": "542c14fdb7e29631",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/架构整理后.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "架构整理后"
-            }
-          },
-          {
-            "id": "2ebc96a799ab2c9d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/数据架构和流向.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "数据架构和流向"
-            }
-          },
-          {
-            "id": "b32c2fde840803e6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/execl和项目信息接入.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "execl和项目信息接入"
-            }
-          },
-          {
-            "id": "1888833ff6ada65a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/功能-报表群内通知.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "功能-报表群内通知"
-            }
-          },
-          {
-            "id": "c8f50ea214bb3852",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/execl和项目信息接入.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "execl和项目信息接入"
-            }
-          },
-          {
-            "id": "f42afa340f576210",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/eden-agenda-Excel推送链路迁移-技术方案.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "eden-agenda-Excel推送链路迁移-技术方案"
-            }
-          },
-          {
-            "id": "3d9ae8cf516555d0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/execl和项目信息接入.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "execl和项目信息接入"
-            }
-          },
-          {
-            "id": "bf62768ee782ff80",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "群消息问题归类汇总-技术方案"
-            }
-          },
-          {
-            "id": "d4385e1c18a32121",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "LLM聊天记录分析-测试方案"
+              "title": "季度OKR-2026Q4"
             }
           }
         ],
-        "currentTab": 19
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -523,54 +313,54 @@
       "moma:Open Moma": false
     }
   },
-  "active": "15c2e3c6ab073f67",
+  "active": "145a6e09b4548b00",
   "lastOpenFiles": [
+    "00.需求/通知复尺自动化/通知复尺自动化-金属门通知复尺屏蔽-技术方案.md",
+    "90.AI学习/llm-agent/llm-master/docs/interview/llm/loop_engineering_interview.md",
+    "80.日报周报/季度OKR-2026Q4.md",
+    "考核/考核系统上下游交互清单（对端系统×交互信息总表）.md",
+    "考核/考核系统scm-workbench-功能与代码学习指南.md",
+    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
+    "00.需求/roomie/会议记录.md",
+    "00.需求/roomie/架构整理后.md",
+    "00.需求/roomie/数据架构和流向.md",
+    "00.需求/roomie/execl和项目信息接入.md",
+    "00.需求/roomie/功能-报表群内通知.md",
+    "00.需求/roomie/eden-agenda-Excel推送链路迁移-技术方案.md",
+    "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
+    "20.知识沉淀/📚 后端项目索引.md",
+    "fig/report2img-poc3.png",
+    "fig/report2img-poc2.png",
+    "fig/report2img-poc.png",
+    "fig/text2img-poc.png",
+    "fig",
+    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
     "10.项目整理/材料配置问题.md",
     "10.项目整理/主材任务域学习索引.md",
     "10.项目整理/主材任务与流程配置/01-接口速查与curl.md",
     "lark-auth-qr.png",
-    "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md",
     "00.需求/roomie/eden-agenda-推送数据源queryPlan迁移-技术方案.md",
     "00.需求/roomie/roomie问题闭环-详情联调页.html",
     "00.需求/roomie/群消息汇总/LLM聊天记录分析-测试方案.md.tmp.39070.858bfa863c4e",
-    "00.需求/roomie/群消息汇总/群消息问题归类汇总-技术方案.md",
     "00.需求/roomie/赵公口与永外-主材问题台账.xlsx",
     "00.需求/roomie/项目过滤/eden-agenda-大区分组分析-技术方案.md",
     "00.需求/roomie/项目过滤",
-    "00.需求/roomie/execl和项目信息接入.md",
     "00.需求/roomie/群消息汇总",
     "00.需求/roomie/未命名.md",
     "00.需求/roomie/字段映射-四板块汇总与源表对照.md",
-    "00.需求/roomie/eden-agenda-Excel推送链路迁移-技术方案.md",
     "10.工作/技术方案/eden-agenda-Excel推送链路迁移-技术方案.md",
     "00.需求/roomie/文档处理逻辑.md",
-    "00.需求/roomie/功能-报表群内通知.md",
-    "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
-    "00.需求/roomie/数据架构和流向.md",
     "录音目录/20261110-170225-云助理接入Roomie工作台与数据落库进展.md",
     "录音目录/20261111-102834-云助理从材料环节切入为项目经理提效.md",
-    "00.需求/roomie/架构整理后.md",
     "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
-    "00.需求/roomie/架构初稿.md",
     "录音目录",
-    "未命名.md",
-    "_tp_c10_tmp.md",
-    "_tp_c9_tmp.md",
-    "_tp_c8_tmp.md",
-    "_tp_c7_tmp.md",
-    "_tp_c6_tmp.md",
     "section5.xml",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg.png",
     "00.需求/roomie/attachments/云助理数据流向_双库方案_修正版.svg",
     "00.需求/roomie/attachments/系统结构.png",
     "00.需求/roomie/attachments",
-    "00.需求/未命名",
     "00.需求/北京大宅/fig/排程修改记录-递增规则diff示例.png",
     "00.需求/北京大宅-递增规则与任务类型增加/fig/排程修改记录-递增规则diff示例.png",
-    "lark_auth_qr.png",
-    "90.AI学习/helloagent/hello-agents/读者群二维码.png",
-    "90.AI学习/helloagent/hello-agents/读者反馈问卷.png",
-    "90.AI学习/helloagent/hello-agents/docs/images/9-figures/9-3.png",
     "未命名.canvas",
     "未命名 1.canvas"
   ]

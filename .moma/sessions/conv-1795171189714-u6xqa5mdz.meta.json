@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795171189714-u6xqa5mdz",
+  "providerId": "claude",
+  "title": "解释 Apache Dubbo 概念",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795171189714,
+  "updatedAt": 1795171412361,
+  "lastResponseAt": 1795171209762,
+  "sessionId": "e302213a-2101-4bad-8f93-d2fb0c49417e",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "e302213a-2101-4bad-8f93-d2fb0c49417e"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 3178,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 23808,
+    "outputTokens": 1370,
+    "contextWindow": 200000,
+    "contextTokens": 26986,
+    "percentage": 13,
+    "contextWindowIsAuthoritative": true
+  }
+}

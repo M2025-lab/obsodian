@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795171752178-nyn5j580t",
+  "providerId": "claude",
+  "title": "排查 Maven 私服 jar 包更新不生效问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795171752178,
+  "updatedAt": 1795173137858,
+  "lastResponseAt": 1795173137858,
+  "sessionId": "0143d5b3-2f74-48dd-a090-0dd74996622c",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0143d5b3-2f74-48dd-a090-0dd74996622c"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 317,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 43200,
+    "outputTokens": 300,
+    "contextWindow": 200000,
+    "contextTokens": 43517,
+    "percentage": 22,
+    "contextWindowIsAuthoritative": true
+  }
+}

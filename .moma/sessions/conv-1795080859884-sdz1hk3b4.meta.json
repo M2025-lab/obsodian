@@ -4,8 +4,8 @@
   "title": "跟进群消息推送接口化改造进度",
   "titleGenerationStatus": "success",
   "createdAt": 1795080859884,
-  "updatedAt": 1795097204041,
-  "lastResponseAt": 1795093367734,
+  "updatedAt": 1795174736239,
+  "lastResponseAt": 1795174736239,
   "sessionId": "1a71e06a-6222-4210-a300-155abf1b587b",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,13 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 232,
+    "inputTokens": 264,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 155072,
-    "outputTokens": 493,
+    "cacheReadInputTokens": 69120,
+    "outputTokens": 323,
     "contextWindow": 200000,
-    "contextTokens": 155304,
-    "percentage": 78,
+    "contextTokens": 69384,
+    "percentage": 35,
     "contextWindowIsAuthoritative": true
   }
 }

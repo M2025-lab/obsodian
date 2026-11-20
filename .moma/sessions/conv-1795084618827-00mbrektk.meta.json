@@ -4,8 +4,8 @@
   "title": "调研接入文字转图片能力方案",
   "titleGenerationStatus": "success",
   "createdAt": 1795084618827,
-  "updatedAt": 1795097204041,
-  "lastResponseAt": 1795085022493,
+  "updatedAt": 1795157689884,
+  "lastResponseAt": 1795157669325,
   "sessionId": "a6f722bc-3ed4-49d1-ab1b-07c4c8af3b41",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,12 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 1664,
+    "inputTokens": 828,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 28800,
-    "outputTokens": 449,
+    "cacheReadInputTokens": 78592,
+    "outputTokens": 102,
     "contextWindow": 200000,
-    "contextTokens": 30464,
-    "percentage": 15
-  }
+    "contextTokens": 79420,
+    "percentage": 40
+  },
+  "resumeAtMessageId": "5c7f174d-a92e-4b0d-ae89-0b29fae4abd3"
 }
