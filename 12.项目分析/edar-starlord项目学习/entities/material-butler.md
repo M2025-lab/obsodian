@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialButlerService 管家派工服务
 
+> 🔗 飞书：https://beike.feishu.cn/docx/X6BfdNbohoEY93xjDftceyWcn5g
+
 ## 概述
 管家（Butler）角色的派工工作台。查询待派工任务、可改约任务、派工统计、历史派工记录。支持整装项目（project）和中央仓（central）两种模式。是交付模块的派工决策入口。
 

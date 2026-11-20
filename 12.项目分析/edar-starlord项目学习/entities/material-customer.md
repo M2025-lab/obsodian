@@ -1,4 +1,5 @@
 ---
+
 title: MaterialCustomerService - 客户主材进展服务
 created: 2026-07-01
 updated: 2026-07-01
@@ -11,6 +12,8 @@ confidence: high
 ---
 
 # MaterialCustomerService 客户主材进展服务
+
+> 🔗 飞书：https://beike.feishu.cn/docx/AUgYdNoFVoH961xFOwEcDQornah
 
 ## 概述
 面向 C 端客户的主材进展查询服务。将 TaskDispatch（任务调度）数据按物料维度（materialCode + supplierCode）聚合为"主材进展"视图，供客户查看家中主材的排产、生产、送货、安装进度。支持按 projectOrderId 查询全量进展、按物料+供应商查询单个物料详情、全量扫描索引。

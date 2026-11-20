@@ -1,4 +1,7 @@
 [[10.项目整理/Model=5、6、7 业务模式影响哪些]]
+
+> 🔗 飞书：https://beike.feishu.cn/docx/JVK1dZvdpoSJcWxFWdkcpoJanye
+
 ## 一、入口数量统计
 
 项目中Mode配置共有 **7个主要入口**：

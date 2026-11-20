@@ -10,6 +10,8 @@ confidence: high
 
 ## 概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/VB0Sd9lzLox5aWxVQEacvCOhnlg
+
 品类流程作业配置服务（CategoryProcessService）管理每个品类规则下的**作业流程定义（ProcessDefine）**，包括节点配置、连线关系、时间约束、激活条件、通知推送等完整工序信息。它是交付流程三层配置（规则 → 品类 → 作业流程）的最底层，直接定义"某品类物料在某个配送方式下要经过哪些节点、每个节点由谁执行、耗时多久、有什么前置条件"。
 
 核心数据结构：

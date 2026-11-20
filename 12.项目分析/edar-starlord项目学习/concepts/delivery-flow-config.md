@@ -9,6 +9,8 @@ confidence: high
 
 # 交付流程配置驱动 (DeliveryFlow)
 
+> 🔗 飞书：https://beike.feishu.cn/docx/CvPTdQ5vDo2JA4xU5hlcLyoanBH
+
 ## 概述
 V2 交付流程采用配置驱动模式：通过"品类规则引擎"将"什么品类 x 什么分公司 x 什么套餐"映射到"什么物料流程模板"。模板定义了流程节点、节点间的转移条件、每个节点的执行人角色和时间规则。
 

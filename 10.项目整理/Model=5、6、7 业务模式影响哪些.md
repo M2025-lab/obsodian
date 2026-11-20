@@ -1,5 +1,8 @@
 [[10.项目整理/Mode配置入口完整汇总]]
 
+> 🔗 飞书：https://beike.feishu.cn/docx/KGYDdci0lo0vHIx6Z5pccsfEnFc
+
+
 
 ## Mode 5/6/7 各影响维度的业务含义详解
 

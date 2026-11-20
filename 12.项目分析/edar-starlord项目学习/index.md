@@ -1,5 +1,8 @@
 # Wiki Index
 
+> 🔗 飞书：https://beike.feishu.cn/docx/RixGd5Ol2odAwyxTVZRcKiopnXc
+
+
 > Content catalog. Every wiki page listed under its type with a one-line summary.
 > Read this first to find relevant pages for any query.
 > Last updated: 2026-07-01 | Total pages: 24

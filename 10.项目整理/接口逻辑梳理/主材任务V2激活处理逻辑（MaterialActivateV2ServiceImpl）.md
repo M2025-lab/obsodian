@@ -13,6 +13,8 @@ method: activateTaskDispatch(TaskDispatch)
 进行激活操作、查第一个未激活的节点，并激活
 # 主材任务V2激活处理逻辑（MaterialActivateV2ServiceImpl）
 
+> 🔗 飞书：https://beike.feishu.cn/docx/GeJkdCBxuoQa8Rxk6VxcSKcTnTb
+
 ## 功能概述
 
 `activateTaskDispatch(TaskDispatch)` 是 v2 版的主材任务**通用激活**方法。

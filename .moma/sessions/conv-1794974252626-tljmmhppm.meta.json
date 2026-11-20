@@ -4,8 +4,8 @@
   "title": "搭建 roomie issue 自动闭环 LLM 工具调用链路框架",
   "titleGenerationStatus": "success",
   "createdAt": 1794974252626,
-  "updatedAt": 1794998266685,
-  "lastResponseAt": 1794998266685,
+  "updatedAt": 1795081937904,
+  "lastResponseAt": 1795058170326,
   "sessionId": "a20082ac-3cc3-4c32-8a1f-77c3b3d0798d",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,12 +13,12 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 119,
+    "inputTokens": 458,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 150080,
-    "outputTokens": 558,
+    "cacheReadInputTokens": 149696,
+    "outputTokens": 517,
     "contextWindow": 200000,
-    "contextTokens": 150199,
+    "contextTokens": 150154,
     "percentage": 75,
     "contextWindowIsAuthoritative": true
   }

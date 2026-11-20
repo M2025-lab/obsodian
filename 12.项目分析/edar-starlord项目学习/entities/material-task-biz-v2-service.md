@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialTaskBizV2Service
 
+> 🔗 飞书：https://beike.feishu.cn/docx/XJ8BdXK2Oo9DTxxs64DcFWCKnuc
+
 ## 概述
 
 `MaterialTaskBizV2Service` 是面向业务侧（工长、管家、设计师等角色）的主材任务查询服务。它聚合了多种维度的任务查询能力，服务于移动端首页卡片、任务列表、零售任务详情等前端场景。该服务的主要特点是将多个底层 DAO 查询与外部系统（项目订单、作业中心、客户中心、Ceres 组织架构等）的数据聚合为前端友好的 VO 对象。

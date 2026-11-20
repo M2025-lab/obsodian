@@ -7,6 +7,8 @@ method: handleNode
 
 ## 功能概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/AiJMdxAcZoEOxYxFy4PcZvoon4b
+
 主材任务节点完成处理的核心入口。处理一个任务节点（TaskDispatchNode）的完成逻辑，包括：自动完成前置未激活的依赖、激活当前任务、标记当前节点完成、决定下一节点（合格进入下一节点 / 不合格回退重启）、通知供应链系统、发MQ消息、激活下一任务。
 
 ## 入口

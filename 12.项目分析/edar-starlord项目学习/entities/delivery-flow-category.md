@@ -10,6 +10,8 @@ confidence: high
 
 ## 概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/RsjzdmuwbowJWNxPMlkc9Nzbnxf
+
 品类规则服务（DeliveryFlowCategoryService）是交付流程配置管理的核心服务，负责管理货物配送流程中的**品类规则（Category）**的完整生命周期。品类规则定义了某个品类物料在特定供应商下应遵循的节点流程模板，是规则 → 品类 → 作业流程三层配置体系的中间层。
 
 品类规则核心概念：

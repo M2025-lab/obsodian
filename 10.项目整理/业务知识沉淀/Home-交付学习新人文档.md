@@ -1,5 +1,8 @@
 展示了Home家装系统map以及交付系统和施工包的简单介绍
 ## HOME系统Map图
+
+> 🔗 飞书：https://beike.feishu.cn/docx/ULlydkvQ2opNhKxIlvhcyp0Ynlg
+
 ![[10.项目整理/业务知识沉淀/fig/Pasted image 20260710102321.png]]
 - 中控层 = 把客户需求转化为可执行的"产品+服务+价格"方案
 - 内控=工程量审核、成本把控、调量确认

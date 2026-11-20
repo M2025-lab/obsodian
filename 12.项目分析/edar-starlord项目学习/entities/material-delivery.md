@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialDeliveryService 物料送货服务
 
+> 🔗 飞书：https://beike.feishu.cn/docx/U3cCdHUx6omGDNx4uCecZjatnHh
+
 ## 概述
 管理主材送货任务的查询和统计。区分"单独送货"和"批量送货"两种模式：单独送货通过 [[12.项目分析/edar-starlord项目学习/接口分析]] 查询，批量送货通过 [[material-batch-v2]] 查询，最终合并展示。是交付模块中面向安装工和管家的送货任务列表视图。
 

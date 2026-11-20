@@ -12,6 +12,8 @@ confidence: high
 
 # DeliveryMaterialBizService（配送主材业务服务）
 
+> 🔗 飞书：https://beike.feishu.cn/docx/DWPidqkKeo9shbxNk7GcoLBdn8g
+
 ## 概述
 
 配送主材业务核心服务（V2 版本），负责**根据供应链（SCM）事件消息驱动主材任务的创建与取消**。是连接供应链系统（OMS）和主材任务系统的桥梁。

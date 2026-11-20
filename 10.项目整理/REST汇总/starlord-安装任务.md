@@ -1,5 +1,8 @@
 # 安装任务 & 验收模块
 
+> 🔗 飞书：https://beike.feishu.cn/docx/F4PadywDSozfBOxTUOtc5lAZnfh
+
+
 **接口数**: 49 | **类数**: 8
 
 ---

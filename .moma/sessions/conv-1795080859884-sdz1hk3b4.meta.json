@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795080859884-sdz1hk3b4",
+  "providerId": "claude",
+  "title": "跟进群消息推送接口化改造进度",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795080859884,
+  "updatedAt": 1795097204041,
+  "lastResponseAt": 1795093367734,
+  "sessionId": "1a71e06a-6222-4210-a300-155abf1b587b",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1a71e06a-6222-4210-a300-155abf1b587b"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 232,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 155072,
+    "outputTokens": 493,
+    "contextWindow": 200000,
+    "contextTokens": 155304,
+    "percentage": 78,
+    "contextWindowIsAuthoritative": true
+  }
+}

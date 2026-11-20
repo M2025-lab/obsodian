@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialDelayProcessService 物料延期处理服务
 
+> 🔗 飞书：https://beike.feishu.cn/docx/NjRKdx7nfoq6eRxtsntcTN8jnQe
+
 ## 概述
 管理物料任务延期的完整生命周期：创建延期单、补录延期原因、确认延期、查询延期、删除延期。延期原因按角色（业主/非业主）分类，确认后推送通知。同时处理来自 WorkCenter 的延期撤销任务和管家/经理派工事件触发的延期处理。
 

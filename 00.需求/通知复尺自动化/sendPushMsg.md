@@ -1,5 +1,8 @@
 # com.ke.utopia.manager.push.PushClient#sendPushMsg 业务执行说明
 
+> 🔗 飞书：https://beike.feishu.cn/docx/FGE0dC4YzoJGBqxPzX0ctt4gnmc
+
+
 > 本文按"递归分层 + 业务语义"格式还原，所有结论均基于源码逐行核对（无猜测）。 配套分析见 `doc/handleNode_business_analysis.md`（handlerNode 是它的最上游业务驱动方之一）。
 
 ---

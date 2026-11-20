@@ -1,5 +1,8 @@
 # 主材任务与流程配置（目录索引）
 
+> 🔗 飞书：https://beike.feishu.cn/docx/LtcBd4YD3o2CDNxQGOvcWA4gnjo
+
+
 > 来源：2026-08-28 对 edar-starlord 主材任务链路的逐层代码调查。
 > 所有结论均标注 文件路径:行号，代码仓库：`/Users/mirror/IdeaProjects/edar-starlord`（Spring Boot 多模块：web/api/service/dao/manager/base）。
 > 不确定/无法从代码判定的事项集中在 [[99-待确认事项]]，未与结论混写。

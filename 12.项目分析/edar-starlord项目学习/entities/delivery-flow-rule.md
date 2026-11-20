@@ -10,6 +10,8 @@ confidence: high
 
 ## 概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/WKLydqscgoVv9YxlAzXcrwhknOd
+
 配送流程规则服务（DeliveryFlowRuleService）管理交付流程三层配置体系的最顶层——**规则（Rule）**。Rule 定义了"在什么分公司、什么套餐、什么销售类型、什么单据类型下，应该使用哪套品类配置"。一份 Rule 关联多个 RuleUnit（规则明细组合）和 Category（品类规则），最终通过 deliveryProcessCfgId 关联到全流程配置（排程）。
 
 核心概念：

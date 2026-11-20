@@ -1,5 +1,8 @@
 # MaterialHandleV2ServiceImpl#handleNode 完整业务执行说明
 
+> 🔗 飞书：https://beike.feishu.cn/docx/OgkWdfj8loQlIgxWSrqcUAlLnbc
+
+
 > 递归追踪目标函数及其整条调用链，还原"完成一个主材任务节点"背后的全部业务分支、数据流与状态流转。 所有结论均来自源码逐行核对（edar-starlord-service / edar-starlord-dao / edar-starlord-base）。
 
 ---

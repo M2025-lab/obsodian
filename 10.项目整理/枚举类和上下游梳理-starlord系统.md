@@ -1,5 +1,8 @@
 用户要求分析这个家装领域材料履约系统的项目职责。这是一个Spring Boot项目，从之前的探索可以看到：
 
+> 🔗 飞书：https://beike.feishu.cn/docx/WeYgd1DMJoLrHGxA99gcd2NMnef
+
+
 1. 项目名称：edar-starlord（可能是内部代号）
 2. 主要模块：
    - edar-starlord-api：API接口定义（Feign Client）

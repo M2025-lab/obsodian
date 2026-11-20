@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialDeliverEngineerService（交付工程师主材任务服务）
 
+> 🔗 飞书：https://beike.feishu.cn/docx/VOpddAWzJo5zsixI1RscCnfZnSb
+
 ## 概述
 
 交付工程师主材任务查询服务，专门为**交付工程师**角色提供。核心功能是查询指定项目订单下、类型为**测量**或**复尺**的主材进展任务列表。查询条件限定为：激活未完成状态、节点类型为"通知可启动"/"通知启动"/"启动"、任务类型为测量或复尺。

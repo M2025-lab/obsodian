@@ -1,0 +1,24 @@
+{
+  "id": "conv-1795084618827-00mbrektk",
+  "providerId": "claude",
+  "title": "调研接入文字转图片能力方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795084618827,
+  "updatedAt": 1795097204041,
+  "lastResponseAt": 1795085022493,
+  "sessionId": "a6f722bc-3ed4-49d1-ab1b-07c4c8af3b41",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a6f722bc-3ed4-49d1-ab1b-07c4c8af3b41"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1664,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 28800,
+    "outputTokens": 449,
+    "contextWindow": 200000,
+    "contextTokens": 30464,
+    "percentage": 15
+  }
+}

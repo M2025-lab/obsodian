@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialFlowRuleService 物料流程规则服务
 
+> 🔗 飞书：https://beike.feishu.cn/docx/UGZzd5EPzoC2SDxXIDJcYIV5nWb
+
 ## 概述
 管理物料流程规则的完整生命周期：创建、更新、失效、生效、设为默认、复制、查询。物料流程规则定义了"什么品类 x 什么分公司 x 什么套餐"使用哪套物料流程模板，是交付流程配置的核心规则引擎。与 [[material-flow-category]]（品类规则）和 [[material-template-v2]]（模板）紧密关联。
 

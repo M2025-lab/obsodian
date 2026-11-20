@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialScheduleService
 
+> 🔗 飞书：https://beike.feishu.cn/docx/NPCEdaQJqo2WcmxoUFrcMnBQnwZ
+
 ## 概述
 
 `MaterialScheduleService` 是主材排程与日历服务，提供主材任务的日历视图、日报生成、数据清理和 Push 推送等功能。它帮助管理者（工长、管家等角色）按天查看任务的完成情况，并支持每日自动推送任务日报。

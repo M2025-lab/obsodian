@@ -79,6 +79,7 @@
   "savedProviderThinkingBudget": {
     "claude": "off"
   },
+  "lastSelectedModelIdByProvider": {},
   "savedProviderPermissionMode": {
     "claude": "yolo"
   },
@@ -106,6 +107,15 @@
     "supportFileSuffixes": [
       "md",
       "html"
+    ],
+    "securityNoticeUrl": "https://moma.ke.com/security-notice",
+    "riskBullets": [
+      "应用访问强制登录鉴权：贝壳用户使用单点登录，非贝壳用户使用短信验证码登录。",
+      "严格最小权限原则，仅开放本人业务必需的数据与功能。",
+      "个人身份信息（如手机号、身份证等）前端必须脱敏，禁止明文展示。",
+      "严格数据权限隔离，禁止越权查看、操作他人信息及数据。",
+      "严格遵守国家法律法规，严格遵守公司安全合规要求。",
+      "涉及AI内容生成，请自行在文档中标注。"
     ]
   },
   "autoUpdate": true,
@@ -160,7 +170,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1795052714516,
+  "lastGrayReleaseCheck": 1795139520639,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -170,8 +180,8 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1795052714621,
-    "fetchedPluginVersion": "0.3.27",
+    "fetchedAt": 1795139520813,
+    "fetchedPluginVersion": "0.3.32",
     "envVars": {
       "claude": {
         "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "800000",
@@ -183,7 +193,7 @@
   "workbenchAutoOpenDismissed": false,
   "hostAuthSelfHealGrayEnabled": true,
   "homepageEnabled": true,
-  "lastGrayReleaseDismiss": 1794987253631,
+  "lastGrayReleaseDismiss": 1795078916222,
   "lastGrayReleaseDismissVersion": "0.3.31",
   "voiceBotEnabled": false,
   "codexGrayEnabled": false

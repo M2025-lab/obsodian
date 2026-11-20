@@ -12,6 +12,8 @@ confidence: high
 
 # MaterialFlowQueryService 物料流程统一查询服务
 
+> 🔗 飞书：https://beike.feishu.cn/docx/TQYZdd1L0of14xxAHCPccxE3nMc
+
 ## 概述
 提供物料流程的统一配置查询接口，支持按条件查询物料配置数据（模板+节点+规则）和应用层数据（指定任务类型的调度详情）。是交付流程的数据透视层，整合了 [[material-flow-rule]]、[[material-template-v2]] 的配置数据。
 

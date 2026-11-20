@@ -10,6 +10,8 @@ confidence: high
 
 ## 概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/Evt8dwhH0o4cqbxnh5HcUBNvnod
+
 任务节点配置查询服务（DeliveryFlowTaskNodeService）为前端品类流程编辑页面提供**查询型**支撑服务，返回节点模式、角色类型、工种列表和时间条件选项。它是纯粹的读服务，不涉及数据写入操作，主要服务于品类作业流程配置的前端渲染和数据选择。
 
 与其他交付流程服务的关系：此服务被 `CategoryProcessController` 直接调用，返回值用于前端构建品类流程编辑界面的下拉选项和选择器数据。^[DeliveryFlowTaskNodeServiceImpl.java]

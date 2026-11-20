@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795061287097-6cueuc3w0",
+  "providerId": "claude",
+  "title": "对比新版聊天记录分析召回率与问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795061287097,
+  "updatedAt": 1795097204041,
+  "lastResponseAt": 1795083492280,
+  "sessionId": "a2f43ae4-2f42-4ac0-b059-33b331d69c24",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a2f43ae4-2f42-4ac0-b059-33b331d69c24"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 705,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 99712,
+    "outputTokens": 776,
+    "contextWindow": 200000,
+    "contextTokens": 100417,
+    "percentage": 50,
+    "contextWindowIsAuthoritative": true
+  }
+}

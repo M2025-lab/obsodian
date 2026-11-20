@@ -1,5 +1,8 @@
 # 01 接口速查与 curl
 
+> 🔗 飞书：https://beike.feishu.cn/docx/Rp3vd4CLQoIcWnxhX4tcKctHnmd
+
+
 > 本地服务地址：`127.0.0.1:8080`。以下 curl 均为可直接执行的示例；带 ⚠️ 的注意点来自代码核验。
 
 ## 1. 主材任务生成接口

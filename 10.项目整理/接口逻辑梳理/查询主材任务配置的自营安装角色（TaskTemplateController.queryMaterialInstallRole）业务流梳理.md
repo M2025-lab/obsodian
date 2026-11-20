@@ -7,6 +7,8 @@ method: queryMaterialInstallRole
 
 ## 功能概述
 
+> 🔗 飞书：https://beike.feishu.cn/docx/S4McdaaZUo5fkOxaCXgcWq56njb
+
 根据 SKU、店铺、项目业务类型等参数，查询主材任务配置表中对应物料的安装角色（roleCode），决定每个 SKU 应该由什么工人角色安装。查询时按"履约分公司 + 供应商"的匹配粒度逐级降级兜底（指定分公司指定供应商 → 指定分公司不限供应商 → 不限分公司指定供应商 → 不限分公司不限供应商）。
 
 ## 入口

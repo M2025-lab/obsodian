@@ -1,5 +1,8 @@
 # StarLord 核心数据表梳理
 
+> 🔗 飞书：https://beike.feishu.cn/docx/IiQtdxQ4ZoBDgbxw5OxcLuk7nTd
+
+
 ## 概述
 
 - 分析依据：基于 MyBatis Generator 自动生成的 model/DAO 层代码

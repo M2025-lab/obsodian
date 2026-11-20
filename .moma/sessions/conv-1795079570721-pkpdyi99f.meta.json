@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795079570721-pkpdyi99f",
+  "providerId": "claude",
+  "title": "优化云助理回答 Agent 的 Prompt",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795079570721,
+  "updatedAt": 1795081978815,
+  "lastResponseAt": 1795080238084,
+  "sessionId": "d7044ab1-ca4a-48d8-b8ee-65ba28b19044",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "d7044ab1-ca4a-48d8-b8ee-65ba28b19044"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1699,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 125376,
+    "outputTokens": 5323,
+    "contextWindow": 200000,
+    "contextTokens": 127075,
+    "percentage": 64,
+    "contextWindowIsAuthoritative": true
+  }
+}
