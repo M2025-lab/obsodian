@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795420241790-x9uzq4msc",
+  "providerId": "claude",
+  "title": "评估重新运行后的准确率与召回率",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795420241790,
+  "updatedAt": 1795429511520,
+  "lastResponseAt": 1795429511520,
+  "sessionId": "f542b34d-d99c-4f3a-9d15-3eab5cad7b3a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "f542b34d-d99c-4f3a-9d15-3eab5cad7b3a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1229,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 90560,
+    "outputTokens": 8289,
+    "contextWindow": 200000,
+    "contextTokens": 91789,
+    "percentage": 46,
+    "contextWindowIsAuthoritative": true
+  }
+}

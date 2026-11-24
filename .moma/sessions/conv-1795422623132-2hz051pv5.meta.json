@@ -1,0 +1,24 @@
+{
+  "id": "conv-1795422623132-2hz051pv5",
+  "providerId": "claude",
+  "title": "替换 agenda 中已废弃的 Feign 接口调用",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795422623132,
+  "updatedAt": 1795425202343,
+  "lastResponseAt": 1795425199082,
+  "sessionId": "79b9d2b3-2d9d-4c2c-91e4-0489115cfd0f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "79b9d2b3-2d9d-4c2c-91e4-0489115cfd0f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 421,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 95744,
+    "outputTokens": 185,
+    "contextWindow": 200000,
+    "contextTokens": 96165,
+    "percentage": 48
+  }
+}

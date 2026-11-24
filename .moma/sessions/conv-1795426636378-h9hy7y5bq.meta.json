@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795426636378-h9hy7y5bq",
+  "providerId": "claude",
+  "title": "重写 DailyPushPlanAnalyzeServiceImpl 进仓时间分析逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795426636378,
+  "updatedAt": 1795437702012,
+  "lastResponseAt": 1795436674856,
+  "sessionId": "c1fbbac0-bb72-4974-850e-545830d6e93d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "c1fbbac0-bb72-4974-850e-545830d6e93d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 108,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 154368,
+    "outputTokens": 563,
+    "contextWindow": 200000,
+    "contextTokens": 154476,
+    "percentage": 77,
+    "contextWindowIsAuthoritative": true
+  }
+}

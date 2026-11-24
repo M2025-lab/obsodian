@@ -56,31 +56,31 @@
             }
           },
           {
-            "id": "a231d006dae0b8af",
+            "id": "5a3fdffa35a651dc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "90.AI学习/llm-agent/llm-master/docs/interview/llm/loop_engineering_interview.md",
+                "file": "视频识别的提示词.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "loop_engineering_interview"
+              "title": "视频识别的提示词"
             }
           },
           {
-            "id": "145a6e09b4548b00",
+            "id": "7fc3aa03a0ca3dc5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "80.日报周报/季度OKR-2026Q4.md",
+                "file": "00.需求/roomie/eden-agenda-推送数据源queryProgress迁移-技术方案.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "季度OKR-2026Q4"
+              "title": "eden-agenda-推送数据源queryProgress迁移-技术方案"
             }
           }
         ],
@@ -163,7 +163,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 320
+    "width": 320,
+    "collapsed": true
   },
   "right": {
     "id": "9ea8a1c419913df5",
@@ -295,7 +296,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 713.08984375
+    "width": 876.9453125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -313,11 +314,17 @@
       "moma:Open Moma": false
     }
   },
-  "active": "145a6e09b4548b00",
+  "active": "15c2e3c6ab073f67",
   "lastOpenFiles": [
+    "视频识别的提示词.md",
+    "00.需求/roomie/eden-agenda-推送数据源queryProgress迁移-技术方案.md",
+    "00.需求/roomie/群消息汇总/Leonis私聊汇总推送-实施交付.md",
+    "90.AI学习/llm-agent/llm-master/docs/roadmap/README.md",
+    "90.AI学习/llm-agent/llm-master/docs/topics/agent.md",
+    "00.需求/roomie/群消息汇总/验证集基线-赵公口主材问题台账.md",
+    "80.日报周报/季度OKR-2026Q4.md",
     "00.需求/通知复尺自动化/通知复尺自动化-金属门通知复尺屏蔽-技术方案.md",
     "90.AI学习/llm-agent/llm-master/docs/interview/llm/loop_engineering_interview.md",
-    "80.日报周报/季度OKR-2026Q4.md",
     "考核/考核系统上下游交互清单（对端系统×交互信息总表）.md",
     "考核/考核系统scm-workbench-功能与代码学习指南.md",
     "00.需求/roomie/云助理群场景提效·Roomie接入初版方案.md",
@@ -346,12 +353,6 @@
     "00.需求/roomie/项目过滤/eden-agenda-大区分组分析-技术方案.md",
     "00.需求/roomie/项目过滤",
     "00.需求/roomie/群消息汇总",
-    "00.需求/roomie/未命名.md",
-    "00.需求/roomie/字段映射-四板块汇总与源表对照.md",
-    "10.工作/技术方案/eden-agenda-Excel推送链路迁移-技术方案.md",
-    "00.需求/roomie/文档处理逻辑.md",
-    "录音目录/20261110-170225-云助理接入Roomie工作台与数据落库进展.md",
-    "录音目录/20261111-102834-云助理从材料环节切入为项目经理提效.md",
     "00.需求/roomie/云助理-项目进展汇报-202611-副本.html",
     "录音目录",
     "section5.xml",

@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795422251576-95pq9mi7d",
+  "providerId": "claude",
+  "title": "清理 starlord Maven 本地缓存依赖",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795422251576,
+  "updatedAt": 1795422577516,
+  "lastResponseAt": 1795422459321,
+  "sessionId": "db70486f-0164-4ee1-aeb5-ad8a2249a342",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "db70486f-0164-4ee1-aeb5-ad8a2249a342"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 901,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 30016,
+    "outputTokens": 368,
+    "contextWindow": 200000,
+    "contextTokens": 30917,
+    "percentage": 15,
+    "contextWindowIsAuthoritative": true
+  }
+}

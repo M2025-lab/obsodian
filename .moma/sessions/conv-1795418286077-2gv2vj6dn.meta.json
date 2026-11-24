@@ -1,0 +1,52 @@
+{
+  "id": "conv-1795418286077-2gv2vj6dn",
+  "providerId": "claude",
+  "title": "解释 LeonisPersonalPusher#push 用法",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795418286077,
+  "updatedAt": 1795420419076,
+  "lastResponseAt": 1795420419043,
+  "sessionId": "2433dd05-ecd2-4c11-8f1c-2a8c9d18b410",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "2433dd05-ecd2-4c11-8f1c-2a8c9d18b410",
+    "subagentData": {
+      "call_47a0482c0c1b48238fce12ea": {
+        "id": "call_47a0482c0c1b48238fce12ea",
+        "description": "探索推送任务配置与管理端",
+        "prompt": "在 /Users/mirror/IdeaProjects/construction-agent 项目中探索以下内容（medium 广度）：\n\n1. `construction-agent-start` 模块里所有管理端 Controller（admin 相关），特别是管理 construction_channel_task 渠道任务的 Controller（保存任务、查询、手动触发等入口），给出文件路径和主要接口列表。\n\n2. `ApolloConfig.java`（在 service/apollo/ 下）中 signRecordPush 相关的所有配置字段（getSignRecordPushSpaceId 等），它们对应的 Apollo 配置 key 是什么（@Value 注解里的 key）。\n\n3. `SignRecordKafkaListener.java` 的完整结构：监听的 topic、消费逻辑概要、去重逻辑、try-catch 兜底。\n\n4. `ConstructionChannelTask` domain 类的字段列表（表结构），以及 ConstructionChannelTaskTarget 的字段列表。\n\n5. 查找是否有前端页面或 admin 接口可以创建 channel task（搜 \"channel\" 相关的 controller / VO / 页面目录）。\n\n返回：每个问题的答案，带文件路径和行号。重点是第 1 和第 2 个问题。",
+        "status": "error",
+        "toolCalls": [],
+        "isExpanded": false,
+        "result": "Agent terminated early due to an API error: API Error: 400 模型 deepseek-v4-flash 不可用，请重新选择模型"
+      },
+      "call_698997ddea8c4d63bc1f6aef": {
+        "id": "call_698997ddea8c4d63bc1f6aef",
+        "description": "探索推送任务配置与管理端",
+        "prompt": "在 /Users/mirror/IdeaProjects/construction-agent 项目中探索以下内容（medium 广度）：\n\n1. `construction-agent-start` 模块里所有管理端 Controller（admin 相关），特别是管理 construction_channel_task 渠道任务的 Controller（保存任务、查询、手动触发等入口），给出文件路径和主要接口列表。\n\n2. `ApolloConfig.java`（在 service/apollo/ 下）中 signRecordPush 相关的所有配置字段（getSignRecordPushSpaceId 等），它们对应的 Apollo 配置 key 是什么（@Value 注解里的 key）。\n\n3. `SignRecordKafkaListener.java` 的完整结构：监听的 topic、消费逻辑概要、去重逻辑、try-catch 兜底。\n\n4. `ConstructionChannelTask` domain 类的字段列表（表结构），以及 ConstructionChannelTaskTarget 的字段列表。\n\n5. 查找是否有前端页面或 admin 接口可以创建 channel task（搜 \"channel\" 相关的 controller / VO / 页面目录）。\n\n返回：每个问题的答案，带文件路径和行号。重点是第 1 和第 2 个问题。",
+        "status": "error",
+        "toolCalls": [],
+        "isExpanded": false,
+        "result": "Agent terminated early due to an API error: API Error: 400 模型 deepseek-v4-flash 不可用，请重新选择模型"
+      },
+      "call_bc7b5784507046f99778c94a": {
+        "id": "call_bc7b5784507046f99778c94a",
+        "description": "探索推送任务配置与管理端",
+        "prompt": "在 /Users/mirror/IdeaProjects/construction-agent 项目中探索以下内容（medium 广度）：\n\n1. `construction-agent-start` 模块里所有管理端 Controller（admin 相关），特别是管理 construction_channel_task 渠道任务的 Controller（保存任务、查询、手动触发等入口），给出文件路径和主要接口列表。\n\n2. `ApolloConfig.java`（在 service/apollo/ 下）中 signRecordPush 相关的所有配置字段（getSignRecordPushSpaceId 等），它们对应的 Apollo 配置 key 是什么（@Value 注解里的 key）。\n\n3. `SignRecordKafkaListener.java` 的完整结构：监听的 topic、消费逻辑概要、去重逻辑、try-catch 兜底。\n\n4. `ConstructionChannelTask` domain 类的字段列表（表结构），以及 ConstructionChannelTaskTarget 的字段列表。\n\n5. 查找是否有前端页面或 admin 接口可以创建 channel task（搜 \"channel\" 相关的 controller / VO / 页面目录）。\n\n返回：每个问题的答案，带文件路径和行号。重点是第 1 和第 2 个问题。",
+        "status": "error",
+        "toolCalls": [],
+        "isExpanded": false,
+        "result": "Agent terminated early due to an API error: API Error: 400 模型 deepseek-v4-flash 不可用，请重新选择模型"
+      }
+    }
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0
+  }
+}

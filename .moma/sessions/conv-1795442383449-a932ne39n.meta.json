@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795442383449-a932ne39n",
+  "providerId": "claude",
+  "title": "编写SQL查询主材任务节点链路",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795442383449,
+  "updatedAt": 1795442467866,
+  "lastResponseAt": 1795442467866,
+  "sessionId": "1daae8ec-c4f9-4b57-83e6-d68a354c04ef",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "1daae8ec-c4f9-4b57-83e6-d68a354c04ef"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 4799,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 56640,
+    "outputTokens": 3321,
+    "contextWindow": 200000,
+    "contextTokens": 61439,
+    "percentage": 31,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795420419203-xioss1vv6",
+  "providerId": "claude",
+  "title": "实现 Leonis 私聊消息推送功能接入",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795420419203,
+  "updatedAt": 1795421534674,
+  "lastResponseAt": 1795421534674,
+  "sessionId": "5606a6af-abe4-4240-9bb0-f62582050293",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "5606a6af-abe4-4240-9bb0-f62582050293"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 295,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 87872,
+    "outputTokens": 225,
+    "contextWindow": 200000,
+    "contextTokens": 88167,
+    "percentage": 44,
+    "contextWindowIsAuthoritative": true
+  }
+}

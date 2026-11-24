@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795437767910-3lqjjulte",
+  "providerId": "claude",
+  "title": "分析 LeonisPersonalPusher 推送逻辑以在 agenda 中调用",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795437767911,
+  "updatedAt": 1795441586053,
+  "lastResponseAt": 1795441586053,
+  "sessionId": "0982785d-f5d2-4cfd-8dfa-dbc8b61ed20e",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "0982785d-f5d2-4cfd-8dfa-dbc8b61ed20e"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 80,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 101120,
+    "outputTokens": 2799,
+    "contextWindow": 200000,
+    "contextTokens": 101200,
+    "percentage": 51,
+    "contextWindowIsAuthoritative": true
+  }
+}

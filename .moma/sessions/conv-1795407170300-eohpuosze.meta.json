@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795407170300-eohpuosze",
+  "providerId": "claude",
+  "title": "开发leonis_private_binding通用查询功能",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795407170300,
+  "updatedAt": 1795420430728,
+  "lastResponseAt": 1795414351671,
+  "sessionId": "3e709235-367e-4719-9d4f-3e19f66d474b",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "3e709235-367e-4719-9d4f-3e19f66d474b"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 518,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 81856,
+    "outputTokens": 599,
+    "contextWindow": 200000,
+    "contextTokens": 82374,
+    "percentage": 41,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "conv-1795425206233-xk5xifey6",
+  "providerId": "claude",
+  "title": "修复 DailyPushPlanAnalyzeServiceImpl 99 行后代码",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795425206233,
+  "updatedAt": 1795437691188,
+  "lastResponseAt": 1795426262842,
+  "sessionId": "6f922315-bb28-4d58-8eb3-7771e710583a",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "6f922315-bb28-4d58-8eb3-7771e710583a"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1653,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 76608,
+    "outputTokens": 458,
+    "contextWindow": 200000,
+    "contextTokens": 78261,
+    "percentage": 39
+  }
+}
