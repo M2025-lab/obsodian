@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="light" name="color-scheme"/>
-<title>roomie 问题闭环 · 详情 / 回复联调页</title>
+<title>roomie 问题闭环 · 详情 / 回复 / 推群联调页</title>
 <style>
 :root{--blue:#1a66ff;--ink:#172b46;--muted:#61728a;--line:#dde5ee;--paper:#fff;--wash:#f3f6fb;--green:#16805c;--red:#c0392b;--orange:#bc741f;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 *{box-sizing:border-box}
@@ -41,22 +41,31 @@ textarea:focus{outline:2px solid #c9dbff}
 .mono{font-family:var(--mono);font-size:12px;color:var(--muted)}
 .empty{display:none;color:var(--muted);font-size:13px;padding:26px 0;text-align:center}
 .block.on{display:block}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-size:11.5px;color:var(--muted);text-align:left;font-weight:600;letter-spacing:.04em;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:7px 8px;border-bottom:1px dashed var(--line);vertical-align:top;word-break:break-all}
+.tbl tr.row{cursor:pointer}
+.tbl tr.row:hover td{background:var(--wash)}
+.tbl td.num{font-family:var(--mono);white-space:nowrap}
 </style>
 </head>
 <body>
 <header class="wrap" style="padding-bottom:0">
-<h1>roomie 问题闭环 · 详情 / 回复联调页</h1>
-<p class="sub">对应 eden-agenda 两个联调接口：<code>issue-detail</code>（问题详情）与
-<code>issue-reply</code>（自动闭环回复）—— 页面不直接出网，
-把接口返回的 <code>ResultDTO</code> JSON 粘贴进来即可渲染（联调期演示用）。</p>
+<h1>roomie 问题闭环 · 列表 / 详情 / 回复 / 推群联调页</h1>
+<p class="sub">对应 eden-agenda 四个联调接口：<code>issue-list</code>（问题列表）、
+<code>issue-detail</code>（问题详情）、<code>issue-reply</code>（自动闭环回复）与
+<code>issue-reply-push</code>（闭环回复 + 推回原群）——
+页面不直接出网，把接口返回的 <code>ResultDTO</code> JSON 粘贴进来即可渲染（联调期演示用）。</p>
 </header>
 <main class="wrap">
 <section class="card">
-<h2>① 粘贴接口返回 <span class="n">curl 拿到的 JSON 直接贴，含 data 外壳也行</span></h2>
+<h2>① 粘贴接口返回 <span class="n">curl 拿到的 JSON 直接贴，含 data 外壳也行；列表行可点击联动详情</span></h2>
 <label for="detail-json">issue-detail 返回（ResultDTO&lt;IssueDetailVO&gt;）</label>
 <textarea id="detail-json" placeholder='{"code":200,"message":"success","data":{"id":1,"groupName":"…","detail":"…","resolved":false}}'></textarea>
-<label for="reply-json" style="margin-top:12px">issue-reply 返回（ResultDTO&lt;IssueReplyVO&gt;，可只贴详情，回复区隐藏）</label>
+<label for="reply-json" style="margin-top:12px">issue-reply / issue-reply-push 返回（ResultDTO&lt;IssueReplyVO&gt; / &lt;IssueReplyPushVO&gt;，可只贴详情，回复区隐藏）</label>
 <textarea id="reply-json" placeholder='{"code":200,"data":{"reply":"…","messageId":"68f2…","costMs":41026}}'></textarea>
+<label for="list-json" style="margin-top:12px">issue-list 返回（ResultDTO&lt;IssueListPageVO&gt;，贴了就出列表）</label>
+<textarea id="list-json" placeholder='{"code":200,"data":{"list":[{"id":1,"detail":"…","senderName":"…","groupId":"…"}],"total":123,"pageNum":1,"pageSize":20,"hasMore":true}}' style="min-height:110px"></textarea>
 <div class="row">
 <button class="btn primary" id="render-btn">渲染</button>
 <button class="btn" id="demo-btn">载入示例数据</button>
@@ -64,8 +73,17 @@ textarea:focus{outline:2px solid #c9dbff}
 </div>
 <div class="err" id="parse-err"></div>
 </section>
+<section class="card" id="list-card" style="display:none">
+<h2>② 问题列表 <span class="n">IssueListPageVO · 点击行渲染详情</span></h2>
+<p class="mono" id="list-meta">—</p>
+<table class="tbl" id="list-tbl">
+<thead><tr><th>ID</th><th>问题描述</th><th>提问人</th><th>类型</th><th>品类</th><th>业主</th><th>来源群</th><th>提问时间</th><th>状态</th></tr></thead>
+<tbody id="list-body"></tbody>
+</table>
+<p class="mono" style="margin:10px 0 0">点击行 = 把该行当 issue-detail 渲染（列表行字段就够，详情卡显示同口径数据）；回复/推送区不受影响。</p>
+</section>
 <section class="card">
-<h2>② 问题详情 <span class="n">IssueDetailVO</span></h2>
+<h2>③ 问题详情 <span class="n">IssueDetailVO</span></h2>
 <div class="empty block" id="detail-empty">粘贴 issue-detail 返回后点「渲染」——或先「载入示例数据」看效果</div>
 <dl class="grid" id="detail-grid" style="display:none">
 <dt>问题 ID</dt><dd id="d-id">—</dd>
@@ -80,7 +98,7 @@ textarea:focus{outline:2px solid #c9dbff}
 </dl>
 </section>
 <section class="card" id="reply-card" style="display:none">
-<h2>③ 自动闭环回复 <span class="n">IssueReplyVO · 小师父 Agent</span></h2>
+<h2>④ 自动闭环回复 <span class="n">IssueReplyVO / IssueReplyPushVO · 小师父 Agent</span></h2>
 <dl class="grid">
 <dt>耗时</dt><dd id="r-cost">—</dd>
 <dt>messageId</dt><dd id="r-msg-id" class="mono">—</dd>
@@ -89,22 +107,46 @@ textarea:focus{outline:2px solid #c9dbff}
 <div class="reply" id="r-reply">—</div>
 <p class="mono" style="margin:12px 0 0">排障：拿 messageId 去小师父后台查 Agent 全过程（模型/工具编排都在它那边跑）。</p>
 </section>
+<section class="card" id="push-card" style="display:none">
+<h2>⑤ 推送结果 <span class="n">IssueReplyPushVO.pushItems · pushMsg</span></h2>
+<div class="empty block" id="push-empty">本次回复未携带推送结果（issue-reply 的返回没有 pushItems）</div>
+<dl class="grid" id="push-grid" style="display:none">
+<dt>推送目标群</dt><dd id="p-group">—</dd>
+<dt>推送状态</dt><dd id="p-status">—</dd>
+<dt>回执</dt><dd id="p-trace" class="mono">—</dd>
+<dt>失败原因</dt><dd id="p-err">—</dd>
+</dl>
+<p class="mono" style="margin:12px 0 0">推送语义：pushMsg 返回 errno=0 只代表任务下发成功，真实送达看异步回调；机器人由 roomie.push.robot-uc-code 配置。</p>
+</section>
 <section class="card">
-<h2>④ 字段对照 <span class="n">排障时对着改</span></h2>
+<h2>⑥ 字段对照 <span class="n">排障时对着改</span></h2>
 <dl class="grid">
 <dt>resolved</dt><dd>status=1 已解决 / status=0 未解决；后端在未解决时把 resolveTime 置 null（遮掉 1970 哨兵值），前端不再需要判</dd>
 <dt>questionTypeName</dt><dd>type 1橱柜/定制柜进度 2主材整改 3主材进度 4云助理取消 5其他</dd>
 <dt>senderName</dt><dd>首问发送人＝项目经理（三锚定位的锚2），闭环回复里的「提问人」就是他</dd>
 <dt>messageId</dt><dd>小师父异步任务标识——排障时拿它去小师父后台查 Agent 全过程（模型/工具编排在它那边）</dd>
+<dt>pushItems</dt><dd>issue-reply-push 独有：单群一条（groupId/success/traceId/errMsg），success=false 时看 errMsg；空数组=回复为空或 issue 无来源群，推送被跳过（后端日志有原因）</dd>
+<dt>list / hasMore</dt><dd>issue-list 返回 IssueListPageVO：list 行字段与详情同口径（type 映射名/品类/业主/解决状态），点行即渲染详情卡——从列表挑 issueId 去 curl reply/reply-push</dd>
 </dl>
 </section>
 </main>
 <footer class="wrap" style="padding-top:0">
-<p class="mono">本页纯本地渲染：无出网、无 moma runtime 授权、粘贴即显。后端代码：eden-agenda MsgAnalyzeService（issueDetail / reply 两个方法，reply 走小师父 Agent 服务）。</p>
+<p class="mono">本页纯本地渲染：无出网、无 moma runtime 授权、粘贴即显。后端代码：eden-agenda MsgAnalyzeService（issueDetail / reply / replyAndPush 三个方法，reply 走小师父 Agent 服务，replyAndPush 再把回复推回原群）。</p>
 </footer>
 <script>
 "use strict";
 var DEMO = {
+  list: {"code":200,"data":{
+    "list":[
+      {"id":42,"detail":"张三家的橱柜定制柜什么时候能进场？上周说好这周的。","senderName":"李四","senderId":"wm8cxxx",
+       "groupId":"wrQ7xxxx","groupName":"赵公口项目对接群","groupMessageIds":"[\"msg-101\",\"msg-102\"]",
+       "questionTypeName":"橱柜/定制柜进度","category":1,"categoryName":"橱木","homeownerName":"张三",
+       "resolved":false,"issueTime":"2026-11-17 09:41:00"},
+      {"id":41,"detail":"云助理群里主材下单进度看不到，后台哪个环节卡住了？","senderName":"王五","senderId":"wm9dxxx",
+       "groupId":"wrQ7xxxx","groupName":"赵公口项目对接群","groupMessageIds":"[\"msg-098\"]",
+       "questionTypeName":"主材进度","category":0,"categoryName":"其他","homeownerName":"",
+       "resolved":false,"issueTime":"2026-11-16 15:20:00"}],
+    "total":2,"pageNum":1,"pageSize":20,"hasMore":false}},
   detail: {"code":200,"message":"success","data":{
     "id":42,"groupId":"wrQ7xxxx","groupName":"赵公口项目对接群",
     "senderName":"李四","senderId":"wm8cxxx",
@@ -117,7 +159,9 @@ var DEMO = {
     "detail":"张三家的橱柜定制柜什么时候能进场？上周说好这周的。",
     "reply":"张三家橱柜预计本周四（11/19）进场。当前进度：测量已完成，图纸确认待业主回复，下单还未激活——卡在图纸确认环节。建议今天先催一下张三家图纸确认，确认后我这边同步推下单。",
     "messageId":"68f2c1a9-2e3b-4d57-9a10-8b6f4a2c7e55",
-    "costMs":41026}}
+    "costMs":41026,
+    "groupId":"wrQ7xxxx",
+    "pushItems":[{"groupId":"wrQ7xxxx","success":true,"traceId":"1b7e0d8a-9c2f-4e11-a0aa-3f6d2c9b8e01","errMsg":null}]}}
 };
 function $(id){return document.getElementById(id)}
 function unwrap(json){
@@ -144,11 +188,74 @@ function renderDetail(vo){
   $("d-msg-ids").textContent=txt(vo.groupMessageIds);
 }
 function renderReply(vo){
-  if(!vo||!vo.reply){ $("reply-card").style.display="none"; return }
+  if(!vo||!vo.reply){ $("reply-card").style.display="none"; renderPush(null); return }
   $("reply-card").style.display="";
   $("r-cost").textContent=txt(vo.costMs)+" ms";
   $("r-msg-id").textContent=txt(vo.messageId);
   $("r-reply").textContent=txt(vo.reply);
+  renderPush(vo);
+}
+function renderPush(vo){
+  // issue-reply 的返回没有 pushItems——推送卡隐藏；issue-reply-push 才有
+  var hasPush = vo && vo.pushItems!==undefined;
+  $("push-card").style.display = hasPush?"":"none";
+  if(!hasPush) return;
+  var items=vo.pushItems;
+  $("push-empty").classList.toggle("on", !items || !items.length);
+  $("push-grid").style.display = (items && items.length)?"":"none";
+  if(!items || !items.length) return;
+  var it=items[0];
+  $("p-group").textContent=txt(it.groupId)+(vo.groupId && it.groupId!==vo.groupId?"（返回 groupId："+vo.groupId+"）":"");
+  var ok=it.success===true;
+  $("p-status").innerHTML=ok?'<span class="tag ok">已下发</span>':'<span class="tag no">失败</span>';
+  $("p-trace").textContent=txt(it.traceId);
+  $("p-err").textContent=ok?"—（无）":txt(it.errMsg);
+}
+function renderList(page){
+  // issue-list 没贴（空框）——列表卡隐藏，不影响详情/回复区
+  if(!page){ $("list-card").style.display="none"; return }
+  $("list-card").style.display="";
+  var items=page.list||[];
+  $("list-meta").textContent="共 "+txt(page.total)+" 条 · 第 "+txt(page.pageNum)+" 页 / 每页 "+txt(page.pageSize)+
+    (page.hasMore===false?" · 末页":" · 还有下一页")+" · 本页 "+items.length+" 条";
+  var body=$("list-body");
+  body.innerHTML="";
+  items.forEach(function(it){
+    var tr=document.createElement("tr");
+    tr.className="row";
+    var tds=[
+      txt(it.id),
+      txt(it.detail).slice(0,60)+(String(it.detail||"").length>60?"…":""),
+      txt(it.senderName),
+      txt(it.questionTypeName,"—（type 未配名）"),
+      txt(it.categoryName,"—（cat="+txt(it.category)+")"),
+      txt(it.homeownerName),
+      txt(it.groupId),
+      txt(it.issueTime),
+      it.resolved===true?'<span class="tag ok">已解决</span>':'<span class="tag no">未解决</span>'
+    ];
+    tds.forEach(function(v,i){
+      var td=document.createElement("td");
+      if(i===0||i===6||i===7) td.className="num";
+      td.innerHTML=txt(v)==="—"?v:v; // 纯文本字段直出，状态列是拼好的 tag HTML
+      tr.appendChild(td);
+    });
+    tr.addEventListener("click",function(){ rowToDetail(it) });
+    body.appendChild(tr);
+  });
+}
+function rowToDetail(it){
+  // 列表行字段就是详情口径的子集——直接喂 renderDetail，详情卡即时联动
+  renderDetail({
+    id:it.id, groupId:it.groupId, groupName:it.groupName,
+    senderName:it.senderName, senderId:it.senderId,
+    detail:it.detail, type:null, questionTypeName:it.questionTypeName,
+    category:it.category, categoryName:it.categoryName,
+    homeownerName:it.homeownerName,
+    resolved:it.resolved, resolveTime:null, issueTime:it.issueTime,
+    groupMessageIds:it.groupMessageIds
+  });
+  $("detail-json").value=JSON.stringify({code:200,data:it},null,2);
 }
 function parseBox(id){
   var raw=$(id).value.trim();
@@ -161,9 +268,11 @@ function render(){
   try{
     var detail=parseBox("detail-json");
     var reply=parseBox("reply-json");
-    if(!detail && !reply) throw new Error("两个框都是空的——至少贴一个接口返回");
+    var list=parseBox("list-json");
+    if(!detail && !reply && !list) throw new Error("三个框都是空的——至少贴一个接口返回");
     if(detail) renderDetail(detail);
     renderReply(reply);
+    renderList(list);
   }catch(e){
     errEl.textContent="解析失败："+e.message+" ——检查贴的是不是完整 JSON（curl 记得 -d '' 或引号转义）";
     errEl.classList.add("on");
@@ -173,14 +282,17 @@ $("render-btn").addEventListener("click",render);
 $("demo-btn").addEventListener("click",function(){
   $("detail-json").value=JSON.stringify(DEMO.detail,null,2);
   $("reply-json").value=JSON.stringify(DEMO.reply,null,2);
+  $("list-json").value=JSON.stringify(DEMO.list,null,2);
   render();
 });
 $("clear-btn").addEventListener("click",function(){
-  $("detail-json").value=""; $("reply-json").value="";
+  $("detail-json").value=""; $("reply-json").value=""; $("list-json").value="";
   $("parse-err").classList.remove("on");
   $("detail-grid").style.display="none";
   $("detail-empty").classList.add("on");
   $("reply-card").style.display="none";
+  $("push-card").style.display="none";
+  $("list-card").style.display="none";
 });
 document.addEventListener("keydown",function(e){
   if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){render()}

@@ -1,0 +1,28 @@
+{
+  "id": "conv-1795489106593-msaeyctrv",
+  "providerId": "claude",
+  "title": "提升橱柜类问题自动回复召回率与准确率",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795489106593,
+  "updatedAt": 1795515904509,
+  "lastResponseAt": 1795515904509,
+  "sessionId": "9a031df0-08de-4e70-a99b-d76b58f351c6",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "9a031df0-08de-4e70-a99b-d76b58f351c6",
+    "previousProviderSessionIds": [
+      "b144e60c-2d83-4372-9b23-6adcd33ea169"
+    ]
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 177,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 49792,
+    "outputTokens": 639,
+    "contextWindow": 200000,
+    "contextTokens": 49969,
+    "percentage": 25,
+    "contextWindowIsAuthoritative": true
+  }
+}

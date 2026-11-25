@@ -1,4 +1,31 @@
 {
   "schemaVersion": 2,
-  "records": {}
+  "records": {
+    "frontend-design": {
+      "skillName": "frontend-design",
+      "origin": "skillhub",
+      "installedAt": 1795514264017,
+      "updatedAt": 1795514264017,
+      "skillId": "space_2",
+      "sourceType": "space",
+      "spaceName": "Moma平台技能库（应用）",
+      "userCode": "23104817",
+      "remoteModifyTime": "2026-06-05 11:09:45"
+    },
+    "slides-visual-loop": {
+      "skillName": "slides-visual-loop",
+      "origin": "skillhub",
+      "installedAt": 1795514264211,
+      "updatedAt": 1795514264211,
+      "skillId": "space_9450",
+      "sourceType": "space",
+      "spaceName": "Moma任务助手-技能",
+      "userCode": "23109666",
+      "aliases": [
+        "HTML演示文稿"
+      ],
+      "displayName": "HTML演示文稿",
+      "remoteModifyTime": "2026-07-08 10:29:30"
+    }
+  }
 }

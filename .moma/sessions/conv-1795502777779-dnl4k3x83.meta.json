@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795502777779-dnl4k3x83",
+  "providerId": "claude",
+  "title": "分析橱木类问题台账的常见问法",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795502777779,
+  "updatedAt": 1795515470762,
+  "lastResponseAt": 1795515470762,
+  "sessionId": "4d51ea59-59f8-4ceb-9999-8bc903ec7ebb",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "4d51ea59-59f8-4ceb-9999-8bc903ec7ebb"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 94,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 162432,
+    "outputTokens": 521,
+    "contextWindow": 200000,
+    "contextTokens": 162526,
+    "percentage": 81,
+    "contextWindowIsAuthoritative": true
+  }
+}

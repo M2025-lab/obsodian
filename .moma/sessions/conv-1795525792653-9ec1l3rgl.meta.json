@@ -1,0 +1,27 @@
+{
+  "id": "conv-1795525792653-9ec1l3rgl",
+  "providerId": "claude",
+  "title": "Fork: 为 MsgAnalyzeService#analyzeOnce 创建定时任务 (#6)",
+  "createdAt": 1795525792653,
+  "updatedAt": 1795527805266,
+  "lastResponseAt": 1795527805266,
+  "sessionId": null,
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "forkSource": {
+      "sessionId": "68f59423-a466-4449-9962-8d90377139f5",
+      "resumeAt": "958abfdd-16a6-415a-ac8c-14304b6500a8"
+    }
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 640,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 96768,
+    "outputTokens": 916,
+    "contextWindow": 200000,
+    "contextTokens": 97408,
+    "percentage": 49,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,62 @@
+/* ============================================================
+   slides-visual-loop · base.css
+   Mandatory structural CSS. Include IN FULL in every deck.
+   Covers: viewport fitting, horizontal/vertical nav modes,
+   reveal animations, nav dots, page number.
+   Palette/typography live in the deck's own <style> (per-deck).
+   ============================================================ */
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; overflow:hidden; }
+
+:root{
+  --title-size: clamp(1.5rem, 5vw, 4rem);
+  --h2-size:    clamp(1.25rem, 3.5vw, 2.5rem);
+  --h3-size:    clamp(1rem, 2.5vw, 1.75rem);
+  --body-size:  clamp(0.75rem, 1.5vw, 1.125rem);
+  --small-size: clamp(0.65rem, 1vw, 0.875rem);
+  --slide-padding: clamp(1.5rem, 4.5vw, 4.5rem);
+}
+
+/* ---- deck container: direction chosen via class ---- */
+.deck{ width:100vw; height:100vh; height:100dvh; scrollbar-width:none; }
+.deck::-webkit-scrollbar{ display:none; }
+.deck--v{ overflow-y:auto; overflow-x:hidden; scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+.deck--h{ display:flex; flex-direction:row; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scroll-behavior:smooth; }
+
+/* ---- each slide = exact viewport ---- */
+.slide{
+  position:relative; flex:0 0 auto;
+  width:100vw; height:100vh; height:100dvh;
+  overflow:hidden; scroll-snap-align:start;
+  display:flex; flex-direction:column;
+}
+.slide-content{
+  flex:1; display:flex; flex-direction:column; justify-content:center;
+  max-height:100%; overflow:hidden; padding:var(--slide-padding);
+  position:relative; z-index:1;
+}
+
+/* ---- responsive height breakpoints ---- */
+@media (max-height:700px){ :root{ --slide-padding:clamp(1rem,3vw,2rem); --title-size:clamp(1.25rem,4.5vw,2.5rem); --h2-size:clamp(1rem,3vw,1.75rem);} }
+@media (max-height:600px){ :root{ --slide-padding:clamp(.6rem,2.5vw,1.5rem); --body-size:clamp(.7rem,1.2vw,.95rem);} .decorative{ display:none; } }
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{ animation-duration:.01ms!important; transition-duration:.2s!important;} .deck{ scroll-behavior:auto; } }
+
+/* ---- staggered reveal on the slide currently in view ---- */
+.reveal{ opacity:0; transform:translateY(22px); }
+.slide.in-view .reveal{ animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards; }
+.slide.in-view .reveal.d1{animation-delay:.08s} .slide.in-view .reveal.d2{animation-delay:.18s}
+.slide.in-view .reveal.d3{animation-delay:.28s} .slide.in-view .reveal.d4{animation-delay:.38s}
+.slide.in-view .reveal.d5{animation-delay:.48s} .slide.in-view .reveal.d6{animation-delay:.58s}
+.slide.in-view .reveal.d7{animation-delay:.68s} .slide.in-view .reveal.d8{animation-delay:.78s}
+@keyframes rise{ to{ opacity:1; transform:none; } }
+
+/* ---- navigation dots (position depends on direction) ---- */
+.nav-dots{ position:fixed; z-index:50; display:flex; gap:.7rem; }
+.deck-v-dots{ right:clamp(.8rem,2vw,1.6rem); top:50%; transform:translateY(-50%); flex-direction:column; }
+.deck-h-dots{ bottom:clamp(1rem,3vh,2rem); left:50%; transform:translateX(-50%); flex-direction:row; }
+.nav-dot{ width:9px; height:9px; border-radius:999px; border:1.5px solid currentColor; opacity:.35; cursor:pointer; transition:.25s; }
+.nav-dot.active{ opacity:1; transform:scale(1.25); }
+
+/* ---- page number ---- */
+.pageno{ position:fixed; left:clamp(1rem,3vw,2.5rem); bottom:clamp(.9rem,2.5vh,1.8rem); z-index:50; font-size:var(--small-size); letter-spacing:.1em; opacity:.75; }

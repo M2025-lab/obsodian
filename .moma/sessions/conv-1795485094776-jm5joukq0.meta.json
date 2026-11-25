@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795485094776-jm5joukq0",
+  "providerId": "claude",
+  "title": "确认 agenda 中 roomie.push.robot-uc-code 所属 Apollo...",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795485094776,
+  "updatedAt": 1795487141095,
+  "lastResponseAt": 1795487141095,
+  "sessionId": "7b66d3b3-4223-46d3-adeb-d4fc79b56791",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "7b66d3b3-4223-46d3-adeb-d4fc79b56791"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 375,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 69504,
+    "outputTokens": 535,
+    "contextWindow": 200000,
+    "contextTokens": 69879,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

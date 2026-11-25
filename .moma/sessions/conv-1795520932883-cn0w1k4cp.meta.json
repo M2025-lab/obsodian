@@ -1,0 +1,24 @@
+{
+  "id": "conv-1795520932883-cn0w1k4cp",
+  "providerId": "claude",
+  "title": "为 MsgAnalyzeService#analyzeOnce 创建定时任务",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795520932883,
+  "updatedAt": 1795525792716,
+  "lastResponseAt": 1795525728025,
+  "sessionId": "68f59423-a466-4449-9962-8d90377139f5",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "68f59423-a466-4449-9962-8d90377139f5"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 0,
+    "percentage": 0,
+    "contextWindowIsAuthoritative": true
+  }
+}

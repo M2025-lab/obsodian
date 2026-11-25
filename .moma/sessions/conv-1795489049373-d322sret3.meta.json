@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795489049373-d322sret3",
+  "providerId": "claude",
+  "title": "设计大区到群映射的图片推送逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795489049373,
+  "updatedAt": 1795491664641,
+  "lastResponseAt": 1795491664640,
+  "sessionId": "f763374d-23d4-45e5-bac2-feff1336f025",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "f763374d-23d4-45e5-bac2-feff1336f025"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 326,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 124544,
+    "outputTokens": 315,
+    "contextWindow": 200000,
+    "contextTokens": 124870,
+    "percentage": 62,
+    "contextWindowIsAuthoritative": true
+  }
+}
