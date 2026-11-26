@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795590290541-9nf1ds5pk",
+  "providerId": "claude",
+  "title": "创建微信小师傅 Agent 角色提示词",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795590290541,
+  "updatedAt": 1795592476341,
+  "lastResponseAt": 1795591771496,
+  "sessionId": "83b0a67f-e442-4d60-80f1-bc9e1687a23e",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "83b0a67f-e442-4d60-80f1-bc9e1687a23e"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1482,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 97344,
+    "outputTokens": 475,
+    "contextWindow": 200000,
+    "contextTokens": 98826,
+    "percentage": 49,
+    "contextWindowIsAuthoritative": true
+  }
+}

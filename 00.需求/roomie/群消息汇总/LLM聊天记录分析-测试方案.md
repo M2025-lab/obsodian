@@ -1127,3 +1127,153 @@ ALTER TABLE roomie_msg_issue
 - v3 R8（2026-11-23，§5.18）：**识别质量全面新高——类型 91%（334/367）历史 best、橱木类型 95%、品类精确 98%、可比口径召回 99% 持平**；但 homeowner_name 字段落地引入**新型 JSON 故障**（字段名缺左引号，§5.7 重试对「自认没错」形态失效，3 次重犯吃 49 条消息 + 10 个基线 Q 进范围外），残留 63/空批 1 是**链路新债不是模型债**。橱木专项：召回 84%（缺口 9 条零真类型错——失败批 1 + 混链未收窄 8），品类改判层可收回 8 条到 ~98%。修复方案当日已写又回退（正则预修复在 1.2.83 上验证有效、AllowUnQuotedFieldNames 验证无效，结论留档 §5.18），R9 验证线：空批=0/残留 ≤15/橱木召回 ≥90%。
 - v3 R9（2026-11-23，§5.19）：**R8 三条验证线全达成，新型 JSON 故障闭环——根治层（Agent 管理台「字段名必须带双引号」约束，代码 git 零改动）单层落地即够，代码预修复层无需上**。56 批零解析失败、失败批 0/范围外 0/残留 9（无一正经首问，实际漏报代价≈0）；**召回 206/208=99% 首次无口径豁免**、类型 92%（348/378）再创新高。橱木召回 84% 三轮不动（MIX-only 9 条零真类型错，Q0018 新入），改判审计池涨到 8 条——橱木召回的唯一路径仍是品类改判层（先离线回放验误伤 0）。under-merge 81 Q 横盘是类型 MISMATCH 重复对的放大器，破局在合并不在类型。链路指标进入理想区，后续迭代重心从「链路质量」正式转「合并质量 + 品类收窄」。
 - 橱木回复 v0（2026-11-24，§5.20）：**首批回答侧指标落地——回答召回 82%（圈定 84% × 圈内 98%）、降级合规 100%、零链路失败**；瓶颈排序被实测证实「圈定 > 检索 > 准确率口径」，品类改判层优先的决策成立。硬字段 34% 是三混杂下界（时效漂移最大头——基线是 11-13 快照 vs Agent 查当前状态；under-merge 错位；少数真检索失败），准确率真数等「答案要点时效分口径 + 人工/LLM 判读」。两个新发现：同 ucid 会话记忆污染（同一 issue 两跑结果不同，评测轮互相污染，干净轮需换 ucid）+ reply() 无 empty 兜底（2868 空串入库，沿 §5.9 惯例补重试）。
+- 多轮追问上下文（2026-11-25，§5.23）：**方案 = 机器人消息作只读上下文素材进 prompt 第五段，不做分析对象**。定位问题：PM 追问「选2」被批次边界切开——原问题和选项都已 status=1 不在 prompt 里、机器人消息被 onlyHuman 挡在分析链路外、PREV_TAIL 只在同轮内衔接，模型只看到一句没头没尾的「选2」大概率判 noise。地基已天然存在：agent 推群的消息经 MQ 回流落 message 表（analyze_status 停 0、仅被 onlyHuman 排除），不需要给 issue 表加回复字段。修法四件：机器人只读查询（**复用通用 `selectPendingMessages`，走 `onlyRobot` 旗标 + startTime 时间窗 + onlyPending=false，不另建专用方法**；同群+机器人 sender_type+时间窗+条数上限，不看 analyze_status）→ `PromptAssembler` 加第五段「云助理最近回复」（只读、禁止 involved/noise，与 prevTail 同语义）→ 判定交给模型（时间窗内闲聊自然忽略，无引用的「第二个」也能命中）→ 消费模型/定时任务/analyze_status 全不动。替代方案否决留档：会话冷却窗口（延迟+参数难调，与增量消化语义冲突）、追问走 reply 链路（匹配逻辑等于把判定换位置，改造更大）。验证线：注入机器人消息后「选2」型追问不再判 noise、能 merge 进原 issue；时间窗外追问仍退化现状（参数上 Apollo 可调）。
+- 多轮追问二段（2026-11-25，§5.23 二段）：**只给机器人回复不够——原问题本体也要进上下文**（PM 的「选2」必须拼回原问题才知道在答什么）。扩展三件：`listRecentUnresolved(48h/20条)` 历史 issue 喂归并候选（锚 dbId:N，issue 表没存 firstAskMsgKey）+ mergeInto 双锚约定（本轮 firstAskMsgKey / 跨轮 dbId:N）+ `persistReport` 落库消费 dbId 锚（原来 mergeInto 根本没有落库路径）——追问不建新 issue，`appendMsgIds` 挂回历史 issue 的 group_message_ids 去重合并、involved 回写 status=1。
+- 手写 mapper 退役（2026-11-25，§5.23 重构）：**`RoomieMsgAnalyzeMapper`（手写接口+XML）整体删除，分析链路查询全走 mbg Example 通用 API**——消费/机器人上下文/状态回写/reset/残留计数五种操作全部挪进 `RoomieGroupMessageDao`（`selectByExampleWithBLOBs` + `updateByExampleSelective` + `countByExample`，沿 RoomieMsgIssueDaoImpl 同款用法）；`selectByExampleWithBLOBs` XML 里 mbg 本就生成、接口按 RoomieMsgIssueMapper 先例补声明（selectByExample 只走 BaseResultMap，LONGTEXT 不回）。机器人上下文查询即「Example 组合 onlyRobot 补集条件 + msgTime 窗口 + limitSize」——通用 select 的一个旗标组合，不再有专用方法。
+- 代码审查（2026-11-25，§5.23 复核）：**五处修——两处硬伤 + 三处口径/防御**。硬伤①：mbg 重跑把 `RoomieGroupMessageWithBLOBs` 的三个 lombok 注解抹掉（原文件注释预言的坑成真），`getTextContent()` 不存在 dao 模块编译失败——注解补回；硬伤②：`robotQuery` 漏 `setOnlyRobot(true)`，第五段拉的是员工消息（机器人选项消息根本没进 prompt，§5.23 一段等于没生效）——补旗标。口径③：`countUnanalyzedByGroupId` 收口对账没排除机器人消息，sender_type=100 永远停 0 被当「残留未分析」误报（实测 73 条噪音淹没真失败）——对账口径对齐消费口径（加 `sender_type IN (1,2,3)`）；防御④：dbId 分支反查全失败时 append 空清单无动作、消息状态不回写（下轮重复消费）——加空清单 error 日志护栏（消息停 0 下轮重拼，行为保持）；防御⑤：`pagePending` mutate 调用方查询对象（pageSize+1 原地改写）——浅拷贝隔离。附带：ROBOT_CONTEXT_HOURS 用户调 4h 与历史 issue 窗 48h 不对称的语义提醒已记 §5.23 方案段。
+- 对话块重构落地（2026-11-25，§5.24）：**分析单位从等分批换成对话块，§5.23 方案整体替代**。新增三件：`BlockSplitter`（静默切块：人开块/机器人跟随归块/GAP 30min Apollo 可调）、`MsgBlock`（内存块对象，isClosed/hasPendingHuman 两闸）、`selectMessageFlow`（时间窗统一消息流，Example 通用 select 零 XML）。删净四套缝合机制：PREV_TAIL、robotReplies 单独拉（4h 窗）、historyIssues 顶替逻辑、firstAskMsgKey/dbId 双锚（**只留 dbId**，persistReport 两分支）；pagePending/cursorId 分批循环、MsgAnalyzePendingQueryParam/PageVO 两个 DTO 整体删除，`/pending` 接口换 `/blocks` 块预览观测口（不烧 LLM）。prompt 三段+一（群信息/本块消息人机交错/上一块只读——跨块追问兜底/归并候选 200 字摘要）；归并候选每段重查库（段 2 候选天然含段 1 落库 issue，无内存态）；超长块 BLOCK_MSG_LIMIT=200 条硬切分段。非闭环零分支（问而无答/选项未选都走同一条块路径），机器人消息语义放宽为「内容可浓缩进 detail、永不 involved」。batches 参数语义变为「本轮最多分析块数」，batchSize 保位废弃；后按用户裁决**旧参数全链删净**（analyzeOnce/analyzeSweep 签名瘦身、Apollo roomie.msg-analyze.blocks 取代 batch-size/batches、Controller/Schedule 参数同步）。
+- 块链路首跑踩坑（2026-11-25）：**Example update 的 record 必须用 WithBLOBs 实例**——`updateByExampleSelective` XML 的 `<if test="record.textContent != null">` 是 BLOB 列条件，OGNL 按运行时类找 getter：传基类 `RoomieGroupMessage`（无 textContent）直接 `NoSuchPropertyException`（resetAnalyzeStatusByGroupId 首炸）。修法：dao 里两处 update 的 record 全换 `RoomieGroupMessageWithBLOBs` 实例，只 set analyzeStatus（textContent=null 时 if 跳列）。教训：**带 BLOBs 子类表的 Example 系 update，record 永远传 WithBLOBs 类型**——基类实例编译过、运行期才炸，静默杀手。
+
+### 5.23 多轮追问上下文丢失（2026-11-25：机器人回复作只读上下文进 prompt，方案+落地）
+
+**问题**：定时跑分析（问题→模型给选项→PM 回选择）多轮被批次边界切开。现状三个机制都救不了：
+1. `PREV_TAIL_SIZE=50` 上文衔接只在同一轮内跨批生效；下一轮定时任务从头拉，第一批没有尾巴；
+2. 机器人消息进不了分析链路——`onlyHuman` 过滤 `sender_type IN (1,2,3)`，agent 推回群里的选项消息对分析器不可见；
+3. PM 的追问消息进下一轮时，原问题和选项都是 analyze_status=1（已消费），不再出现在 prompt 里。
+
+模型只看到一句没头没尾的「选2」——大概率判成噪音。
+
+**地基（已天然存在）**：agent 推群的消息经 MQ 回流落在 `roomie_group_message` 表里（analyze_status 停 0、仅被 onlyHuman 排除在分析批外）。上下文素材不在 issue 表在 message 表——不需要给 issue 表加回复字段。
+
+**二段扩展（2026-11-25 用户评审补强）**：只给机器人回复还不够——PM 的「选2」要拼回**原问题**才算完整上下文（不然模型只见选项+「选2」，不知道在问什么）。而下一轮定时任务时本轮内存 `allIssues` 是空的，历史原问题必须从 DB 读：
+
+- **历史 issue 进归并候选**：`listRecentUnresolved(groupId, 48h, 20)` 查近窗口未解决 issue，锚用库主键 `dbId:N`（issue 表没存 firstAskMsgKey，历史消息 msgKey 拿不回来）；历史候选首轮喂、之后被本轮内存候选顶替（buildMergeCandidates 只在 allIssues 非空时重建，首轮两者共存）。
+- **mergeInto 双锚约定**：本批/本轮内归并 → firstAskMsgKey（原有）；跨轮历史归并 → `dbId:N`。
+- **落库消费（原来 mergeInto 完全没有落库路径）**：`persistReport` 解析 mergeInto 为 dbId 锚时不建新行——追问消息 id 通过 `appendMsgIds` 挂回历史 issue 的 group_message_ids（去重合并），involved 消息回写 status=1；历史 issue 详情页里消息清单自动带上追问消息。
+
+**方案：机器人消息作「上下文素材」进 prompt，不做分析对象**
+
+拼 prompt 时额外拉：同群、机器人 sender_type、时间窗（代码默认 48h，**当前实测调 4h**——注意与历史 issue 窗 48h 不对称：4h 后选项消息过期、原问题候选还在，「选2」型追问只看得到问题看不到选项，跨日追问对不上）、条数上限（默认 20）——**不看 analyze_status**（机器人消息不是消费对象，每轮作为参考重读；幂等重读没有成本，机器人消息量远小于人）。`PromptAssembler` 输出第五段：
+
+| 段 | 给模型的视野 |
+|---|---|
+| 本批消息 | PM 的「选2」（追问消息） |
+| 上文衔接（批内） | 轮内尾巴 |
+| 归并候选 | 已建 issue 摘要（原问题） |
+| **云助理最近回复（新第五段）** | **Agent 上次给的选项** |
+
+模型要判断「这条『选2』是对哪条选项的选择」所需素材全齐，判定交给模型——时间窗内同 sender 闲聊会被它自然忽略，不需要代码写匹配规则。PM 引用机器人消息（quote_msg_key）时 formatLine 已带 `quote→` 标注，模型顺着引用对上，同一查询天然覆盖。
+
+**为什么这样**：不动消费模型（analyze_status=0→1/9 一次性消费不变、定时任务零改动）；判定交给模型（比 quote 链精确匹配宽——不引用消息只说「第二个」也能命中）；失败模式温和（注入多了顶多多花 token 模型忽略即可，漏注入退化成现状）。
+
+**否决替代方案留档**：
+- 会话冷却窗口（按时间间隔切会话、冷却后整段分析）：消息被扣住导致分析延迟、冷却参数难调、和定时任务「增量消化」语义冲突；
+- 追问走 reply 链路不走 analyze 链路（agent 回复识别「需要澄清」挂「追问中」状态，PM 回复带 [issue+选项] 走 reply）：「消息→issue 匹配」又要一套逻辑，等于把方案一的判定部分换个执行位置，改造更大。
+
+**验证线**：注入机器人消息后「选2」型追问不再判 noise、能 merge 进原 issue；时间窗外追问仍退化现状（时间窗/条数参数上 Apollo 可调，真遇到再调）。
+
+### 5.24 对话块重构（2026-11-25：分析单位从等分批换成对话块，§5.23 方案的整体替代）
+
+**病根**：分析单位选错了——「50 条等分批」人为切对话，对话自然连续性与批边界天然错位，补丁永远追不上切缝产生的洞。§5.23 之前累积的四套机制补的全是同一个洞：
+
+| 补丁 | 在补什么 | 代价 |
+|---|---|---|
+| PREV_TAIL（50 条尾巴） | 批被切开，上下文丢了 | 批间缝合，只管轮内 |
+| robotReplies 单独拉一路（4h 窗） | 机器人消息不在批里 | 平行机制+时间窗参数、与 issue 窗 48h 不对称 |
+| historyIssues dbId 候选 | 上一轮的原问题看不见 | 与轮内候选**顶替**逻辑——实测 bug 温床（追问落在第 2 批起候选已消失） |
+| 双锚体系（firstAskMsgKey/dbId） | 轮内、跨轮两套归并 | 模型要学两种锚、persistReport 三分支 |
+
+实测暴露的三条断链（§5.23 复核+生产推演）：①机器人选项回复是「孤儿」——第五段与 dbId 候选之间无结构线索，模型两次语义猜；②quote 落库存 globalMsgId、prompt 标 msgKey，**键空间不通**（生产上引用信号整条丢失，测试数据碰巧同格式）；③历史候选只活到第一批。另外现实非闭环形态（提问无回复/选项未选）在批方案里没有立足点——测试基线全是闭环样本，评测盲区。
+
+**块规则（查询时现算，块不落库）**：
+1. 只有人的消息（sender_type IN (1,2,3)）能开块：相邻两条人消息间隔 > GAP(30min)，后一条开新块；
+2. 机器人消息**跟随归块**：归入前一条人消息所在块，自己不开块、不计静默（机器人是回应方，出现不是停顿）；
+3. 块关闭 = 块内最后一条人消息后静默 > GAP。GAP=30min 与定时任务间隔 5~10min 之间 3 倍裕量——回复迟到不存在落在块外的场景（无积压，唯一延迟源就是任务间隔）。
+
+**新链路（数据流）**：消息流（人+机器人统一）→ 静默切块 → 已关闭且有未分析人消息的块 → 逐块一次 LLM 调用 → 落库（块内人消息回写 1/9；机器人消息只读不标）。
+
+**块分析 prompt 三段+一**：①群信息 ②本块消息（时间序、人机交错全文、quote 解引用成可读摘要）③上一块只读（跨块追问第一层兜底）④归并候选（近 48h 未解决 issue，**唯一锚 dbId:N**，摘要放宽 200 字）。
+
+**非闭环是默认态，零分支**：块的关闭由静默说了算，不由「是否走到解决」说了算——
+
+| 生产形态 | 块的样子 | 分析结果 |
+|---|---|---|
+| 问了，云助理没回（agent 未触发/失败） | 单条人消息的块 | issue 照建，detail「提问未见助理响应」——运营信号 |
+| 问 + 选项大回复，PM 还没选 | 两条消息的块 | issue 照建，detail 浓缩「问王辰进展，助理列 5 条订单待选择」，status=0 |
+| 完整闭环（问→选项→选） | 三条+ 的块 | 同块归进一个 issue，多轮追问天然治好 |
+
+机器人消息语义同步放宽：从「只读禁引」改为「内容可浓缩进 issue detail、永不进 involved」——非闭环 issue 自带「现在卡在哪」的进展描述。issue 状态机不扩（status=0 天然覆盖「等选择/等处理/无响应」——区分是 detail 的事不是状态机的事）。
+
+**删除清单**：PREV_TAIL、robotReplies 单独拉一路（4h 窗）、historyIssues 顶替逻辑、firstAskMsgKey/dbId 双锚（**只留 dbId**）、persistReport 三分支（留新建/dbId 挂接两分支，firstAsk 特判删）、cursorId 分页循环（循环按块走）。
+
+**保留清单**：analyze_status 0/1/9、issue 表结构、appendMsgIds、Agent 调用+重试剥壳、收口对账（对账口径=人消息）、运行锁、白名单 sweep。删的代码比加的多。
+
+**极限场景**：超长块（活跃群一下午几百条超模型 context）块内硬切分段，段 2 归并候选=段 1 已落库 issue——锚还是 dbId（已有主键），全链路锚体系 100% 唯一；跨块追问（隔天回「选2」）两层兜底（上一块只读+dbId 候选 200 字摘要）；块天然幂等（分组只依赖 msg_time，与 analyze_status 无关，下轮重算一致）。
+
+**dao 通用化约束（用户裁决）**：能用通用 select/update 就用通用——块查询走 mbg Example（时间窗+senderType 组合+orderByClause+limitSize），延续 §5.23 手写 mapper 退役路线，零 XML。
+
+**验证线**：①王辰场景（问→5 条订单表格→「2」）单块直出单 issue；②非闭环样本两条（提问无回复/选项未选）issue 正常建、detail 带进展、后续 PM 补消息能归并回；③静默期中块不消费（跑半截对话不出 issue）；④收口对账残留=0（人消息口径）。
+
+### 5.25 滚动消费（2026-11-25：拆 isClosed 闸——活跃块每轮任务直接吃，§5.24 的延迟补丁）
+
+**病根**：§5.24 的「块关闭才分析」把响应延迟钉死在 GAP(30min)+任务间隔上——机器人回复最迟 30min 后才到、块要等静默满 30min 才开闸，PM 的「选2」最坏要 30~40min 才被消化。生产诉求是 5~10min 内出响应，闸与延迟诉求直接冲突。
+
+**触发与上下文解耦**（核心一拆）：闸从「已关闭 且 有待分析」改为「**有待分析人消息就吃**」——块静默与否不再决定消不消费，只由 analyze_status 说了算。PM 每条消息进来，下一轮任务（5~10min）必然扫到 pending 块直接分析：场景2（问→机器人选项→PM 回「选2」）的「选2」最迟一个任务周期被消化，detail 补全、issue 落定。机器人回复单独到不触发任何分析（它 status 恒 0 永不进消费闸）——它是下轮分析的**素材**不是触发器，这恰好与「机器人的出现不是对话停顿」的块规则 2 同构。
+
+**两场景归一**（用户裁决的生产场景枚举）：场景1（PM 问得详细→分析→回复）与场景2（问得粗→机器人选项/引导→PM 简短回复→再分析→回复）不是两套逻辑，是同一个循环的两轮展开——第一轮分析对粗问题建 issue（detail 模糊）+ 机器人选项回复；第二轮「选2」以新消息进块，选项+原问题作已分析上文，归并回原 issue 补全 detail，回复链这次拿到完整问题出终答。终答引出的新追问 = 又一轮场景1/2，循环接着转。P3（问了没下文）按此枚举不需要静默收尾修正——issue 停在原状态即设计内。
+**老消息归属标注（防影子 issue，本轮最大风险的对冲）**：拆闸后活跃块每轮都全量喂给模型——块内 status≠0 的老消息若不标注，模型见「未标注的新面孔」可能把已归档素材再开一条新 issue（老病 M00083 的影子形态回归）。对冲：prompt 里块内消息**分层渲染**——status=0 人消息 = 消费对象（无标注）；status=1 人消息尾部标 `[已归入dbId:X]`（从归并候选 issue 的 groupMessageIds 反查）；status=9 标 `[已判噪音]`；机器人消息无标注（段头说明已交代身份）。模型看见归属就明白这些行是历史素材的再露面，归并候选段同时给出 dbId 锚，两处信号互证。
+**dbId 归并 detail 刷新**（§5.23 时代落下的缺口，滚动消费的成立前提）：persistReport 的 dbId 分支原本只 appendMsgIds——模型在归并条目里输出的**补全后 detail 被丢弃**，issue.detail 永远停在模糊原句 → 回复链每次拿到的都是模糊问题 → LLM 每次都再吐选项 → 场景2 的终答永远出不来（死循环缺口）。修法：dbId 分支升级为 mergeInto 落库——消息 id 合并 + detail/homeownerName/status 非空即刷（模型看到全上下文后的重写天然覆盖旧模糊版；RoomieMsgIssue 无 WithBLOBs 子类、detail 在本体，selective update 无 OGNL 陷阱）。issue 从「一次写成」变为「滚动刷新的活记录」——这正是两场景循环的物化形态。
+**回复链保持手动**（用户裁决）：分析→回复不接自动链——测试期 `/issue-reply-push` 按条手动触发已够（管理台按钮即流程），批量自动接链留到放量阶段再定。故本轮滚动消费只改分析侧，回复侧零改动。
+→ **2026-11-25 已解禁实现**（§5.26）：analyzeSweep 收口段挂自动回复消费，默认关、Apollo 一开即闭环，原手动按钮保留作兜底。
+
+**改动清单**（§5.24 基础上）：
+- 拆闸：消费条件从 `isClosed && hasPendingHuman` 改为 `hasPendingHuman`；`MsgBlock.isClosed` 保留仅供 previewBlocks 观测；
+- PromptAssembler：块内消息分层渲染（归属标注）；归并候选反查映射（msgId→dbId）传入；
+- dao：`appendMsgIds` 升级 `mergeInto`（ids 合并 + 非空字段刷新，一次 updateByPrimaryKeySelective），旧方法删；
+- persistReport dbId 分支：改调 mergeInto，传刷新字段。
+
+**验证线**：①「选2」消息发出后一个任务周期内被消费、merge 回原 issue 且 detail 已补全（不再是模糊原句）；②回写后收口对账残留=0；③老消息不建影子 issue（重跑同一活跃块，issue 数不增）；④机器人回复单独到达不触发分析（无 pending 人消息时轮空转）。
+
+**落地记录（2026-11-25，BUILD SUCCESS）**：dao `mergeInto(issueId, msgIds, refresh)`（StringUtils 非空判 + selective update，detail/homeownerName/status null 不刷）；PromptAssembler 分层标注（`buildOwnershipMap` 反查 + `formatLine(msg, msgIdToDbId)` + `ownershipTag`，本段/上一段只读两处都标，机器人消息不标）；doAnalyze 闸改 `hasPendingHuman()` 单条件、块日志 tag `(closed)`→`(rolling)`；persistReport dbId 分支走 `toRefreshModel`（resolved null 时 status 留 null 防已解决刷回 0）。编译一次失败：上一段衔接的 formatLine 调用漏传映射参数——两处调用都要带归属。
+
+**5min 节拍参数收紧（2026-11-25，同日续）**：任务定 5min 一轮，块窗口参数从「低频+等静默关」时代遗产收紧——正常运行 `flow-hours` 72h→**Apollo 默认 2h**（窗只要装得下活跃块+一块兜底：5min 节拍下块最迟 30min 关，2h=4 节拍+GAP）、`FLOW_LIMIT` 2000→**200**（2h 窗每分钟 1.7 条才触顶）；**reset 全量重跑保留大窗大限**（72h/2000——prompt 迭代对比 1447 条基线的口径不能被截废）。GAP=30min 与 BLOCK_MSG_LIMIT=200 不动（对话语义/模型 context 防护，与节拍无关）。连带两个真 bug：①**截断方向**——`selectMessageFlow` 原是 `msg_time asc`+limit，截断时丢最新消息（新 PM 提问永远进不了块、收口对账每轮误报残留），改为 desc 取最新 limit 条内存反转回正序；②**收口对账窗口界**——`countUnanalyzedByGroupId` 原查全群，5min 前的未分析消息（任务还没轮到）也被数成残留，改为传 flowStart 与流窗同界。
+
+**滚动消费全面复查（2026-11-25，第三轮）**：修三处——
+- **B1 轮内标注失真（硬伤）**：persistReport 回写 analyze_status 只写库不刷内存 VO，同轮后续段/块的只读上文（共享这批 VO）渲染时 status 仍 0，`[已归入dbId:X]`/`[已判噪音]` 标注整条失效——轮间重查库不失真，轮内必须靠回写后同步 `markVoStatus` 刷 VO（防影子 issue 的链路轮内才真正闭环）；
+- **B2 reset 窗拉不到基线（硬伤）**：基线数据 msg_time 从 2026-09-15 起（历史时间不随重跑前移），`FLOW_RESET_HOURS=72` 窗一条拉不到，全量重跑**静默空转**（对账窗同界连告警都不发）——reset 窗改 24×90 小时；
+- **B3 preview 观测口误用 FLOW_LIMIT**：200 条截断把导数据天的块切点看丢，观测口改走 `FLOW_RESET_LIMIT`（观测不随运行窗收紧）。
+推演过不落码的：候选窗 48h vs 流窗 2h 错位是有意设计（跨夜「选2」靠 dbId 锚兜底）；候选摘要 200 字截断在补全版 detail 超长时可能截掉选项表格关键行——token 取舍，留观察项；idsOf 跨批 warn 在轮内是伪报（msgKeyToId 累积）。
+
+### 5.26 自动回复闭环（2026-11-25：sweep 收口段消费——§5.25 挂起项解禁）
+
+**决策三项**（用户裁决）：触发节拍=**同轮 sweep 限速消费**（不建独立 Schedule，5min 节拍不破坏）；防重推=**复用 status 编码**（0=待处理未回复 / 1=已解决 / 2=已回复，不加 DDL）；范围=**仅未解决且橱木**的 issue（`reply()` 里 category≠橱木的跳过逻辑对齐）。
+
+**复用 status 编码的闭环语义**（本节核心）：队列条件坍缩成单一 `status=0`——已解决(1)不用回、已回复(2)天然防重推。关键正反馈在归并刷新路径：PM 对已回复问题继续追问时，模型 mergeInto 的 refresh 会把 status 刷回 0（resolved=false 输出时）——**追问合入即自动重回回复队列**，下一轮 sweep 再出终答。「两场景归一循环」（§5.25）至此全链物化：分析落库→同轮回推→PM 追问→归并刷新 status=0→下轮再回。
+
+**防重占位（CAS）**：每条回复前先 `casStatus(id, 0→2)`——0 行=手动按钮/并发轮次已在处理，跳过换下一条；抢占成功才走 replyAndPush 全链。回复链失败（Agent 超时/推送全失败）回滚 `2→0` 放行下轮重试；成功即终态 2 幂等停轮。手动按钮与自动链并发安全共用同一 CAS 口径。
+
+<!-- TODO: 改动清单与验证线 -->
+
+**改动清单**：
+- dao `RoomieMsgIssueDao`：`listPendingAutoReply(hours, limit)`（status=0 + category=橱木 + issue_time asc FIFO + PageHelper LIMIT，跨群不滤 groupId）+ `casStatus(issueId, from, to)`（Example 条件 update，返回更新行数）；
+- service `MsgAnalyzeServiceImpl`：Apollo `roomie.msg-analyze.auto-reply.enabled`（默认 **false**）+ `roomie.msg-analyze.reply-limit`（默认 3）+ 队列窗 `AUTO_REPLY_HOURS=24h`；`analyzeSweep` 收口段挂 `autoReplySweep()`（开关关/队列空零成本空跑）；逐条 CAS 0→2 → replyAndPush → pushItems 无一条 success 则回滚 2→0；异常只记日志不打断 sweep 收口；收口日志带自动回复条数。
+
+**验证线**：① 开关关=行为与改前完全一致（默认零风险）；② 开关开+队列有橱木 issue：FIFO 最老先回、推回原群、status 落 2 不再重推；③ 回复链失败（Agent 超时）：status 回 0，下轮重新进入队列；④ 手动按钮与自动轮并发同一 issue：CAS 只有一方成功，另一方跳过；⑤ PM 对已回复 issue 追问：归并 refresh 把 status 刷回 0，下轮自动再出终答（循环物化验证）。
+
+**观察项**：reply-limit=3 时一轮最多 ~6min Agent 串行占用——5min 节拍下任务会 overrun，留意调度侧超时配置；真发生再调 limit 或拆独立任务（本节决策的预留退路）。
+
+### 5.27 消息锚点 msgKey→库主键 id（2026-11-25：LLM 全链锚点语言统一）
+
+**动机**：msgKey 是 ~32 字符 base64（`CAIQj6WZ…=`），分词后 ≈12~15 token/条——输入侧 200 条块的锚点 ~2500 token 且 prevSegment/prevBlock 只读上下文翻倍再烧一遍；输出侧 involved/noise 是**原样回抄**，30 条 involved 一段就是上千输出 token（单价 3~5 倍）。且 base64 含 `+/=` 形近字符，模型逐位抄写天然漂移——错一位反查 miss，消息停 0 下轮重分析白烧一轮。数字是 LLM 抄写最稳形态（dbId 锚零 miss 已实证）。
+
+**改动**（3 文件，库/DDL 零改动——group_message_ids 本就存 id）：
+- `PromptAssembler`：行锚渲染 `msg<id>`（与 18 位订单号视觉区隔）；quote→ 解析为 id（本段+上一段内 key→id 反查，流外引用保原 key 只读）；段头指令改「输出锚点一律用 msg 编号」；归并候选指令同步 involvedMsgIds；
+- `MsgAnalyzeReport`：`involvedMsgKeys→involvedMsgIds:List<Long>`、`firstAskMsgKey→firstAskMsgId`、`noiseMsgKeys→noiseMsgIds`、`mergeInto:String→mergeIntoId:Long`（dbId 解析层删）；
+- `persistReport`：msgKeyToId 反查体系整个删除，换 `knownMsgIds` 合法集——**张冠李戴对冲**（msgKey 抄错必然 miss 响亮失败；id 抄错可能落到另一条合法行静默错挂，故模型输出 id 必须 ∈ 已知集才落，未知丢弃记 warn，失败语义与旧反查 miss 等价但概率低一个量级）。
+
+**验证线**（与 B2 修复后的全量 reset 重跑合并做，不额外烧轮次）：① 大群 reset 全量重建跑通——issue 落库 involved 即 id（无反查 warn）；② msgKey 漂移 warn 频次对比切换前（预期归零）；③ 跨轮归并 mergeIntoId 路径正常（「选2」归并回原 issue 且 detail 补全）；④ prompt 侧 token：同块对比 userPrompt 长度（锚点段预期 -40%+）。
+
+**残留 msgKey 的边界**（有意保留）：VO 字段与 MQ handler 落库不动（msgKey 是消息表唯一键语义）；quote 流外引用渲原 key（读得懂但不该输出）；【归并候选】段 dbId 锚本来就是 id。小师父侧 Agent 的系统提示词若也引用了 msgKey 字样需同步——`RETRY_FORMAT_PREFIX` 与 Agent 编排在服务端，不在本仓库改动面，重跑前留意。
+
+**风险**：模型若仍按旧习惯输出 msgKey 字符串（Agent 端提示词没同步时），fastjson 反序列化 `List<Long>` 直接失败→空 report→重试→停 0——响亮失败不静默错挂，与旧 miss 语义同构但更早暴露。上线前先用 `/agent-chat-direct` 后门口裸测一轮 agent 对新 prompt 的输出形态。
+

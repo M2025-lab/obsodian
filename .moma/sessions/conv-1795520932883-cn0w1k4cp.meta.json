@@ -4,8 +4,8 @@
   "title": "为 MsgAnalyzeService#analyzeOnce 创建定时任务",
   "titleGenerationStatus": "success",
   "createdAt": 1795520932883,
-  "updatedAt": 1795525792716,
-  "lastResponseAt": 1795525728025,
+  "updatedAt": 1795587421528,
+  "lastResponseAt": 1795584039423,
   "sessionId": "68f59423-a466-4449-9962-8d90377139f5",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,12 +13,13 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 0,
+    "inputTokens": 1263,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 0,
+    "cacheReadInputTokens": 99456,
+    "outputTokens": 591,
     "contextWindow": 200000,
-    "contextTokens": 0,
-    "percentage": 0,
+    "contextTokens": 100719,
+    "percentage": 50,
     "contextWindowIsAuthoritative": true
   }
 }

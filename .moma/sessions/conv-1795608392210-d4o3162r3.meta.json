@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795608392210-d4o3162r3",
+  "providerId": "claude",
+  "title": "连接 DataGrip 到 leonis_private_binding 数据表",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795608392210,
+  "updatedAt": 1795608738099,
+  "lastResponseAt": 1795608420172,
+  "sessionId": "39c329f7-cbec-4640-af62-5d8d4412cd99",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "39c329f7-cbec-4640-af62-5d8d4412cd99"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 304,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 29248,
+    "outputTokens": 437,
+    "contextWindow": 200000,
+    "contextTokens": 29552,
+    "percentage": 15,
+    "contextWindowIsAuthoritative": true
+  }
+}

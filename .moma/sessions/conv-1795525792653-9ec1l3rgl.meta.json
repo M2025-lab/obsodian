@@ -3,8 +3,8 @@
   "providerId": "claude",
   "title": "Fork: 为 MsgAnalyzeService#analyzeOnce 创建定时任务 (#6)",
   "createdAt": 1795525792653,
-  "updatedAt": 1795527805266,
-  "lastResponseAt": 1795527805266,
+  "updatedAt": 1795580039029,
+  "lastResponseAt": 1795580039029,
   "sessionId": null,
   "lastEffectiveModel": "auto",
   "providerState": {

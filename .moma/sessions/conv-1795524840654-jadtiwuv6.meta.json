@@ -4,8 +4,8 @@
   "title": "查询测试库 GroupMessage 发送者姓名",
   "titleGenerationStatus": "success",
   "createdAt": 1795524840654,
-  "updatedAt": 1795525718592,
-  "lastResponseAt": 1795525551373,
+  "updatedAt": 1795593896534,
+  "lastResponseAt": 1795592559306,
   "sessionId": "6f34aa8b-83c4-416e-b4ef-a7211933dfa1",
   "lastEffectiveModel": "auto",
   "providerState": {
@@ -13,12 +13,12 @@
   },
   "usage": {
     "model": "auto",
-    "inputTokens": 617,
+    "inputTokens": 11701,
     "cacheCreationInputTokens": 0,
-    "cacheReadInputTokens": 34624,
-    "outputTokens": 463,
+    "cacheReadInputTokens": 23360,
+    "outputTokens": 93,
     "contextWindow": 200000,
-    "contextTokens": 35241,
+    "contextTokens": 35061,
     "percentage": 18,
     "contextWindowIsAuthoritative": true
   }

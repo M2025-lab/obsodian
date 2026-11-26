@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795607097462-nq6cfd7fr",
+  "providerId": "claude",
+  "title": "分析 starlord 中 Nacos Preconditions 报 IllegalArgu...",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795607097462,
+  "updatedAt": 1795610527638,
+  "lastResponseAt": 1795607679474,
+  "sessionId": "510d29c2-a5e3-4a40-be3b-4d7cb372d833",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "510d29c2-a5e3-4a40-be3b-4d7cb372d833"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 346,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 54272,
+    "outputTokens": 1631,
+    "contextWindow": 200000,
+    "contextTokens": 54618,
+    "percentage": 27,
+    "contextWindowIsAuthoritative": true
+  }
+}

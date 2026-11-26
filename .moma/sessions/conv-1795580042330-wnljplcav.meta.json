@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795580042330-wnljplcav",
+  "providerId": "claude",
+  "title": "调试小师傅机器人 chatDirectAsync 后门接口",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795580042330,
+  "updatedAt": 1795587506465,
+  "lastResponseAt": 1795580311626,
+  "sessionId": "a6c638b7-19c1-4516-8651-d0336c90bfff",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a6c638b7-19c1-4516-8651-d0336c90bfff"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 279,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 52928,
+    "outputTokens": 749,
+    "contextWindow": 200000,
+    "contextTokens": 53207,
+    "percentage": 27,
+    "contextWindowIsAuthoritative": true
+  }
+}
