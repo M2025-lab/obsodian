@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795662478761-yv05tmq39",
+  "providerId": "claude",
+  "title": "梳理考核系统技术地图以独立接手需求与排查",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795662478761,
+  "updatedAt": 1795664470923,
+  "lastResponseAt": 1795664470923,
+  "sessionId": "45287fe9-d79c-4ec4-9f3c-d8342cb9a4dc",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "45287fe9-d79c-4ec4-9f3c-d8342cb9a4dc"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 3406,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 83328,
+    "outputTokens": 404,
+    "contextWindow": 200000,
+    "contextTokens": 86734,
+    "percentage": 43,
+    "contextWindowIsAuthoritative": true
+  }
+}

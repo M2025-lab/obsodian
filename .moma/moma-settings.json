@@ -50,7 +50,8 @@
         "bogon": "native-windows",
         "PC-20200915PKWW.ljstaff.com": "native-windows",
         "PC-20210913TEUN.ljstaff.com": "native-windows",
-        "DESKTOP-NL09F7A.ljstaff.com": "native-windows"
+        "DESKTOP-NL09F7A.ljstaff.com": "native-windows",
+        "LAPTOP-VUGGCDN4.ljstaff.com": "native-windows"
       },
       "wslDistroOverridesByHost": {}
     }
@@ -160,8 +161,8 @@
       "defaultConversationId": "",
       "defaultParentFolderId": "",
       "identity": "user",
-      "autoInstallAttemptedAt": "2026-11-25T01:48:19.850Z",
-      "momaCliUpdateAttemptedAt": "2026-11-25T01:48:19.850Z"
+      "autoInstallAttemptedAt": "2026-11-27T01:48:39.598Z",
+      "momaCliUpdateAttemptedAt": "2026-11-27T01:48:39.598Z"
     },
     "strictMarkdown": false
   },
@@ -170,7 +171,7 @@
     "chat-view-placement-v1",
     "homepage-native-import-v1"
   ],
-  "lastGrayReleaseCheck": 1795657459862,
+  "lastGrayReleaseCheck": 1795744105865,
   "voiceRecording": {
     "storageMode": "text",
     "storagePath": "/录音目录"
@@ -180,7 +181,7 @@
   "momaCliGrayEnabled": true,
   "realtimeAsrEnabled": true,
   "remoteAgentConfig": {
-    "fetchedAt": 1795608325134,
+    "fetchedAt": 1795744107105,
     "fetchedPluginVersion": "0.3.32",
     "envVars": {
       "claude": {

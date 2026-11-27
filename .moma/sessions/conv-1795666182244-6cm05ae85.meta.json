@@ -1,0 +1,23 @@
+{
+  "id": "conv-1795666182244-6cm05ae85",
+  "providerId": "claude",
+  "title": "Fork: 询问微信推送功能开发进度 (#4)",
+  "createdAt": 1795666182244,
+  "updatedAt": 1795672808978,
+  "lastResponseAt": 1795672807795,
+  "sessionId": "b3d41b79-91b6-4b1a-935d-b590a4940b59",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "b3d41b79-91b6-4b1a-935d-b590a4940b59"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 132,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 132608,
+    "outputTokens": 116,
+    "contextWindow": 200000,
+    "contextTokens": 132740,
+    "percentage": 66
+  }
+}

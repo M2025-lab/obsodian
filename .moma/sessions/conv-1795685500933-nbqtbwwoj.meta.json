@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795685500933-nbqtbwwoj",
+  "providerId": "claude",
+  "title": "分析微信小师傅 Agent Prompt 设计模式",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795685500933,
+  "updatedAt": 1795688313788,
+  "lastResponseAt": 1795688313788,
+  "sessionId": "c427b7d2-d861-47ee-8e5d-6ecd726f2b5c",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "c427b7d2-d861-47ee-8e5d-6ecd726f2b5c"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 782,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 36096,
+    "outputTokens": 411,
+    "contextWindow": 200000,
+    "contextTokens": 36878,
+    "percentage": 18,
+    "contextWindowIsAuthoritative": true
+  }
+}

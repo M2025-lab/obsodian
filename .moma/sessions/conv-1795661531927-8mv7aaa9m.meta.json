@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795661531927-8mv7aaa9m",
+  "providerId": "claude",
+  "title": "设计MsgAnalyze回复异步回调接口技术方案",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795661531927,
+  "updatedAt": 1795663789797,
+  "lastResponseAt": 1795663787045,
+  "sessionId": "99eb9725-28c9-44ee-8ea8-bbd2adefa132",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "99eb9725-28c9-44ee-8ea8-bbd2adefa132"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 175,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 159296,
+    "outputTokens": 90,
+    "contextWindow": 200000,
+    "contextTokens": 159471,
+    "percentage": 80,
+    "contextWindowIsAuthoritative": true
+  }
+}

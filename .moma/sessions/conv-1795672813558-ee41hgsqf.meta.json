@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795672813558-ee41hgsqf",
+  "providerId": "claude",
+  "title": "编写 agenda 接入 LeonisPersonalPusher 推送接口文档",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795672813558,
+  "updatedAt": 1795687117285,
+  "lastResponseAt": 1795687117285,
+  "sessionId": "a89e2533-7325-41d5-97bc-9833f68b59f6",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "a89e2533-7325-41d5-97bc-9833f68b59f6"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 141,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 48704,
+    "outputTokens": 1103,
+    "contextWindow": 200000,
+    "contextTokens": 48845,
+    "percentage": 24,
+    "contextWindowIsAuthoritative": true
+  }
+}

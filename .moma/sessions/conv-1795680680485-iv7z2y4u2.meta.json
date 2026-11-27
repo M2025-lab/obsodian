@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795680680485-iv7z2y4u2",
+  "providerId": "claude",
+  "title": "生成 ToolController UpdateTaskUcidParam 接口 curl",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795680680485,
+  "updatedAt": 1795681829982,
+  "lastResponseAt": 1795680784165,
+  "sessionId": "b2dcd5de-6a98-4459-9815-f169cdd2e879",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "b2dcd5de-6a98-4459-9815-f169cdd2e879"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1550,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 41344,
+    "outputTokens": 2228,
+    "contextWindow": 200000,
+    "contextTokens": 42894,
+    "percentage": 21,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795680381798-1hh6p003g",
+  "providerId": "claude",
+  "title": "记录送货项目经理通知失败线上问题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795680381798,
+  "updatedAt": 1795681846175,
+  "lastResponseAt": 1795680663742,
+  "sessionId": "068b6a61-6aad-4997-82a9-952544a1ed4f",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "068b6a61-6aad-4997-82a9-952544a1ed4f"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 314,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68992,
+    "outputTokens": 378,
+    "contextWindow": 200000,
+    "contextTokens": 69306,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -2,14 +2,6 @@
   "tabManagerState": {
     "openTabs": [
       {
-        "tabId": "tab-1795418275393-l0kw2wa",
-        "conversationId": "conv-1795420419203-xioss1vv6"
-      },
-      {
-        "tabId": "tab-1795420218167-2e3yaae",
-        "conversationId": "conv-1795437767910-3lqjjulte"
-      },
-      {
         "tabId": "tab-1795484853820-qxfvy23",
         "conversationId": "conv-1795485094776-jm5joukq0"
       },
@@ -20,8 +12,28 @@
       {
         "tabId": "tab-1795502741814-arkuwxy",
         "conversationId": "conv-1795407170300-eohpuosze"
+      },
+      {
+        "tabId": "tab-1795662382945-72jvf9i",
+        "conversationId": "conv-1795662478761-yv05tmq39"
+      },
+      {
+        "tabId": "tab-1795672811003-u85zxva",
+        "conversationId": "conv-1795672813558-ee41hgsqf"
+      },
+      {
+        "tabId": "tab-1795685465677-20xw5ut",
+        "conversationId": "conv-1795685500933-nbqtbwwoj"
+      },
+      {
+        "tabId": "tab-1795689042918-6vx0wp7",
+        "conversationId": "conv-1795689167046-e6ubafmpd"
+      },
+      {
+        "tabId": "tab-1795696537458-pflw3lz",
+        "conversationId": "conv-1795696564172-1odxlx58n"
       }
     ],
-    "activeTabId": "tab-1795502741814-arkuwxy"
+    "activeTabId": "tab-1795696537458-pflw3lz"
   }
 }

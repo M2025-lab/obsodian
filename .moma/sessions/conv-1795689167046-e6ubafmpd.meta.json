@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795689167046-e6ubafmpd",
+  "providerId": "claude",
+  "title": "重写 roomie-Agent 自动回复 prompt",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795689167046,
+  "updatedAt": 1795693081602,
+  "lastResponseAt": 1795693081602,
+  "sessionId": "990887ff-a368-44a4-b4f4-0fb884e5c59d",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "990887ff-a368-44a4-b4f4-0fb884e5c59d"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 533,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 152320,
+    "outputTokens": 648,
+    "contextWindow": 200000,
+    "contextTokens": 152853,
+    "percentage": 76,
+    "contextWindowIsAuthoritative": true
+  }
+}
