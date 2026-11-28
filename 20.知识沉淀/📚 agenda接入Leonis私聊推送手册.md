@@ -387,6 +387,7 @@ curl 'https://<construction-agent-host>/api/v1/open/push/push_20261126_xxxxxxxx'
 | **任务表/job 显示 SUCCESS 但没收到消息** | 按下表四链路排查 | SUCCESS ≠ 发出。**三种静默机制**：① 绑定三元组（ucid+服务env+请求sourceKey）没精确命中同一条绑定 → expandRefs 逐个吞掉 → 空目标 → 0 个 FAIL → markSuccess（`ChannelTargetExpander.java:129-148` + `ChannelTaskService.java:387-399`）；② LeonisPersonalPusher 不检查 sendCustomerText 返回值，底层 doPost 把异常吞成 errcode=-1 的 Map，没有任何一层看 errcode → Leonis 拒收也 SUCCESS（`LeonisPersonalPusher.java:37` + `LeonisClientImpl.java:132-138`）；③ 同一 ucid 多条绑定挂不同企微账号（不同 userClientId/昵称）——消息发到了另一台手机的账号上。定位：jobId 查 details（空=链路①；有 SUCCESS+sentContent=链路②③）→ 日志 grep `[ChannelTargetExpander] 跳过目标` 和 `[Leonis] 响应`（body 里 errcode 是真实原因；无此行=根本没发） |
 
 > **实测案例（2026-11-26）**：请求 sourceKey 传 `ROOMIE-YUNZHULI`，但该 ucid 的 prod 绑定挂在 `WEIXIN_XIAOSHIFU` 下 → 三元组查空 → 目标被静默剔除 → 任务表 `SUCCESS`（15:23:22）但全程未调 Leonis 发送。修复 = sourceKey 改传绑定表里实际的 `WEIXIN_XIAOSHIFU`。**教训：sourceKey 不是「业务方想要的名字」，必须与 leonis_private_binding.source_key 逐字一致——排查时先查绑定表，再回填参数。**
+
 | status=FAIL，details 里有 errorMsg | 小师父日志按 jobId 搜 | `ChannelTaskExecutor` 会先重试 3 次（间隔递增 1s/2s/3s）才落 FAIL；errorMsg 常见为 LeonisManager 调 Leonis 平台超时 |
 | 返回 401/鉴权拦截 | 请求头 `X-KE-UCID` | 该接口不在默认放行名单，不带 ucid 头会被 OperatorInterceptor 拦（`OperatorInterceptor.java:118`） |
 

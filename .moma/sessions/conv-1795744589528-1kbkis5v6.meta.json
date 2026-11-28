@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795744589528-1kbkis5v6",
+  "providerId": "claude",
+  "title": "对比 agenda 分支间 plan-push 逻辑差异",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795744589528,
+  "updatedAt": 1795746548519,
+  "lastResponseAt": 1795746049465,
+  "sessionId": "d3483e7e-0202-48ae-983c-f5a72c7a2a71",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "d3483e7e-0202-48ae-983c-f5a72c7a2a71"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 487,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68736,
+    "outputTokens": 582,
+    "contextWindow": 200000,
+    "contextTokens": 69223,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

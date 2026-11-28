@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795749630500-te0yoikuf",
+  "providerId": "claude",
+  "title": "生成 starlord 接口 curl 命令",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795749630500,
+  "updatedAt": 1795850784195,
+  "lastResponseAt": 1795850784195,
+  "sessionId": "86ac4ffb-6a4c-435c-abad-0f7b75518ff6",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "86ac4ffb-6a4c-435c-abad-0f7b75518ff6"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 344,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 134144,
+    "outputTokens": 4392,
+    "contextWindow": 200000,
+    "contextTokens": 134488,
+    "percentage": 67,
+    "contextWindowIsAuthoritative": true
+  }
+}

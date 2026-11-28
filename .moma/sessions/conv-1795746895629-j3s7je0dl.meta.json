@@ -1,0 +1,25 @@
+{
+  "id": "conv-1795746895629-j3s7je0dl",
+  "providerId": "claude",
+  "title": "解释 construction-agent 绑定表 env prod 的作用与拦截逻辑",
+  "titleGenerationStatus": "success",
+  "createdAt": 1795746895629,
+  "updatedAt": 1795749419759,
+  "lastResponseAt": 1795746985116,
+  "sessionId": "e7456a78-3325-472c-b4e1-ef4d028f53f8",
+  "lastEffectiveModel": "auto",
+  "providerState": {
+    "providerSessionId": "e7456a78-3325-472c-b4e1-ef4d028f53f8"
+  },
+  "usage": {
+    "model": "auto",
+    "inputTokens": 1496,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 43200,
+    "outputTokens": 2256,
+    "contextWindow": 200000,
+    "contextTokens": 44696,
+    "percentage": 22,
+    "contextWindowIsAuthoritative": true
+  }
+}
